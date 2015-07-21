@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -47,6 +48,12 @@ public class PaymentChannelCEB implements PaymentChannel{
      * 
      */
     private static final String SUCCESSED = "AAAAAAA";
+    
+    @Autowired
+    private TdPayRecordService payRecordService;
+    
+    @Autowired
+    private TdOrderService orderService;
 
     @Override
     public String getPayFormData(HttpServletRequest request) {

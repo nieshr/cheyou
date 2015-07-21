@@ -24,7 +24,7 @@ import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserService;
 
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages={"com.ynyes.cheyou","com.cytm.payment"})
 @EnableAutoConfiguration
 public class Application extends SpringBootServletInitializer implements CommandLineRunner {
     @Autowired

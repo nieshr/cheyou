@@ -24,6 +24,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.csii.payment.client.core.CebMerchantSignVerify;
 import com.cytm.payment.alipay.AlipayConfig;
@@ -64,7 +65,7 @@ import com.ynyes.cheyou.service.TdUserService;
  */
 @Controller
 @RequestMapping("/order")
-public class TdOrderController extends AbstractPaytypeService {
+public class TdOrderController extends AbstractPaytypeController {
     
     private static final String PAYMENT_ALI = "ALI";
 
@@ -160,7 +161,7 @@ public class TdOrderController extends AbstractPaytypeService {
         map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());
         
         // 支付方式列表
-        setPayTypes(map);
+        setPayTypes(map, true , false, req);
         
         // 配送方式
         map.addAttribute("delivery_type_list",
@@ -402,12 +403,11 @@ public class TdOrderController extends AbstractPaytypeService {
             }
             
             // 支付类型
+            payTypeFee = payType.getFee();
             tdOrder.setPayTypeId(payType.getId());
             tdOrder.setPayTypeTitle(payType.getTitle());
-            tdOrder.setPayTypeFee(payType.getFee());
+            tdOrder.setPayTypeFee(payTypeFee);
             tdOrder.setIsOnlinePay(payType.getIsOnlinePay());
-            
-            payTypeFee = payType.getFee();
         }
         
         // 配送方式
@@ -627,10 +627,15 @@ public class TdOrderController extends AbstractPaytypeService {
                 payForm = channelCEB.getPayFormData(req);
                 map.addAttribute("charset", "GBK");
             } else {
-                //
+                //其他目前未实现的支付方式
+                return "/client/error_404";
             }
+        } else {
+            return "/client/error_404";
         }
-
+        order.setPayTime(new Date());
+        tdOrderService.save(order);
+        
         map.addAttribute("payForm", payForm);
 
         return "/client/order_pay_form";
@@ -720,8 +725,15 @@ public class TdOrderController extends AbstractPaytypeService {
         boolean verify_result = AlipayNotify.verify(params);
         
         tdCommonService.setHeader(map, req);
-        map.put("orderNo", orderNo.substring(0, orderNo.length() - 6));
-        map.put("methodName", "支付宝");
+        orderNo = (orderNo == null) ? "" : 
+            (orderNo.length() < 6) ? orderNo 
+                    : orderNo.substring(0, orderNo.length() - 6);
+        TdOrder order = tdOrderService.findByOrderNumber(orderNo);
+        if(order == null) {
+            // 订单不存在
+            return "/client/order_pay_failed";
+        }
+        map.put("order", order);
         if(verify_result){//验证成功
             if("WAIT_SELLER_SEND_GOODS".equals(trade_status)){
                 //订单支付成功
@@ -754,24 +766,19 @@ public class TdOrderController extends AbstractPaytypeService {
         plainObjectStr = plainObjectStr.replaceAll("=", "\":\"").replaceAll("~\\|~", "\",\"");
         plainObjectStr = "{\"" + plainObjectStr + "\"}";
 
-        JSONObject paymentResult = JSONObject.fromObject(plainObjectStr);        
-        String payment_channel_name = "光大银行";
-
-        String [] msgExt = paymentResult.getString("msgExt").split("\\|", 2);
-        String paybank_no = msgExt[1];
+        JSONObject paymentResult = JSONObject.fromObject(plainObjectStr);
         
-        String orderNo = msgExt[0];
-        orderNo = (null == orderNo) ? "" : orderNo.trim();
-        for(Iterator<String[]> bankConfigs = CEBPayConfig.INTER_B2C_BANK_CONFIG.values().iterator(); bankConfigs.hasNext();) {
-            String [] bankNoAndName = bankConfigs.next();
-            if(bankNoAndName[0].equals(paybank_no)) {
-                payment_channel_name = bankNoAndName[1];
-                break;
-            }
+        String orderNo = paymentResult.getString("orderId");
+        orderNo = (orderNo == null) ? "" : 
+            (orderNo.length() < 6) ? orderNo 
+                    : orderNo.substring(0, orderNo.length() - 6);
+        TdOrder order = tdOrderService.findByOrderNumber(orderNo);
+        if(order == null) {
+            // 订单不存在
+            return "/client/order_pay_failed";
         }
         
-        map.put("orderNo", orderNo);
-        map.put("methodName", payment_channel_name);
+        map.put("order", order);
         if(verify_result){//验证成功
             String trade_status = paymentResult.getString("respCode");
             if("".equals(trade_status) || "AAAAAAA".equals(trade_status)){
@@ -782,5 +789,96 @@ public class TdOrderController extends AbstractPaytypeService {
         }
         //验证失败或者支付失败
         return "/client/order_pay_failed";
+    }
+    
+    /*
+     * 
+     */
+    @RequestMapping(value = "/change_paymethod", method={RequestMethod.POST})    
+    public @ResponseBody Map<String, String> changePaymentMethod(Long orderId, Long paymentMethodId, ModelMap map, HttpServletRequest req) {        
+        String username = (String) req.getSession().getAttribute("username");
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("status", "F");
+        if (null == username) {
+            result.put("message", "请先登录！");
+            return result;
+        }
+
+        if (null == orderId) 
+        {
+            result.put("message", "订单Id非法！");
+            return result;
+        }
+        
+        if(null == paymentMethodId) {
+            result.put("message", "支付方式非法！");
+            return result;
+        }
+        
+        TdOrder order = tdOrderService.findOne(orderId);
+        
+        if (null == order)
+        {
+            result.put("message", "不存在的订单信息！");
+            return result;
+        }
+        
+        TdPayType payType = tdPayTypeService.findOne(paymentMethodId);
+        if (null == payType)
+        {
+            result.put("message", "不存在的支付方式信息！");
+            return result;
+        }
+        
+        if(order.getStatusId() != 2l) {
+            result.put("message", "订单不能修改支付方式！");
+            return result;
+        }
+        
+        if(payType.getIsEnable()) {
+            result.put("message", "所选的支付方式暂不支持，请选择其他支付方式！");
+        }
+        
+        if (payType.getIsOnlinePay()) {
+            order.setStatusId(2L); // 待付款
+        } else {
+            order.setStatusId(1L); // 待确认
+        }
+        
+        Double payTypeFee = payType.getFee();
+        payTypeFee = payTypeFee == null ? 0.0 : payTypeFee;
+        
+        double goodPrice = order.getTotalGoodsPrice();
+        Double deliverTypeFee = order.getDeliverTypeFee();
+        deliverTypeFee = deliverTypeFee == null ? 0.0 : deliverTypeFee;
+        /*
+         * 订单金额=商品总额+支付手续费+运费-优惠券金额-积分抵扣金额
+         * 优惠券金额+积分抵扣金额=商品总额+支付手续费+运费-订单金额
+         */
+        Double orgPayTypeFee = order.getPayTypeFee();
+        orgPayTypeFee = orgPayTypeFee == null ? 0.0 : orgPayTypeFee;
+        double couponAndPointsFee = goodPrice 
+                + orgPayTypeFee 
+                + deliverTypeFee - order.getTotalPrice();
+        
+        /*
+         * 按百分比收取手续费,手续费重新计算(商品总额*百分比)
+         */
+        if(payType.getIsFeeCountByPecentage()) {
+            payTypeFee = goodPrice * payTypeFee / 100;
+        }
+        
+        order.setTotalPrice(goodPrice + payTypeFee 
+                + deliverTypeFee - couponAndPointsFee);
+        order.setPayTypeFee(payTypeFee);
+        order.setPayTypeId(payType.getId());
+        order.setPayTypeTitle(payType.getTitle());
+        order.setIsOnlinePay(payType.getIsOnlinePay());
+        
+        tdOrderService.save(order);
+        
+        result.put("status", "S");
+        result.put("message", "订单支付方式修改成功！");
+        return result;
     }
 }

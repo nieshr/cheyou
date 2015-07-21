@@ -49,6 +49,9 @@
     }); 
 });
 </script>
+<script type="text/javascript">
+    var forPaymentFllow = true;
+</script>
 </head>
 <body>
 <#include "/client/common_header.ftl" />
@@ -151,7 +154,9 @@
             <input name="appointmentTime" type="text" value="" datatype="*" class="text input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" errormsg="请选择预约安装时间" nullmsg="请选择预约安装时间">
             <a href="javascript:;"><img src="/client/images/content/rl.png" /></a>
         </section>
-        <div class="clear h20"></div>        
+        <div class="clear h20"></div>
+        <#assign maxMethodCount=5/>
+        <#assign changePayMethod=false/>
         <#include "/client/paybox_common.ftl" />
         <div class="clear h10"></div>
         <div class="car_pay">

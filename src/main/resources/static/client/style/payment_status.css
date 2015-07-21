@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.notice-cnt {
+    display: none;
+}
+
+.notice-title {
+    height: 45px;
+    line-height: 45px;
+    border: 1px solid #C5C5C5;
+}
+
+.status-success {
+    background-color: #EDFFCC;
+}
+
+.status-failed {
+    background-color: #E58B84;
+}
+
+.notice-icon {
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+    margin-right: 8px;
+    margin-top: 5px;
+}
+
+.notice-content {
+    position: absolute;
+    font-size: 14px;
+}
