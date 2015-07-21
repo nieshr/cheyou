@@ -104,6 +104,12 @@ public class TdOrderController extends AbstractPaytypeController {
     
     @Autowired
     private TdPayRecordService payRecordService;
+    
+    @Autowired
+    private PaymentChannelCEB payChannelCEB;
+    
+    @Autowired
+    private PaymentChannelAlipay payChannelAlipay;
 
     @RequestMapping(value = "/info")
     public String orderInfo(HttpServletRequest req, HttpServletResponse resp,
@@ -618,13 +624,11 @@ public class TdOrderController extends AbstractPaytypeController {
 
             String payCode = payType.getCode();
             if(PAYMENT_ALI.equals(payCode)) {
-                PaymentChannelAlipay channelAlipay = new PaymentChannelAlipay();
-                payForm = channelAlipay.getPayFormData(req);
+                payForm = payChannelAlipay.getPayFormData(req);
                 map.addAttribute("charset", AlipayConfig.CHARSET);
             } else if(CEBPayConfig.INTER_B2C_BANK_CONFIG.keySet().contains(payCode)) {
                 req.setAttribute("payMethod", payCode);
-                PaymentChannelCEB channelCEB = new PaymentChannelCEB();
-                payForm = channelCEB.getPayFormData(req);
+                payForm = payChannelCEB.getPayFormData(req);
                 map.addAttribute("charset", "GBK");
             } else {
                 //其他目前未实现的支付方式
@@ -672,7 +676,7 @@ public class TdOrderController extends AbstractPaytypeController {
      */
     @RequestMapping(value = "/pay/notify_alipay")
     public void payNotifyAlipay(ModelMap map, HttpServletRequest req, HttpServletResponse resp) {
-        new PaymentChannelAlipay().doResponse(req, resp);
+        payChannelAlipay.doResponse(req, resp);
     }
     
     /*
@@ -680,7 +684,7 @@ public class TdOrderController extends AbstractPaytypeController {
      */
     @RequestMapping(value = "/pay/notify_cebpay")
     public void payNotifyCEBPay(ModelMap map, HttpServletRequest req, HttpServletResponse resp) {
-        new PaymentChannelCEB().doResponse(req, resp);
+        payChannelCEB.doResponse(req, resp);
     }
     
     /*

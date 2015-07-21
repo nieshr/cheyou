@@ -208,7 +208,7 @@
                     <target>1.7</target>
                     <encoding>UTF-8</encoding>
                     <compilerArguments>
-                        <extdirs>C:\Tools\alipayfastlogin\demo\alipay.auth.authorize-JAVA-UTF-8\WebRoot\WEB-INF\lib</extdirs>
+                        <extdirs>/Users/Sharon/Documents/车有同盟/CCP_REST_SDK_JAVA_v2.6.1r/demo/lib</extdirs>
                     </compilerArguments>
                 </configuration>
             </plugin>
