@@ -51,50 +51,6 @@ public class TdImageController {
         os.write(data);
         os.flush();
         os.close();
-
-        // File file = new File(path + name);
-        //
-        // if (file.exists())
-        // {
-        // BufferedImage bufferedImage = ImageIO.read(file);
-        //
-        // String format = getFormatName(file);
-        //
-        // // 禁止图像缓存。
-        // resp.setHeader("Pragma", "no-cache");
-        // resp.setHeader("Cache-Control", "no-cache");
-        // resp.setDateHeader("Expires", 0);
-        //
-        // if (format.equalsIgnoreCase("PNG")) {
-        // resp.setContentType("image/png");
-        // } else if (format.equalsIgnoreCase("GIF")) {
-        // resp.setContentType("image/gif");
-        // } else {
-        // resp.setContentType("image/jpeg");
-        // }
-        //
-        // // 将图像输出到Servlet输出流中。
-        // ServletOutputStream sos = resp.getOutputStream();
-        // ImageIO.write(bufferedImage, "jpeg", sos);
-        // sos.close();
-        // }
     }
-
-//    private String getFormatName(Object o) {
-//        try {
-//            ImageInputStream iis = ImageIO.createImageInputStream(o);
-//            Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
-//
-//            if (!iter.hasNext()) {
-//                return null;
-//            }
-//
-//            ImageReader reader = iter.next();
-//            iis.close();
-//            return reader.getFormatName();
-//        } catch (IOException e) {
-//        }
-//        return null;
-//    }
 
 }

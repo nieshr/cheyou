@@ -27,12 +27,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/commons-lang-2.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/commons-logging-1.1.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/Sharon/Documents/车有同盟/CoalaPayNotifyGate/WebContent/WEB-INF/lib/commons-codec-1.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/Sharon/Documents/车有同盟/CCP_REST_SMS_DEMO_JAVA_v2.6r/sdk/lib/dom4j-1.6.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/Sharon/Documents/车有同盟/alipayfastlogin/快捷登录接口-alipay.auth.authorize(20130530)/demo/alipay.auth.authorize-JAVA-UTF-8/WebRoot/WEB-INF/lib/commons-codec-1.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/Sharon/Documents/车有同盟/alipayfastlogin/快捷登录接口-alipay.auth.authorize(20130530)/demo/alipay.auth.authorize-JAVA-UTF-8/WebRoot/WEB-INF/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Users/Sharon/Documents/车有同盟/alipayfastlogin/快捷登录接口-alipay.auth.authorize(20130530)/demo/alipay.auth.authorize-JAVA-UTF-8/WebRoot/WEB-INF/lib/commons-httpclient-3.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
