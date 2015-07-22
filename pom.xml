@@ -205,18 +205,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerArguments>
-                        <extdirs>/Users/Sharon/Documents/车有同盟/CCP_REST_SDK_JAVA_v2.6.1r/demo/lib</extdirs>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
 		</plugins>
 	</build>
 
