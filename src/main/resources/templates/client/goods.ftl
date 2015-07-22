@@ -161,7 +161,7 @@ function clearSelect()
       <h3>${goods.title!''}</h3>
       <h4 class="red">${goods.subTitle!''}</h4>
       
-      <#if qiang?? && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
+      <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
 <script>
 $(document).ready(function(){
     setInterval("timer()",1000);
@@ -254,7 +254,11 @@ function checkTime(i)
           <div class="pro_price">
             <p class="p1">
               <span class="mr10">同盟价</span>
-              <span class="red fs24 lh30 mr20">￥：<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></span>
+              <#if qiang?? && qiang != 1 && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
+                <span class="red fs24 lh30 mr20">￥：<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></span>
+              <#else>
+                <span class="red fs24 lh30 mr20">￥：<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></span>
+              </#if>
               <span class="unl-th c9">￥：<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span>
             </p>
             <#if goods.returnPoints?? && goods.returnPoints != 0>
@@ -362,7 +366,15 @@ function checkTime(i)
                     <a id="id-plus" href="javascript:;"></a>
                     <a id="id-minus" class="down" href="javascript:;"></a>
                 </div>
-                <span class="fl ml10">库存${goods.leftNumber!'0'}件</span>
+                <span class="fl ml10">库存
+                <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
+                    ${goods.flashSaleLeftNumber!'0'}
+                <#elseif qiang?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
+                    ${goods.groupSaleLeftNumber!'0'}
+                <#else>
+                    ${goods.leftNumber!'0'}
+                </#if>
+                    件</span>
                 <div class="clear"></div>
             </td>
         </tr>

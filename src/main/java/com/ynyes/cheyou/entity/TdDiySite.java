@@ -74,6 +74,16 @@ public class TdDiySite {
     // 轮播展示图片，多张图片以,隔开
     @Column
     private String showPictures;
+    
+    // 登录名
+    @Column
+    private String username;
+    
+    // 登录密码
+    private String password;
+    
+    // 手机号
+    private String mobile;
 
     public Long getId() {
         return id;
@@ -193,5 +203,29 @@ public class TdDiySite {
 
     public void setShowPictures(String showPictures) {
         this.showPictures = showPictures;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }

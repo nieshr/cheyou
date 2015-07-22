@@ -90,6 +90,34 @@ $(function () {
         <span class="Validform_checktip">*同盟店名称</span>
     </dd>
   </dl>
+  <dl>
+    <dt>登录名</dt>
+    <dd>
+        <input name="title" type="text" value="<#if diy_site??>${diy_site.username!""}</#if>" class="input normal" ajaxurl="/Verwalter/order/setting/diysite/check<#if diy_site??>?id=${diy_site.id}</#if>" datatype="*6-100" sucmsg=" "> 
+        <span class="Validform_checktip">*登录账号</span>
+    </dd>
+  </dl>
+  <dl>
+    <dt>登录密码</dt>
+    <dd>
+        <input name="password" type="password" value="<#if diy_site??>${diy_site.password!""}</#if>" class="input normal" datatype="*6-20" sucmsg=" "> 
+        <span class="Validform_checktip">*</span>
+    </dd>
+  </dl>
+  <dl>
+    <dt>重复密码</dt>
+    <dd>
+        <input type="password" value="<#if diy_site??>${diy_site.password!""}</#if>" class="input normal" datatype="*" recheck="password" sucmsg=" "> 
+        <span class="Validform_checktip">*</span>
+    </dd>
+  </dl>
+  <dl>
+    <dt>手机号</dt>
+    <dd>
+        <input name="mobile" type="text" value="<#if diy_site??>${diy_site.mobile!""}</#if>" class="input normal" datatype="m" sucmsg=" "> 
+        <span class="Validform_checktip">*用于接收通知短信</span>
+    </dd>
+  </dl>
   
   <dl>
     <dt>店面图片</dt>

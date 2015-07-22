@@ -66,6 +66,7 @@ function __doPostBack(eventTarget, eventArgument) {
   <tr class="odd_bg">
     <th width="8%">选择</th>
     <th align="left">名称</th>
+    <th align="left">登录名</th>
     <th align="left">地区</th>
     <th align="left" width="37%">地理位置</th>
     <th align="left" width="12%">排序</th>
@@ -83,6 +84,7 @@ function __doPostBack(eventTarget, eventArgument) {
                     <input type="hidden" name="listId" id="listId" value="${item.id}">
                 </td>
                 <td><a href="/Verwalter/order/setting/diysite/edit?id=${item.id}">${item.title!""}</a></td>
+                <td>${item.username!""}</td>
                 <td>${item.city!""}</td>
                 <td>${item.address!""}</td>
                 <td><input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);"></td>

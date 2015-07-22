@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.cheyou.entity.TdDiySite;
+import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.repository.TdDiySiteRepo;
 
 /**
@@ -25,6 +26,9 @@ import com.ynyes.cheyou.repository.TdDiySiteRepo;
 public class TdDiySiteService {
     @Autowired
     TdDiySiteRepo repository;
+    
+    @Autowired
+    TdUserService tdUserService;
     
     /**
      * 删除
@@ -124,7 +128,19 @@ public class TdDiySiteService {
      */
     public TdDiySite save(TdDiySite e)
     {
-        
+        if (null == e.getUsername())
+        {
+            TdUser user = tdUserService.findByUsername(e.getUsername());
+            
+            if (null == user)
+            {
+                user = tdUserService.addNewUser(null, e.getUsername(), e.getPassword(), e.getMobile(), null, null);
+                
+                user.setRoleId(2L); // 加盟商用户
+                
+                tdUserService.save(user);
+            }
+        }
         return repository.save(e);
     }
     

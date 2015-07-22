@@ -21,6 +21,7 @@ import com.ynyes.cheyou.entity.TdDeliveryType;
 import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdPayType;
+import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.service.TdArticleService;
 import com.ynyes.cheyou.service.TdDeliveryTypeService;
 import com.ynyes.cheyou.service.TdDiySiteService;
@@ -249,6 +250,53 @@ public class TdManagerOrderController {
         }
         
         return "/site_mag/pay_type_edit";
+    }
+    
+    // 订单设置编辑
+    @RequestMapping(value = "/setting/diysite/check", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> validateForm(String param, Long id) {
+        Map<String, String> res = new HashMap<String, String>();
+
+        res.put("status", "n");
+
+        if (null == param || param.isEmpty()) {
+            res.put("info", "该字段不能为空");
+            return res;
+        }
+        
+        TdUser tdUser = tdUserService.findByUsername(param);
+        
+        if (null == id) // 新增
+        {
+            if (null != tdUser) {
+                res.put("info", "该登录名不能使用");
+                return res;
+            }
+        } 
+        else // 修改，查找除当前ID的所有
+        {
+            TdDiySite dSite = tdDiySiteService.findOne(id);
+            
+            if (null == dSite)
+            {
+                if (null != tdUser) {
+                    res.put("info", "该登录名不能使用");
+                    return res;
+                }
+            }
+            else
+            {
+                if (null != tdUser && tdUser.getUsername() != dSite.getUsername()) {
+                    res.put("info", "该登录名不能使用");
+                    return res;
+                }
+            }
+        }
+
+        res.put("status", "y");
+
+        return res;
     }
     
     @RequestMapping(value="/edit")
