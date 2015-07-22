@@ -19,7 +19,6 @@
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/jquery.cookie.js"></script>
-<script src="/client/js/jquery.leanModal.min.js"></script>
 
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
@@ -39,6 +38,9 @@ DD_belatedPNG.fix('.,img,background');
     menuDownList("mainnavdown","#navdown",".a2","sel");
     checkNowHover("shopping_down","shopping_sel");
 });
+</script>
+<script type="text/javascript">
+    var forPaymentFllow = false;
 </script>
 </head>
 <body>
@@ -81,7 +83,7 @@ DD_belatedPNG.fix('.,img,background');
                 <#if order.statusId==1>
                     请稍等，我们将尽快确认您的订单。
                 <#elseif order.statusId==2>
-                    亲爱的客户，此订单还未支付您可以<a href="/order/dopay/${order.id}" style="color: #F00;"">去支付</a>或者<a id="change_paytype" data-order_id="${order.id}" href="javascrpit:void();" style="color: #F00;"">修改支付方式</a>。
+                    亲爱的客户，此订单还未支付您可以<a href="/order/dopay/${order.id!""}" style="color: #F00;">去支付</a>或者<span id="change_paytype" data-orderid="${order.id!""}" style="color: #F00;cursor:pointer;">修改支付方式</span>。
                 <#elseif order.statusId==3>
                     亲爱的客户，我们将尽快为您发货。
                 <#elseif order.statusId==4>
@@ -94,6 +96,8 @@ DD_belatedPNG.fix('.,img,background');
             </#if>
         </dd>
       </dl>
+      <#assign maxMethodCount=3/>
+      <#assign changePayMethod=true/>
       <#include "/client/paybox_common.ftl" />
       <script type="text/javascript" src="/client/js/change_paymethod.js"></script>
       <div class="mymember_green">

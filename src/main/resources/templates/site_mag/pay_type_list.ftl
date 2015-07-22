@@ -71,6 +71,9 @@ function __doPostBack(eventTarget, eventArgument) {
     <th align="left">支付描述</th>
     <th align="left" width="12%">排序</th>
     <th width="8%">是否启用</th>
+    <th width="8%">代码</th>
+    <th width="8%">活动标题</th>
+    <th width="10%">活动内容</th>
     <th width="10%">操作</th>
   </tr>
     
@@ -92,6 +95,9 @@ function __doPostBack(eventTarget, eventArgument) {
                 <td>${item.info!""}</td>
                 <td><input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);"></td>
                 <td align="center"><#if item.isEnable?? && item.isEnable>是<#else>否</#if></td>
+                <td>${item.code!""}</td>
+                <td>${item.adTitle!""}</td>
+                <td>${item.adContents!""}</td>
                 <td align="center">
                     <a href="/Verwalter/order/setting/pay/edit?id=${item.id}">修改</a>
                 </td>

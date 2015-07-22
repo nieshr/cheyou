@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cytm.payment.PaymentChannel;
 import com.cytm.payment.util.PaymentUtil;
@@ -25,6 +25,7 @@ import com.ynyes.cheyou.entity.TdPayRecord;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayRecordService;
 
+@Service
 public class PaymentChannelCEB implements PaymentChannel{
     /*
      * 
@@ -47,6 +48,12 @@ public class PaymentChannelCEB implements PaymentChannel{
      * 
      */
     private static final String SUCCESSED = "AAAAAAA";
+    
+    @Autowired
+    private TdPayRecordService payRecordService;
+    
+    @Autowired
+    private TdOrderService orderService;
 
     @Override
     public String getPayFormData(HttpServletRequest request) {
@@ -148,11 +155,9 @@ public class PaymentChannelCEB implements PaymentChannel{
                 out.print(responseContents.toString());
                 
                 String payResult = paymentResult.getString("respCode");
-                WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
-                TdOrderService orderService = context.getBean(TdOrderService.class);
                 orderId = orderId == null ? "" : 
                     orderId.substring(0, orderId.length() - 6);
-                TdPayRecordService payRecordService = context.getBean(TdPayRecordService.class);
+
                 TdOrder order = orderService.findByOrderNumber(orderId);
                 List<TdPayRecord> payRecords = payRecordService.getAllByOrderId(order.getId());
                 

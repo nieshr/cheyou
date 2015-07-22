@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.cytm.payment.PaymentChannel;
 import com.cytm.payment.alipay.core.AlipayConfirmGoods;
@@ -31,6 +29,7 @@ import com.ynyes.cheyou.entity.TdPayRecord;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayRecordService;
 
+@org.springframework.stereotype.Service
 public class PaymentChannelAlipay implements PaymentChannel {
     private static final String OUT_TRADE_NO_PARA = "out_trade_no";
     private static final String ORDER_NO_TB_PARA = "trade_no";
@@ -46,6 +45,9 @@ public class PaymentChannelAlipay implements PaymentChannel {
      * 
      */
     private static final Logger paymentLogger = Logger.getLogger("paymentApi");
+    
+    @Autowired
+    private TdPayRecordService payRecordService;
     
     @Autowired
     private TdOrderService orderService;
@@ -80,7 +82,6 @@ public class PaymentChannelAlipay implements PaymentChannel {
         requestParameters.put(Constants.KEY_SELLER_ID, AlipayConfig.SELLER_ID);
         requestParameters.put(Constants.KEY_SELLER_ACCOUNT_NAME, AlipayConfig.SELLER_EMAIL);
         
-        // TODO：
         // 此字段要修改
         //requestParameters.put(Constants.KEY_BODY, "支付测试");
         requestParameters.put(Constants.KEY_TOTAL_FEE, orderAmount);
@@ -145,9 +146,7 @@ public class PaymentChannelAlipay implements PaymentChannel {
             out = resp.getWriter();
             if (AlipayNotify.verify(params)) {// 验证成功
                 paymentLogger.info("AlipayNotify:Accepted!");
-                WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
-                TdOrderService orderService = context.getBean(TdOrderService.class);
-                TdPayRecordService payRecordService = context.getBean(TdPayRecordService.class);
+
                 TdOrder order = orderService.findByOrderNumber(orderNo);
                 List<TdPayRecord> payRecords = payRecordService.getAllByOrderId(order.getId());
                 if (OrderStatus.WAIT_PAY.equals(trade_status)) {

@@ -1,23 +1,20 @@
 /**
  * 
  */
-$(document).ready(function() {    
-    $(".paymethod").click(function() {
-        var $selectedItem = $(this);
-        var payment_method = $selectedItem.find("input [name='payTypeId']");
-        payment_method.trigger("select");
-    });
-    
-    $("input [name='payTypeId']").select(function() {
-        $.cookie('payMethod', $(this).val(), { expires: 7, path: '/' });
+$(document).ready(function() {
+    $("input[name='payTypeId']").change(function() {
+        if(forPaymentFllow) {
+            $.cookie('payMethod', $(this).val(), { expires: 7, path: '/' });
+        }
         $(".paymethod").removeClass("paymethodSelected");
         var $selectedItem = $(this).parent();
         $selectedItem.addClass("paymethodSelected");
+        $("input[name='payTypeId']").attr("checked", "checked");
     });
     
-    var lastPaymentMethod = $.cookie('payMethod');
+    var lastPaymentMethod = !paymethodId ? $.cookie('payMethod') : paymethodId;
     if(lastPaymentMethod) {
-        $("input [value='" + lastPaymentMethod + "']").trigger("select");
+        $("input[value='" + lastPaymentMethod + "']:radio").trigger("change");
     }
     
     $("#expandBank").click(function() {
