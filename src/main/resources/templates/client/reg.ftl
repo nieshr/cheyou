@@ -104,10 +104,6 @@ function tip()
         <span style="color: #F00"><#if errCode??>
             <#if errCode==1>
                 验证码错误
-            <#elseif errCode==2>
-                该用户已存在
-            <#elseif errCode==3>
-                注册用户失败
             <#elseif errCode==4>
                 短信验证码错误
             </#if>
@@ -115,7 +111,7 @@ function tip()
         <form id="form1" method="post" action="/reg">
             <div>
                 <p><b style="color: #FF0000;">*</b> 请输入用户名 </p>
-                <input class="text" name="username" type="text" datatype="s6-20"/>
+                <input class="text" name="username" type="text" datatype="s6-20" ajaxurl="/reg/check/username"/>
             </div>
             <div>
                 <p>请输入车牌号码（选填）</p>
@@ -127,11 +123,11 @@ function tip()
             </div>
             <div>
                 <p><b style="color: #FF0000;">*</b> 请确认密码</p>
-                <input class="text" type="password" recheck="password"/>
+                <input class="text" type="password" datatype="*" recheck="password"/>
             </div>
             <div>
                 <p><b style="color: #FF0000;">*</b> 手机验证 </p>
-                <input id="mobileNumber" class="text" name="mobile" type="text" datatype="m"/>
+                <input id="mobileNumber" class="text" name="mobile" type="text" datatype="m"  ajaxurl="/reg/check/mobile"/>
             </div>
             <div>
                 <p><b style="color: #FF0000;">*</b> 短信验证码</p>

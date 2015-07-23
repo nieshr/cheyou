@@ -2,6 +2,7 @@ package com.ynyes.cheyou.controller.front;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,30 +90,55 @@ public class TdLoginController {
         {
             res.put("msg", "用户名及密码不能为空");
         }
-        
+        /**
+         * 按账号查找登录验证
+         * 密码验证
+         * 修改最后登录时间
+         * @author libiao
+         */
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
         
-        if (null == user)
+        if (null != user)
         {
-            res.put("msg", "不存在该用户");
+        	if (!user.getPassword().equals(password))
+            {
+                res.put("msg", "密码错误");
+                return res;
+            }
+        	user.setLastLoginTime(new Date());
+        	user = tdUserService.save(user);
+        	request.getSession().setAttribute("username", user.getUsername());
+            
+            res.put("code", 0);
+            
             return res;
         }
-        
-        if (!user.getPassword().equals(password))
-        {
-            res.put("msg", "密码错误");
+        /**
+         * 如果账号验证未通过，再进行手机登录验证
+         * 密码验证
+         * 修改最后登录时间
+         * @author libiao
+         */
+        user = tdUserService.findByMobileAndIsEnabled(username);
+        if(null != user){
+        	if (!user.getPassword().equals(password))
+            {
+                res.put("msg", "密码错误");
+                return res;
+            }
+        	user.setLastLoginTime(new Date());
+        	user = tdUserService.save(user);
+        	request.getSession().setAttribute("username", user.getUsername());
+            
+            res.put("code", 0);
+            
             return res;
+        }else
+        {	//账号-手机都未通过验证，则用户不存在
+        	res.put("msg", "不存在该用户");
+        	return res;
         }
         
-        user.setLastLoginTime(new Date());
-        
-        tdUserService.save(user);
-        
-        request.getSession().setAttribute("username", username);
-        
-        res.put("code", 0);
-        
-        return res;
     }
 
     @RequestMapping("/logout")

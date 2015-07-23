@@ -1,5 +1,6 @@
 package com.ynyes.cheyou.controller.front;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,15 +44,72 @@ public class TdRegController {
     @Autowired
     private TdCommonService tdCommonService;
     
+    @RequestMapping(value = "/reg/check/{type}", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, String> validateForm(@PathVariable String type, String param) {
+        Map<String, String> res = new HashMap<String, String>();
+
+        res.put("status", "n");
+        
+        
+        if (null == type)
+        {
+        	res.put("info", "参数错误");
+            return res;
+        }
+        
+        if (type.equalsIgnoreCase("username"))
+        {
+        	if (null == param || param.isEmpty()) {
+                res.put("info", "用户名不能为空");
+                return res;
+            }
+        	
+        	TdUser user = tdUserService.findByUsername(param);
+        	
+        	if (null != user)
+        	{
+        		res.put("info", "该用户已经存在");
+                return res;
+        	}
+        }
+        
+        /**
+         * 	ajax实时验证
+         * 	手机号查找用户
+         * 	判断手机号是已否注册
+         * @author libiao
+         */
+        if (type.equalsIgnoreCase("mobile"))		
+        {
+        	if (null == param || param.isEmpty())
+        	{
+                res.put("info", "用户名不能为空");
+                return res;
+            }
+        	
+        	TdUser user = tdUserService.findByMobile(param);		
+        	
+        	if (null != user)	
+         	{
+        		res.put("info", "该手机已经注册");
+                return res;
+        	}
+        }
+
+        res.put("status", "y");
+
+        return res;
+    }
+    
     @RequestMapping("/reg")
-    public String reg(Integer errCode, Integer shareId, HttpServletRequest request, ModelMap map) {
+    public String reg(Integer errCode, Integer shareId,String mobile, HttpServletRequest request, ModelMap map) {
         String username = (String) request.getSession().getAttribute("username");
         
         if (null != shareId)
         {
             map.addAttribute("share_id", shareId);
         }
-        
         // 基本信息
         tdCommonService.setHeader(map, request);
         
@@ -61,14 +120,11 @@ public class TdRegController {
                 {
                     map.addAttribute("error", "验证码错误");
                 }
-                else if (errCode.equals(2))
-                {
-                    map.addAttribute("error", "用户名已存在");
-                }
                 
                 map.addAttribute("errCode", errCode);
             }
             return "/client/reg";
+            
         }
         return "redirect:/";
     }
@@ -105,7 +161,6 @@ public class TdRegController {
                 HttpServletRequest request){
         String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
         String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
-        
         if (null == codeBack || null == smsCodeSave)
         {
             if (null == shareId)
@@ -142,21 +197,9 @@ public class TdRegController {
             }
         }
         
-        TdUser user = tdUserService.findByUsername(username);
+        //--------------------------------------------
         
-        if (null != user)
-        {
-            if (null == shareId)
-            {
-                return "redirect:/reg?errCode=2";
-            }
-            else
-            {
-                return "redirect:/reg?errCode=2&shareId=" + shareId;
-            }
-        }
-        
-        user = tdUserService.addNewUser(null, username, password, mobile, email, carCode);
+       TdUser user = tdUserService.addNewUser(null, username, password, mobile, email, carCode);
         
         if (null == user)
         {

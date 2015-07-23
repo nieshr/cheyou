@@ -307,6 +307,31 @@ public class TdUserService {
         
         return repository.findByUpperUsernameAndStatusIdOrderByIdDesc(username, 1L, pageRequest);
     }
+   /**
+    *  手机号查找
+    * @author libiao
+    * @param mobile
+    * @return
+    */
+    public TdUser findByMobileAndIsEnabled(String mobile){
+    	if(null==mobile){
+    		return null;
+    	}
+    	return repository.findByMobileAndStatusIdOrMobileAndStatusId(mobile, 0L, mobile, 1L);
+    }
+    /**
+     * 
+     * 注册查找----按手机号
+     * @author libiao
+     * @param mobile
+     * @return
+     */
+    public TdUser findByMobile(String mobile){
+    	if(null ==mobile){
+    		return null;
+    	}
+    	return repository.findByMobile(mobile);
+    }
     
     /**
      * 查找
