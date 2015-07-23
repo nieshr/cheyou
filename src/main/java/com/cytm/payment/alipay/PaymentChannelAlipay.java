@@ -249,7 +249,7 @@ public class PaymentChannelAlipay implements PaymentChannel {
     private boolean sendConfirmGoods(int timeCount, String trade_no) {
         try {
             @SuppressWarnings({ "unchecked", "rawtypes" })
-            String result = post(AlipayConfig.REAUESTURL,
+            String result = (String)post(AlipayConfig.REAUESTURL,
                     AlipayConfirmGoods.generatNameValuePair(trade_no),
                     new AlipayConfirmGoodsHandler(), AlipayConfig.CHARSET);
             paymentLogger.info(String.format("AlipayConfirmGoods:%s%s!", NEW_LINE, result));

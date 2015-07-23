@@ -90,7 +90,7 @@ public class TdCartController {
                         
                         BigDecimal b = new BigDecimal(qiangPrice);
                         
-                        qiangPrice = b.setScale(0, BigDecimal.ROUND_HALF_UP).doubleValue();
+                        qiangPrice = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                     }
                     else
                     {
