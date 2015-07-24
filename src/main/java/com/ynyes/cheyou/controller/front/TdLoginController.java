@@ -2,7 +2,6 @@ package com.ynyes.cheyou.controller.front;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.service.TdCommonService;
-import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.util.VerifServlet;
 
@@ -29,9 +27,6 @@ import com.ynyes.cheyou.util.VerifServlet;
 public class TdLoginController {
     @Autowired
     private TdUserService tdUserService;
-    
-    @Autowired
-    private TdSettingService tdSettingService;
     
     @Autowired
     private TdCommonService tdCommonService;
@@ -54,7 +49,14 @@ public class TdLoginController {
         {
             referer = "/";
         }
-        
+        /**
+		 * @author lc
+		 * @注释：
+		 */
+        TdUser tdUser = tdUserService.findByUsername(username);
+        if(tdUser.getRoleId()==2L){
+        	return "redirect:/user/diysite/order/list/0";
+        }
         return "redirect:" + referer;
     }
     
@@ -111,6 +113,14 @@ public class TdLoginController {
             
             res.put("code", 0);
             
+            /**
+    		 * @author lichong
+    		 * @注释：判断用户类型
+    		 */
+            if(user.getRoleId()==2L){
+            	res.put("role", 2);
+            }
+            
             return res;
         }
         /**
@@ -132,13 +142,20 @@ public class TdLoginController {
             
             res.put("code", 0);
             
+            /**
+    		 * @author lichong
+    		 * @注释：判断用户类型
+    		 */
+            if(user.getRoleId()==2L){
+            	res.put("role", 2);
+            }
+            
             return res;
         }else
         {	//账号-手机都未通过验证，则用户不存在
         	res.put("msg", "不存在该用户");
         	return res;
         }
-        
     }
 
     @RequestMapping("/logout")

@@ -29,4 +29,7 @@ div,ul,dl,dd,dt,li,p,span,h2,h3,h4,h5,h6,img,a,i,b,input {
 100% {background:green;}
 }
 
-
+.btn-1{background-color: #de000f;display: inline-block;height: 18px;line-height: 18px;padding: 9px 30px;color: #fff;font-size: 15px;font-weight: bold;font-family: '\5fae\8f6f\96c5\9ed1';}
+a{color: #666;text-decoration: none;}
+.ml10{margin-left: 10px;}
+.ftx-05{color: #005ea7;}
