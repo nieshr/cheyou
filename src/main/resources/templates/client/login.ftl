@@ -19,9 +19,22 @@
 <link href="/client/style/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-$(document).ready(function(){
-    
-    $("#btn_login").click(function(){
+	$(function(){
+	
+	    $("#btn_login").click(function(){
+	    	login();
+	    });
+	     
+	});
+
+
+   document.onkeydown = function(event){
+    if((event.keyCode || event.which) == 13){
+        login();
+    }
+   }
+   
+   function login(){
         var username = $("#txt_loginId").val();
         var password = $("#txt_loginPwd").val();
         
@@ -30,7 +43,6 @@ $(document).ready(function(){
             alert("用户名或密码长度输入不足");
             return;
         }
-        
         $.ajax({
                 type: "post",
                 url: "login",
@@ -53,10 +65,7 @@ $(document).ready(function(){
                     }
                 }
             });
-    });
-});
-
-
+    }
 </script>
 </head>
 

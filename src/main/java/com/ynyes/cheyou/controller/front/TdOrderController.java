@@ -311,6 +311,7 @@ public class TdOrderController extends AbstractPaytypeController {
                     orderGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
                     orderGoods.setPrice(cartGoods.getPrice());
                     orderGoods.setIsReturnApplied(false);
+                    orderGoods.setGoodsSaleType(cartGoods.getQiang());
 
                     long quantity = 0;
                     
@@ -637,7 +638,9 @@ public class TdOrderController extends AbstractPaytypeController {
         } else {
             return "/client/error_404";
         }
+        
         order.setPayTime(new Date());
+        
         tdOrderService.save(order);
         
         map.addAttribute("payForm", payForm);
@@ -740,7 +743,10 @@ public class TdOrderController extends AbstractPaytypeController {
         map.put("order", order);
         if(verify_result){//验证成功
             if("WAIT_SELLER_SEND_GOODS".equals(trade_status)){
+                
                 //订单支付成功
+                afterPaySuccess(order);
+                
                 return "/client/order_pay_success";
             }
         }
@@ -783,10 +789,14 @@ public class TdOrderController extends AbstractPaytypeController {
         }
         
         map.put("order", order);
+        
         if(verify_result){//验证成功
             String trade_status = paymentResult.getString("respCode");
             if("".equals(trade_status) || "AAAAAAA".equals(trade_status)){
                 //订单支付成功
+                
+                afterPaySuccess(order);
+                
                 return "/client/order_pay_success";
             }
 
@@ -884,5 +894,88 @@ public class TdOrderController extends AbstractPaytypeController {
         result.put("status", "S");
         result.put("message", "订单支付方式修改成功！");
         return result;
+    }
+    
+    /**
+     * 订单支付成功后步骤
+     * 
+     * @param tdOrder 订单
+     */
+    private void afterPaySuccess(TdOrder tdOrder)
+    {
+        if (null == tdOrder)
+        {
+            return;
+        }
+        
+        // 待发货
+        tdOrder.setStatusId(3L);
+        
+        tdOrder = tdOrderService.save(tdOrder);
+        
+        List<TdOrderGoods> tdOrderGoodsList = tdOrder.getOrderGoodsList();
+        
+        Long totalPoints = 0L;
+        Double totalCash = 0.0;
+        
+        // 返利总额
+        if (null != tdOrderGoodsList)
+        {
+            for (TdOrderGoods tog : tdOrderGoodsList)
+            {
+                if (0 == tog.getGoodsSaleType()) // 正常销售
+                {
+                    TdGoods tdGoods = tdGoodsService.findOne(tog.getGoodsId());
+                    
+                    if (null != tdGoods && null != tdGoods.getReturnPoints())
+                    {
+                        totalPoints += tdGoods.getReturnPoints();
+                        
+                        if (null != tdGoods.getShopReturnRation())
+                        {
+                            totalCash = tdGoods.getSalePrice() * tdGoods.getShopReturnRation();
+                        }
+                    }
+                }
+            }
+            
+            // 用户返利
+            TdUser tdUser = tdUserService.findByUsername(tdOrder.getUsername());
+            
+            if (null != tdUser)
+            {
+                TdUserPoint userPoint = new TdUserPoint();
+                
+                userPoint.setDetail("购买商品赠送粮草");
+                userPoint.setOrderNumber(tdOrder.getOrderNumber());
+                userPoint.setPoint(totalPoints);
+                userPoint.setPointTime(new Date());
+                userPoint.setTotalPoint(tdUser.getTotalPoints() + totalPoints);
+                userPoint.setUsername(tdUser.getUsername());
+                
+                userPoint = tdUserPointService.save(userPoint);
+                
+                tdUser.setTotalPoints(userPoint.getTotalPoint());
+                
+                tdUserService.save(tdUser);
+            }
+        }
+        
+        // 同盟店返利
+        TdDiySite tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
+        
+        if (null != tdShop)
+        {
+            if (null == tdShop.getTotalCash())
+            {
+                tdShop.setTotalCash(totalCash);
+            }
+            else
+            {
+                tdShop.setTotalCash(tdShop.getTotalCash() + totalCash);
+            }
+            
+            tdDiySiteService.save(tdShop);
+        }
     }
 }

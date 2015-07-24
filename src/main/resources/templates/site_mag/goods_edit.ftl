@@ -198,6 +198,7 @@ $(function () {
     }
     
     // 自动计算销售价
+    /*
     $("#outFactoryPrice").change(function(){
         var p1 = $.trim($('#outFactoryPrice').val());
         var p2 = $.trim($('#returnPrice').val())
@@ -206,7 +207,9 @@ $(function () {
         
         $("#idComputeSalePrice").val((parseFloat(p1) + parseFloat(p2)));
     });
+    */
     
+    /*
     $("#returnPrice").change(function(){
         var p1 = $.trim($('#outFactoryPrice').val());
         var p2 = $.trim($('#returnPrice').val())
@@ -215,6 +218,7 @@ $(function () {
         
         $("#idComputeSalePrice").val((parseFloat(p1) + parseFloat(p2)));
     });
+    */
     
     // 判断粮草购买限额不能大于最高返现额
     $("#pointLimited").change(function(){
@@ -502,7 +506,21 @@ function del_goods_comb(obj) {
     </div>
     
     <div class="tab-content" style="display: none;">
-        
+        <#if provider_list??>
+        <dl>
+            <dt>供应商</dt>
+            <dd>
+                <div class="rule-single-select">
+                    <select name="providerId" datatype="*0-100" sucmsg=" ">
+                        <option value="" <#if !provider_list??>selected="selected"</#if>>请选择类别...</option>
+                        <#list provider_list as w>
+                            <option value="${w.id!""}" <#if goods?? && goods.providerId?? && goods.providerId==w.id>selected="selected"</#if>>${w.title!""}</option>
+                        </#list>
+                    </select>
+                </div>
+            </dd>
+        </dl>
+        </#if>
         <dl>
             <dt>成本价</dt>
             <dd>
@@ -525,40 +543,19 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">电话卡销售时包含的话费</span>
             </dd>
         </dl>
-        <dl>
-            <dt>组合价</dt>
-            <dd>
-                <input name="combPrice" type="text" value="<#if goods?? && goods.combPrice??>${goods.combPrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">商品组合销售时的价格</span>
-            </dd>
-        </dl>
-        <dl>
-            <dt>出厂价</dt>
-            <dd>
-                <input id="outFactoryPrice" name="outFactoryPrice" type="text" value="<#if goods?? && goods.outFactoryPrice??>${goods.outFactoryPrice?string("0.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">*商品出厂价</span>
-            </dd>
-        </dl>
         -->
         <dl>
-            <dt>返现额</dt>
+            <dt>供货价</dt>
             <dd>
-                <input id="returnPrice" name="returnPrice" type="text" value="<#if goods?? && goods.returnPrice??>${goods.returnPrice?string("0.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">*返还同盟店的金额，不填时为0</span>
+                <input id="outFactoryPrice" name="outFactoryPrice" type="text" value="<#if goods?? && goods.outFactoryPrice??>${goods.outFactoryPrice?string("0.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">*商品供货价</span>
             </dd>
         </dl>
         <dl>
             <dt>销售价</dt>
             <dd>
                 <input id="idComputeSalePrice" name="salePrice" type="text" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
-                <span class="Validform_checktip">销售价</span>
-            </dd>
-        </dl>
-        <dl>
-            <dt>粮草购买限额</dt>
-            <dd>
-                <input id="pointLimited" name="pointLimited" type="text" value="<#if goods?? && goods.pointLimited??>${goods.pointLimited?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
-                <span class="Validform_checktip">购买时可使用的粮草限额，必须小于最高返现额</span>
+                <span class="Validform_checktip">*销售价</span>
             </dd>
         </dl>
         <dl>
@@ -568,21 +565,43 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">购买该商品赠送的粮草</span>
             </dd>
         </dl>
-        <#if provider_list??>
         <dl>
-            <dt>供应商</dt>
+            <dt>同盟店返利比例</dt>
             <dd>
-                <div class="rule-single-select">
-                    <select name="providerId" datatype="*0-100" sucmsg=" ">
-                        <option value="" <#if !provider_list??>selected="selected"</#if>>请选择类别...</option>
-                        <#list provider_list as w>
-                            <option value="${w.id!""}" <#if goods?? && goods.providerId?? && goods.providerId==w.id>selected="selected"</#if>>${w.title!""}</option>
-                        </#list>
-                    </select>
-                </div>
+                <input name="shopReturnRation" type="text" value="<#if goods?? && goods.shopReturnRation??>${goods.shopReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <span class="Validform_checktip">同盟店返利 = 销售价 * 同盟店返利比例</span>
             </dd>
         </dl>
-        </#if>
+        <dl>
+            <dt>平台服务费比例</dt>
+            <dd>
+                <input name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <span class="Validform_checktip">平台服务费 = 销售价 * 平台服务费比例</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>培训服务费比例</dt>
+            <dd>
+                <input name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <span class="Validform_checktip">培训服务费 = 销售价 * 培训服务费比例</span>
+            </dd>
+        </dl>
+        <#--
+        <dl>
+            <dt>返现额</dt>
+            <dd>
+                <input id="returnPrice" name="returnPrice" type="text" value="<#if goods?? && goods.returnPrice??>${goods.returnPrice?string("0.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">*返还同盟店的金额，不填时为0</span>
+            </dd>
+        </dl>
+        -->
+        <dl>
+            <dt>粮草购买限额</dt>
+            <dd>
+                <input id="pointLimited" name="pointLimited" type="text" value="<#if goods?? && goods.pointLimited??>${goods.pointLimited?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">购买时可使用的粮草限额</span>
+            </dd>
+        </dl>
         <#if warehouse_list??>
         <dl>
             <dt>所在仓库</dt>

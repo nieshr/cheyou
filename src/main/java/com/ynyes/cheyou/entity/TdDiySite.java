@@ -80,10 +80,16 @@ public class TdDiySite {
     private String username;
     
     // 登录密码
+    @Column
     private String password;
     
     // 手机号
+    @Column
     private String mobile;
+    
+    // 经度
+    @Column
+    private Double totalCash;
 
     public Long getId() {
         return id;
@@ -227,5 +233,13 @@ public class TdDiySite {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public Double getTotalCash() {
+        return totalCash;
+    }
+
+    public void setTotalCash(Double totalCash) {
+        this.totalCash = totalCash;
     }
 }

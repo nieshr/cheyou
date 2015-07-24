@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.service.TdCommonService;
-import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.util.VerifServlet;
 
@@ -28,9 +27,6 @@ import com.ynyes.cheyou.util.VerifServlet;
 public class TdLoginController {
     @Autowired
     private TdUserService tdUserService;
-    
-    @Autowired
-    private TdSettingService tdSettingService;
     
     @Autowired
     private TdCommonService tdCommonService;
@@ -96,38 +92,70 @@ public class TdLoginController {
         {
             res.put("msg", "用户名及密码不能为空");
         }
-        
+        /**
+         * 按账号查找登录验证
+         * 密码验证
+         * 修改最后登录时间
+         * @author libiao
+         */
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
         
-        if (null == user)
+        if (null != user)
         {
-            res.put("msg", "不存在该用户");
+        	if (!user.getPassword().equals(password))
+            {
+                res.put("msg", "密码错误");
+                return res;
+            }
+        	user.setLastLoginTime(new Date());
+        	user = tdUserService.save(user);
+        	request.getSession().setAttribute("username", user.getUsername());
+            
+            res.put("code", 0);
+            
+            /**
+    		 * @author lichong
+    		 * @注释：判断用户类型
+    		 */
+            if(user.getRoleId()==2L){
+            	res.put("role", 2);
+            }
+            
             return res;
         }
-        
-        if (!user.getPassword().equals(password))
-        {
-            res.put("msg", "密码错误");
-            return res;
-        }
-        
-        user.setLastLoginTime(new Date());
-        
-        tdUserService.save(user);
-        
-        request.getSession().setAttribute("username", username);
-        
-        res.put("code", 0);
-        
         /**
-		 * @author lichong
-		 * @注释：判断用户类型
-		 */
-        if(user.getRoleId()==2L){
-        	res.put("role", 2);
+         * 如果账号验证未通过，再进行手机登录验证
+         * 密码验证
+         * 修改最后登录时间
+         * @author libiao
+         */
+        user = tdUserService.findByMobileAndIsEnabled(username);
+        if(null != user){
+        	if (!user.getPassword().equals(password))
+            {
+                res.put("msg", "密码错误");
+                return res;
+            }
+        	user.setLastLoginTime(new Date());
+        	user = tdUserService.save(user);
+        	request.getSession().setAttribute("username", user.getUsername());
+            
+            res.put("code", 0);
+            
+            /**
+    		 * @author lichong
+    		 * @注释：判断用户类型
+    		 */
+            if(user.getRoleId()==2L){
+            	res.put("role", 2);
+            }
+            
+            return res;
+        }else
+        {	//账号-手机都未通过验证，则用户不存在
+        	res.put("msg", "不存在该用户");
+        	return res;
         }
-        
-        return res;
     }
 
     @RequestMapping("/logout")

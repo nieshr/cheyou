@@ -378,6 +378,18 @@ public class TdGoods {
     @Column
     private Long totalComments;
     
+    // 同盟店返利比例
+    @Column(scale=2)
+    private Double shopReturnRation;
+    
+    // 平台服务费比例
+    @Column(scale=2)
+    private Double platformServiceReturnRation;
+    
+    // 培训服务费比例
+    @Column(scale=2)
+    private Double trainServiceReturnRation;
+    
     public Long getId() {
         return id;
     }
@@ -1058,6 +1070,29 @@ public class TdGoods {
     public void setProviderTitle(String providerTitle) {
         this.providerTitle = providerTitle;
     }
-    
+
+    public Double getShopReturnRation() {
+        return shopReturnRation;
+    }
+
+    public void setShopReturnRation(Double shopReturnRation) {
+        this.shopReturnRation = shopReturnRation;
+    }
+
+    public Double getPlatformServiceReturnRation() {
+        return platformServiceReturnRation;
+    }
+
+    public void setPlatformServiceReturnRation(Double platformServiceReturnRation) {
+        this.platformServiceReturnRation = platformServiceReturnRation;
+    }
+
+    public Double getTrainServiceReturnRation() {
+        return trainServiceReturnRation;
+    }
+
+    public void setTrainServiceReturnRation(Double trainServiceReturnRation) {
+        this.trainServiceReturnRation = trainServiceReturnRation;
+    }
     
 }
