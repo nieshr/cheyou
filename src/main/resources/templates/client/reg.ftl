@@ -111,11 +111,11 @@ function tip()
         <form id="form1" method="post" action="/reg">
             <div>
                 <p><b style="color: #FF0000;">*</b> 请输入用户名 </p>
-                <input class="text" name="username" type="text" datatype="s6-20" ajaxurl="/reg/check/username"/>
+                <input class="text" name="username" type="text" datatype="s6-20" ajaxurl="/reg/check/username" value = "${username!''}"/>
             </div>
             <div>
                 <p>请输入车牌号码（选填）</p>
-                <input class="text" name="carCode" type="text" />
+                <input class="text" name="carCode" type="text" value ="${carCode!''}"/>
             </div>
             <div>
                 <p><b style="color: #FF0000;">*</b> 请输入密码</p>

@@ -94,7 +94,7 @@
         <span>合作账号登录</span>
         <p>
             <span>
-                <a href="#" title="QQ登录">
+                <a href="/qq/login" title="QQ登录">
                     <img src="/client/images/20150619110939448_easyicon_net_72.png" width="30" height="30" />
                 </a>
             </span>

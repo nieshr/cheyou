@@ -103,7 +103,7 @@ public class TdRegController {
     }
     
     @RequestMapping("/reg")
-    public String reg(Integer errCode, Integer shareId,String mobile, HttpServletRequest request, ModelMap map) {
+    public String reg(Integer errCode, Integer shareId,String name,String carCode, HttpServletRequest request, ModelMap map) {
         String username = (String) request.getSession().getAttribute("username");
         
         if (null != shareId)
@@ -112,6 +112,7 @@ public class TdRegController {
         }
         // 基本信息
         tdCommonService.setHeader(map, request);
+        
         
         if (null == username) {
             if (null != errCode)
@@ -123,6 +124,8 @@ public class TdRegController {
                 
                 map.addAttribute("errCode", errCode);
             }
+            map.addAttribute("username",name);
+            map.addAttribute("carCode",carCode);
             return "/client/reg";
             
         }
@@ -165,11 +168,11 @@ public class TdRegController {
         {
             if (null == shareId)
             {
-                return "redirect:/reg";
+                return "redirect:/reg?name= "+username+"&carCode="+carCode;
             }
             else
             {
-                return "redirect:/reg?shareId=" + shareId;
+                return "redirect:/reg?shareId=" + shareId + "&name= "+username+"&carCode="+carCode;
             }
         }
         
@@ -177,11 +180,11 @@ public class TdRegController {
         {
             if (null == shareId)
             {
-                return "redirect:/reg?errCode=1";
+                return "redirect:/reg?errCode=1&name= "+username+"&carCode="+carCode;
             }
             else
             {
-                return "redirect:/reg?errCode=1&shareId=" + shareId;
+                return "redirect:/reg?errCode=1&shareId=" + shareId + "&name= "+username+"&carCode="+carCode;
             }
         }
         
@@ -189,15 +192,14 @@ public class TdRegController {
         {
             if (null == shareId)
             {
-                return "redirect:/reg?errCode=4";
+                return "redirect:/reg?errCode=4&name= "+username+"&mobile="+mobile;
             }
             else
             {
-                return "redirect:/reg?errCode=4&shareId=" + shareId;
+                return "redirect:/reg?errCode=4&shareId=" + shareId + "&name= "+username+"&carCode="+carCode;
             }
         }
         
-        //--------------------------------------------
         
        TdUser user = tdUserService.addNewUser(null, username, password, mobile, email, carCode);
         
