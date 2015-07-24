@@ -121,7 +121,7 @@ public class TdUserController extends AbstractPaytypeController {
         map.addAttribute("total_undelivered", tdOrderService.countByUsernameAndStatusId(username, 3));
         map.addAttribute("total_unreceived", tdOrderService.countByUsernameAndStatusId(username, 4));
         map.addAttribute("total_finished", tdOrderService.countByUsernameAndStatusId(username, 6));
-        
+            
         return "/client/user_index";
     }
     
@@ -344,6 +344,37 @@ public class TdUserController extends AbstractPaytypeController {
         setPayTypes(map, false, true, req);
         
         return "/client/user_order_detail";
+    }
+    
+    /**
+	 * @author lc
+	 * @注释：
+	 */
+    @RequestMapping(value = "/user/diysite/order")
+    public String diysiteorder(Long id,
+                        HttpServletRequest req, 
+                        ModelMap map){
+        String username = (String) req.getSession().getAttribute("username");
+        if (null == username)
+        {
+            return "redirect:/login";
+        }
+        
+        tdCommonService.setHeader(map, req);
+        
+        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        map.addAttribute("user", tdUser);
+        
+        if (null != id)
+        {
+            map.addAttribute("order", tdOrderService.findOne(id));
+        }
+        
+        // 支付方式列表
+        setPayTypes(map, false, true, req);
+        
+        return "/client/diysite_order_detail";
     }
     
     @RequestMapping(value = "/user/collect/list")

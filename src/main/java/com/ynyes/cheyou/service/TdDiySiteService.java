@@ -128,16 +128,16 @@ public class TdDiySiteService {
      */
     public TdDiySite save(TdDiySite e)
     {
-        if (null == e.getUsername())
+        if (null != e.getUsername())    
         {
             TdUser user = tdUserService.findByUsername(e.getUsername());
             
-            if (null == user)
+            if (null == user )
             {
                 user = tdUserService.addNewUser(null, e.getUsername(), e.getPassword(), e.getMobile(), null, null);
                 
                 user.setRoleId(2L); // 加盟商用户
-                
+               
                 tdUserService.save(user);
             }
         }
@@ -148,5 +148,14 @@ public class TdDiySiteService {
     {
         
         return (List<TdDiySite>) repository.save(entities);
+    }
+    
+    /**
+	 * @author lc
+	 * @注释：
+	 */
+    public TdDiySite findbyUsername(String username){
+		
+    	return (repository.findByUsernameAndIsEnableTrue(username)); 	
     }
 }

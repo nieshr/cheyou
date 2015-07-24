@@ -53,7 +53,14 @@ public class TdLoginController {
         {
             referer = "/";
         }
-        
+        /**
+		 * @author lc
+		 * @注释：
+		 */
+        TdUser tdUser = tdUserService.findByUsername(username);
+        if(tdUser.getRoleId()==2L){
+        	return "redirect:/user/diysite/order/list/0";
+        }
         return "redirect:" + referer;
     }
     
@@ -111,6 +118,14 @@ public class TdLoginController {
         request.getSession().setAttribute("username", username);
         
         res.put("code", 0);
+        
+        /**
+		 * @author lichong
+		 * @注释：判断用户类型
+		 */
+        if(user.getRoleId()==2L){
+        	res.put("role", 2);
+        }
         
         return res;
     }

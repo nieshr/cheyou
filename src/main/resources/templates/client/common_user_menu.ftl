@@ -44,9 +44,10 @@
             <a href="/user/address/list">收货地址</a>
         </div>
     </div>
-    
+<!--    
     <div class="mymember_menu_part"> 
         <a class="mymember_menu_tit" href="#"><img src="/client/images/mymember/menu05.png" />加盟商中心</a>
         <div> <a href="/user/shop">进入加盟商中心</a> </div>
     </div>
+    -->
 </div>

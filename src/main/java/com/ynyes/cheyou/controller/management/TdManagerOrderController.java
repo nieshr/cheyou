@@ -280,14 +280,14 @@ public class TdManagerOrderController {
             
             if (null == dSite)
             {
-                if (null != tdUser) {
+                if (null != tdUser || tdUser.getRoleId() == 2L) {
                     res.put("info", "该登录名不能使用");
                     return res;
                 }
             }
             else
             {
-                if (null != tdUser && tdUser.getUsername() != dSite.getUsername()) {
+                if (null != tdUser && tdUser.getUsername() != dSite.getUsername() && tdUser.getRoleId()!=2L) {
                     res.put("info", "该登录名不能使用");
                     return res;
                 }
@@ -484,11 +484,11 @@ public class TdManagerOrderController {
         
         if (null == tdDiySite.getId())
         {
-            tdManagerLogService.addLog("add", "新增自提点", req);
+            tdManagerLogService.addLog("add", "新增同盟店", req);
         }
         else
         {
-            tdManagerLogService.addLog("edit", "修改自提点", req);
+            tdManagerLogService.addLog("edit", "修改同盟店", req);
         }
         
         tdDiySiteService.save(tdDiySite);

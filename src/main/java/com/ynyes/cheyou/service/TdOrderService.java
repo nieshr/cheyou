@@ -197,4 +197,56 @@ public class TdOrderService {
         
         return (List<TdOrder>) repository.save(entities);
     }
+    /**
+	 * @author lichong
+	 * @注释：
+	 */
+    public Page<TdOrder> findByDiysitename(String diysitename, int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByshopTitleOrderByIdDesc(diysitename, pageRequest);
+    }
+    public Page<TdOrder> findByDiysitenameAndSearch(String diysitename, String keywords, int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByshopTitleAndOrderNumberContainingOrderByIdDesc(diysitename, keywords, pageRequest);
+    }
+    public Page<TdOrder> findByDiysitenameAndStatusIdAndSearch(String diysitename, long statusId, String keywords, int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByshopTitleAndStatusIdAndOrderNumberContainingOrderByIdDesc(diysitename, statusId, keywords, pageRequest);
+    }
+    public Page<TdOrder> findByDiysitenameAndStatusId(String diysitename, long statusId, int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByshopTitleAndStatusIdOrderByIdDesc(diysitename, statusId, pageRequest);
+    }
+    public Page<TdOrder> findByDiysitenameAndTimeAfter(String diysitename, Date time, int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByshopTitleAndOrderTimeAfterOrderByIdDesc(diysitename, time, pageRequest);
+    }
+    public Page<TdOrder> findByDiysitenameAndTimeAfterAndSearch(String diysitename, Date time, String keywords, int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByshopTitleAndOrderTimeAfterAndOrderNumberContainingOrderByIdDesc(diysitename, time, keywords, pageRequest);
+    }
+    public Page<TdOrder> findByDiysitenameAndStatusIdAndTimeAfterAndSearch(String username, long statusId, Date time, String keywords, int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByshopTitleAndStatusIdAndOrderTimeAfterAndOrderNumberContainingOrderByIdDesc(username, statusId, time, keywords, pageRequest);
+    }
+    public Page<TdOrder> findByDiysitenameAndStatusIdAndTimeAfter(String username, long statusId, Date time, int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByshopTitleAndStatusIdAndOrderTimeAfterOrderByIdDesc(username, statusId, time, pageRequest);
+    }
 }

@@ -36,9 +36,13 @@ $(document).ready(function(){
                 url: "login",
                 data: { "username": username, "password": password },
                 dataType: "json",
-                success: function (data) {
-                    if (data.code == 0) {
-                        var url = document.referrer;
+                success: function (data) { 
+                <!-- 修改 -->
+                    if (data.role == 2){
+                        window.location.href="/user/diysite/order/list/0";
+                    }    
+                    else if (data.code == 0) {
+                        var url = document.referrer;          
                         if(undefined==url || ""==url){
                             window.location.href="/";
                         }else{
