@@ -352,7 +352,7 @@ function delItem(id)
         <a class="index_free" href="/coupon/list">免费洗车券</a>
         <a class="index_free" href="/coupon/list">免费打蜡券</a>
         <a class="index_free" href="/coupon/list">200元优惠券</a>
-        <div class="index_ask">
+        <div class="index_ask">          
             <a class="fl" href="javascript:;">免费询价</a>
             <a class="fr" href="javascript:;">免费安装</a>
             <div class="clear"></div>
