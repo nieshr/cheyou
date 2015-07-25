@@ -31,6 +31,7 @@ import com.ynyes.cheyou.entity.TdUserConsult;
 import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.entity.TdUserRecentVisit;
 import com.ynyes.cheyou.entity.TdUserReturn;
+import com.ynyes.cheyou.entity.TdUserSuggestion;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdOrderGoodsService;
@@ -44,6 +45,7 @@ import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserRecentVisitService;
 import com.ynyes.cheyou.service.TdUserReturnService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.service.TdUserSuggestionService;
 import com.ynyes.cheyou.util.ClientConstant;
 
 /**
@@ -77,6 +79,13 @@ public class TdUserController extends AbstractPaytypeController {
     
     @Autowired
     private TdUserCommentService tdUserCommentService;
+    
+    /**
+     * 投诉service
+     * @author Zhangji
+     */
+    @Autowired
+    private TdUserSuggestionService tdUserSuggestionService;
     
     @Autowired
     private TdUserRecentVisitService tdUserRecentVisitService;
@@ -718,6 +727,72 @@ public class TdUserController extends AbstractPaytypeController {
         return "/client/user_return_list";
     }
     
+   /**
+    * 用户投诉
+    * 
+    * @param req
+    * @param map
+    * @return
+    */
+    @RequestMapping(value="/user/suggestion/list")
+    public String suggestionList(HttpServletRequest req,     		                     
+                                 ModelMap map){
+    String username = (String) req.getSession().getAttribute("username");
+
+    if (null == username)
+    {
+     return "redirect:/login";
+    }
+
+    tdCommonService.setHeader(map, req);
+
+
+    TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+
+    map.addAttribute("user", tdUser);
+    return "/client/user_suggestion_list";
+    }
+    
+    /**
+     * 投诉
+     * 
+     */
+    @RequestMapping(value = "/user/suggestion/add", method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> suggestionAdd(HttpServletRequest req, 
+                  		String content,
+                        String title,
+                        String code,
+                        ModelMap map){
+        Map<String, Object> res = new HashMap<String, Object>();
+        res.put("code", 1);
+        
+        String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            res.put("message", "请先登录！");
+            return res;
+        }
+        
+        TdUserSuggestion tdSuggestion = new TdUserSuggestion();
+        
+        tdSuggestion.setContent(content);
+        tdSuggestion.setTime(new Date());
+        tdSuggestion.setTitle(title);    
+        
+        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        tdUserSuggestionService.save(tdSuggestion);
+                
+        res.put("code", 0);
+        
+        return res;
+    }
+    
+    
+    
+    
     @RequestMapping(value = "/user/comment/add", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> commentAdd(HttpServletRequest req, 
@@ -939,6 +1014,8 @@ public class TdUserController extends AbstractPaytypeController {
                                     String detail,
                                     String postcode,
                                     String mobile,
+                                    String receiverCarcode,         //增加车牌 by zhangji
+                                    String receiverCartype,         //车型
                                     HttpServletRequest req) {
         Map<String, Object> res = new HashMap<String, Object>();
         
@@ -969,6 +1046,8 @@ public class TdUserController extends AbstractPaytypeController {
         address.setDetailAddress(detail);
         address.setPostcode(postcode);
         address.setReceiverMobile(mobile);
+        address.setReceiverCarcode(receiverCarcode);        //增加车牌 by zhangji
+        address.setReceiverCartype(receiverCartype);         //车型
         
         user.getShippingAddressList().add(address);
         

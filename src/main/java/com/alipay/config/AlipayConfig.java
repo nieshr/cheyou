@@ -30,7 +30,7 @@ public class AlipayConfig {
 	public static String key = "1sfhrsrza6k9hwy0y07c902lc9ayhpvs";
 
 	//必填，页面跳转同步通知页面路径
-	public static String return_url = "http://localhost:80/login/alipay_return_url";
+	public static String return_url = "http://localhost:8080/login/alipay_return_url";
 	
 	//需http://格式的完整路径，不允许加?id=123这类自定义参数
 	//↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑

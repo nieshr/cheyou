@@ -75,6 +75,19 @@ public class TdShippingAddress {
 	// 排序号
     @Column
     private Long sortId;
+    
+    /**
+     * 新增车牌和车型参数，供“安装信息”使用
+     * @author zhangji
+     */
+    
+    //收货人车牌
+    @Column
+    private String receiverCarcode;
+    
+    //收货人车型
+    @Column
+    private String receiverCartype;
 
     public Long getId() {
         return id;
@@ -187,5 +200,24 @@ public class TdShippingAddress {
     public void setSortId(Long sortId) {
         this.sortId = sortId;
     }
+
+	public String getReceiverCarcode() {
+		return receiverCarcode;
+	}
+
+	public void setReceiverCarcode(String receiverCarcode) {
+		this.receiverCarcode = receiverCarcode;
+	}
+
+	public String getReceiverCartype() {
+		return receiverCartype;
+	}
+
+	public void setReceiverCartype(String receiverCartype) {
+		this.receiverCartype = receiverCartype;
+	}
+
+    
+
 
 }

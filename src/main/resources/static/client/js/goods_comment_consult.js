@@ -82,6 +82,31 @@ function submitConsult()
     });
 }
 
+/**
+ * 提交投诉
+ * zhangji
+ * @param type
+ * @param stars
+ */
+function submitSuggestion()
+{
+    $.ajax({
+        type:"post",
+        url:"/user/suggestion/add?" + $("#suggestionForm").serialize(),
+        success:function(res){
+            if (0 == res.code)
+            {
+                alert("提交投诉成功，请耐心等待审核~~");
+            }
+            else
+            {
+                var ss = "" + res.message;
+                alert(res["message"]);
+            }
+        }
+    });
+}
+
 // 改变星级
 function starChange(type, stars)
 {

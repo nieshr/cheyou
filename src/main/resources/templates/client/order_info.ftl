@@ -52,6 +52,9 @@
 <script type="text/javascript">
     var forPaymentFllow = true;
 </script>
+
+
+
 </head>
 <body>
 <#include "/client/common_header.ftl" />
@@ -67,24 +70,27 @@
     <div class="clear h30"></div>
     
     <form id="form1" name="form1" action="/order/submit" method="post">
-        <#--
+        
         <table class="address_tab">
             <tr>
                 <th width="140">
-                    <p>收货地址</p>
-                    <a class="red" href="javascript:toggleNewAddress();">新增收货地址</a>
+                    <p>安装信息</p>
+                    <a class="red" href="javascript:toggleNewAddress();">新增安装信息</a>
                 </th>
                 <td>
                     <input id="input-address-id" type="hidden" name="addressId" value="" datatype="n" nullmsg="请选择收货地址!"/>
                     <#if user.shippingAddressList?? && user.shippingAddressList?size gt 0>
                         <#list user.shippingAddressList as address>
                             <a href="javascript:;" onclick="javascript:selectAddress(this, ${address.id});">
-                                <p>收货人：${address.receiverName!''}</p>
-                                <p class="p1">收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>
-                                <p>电话：${address.receiverMobile!''}</p>
+                                <p>姓名：${address.receiverName!''}</p>
+                           <#--     <p class="p1">收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>  -->
+                                <p>手机：${address.receiverMobile!''}</p>                              
+                                <p>车牌：${address.receiverCarcode!'' }</p>
+                                <P>车型：${address.receiverCartype!'' }</P>
                             </a>
-                        </#list>
+                        </#list>                                                 
                     </#if>
+                   
                     <div class="clear"></div>
                 </td>
             </tr>
@@ -93,12 +99,16 @@
             <table class="mymember_address">
                   <tbody>
                   <tr>
-                    <th>收货人*：</th>
+                    <th>姓名*：</th>
                     <td>
                         <input class="mytext" id="receiverName" value="" type="text">
                         <span>收货人姓名</span>
                     </td>
                   </tr>
+                  <tr>
+              <#--    <th>姓名</th>  -->
+                  </tr>
+              <#--    
                   <tr>
                     <th>地区*：</th>
                     <td>
@@ -121,11 +131,24 @@
                         <input class="mytext" id="postcode" value="" type="text">
                     </td>
                   </tr>
+                  -->
                   <tr>
-                    <th>联系电话*：</th>
+                    <th>手机*：</th>
                     <td>
                         <input class="mytext" id="mobile" value="" type="text">
                     </td>
+                  </tr>
+                  <tr>
+                  <th>车牌（选填）*：</th>
+                  <td>
+                  <input class="mytext" id="receiverCarcode" value="" type="text"/>
+                  </td>
+                  </tr>
+                  <tr>
+                  <th>车型（选填）*：</th>
+                  <td>
+                   <input class="mytext" id="receiverCartype" value="" type="text"/>
+                  </td>
                   </tr>
                   <tr>
                     <th></th>
@@ -134,20 +157,36 @@
                 </tbody>
                 </table>
             </div>
-        -->
-        
+   
+      
+     
         <div class="clear h20"></div>
         
-        <section class="order_check fl">
-            <h3>选择线下同盟店</h3>
-            <select name="shopId" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
+       <section class="order_check fl">
+         <h3>选择线下同盟店</h3>
+          
+             
+            <select name="shopId" id="formselect"datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
                 <option>请选择</option>
                 <#if shop_list??>
                     <#list shop_list as item>
                         <option value="${item.id}">${item.title!''}</option>
-                    </#list>
+                        <p>${item.address}</p>
+                    </#list>                  
                 </#if>
             </select>
+       <#--
+                 <#if shop_list??>
+                     <#list shop_list as item>
+                        <table id="${item.id}" style="display:">
+                             <tr>
+                             
+                               <td>${item.address}</td>
+                             </tr>
+                         </table>
+                       </#list>
+                 </#if>
+        -->          
         </section>
         <section class="order_check fr" style="width:40%;">
             <h3>选择预约安装时间</h3>

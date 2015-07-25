@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if goods??>${goods.seoTitle!''}-</#if>云南车有同盟商贸有限公司</title>
+<title><#if goods??>${goods.seoTitle!''}-</#if>${site.company!''}</title>
 <meta name="keywords" content="${goods.seoKeywords!''}">
 <meta name="description" content="${goods.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -369,7 +369,7 @@ function checkTime(i)
                 <span class="fl ml10">库存
                 <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
                     ${goods.flashSaleLeftNumber!'0'}
-                <#elseif qiang?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
+                <#elseif qiang?? && qiang!=1 && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
                     ${goods.groupSaleLeftNumber!'0'}
                 <#else>
                     ${goods.leftNumber!'0'}

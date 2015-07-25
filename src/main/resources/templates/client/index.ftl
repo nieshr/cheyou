@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<title><#if site??>${site.seoTitle!''}-</#if>${site.company!''}</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -352,7 +352,7 @@ function delItem(id)
         <a class="index_free" href="/coupon/list">免费洗车券</a>
         <a class="index_free" href="/coupon/list">免费打蜡券</a>
         <a class="index_free" href="/coupon/list">200元优惠券</a>
-        <div class="index_ask">
+        <div class="index_ask">          
             <a class="fl" href="javascript:;">免费询价</a>
             <a class="fr" href="javascript:;">免费安装</a>
             <div class="clear"></div>

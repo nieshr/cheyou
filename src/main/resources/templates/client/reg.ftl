@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<title><#if site??>${site.seoTitle!''}-</#if>${site.company!''}</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -111,11 +111,11 @@ function tip()
         <form id="form1" method="post" action="/reg">
             <div>
                 <p><b style="color: #FF0000;">*</b> 请输入用户名 </p>
-                <input class="text" name="username" type="text" datatype="s6-20" ajaxurl="/reg/check/username"/>
+                <input class="text" name="username" type="text" datatype="s6-20" ajaxurl="/reg/check/username" value = "${username!''}"/>
             </div>
             <div>
                 <p>请输入车牌号码（选填）</p>
-                <input class="text" name="carCode" type="text" />
+                <input class="text" name="carCode" type="text" value ="${carCode!''}"/>
             </div>
             <div>
                 <p><b style="color: #FF0000;">*</b> 请输入密码</p>
