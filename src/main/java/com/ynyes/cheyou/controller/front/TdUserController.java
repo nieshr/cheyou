@@ -45,8 +45,8 @@ import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserRecentVisitService;
 import com.ynyes.cheyou.service.TdUserReturnService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.service.TdUserSuggestionService;
 import com.ynyes.cheyou.util.ClientConstant;
-import com.ynyes.cheyou.service.TdUserSuggestionService;   
 
 /**
  * 用户中心
