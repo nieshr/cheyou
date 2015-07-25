@@ -332,7 +332,16 @@ public class TdUserService {
     	}
     	return repository.findByMobile(mobile);
     }
-    
+    /**
+	 * @author lc
+	 * @注释：按支付宝id查找
+	 */
+    public TdUser findByalipayname(String alipayname){
+    	if(null ==alipayname){
+    		return null;
+    	}
+    	return repository.findByAlipayUserId(alipayname);
+    }
     /**
      * 查找
      * 

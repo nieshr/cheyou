@@ -99,7 +99,7 @@
                 </a>
             </span>
             <span class="ml20">
-                <a href="#" title="支付宝登录">
+                <a href="/login/alipay_login" title="支付宝登录">
                     <img src="/client/images/20150619110924540_easyicon_net_72.png" width="30" height="30" />
                 </a>
             </span>
