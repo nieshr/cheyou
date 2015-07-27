@@ -332,6 +332,20 @@ public class TdUserService {
     	}
     	return repository.findByMobile(mobile);
     }
+    
+    /**
+     * 按QQ——openID查找
+     * @author libiao
+     * @param qq
+     * @return
+     */
+    public TdUser findByQqUserId(String qqUserId){
+    	if(null == qqUserId){
+    		return null;
+    	}
+    	return repository.findByQqUserId(qqUserId);
+    }
+    
     /**
 	 * @author lc
 	 * @注释：按支付宝id查找
@@ -341,6 +355,7 @@ public class TdUserService {
     		return null;
     	}
     	return repository.findByAlipayUserId(alipayname);
+
     }
     /**
      * 查找

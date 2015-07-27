@@ -402,6 +402,7 @@ function del_goods_comb(obj) {
         </div>
     </div>
     <div class="tab-content" style="display: none;">
+        <#--
         <dl>
             <dt>商品名称</dt>
             <dd>
@@ -409,7 +410,7 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>
-        <#--
+        -->
         <dl>
             <dt>商品标题</dt>
             <dd>
@@ -417,7 +418,6 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>
-        -->
         <dl>
             <dt>商品副标题</dt>
             <dd>
