@@ -214,6 +214,15 @@ function hideSuggestion()
 {
     $("#sugguestion-div").css("display", "none");
 }
+
+function showSuggestion()
+{
+    $("#sugguestion-div").css("display", "block");
+}
+function move()
+{
+    $('html,body').animate({scrollTop:0},500);
+}
 </script>
 
 <div id="sugguestion-div" class="mianfeilingqutanchu" style="display:none;">
@@ -421,8 +430,8 @@ function delItem(id)
     <a href="javascript:;" title="微信客服"><img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服" /><span><img src="${site.wxQrCode!''}" width="84" height="84"/></span></a>
     <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq!''}&site=qq&menu=yes" target="_blank" title="在线咨询"><img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询" /></a>
     <a href="javascript:;" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /><span><img src="${site.weiboQrCode!''}" width="84" height="84"/></span></a>
-    <a href="javascript:$('div.mianfeilingqutanchu').show();" title="投诉"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线" /></a>
-    <a href="javascript:$('html,body').animate({scrollTop:0},500);" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
+    <a href="javascript:showSuggestion();" title="投诉"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线"/></a>
+    <a href="javascript:move();" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
 </aside>
 
 
