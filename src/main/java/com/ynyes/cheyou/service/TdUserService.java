@@ -332,31 +332,18 @@ public class TdUserService {
     	}
     	return repository.findByMobile(mobile);
     }
-    /**
-
-     * QQ查找
-     * @author libiao
-     * @param qq
-     * @return
-     */
-    public TdUser findByQqAndIsEnabled(String qq){
-    	if(null ==qq){
-    		return null;
-    	}
-    	return repository.findByQqAndStatusIdOrQqAndStatusId(qq, 0L, qq, 1L);
-    }
     
     /**
-     * QQ查找
+     * 按QQ——openID查找
      * @author libiao
      * @param qq
      * @return
      */
-    public TdUser findByQq(String qq){
-    	if(null == qq){
+    public TdUser findByQqUserId(String qqUserId){
+    	if(null == qqUserId){
     		return null;
     	}
-    	return repository.findByQq(qq);
+    	return repository.findByQqUserId(qqUserId);
     }
     
     /**
