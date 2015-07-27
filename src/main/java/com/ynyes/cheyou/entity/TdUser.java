@@ -47,6 +47,9 @@ public class TdUser {
 	@Column
 	private String alipayUserId;
 	
+	//QQ登录名
+	@Column
+	private String qqUserId;	
 
 	// 上级用户名
     @Column
@@ -223,7 +226,15 @@ public class TdUser {
 		this.alipayUserId = alipay_userid;
 	}
 	
-    public List<TdShippingAddress> getShippingAddressList() {
+    public String getQqUserId() {
+		return qqUserId;
+	}
+
+	public void setQqUserId(String qqUserId) {
+		this.qqUserId = qqUserId;
+	}
+
+	public List<TdShippingAddress> getShippingAddressList() {
         return shippingAddressList;
     }
 

@@ -40,6 +40,22 @@ function checkTime(i)
     return i;  
 }
 </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".mianfeilingqutanchu #yincang").click(function(){
+    $(this).parents(".mianfeilingqutanchu").hide();
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#xianshi").click(function(){
+      $("div.mianfeilingqutanchu").show();
+  });
+});
+</script>
 </head>
 <body>
 <#include "/client/common_header.ftl" />

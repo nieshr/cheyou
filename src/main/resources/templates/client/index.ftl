@@ -13,11 +13,15 @@
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
+<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -176,6 +180,7 @@ $(function(){
 	$.ljs_adcartoon.arrowNum(shopad);
 	});
 </script>
+<meta property="qc:admins" content="274143415163145116375" />
 </head>
 
 <body>
@@ -184,6 +189,88 @@ $(function(){
         <a class="w100 block ta-c" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}" style=" background:url(${item.fileUri!''}) no-repeat top center; height:100px;"></a>
     </#list>
 </#if>
+<#-- 投訴頁面js-->
+<#-- 投诉 -->
+<script>
+$(document).ready(function(){
+    $("#suggestionForm").Validform({
+        tiptype: 3,
+        ajaxPost:true,
+        callback: function(data) {
+            if (data.code==0)
+            {
+                alert("提交成功，我们会尽快处理，请耐心等待");
+                window.location.reload();
+            }
+            else
+            {
+                alert(data.message);
+            }
+        }
+    });
+});
+
+function hideSuggestion()
+{
+    $("#sugguestion-div").css("display", "none");
+}
+</script>
+
+<div id="sugguestion-div" class="mianfeilingqutanchu" style="display:none;">
+    <div class="mianfeilingqutanchu_dl"> 
+        <div class="main bgff">
+            <div class="tousuyemian">
+                <div class="rightb_gundong fr" id="yincang">
+                    <a href="javascript:hideSuggestion();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="21" height="21" /></a>
+                </div>
+                  <form id="suggestionForm" action="/suggestion/add">
+                      <div class="clear"></div>
+                      <h3>我要投诉</h3>
+                      <p>在您填写下列投诉内容之前，我们首先代表车有同盟为导致您进行投诉的原因（行为）表示歉意，请详细描述事件经过，以便我们尽快为您解决问题，我们一定会及时处理，给您一个满意的解决方案，您的满意是我们最大的动力，谢谢！</p>
+                      <div class="tousuneirong">
+                          <#-- 
+                          <span>标题</span><input name="title"  onfocus="if(value=='订单编号') {value=''}" onblur="if (value=='订单编号') {value='订单编号'}"  value="" id="et_contact_name" class="input ml20" type="text">
+                          -->
+                          <div class="clear h10"></div>
+                          <span><b class="red">*</b>投诉内容</span>
+                          <div class=" clear"></div>
+                          <textarea class="input" style="width:1000px;height:250px" onfocus="if(value=='') {value=''}" onblur="if (value=='') {value=''}"  value="" datatype="*1-255" nullmsg="请输入投诉内容" id="suggestionContent" name="content"></textarea>
+                          
+                      </div>
+                      <div class="tousulianxifangshi mt20">
+                          <p>为了尽快为您解决问题，请提供您的联系方式，谢谢。</p>
+                          <div> 
+                              <span><b class="red">*</b>称呼</span>                                               
+                              <input name="name" value="" datatype="*1-20" nullmsg="请输入您的称呼" class="input ml20" type="text">                                         
+                          </div>
+                          <div class="clear h10"></div>
+                          <div>
+                              <span>邮箱&nbsp;&nbsp;</span>
+                              <input name="mail"   value="" datatype="*0-250" nullmsg="请输入正确的邮箱地址" class="input ml20" type="text">
+                          </div>
+                          <div class="clear h10"></div>
+                          <div>
+                              <span><b class="red">*</b>手机</span>
+                              <input name="mobile"   value="" datatype="m" nullmsg="请输入您的手机号码" class="input ml20" type="text">
+                          </div>
+                          <div class="clear h20"></div>
+                          <input class="Message_an" type="submit" value="提交" title="提交" />
+                      </div>
+                   </form>
+            
+                <div class="tousubeizhu mt5">
+                     <h4>备注</h4>
+                     <p>您还可以拨打${site.telephone!''}进行电话投诉</p>
+                </div>  
+            </div>
+        </div>
+    
+        <div class="clear"></div> 
+    </div>
+</div>
+                  
+
+
 <div class="top">
     <div class="w1200 top1">
         <p class="huanyin">商城访问量：<span class="blue">${site.totalVisits!'0'}</span></p>
@@ -195,7 +282,7 @@ $(function(){
                 <a href="/logout">退出<i></i></a>
             <#else>
                 <a href="/login" target="_blank">登录<i></i></a>
-                <a href="/reg" target="_blank">免费注册<i></i></a>
+                <a href="/reg" target="_blank">免费注册<i></i></a>               
             </#if>
             <a href="/user/order/list/0">我的订单</a>
             <a href="/user">会员中心</a>
@@ -334,9 +421,11 @@ function delItem(id)
     <a href="javascript:;" title="微信客服"><img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服" /><span><img src="${site.wxQrCode!''}" width="84" height="84"/></span></a>
     <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq!''}&site=qq&menu=yes" target="_blank" title="在线咨询"><img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询" /></a>
     <a href="javascript:;" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /><span><img src="${site.weiboQrCode!''}" width="84" height="84"/></span></a>
-    <a href="javascript:;" title="服务热线"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线" /><span><img src="/client/images/sys02.png" width="84" height="84"/></span></a>
+    <a href="javascript:$('div.mianfeilingqutanchu').show();" title="投诉"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线" /></a>
     <a href="javascript:$('html,body').animate({scrollTop:0},500);" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
 </aside>
+
+
 
 <div class="main">
     <section class="index_right">

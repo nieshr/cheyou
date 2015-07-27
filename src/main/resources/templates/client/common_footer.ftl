@@ -44,6 +44,22 @@
     </div>
 </div>
 
+<<<<<<< HEAD
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".mianfeilingqutanchu .yincang").click(function(){
+    $(this).parents(".mianfeilingqutanchu").hide("slow");
+  });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".mianfeilingqutanchu #xianshi").click(function(){
+      $(this).parents(".mianfeilingqutanchu").show();
+  });
+});
+</script>
+=======
 <#--
 <div class="mianfeilingqutanchu">
                   <div class="mianfeilingqutanchu_dl">
@@ -70,9 +86,13 @@
 <div class="tousulianxifangshi mt20">
 <p>为了尽快为您解决问题，请提供您的联系方式，谢谢。</p>
 <span>称呼</span><input name="et_contact_name"  onfocus="if(value=='订单编号') {value=''}" onblur="if (value=='订单编号') {value='订单编号'}"  value="" id="et_contact_name" class="input ml20" type="text"><div class="clear h10"></div>
+>>>>>>> refs/remotes/origin/master
 
-<span>邮箱</span><input name="et_contact_name"  onfocus="if(value=='订单编号') {value=''}" onblur="if (value=='订单编号') {value='订单编号'}"  value="" id="et_contact_name" class="input ml20" type="text"><div class="clear h10"></div>
 
+<<<<<<< HEAD
+
+          
+=======
 <span>联系方式</span><input name="et_contact_name"  onfocus="if(value=='订单编号') {value=''}" onblur="if (value=='订单编号') {value='订单编号'}"  value="" id="et_contact_name" class="input ml20" type="text"><b class="red">*</b>
 <div class="clear h20"></div>
 <input class="Message_an" type="submit" name="button2" id="button2" value="提交" title="提交" />
@@ -85,3 +105,4 @@
 </div>  
 </div>
 -->
+>>>>>>> refs/remotes/origin/master
