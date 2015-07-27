@@ -889,19 +889,25 @@ public class TdUserController extends AbstractPaytypeController {
         
         map.addAttribute("user", tdUser);
         
-        Page<TdUserComment> commentPage = null;
-        
-        if (null == keywords || keywords.isEmpty())
+        if (null != tdUser)
         {
-            commentPage = tdUserCommentService.findByUsername(username, page, ClientConstant.pageSize);
-        }
-        else
-        {
-            commentPage = tdUserCommentService.findByUsernameAndSearch(username, keywords, page, ClientConstant.pageSize);
+            // 查找该用户的未评价订单
+            map.addAttribute("order_page", tdOrderService.findByUsernameAndStatusId(username, 5L, page, ClientConstant.pageSize));
         }
         
-        map.addAttribute("comment_page", commentPage);
-        map.addAttribute("keywords", keywords);
+//        Page<TdUserComment> commentPage = null;
+//        
+//        if (null == keywords || keywords.isEmpty())
+//        {
+//            commentPage = tdUserCommentService.findByUsername(username, page, ClientConstant.pageSize);
+//        }
+//        else
+//        {
+//            commentPage = tdUserCommentService.findByUsernameAndSearch(username, keywords, page, ClientConstant.pageSize);
+//        }
+//        
+//        map.addAttribute("comment_page", commentPage);
+//        map.addAttribute("keywords", keywords);
         
         return "/client/user_comment_list";
     }

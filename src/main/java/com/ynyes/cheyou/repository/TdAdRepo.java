@@ -22,5 +22,5 @@ public interface TdAdRepo extends
 		JpaSpecificationExecutor<TdAd> 
 {
     Page<TdAd> findByIsEnableTrueOrderBySortIdAsc(Pageable page);
-    List<TdAd> findByTypeIdAndStartTimeBeforeAndEndTimeAfterAndIsEnableTrueOrderByIdDesc(Long typeId, Date current1, Date current2);
+    List<TdAd> findByTypeIdAndStartTimeBeforeAndEndTimeAfterAndIsEnableTrueOrderBySortIdAsc(Long typeId, Date current1, Date current2);
 }

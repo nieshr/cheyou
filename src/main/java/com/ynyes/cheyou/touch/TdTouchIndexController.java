@@ -110,7 +110,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("big_scroll_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
         
         // 商品分类底部广告
@@ -118,7 +118,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("cat_bottom_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 页面中部轮播广告
@@ -126,7 +126,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("mid_scroll_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 页面中部大图广告
@@ -134,7 +134,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("mid_big_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 商品分类轮播广告
@@ -142,7 +142,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("type_scroll_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 昆明自驾游大图广告
@@ -150,7 +150,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("tour_km_big_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 省内自驾游大图广告
@@ -158,7 +158,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("tour_province_big_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 国内自驾游大图广告
@@ -166,7 +166,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("tour_country_big_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 昆明自驾游列表广告
@@ -174,7 +174,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("tour_km_list_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 省内自驾游列表广告
@@ -182,7 +182,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("tour_province_list_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 国内自驾游列表广告
@@ -190,7 +190,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("tour_country_list_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 首页底部大图广告
@@ -198,7 +198,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("bottom_big_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 首页底部小图广告
@@ -206,7 +206,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("bottom_small_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 已经结束团购
@@ -238,7 +238,7 @@ public class TdTouchIndexController {
         
         if (null != adType) {
             map.addAttribute("touch_middle_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
         
         // 触屏页秒杀栏旁边广告
@@ -246,7 +246,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("touch_miao_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
         
         // 触屏页团购栏旁边广告
@@ -254,7 +254,7 @@ public class TdTouchIndexController {
 
         if (null != adType) {
             map.addAttribute("touch_tuan_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
         
         // 自驾游

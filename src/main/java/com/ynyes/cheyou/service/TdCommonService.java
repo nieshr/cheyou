@@ -72,7 +72,7 @@ public class TdCommonService {
 
         if (null != adType) {
             map.addAttribute("top_small_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderByIdDesc(adType.getId()));
+                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
 
         // 网站基本信息

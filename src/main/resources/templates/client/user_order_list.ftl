@@ -74,6 +74,8 @@ DD_belatedPNG.fix('.,img,background');
                             待发货订单
                         <#elseif status_id==4>
                             待收货订单
+                        <#elseif status_id==5>
+                            待评价订单
                         <#elseif status_id==6>
                             已完成订单
                         <#elseif status_id==7>
@@ -128,6 +130,9 @@ DD_belatedPNG.fix('.,img,background');
                                         待发货
                                     <#elseif order.statusId==4>
                                         待收货
+                                    <#elseif order.statusId==5>
+                                        待评价
+                                        <a href="#">发表评论</a>
                                     <#elseif order.statusId==6>
                                         已完成
                                     </#if>

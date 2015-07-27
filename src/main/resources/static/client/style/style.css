@@ -892,13 +892,14 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	left:75px;
 	font-size:12px;}
 .knockbox dd {
-	float:left;
-	display:block;
-	_display:inline;
-	width:244px;
-	height:350px;
-	padding:0 10px 0;
-	border-left:1px dashed #ccc;}
+    float: left;
+    display: block;
+    _display: inline;
+    width: 244px;
+    height: 190px;
+    padding: 0 10px 0;
+    border-left: 1px dashed #ccc;
+}
 .knockbox dd a {
 	display:block;
 	width:100%;

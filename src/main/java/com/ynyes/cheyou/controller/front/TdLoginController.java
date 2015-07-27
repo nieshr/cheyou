@@ -200,7 +200,7 @@ public class TdLoginController {
     		 * @author lichong
     		 * @注释：判断用户类型
     		 */
-            if(user.getRoleId()==2L){
+            if(null != user.getRoleId() && user.getRoleId().equals(2L)){
             	res.put("role", 2);
             }
             
@@ -284,8 +284,8 @@ public class TdLoginController {
     @RequestMapping(value= "/login/alipay_return_url"  , method = RequestMethod.GET)
 	public String returnurl(HttpServletRequest request, ModelMap map){
 		Map<String,String> params = new HashMap<String,String>();
-		Map requestParams = request.getParameterMap();
-		for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+		Map<String, String[]>  requestParams = request.getParameterMap();
+		for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
 			String name = (String) iter.next();
 			String[] values = (String[]) requestParams.get(name);
 			String valueStr = "";
@@ -308,13 +308,12 @@ public class TdLoginController {
 		//获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
 		//支付宝用户号
 		String user_id = " ";
-		String token = " ";
+//		String token = " ";
 		try {
 			user_id = new String(request.getParameter("user_id").getBytes("ISO-8859-1"),"UTF-8");
 			//授权令牌
-			token = new String(request.getParameter("token").getBytes("ISO-8859-1"),"UTF-8");
+//			token = new String(request.getParameter("token").getBytes("ISO-8859-1"),"UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	   	

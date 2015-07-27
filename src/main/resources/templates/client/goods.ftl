@@ -211,7 +211,9 @@ function timer()
                     
     var price = ${goods.flashSalePrice?string("0.00")} * ts / allts;
     
-    var s_x = Math.round(price).toString();
+    // var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
     var pos_decimal = s_x.indexOf('.');
     if (pos_decimal < 0) {
         pos_decimal = s_x.length;

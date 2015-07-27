@@ -68,6 +68,8 @@ DD_belatedPNG.fix('.,img,background');
                     待发货
                 <#elseif order.statusId==4>
                     待收货
+                <#elseif order.statusId==5>
+                    待评价
                 <#elseif order.statusId==6>
                     已完成
                 <#elseif order.statusId==8>
@@ -212,7 +214,8 @@ DD_belatedPNG.fix('.,img,background');
                 </tr>
             </#list>
         </#if>
-      </tbody></table>
+        </tbody>
+      </table>
       
     </div><!--mymember_info END-->
 

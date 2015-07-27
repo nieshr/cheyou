@@ -101,7 +101,9 @@ function timer${item_index}()
     
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
     
-    var s_x = Math.round(price).toString();
+    //var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
     var pos_decimal = s_x.indexOf('.');
     if (pos_decimal < 0) {
         pos_decimal = s_x.length;
@@ -135,7 +137,13 @@ function timer${item_index}()
                     <div class="yiyuqiangpailiebiao_rt_jg">抢拍价：<span id="flashPrice${item_index}">¥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}<#else>0.00</#if></span></div>
                     
                     <div class="yiyuqiangpailiebiao_rt_anniu">
+                        <#if type?? && type=="ongoing">
+                        <a href="javascript:;">即将开始</a>
+                        <#elseif type?? && type=="passed">
+                        <a href="javascript:;">已经结束</a>
+                        <#else>
                         <a href="/cart/init?id=${item.id}&qiang=1">立即购买</a>
+                        </#if>
                     </div>
           
                     <div class="clear"></div>

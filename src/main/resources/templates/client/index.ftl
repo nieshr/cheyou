@@ -503,12 +503,16 @@ function timer8${item_index}()
     
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
     
-    var s_x = Math.round(price).toString();
+    // var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
     var pos_decimal = s_x.indexOf('.');
+    
     if (pos_decimal < 0) {
         pos_decimal = s_x.length;
         s_x += '.';
     }
+    
     while (s_x.length <= pos_decimal + 2) {
         s_x += '0';
     }
@@ -522,7 +526,7 @@ function timer8${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft8${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice8${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -604,7 +608,9 @@ function timer15${item_index}()
     
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
     
-    var s_x = Math.round(price).toString();
+    //var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
     var pos_decimal = s_x.indexOf('.');
     if (pos_decimal < 0) {
         pos_decimal = s_x.length;
@@ -623,7 +629,7 @@ function timer15${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft15${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice15${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -705,7 +711,9 @@ function timer23${item_index}()
                     
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
     
-    var s_x = Math.round(price).toString();
+    // var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
     var pos_decimal = s_x.indexOf('.');
     if (pos_decimal < 0) {
         pos_decimal = s_x.length;
@@ -723,7 +731,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft23${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice23${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -770,7 +778,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -804,7 +812,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -838,7 +846,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -885,7 +893,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -919,7 +927,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -953,7 +961,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>

@@ -63,8 +63,12 @@ DD_belatedPNG.fix('.,img,background');
         <table class="mymember_evaluate">
             <tr>
                 <th colspan="2">商品信息</th>
+                <th colspan="1">购买时间</th>
                 <th width="200">评价状态</th>
             </tr>
+            <#if order_page??>
+                
+            </#if>
             <#if comment_page??>
                 <#list comment_page.content as comment>
                 <tr>
@@ -85,7 +89,39 @@ DD_belatedPNG.fix('.,img,background');
                         （暂无回复）
                         </#if>    
                     </td>
-                </tr>   
+                </tr>
+                
+                <tr id="mymember_eva01" class="">
+                    <td class="td004" colspan="4">
+                        <span style="position:absolute;right:258px;top:-13px;">
+                            <img src="/client/images/mymember/arrow06.gif">
+                        </span>
+                        <div class="mymember_eva_div">
+                          <b><font>* </font>评分：</b>
+                          <div class="myclear"></div>
+                          <a class="a001" href="#"><img src="/client/images/mymember/star02.png"></a>
+                          <a class="a001" href="#"><img src="/client/images/mymember/star02.png"></a>
+                          <a class="a001" href="#"><img src="/client/images/mymember/star02.png"></a>
+                          <a class="a001" href="#"><img src="/client/images/mymember/star01.png"></a>
+                          <a class="a001" href="#"><img src="/client/images/mymember/star01.png"></a>
+                          <div class="myclear"></div>
+                        </div>
+                        <div class="mymember_eva_div">
+                          <b><font>* </font>心得：</b>
+                          <textarea></textarea>
+                        </div>
+                        <div class="mymember_eva_div">
+                          <b><font>* </font>晒单：</b>
+                          <div class="myclear"></div>
+                          <a class="a002" href="#"><img src="/client/images/mymember/img01.jpg" width="75"></a>
+                          <a class="a002" href="#">添加图片</a>
+                          <div class="myclear"></div>
+                        </div>
+                        <div class="mymember_eva_div">
+                          <input class="mysub" type="submit" value="发表评论">
+                        </div>
+                    </td>
+                </tr>
                 </#list>
             </#if>  
         </table>

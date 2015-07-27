@@ -98,9 +98,9 @@ public class TdAdService {
         return (List<TdAd>) repository.findAll();
     }
     
-    public List<TdAd> findByTypeIdAndIsValidTrueOrderByIdDesc(Long typeId)
+    public List<TdAd> findByTypeIdAndIsValidTrueOrderBySortIdAsc(Long typeId)
     {
-        return repository.findByTypeIdAndStartTimeBeforeAndEndTimeAfterAndIsEnableTrueOrderByIdDesc(typeId, new Date(), new Date());
+        return repository.findByTypeIdAndStartTimeBeforeAndEndTimeAfterAndIsEnableTrueOrderBySortIdAsc(typeId, new Date(), new Date());
     }
     
     public Page<TdAd> findAllOrderBySortIdAsc(int page, int size)
