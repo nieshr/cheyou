@@ -24,9 +24,11 @@ import com.ynyes.cheyou.repository.TdUserSuggestionRepo;
 public class TdUserSuggestionService {
 	@Autowired
 	TdUserSuggestionRepo repository;
-	
 
-	
+	 public List<TdUserSuggestion> findAll(){
+	        return (List<TdUserSuggestion>) repository.findAll();
+	    }
+
 	public TdUserSuggestion findOne(Long id)
     {
 		if(null == id)
@@ -49,6 +51,17 @@ public class TdUserSuggestionService {
 	public void save(TdUserSuggestion tdSuggestion){
 		repository.save(tdSuggestion);
 	}
+	
+	/**
+	 * 删除
+	 */
+    public void delete(Long id)
+    {
+        if (null != id)
+        {
+            repository.delete(id);
+        }
+    }
 
 
 }
