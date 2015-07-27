@@ -90,82 +90,7 @@ public class TdLoginController {
 	 * @exception <BR>
 	 * @since 1.0.0
 	 */
-	// @RequestMapping("/forget")
-	// public String forget(){
-	// return "/front/forget";
-	// }
-
-	// @RequestMapping(value = "/login", method = RequestMethod.POST)
-	// @ResponseBody
-	// public Map<String, Object> login(String username, String password, String
-	// code, Boolean isSave,
-	// HttpServletRequest request) {
-	// Map<String, Object> res = new HashMap<String, Object>();
-	//
-	// res.put("code", 1);
-	//
-	// if (username.isEmpty() || password.isEmpty()) {
-	// res.put("msg", "用户名及密码不能为空");
-	// }
-	// /**
-	// * 按账号查找登录验证 密码验证 修改最后登录时间
-	// *
-	// * @author libiao
-	// */
-	// TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
-	//
-	// if (null != user) {
-	// if (!user.getPassword().equals(password)) {
-	// res.put("msg", "密码错误");
-	// return res;
-	// }
-	// user.setLastLoginTime(new Date());
-	// user = tdUserService.save(user);
-	// request.getSession().setAttribute("username", user.getUsername());
-	//
-	// res.put("code", 0);
-	//
-	// /**
-	// * @author lichong
-	// * @注释：判断用户类型
-	// */
-	// if (user.getRoleId() == 2L) {
-	// res.put("role", 2);
-	// }
-	//
-	// return res;
-	// }
-	// /**
-	// * 如果账号验证未通过，再进行手机登录验证 密码验证 修改最后登录时间
-	// *
-	// * @author libiao
-	// */
-	// user = tdUserService.findByMobileAndIsEnabled(username);
-	// if (null != user) {
-	// if (!user.getPassword().equals(password)) {
-	// res.put("msg", "密码错误");
-	// return res;
-	// }
-	// user.setLastLoginTime(new Date());
-	// user = tdUserService.save(user);
-	// request.getSession().setAttribute("username", user.getUsername());
-	//
-	// res.put("code", 0);
-	//
-	// /**
-	// * @author lichong
-	// * @注释：判断用户类型
-	// */
-	// if (user.getRoleId() == 2L) {
-	// res.put("role", 2);
-	// }
-	//
-	// return res;
-	// } else { // 账号-手机都未通过验证，则用户不存在
-	// res.put("msg", "不存在该用户");
-	// return res;
-	// }
-	// }
+	
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
@@ -354,8 +279,8 @@ public class TdLoginController {
 
 		// 计算得出通知验证结果
 		boolean verify_result = AlipayNotify.verify(params);
-		// 假设验证成功
-		verify_result = true;
+//		// 假设验证成功
+//		verify_result = true;
 
 		if (verify_result) {// 验证成功
 			//////////////////////////////////////////////////////////////////////////////////////////
@@ -392,9 +317,9 @@ public class TdLoginController {
 		}
 
 	}
-
-	/**
-	 * @author lc @注释：
+    /**
+	 * @author lc
+	 * @注释：支付宝绑定登陆
 	 */
 	@RequestMapping(value = "/login/alipay_accredit/{type}", method = RequestMethod.GET)
 	public String alipaylogin(@PathVariable String type, String useralipay_username, HttpServletRequest request, ModelMap map) {

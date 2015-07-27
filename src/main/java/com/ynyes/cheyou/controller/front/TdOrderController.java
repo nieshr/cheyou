@@ -388,20 +388,15 @@ public class TdOrderController extends AbstractPaytypeController {
                 + leftPad(Integer.toString(random.nextInt(999)), 3, "0"));
 
         // 收货地址
-<<<<<<< HEAD
         if (null != address)
         {
-        	
             //增加车牌 by zhangji      	
         	tdOrder.setCarCode(address.getReceiverCarcode());
         	//增加车型  by zhangji
         	tdOrder.setCarType(address.getReceiverCartype());
         	
             tdOrder.setPostalCode(address.getPostcode());          
-=======
-        if (null != address) {
-            tdOrder.setPostalCode(address.getPostcode());
->>>>>>> refs/remotes/origin/master
+
             tdOrder.setShippingName(address.getReceiverName());
             tdOrder.setShippingPhone(address.getReceiverMobile());
             tdOrder.setShippingAddress(address.getProvince()
