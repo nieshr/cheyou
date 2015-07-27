@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<title><#if site??>${site.seoTitle!''}-</#if>${site.company!''}</title>
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
@@ -99,7 +99,7 @@
                 </a>
             </span>
             <span class="ml20">
-                <a href="#" title="支付宝登录">
+                <a href="/login/alipay_login" title="支付宝登录">
                     <img src="/client/images/20150619110924540_easyicon_net_72.png" width="30" height="30" />
                 </a>
             </span>

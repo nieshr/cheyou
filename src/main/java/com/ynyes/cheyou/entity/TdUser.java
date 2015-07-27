@@ -43,7 +43,12 @@ public class TdUser {
 	@Column(nullable=false, unique=true)
 	private String username;
     
-    // 上级用户名
+	//支付宝登陆名
+	@Column
+	private String alipayUserId;
+	
+
+	// 上级用户名
     @Column
     private String upperUsername;
 	
@@ -209,7 +214,15 @@ public class TdUser {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public String getAlipayUserId() {
+		return alipayUserId;
+	}
 
+	public void setAlipayUserId(String alipay_userid) {
+		this.alipayUserId = alipay_userid;
+	}
+	
     public List<TdShippingAddress> getShippingAddressList() {
         return shippingAddressList;
     }

@@ -280,7 +280,7 @@ public class TdManagerOrderController {
             
             if (null == dSite)
             {
-                if (null != tdUser || tdUser.getRoleId() == 2L) {
+                if (null != tdUser && tdUser.getRoleId() == 2L) {
                     res.put("info", "该登录名不能使用");
                     return res;
                 }

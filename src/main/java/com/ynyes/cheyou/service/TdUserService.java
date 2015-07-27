@@ -333,6 +333,7 @@ public class TdUserService {
     	return repository.findByMobile(mobile);
     }
     /**
+
      * QQ查找
      * @author libiao
      * @param qq
@@ -344,6 +345,7 @@ public class TdUserService {
     	}
     	return repository.findByQqAndStatusIdOrQqAndStatusId(qq, 0L, qq, 1L);
     }
+    
     /**
      * QQ查找
      * @author libiao
@@ -355,6 +357,18 @@ public class TdUserService {
     		return null;
     	}
     	return repository.findByQq(qq);
+    }
+    
+    /**
+	 * @author lc
+	 * @注释：按支付宝id查找
+	 */
+    public TdUser findByalipayname(String alipayname){
+    	if(null ==alipayname){
+    		return null;
+    	}
+    	return repository.findByAlipayUserId(alipayname);
+
     }
     /**
      * 查找

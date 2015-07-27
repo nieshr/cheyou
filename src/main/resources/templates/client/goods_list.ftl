@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if productCategory??>${productCategory.seoTitle!''}-</#if>车有同盟</title>
+<title><#if productCategory??>${productCategory.seoTitle!''}-</#if>${site.company!''}</title>
 <meta name="keywords" content="<#if productCategory??>${productCategory.seoKeywords!''}</#if>" />
 <meta name="description" content="<#if productCategory??>${productCategory.seoDescription!''}</#if>" />
 <meta name="copyright" content="<#if site??>${site.copyright!''}</#if>" /> 

@@ -45,7 +45,10 @@ public interface TdUserRepo extends
     
     TdUser findByMobile(String mobile);		//手机号查找
     
+
     TdUser findByQqAndStatusIdOrQqAndStatusId(String qq,Long status,String qq1,Long status1);
-    
     TdUser findByQq(String qq);
+
+    TdUser findByAlipayUserId(String alipay_userid);	//支付宝用户名查找
+
 }
