@@ -190,7 +190,9 @@ public class TdLoginController {
 			 * @author lc
 			 * @注释：添加支付宝第三方登陆用户名
 			 */
-        	user.setAlipayUserId(alipayuser_id);
+        	if(null != alipayuser_id){
+        		user.setAlipayUserId(alipayuser_id);
+        	}       	
         	user = tdUserService.save(user);
         	request.getSession().setAttribute("username", user.getUsername());
             
@@ -224,7 +226,9 @@ public class TdLoginController {
 			 * @author lc
 			 * @注释：添加支付宝第三方登陆用户名
 			 */
-        	user.setAlipayUserId(alipayuser_id);
+        	if(null != alipayuser_id){
+        		user.setAlipayUserId(alipayuser_id);
+        	}  
         	user = tdUserService.save(user);
         	request.getSession().setAttribute("username", user.getUsername());
             
@@ -354,7 +358,7 @@ public class TdLoginController {
 			//该页面可做页面美工编辑
 //			System.out.println("验证失败");
 			
-			return "/client/accredit_login";
+			return "/client/error_404";
 			//调试 假设验证成功
 			
 		}
@@ -362,7 +366,7 @@ public class TdLoginController {
 	}
     /**
 	 * @author lc
-	 * @注释：
+	 * @注释：支付宝绑定登陆
 	 */
     @RequestMapping(value= "/login/alipay_accredit"  , method = RequestMethod.GET)
     public String alipaylogin(String useralipay_username ,HttpServletRequest request, ModelMap map){
