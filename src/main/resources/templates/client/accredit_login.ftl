@@ -36,7 +36,7 @@ $(document).ready(function(){
     //searchTextClear(".text01","用户名/邮箱/手机号","#999","#555");  
 });
 function otherlogin(){
-    window.location.href ="/login/alipay_accredit?useralipay_username=${alipay_user_id!''}";
+    window.location.href ="/login/alipay_accredit/${qq!''}?useralipay_username=${alipay_user_id!''}";
 } 
    
 function cliLogin(){
@@ -46,7 +46,7 @@ function cliLogin(){
         $.ajax({
                 type: "post",
                 url: "/login",
-                data: { "username": username, "password": password , "alipayuser_id":${alipay_user_id!''}},
+                data: { "username": username, "password": password , "alipayuser_id":${alipay_user_id!''} , type : <#if qq??>qq<#else>zfb</#if>},
                 dataType: "json",
                 success: function (data) { 
                 <!-- 修改 -->

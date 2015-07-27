@@ -84,7 +84,9 @@
                             <td width="44%">会员账户：
                                 ${order.username}
                             </td>
-                            <td width="56%">客户姓名：<#if user??>${user.realName!''}</#if><br>
+                          <#--  <td width="56%">客户姓名：<#if user??>${user.realName!''}</#if><br>          -->                
+                            </td>
+                            <td width="56%">姓名：${order.shippingName!''}<br>                          
                             </td>
                         </tr>
                         <tr>
@@ -94,8 +96,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>配送方式：${order.deliverTypeTitle!''}</td>
-                            <td>邮政编码：${order.postalCode!''}</td>
+                            <td>车型：${order.carType!''}</td>
+                            <td>车牌：${order.carCode!''}</td>
                         </tr>
                         <tr>
                             <td valign="top">用户留言：${order.userRemarkInfo!''}
@@ -110,9 +112,11 @@
                     <table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" style="border-top: 1px solid #000; font-size: 12px; font-family: '微软雅黑'; background: #fff;">
                         <tbody><tr>
                             <td align="right">商品金额：￥${order.totalGoodsPrice?string("0.00")}
-                                + 配送费：￥${order.deliverTypeFee?string("0.00")}
+                       <#--         + 配送费：￥${order.deliverTypeFee?string("0.00")}
                                 + 支付手续费：￥${order.payTypeFee?string("0.00")}
-                                = 订单总额：${order.totalPrice?string("0.00")}</td>
+                                = 订单总额：${order.totalPrice?string("0.00")}
+                          -->      
+                                </td>
                         </tr>
                     </tbody></table>
                 </td>

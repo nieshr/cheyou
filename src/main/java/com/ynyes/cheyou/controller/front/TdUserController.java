@@ -46,7 +46,11 @@ import com.ynyes.cheyou.service.TdUserRecentVisitService;
 import com.ynyes.cheyou.service.TdUserReturnService;
 import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.service.TdUserSuggestionService;
+<<<<<<< HEAD
+import com.ynyes.cheyou.util.ClientConstant;   
+=======
 import com.ynyes.cheyou.util.ClientConstant;
+>>>>>>> refs/remotes/origin/master
 
 /**
  * 用户中心
@@ -734,54 +738,61 @@ public class TdUserController extends AbstractPaytypeController {
     * @param map
     * @return
     */
-    @RequestMapping(value="/user/suggestion/list")
-    public String suggestionList(HttpServletRequest req,     		                     
-                                 ModelMap map){
-    String username = (String) req.getSession().getAttribute("username");
-
-    if (null == username)
-    {
-     return "redirect:/login";
-    }
-
-    tdCommonService.setHeader(map, req);
-
-
-    TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
-
-    map.addAttribute("user", tdUser);
-    return "/client/user_suggestion_list";
-    }
+//    @RequestMapping(value="/user/suggestion/list")
+//    public String suggestionList(HttpServletRequest req,     		                     
+//                                 ModelMap map){
+//    String username = (String) req.getSession().getAttribute("username");
+//
+//    if (null == username)
+//    {
+//     return "redirect:/login";
+//    }
+//
+//    tdCommonService.setHeader(map, req);
+//
+//
+//    TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+//
+//    map.addAttribute("user", tdUser);
+//    return "/client/user_suggestion_list";
+//    }
     
     /**
      * 投诉
      * 
      */
-    @RequestMapping(value = "/user/suggestion/add", method=RequestMethod.POST)
+    @RequestMapping(value = "/suggestion/add", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> suggestionAdd(HttpServletRequest req, 
                   		String content,
                         String title,
+                        String name,
+                        String mobile,
+                        String mail,
                         String code,
                         ModelMap map){
         Map<String, Object> res = new HashMap<String, Object>();
         res.put("code", 1);
         
-        String username = (String) req.getSession().getAttribute("username");
-        
-        if (null == username)
-        {
-            res.put("message", "请先登录！");
-            return res;
-        }
-        
+//        String username = (String) req.getSession().getAttribute("username");
+//        
+//        if (null == username)
+//        {
+//            res.put("message", "请先登录！");
+//            return res;
+//        }
+//        
         TdUserSuggestion tdSuggestion = new TdUserSuggestion();
         
         tdSuggestion.setContent(content);
         tdSuggestion.setTime(new Date());
-        tdSuggestion.setTitle(title);    
+        tdSuggestion.setName(name);
+        tdSuggestion.setMail(mail);
+        tdSuggestion.setMobile(mobile);
         
-        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        
+//        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
         
         tdUserSuggestionService.save(tdSuggestion);
                 

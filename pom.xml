@@ -187,6 +187,12 @@
 		    <version>1.0</version>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
+    <groupId>org.hsqldb</groupId>
+    <artifactId>hsqldb</artifactId>
+    <scope>runtime</scope>
+</dependency>
+=======
 		    <groupId>commons-httpclient</groupId>
 		    <artifactId>commons-httpclient</artifactId>
 		    <version>3.0.1</version>
@@ -200,6 +206,7 @@
             <artifactId>sdk4j</artifactId>
             <version>2.0</version>
         </dependency>
+>>>>>>> refs/remotes/origin/master
 	</dependencies>
 
 	<properties>

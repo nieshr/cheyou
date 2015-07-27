@@ -47,6 +47,43 @@ function btnPageSubmit()
     + "-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string('#.##')}-${priceHigh?string('#.##')}</#if>";
 }
 </script>
+
+<#-- 投訴頁面提交js-->
+<script>
+function submitSuggestion()
+{
+    $.ajax({
+        type:"post",
+        url:"/user/suggestion/add?" + $("#suggestionForm").serialize(),
+        success:function(res){
+            if (0 == res.code)
+            {
+                alert("提交投诉成功，请耐心等待审核~~");
+            }
+            else
+            {
+                var ss = "" + res.message;
+                alert(res["message"]);
+            }
+        }
+    });
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".mianfeilingqutanchu #yincang").click(function(){
+    $(this).parents(".mianfeilingqutanchu").hide();
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#xianshi").click(function(){
+      $("div.mianfeilingqutanchu").show();
+  });
+});
+</script>
 </head>
 <body>
 

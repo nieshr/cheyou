@@ -22,7 +22,7 @@ public class TdUserSuggestion {
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-    //投诉标题
+    //订单编号
 	@Column
 	private String title;
 	
@@ -35,7 +35,47 @@ public class TdUserSuggestion {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date time;
 	
-    public Long getId() {
+	//称呼
+	@Column
+	private String name;
+	
+	//邮箱
+	@Column
+	private String mail;
+	
+	//联系方式
+	@Column
+	private String mobile;
+
+	// 排序号
+    @Column
+    private Long sortId;
+	
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
@@ -75,7 +115,4 @@ public class TdUserSuggestion {
 		this.sortId = sortId;
 	}
 
-	// 排序号
-    @Column
-    private Long sortId;
 }

@@ -45,5 +45,9 @@ public interface TdUserRepo extends
     
     TdUser findByMobile(String mobile);		//手机号查找
     
+
+    TdUser findByQqUserId(String qqUserId);
+
     TdUser findByAlipayUserId(String alipay_userid);	//支付宝用户名查找
+
 }

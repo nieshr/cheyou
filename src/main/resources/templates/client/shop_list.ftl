@@ -56,6 +56,7 @@ function loadMap(x, y)
     map.addOverlay(marker);
 }
 </script>
+
 </head>
 
 <body>

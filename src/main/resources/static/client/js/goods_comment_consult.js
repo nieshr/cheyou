@@ -6,6 +6,7 @@ $(document).ready(function(){
     $("#consultForm").Validform({
         tiptype: 1
     });
+    
 });
 
 // 按星级获取评论
@@ -45,6 +46,7 @@ function getConsult(goodsId, page)
 // 提交评论
 function submitComment()
 {
+	
     $.ajax({
         type:"post",
         url:"/user/comment/add?" + $("#commentForm").serialize(),
@@ -72,31 +74,6 @@ function submitConsult()
             if (0 == res.code)
             {
                 alert("提交咨询成功，请耐心等待审核~~");
-            }
-            else
-            {
-                var ss = "" + res.message;
-                alert(res["message"]);
-            }
-        }
-    });
-}
-
-/**
- * 提交投诉
- * zhangji
- * @param type
- * @param stars
- */
-function submitSuggestion()
-{
-    $.ajax({
-        type:"post",
-        url:"/user/suggestion/add?" + $("#suggestionForm").serialize(),
-        success:function(res){
-            if (0 == res.code)
-            {
-                alert("提交投诉成功，请耐心等待审核~~");
             }
             else
             {
