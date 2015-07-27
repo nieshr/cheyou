@@ -332,7 +332,30 @@ public class TdUserService {
     	}
     	return repository.findByMobile(mobile);
     }
-    
+    /**
+     * QQ查找
+     * @author libiao
+     * @param qq
+     * @return
+     */
+    public TdUser findByQqAndIsEnabled(String qq){
+    	if(null ==qq){
+    		return null;
+    	}
+    	return repository.findByQqAndStatusIdOrQqAndStatusId(qq, 0L, qq, 1L);
+    }
+    /**
+     * QQ查找
+     * @author libiao
+     * @param qq
+     * @return
+     */
+    public TdUser findByQq(String qq){
+    	if(null == qq){
+    		return null;
+    	}
+    	return repository.findByQq(qq);
+    }
     /**
      * 查找
      * 

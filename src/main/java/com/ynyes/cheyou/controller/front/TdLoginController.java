@@ -61,12 +61,12 @@ public class TdLoginController {
 	}
 
 	/**
-	 * QQ登录
+	 * 跳转进入互联开放平台进行QQ登录验证
 	 * 
-	 * @author libiao
 	 * @param request
 	 * @param response
 	 * @throws IOException
+	 * @author libiao
 	 */
 	@RequestMapping(value = "/qq/login", method = RequestMethod.GET)
 	public void infoQQLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {

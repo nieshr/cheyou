@@ -44,4 +44,8 @@ public interface TdUserRepo extends
     TdUser findByMobileAndStatusIdOrMobileAndStatusId(String mobile,Long statusId,String mobile1,Long statusId1);		//手机号已验证查找
     
     TdUser findByMobile(String mobile);		//手机号查找
+    
+    TdUser findByQqAndStatusIdOrQqAndStatusId(String qq,Long status,String qq1,Long status1);
+    
+    TdUser findByQq(String qq);
 }
