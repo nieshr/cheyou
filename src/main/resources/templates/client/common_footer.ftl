@@ -41,8 +41,8 @@
             <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254586643'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254586643%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
     
         </p>
+        <!--add 2015-7-28 18:45:37 mdj-->
         <p>
-        
         <#if setting?? && setting.bottomLogoUri1?? && setting.bottomLogoLink1??>
         <span style="margin-right:10px;"><img src="${setting.bottomLogoUri1}"  href="${setting.bottomLogoLink1}"/></span>
         </#if>
@@ -52,6 +52,7 @@
         <#if setting?? && setting.bottomLogoUri3?? && setting.bottomLogoLink3??>
         <span style="margin-right:10px;"><img src="${setting.bottomLogoUri1}"  href="${setting.bottomLogoLink1}"/></span>
         </#if>
+        <!--add 2015-7-28 18:45:37 mdj-->
 		</p>
     </div>
 </div>
