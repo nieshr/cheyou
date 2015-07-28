@@ -926,7 +926,7 @@ public class TdManagerUserController {
                 {
                     tdUserCommentService.delete(id);
                 }
-                else if (type.equalsIgnoreCase("suggestion")) //投诉   by zhangji
+                else if (type.equalsIgnoreCase("suggestion")) //投诉  @ by zhangji
                 {
                 	tdUserSuggestionService.delete(id);
                 }
