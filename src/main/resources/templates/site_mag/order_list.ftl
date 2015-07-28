@@ -31,6 +31,7 @@ function __doPostBack(eventTarget, eventArgument) {
     }
 }
 </script>
+
     <!--导航栏-->
     <div class="location">
         <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>
@@ -76,6 +77,9 @@ function __doPostBack(eventTarget, eventArgument) {
                         <a onclick="return ExePostBack('btnDelete','删除后订单将无法恢复，是否继续？');" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除订单</span></a>
                     </li>
                     </#if>
+                    <li>
+                        <a class="all"><span>销售额：￥${price!0.00}</span></a>
+                    </li>
                 </ul>
             </div>
             <div class="r-list">
