@@ -239,6 +239,17 @@ $(document).ready(function(){
     	var index = $(this).index();
         $(".shadow_add").eq(index).css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
      });
+     
+     $(".shadow_add2").mouseover(function(){   
+         var index = $(this).index();
+         $(".shadow_add2").eq(index).css({"box-shadow":"10px 10px 5px #888888",
+                                         "background-color":"#f7f7f7"});        
+     });
+         
+      $(".shadow_add2").mouseout(function(){    
+         var index = $(this).index();
+         $(".shadow_add2").eq(index).css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
+      });
 }); 
 </script>
 
@@ -1275,12 +1286,12 @@ function timer23${item_index}()
     
     <section class="index_mt">
         <h3>车友还想团购</h3>
-        <#--
+        
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
-        -->
+       
         <a href="javascript:;"><img src="/client/images/images/index_ico09.png" /></a>
     </section>
     
@@ -1347,7 +1358,7 @@ function timer23${item_index}()
             <#if top_category_list??>
                 <#list top_category_list as item>
                     <#if item_index gt 4 && item_index < 9>
-                        <td class="shadow_add">
+                        <td class="shadow_add2">
                             <a href="/list/${item.id}"><img src="${item.imgUrl!''}" width="68" height="68"/>
                                 <p>${item.title!''}</p>
                             </a>
