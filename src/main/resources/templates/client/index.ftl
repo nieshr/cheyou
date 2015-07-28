@@ -210,6 +210,7 @@ $(document).ready(function(){
     });
 });
 
+
 function hideSuggestion()
 {
     $("#sugguestion-div").css("display", "none");
@@ -223,6 +224,22 @@ function move()
 {
     $('html,body').animate({scrollTop:0},500);
 }
+</script>
+
+<script>
+//二级状态增加阴影效果  @by zhangji
+$(document).ready(function(){ 
+     $(".shadow_add").mouseover(function(){   
+    	var index = $(this).index();
+        $(".shadow_add").eq(index).css({"box-shadow":"10px 10px 5px #888888",
+        	                            "background-color":"#f7f7f7"});        
+    });
+        
+     $(".shadow_add").mouseout(function(){    
+    	var index = $(this).index();
+        $(".shadow_add").eq(index).css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
+     });
+}); 
 </script>
 
 <div id="sugguestion-div" class="mianfeilingqutanchu" style="display:none;">
@@ -1312,13 +1329,12 @@ function timer23${item_index}()
         </ul>
         <div style="clear:both;"></div>
     </div>
-  
     <table class="propart">
         <tr>
             <#if top_category_list??>
                 <#list top_category_list as item>
                     <#if item_index < 5>
-                        <td>
+                        <td class="shadow_add">     <#-- 增加id @by zhangji -->
                             <a href="/list/${item.id}"><img src="${item.imgUrl!''}" width="68" height="68"/>
                                 <p>${item.title!''}</p>
                             </a>
@@ -1331,7 +1347,7 @@ function timer23${item_index}()
             <#if top_category_list??>
                 <#list top_category_list as item>
                     <#if item_index gt 4 && item_index < 9>
-                        <td>
+                        <td class="shadow_add">
                             <a href="/list/${item.id}"><img src="${item.imgUrl!''}" width="68" height="68"/>
                                 <p>${item.title!''}</p>
                             </a>
@@ -1346,8 +1362,7 @@ function timer23${item_index}()
                 </a>
             </td>
         </tr>  
-    </table>
-
+    </table> 
     <div class="clear h30"></div>
   
     <section class="indextit">

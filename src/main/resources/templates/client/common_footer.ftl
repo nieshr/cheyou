@@ -43,20 +43,3 @@
         </p>
     </div>
 </div>
-
-<script type="text/javascript">
-$(document).ready(function(){
-  $(".mianfeilingqutanchu .yincang").click(function(){
-    $(this).parents(".mianfeilingqutanchu").hide("slow");
-  });
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
-  $(".mianfeilingqutanchu #xianshi").click(function(){
-      $(this).parents(".mianfeilingqutanchu").show();
-  });
-});
-</script>
-
-

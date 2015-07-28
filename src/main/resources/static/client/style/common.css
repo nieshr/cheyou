@@ -2,7 +2,7 @@
 
 /* CSS Document */
 * {padding: 0;margin: 0;}
-body {margin: 0px;padding: 0px;color: #666;font-family:"微软雅黑", Arial, Helvetica, sans-serif;font-size:14px;background:#fff;text-align:left;position:relative; line-height:20px;}
+body {margin: 0px;padding: 0px;color: #666;font-family:"微软雅黑", Arial, Helvetica, sans-serif;font-size:14px;background:#fff;text-align:left;position:relative; line-height:20px;overflow-x: hidden;}
 img {border: 0;position:relative;}
 .clear {height:0px;line-height: 0px;font-size: 0px;clear: both;visibility: hidden;overflow:hidden;padding:0;margin:0;}
 div,ul,dl,dd,dt,li,td,tr,table,p,span,h1,h2,h3,h4,h5,h6,form{ margin:0px;  padding:0px; list-style:none; list-style-type: none; word-wrap:break-word;position:relative; border:none;}
