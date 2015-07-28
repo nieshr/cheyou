@@ -245,5 +245,4 @@ function delItem(id)
     <a href="javascript:;" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /><span><img src="${site.weiboQrCode!''}" width="84" height="84"/></span></a>
     <a href="javascript:showSuggestion();" title="投诉"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线"/></a>
     <a href="javascript:move();" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
-
 </aside>

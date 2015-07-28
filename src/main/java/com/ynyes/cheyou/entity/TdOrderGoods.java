@@ -77,6 +77,10 @@ public class TdOrderGoods {
     // 是否已评价
     @Column
     private Boolean isCommented;
+    
+    // 评论ID
+    @Column
+    private Long commentId;
 
     public Long getId() {
         return id;
@@ -196,5 +200,13 @@ public class TdOrderGoods {
 
     public void setIsCommented(Boolean isCommented) {
         this.isCommented = isCommented;
+    }
+
+    public Long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 }
