@@ -147,7 +147,7 @@ public class TdOrderController extends AbstractPaytypeController {
         Long totalPointLimited = 0L;
         Double totalPrice = 0.0;
 
-        // 积分限制总和
+        // 积分限制总和 和 购物总额
         if (null != selectedGoodsList) {
             for (TdCartGoods cg : selectedGoodsList) {
                 TdGoods goods = tdGoodsService.findOne(cg.getGoodsId());
