@@ -13,11 +13,15 @@
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
+<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -185,6 +189,156 @@ $(function(){
         <a class="w100 block ta-c" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}" style=" background:url(${item.fileUri!''}) no-repeat top center; height:100px;"></a>
     </#list>
 </#if>
+<#-- 投訴頁面js-->
+<#-- 投诉 -->
+<script>
+$(document).ready(function(){
+    $("#suggestionForm").Validform({
+        tiptype: 3,
+        ajaxPost:true,
+        callback: function(data) {
+            if (data.code==0)
+            {
+                alert("提交成功，我们会尽快处理，请耐心等待");
+                window.location.reload();
+            }
+            else
+            {
+                alert(data.message);
+            }
+        }
+    });
+});
+
+
+function hideSuggestion()
+{
+    $("#sugguestion-div").css("display", "none");
+}
+
+function showSuggestion()
+{
+    $("#sugguestion-div").css("display", "block");
+}
+function move()
+{
+    $('html,body').animate({scrollTop:0},500);
+}
+</script>
+<script>
+//车友还想团购 demand
+$(document).ready(function(){
+    $("#demandForm").Validform({
+        tiptype: 3,
+        ajaxPost:true,
+        callback: function(data) {
+            if (data.code==0)
+            {
+                alert("提交成功，我们会尽快处理，请耐心等待");
+                window.location.reload();
+            }
+            else
+            {
+                alert(data.message);
+            }
+        }
+    });
+});
+
+
+function hideDemand()
+{
+    $("#demand-div").css("display", "none");
+}
+
+function showDemand()
+{
+    $("#demand-div").css("display", "block");
+}
+</script>
+
+<script>
+//二级状态增加阴影效果  @by zhangji
+$(document).ready(function(){ 
+     $(".shadow_add").mouseover(function(){   
+    	var index = $(this).index();
+        $(".shadow_add").eq(index).css({"box-shadow":"10px 10px 5px #888888",
+        	                            "background-color":"#f7f7f7"});        
+    });
+        
+     $(".shadow_add").mouseout(function(){    
+    	var index = $(this).index();
+        $(".shadow_add").eq(index).css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
+     });
+     
+     $(".shadow_add2").mouseover(function(){   
+         var index = $(this).index();
+         $(".shadow_add2").eq(index).css({"box-shadow":"10px 10px 5px #888888",
+                                         "background-color":"#f7f7f7"});        
+     });
+         
+      $(".shadow_add2").mouseout(function(){    
+         var index = $(this).index();
+         $(".shadow_add2").eq(index).css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
+      });
+}); 
+</script>
+
+<div id="sugguestion-div" class="mianfeilingqutanchu" style="{display:none;">
+    <div class="mianfeilingqutanchu_dl"> 
+        <div class="main bgff">
+            <div class="tousuyemian">
+                <div class="rightb_gundong fr" id="yincang">
+                    <a href="javascript:hideSuggestion();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="21" height="21" /></a>
+                </div>
+                  <form id="suggestionForm" action="/suggestion/add">
+                      <div class="clear"></div>
+                      <h3>我要投诉</h3>
+                      <p>在您填写下列投诉内容之前，我们首先代表车有同盟为导致您进行投诉的原因（行为）表示歉意，请详细描述事件经过，以便我们尽快为您解决问题，我们一定会及时处理，给您一个满意的解决方案，您的满意是我们最大的动力，谢谢！</p>
+                      <div class="tousuneirong">
+                          <#-- 
+                          <span>标题</span><input name="title"  onfocus="if(value=='订单编号') {value=''}" onblur="if (value=='订单编号') {value='订单编号'}"  value="" id="et_contact_name" class="input ml20" type="text">
+                          -->
+                          <div class="clear h10"></div>
+                          <span><b class="red">*</b>投诉内容</span>
+                          <div class=" clear"></div>
+                          <textarea class="input" style="width:1000px;height:250px" onfocus="if(value=='') {value=''}" onblur="if (value=='') {value=''}"  value="" datatype="*1-255" nullmsg="请输入投诉内容" id="suggestionContent" name="content"></textarea>
+                          
+                      </div>
+                      <div class="tousulianxifangshi mt20">
+                          <p>为了尽快为您解决问题，请提供您的联系方式，谢谢。</p>
+                          <div> 
+                              <span><b class="red">*</b>称呼</span>                                               
+                              <input name="name" value="" datatype="*1-20" nullmsg="请输入您的称呼" class="input ml20" type="text">                                         
+                          </div>
+                          <div class="clear h10"></div>
+                          <div>
+                              <span>邮箱&nbsp;&nbsp;</span>
+                              <input name="mail"   value="" datatype="*0-250" nullmsg="请输入正确的邮箱地址" class="input ml20" type="text">
+                          </div>
+                          <div class="clear h10"></div>
+                          <div>
+                              <span><b class="red">*</b>手机</span>
+                              <input name="mobile"   value="" datatype="m" nullmsg="请输入您的手机号码" class="input ml20" type="text">
+                          </div>
+                          <div class="clear h20"></div>
+                          <input class="Message_an" type="submit" value="提交" title="提交" />
+                      </div>
+                   </form>
+            
+                <div class="tousubeizhu mt5">
+                     <h4>备注</h4>
+                     <p>您还可以拨打${site.telephone!''}进行电话投诉</p>
+                </div>  
+            </div>
+        </div>
+    
+        <div class="clear"></div> 
+    </div>
+</div>
+                  
+
+
 <div class="top">
     <div class="w1200 top1">
         <p class="huanyin">商城访问量：<span class="blue">${site.totalVisits!'0'}</span></p>
@@ -196,7 +350,7 @@ $(function(){
                 <a href="/logout">退出<i></i></a>
             <#else>
                 <a href="/login" target="_blank">登录<i></i></a>
-                <a href="/reg" target="_blank">免费注册<i></i></a>
+                <a href="/reg" target="_blank">免费注册<i></i></a>               
             </#if>
             <a href="/user/order/list/0">我的订单</a>
             <a href="/user">会员中心</a>
@@ -335,9 +489,11 @@ function delItem(id)
     <a href="javascript:;" title="微信客服"><img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服" /><span><img src="${site.wxQrCode!''}" width="84" height="84"/></span></a>
     <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq!''}&site=qq&menu=yes" target="_blank" title="在线咨询"><img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询" /></a>
     <a href="javascript:;" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /><span><img src="${site.weiboQrCode!''}" width="84" height="84"/></span></a>
-    <a href="javascript:;" title="服务热线"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线" /><span><img src="/client/images/sys02.png" width="84" height="84"/></span></a>
-    <a href="javascript:$('html,body').animate({scrollTop:0},500);" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
+    <a href="javascript:showSuggestion();" title="投诉"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线"/></a>
+    <a href="javascript:move();" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
 </aside>
+
+
 
 <div class="main">
     <section class="index_right">
@@ -504,12 +660,16 @@ function timer8${item_index}()
     
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
     
-    var s_x = Math.round(price).toString();
+    // var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
     var pos_decimal = s_x.indexOf('.');
+    
     if (pos_decimal < 0) {
         pos_decimal = s_x.length;
         s_x += '.';
     }
+    
     while (s_x.length <= pos_decimal + 2) {
         s_x += '0';
     }
@@ -523,7 +683,7 @@ function timer8${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft8${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice8${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -605,7 +765,9 @@ function timer15${item_index}()
     
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
     
-    var s_x = Math.round(price).toString();
+    //var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
     var pos_decimal = s_x.indexOf('.');
     if (pos_decimal < 0) {
         pos_decimal = s_x.length;
@@ -624,7 +786,7 @@ function timer15${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft15${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice15${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -706,7 +868,9 @@ function timer23${item_index}()
                     
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
     
-    var s_x = Math.round(price).toString();
+    // var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
     var pos_decimal = s_x.indexOf('.');
     if (pos_decimal < 0) {
         pos_decimal = s_x.length;
@@ -724,7 +888,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft23${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice23${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -771,7 +935,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -805,7 +969,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -839,7 +1003,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -886,7 +1050,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -920,7 +1084,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -954,7 +1118,7 @@ function timer23${item_index}()
                                 <dt>
                                     <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
-                                    <p class="c9 pt10 pb20">${item.subTitle!''}</p>
+                                    <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -1113,6 +1277,56 @@ function timer23${item_index}()
     </ul>
         
     <div class="clear h30"></div> 
+  <#-- 车友还想团购 -->
+  <div id="demand-div" class="mianfeilingqutanchu" style="display:none;">
+    <div class="mianfeilingqutanchu_dl"> 
+        <div class="main bgff">
+            <div class="tousuyemian">
+                <div class="rightb_gundong fr" >
+                    <a href="javascript:hideDemand();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="21" height="21" /></a>
+                </div>
+                  <form id="demandForm" action="/demand/add">
+                      <div class="clear"></div>
+                      <h3>我要团购其他商品</h3>
+                      <p>如果您有中意的商品，您可以在这个页面申请将其加入到新的团购中！同时您的留言还将可能以匿名的方式显示在首页，描述您中意的商品，让大家一起来团购吧！我们将根据反馈情况决定增加新的团购商品。您的满意是我们最大的动力，谢谢！</p>
+                      <div class="tousuneirong">
+                          <div class="clear h10"></div>
+                          <span><b class="red">*</b>期望加入团购的商品描述</span>
+                          <div class=" clear"></div>
+                          <textarea class="input" style="width:1000px;height:250px" onfocus="if(value=='') {value=''}" onblur="if (value=='') {value=''}"  value="" datatype="*1-255" nullmsg="请输入投诉内容" id="suggestionContent" name="content"></textarea>
+                          
+                      </div>
+                      <div class="tousulianxifangshi mt20">
+                          <p>为了尽快为您解决问题，请提供您的联系方式，谢谢。</p>
+                          <div> 
+                              <span><b class="red">*</b>称呼</span>                                               
+                              <input name="name" value="" datatype="*1-20" nullmsg="请输入您的称呼" class="input ml20" type="text">                                         
+                          </div>
+                          <div class="clear h10"></div>
+                          <div>
+                              <span>邮箱&nbsp;&nbsp;</span>
+                              <input name="mail"   value="" datatype="*0-250" nullmsg="请输入正确的邮箱地址" class="input ml20" type="text">
+                          </div>
+                          <div class="clear h10"></div>
+                          <div>
+                              <span><b class="red">*</b>手机</span>
+                              <input name="mobile"   value="" datatype="m" nullmsg="请输入您的手机号码" class="input ml20" type="text">
+                          </div>
+                          <div class="clear h20"></div>
+                          <input class="Message_an" type="submit" value="提交" title="提交" />
+                      </div>
+                   </form>
+            
+                <div class="tousubeizhu mt5">
+                     <h4>备注</h4>
+                     <p>您还可以拨打${site.telephone!''}进行电话投诉</p>
+                </div>  
+            </div>
+        </div>
+    
+        <div class="clear"></div> 
+    </div>
+</div>
   
     <section class="teambanner">
         <div id="teamadsum">
@@ -1153,13 +1367,23 @@ function timer23${item_index}()
     
     <section class="index_mt">
         <h3>车友还想团购</h3>
-        <#--
+       <#--
+        <#if demand_list??>
+            <#list demand_list as show>
+                <#if show_index<3>
+                    <p class="pt15">网友${show.mobile!''}留言：</p>
+                    <p>${show.content!''}</p>
+                </#if>
+            </#list>
+        </#if>    
+       -->
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
-        -->
-        <a href="javascript:;"><img src="/client/images/images/index_ico09.png" /></a>
+       
+        <#-- 增加链接的js函数showDemand();   zhangji -->        
+        <a href="javascript:showDemand();"><img src="/client/images/images/index_ico09.png" /></a>   
     </section>
     
     <div class="clear h20"></div> 
@@ -1207,13 +1431,12 @@ function timer23${item_index}()
         </ul>
         <div style="clear:both;"></div>
     </div>
-  
     <table class="propart">
         <tr>
             <#if top_category_list??>
                 <#list top_category_list as item>
                     <#if item_index < 5>
-                        <td>
+                        <td class="shadow_add">     <#-- 增加id @by zhangji -->
                             <a href="/list/${item.id}"><img src="${item.imgUrl!''}" width="68" height="68"/>
                                 <p>${item.title!''}</p>
                             </a>
@@ -1226,7 +1449,7 @@ function timer23${item_index}()
             <#if top_category_list??>
                 <#list top_category_list as item>
                     <#if item_index gt 4 && item_index < 9>
-                        <td>
+                        <td class="shadow_add2">
                             <a href="/list/${item.id}"><img src="${item.imgUrl!''}" width="68" height="68"/>
                                 <p>${item.title!''}</p>
                             </a>
@@ -1241,8 +1464,7 @@ function timer23${item_index}()
                 </a>
             </td>
         </tr>  
-    </table>
-
+    </table> 
     <div class="clear h30"></div>
   
     <section class="indextit">

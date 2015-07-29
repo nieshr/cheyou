@@ -37,6 +37,14 @@ public class TdOrder {
     @JoinColumn(name="tdOrderId")
     private List<TdOrderGoods> orderGoodsList;
     
+    //车牌
+    @Column
+    private String carCode;
+       
+	//车型
+    @Column
+    private String carType;
+    
     // 收货地址
     @Column
     private String shippingAddress;
@@ -586,4 +594,19 @@ public class TdOrder {
     public void setAppointmentTime(Date appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
+    public String getCarCode() {
+		return carCode;
+	}
+
+	public void setCarCode(String carCode) {
+		this.carCode = carCode;
+	}
+
+	public String getCarType() {
+		return carType;
+	}
+
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
 }

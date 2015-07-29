@@ -17,9 +17,12 @@
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+
+
 <style type="text/css">
-    body, html,#allmap {width: 100%;height: 100%; margin:0;font-family:"微软雅黑";}
+   html,#allmap {width: 100%; height:100%; margin:0;font-family:"微软雅黑";}     <#-- 去掉了body @by zhangji-->
 </style>
+
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lwRXRetipHPGz8y6lzUlUZfc"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -56,6 +59,7 @@ function loadMap(x, y)
     map.addOverlay(marker);
 }
 </script>
+
 </head>
 
 <body>
@@ -120,7 +124,7 @@ function loadMap(x, y)
         </div>
    
         <div class="dituliebiao_rt fr">
-            <div id="allmap" width="743" height="650">
+            <div id="allmap" width="743" height="650";>  
             
             </div>
         </div>  

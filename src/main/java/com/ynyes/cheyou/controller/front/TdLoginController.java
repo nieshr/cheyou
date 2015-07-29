@@ -2,7 +2,6 @@ package com.ynyes.cheyou.controller.front;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,12 +24,7 @@ import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
-import com.qq.connect.api.qzone.PageFans;
-import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
-import com.qq.connect.javabeans.qzone.PageFansBean;
-import com.qq.connect.javabeans.qzone.UserInfoBean;
-import com.qq.connect.javabeans.weibo.Company;
 import com.qq.connect.oauth.Oauth;
 import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.service.TdCommonService;
@@ -69,7 +63,7 @@ public class TdLoginController {
 		 * @author lc @注释：
 		 */
 		TdUser tdUser = tdUserService.findByUsername(username);
-		if (tdUser.getRoleId() == 2L) {
+		if (null != tdUser.getRoleId() && tdUser.getRoleId().equals(2L)) {
 			return "redirect:/user/diysite/order/list/0";
 		}
 		return "redirect:" + referer;
@@ -143,7 +137,7 @@ public class TdLoginController {
 			 * @author lichong
 			 * @注释：判断用户类型
 			 */
-			if (user.getRoleId() == 2L) {
+			if(null != user.getRoleId() && user.getRoleId().equals(2L)){
 				res.put("role", 2);
 			}
 
@@ -237,11 +231,12 @@ public class TdLoginController {
 	 * @author lc
 	 * @注释：支付宝登陆返回参数
 	 */
-	@RequestMapping(value = "/login/alipay_return_url", method = RequestMethod.GET)
-	public String returnurl(HttpServletRequest request, ModelMap map) {
-		Map<String, String> params = new HashMap<String, String>();
-		Map requestParams = request.getParameterMap();
-		for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+	@RequestMapping(value= "/login/alipay_return_url"  , method = RequestMethod.GET)
+	public String returnurl(HttpServletRequest request, ModelMap map){
+		Map<String,String> params = new HashMap<String,String>();
+		Map<String, String[]>  requestParams = request.getParameterMap();
+		for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+
 			String name = (String) iter.next();
 			String[] values = (String[]) requestParams.get(name);
 			String valueStr = "";
@@ -252,7 +247,6 @@ public class TdLoginController {
 			try {
 				valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			params.put(name, valueStr);
@@ -263,13 +257,13 @@ public class TdLoginController {
 		// 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
 		// 支付宝用户号
 		String user_id = " ";
-		String token = " ";
+//		String token = " ";
 		try {
-			user_id = new String(request.getParameter("user_id").getBytes("ISO-8859-1"), "UTF-8");
-			// 授权令牌
-			token = new String(request.getParameter("token").getBytes("ISO-8859-1"), "UTF-8");
+			user_id = new String(request.getParameter("user_id").getBytes("ISO-8859-1"),"UTF-8");
+			//授权令牌
+//			token = new String(request.getParameter("token").getBytes("ISO-8859-1"),"UTF-8");
+
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -277,8 +271,8 @@ public class TdLoginController {
 
 		// 计算得出通知验证结果
 		boolean verify_result = AlipayNotify.verify(params);
-		// 假设验证成功
-		verify_result = true;
+//		// 假设验证成功
+//		verify_result = true;
 
 		if (verify_result) {// 验证成功
 			//////////////////////////////////////////////////////////////////////////////////////////
@@ -311,13 +305,12 @@ public class TdLoginController {
 
 			return "/client/accredit_login";
 			// 调试 假设验证成功
-
 		}
-
 	}
-
-	/**
-	 * @author lc @注释：
+	
+    /**
+	 * @author lc
+	 * @注释：支付宝绑定登陆
 	 */
 	@RequestMapping(value = "/login/alipay_accredit/{type}", method = RequestMethod.GET)
 	public String alipaylogin(@PathVariable String type, String useralipay_username, HttpServletRequest request, ModelMap map) {

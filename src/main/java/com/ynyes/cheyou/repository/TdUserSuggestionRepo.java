@@ -1,12 +1,7 @@
 package com.ynyes.cheyou.repository;
 
-import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
-
 
 import com.ynyes.cheyou.entity.TdUserSuggestion;
 /**
@@ -18,9 +13,5 @@ public interface TdUserSuggestionRepo extends
            PagingAndSortingRepository<TdUserSuggestion, Long>,
            JpaSpecificationExecutor<TdUserSuggestion> 
 {
-// 根据查找
-Page<TdUserSuggestion> findByIdOrderBySortIdAsc(Long Id, Pageable page);
-List<TdUserSuggestion> findById(Long id);
-
-
+	// 根据查找
 }

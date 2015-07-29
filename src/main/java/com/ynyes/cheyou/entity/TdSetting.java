@@ -136,6 +136,30 @@ public class TdSetting {
     // 在线人数
     @Column
     private Long totalOnlines;
+    
+    // 底部Logo图片1
+    @Column
+    private String bottomLogoUri1;
+    
+    // 底部Logo图片1跳转
+    @Column
+    private String bottomLogoLink1;
+    
+    // 底部Logo图片2
+    @Column
+    private String bottomLogoUri2;
+    
+    // 底部Logo图片2跳转
+    @Column
+    private String bottomLogoLink2;
+    
+    // 底部Logo图片3
+    @Column
+    private String bottomLogoUri3;
+    
+    // 底部Logo图片3跳转
+    @Column
+    private String bottomLogoLink3;
 
     public Long getId() {
         return id;
@@ -376,5 +400,52 @@ public class TdSetting {
     public void setWeiboQrCode(String weiboQrCode) {
         this.weiboQrCode = weiboQrCode;
     }
-    
+
+	public String getBottomLogoUri1() {
+		return bottomLogoUri1;
+	}
+
+	public void setBottomLogoUri1(String bottomLogoUri1) {
+		this.bottomLogoUri1 = bottomLogoUri1;
+	}
+
+	public String getBottomLogoLink1() {
+		return bottomLogoLink1;
+	}
+
+	public void setBottomLogoLink1(String bottomLogoLink1) {
+		this.bottomLogoLink1 = bottomLogoLink1;
+	}
+
+	public String getBottomLogoUri2() {
+		return bottomLogoUri2;
+	}
+
+	public void setBottomLogoUri2(String bottomLogoUri2) {
+		this.bottomLogoUri2 = bottomLogoUri2;
+	}
+
+	public String getBottomLogoLink2() {
+		return bottomLogoLink2;
+	}
+
+	public void setBottomLogoLink2(String bottomLogoLink2) {
+		this.bottomLogoLink2 = bottomLogoLink2;
+	}
+
+	public String getBottomLogoUri3() {
+		return bottomLogoUri3;
+	}
+
+	public void setBottomLogoUri3(String bottomLogoUri3) {
+		this.bottomLogoUri3 = bottomLogoUri3;
+	}
+
+	public String getBottomLogoLink3() {
+		return bottomLogoLink3;
+	}
+
+	public void setBottomLogoLink3(String bottomLogoLink3) {
+		this.bottomLogoLink3 = bottomLogoLink3;
+	}
 }

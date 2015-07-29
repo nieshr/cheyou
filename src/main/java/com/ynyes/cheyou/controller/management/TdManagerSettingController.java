@@ -1,20 +1,32 @@
 package com.ynyes.cheyou.controller.management;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ynyes.cheyou.entity.TdDemand;
 import com.ynyes.cheyou.entity.TdServiceItem;
 import com.ynyes.cheyou.entity.TdSetting;
+import com.ynyes.cheyou.entity.TdShippingAddress;
+import com.ynyes.cheyou.entity.TdUser;
+import com.ynyes.cheyou.entity.TdUserComment;
+import com.ynyes.cheyou.entity.TdUserSuggestion;
+import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdManagerLogService;
 import com.ynyes.cheyou.service.TdServiceItemService;
 import com.ynyes.cheyou.service.TdSettingService;
+import com.ynyes.cheyou.service.TdUserSuggestionService;
+import com.ynyes.cheyou.util.SiteMagConstant;
 
 /**
  * 后台广告管理控制器
@@ -34,6 +46,12 @@ public class TdManagerSettingController {
     
     @Autowired
     TdServiceItemService tdServiceItemService;
+    
+    @Autowired
+    TdUserSuggestionService tdUserSuggestionService;
+    
+    @Autowired
+    TdDemandService tdDemandService;
     
     @RequestMapping
     public String setting(Long status, ModelMap map,
@@ -110,6 +128,148 @@ public class TdManagerSettingController {
         map.addAttribute("service_item_list", tdServiceItemService.findAllOrderBySortIdAsc());
                 
         return "/site_mag/service_item_list";
+    }
+    
+    /**
+     * 后台投诉查看页面跳转
+     * @author Zhangji
+     * 
+     */
+    @RequestMapping(value="/suggestion/list")
+    public String suggestion( String __EVENTTARGET,
+                        String __EVENTARGUMENT,
+                        String __VIEWSTATE,
+                        Integer page,
+                        Integer size,
+                        Long id,
+                        String name,
+                        String content,
+                        String mail,
+                        Long mobile,
+                        ModelMap map,
+                        HttpServletRequest req){
+    	
+    	if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                } 
+            }
+//            else if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
+//            {
+//                btnDelete("user", listId, listChkId);
+//                tdManagerLogService.addLog("delete", "删除用户", req);
+//            }
+        }
+  
+       if (null == page || page < 0)
+       {
+           page = 0;
+       }
+       if (null == size || size <= 0)
+       {
+           size = SiteMagConstant.pageSize;;
+       }
+     
+       map.addAttribute("page", page);
+       map.addAttribute("size", size);
+
+        Page<TdUserSuggestion> suggestionPage = null;
+       
+        suggestionPage = tdUserSuggestionService.findAllOrderByTimeDesc(page, size);
+                   
+        map.addAttribute("__EVENTTARGET", __EVENTTARGET);
+        map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        map.addAttribute("suggestion_page", suggestionPage);
+        
+        return "/site_mag/suggestion_list";
+    }
+//    /**
+//     * 删除投诉
+//     * @param req
+//     * @param id
+//     * @param map
+//     * @return
+//     */
+//    @RequestMapping(value = "/suggestion/delete")
+//    public String address(HttpServletRequest req,                        
+//                        Long id,
+//                   //     TdUserSuggestion tdUserSuggestion,
+//                        ModelMap map){
+//    	TdUserSuggestion tdUserSuggestion = new TdUserSuggestion();
+//    	tdUserSuggestion.setId(id);
+//    	tdUserSuggestionService.delete(id);
+//    	map.addAttribute("suggestion_page",tdUserSuggestion);
+//    	
+//    	return "/setting/suggestion_list";
+//    }
+//    
+//    
+//  ///////////////////////////////////
+    
+    /**
+     * 后台“车友还想团购”查看页面跳转
+     * @author Zhangji
+     * 
+     */
+    @RequestMapping(value="/demand/list")
+    public String demand( String __EVENTTARGET,
+                        String __EVENTARGUMENT,
+                        String __VIEWSTATE,
+                        Integer page,
+                        Integer size,
+                        Long id,
+                        String name,
+                        String content,
+                        String mail,
+                        Long mobile,
+                        ModelMap map,
+                        HttpServletRequest req){
+    	
+    	if (null != __EVENTTARGET)
+        {
+            if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
+            {
+                if (null != __EVENTARGUMENT)
+                {
+                    page = Integer.parseInt(__EVENTARGUMENT);
+                } 
+            }
+//            else if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
+//            {
+//                btnDelete("user", listId, listChkId);
+//                tdManagerLogService.addLog("delete", "删除用户", req);
+//            }
+        }
+  
+       if (null == page || page < 0)
+       {
+           page = 0;
+       }
+       if (null == size || size <= 0)
+       {
+           size = SiteMagConstant.pageSize;;
+       }
+     
+       map.addAttribute("page", page);
+       map.addAttribute("size", size);
+
+        Page<TdDemand> tdDemandPage = null;
+       
+        tdDemandPage = tdDemandService.findAllOrderByTimeDesc(page, size);
+                   
+        map.addAttribute("__EVENTTARGET", __EVENTTARGET);
+        map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        map.addAttribute("demand_page", tdDemandPage);
+        
+        return "/site_mag/demand_list";
     }
     
     @RequestMapping(value="/service/edit")

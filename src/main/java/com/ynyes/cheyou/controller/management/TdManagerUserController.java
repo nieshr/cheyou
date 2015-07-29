@@ -33,6 +33,7 @@ import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserRecentVisitService;
 import com.ynyes.cheyou.service.TdUserReturnService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.service.TdUserSuggestionService;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
 /**
@@ -56,6 +57,9 @@ public class TdManagerUserController {
     
     @Autowired
     TdUserCommentService tdUserCommentService;
+    
+    @Autowired
+    TdUserSuggestionService tdUserSuggestionService;  //add by zhangji
     
     @Autowired
     TdUserReturnService tdUserReturnService;
@@ -921,6 +925,10 @@ public class TdManagerUserController {
                 else if (type.equalsIgnoreCase("comment")) // 评论
                 {
                     tdUserCommentService.delete(id);
+                }
+                else if (type.equalsIgnoreCase("suggestion")) //投诉  @ by zhangji
+                {
+                	tdUserSuggestionService.delete(id);
                 }
                 else if (type.equalsIgnoreCase("return")) // 退换货
                 {

@@ -8,29 +8,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 /**
- * 用户投诉
+ * 车友还想团购
  * 
- * @author Zhangji
- *
+ * @author zhangji
  */
 @Entity
-public class TdUserSuggestion {
-	
+public class TdDemand {
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-    //订单编号
-	@Column
-	private String title;
-	
-	//投诉内容
+	//要求团购的内容
 	@Column
 	private String content;
 	
-	//投诉时间
+	//提交时间
 	@Column
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date time;
@@ -39,6 +33,7 @@ public class TdUserSuggestion {
 	@Column
 	private String name;
 	
+
 	//邮箱
 	@Column
 	private String mail;
@@ -46,12 +41,34 @@ public class TdUserSuggestion {
 	//联系方式
 	@Column
 	private String mobile;
-
-	// 排序号
-    @Column
-    private Long sortId;
 	
-    public String getName() {
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	public String getName() {
 		return name;
 	}
 
@@ -73,46 +90,6 @@ public class TdUserSuggestion {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public Date getTime() {
-		return time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
-	}
-
-	public Long getSortId() {
-		return sortId;
-	}
-
-	public void setSortId(Long sortId) {
-		this.sortId = sortId;
 	}
 
 }

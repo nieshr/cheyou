@@ -32,7 +32,7 @@
             <a href="/user/return/list">返修退换货</a>
             <a href="/user/consult/list">购买咨询</a>
             <a href="/user/comment/list">我的评论</a>
-            <a href="/user/suggestion/list">我的投诉</a>
+       <#--      <a href="/user/suggestion/list">我的投诉</a> -->
         </div>
     </div>
     
@@ -42,7 +42,7 @@
             <a href="/user">个人中心</a>
             <a href="/user/info">编辑信息</a>
             <a href="/user/password">修改密码</a>
-            <a href="/user/address/list">安装信息</a>
+           <a href="/user/address/list">安装信息</a> 
         </div>
     </div>
 <!--    

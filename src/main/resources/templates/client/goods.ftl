@@ -211,7 +211,9 @@ function timer()
                     
     var price = ${goods.flashSalePrice?string("0.00")} * ts / allts;
     
-    var s_x = Math.round(price).toString();
+    // var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
     var pos_decimal = s_x.indexOf('.');
     if (pos_decimal < 0) {
         pos_decimal = s_x.length;
@@ -585,57 +587,6 @@ function checkTime(i)
         <div id="tab2" class="php_z" style="display:none;">
             ${goods.afterMarketService!''}
         </div>
-        
-        <div class="clear h20"></div>
-        
-        <section class="pro_mytext" id="pro_mytext">
-            <#if username??>
-                <form id="commentForm" action="javascript:submitComment();">
-                    <input type="hidden" name="goodsId" value=${goods.id} />
-                    <div class="pb20 lh25">
-                        <span class="sp1">我要评论</span>
-                        <input class="ml20" type="radio" name="stars" value="3" datatype="n" nullmsg="请点击进行评价"/><span class="mr20"> 好评</span>
-                        <input type="radio" name="stars" value="2" datatype="n" nullmsg="请点击进行评价"/><span class="mr20"> 中评</span>
-                        <input type="radio" name="stars" value="1" datatype="n" nullmsg="请点击进行评价"/><span class="mr20"> 差评</span>
-                    </div>
-                    <div class="area">
-                        <textarea name="content" datatype="*5-255" nullmsg="请输入评价内容"></textarea>
-                    </div>
-                    <div class="pt10 pb10">
-                        <div class="clear h5"></div>
-                        <span class="fl">同盟店商品质量：</span>
-                        <input id="goodsStar" name="goodsStar" type="hidden" value="1" />
-                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 1);"><img src="/client/images/content/start01.png" /></a>
-                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 2);"><img src="/client/images/content/start03.png" /></a>
-                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 3);"><img src="/client/images/content/start03.png" /></a>
-                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 4);"><img src="/client/images/content/start03.png" /></a>
-                        <a class="goodsStar fl" href="javascript:starChange('goodsStar', 5);"><img src="/client/images/content/start03.png" /></a>
-                         
-                        <span class="fl ml20">同盟店专业技能：</span>
-                        <input id="skillStar" name="skillStar" type="hidden" value="1" />
-                        <a class="skillStar fl" href="javascript:starChange('skillStar', 1);"><img src="/client/images/content/start01.png" /></a>
-                        <a class="skillStar fl" href="javascript:starChange('skillStar', 2);"><img src="/client/images/content/start03.png" /></a>
-                        <a class="skillStar fl" href="javascript:starChange('skillStar', 3);"><img src="/client/images/content/start03.png" /></a>
-                        <a class="skillStar fl" href="javascript:starChange('skillStar', 4);"><img src="/client/images/content/start03.png" /></a>
-                        <a class="skillStar fl" href="javascript:starChange('skillStar', 5);"><img src="/client/images/content/start03.png" /></a>
-                          
-                        <span class="fl ml20">同盟店服务态度：</span>
-                        <input id="serviceStar" name="serviceStar" type="hidden" value="1" />
-                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 1);"><img src="/client/images/content/start01.png" /></a>
-                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 2);"><img src="/client/images/content/start03.png" /></a>
-                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 3);"><img src="/client/images/content/start03.png" /></a>
-                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 4);"><img src="/client/images/content/start03.png" /></a>
-                        <a class="serviceStar fl" href="javascript:starChange('serviceStar', 5);"><img src="/client/images/content/start03.png" /></a>
-                        
-                        <div class="clear h10"></div>
-                    </div>
-                    <input class="sub fr" type="submit" value="提交评价" />
-                </form>
-            <#else>
-                <div>请 <a href="/login">登录</a> 以发表评论</div>
-            </#if>
-            <div class="clear"></div>
-        </section>
         
         <div class="clear h20"></div>
         

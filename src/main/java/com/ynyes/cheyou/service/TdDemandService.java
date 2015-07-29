@@ -10,26 +10,27 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ynyes.cheyou.entity.TdUserSuggestion;
-import com.ynyes.cheyou.repository.TdUserSuggestionRepo;
+import com.ynyes.cheyou.entity.TdDemand;
+import com.ynyes.cheyou.repository.TdDemandRepo;
+
 
 /**
- * TdUserSuggestion 服务类
+ * TdDemand 服务类
  * @author Zhangji
  *
  */
 
 @Service
 @Transactional
-public class TdUserSuggestionService {
+public class TdDemandService {
 	@Autowired
-	TdUserSuggestionRepo repository;
+	TdDemandRepo repository;
 
-	 public List<TdUserSuggestion> findAll(){
-	        return (List<TdUserSuggestion>) repository.findAll();
+	 public List<TdDemand> findAll(){
+	        return (List<TdDemand>) repository.findAll();
 	    }
 
-	public TdUserSuggestion findOne(Long id)
+	public TdDemand findOne(Long id)
     {
 		if(null == id)
 		{
@@ -39,7 +40,7 @@ public class TdUserSuggestionService {
         return repository.findOne(id);
     }
 	
-	public Page<TdUserSuggestion> findAllOrderByTimeDesc(int page,int size){
+	public Page<TdDemand> findAllOrderByTimeDesc(int page,int size){
 
 		PageRequest pageRequest = new PageRequest(page,size,new Sort(Direction.DESC,"time"));
 		return repository.findAll(pageRequest);
@@ -48,8 +49,8 @@ public class TdUserSuggestionService {
 	/**
 	 * 添加
 	 */
-	public void save(TdUserSuggestion tdSuggestion){
-		repository.save(tdSuggestion);
+	public void save(TdDemand tdDemand){
+		repository.save(tdDemand);
 	}
 	
 	/**
@@ -62,6 +63,7 @@ public class TdUserSuggestionService {
             repository.delete(id);
         }
     }
+
 
 
 }

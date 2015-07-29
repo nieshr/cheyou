@@ -11,11 +11,13 @@
 <link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/goods_comment_consult.js"></script>
 
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>

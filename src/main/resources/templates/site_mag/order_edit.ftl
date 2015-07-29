@@ -750,7 +750,10 @@
             <dt>订单统计</dt>
             <dd>
                 <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
-                    <tbody><tr>
+                    <tbody>
+                    
+                    
+                    <tr>
                         <th width="20%">
                             商品总金额
                         </th>

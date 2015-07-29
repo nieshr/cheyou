@@ -119,7 +119,7 @@ DD_belatedPNG.fix('.,img,background');
         
       
     <div class="h20"></div>
-    <#-- 新增添加提示 -->
+    <#-- 新增一个添加提示 -->
     <h3>添加/修改</h3> 
     <form method="post" action="/user/address/save" id="form1">
     <table class="mymember_address">
