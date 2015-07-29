@@ -43,16 +43,25 @@
         </p>
         <!--add 2015-7-28 18:45:37 mdj-->
         <p>
-        <#if setting?? && setting.bottomLogoUri1?? && setting.bottomLogoLink1??>
-        <span style="margin-right:10px;"><img src="${setting.bottomLogoUri1}"  href="${setting.bottomLogoLink1}"/></span>
+        <#if site??&&site.bottomLogoUri1??&&site.bottomLogoLink1??>
+        <span style="margin-right:10px;">
+        <a href="${site.bottomLogoLink1}"><img src="${site.bottomLogoUri1}" /><img>
+        </span>
         </#if>
-        <#if setting?? && setting.bottomLogoUri2?? && setting.bottomLogoLink2??>
-        <span style="margin-right:10px;"><img src="${setting.bottomLogoUri1}"  href="${setting.bottomLogoLink1}"/></span>
+        <#if site??&&site.bottomLogoUri2??&&site.bottomLogoLink2??>
+        <span style="margin-right:10px;">
+        <a href="${site.bottomLogoLink2}"><img src="${site.bottomLogoUri2}" /><img>
+        </span>
         </#if>
-        <#if setting?? && setting.bottomLogoUri3?? && setting.bottomLogoLink3??>
-        <span style="margin-right:10px;"><img src="${setting.bottomLogoUri1}"  href="${setting.bottomLogoLink1}"/></span>
+        <#if site??&&site.bottomLogoUri3??&&site.bottomLogoLink3??>
+        <span style="margin-right:10px;">
+        <a href="${site.bottomLogoLink3}"><img src="${site.bottomLogoUri3}" /><img>
+        </span>
         </#if>
-        <!--add 2015-7-28 18:45:37 mdj-->
+        <#if site??&&((site.bottomLogoUri3??&&site.bottomLogoLink3??)||(site.bottomLogoUri2?? && site.bottomLogoLink2??)||(site.bottomLogoUri1??&&site.bottomLogoLink1??))>
+        <br />
+        </#if>
 		</p>
+		<!--add 2015-7-28 18:45:37 mdj-->
     </div>
 </div>
