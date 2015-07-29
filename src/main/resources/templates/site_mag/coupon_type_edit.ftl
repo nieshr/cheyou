@@ -76,15 +76,49 @@ $(function () {
         <span class="Validform_checktip">*名称</span>
     </dd>
   </dl>
-  
+    <dl>
+        <dt>类型</dt>
+        <dd>
+            <div class="rule-single-select">
+            <select name="categoryId" datatype="*" sucmsg=" ">
+                <option value="" <#if !coupon_type?? || !coupon_type.categoryId??>selected="selected"</#if>>请选择</option>
+                <option value="0" <#if coupon_type?? && coupon_type.categoryId == 0>selected="selected"</#if>>普通券</option>
+                <option value="1" <#if coupon_type?? && coupon_type.categoryId == 1>selected="selected"</#if>>满减券</option>
+                <option value="2" <#if coupon_type?? && coupon_type.categoryId == 2>selected="selected"</#if>>单品类券</option>
+            </select>
+            </div>
+        </dd>
+    </dl>
+    <dl>
+        <dt>满减券使用额度</dt>
+        <dd>
+          <input name="canUsePrice" type="text" value="<#if coupon_type?? && coupon_type.canUsePrice>${coupon_type.canUsePrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+          <span class="Validform_checktip">消费满该额度时可使用，仅对满减券有效</span>
+        </dd>
+    </dl>
+    <dl>
+        <dt>单品类券限制使用品类</dt>
+        <dd>
+            <div class="rule-single-select">
+            <select name="productTypeId" datatype="n0-5">
+                <option <#if coupon_type?? && coupon_type.productTypeId??><#else>selected="selected"</#if> value="">请选择</option>
+                <#if category_list??>
+                    <#list category_list as c>
+                        <option value="${c.id!""}" <#if categoryId?? && c.id==categoryId>selected="selected"</#if> ><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                    </#list>
+                </#if>
+            </select>
+        </div>
+        </dd>
+    </dl>
+    
   <dl>
-    <dt>定价</dt>
+    <dt>普通券定价</dt>
     <dd>
       <input name="price" type="text" value="<#if coupon_type??>${coupon_type.price!""}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
       <span class="Validform_checktip">免费券定价为0</span>
     </dd>
   </dl>
-  
   <dl>
     <dt>有效期</dt>
     <dd>

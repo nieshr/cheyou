@@ -19,6 +19,7 @@ import com.ynyes.cheyou.service.TdCouponService;
 import com.ynyes.cheyou.service.TdCouponTypeService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdManagerLogService;
+import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
 /**
@@ -42,6 +43,9 @@ public class TdManagerCouponController {
     
     @Autowired 
     private TdDiySiteService tdDiySiteService;
+    
+    @Autowired
+    private TdProductCategoryService tdProductCategoryService;
     
     
 //    @RequestMapping(value="/check", method = RequestMethod.POST)
@@ -132,6 +136,7 @@ public class TdManagerCouponController {
         }
 
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        map.addAttribute("category_list", tdProductCategoryService.findAll());
 
         if (null != id) {
             map.addAttribute("coupon_type", tdCouponTypeService.findOne(id));

@@ -554,7 +554,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>销售价</dt>
             <dd>
-                <input id="idComputeSalePrice" name="salePrice" type="text" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <input id="idComputeSalePrice" name="salePrice" type="text" value="<#if goods?? && goods.salePrice??>${goods.salePrice?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/">
                 <span class="Validform_checktip">*销售价</span>
             </dd>
         </dl>

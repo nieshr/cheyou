@@ -145,6 +145,7 @@ public class TdOrderController extends AbstractPaytypeController {
                 .findByUsernameAndIsSelectedTrue(username);
 
         Long totalPointLimited = 0L;
+        Double totalPrice = 0.0;
 
         // 积分限制总和
         if (null != selectedGoodsList) {
@@ -154,11 +155,13 @@ public class TdOrderController extends AbstractPaytypeController {
                 if (null != goods && null != goods.getPointLimited()) {
                     totalPointLimited += goods.getPointLimited()
                             * cg.getQuantity();
+                    totalPrice += cg.getPrice() * cg.getQuantity();
                 }
             }
         }
 
         // 优惠券
+        // TODO: 满减券， 单品类券，普通券查找
         map.addAttribute("coupon_list",
                 tdCouponService.findByUsernameAndIsUseable(username));
 
