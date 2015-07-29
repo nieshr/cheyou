@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.cheyou.entity.TdDemand;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdOrderGoods;
@@ -33,6 +34,7 @@ import com.ynyes.cheyou.entity.TdUserRecentVisit;
 import com.ynyes.cheyou.entity.TdUserReturn;
 import com.ynyes.cheyou.entity.TdUserSuggestion;
 import com.ynyes.cheyou.service.TdCommonService;
+import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdOrderGoodsService;
 import com.ynyes.cheyou.service.TdOrderService;
@@ -88,7 +90,14 @@ public class TdUserController extends AbstractPaytypeController {
      */
     @Autowired
     private TdUserSuggestionService tdUserSuggestionService;
-
+    
+    /**
+     * 车友还想团购
+     * @author Zhangji
+     */
+    @Autowired
+    private TdDemandService tdDemandService;
+    
     @Autowired
     private TdUserRecentVisitService tdUserRecentVisitService;
 
@@ -738,8 +747,48 @@ public class TdUserController extends AbstractPaytypeController {
 
         return res;
     }
+    
+    /**
+     * 车友还想团购
+     *@author Zhangji
+     *
+     */
+    @RequestMapping(value = "/demand/add", method=RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> demandAdd(HttpServletRequest req, 
+                  		String content,
+                        String name,
+                        String mobile,
+                        String mail,
+                        ModelMap map){
+        Map<String, Object> res = new HashMap<String, Object>();
+        res.put("code", 1);
+              
+        TdDemand tdDemand = new TdDemand();
+        
+        tdDemand.setContent(content);
+        tdDemand.setTime(new Date());
+        tdDemand.setName(name);
+        tdDemand.setMail(mail);
+        tdDemand.setMobile(mobile);
+        
+        
+        
+//        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        tdDemandService.save(tdDemand);
+        
 
-    @RequestMapping(value = "/user/comment/add", method = RequestMethod.POST)
+        map.addAttribute("demand_list",tdDemand);
+                
+        res.put("code", 0);
+        
+        return res;
+    }
+    
+    
+    
+    @RequestMapping(value = "/user/comment/add", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> commentAdd(HttpServletRequest req,
             TdUserComment tdComment, Long orderId, Long ogId, String code,
