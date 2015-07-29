@@ -240,6 +240,52 @@ $(function () {
             <span class="Validform_checktip">支持HTML</span>
         </dd>
     </dl>
+    <!--add 2015-7-28 17:46:12 mdj-->
+    <dl>
+        <dt>第一个网站安检URL</dt>
+        <dd>
+            <input name="bottomLogoLink1" type="text" value="<#if setting??>${setting.bottomLogoLink1!""}</#if>" class="input normal" datatype="*0-100" sucmsg=" ">
+            <span class="Validform_checktip"></span>
+        </dd><br />
+        <dt>第一个网站安检LOGO</dt>
+        <dd>
+            <input name="bottomLogoUri1" type="text" datatype="*0-255" value="<#if setting??>${setting.bottomLogoUri1!""}</#if>" class="input normal upload-path">
+            <div class="upload-box upload-img"></div>
+            <span class="Validform_checktip"></span>
+            <div class="photo-list thumb_ImgUrl_show">
+            </div>
+        </dd>
+    </dl>
+    <dl>
+        <dt>第二个网站安检URL</dt>
+        <dd>
+            <input name="bottomLogoLink1" type="text" value="<#if setting??>${setting.bottomLogoLink2!""}</#if>" class="input normal" datatype="*0-100" sucmsg=" ">
+            <span class="Validform_checktip"></span>
+        </dd><br />
+        <dt>第二个网站安检LOGO</dt>
+        <dd>
+            <input name="bottomLogoUri1" type="text" datatype="*0-255" value="<#if setting??>${setting.bottomLogoUri2!""}</#if>" class="input normal upload-path">
+            <div class="upload-box upload-img"></div>
+            <span class="Validform_checktip"></span>
+            <div class="photo-list thumb_ImgUrl_show">
+            </div>
+        </dd>
+    </dl><dl>
+        <dt>第三个网站安检URL</dt>
+        <dd>
+            <input name="bottomLogoLink1" type="text" value="<#if setting??>${setting.bottomLogoLink3!""}</#if>" class="input normal" datatype="*0-100" sucmsg=" ">
+            <span class="Validform_checktip"></span>
+        </dd><br />
+        <dt>第三个网站安检LOGO</dt>
+        <dd>
+            <input name="bottomLogoUri1" type="text" datatype="*0-255" value="<#if setting??>${setting.bottomLogoUri3!""}</#if>" class="input normal upload-path">
+            <div class="upload-box upload-img"></div>
+            <span class="Validform_checktip"></span>
+            <div class="photo-list thumb_ImgUrl_show">
+            </div>
+        </dd>
+    </dl>
+    <!--add 2015-7-28 17:46:12 mdj-->
 </div>
 <div class="tab-content" style="display: none;">
     <dl>

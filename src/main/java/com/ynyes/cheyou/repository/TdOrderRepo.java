@@ -1,6 +1,7 @@
 package com.ynyes.cheyou.repository;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,4 +55,13 @@ public interface TdOrderRepo extends
     Page<TdOrder> findByshopTitleAndStatusIdAndOrderTimeAfterAndOrderNumberContainingOrderByIdDesc(String diystiename, Long statusId, Date time, String keywords, Pageable page);
     Page<TdOrder> findByshopTitleAndOrderTimeAfterAndOrderNumberContainingOrderByIdDesc(String diystiename, Date time, String keywords, Pageable page);
     Page<TdOrder> findByshopTitleAndStatusIdAndOrderTimeAfterOrderByIdDesc(String diystiename, Long statusId, Date time, Pageable page);
+    
+    /**
+     * 按交易状态查询
+     * @author libiao
+     */
+    List<TdOrder> findByStatusId(Long statusId);
+    
+//    List<TdOrder> findAll();
+    
 }
