@@ -284,7 +284,7 @@ $(document).ready(function(){
 }); 
 </script>
 
-<div id="sugguestion-div" class="mianfeilingqutanchu" style="{display:none;">
+<div id="sugguestion-div" class="mianfeilingqutanchu" style="display:none;">
     <div class="mianfeilingqutanchu_dl"> 
         <div class="main bgff">
             <div class="tousuyemian">
