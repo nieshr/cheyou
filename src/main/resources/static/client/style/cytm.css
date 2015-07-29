@@ -38,10 +38,10 @@
 .jgqj_btn { width: 50px; height: 22px; line-height: 22px; text-align: center; cursor: pointer; background: #2b3243; color: #fff; text-align: center; margin-top: 9px; margin-left: 10px; border:none; }
 .jgqj_btn:hover{ background:#ff3535;}
 .sxtjBox { overflow: hidden; padding-left: 15px; float:left;}
-.sxtjBox span{ font-family:"微软雅黑", "宋体"; font-size:12px; color:#444444; margin-right:10px; line-height:39px;}
+.sxtjBox span{ font-family:"寰蒋闆呴粦", "瀹嬩綋"; font-size:12px; color:#444444; margin-right:10px; line-height:39px;}
 
 .down{height:113px;}
-.down2{height:188px; background:#2b3243; text-align:center; color:#FFF; line-height:37px;}
+.down2{height:auto; background:#2b3243; text-align:center; color:#FFF; line-height:37px;}
 .youqin{margin-left:25px;}
 .down2 li{width:133px; float:left;}
 .down2 a{color:#FFF;}
@@ -89,10 +89,10 @@
 .jgqj_btn { width: 50px; height: 22px; line-height: 22px; text-align: center; cursor: pointer; background: #2b3243; color: #fff; text-align: center; margin-top: 9px; margin-left: 10px; border:none; }
 .jgqj_btn:hover{ background:#ff3535;}
 .sxtjBox { overflow: hidden; padding-left: 15px; float:left;}
-.sxtjBox span{ font-family:"å¾®è½¯é›…é»‘", "å®‹ä½“"; font-size:12px; color:#444444; margin-right:10px; line-height:39px;}
+.sxtjBox span{ font-family:"氓戮庐猫陆炉茅鈥衡�茅禄鈥�, "氓庐鈥姑ぢ解�"; font-size:12px; color:#444444; margin-right:10px; line-height:39px;}
 
 .down{height:113px;}
-.down2{height:188px; background:#2b3243; text-align:center; color:#FFF; line-height:37px;}
+.down2{height:auto; background:#2b3243; text-align:center; color:#FFF; line-height:37px;}
 .youqin{margin-left:25px;}
 .down2 li{width:133px; float:left;}
 .down2 a{color:#FFF;}
