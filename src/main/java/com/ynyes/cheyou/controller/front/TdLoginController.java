@@ -63,7 +63,7 @@ public class TdLoginController {
 		 * @author lc @注释：
 		 */
 		TdUser tdUser = tdUserService.findByUsername(username);
-		if (tdUser.getRoleId() == 2L) {
+		if (null != tdUser.getRoleId() && tdUser.getRoleId().equals(2L)) {
 			return "redirect:/user/diysite/order/list/0";
 		}
 		return "redirect:" + referer;

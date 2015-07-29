@@ -1,8 +1,4 @@
 $(document).ready(function(){
-    $("#commentForm").Validform({
-        tiptype: 1
-    });
-    
     $("#consultForm").Validform({
         tiptype: 1
     });
@@ -39,27 +35,6 @@ function getConsult(goodsId, page)
         url:"/goods/consult/" + goodsId + "?page=" + page,
         success:function(res){
             $("#consult-list").html(res);
-        }
-    });
-}
-
-// 提交评论
-function submitComment()
-{
-	
-    $.ajax({
-        type:"post",
-        url:"/user/comment/add?" + $("#commentForm").serialize(),
-        success:function(res){
-            if (0 == res.code)
-            {
-                alert("提交评论成功，请耐心等待审核~~");
-            }
-            else
-            {
-                var ss = "" + res.message;
-                alert(res["message"]);
-            }
         }
     });
 }
