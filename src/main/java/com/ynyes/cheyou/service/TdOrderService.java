@@ -249,4 +249,16 @@ public class TdOrderService {
         
         return repository.findByshopTitleAndStatusIdAndOrderTimeAfterOrderByIdDesc(username, statusId, time, pageRequest);
     }
+    
+    /**
+     * 按交易状态查询
+     * @author libiao
+     */
+    public List<TdOrder> findByStatusId(Long statusId){
+    	return repository.findByStatusId(statusId);
+    }
+    
+    public List<TdOrder> findAll(Long statusId){
+    	return (List<TdOrder>) repository.findAll();
+    }
 }

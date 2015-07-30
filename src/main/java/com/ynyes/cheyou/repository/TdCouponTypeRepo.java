@@ -1,5 +1,7 @@
 package com.ynyes.cheyou.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -19,4 +21,7 @@ public interface TdCouponTypeRepo extends
 		JpaSpecificationExecutor<TdCouponType> 
 {
     Page<TdCouponType> findByTitleContainingOrderBySortIdAsc(String keywords, Pageable page);
+    
+    List<TdCouponType> findByCategoryIdIs(Long categoryId);//按照优惠券类型Id查找优惠券
+    
 }

@@ -192,6 +192,7 @@ public class TdCouponService {
                 e.setTypeTitle(cType.getTitle());
                 e.setTypePicUri(cType.getPicUri());
                 e.setTypeDescription(cType.getDescription());
+                e.setTypeCategoryId(cType.getCategoryId());
             }
         }
         

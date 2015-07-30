@@ -2,6 +2,7 @@ package com.ynyes.cheyou.controller.management;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -355,6 +356,7 @@ public class TdManagerOrderController {
                                 Long[] listId,
                                 Integer[] listChkId,
                                 ModelMap map,
+//                                String dateId,
                                 HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
@@ -396,19 +398,30 @@ public class TdManagerOrderController {
             size = SiteMagConstant.pageSize;;
         }
         
+        Double price = new Double(0.00);
         if (null != statusId)
         {
             if (statusId.equals(0L)) // 全部订单
             {
+            	List<TdOrder> list = tdOrderService.findAll();
+            	for (int i = 0; i < list.size(); i++) {
+            		price += list.get(i).getTotalPrice();
+            	}
                 map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
             }
             else
             {
+            	List<TdOrder> orderList = tdOrderService.findByStatusId(statusId);
+            	for (int i = 0; i < orderList.size(); i++) {
+            		price += orderList.get(i).getTotalPrice();
+            	}
                 map.addAttribute("order_page", tdOrderService.findByStatusIdOrderByIdDesc(statusId, page, size));
             }
         }
         
         // 参数注回
+//        map.addAttribute("dateId",dateId);
+        map.addAttribute("price",price);
         map.addAttribute("page", page);
         map.addAttribute("size", size);
         map.addAttribute("keywords", keywords);
@@ -693,6 +706,29 @@ public class TdManagerOrderController {
         res.put("message", "参数错误!");
         return res;
     }
+    
+    @RequestMapping(value = "order/sumPrice" , method = RequestMethod.GET)
+    public String sumPrice(String date,String date1,HttpServletRequest request){
+    	
+    	
+    	return "/";
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     @ModelAttribute
     public void getModel(@RequestParam(value = "payTypeId", required = false) Long payTypeId,

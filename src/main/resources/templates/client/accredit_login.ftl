@@ -115,7 +115,7 @@ function cliLogin(){
         </#list>
     </#if>
     </p>
-    <p>${site.copyright!''}</p>
+    <p><#if site??>${site.copyright!''}</#if></p>
     <p>${site.address!''} 电话：${site.telephone!''} </p>
   <p><a title="云南网站建设" href="http://www.ynyes.com" target="_blank">网站建设</a>技术支持：<a title="云南网站建设" href="http://www.ynyes.com" target="_blank">昆明天度网络公司</a>
 </p>

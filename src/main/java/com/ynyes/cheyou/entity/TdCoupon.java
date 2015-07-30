@@ -25,9 +25,13 @@ public class TdCoupon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-	// 优惠券类型
+	// 优惠券分类ID
 	@Column
 	private Long typeId;
+	
+	// 优惠券分类类型ID
+    @Column
+    private Long typeCategoryId;
 	
 	// 优惠券名称
 	@Column
@@ -225,5 +229,13 @@ public class TdCoupon {
 
     public void setCarCode(String carCode) {
         this.carCode = carCode;
+    }
+
+    public Long getTypeCategoryId() {
+        return typeCategoryId;
+    }
+
+    public void setTypeCategoryId(Long typeCategoryId) {
+        this.typeCategoryId = typeCategoryId;
     }
 }

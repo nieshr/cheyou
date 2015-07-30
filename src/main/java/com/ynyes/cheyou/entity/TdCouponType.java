@@ -25,6 +25,18 @@ public class TdCouponType {
 	@Column
 	private String title;
 	
+	// 种类 0:普通券 1:满减券 2:限制品类券
+	@Column
+	private Long categoryId;
+	
+	// 满减券金额
+	@Column(scale=2)
+    private Double canUsePrice;
+	
+	// 限制品类券品类ID
+	@Column
+    private Long productTypeId;
+	
 	// 金额
     @Column(scale=2)
     private Double price;
@@ -99,5 +111,29 @@ public class TdCouponType {
 
     public void setTotalDays(Long totalDays) {
         this.totalDays = totalDays;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Double getCanUsePrice() {
+        return canUsePrice;
+    }
+
+    public void setCanUsePrice(Double canUsePrice) {
+        this.canUsePrice = canUsePrice;
+    }
+
+    public Long getProductTypeId() {
+        return productTypeId;
+    }
+
+    public void setProductTypeId(Long productTypeId) {
+        this.productTypeId = productTypeId;
     }
 }

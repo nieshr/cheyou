@@ -1094,5 +1094,11 @@ public class TdGoods {
     public void setTrainServiceReturnRation(Double trainServiceReturnRation) {
         this.trainServiceReturnRation = trainServiceReturnRation;
     }
+
+	@Override
+	public String toString() {
+		return "TdGoods [id=" + id + ", productId=" + productId + ", name=" + name + "]";
+	}
+    
     
 }

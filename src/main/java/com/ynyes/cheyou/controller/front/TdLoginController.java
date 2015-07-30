@@ -84,8 +84,6 @@ public class TdLoginController {
 	 * @exception <BR>
 	 * @since 1.0.0
 	 */
-	
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> login(String username, String password, String alipayuser_id,String type, String code,
@@ -393,7 +391,7 @@ public class TdLoginController {
 	@RequestMapping(value = "/login/qq_login_return", method = RequestMethod.GET)
 	public String qqLoginReturn(String code, String state, HttpServletRequest request, ModelMap map) {
 
-		System.err.println("cede----" + code + "-----state----" + state);
+		tdCommonService.setHeader(map, request);
 		try {
 			AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
 
@@ -417,6 +415,7 @@ public class TdLoginController {
 
 				System.err.println("欢迎你，代号为 " + openID + " 的用户!");
 
+				
 				//根据openID查找用户
 				map.put("alipay_user_id", openID);
 				map.put("qq", "qq");

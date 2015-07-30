@@ -287,6 +287,12 @@ function uploadSuccess(file, serverData) {
                 //封面图片（缩略图） 赋值并显示                       
                 $(this.customSettings.upload_target).siblings(".thumb_ImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + jsonstr.path + "' bigsrc='" + jsonstr.path + "' /></div></li></ul>");
                 $(this.customSettings.upload_target).siblings(".thumb_ImgUrl_show").show();
+                $(this.customSettings.upload_target).siblings(".thumb_Logo1ImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + jsonstr.path + "' bigsrc='" + jsonstr.path + "' /></div></li></ul>");
+                $(this.customSettings.upload_target).siblings(".thumb_Logo1ImgUrl_show").show();
+                $(this.customSettings.upload_target).siblings(".thumb_Logo2ImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + jsonstr.path + "' bigsrc='" + jsonstr.path + "' /></div></li></ul>");
+                $(this.customSettings.upload_target).siblings(".thumb_Logo2ImgUrl_show").show();
+                $(this.customSettings.upload_target).siblings(".thumb_Logo3ImgUrl_show").html("<ul><li><div class='img-box1'><img src='" + jsonstr.path + "' bigsrc='" + jsonstr.path + "' /></div></li></ul>");
+                $(this.customSettings.upload_target).siblings(".thumb_Logo3ImgUrl_show").show();
             } else {
                 addImage($(this.customSettings.upload_target), jsonstr.path, jsonstr.thumb);
             }

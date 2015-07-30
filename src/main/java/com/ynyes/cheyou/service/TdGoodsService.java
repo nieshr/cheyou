@@ -2044,4 +2044,13 @@ public class TdGoodsService {
         return e;
     }
 
+    /**
+     * 根据商品Id查找所属类别Id
+     * @param id
+     * @return
+     */
+    public TdGoods findProductIdById(Long id)
+    {
+    	return repository.findOne(id);
+    }
 }
