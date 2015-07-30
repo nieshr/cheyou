@@ -253,7 +253,7 @@ function hideDemand()
 
 function showDemand()
 {
-    $("#demand-div").css("display", "block");
+//    $("#demand-div").css("display", "block");
 }
 </script>
 
@@ -284,7 +284,7 @@ $(document).ready(function(){
 }); 
 </script>
 
-<div id="sugguestion-div" class="mianfeilingqutanchu" style="{display:none;">
+<div id="sugguestion-div" class="mianfeilingqutanchu" style="display:none;">
     <div class="mianfeilingqutanchu_dl"> 
         <div class="main bgff">
             <div class="tousuyemian">
@@ -1375,13 +1375,13 @@ function timer23${item_index}()
                     <p>${show.content!''}</p>
                 </#if>
             </#list>
-        </#if>    
-       -->
+        </#if>  
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
-       
+          
+        -->
         <#-- 增加链接的js函数showDemand();   zhangji -->        
         <a href="javascript:showDemand();"><img src="/client/images/images/index_ico09.png" /></a>   
     </section>
