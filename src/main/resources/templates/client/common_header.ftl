@@ -1,10 +1,40 @@
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.tousuyemian{line-height: 30px;
+  color: #333;
+  background: #FFF;
+  padding: 20px 20px 20px 20px;  
+  position: fixed;
+  overflow: hidden;
+  width: 1150px;}
+.tousuyemian2{line-height: 30px;
+  color: #333;
+  background: #FFF;
+  padding: 20px 20px 20px 20px;  
+  position: absolute;
+  overflow: hidden;
+  width: 900px;}
+.tousuyemian p{ font-size:14px; line-height:20px; height:45px;}
+.tousulianxifangshi span{width:65px;  text-align:right;}
+textarea.input { width: 98%; height:50px; color:#666;}
+.Message_an {border-radius:5px; -moz-border-radius:5px; -moz-webkit-radius:5px; -o-border-radius:5px; width:100px; height:35px; line-height:35px; color:#fff; font-size:14px;  background-position: 0px 0px; border:0px; cursor:pointer; background:#ff4454; }
+.Message_an:hover,.hov:hover{
+    -moz-box-shadow:0px 0px 4px #333112; -webkit-box-shadow:0px 0px 4px #333112; box-shadow:0px 0px 4px #333112; background:#1c2b38;}
+}
+.bgff{background:#FFF;}     
+.mianfeilingqutanchu{background:url(../client/images/images/darkbg.png) repeat; width:100%; height:100%; z-index:999999999; position:absolute;overflow: hidden;}  
+.mianfeilingqutanchu2{background:url(../client/images/images/darkbg.png) repeat; width:950px; height:460px; z-index:999999999; position:absolute;overflow: hidden;}  
+.mianfeilingqutanchu_dl{ margin-top:3%;}
+.mianfeilingqutanchu_dl2{ margin-top:6px;margin-left:4px;}
+.rightb_gundong{ position:absolute; z-index:99999; margin-top:00px;width:30px; height:50px; margin-left:1130px;}
+
+</style>
 
 <#-- 投诉 -->
 <script>
 $(document).ready(function(){
-    $("#suggestionForm").Validform({
+    $("#suggestionForm1").Validform({
         tiptype: 3,
         ajaxPost:true,
         callback: function(data) {
@@ -23,12 +53,12 @@ $(document).ready(function(){
 
 function hideSuggestion()
 {
-    $("#sugguestion-div").css("display", "none");
+    $("#sugguestion-div1").css("display", "none");
 }
 
 function showSuggestion()
 {
-    $("#sugguestion-div").css("display", "block");
+    $("#sugguestion-div1").css("display", "block");
 }
 function move()
 {
@@ -36,42 +66,39 @@ function move()
 }
 </script>
 
-<div id="sugguestion-div" class="mianfeilingqutanchu" style="display:none;">
+<div id="sugguestion-div1" class="mianfeilingqutanchu" style="display:none;">
     <div class="mianfeilingqutanchu_dl"> 
         <div class="main bgff">
             <div class="tousuyemian">
-                <div class="rightb_gundong fr" id="yincang">
+                <div class="rightb_gundong fr">
                     <a href="javascript:hideSuggestion();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="21" height="21" /></a>
                 </div>
-                  <form id="suggestionForm" action="/suggestion/add">
+                  <form id="suggestionForm1" action="/suggestion/add">
                       <div class="clear"></div>
                       <h3>我要投诉</h3>
                       <p>在您填写下列投诉内容之前，我们首先代表车有同盟为导致您进行投诉的原因（行为）表示歉意，请详细描述事件经过，以便我们尽快为您解决问题，我们一定会及时处理，给您一个满意的解决方案，您的满意是我们最大的动力，谢谢！</p>
                       <div class="tousuneirong">
-                          <#-- 
-                          <span>标题</span><input name="title"  onfocus="if(value=='订单编号') {value=''}" onblur="if (value=='订单编号') {value='订单编号'}"  value="" id="et_contact_name" class="input ml20" type="text">
-                          -->
                           <div class="clear h10"></div>
                           <span><b class="red">*</b>投诉内容</span>
                           <div class=" clear"></div>
-                          <textarea class="input" style="width:1000px;height:250px" onfocus="if(value=='') {value=''}" onblur="if (value=='') {value=''}"  value="" datatype="*1-255" nullmsg="请输入投诉内容" id="suggestionContent" name="content"></textarea>
+                          <textarea class="input Validform_error" style="width:1000px;height:250px" onfocus="if(value=='') {value=''}" onblur="if (value=='') {value=''}"  value="" datatype="*1-255" nullmsg="请输入投诉内容" id="suggestionContent1" name="content"></textarea>
                           
                       </div>
                       <div class="tousulianxifangshi mt20">
                           <p>为了尽快为您解决问题，请提供您的联系方式，谢谢。</p>
                           <div> 
-	                          <span><b class="red">*</b>称呼</span>                                               
-	                          <input name="name" value="" datatype="*1-20" nullmsg="请输入您的称呼" class="input ml20" type="text">                                         
+                              <span><b class="red">*</b>称呼</span>                                               
+                              <input name="name" value="" datatype="*1-20" nullmsg="请输入您的称呼" class="input ml20" type="text"/>                                         
                           </div>
                           <div class="clear h10"></div>
                           <div>
-	                          <span>邮箱&nbsp;&nbsp;</span>
-	                          <input name="mail"   value="" datatype="*0-250" nullmsg="请输入正确的邮箱地址" class="input ml20" type="text">
+                              <span>邮箱&nbsp;&nbsp;</span>
+                              <input name="mail"   value="" datatype="*0-250" nullmsg="请输入正确的邮箱地址" class="input ml20" type="text"/>
                           </div>
                           <div class="clear h10"></div>
                           <div>
-	                          <span><b class="red">*</b>手机</span>
-	                          <input name="mobile"   value="" datatype="m" nullmsg="请输入您的手机号码" class="input ml20" type="text">
+                              <span><b class="red">*</b>手机</span>
+                              <input name="mobile"   value="" datatype="m" nullmsg="请输入您的手机号码" class="input ml20" type="text"/>
                           </div>
                           <div class="clear h20"></div>
                           <input class="Message_an" type="submit" value="提交" title="提交" />
@@ -79,8 +106,8 @@ function move()
                    </form>
             
                 <div class="tousubeizhu mt5">
-                    <h4>备注</h4>
-                    <p>您还可以拨打${site.telephone!''}进行电话投诉</p>
+                     <h4>备注</h4>
+                     <p>您还可以拨打${site.telephone!''}进行电话投诉</p>
                 </div>  
             </div>
         </div>

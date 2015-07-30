@@ -33,7 +33,6 @@ public class TdDemand {
 	@Column
 	private String name;
 	
-
 	//邮箱
 	@Column
 	private String mail;
@@ -42,7 +41,10 @@ public class TdDemand {
 	@Column
 	private String mobile;
 	
-	
+    // 显示状态
+    @Column
+    private Long statusId;
+    	
 	
 	public Long getId() {
 		return id;
@@ -92,4 +94,12 @@ public class TdDemand {
 		this.mobile = mobile;
 	}
 
+	public Long getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(Long statusId) {
+		this.statusId = statusId;
+	}
+    
 }

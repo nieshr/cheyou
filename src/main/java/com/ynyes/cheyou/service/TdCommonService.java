@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
@@ -12,6 +13,8 @@ import com.ynyes.cheyou.entity.TdAdType;
 import com.ynyes.cheyou.entity.TdArticleCategory;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.entity.TdSetting;
+import com.ynyes.cheyou.entity.TdUserSuggestion;
+import com.ynyes.cheyou.entity.TdDemand;
 
 @Service
 public class TdCommonService {
@@ -51,6 +54,10 @@ public class TdCommonService {
     
     @Autowired
     private TdAdService tdAdService;
+    
+    //团购 zhangji
+    @Autowired
+    private TdDemandService tdDemandService;
 
     public void setHeader(ModelMap map, HttpServletRequest req) {
         String username = (String) req.getSession().getAttribute("username");
@@ -169,6 +176,14 @@ public class TdCommonService {
         // 友情链接
         map.addAttribute("site_link_list",
                 tdSiteLinkService.findByIsEnableTrue());
+        
+        //团购留言     
+//        Page<TdDemand> demandPage = null;
+//        
+//        demandPage = tdDemandService.findAllOrderByTimeDesc(page, size);
+        
+        map.addAttribute("demand_list",tdDemandService.findByNameOrderByTimeDesc());
+        
     }
 
 }

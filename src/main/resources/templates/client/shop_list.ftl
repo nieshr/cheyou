@@ -21,6 +21,9 @@
 
 <style type="text/css">
    html,#allmap {width: 100%; height:100%; margin:0;font-family:"微软雅黑";}     <#-- 去掉了body @by zhangji-->
+   .dituliebiao_rt{width:743px; margin-top:20px; height:650px;}
+   .dituliebiao_lt{ margin-top:20px;}
+   .fr{float:right;}                <#--  @by zhangji-->
 </style>
 
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lwRXRetipHPGz8y6lzUlUZfc"></script>

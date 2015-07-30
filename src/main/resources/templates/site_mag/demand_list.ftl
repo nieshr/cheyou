@@ -11,7 +11,7 @@
 </head>
 
 <body class="mainbody"><div class="" style="left: 0px; top: 0px; visibility: hidden; position: absolute;"><table class="ui_border"><tbody><tr><td class="ui_lt"></td><td class="ui_t"></td><td class="ui_rt"></td></tr><tr><td class="ui_l"></td><td class="ui_c"><div class="ui_inner"><table class="ui_dialog"><tbody><tr><td colspan="2"><div class="ui_title_bar"><div class="ui_title" unselectable="on" style="cursor: move;"></div><div class="ui_title_buttons"><a class="ui_min" href="javascript:void(0);" title="最小化" style="display: inline-block;"><b class="ui_min_b"></b></a><a class="ui_max" href="javascript:void(0);" title="最大化" style="display: inline-block;"><b class="ui_max_b"></b></a><a class="ui_res" href="javascript:void(0);" title="还原"><b class="ui_res_b"></b><b class="ui_res_t"></b></a><a class="ui_close" href="javascript:void(0);" title="关闭(esc键)" style="display: inline-block;">×</a></div></div></td></tr><tr><td class="ui_icon" style="display: none;"></td><td class="ui_main" style="width: auto; height: auto;"><div class="ui_content" style="padding: 10px;"></div></td></tr><tr><td colspan="2"><div class="ui_buttons" style="display: none;"></div></td></tr></tbody></table></div></td><td class="ui_r"></td></tr><tr><td class="ui_lb"></td><td class="ui_b"></td><td class="ui_rb" style="cursor: se-resize;"></td></tr></tbody></table></div>
-<form name="form1" method="post" action="/Verwalter/user/comment/list" id="form1">
+<form name="form1" method="post" action="/Verwalter/setting/demand/list" id="form1">
 <div>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="${__EVENTTARGET!""}">
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}">
@@ -52,13 +52,16 @@ var theForm = document.forms['form1'];
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
       </ul>
       <div class="menu-list">
-        <div class="rule-single-select single-select">
+   <#--     <div class="rule-single-select single-select">
+       
         <select name="statusId" onchange="javascript:setTimeout(__doPostBack('statusId',''), 0)" style="display: none;">
             <option <#if !statusId??>selected="selected"</#if> value="">所有状态</option>
             <option <#if statusId?? && statusId==0>selected="selected"</#if> value="0">待审核</option>
             <option <#if statusId?? && statusId==1>selected="selected"</#if> value="1">已审核</option>
         </select>
+        
         </div>
+    -->
       </div>
     </div>
     <div class="r-list">
@@ -82,7 +85,10 @@ var theForm = document.forms['form1'];
                 <td class="comment">
                   <div class="title">
                     <span class="note">
-                        <i>${demand.name!""}</i>
+                        <i>电话：${demand.mobile!''}</i>
+                        <i>&nbsp;</i>
+                        <i>邮箱：${demand.mail!''}</i>
+                        <i>&nbsp;</i>
                         <i>${demand.time!""}</i>
                        <#-- 
                        <i class="reply">
@@ -97,23 +103,22 @@ var theForm = document.forms['form1'];
                         </span>
                         <input type="hidden" name="listId" id="listId" value="${demand.id}">
                     </b>
-                 
-                    ${demand.content!""}
+                    <span>
+                        <i>${demand.name!""}</i>
+                        <i>&nbsp;</i>
+
+                    </span>
                   </div>
+                  <div>&nbsp;</div>
                   <div class="ask">
                     <#if demand.statusId?? && demand.statusId==0>
                         <b class="audit" title="待审核"></b>
                     </#if>
                     ${demand.content!""}
-                    <#if demand.isReplied?? && demand.isReplied>
-                    <#--
-                        <div class="answer">
-                            <b>管理员回复：</b>${comment.reply!""}
-                            <span class="time">${comment.replyTime!""}</span>
-                        </div>
-                    -->
-                    </#if>
+                    <i>&nbsp;</i>
                   </div>
+                  <div>&nbsp;</div>
+                  <div>&nbsp;</div>
                 </td>
             </tr>
         </#list>
