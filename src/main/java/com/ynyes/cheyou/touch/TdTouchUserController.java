@@ -1161,14 +1161,14 @@ public class TdTouchUserController {
         
         map.addAttribute("recommend_goods_page", tdGoodsService.findByIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(0, ClientConstant.pageSize));
         
-        return "/client/user_info";
+        return "/touch/user_info";
     }
     
     @RequestMapping(value = "/user/info", method=RequestMethod.POST)
     public String userInfo(HttpServletRequest req,
                         String realName,
                         String sex,
-                        String email,
+                        String carCode,
                         String mobile,
                         ModelMap map){
         String username = (String) req.getSession().getAttribute("username");
@@ -1180,16 +1180,16 @@ public class TdTouchUserController {
         
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
         
-        if (null != email && null != mobile)
+        if (null != carCode && null != mobile)
         {
             user.setRealName(realName);
             user.setSex(sex);
-            user.setEmail(email);
+            user.setCarCode(carCode);
             user.setMobile(mobile);
             user = tdUserService.save(user);
         }
         
-        return "redirect:/user/info";
+        return "redirect:/touch/user";
     }
     
     @RequestMapping(value = "/user/password", method=RequestMethod.GET)
