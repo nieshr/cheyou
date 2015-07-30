@@ -59,7 +59,7 @@ $(document).ready(function(){
   </nav>
   <div class="clear"></div>
 </section>
-
+<!--
 <div class="index_gg">
     <span>商城快报</span>
     <#if news_page??>
@@ -68,28 +68,7 @@ $(document).ready(function(){
         </#list>
     </#if>
 </div>
-
-<h3 class="indextit mainbox"><span>特别推荐</span><#--<a href="#">+更多</a>--></h3>
-
-<section class="indexlist">
-  <table style="table-layout:fixed;">
-    <tr>
-        <#if index_recommend_goods_page??>
-            <#list index_recommend_goods_page.content as item>
-                <td rowspan="2" width="30%">
-                    <a class="ta-c" href="/touch/goods/${item.id}">
-                        <p class="fs08" style="overflow: hidden; height: 16px;">${item.title!''}</p>
-                        <p class="fs07 c9" style="overflow: hidden; height: 16px;">${item.subTitle!''}</p>
-                        <p class="fs07 red">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
-                        <img src="${item.coverImageUri!''}" />
-                    </a>
-                </td>
-            </#list>
-        </#if>
-    </tr>
-    
-  </table>
-</section>
+-->
 
 <section class="index_ad center mt10">
   <menu>
@@ -126,7 +105,7 @@ $(document).ready(function(){
       </td>     
         <#if miao_cur_page??>
             <#list miao_cur_page.content as item>
-                <#if item_index < 2>
+                <#if item_index lt 2>
                     <td>
                         <a href="/touch/goods/${item.id}?qiang=1">
                           <p class="fs08">${item.title!''}</p>
@@ -164,8 +143,8 @@ $(document).ready(function(){
     <tr>  
       <#if tuan_cur_page??>
         <#list tuan_cur_page.content as item>
-            <#if item_index < 2>
-                <td>
+            <#if item_index lt 2>
+                <td style="border:none;">
                     <a href="/touch/goods/${item.id}?qiang=1">
                       <p class="fs08">${item.title!''}</p>
                       <p class="fs07 c9">${item.subTitle!''}</p>
@@ -176,7 +155,7 @@ $(document).ready(function(){
             </#if>
         </#list>
       </#if>
-      <td rowspan="2" width="35%" style="border:none;">
+      <td rowspan="2" width="40%" style="border:none;">
         <#if touch_tuan_ad_list??>
             <#list touch_tuan_ad_list as item>
                 <a href="${item.linkUri!''}" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if>>
@@ -265,13 +244,36 @@ $(document).ready(function(){
     
   </table>
 </section>
-
+<!--
 <h3 class="indextit mainbox mb5"><span>养车护车</span><#--<a href="#">+更多</a>--></h3>
 <#if curing_page??>
     <#list curing_page.content as item>
         <a class="block center fs08 mb10" href="/info/content/${item.id}?mid=11">${item.title!''}</a>
     </#list>
 </#if>
+-->
+<h3 class="indextit mainbox"><span>特别推荐</span><#--<a href="#">+更多</a>--></h3>
+
+<section class="indexlist">
+  <table style="table-layout:fixed;">
+    <tr>
+        <#if index_recommend_goods_page??>
+            <#list index_recommend_goods_page.content as item>
+                <td rowspan="2" width="30%">
+                    <a class="ta-c" href="/touch/goods/${item.id}">
+                        <p class="fs08" style="overflow: hidden; height: 16px;">${item.title!''}</p>
+                        <p class="fs07 c9" style="overflow: hidden; height: 16px;">${item.subTitle!''}</p>
+                        <p class="fs07 red">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
+                        <img src="${item.coverImageUri!''}" />
+                    </a>
+                </td>
+            </#list>
+        </#if>
+    </tr>
+    
+  </table>
+</section>
+
 
 <div class="clear h20"></div>
 <section class="botlogin">
