@@ -391,7 +391,6 @@ public class TdLoginController {
 	@RequestMapping(value = "/login/qq_login_return", method = RequestMethod.GET)
 	public String qqLoginReturn(String code, String state, HttpServletRequest request, ModelMap map) {
 
-		System.err.println("cede----" + code + "-----state----" + state);
 		tdCommonService.setHeader(map, request);
 		try {
 			AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);

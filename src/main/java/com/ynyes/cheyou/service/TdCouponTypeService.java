@@ -125,4 +125,14 @@ public class TdCouponTypeService {
         
         return (List<TdCouponType>) repository.save(entities);
     }
+    
+    /**
+     * 按照优惠券类型Id查找优惠券
+     * @param categoryId
+     * @return
+     */
+    public List<TdCouponType> findByCategoryId(Long categoryId)
+    {
+    	return repository.findByCategoryIdIs(categoryId);
+    }
 }

@@ -28,6 +28,21 @@ function setprice() {
     location.href = url;
 }
 </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    menuDownList("top_phone","#top_phonelist",".a1","sel");
+    phoneListMore();//单独下拉
+    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+    checkNowHover("shopping_down","shopping_sel");
+    navDownList("navdown","li",".nav_showbox");
+    menuDownList("mainnavdown","#navdown",".a2","sel");
+    
+    chooseMoreShow();
+});
+</script>
+
+
 </head>
 <body>
 <!-- header开始 -->
