@@ -1,6 +1,7 @@
 package com.ynyes.cheyou.controller.front;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ynyes.cheyou.entity.TdKeywords;
+import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdKeywordsService;
+import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.util.ClientConstant;
 
 /**
@@ -32,6 +35,9 @@ public class TdSearchController {
     
     @Autowired
     private TdKeywordsService tdKeywordsService;
+    
+    @Autowired
+    private TdProductCategoryService tdProductCategoryService;
     
     @RequestMapping(value="/search", method = RequestMethod.GET)
     public String list(String keywords, Integer page, HttpServletRequest req, ModelMap map){
@@ -74,7 +80,6 @@ public class TdSearchController {
         
         // 销量排行
         map.addAttribute("most_sold_list", tdGoodsService.findByIsOnSaleTrueOrderBySoldNumberDesc(0, 10).getContent());   
-        
         
         return "/client/search_result";
     }

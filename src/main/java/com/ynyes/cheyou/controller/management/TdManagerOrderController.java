@@ -417,7 +417,6 @@ public class TdManagerOrderController {
             	}
                 map.addAttribute("order_page", tdOrderService.findByStatusIdOrderByIdDesc(statusId, page, size));
             }
-            System.err.println(price);
         }
         
         // 参数注回
