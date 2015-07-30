@@ -289,7 +289,7 @@ function hideDemand()
 
 function showDemand()
 {
-    $("#demand-div").css("display", "block");
+//    $("#demand-div").css("display", "block");
 }
 </script>
 
@@ -1397,6 +1397,7 @@ function timer23${item_index}()
     <section class="index_mt">
         <h3>车友还想团购</h3>
         <#if demand_list??>
+
            <#assign n = 0>
                
                <#list demand_list?sort_by(["time"])?reverse as show>  
@@ -1416,6 +1417,7 @@ function timer23${item_index}()
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
        -->
+
         <#-- 增加链接的js函数showDemand();   zhangji -->        
         <a href="javascript:showDemand();"><img src="/client/images/images/index_ico09.png" /></a>   
     </section>
