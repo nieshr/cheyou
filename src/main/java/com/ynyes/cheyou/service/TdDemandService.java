@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.cheyou.entity.TdDemand;
-import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.repository.TdDemandRepo;
 
 
@@ -34,6 +33,11 @@ public class TdDemandService {
 	public List<TdDemand> findByNameOrderByTimeDesc(){
 		
 		return (List<TdDemand>) repository.findAll();		
+	}
+	
+	public List<TdDemand> findByNameAndStatusIdOrderByTimeDesc(){
+	    
+		return (List<TdDemand>) repository.findByStatusId(1L);
 	}
 
 	public TdDemand findOne(Long id)

@@ -1400,13 +1400,13 @@ function timer23${item_index}()
            <#assign n = 0>
                
                <#list demand_list?sort_by(["time"])?reverse as show>  
-                 
-                      <#if show.statusId = 1>                         
+                   <#if show_index < 3>
+                <#--      <#if show.statusId = 1>   -->                       
                           <p class="pt15">网友${show.name!''}留言：</p>
                           <p style="text-indent:2em;">${show.content!''}</p>
                           <#assign n = n + 1>     
-                     </#if>
-
+                <#--     </#if>    -->
+                   </#if>
                </#list>
               
         </#if>        

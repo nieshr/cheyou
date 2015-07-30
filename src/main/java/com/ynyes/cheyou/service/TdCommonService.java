@@ -178,11 +178,8 @@ public class TdCommonService {
                 tdSiteLinkService.findByIsEnableTrue());
         
         //团购留言     
-//        Page<TdDemand> demandPage = null;
-//        
-//        demandPage = tdDemandService.findAllOrderByTimeDesc(page, size);
-        
-        map.addAttribute("demand_list",tdDemandService.findByNameOrderByTimeDesc());
+        List<TdDemand> tdDemand = tdDemandService.findByNameOrderByTimeDesc();
+        map.addAttribute("demand_list",tdDemand);
         
     }
 

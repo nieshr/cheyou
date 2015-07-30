@@ -14,5 +14,5 @@ public interface TdDemandRepo extends
            PagingAndSortingRepository<TdDemand, Long>,
            JpaSpecificationExecutor<TdDemand> 
 {
-   TdDemand findByNameAndStatusId(String name,Long id);
+   TdDemand findByStatusId(Long statusId);
 } 
