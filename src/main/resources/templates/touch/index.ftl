@@ -11,7 +11,6 @@
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
 
-
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -32,7 +31,10 @@ $(document).ready(function(){
         </form>
     </section>
     <a class="a1" style="top:9px; left:0;" href="/touch"><img src="<#if site??>${site.logoUri!''}</#if>" height="40" /></a>
-    <a class="a2" href="/touch/cart"><img src="/touch/images/qq.png" height="30" /></a>
+    <a class="a2" href="/touch/cart">
+    	<img src="/touch/images/qq.png" height="30" />
+    	<span class="sp1"><#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if></span>
+    </a>
   </div>
 </header>
 <section id="box">

@@ -675,7 +675,7 @@ function timer8${item_index}()
                 ${item.flashSaleStartTime?string("mm")}, 
                 ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数
                 
-    if (0 >= ts)
+    if (0 == ts)
     {
         window.location.reload();
     }
