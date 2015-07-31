@@ -107,7 +107,7 @@
   <dl>
     <dt>类别名称</dt>
     <dd>
-        <input name="title" type="text" value="<#if cat??>${cat.title!""}</#if>" class="input normal" datatype="*1-100" sucmsg=" " ajaxurl="/Verwalter/product/category/check<#if cat??>?id=${cat.id}</#if>" >
+        <input name="title" type="text" value="<#if cat??>${cat.title!""}</#if>" class="input normal" datatype="*1-100" sucmsg=" ">
         <span class="Validform_checktip">*类别中文名称，100字符内</span>
     </dd>
   </dl>
