@@ -178,8 +178,8 @@ $(document).ready(function(){
       </#if>
       <#if tuan_cur_page??>
         <#list tuan_cur_page.content as item>
-            <#if item_index = 2>
-                <td style="width:40%;">
+            <#if item_index = 4>
+                <td style="width:40%;height:100%">
                     <a href="/touch/goods/${item.id}?qiang=1">
                       <p class="fs08">${item.title!''}</p>
                       <p class="fs07 c9">${item.subTitle!''}</p>
