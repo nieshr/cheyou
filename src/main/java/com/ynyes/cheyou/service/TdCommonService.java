@@ -178,7 +178,7 @@ public class TdCommonService {
                 tdSiteLinkService.findByIsEnableTrue());
         
         //团购留言     
-        List<TdDemand> tdDemand = tdDemandService.findByNameOrderByTimeDesc();
+        List<TdDemand> tdDemand = tdDemandService.findByStatusIdAndIsShowable();
         map.addAttribute("demand_list",tdDemand);
         
     }
