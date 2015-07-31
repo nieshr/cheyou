@@ -168,7 +168,7 @@ $(document).ready(function(){
             </#list>
         </#if>
       </td>
-   -->
+
     </tr>
     <tr>
    
@@ -236,12 +236,12 @@ $(document).ready(function(){
     <tr>
         <#if self_drive_goods_page??>
             <#list self_drive_goods_page.content as item>
-                <td rowspan="2" width="30%">
+                <td rowspan="2" width="30%">                 
                     <a class="ta-c" href="/touch/goods/${item.id}">
                       <img src="${item.coverImageUri!''}" />
                       <p class="fs08 ta-l">${item.title!''}</p>
                       <p class="fs10 red ta-l">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
-                    </a>
+                    </a>               
                 </td>
             </#list>
         </#if>
