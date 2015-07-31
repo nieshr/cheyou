@@ -14,27 +14,63 @@
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
-<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 
-<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
+
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/style.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+
+<#--styletext zhanngji-->
+
+<style type="text/css">
+.tousuyemian{line-height: 30px;
+  color: #333;
+  background: #FFF;
+  padding: 20px 20px 20px 20px;  
+  position: fixed;
+  overflow: hidden;
+  width: 1150px;}
+.tousuyemian2{line-height: 30px;
+  color: #333;
+  background: #FFF;
+  padding: 20px 20px 20px 20px;  
+  position: absolute;
+  overflow: hidden;
+  width: 900px;}
+.tousuyemian p{ font-size:14px; line-height:20px; height:45px;}
+.tousulianxifangshi span{width:65px;  text-align:right;}
+textarea.input { width: 98%; height:50px; color:#666;}
+.Message_an {border-radius:5px; -moz-border-radius:5px; -moz-webkit-radius:5px; -o-border-radius:5px; width:100px; height:35px; line-height:35px; color:#fff; font-size:14px;  background-position: 0px 0px; border:0px; cursor:pointer; background:#ff4454; }
+.Message_an:hover,.hov:hover{
+    -moz-box-shadow:0px 0px 4px #333112; -webkit-box-shadow:0px 0px 4px #333112; box-shadow:0px 0px 4px #333112; background:#1c2b38;}
+}
+.bgff{background:#FFF;}     
+.mianfeilingqutanchu{background:url(../client/images/images/darkbg.png) repeat; width:100%; height:100%; z-index:999999999; position:absolute;overflow: hidden;}  
+.mianfeilingqutanchu2{background:url(../client/images/images/darkbg.png) repeat; width:950px; height:460px; z-index:999999999; position:absolute;overflow: hidden;}  
+.mianfeilingqutanchu_dl{ margin-top:3%;}
+.mianfeilingqutanchu_dl2{ margin-top:6px;margin-left:4px;}
+.rightb_gundong{ position:absolute; z-index:99999; margin-top:00px;width:30px; height:50px; margin-left:1130px;}
+.rightb_gundong2{ position:absolute; z-index:99999; margin-top:00px;width:30px; height:50px; margin-left:880px;}
+
+</style>
+
+<#--2015年7月30日8:51:25--> 
 
 
 <script type="text/javascript">
   $(document).ready(function(){
-	menuDownList("top_phone","#top_phonelist",".a1","sel");
-	phoneListMore();//单独下拉
+    menuDownList("top_phone","#top_phonelist",".a1","sel");
+    phoneListMore();//单独下拉
     menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-	navDownList("navdown","li",".nav_showbox");
-	//menuDownList("mainnavdown","#navdown",".a2","sel");
-	checkNowHover("shopping_down","shopping_sel");
-	checkBoxShow("topcheck","a","topsum","li","sel");
-	checkBoxShow("teamadmenu","a","teamadsum","a","sel");
-	
-	//左右单张滚动
+    navDownList("navdown","li",".nav_showbox");
+    //menuDownList("mainnavdown","#navdown",".a2","sel");
+    checkNowHover("shopping_down","shopping_sel");
+    checkBoxShow("topcheck","a","topsum","li","sel");
+    checkBoxShow("teamadmenu","a","teamadsum","a","sel");
+    
+    //左右单张滚动
     var the_one = {
       "boxid":"onebox",         //最外层id
       "sumid":"onesum",         //包裹列表的id
@@ -146,39 +182,39 @@ function tourPageChang(i)
 }
 
 $(function(){
-	//左右滚动幻灯片广告
-	var essayad = {
-			 "boxid":"indexadbox",//最外层id
-			 "sumid":"indexadsum",//列表id
-			 "li01":"threeli01",//li标签id
-			 "li02":"threeli02",//重复li二号id
-			 "stylename":"indexadpart",//内部滚动的标签class
-			 "numid":"indexadnum",//数字id
-			 "boxwidth":758,//宽度
-			 "boxheight":282,//高度
-			 "preid":"indexadpre",//上一个id
-			 "nextid":"indexadnext",//下一个id
-			 "speed":5000,// 切换速度
-			 "gospeed":500//轮换速度
-		  };
-	$.ljs_adcartoon.arrowNum(essayad);
-	
-	var shopad = {
-			 "boxid":"shopadbox",//最外层id
-			 "sumid":"shopadsum",//列表id
-			 "li01":"shopli01",//li标签id
-			 "li02":"shopli02",//重复li二号id
-			 "stylename":"indexadpart",//内部滚动的标签class
-			 "numid":"shopadnum",//数字id
-			 "boxwidth":335,//宽度
-			 "boxheight":323,//高度
-			 "preid":"shopadpre",//上一个id
-			 "nextid":"shopadnext",//下一个id
-			 "speed":5000,// 切换速度
-			 "gospeed":500//轮换速度
-		  };
-	$.ljs_adcartoon.arrowNum(shopad);
-	});
+    //左右滚动幻灯片广告
+    var essayad = {
+             "boxid":"indexadbox",//最外层id
+             "sumid":"indexadsum",//列表id
+             "li01":"threeli01",//li标签id
+             "li02":"threeli02",//重复li二号id
+             "stylename":"indexadpart",//内部滚动的标签class
+             "numid":"indexadnum",//数字id
+             "boxwidth":758,//宽度
+             "boxheight":282,//高度
+             "preid":"indexadpre",//上一个id
+             "nextid":"indexadnext",//下一个id
+             "speed":5000,// 切换速度
+             "gospeed":500//轮换速度
+          };
+    $.ljs_adcartoon.arrowNum(essayad);
+    
+    var shopad = {
+             "boxid":"shopadbox",//最外层id
+             "sumid":"shopadsum",//列表id
+             "li01":"shopli01",//li标签id
+             "li02":"shopli02",//重复li二号id
+             "stylename":"indexadpart",//内部滚动的标签class
+             "numid":"shopadnum",//数字id
+             "boxwidth":335,//宽度
+             "boxheight":323,//高度
+             "preid":"shopadpre",//上一个id
+             "nextid":"shopadnext",//下一个id
+             "speed":5000,// 切换速度
+             "gospeed":500//轮换速度
+          };
+    $.ljs_adcartoon.arrowNum(shopad);
+    });
 </script>
 <meta property="qc:admins" content="274143415163145116375" />
 </head>
@@ -253,7 +289,7 @@ function hideDemand()
 
 function showDemand()
 {
-//    $("#demand-div").css("display", "block");
+    $("#demand-div").css("display", "block");
 }
 </script>
 
@@ -261,13 +297,13 @@ function showDemand()
 //二级状态增加阴影效果  @by zhangji
 $(document).ready(function(){ 
      $(".shadow_add").mouseover(function(){   
-    	var index = $(this).index();
+        var index = $(this).index();
         $(".shadow_add").eq(index).css({"box-shadow":"10px 10px 5px #888888",
-        	                            "background-color":"#f7f7f7"});        
+                                        "background-color":"#f7f7f7"});        
     });
         
      $(".shadow_add").mouseout(function(){    
-    	var index = $(this).index();
+        var index = $(this).index();
         $(".shadow_add").eq(index).css({"box-shadow":"0px 0px 0px #888888","background-color":"transparent"}); 
      });
      
@@ -288,7 +324,7 @@ $(document).ready(function(){
     <div class="mianfeilingqutanchu_dl"> 
         <div class="main bgff">
             <div class="tousuyemian">
-                <div class="rightb_gundong fr" id="yincang">
+                <div class="rightb_gundong fr">
                     <a href="javascript:hideSuggestion();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="21" height="21" /></a>
                 </div>
                   <form id="suggestionForm" action="/suggestion/add">
@@ -296,30 +332,27 @@ $(document).ready(function(){
                       <h3>我要投诉</h3>
                       <p>在您填写下列投诉内容之前，我们首先代表车有同盟为导致您进行投诉的原因（行为）表示歉意，请详细描述事件经过，以便我们尽快为您解决问题，我们一定会及时处理，给您一个满意的解决方案，您的满意是我们最大的动力，谢谢！</p>
                       <div class="tousuneirong">
-                          <#-- 
-                          <span>标题</span><input name="title"  onfocus="if(value=='订单编号') {value=''}" onblur="if (value=='订单编号') {value='订单编号'}"  value="" id="et_contact_name" class="input ml20" type="text">
-                          -->
                           <div class="clear h10"></div>
                           <span><b class="red">*</b>投诉内容</span>
                           <div class=" clear"></div>
-                          <textarea class="input" style="width:1000px;height:250px" onfocus="if(value=='') {value=''}" onblur="if (value=='') {value=''}"  value="" datatype="*1-255" nullmsg="请输入投诉内容" id="suggestionContent" name="content"></textarea>
+                          <textarea class="input Validform_error" style="width:1000px;height:250px" onfocus="if(value=='') {value=''}" onblur="if (value=='') {value=''}"  value="" datatype="*1-255" nullmsg="请输入投诉内容" id="suggestionContent" name="content"></textarea>
                           
                       </div>
                       <div class="tousulianxifangshi mt20">
                           <p>为了尽快为您解决问题，请提供您的联系方式，谢谢。</p>
                           <div> 
                               <span><b class="red">*</b>称呼</span>                                               
-                              <input name="name" value="" datatype="*1-20" nullmsg="请输入您的称呼" class="input ml20" type="text">                                         
+                              <input name="name" value="" datatype="*1-20" nullmsg="请输入您的称呼" class="input ml20" type="text"/>                                         
                           </div>
                           <div class="clear h10"></div>
                           <div>
                               <span>邮箱&nbsp;&nbsp;</span>
-                              <input name="mail"   value="" datatype="*0-250" nullmsg="请输入正确的邮箱地址" class="input ml20" type="text">
+                              <input name="mail"   value="" datatype="*0-250" nullmsg="请输入正确的邮箱地址" class="input ml20" type="text"/>
                           </div>
                           <div class="clear h10"></div>
                           <div>
                               <span><b class="red">*</b>手机</span>
-                              <input name="mobile"   value="" datatype="m" nullmsg="请输入您的手机号码" class="input ml20" type="text">
+                              <input name="mobile"   value="" datatype="m" nullmsg="请输入您的手机号码" class="input ml20" type="text"/>
                           </div>
                           <div class="clear h20"></div>
                           <input class="Message_an" type="submit" value="提交" title="提交" />
@@ -642,7 +675,7 @@ function timer8${item_index}()
                 ${item.flashSaleStartTime?string("mm")}, 
                 ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数
                 
-    if (0 >= ts)
+    if (0 == ts)
     {
         window.location.reload();
     }
@@ -1277,23 +1310,24 @@ function timer23${item_index}()
     </ul>
         
     <div class="clear h30"></div> 
+    
   <#-- 车友还想团购 -->
-  <div id="demand-div" class="mianfeilingqutanchu" style="display:none;">
-    <div class="mianfeilingqutanchu_dl"> 
+  <div id="demand-div" class="mianfeilingqutanchu2" style="display:none;">
+    <div class="mianfeilingqutanchu_dl2"> 
         <div class="main bgff">
-            <div class="tousuyemian">
-                <div class="rightb_gundong fr" >
+            <div class="tousuyemian2">
+                <div class="rightb_gundong2 fr" >
                     <a href="javascript:hideDemand();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="21" height="21" /></a>
                 </div>
                   <form id="demandForm" action="/demand/add">
                       <div class="clear"></div>
-                      <h3>我要团购其他商品</h3>
-                      <p>如果您有中意的商品，您可以在这个页面申请将其加入到新的团购中！同时您的留言还将可能以匿名的方式显示在首页，描述您中意的商品，让大家一起来团购吧！我们将根据反馈情况决定增加新的团购商品。您的满意是我们最大的动力，谢谢！</p>
+                      <h3>团购商品申请</h3>
+                      <p>如果您有中意的商品，您可以在这个页面申请将其加入到新的团购中！同时您的留言还将可能以匿名的方式显示在首页，描述您中意的商品，让大家一起来团购吧！我们将根据反馈情况增加新的团购商品。您的满意是我们最大的动力，谢谢！</p>
                       <div class="tousuneirong">
                           <div class="clear h10"></div>
-                          <span><b class="red">*</b>期望加入团购的商品描述</span>
+                          <span><b class="red">*</b>期望加入团购的商品</span>
                           <div class=" clear"></div>
-                          <textarea class="input" style="width:1000px;height:250px" onfocus="if(value=='') {value=''}" onblur="if (value=='') {value=''}"  value="" datatype="*1-255" nullmsg="请输入投诉内容" id="suggestionContent" name="content"></textarea>
+                          <textarea class="input  Validform_error" style="width:720px;" onfocus="if(value=='') {value=''}" onblur="if (value=='') {value=''}"  value="" datatype="*1-55" nullmsg="请输入内容" id="demandContent" name="content"></textarea>
                           
                       </div>
                       <div class="tousulianxifangshi mt20">
@@ -1310,17 +1344,12 @@ function timer23${item_index}()
                           <div class="clear h10"></div>
                           <div>
                               <span><b class="red">*</b>手机</span>
-                              <input name="mobile"   value="" datatype="m" nullmsg="请输入您的手机号码" class="input ml20" type="text">
+                              <input name="mobile"   value="" datatype="m" nullmsg="请输入您的手机号码" class="input ml20" type="text">                        
                           </div>
                           <div class="clear h20"></div>
                           <input class="Message_an" type="submit" value="提交" title="提交" />
                       </div>
-                   </form>
-            
-                <div class="tousubeizhu mt5">
-                     <h4>备注</h4>
-                     <p>您还可以拨打${site.telephone!''}进行电话投诉</p>
-                </div>  
+                   </form> 
             </div>
         </div>
     
@@ -1367,21 +1396,28 @@ function timer23${item_index}()
     
     <section class="index_mt">
         <h3>车友还想团购</h3>
-       <#--
         <#if demand_list??>
-            <#list demand_list as show>
-                <#if show_index<3>
-                    <p class="pt15">网友${show.mobile!''}留言：</p>
-                    <p>${show.content!''}</p>
-                </#if>
-            </#list>
-        </#if>  
+
+           <#assign n = 0>
+               
+               <#list demand_list?sort_by(["time"])?reverse as show>  
+                   <#if show_index < 4>
+                <#--      <#if show.statusId = 1>   -->                       
+                          <p class="pt15">网友<span style="color:red;">${show.name!''}</span>留言：</p>
+                          <p style="text-indent:2em;">${show.content!''}</p>
+                          <#assign n = n + 1>     
+                <#--     </#if>    -->
+                   </#if>
+               </#list>
+              
+        </#if>        
+       <#--
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
-          
-        -->
+       -->
+
         <#-- 增加链接的js函数showDemand();   zhangji -->        
         <a href="javascript:showDemand();"><img src="/client/images/images/index_ico09.png" /></a>   
     </section>
@@ -1436,7 +1472,9 @@ function timer23${item_index}()
             <#if top_category_list??>
                 <#list top_category_list as item>
                     <#if item_index < 5>
-                        <td class="shadow_add">     <#-- 增加id @by zhangji -->
+                        <#-- 增加id @by zhangji -->
+                        <td class="shadow_add">    
+                         <#--  @by zhangji -->
                             <a href="/list/${item.id}"><img src="${item.imgUrl!''}" width="68" height="68"/>
                                 <p>${item.title!''}</p>
                             </a>
@@ -1577,7 +1615,7 @@ function timer23${item_index}()
                 <div id="onesum">
                 <#list bottom_big_ad_list as item>
                     <a class="onepart" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
-                        <img src="${item.fileUri!''}" width="570" height="375">
+                        <img src="${item.fileUri!''}" width="570" height="375"/>
                     </a>
                 </#list>
                 </div>
@@ -1596,7 +1634,7 @@ function timer23${item_index}()
                 <div id="onesum2">
             <#list bottom_small_ad_list as item>
                 <a class="onepart2" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
-                    <img src="${item.fileUri!''}" width="280" height="375">
+                    <img src="${item.fileUri!''}" width="280" height="375"/>
                 </a>
             </#list>
                 </div>

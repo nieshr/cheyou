@@ -21,6 +21,10 @@
 
 <style type="text/css">
    html,#allmap {width: 100%; height:100%; margin:0;font-family:"微软雅黑";}     <#-- 去掉了body @by zhangji-->
+   .dituliebiao_rt{width:743px; margin-top:20px; height:650px;float:right;}
+   .dituliebiao_lt{ margin-top:20px;}
+   .dituliebiao_lt{width:457px; height:650px; overflow:hidden; float:left;}
+   .fr{float:right;}                <#--  @by zhangji-->
 </style>
 
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lwRXRetipHPGz8y6lzUlUZfc"></script>
@@ -80,6 +84,7 @@ function loadMap(x, y)
             </tr>
         </table>
         <div class="clear"></div>
+        <div>
         <div class="dituliebiao_lt">
             <div class="detail_tit" id="detail_tit">
                 <div class="out">
@@ -128,6 +133,7 @@ function loadMap(x, y)
             
             </div>
         </div>  
+        </div>
     </div>
     <div class="clear"></div> 
 </div><!--main END-->

@@ -20,7 +20,7 @@ public class TdProductCategory {
 	private Long id;
 	
 	// 类型名称
-	@Column(unique=true)
+	@Column
 	private String title;
 	
 	// 父类型

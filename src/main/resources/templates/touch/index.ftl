@@ -11,7 +11,6 @@
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
 
-
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -116,7 +115,10 @@ console.debug('1111')
         </form>
     </section>
     <a class="a1" style="top:9px; left:0;" href="/touch"><img src="<#if site??>${site.logoUri!''}</#if>" height="40" /></a>
-    <a class="a2" href="/touch/cart"><img src="/touch/images/qq.png" height="30" /></a>
+    <a class="a2" href="/touch/cart">
+    	<img src="/touch/images/qq.png" height="30" />
+    	<span class="sp1"><#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if></span>
+    </a>
   </div>
 </header>
 <section id="box">
@@ -230,7 +232,7 @@ console.debug('1111')
       <#if tuan_cur_page??>
         <#list tuan_cur_page.content as item>
             <#if item_index lt 2>
-                <td style="border:none;">
+                <td style="width:30%;">
                     <a href="/touch/goods/${item.id}?qiang=1">
                       <p class="fs08">${item.title!''}</p>
                       <p class="fs07 c9">${item.subTitle!''}</p>
@@ -241,6 +243,7 @@ console.debug('1111')
             </#if>
         </#list>
       </#if>
+
       <td rowspan="2" width="35%" style="border:none;">
         <#if touch_tuan_ad_list??>
             <#list touch_tuan_ad_list as item>
@@ -251,12 +254,14 @@ console.debug('1111')
             </#list>
         </#if>
       </td>
+
     </tr>
     <tr>
+   
         <#if tuan_cur_page??>
             <#list tuan_cur_page.content as item>
-                <#if item_index gt 1 && item_index < 4>
-                    <td>
+                <#if item_index gt 1 && item_index lt 4>
+                    <td style="width:30%;">
                         <a href="/touch/goods/${item.id}?qiang=1">
                           <p class="fs08">${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
@@ -317,12 +322,12 @@ console.debug('1111')
     <tr>
         <#if self_drive_goods_page??>
             <#list self_drive_goods_page.content as item>
-                <td rowspan="2" width="30%">
+                <td rowspan="2" width="30%">                 
                     <a class="ta-c" href="/touch/goods/${item.id}">
                       <img src="${item.coverImageUri!''}" />
                       <p class="fs08 ta-l">${item.title!''}</p>
                       <p class="fs10 red ta-l">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
-                    </a>
+                    </a>               
                 </td>
             </#list>
         </#if>

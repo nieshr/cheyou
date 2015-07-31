@@ -760,6 +760,7 @@ public class TdUserController extends AbstractPaytypeController {
                         String name,
                         String mobile,
                         String mail,
+                        Long statusId,
                         ModelMap map){
         Map<String, Object> res = new HashMap<String, Object>();
         res.put("code", 1);
@@ -771,9 +772,8 @@ public class TdUserController extends AbstractPaytypeController {
         tdDemand.setName(name);
         tdDemand.setMail(mail);
         tdDemand.setMobile(mobile);
-        
-        
-        
+        tdDemand.setStatusId(0L);
+               
 //        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
         
         tdDemandService.save(tdDemand);

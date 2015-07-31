@@ -146,6 +146,10 @@ public class TdManagerSettingController {
                         String content,
                         String mail,
                         Long mobile,
+                        Long statusId,
+                        Long[] listId,
+                        Integer[] listChkId,
+                        Long[] listSortId,
                         ModelMap map,
                         HttpServletRequest req){
     	
@@ -158,11 +162,12 @@ public class TdManagerSettingController {
                     page = Integer.parseInt(__EVENTARGUMENT);
                 } 
             }
-//            else if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
-//            {
-//                btnDelete("user", listId, listChkId);
-//                tdManagerLogService.addLog("delete", "删除用户", req);
-//            }
+            else if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
+            {
+                btnDeleteSuggesiton( listId, listChkId);
+                tdManagerLogService.addLog("delete", "删除投诉", req);
+            }
+            
         }
   
        if (null == page || page < 0)
@@ -221,6 +226,7 @@ public class TdManagerSettingController {
     public String demand( String __EVENTTARGET,
                         String __EVENTARGUMENT,
                         String __VIEWSTATE,
+                        Long statusId,
                         Integer page,
                         Integer size,
                         Long id,
@@ -228,6 +234,9 @@ public class TdManagerSettingController {
                         String content,
                         String mail,
                         Long mobile,
+                        Long[] listId,
+                        Integer[] listChkId,
+                        Long[] listSortId,
                         ModelMap map,
                         HttpServletRequest req){
     	
@@ -240,11 +249,15 @@ public class TdManagerSettingController {
                     page = Integer.parseInt(__EVENTARGUMENT);
                 } 
             }
-//            else if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
-//            {
-//                btnDelete("user", listId, listChkId);
-//                tdManagerLogService.addLog("delete", "删除用户", req);
-//            }
+            else if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
+            {
+                btnDeleteDemand(listId, listChkId);
+                tdManagerLogService.addLog("delete", "删除demand", req);
+            }
+            else if (__EVENTTARGET.equalsIgnoreCase("btnVerify"))
+            {
+            	btnVerifyDemand(listId,listChkId);
+            }
         }
   
        if (null == page || page < 0)
@@ -368,6 +381,89 @@ public class TdManagerSettingController {
                 Long id = ids[chkId];
                 
                 tdServiceItemService.delete(id);
+            }
+        }
+    }
+    
+    /**
+     * 删除团购要求
+     * @author Zhangji
+     * 2015年7月30日12:47:56
+     * @param ids
+     * @param chkIds
+     */
+    private void btnDeleteDemand(Long[] ids, Integer[] chkIds)
+    {
+    	if (null == ids || null == chkIds
+                || ids.length < 1 || chkIds.length < 1)
+        {
+            return;
+        }
+        
+        for (int chkId : chkIds)
+        {
+            if (chkId >=0 && ids.length > chkId)
+            {
+                Long id = ids[chkId];
+                
+                tdDemandService.delete(id);
+            }
+        }
+    }
+    /**
+     * 审核团购要求
+     * @author Zhangji
+     * 2015年7月30日13:24:06
+     * @param ids
+     * @param chkIds
+     */
+    private void btnVerifyDemand(Long[] ids, Integer[] chkIds)
+    {
+    	if (null == ids || null == chkIds
+                || ids.length < 1 || chkIds.length < 1)
+        {
+            return;
+        }
+        
+        for (int chkId : chkIds)
+        {
+            if (chkId >=0 && ids.length > chkId)
+            {
+                Long id = ids[chkId];
+                
+                TdDemand e = tdDemandService.findOne(id);
+                if (null != e)
+                {
+                	e.setStatusId(1L);
+                	 tdDemandService.save(e);
+                }
+               
+            }
+        }
+    }
+    
+    /**
+     * 删除投诉
+     * @author Zhangji
+     * 2015年7月30日13:29:18
+     * @param ids
+     * @param chkIds
+     */
+    private void btnDeleteSuggesiton(Long[] ids, Integer[] chkIds)
+    {
+    	if (null == ids || null == chkIds
+                || ids.length < 1 || chkIds.length < 1)
+        {
+            return;
+        }
+        
+        for (int chkId : chkIds)
+        {
+            if (chkId >=0 && ids.length > chkId)
+            {
+                Long id = ids[chkId];
+                
+                tdUserSuggestionService.delete(id);
             }
         }
     }

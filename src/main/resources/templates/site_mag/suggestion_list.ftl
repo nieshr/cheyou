@@ -48,25 +48,27 @@ var theForm = document.forms['form1'];
   <div id="floatHead" class="toolbar" style="position: static; top: 42px;">
      <div class="l-list">
         <ul class="icon-list">
-   <#--
+     <#--
         <li><a onclick="return ExePostBack('btnVerify','审核通过后将在前台显示，是否继续？');" id="btnVerify" class="save" href="javascript:__doPostBack('btnVerify','')"><i></i><span>审核</span></a></li>
-
+     -->
  
         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
-      -->
+   
       </ul>
      
-      <div class="menu-list">
-<#--        <div class="rule-single-select single-select">
-                <select name="statusId" onchange="javascript:setTimeout(__doPostBack('statusId',''), 0)" style="display: none;">
-                   <option <#if !statusId??>selected="selected"</#if> value="">所有状态</option>
-                   <option <#if statusId?? && statusId==0>selected="selected"</#if> value="0">待审核</option>
-                   <option <#if statusId?? && statusId==1>selected="selected"</#if> value="1">已审核</option>
-               </select>
+   <#--   <div class="menu-list">
+        <div class="rule-single-select single-select">
+               <select name="statusId" onchange="javascript:setTimeout(__doPostBack('statusId',''), 0)" style="display: none;">
+                      <option <#if !statusId??>selected="selected"</#if> value="">所有状态</option>
+                      <option <#if statusId?? && statusId==0>selected="selected"</#if> value="0">待审核</option>
+                      <option <#if statusId?? && statusId==1>selected="selected"</#if> value="1">已审核</option>
+                   </select>
+        
            </div>
-    -->    
+    
      </div>
+   -->
      </div>
      <div class="r-list">
          <#-- <input name="keywords" type="text" class="keyword" value="${keywords!""}">
@@ -87,13 +89,15 @@ var theForm = document.forms['form1'];
     <#if suggestion_page??>
         <#list suggestion_page.content as comment>
             <tr>
-                <td class="comment">
+               <td class="comment">
                   <div class="title">
                     <span class="note">
-                    <i> ${comment.time!""}   </i>                 
-               <#--    <i class="reply">   
+                     <i>联系电话：${comment.mobile!""}</i>   <i>&nbsp;&nbsp;&nbsp;&nbsp;</i> 
+                     <i>邮箱：  ${comment.mail!'' }  </i>    <i>&nbsp;&nbsp;&nbsp;&nbsp;</i> 
+                     <i> ${comment.time!""}   </i>                 
+               <#-   <i class="reply">   
                         <p><a href="/suggestion/delete?id=${comment.id}">删除</a></p> 
-                    </i>           
+                     </i>           
               -->
                     </span>
                     <b>
@@ -103,19 +107,17 @@ var theForm = document.forms['form1'];
                         <input type="hidden" name="listId" id="listId" value="${comment.id!''}">
                     </b>
                     <span >                   
-                        <i>姓名：${comment.name!""}</i>        <i>&nbsp;&nbsp;&nbsp;&nbsp;</i>                   
-                        <i>联系电话：${comment.mobile!""}</i>   <i>&nbsp;&nbsp;&nbsp;&nbsp;</i> 
-                        <i>邮箱：  ${comment.mail!'' }  </i>    <i>&nbsp;&nbsp;&nbsp;&nbsp;</i> 
+                        <i>${comment.name!""}</i>        <i>&nbsp;&nbsp;&nbsp;&nbsp;</i>                   
+                       
                     </span>  
-                  </div>
-                  <div>&nbsp;</div>
-                  <div class="ask">
-                    ${comment.content!""}
-
-                  </div>
-                  <div>&nbsp;</div>
-                  <div>&nbsp;</div>
-                </td>
+                 </div>
+                
+                 <div class="ask">
+                     ${comment.content!""}
+                 </div>
+              
+                 <div>&nbsp;</div>
+               </td>
             </tr>
         </#list>
     </#if>
