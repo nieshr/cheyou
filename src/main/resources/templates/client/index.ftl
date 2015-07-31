@@ -289,7 +289,7 @@ function hideDemand()
 
 function showDemand()
 {
-//    $("#demand-div").css("display", "block");
+    $("#demand-div").css("display", "block");
 }
 </script>
 

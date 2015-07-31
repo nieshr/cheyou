@@ -89,15 +89,15 @@ var theForm = document.forms['form1'];
     <#if suggestion_page??>
         <#list suggestion_page.content as comment>
             <tr>
-                <td class="comment">
+               <td class="comment">
                   <div class="title">
                     <span class="note">
                      <i>联系电话：${comment.mobile!""}</i>   <i>&nbsp;&nbsp;&nbsp;&nbsp;</i> 
                      <i>邮箱：  ${comment.mail!'' }  </i>    <i>&nbsp;&nbsp;&nbsp;&nbsp;</i> 
                      <i> ${comment.time!""}   </i>                 
-               <#--    <i class="reply">   
+               <#-   <i class="reply">   
                         <p><a href="/suggestion/delete?id=${comment.id}">删除</a></p> 
-                    </i>           
+                     </i>           
               -->
                     </span>
                     <b>
@@ -110,15 +110,14 @@ var theForm = document.forms['form1'];
                         <i>${comment.name!""}</i>        <i>&nbsp;&nbsp;&nbsp;&nbsp;</i>                   
                        
                     </span>  
-                  </div>
-                  <div>&nbsp;</div>
-                  <div class="ask">
-                    ${comment.content!""}
-
-                  </div>
-                  <div>&nbsp;</div>
-                  <div>&nbsp;</div>
-                </td>
+                 </div>
+                
+                 <div class="ask">
+                     ${comment.content!""}
+                 </div>
+              
+                 <div>&nbsp;</div>
+               </td>
             </tr>
         </#list>
     </#if>

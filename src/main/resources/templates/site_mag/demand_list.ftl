@@ -90,13 +90,12 @@ var theForm = document.forms['form1'];
                         <i>邮箱：${demand.mail!''}</i>
                         <i>&nbsp;</i>
                         <i>${demand.time!""}</i>
-                       <#-- 
-                       <i class="reply">
+                        <#-- 
+                        <i class="reply">
                             <a href="/Verwalter/user/comment/edit?id=${comment.id}&statusId=${statusId!""}">回复</a>
                         </i>
                         -->
-                    </span>
-                
+                    </span>                
                     <b>
                         <span class="checkall" style="vertical-align:middle;">
                             <input id="listChkId" type="checkbox" name="listChkId" value="${demand_index}" >
@@ -106,18 +105,15 @@ var theForm = document.forms['form1'];
                     <span>
                         <i>${demand.name!""}</i>
                         <i>&nbsp;</i>
-
                     </span>
-                  </div>
-                  <div>&nbsp;</div>
+                  </div>                
                   <div class="ask">
                     <#if demand.statusId?? && demand.statusId==0>
                         <b class="audit" title="待审核"></b>
                     </#if>
                     ${demand.content!""}
                     <i>&nbsp;</i>
-                  </div>
-                  <div>&nbsp;</div>
+                  </div>            
                   <div>&nbsp;</div>
                 </td>
             </tr>
