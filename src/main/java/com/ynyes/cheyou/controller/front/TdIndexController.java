@@ -345,6 +345,9 @@ public class TdIndexController {
         if (device.isMobile() || device.isTablet()) {
             return "/touch/index";
         }
+        
+
+        
 
         return "/client/index";
     }

@@ -40,7 +40,7 @@ function checkTime(i)
     return i;  
 }
 </script>
-
+<#--
 <script type="text/javascript">
 $(document).ready(function(){
   $(".mianfeilingqutanchu #yincang").click(function(){
@@ -56,6 +56,7 @@ $(document).ready(function(){
   });
 });
 </script>
+-->
 </head>
 <body>
 <#include "/client/common_header.ftl" />

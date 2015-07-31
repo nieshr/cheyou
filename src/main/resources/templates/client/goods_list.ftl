@@ -69,6 +69,8 @@ function submitSuggestion()
     });
 }
 </script>
+
+<#--
 <script type="text/javascript">
 $(document).ready(function(){
   $(".mianfeilingqutanchu #yincang").click(function(){
@@ -84,6 +86,8 @@ $(document).ready(function(){
   });
 });
 </script>
+-->
+
 </head>
 <body>
 

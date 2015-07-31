@@ -532,7 +532,7 @@ public class TdTouchUserController {
         
         map.addAttribute("point_page", pointPage);
         
-        return "/client/user_point_list";
+        return "/touch/user_point_list";
     }
     
     @RequestMapping(value = "/user/return/{orderId}")
