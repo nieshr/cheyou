@@ -26,9 +26,19 @@ public class TdDemandService {
 	@Autowired
 	TdDemandRepo repository;
 
-	 public List<TdDemand> findAll(){
+	public List<TdDemand> findAll(){
 	        return (List<TdDemand>) repository.findAll();
-	    }
+	}
+	
+	public List<TdDemand> findByNameOrderByTimeDesc(){
+		
+		return (List<TdDemand>) repository.findAll();		
+	}
+	
+	public List<TdDemand> findByNameAndStatusIdOrderByTimeDesc(){
+	    
+		return (List<TdDemand>) repository.findByStatusId(1L);
+	}
 
 	public TdDemand findOne(Long id)
     {
@@ -45,14 +55,23 @@ public class TdDemandService {
 		PageRequest pageRequest = new PageRequest(page,size,new Sort(Direction.DESC,"time"));
 		return repository.findAll(pageRequest);
 	}
+	
+
+
 
 	/**
 	 * 添加
 	 */
-	public void save(TdDemand tdDemand){
-		repository.save(tdDemand);
+
+	public void save(TdDemand e){
+		repository.save(e);
 	}
 	
+	 public List<TdDemand> save(List<TdDemand> entities)
+	 {
+	        
+	     return (List<TdDemand>) repository.save(entities);
+  }
 	/**
 	 * 删除
 	 */

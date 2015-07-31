@@ -146,7 +146,7 @@ $(document).ready(function(){
       <#if tuan_cur_page??>
         <#list tuan_cur_page.content as item>
             <#if item_index lt 2>
-                <td style="border:none;">
+                <td style="width:30%;">
                     <a href="/touch/goods/${item.id}?qiang=1">
                       <p class="fs08">${item.title!''}</p>
                       <p class="fs07 c9">${item.subTitle!''}</p>
@@ -157,6 +157,7 @@ $(document).ready(function(){
             </#if>
         </#list>
       </#if>
+
       <td rowspan="2" width="40%" style="border:none;">
         <#if touch_tuan_ad_list??>
             <#list touch_tuan_ad_list as item>
@@ -167,12 +168,14 @@ $(document).ready(function(){
             </#list>
         </#if>
       </td>
+   -->
     </tr>
     <tr>
+   
         <#if tuan_cur_page??>
             <#list tuan_cur_page.content as item>
-                <#if item_index gt 1 && item_index < 4>
-                    <td>
+                <#if item_index gt 1 && item_index lt 4>
+                    <td style="width:30%;">
                         <a href="/touch/goods/${item.id}?qiang=1">
                           <p class="fs08">${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>

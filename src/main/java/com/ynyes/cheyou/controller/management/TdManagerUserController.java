@@ -23,6 +23,8 @@ import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.entity.TdUserConsult;
 import com.ynyes.cheyou.entity.TdUserLevel;
 import com.ynyes.cheyou.entity.TdUserReturn;
+import com.ynyes.cheyou.entity.TdDemand;
+import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdManagerLogService;
 import com.ynyes.cheyou.service.TdUserCashRewardService;
 import com.ynyes.cheyou.service.TdUserCollectService;
@@ -60,6 +62,9 @@ public class TdManagerUserController {
     
     @Autowired
     TdUserSuggestionService tdUserSuggestionService;  //add by zhangji
+    
+    @Autowired
+    TdDemandService tdDemandService;  //@zhangji 2015年7月30日11:25:00
     
     @Autowired
     TdUserReturnService tdUserReturnService;
@@ -972,6 +977,17 @@ public class TdManagerUserController {
                         e.setStatusId(1L);
                         tdUserCommentService.save(e);
                     }
+                }
+                else if(type.equalsIgnoreCase("demand"))  //团购要求      @zhangji 2015年7月30日11:23:51
+                {
+                	TdDemand e = tdDemandService.findOne(id);
+                	
+                	if (null != e)
+                	{
+                		e.setStatusId(1L);
+                		tdDemandService.save(e);
+                	}
+                		
                 }
                 else if (type.equalsIgnoreCase("return")) // 退换货
                 {
