@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.cheyou.entity.TdDemand;
+import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.repository.TdDemandRepo;
 
 
@@ -35,10 +36,15 @@ public class TdDemandService {
 		return (List<TdDemand>) repository.findAll();		
 	}
 	
-	public List<TdDemand> findByNameAndStatusIdOrderByTimeDesc(){
-	    
-		return (List<TdDemand>) repository.findByStatusId(1L);
-	}
+	//筛选statusId为1L的
+    public List<TdDemand> findByStatusIdAndIsShowable()
+    {
+
+       
+        
+        return repository.findByStatusIdOrderByIdDesc(1L);
+    }
+    
 
 	public TdDemand findOne(Long id)
     {

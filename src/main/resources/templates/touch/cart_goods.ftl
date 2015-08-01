@@ -33,7 +33,7 @@
       <div class="mainbox">
         
         <p><a <#if allChecked>class="a1 sel" href="javascript:toggleAllSelect(1);"<#else>class="a1" href="javascript:toggleAllSelect(0);"</#if>><i></i>全选</a><span>合计：</span><span class="red">￥<#if cart_goods_list??>${totalPrice?string("0.00")}</#if></span></p>
-        <input class="sub" onclick="javascript:goNext(${totalGoods!0});" type="submit" value="结算（<#if cart_goods_list??>${totalGoods!'0'}</#if>）" />
+        <input class="sub" onclick="javascript:goNext(${totalGoods!0});" type="submit" value="去结算（<#if cart_goods_list??>${totalGoods!'0'}</#if>）" />
       </div>
     </footer>
 <#else>

@@ -251,5 +251,5 @@ input.orange_btn { color: #fff; font-size: 0.8em; background: #f4b93a; width: 10
 .indextit p b { font-weight:400; color:#fff; display:inline-block; padding:0 2px; border-radius:2px; background:#333; margin:0 1px; font-size:0.8em;}
 .indexlist table.index_my td { border:none;}
 .indexlist table.index_my a { padding:0;}
-
+.a2 .sp1{z-index:10;position:absolute;right:-20px;top:-13px;display:block;width:25px;height:25px;text-align:center;color:#fff;line-height:25px;border-radius:50%;background:#e8323d;}
 

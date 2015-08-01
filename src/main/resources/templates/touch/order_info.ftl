@@ -14,7 +14,13 @@
 
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
+<!-- add link 2015-7-31 11:24:56 mdj -->
 
+<script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
+
+<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
+
+<!-- add link 2015-7-31 11:24:56 mdj end -->
 <script type="text/javascript">
 $(document).ready(function(){
   
@@ -45,14 +51,13 @@ $(document).ready(function(){
         </#if>
     </select>
   </div>
-  <p class="address">选择预约安装时间：</p>
-  <div class="address">
-    <select style="width:100%;">
-        <option >9:00</option>
-        <option >14:00</option>
-        <option >17:00</option>
-    </select>
-  </div>
+  <!-- 2015-7-31 10:33:03  mdj  add datePicker -->
+  <section class="order_check address" style="width:90%;">
+            <p class="address" style="float:left">选择预约安装时间:</p> 
+            <input name="appointmentTime" type="text" value="" datatype="*" class="text input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" errormsg="请选择预约安装时间" nullmsg="请选择预约安装时间">
+            <a href="javascript:;"><img src="/client/images/content/rl.png" /></a>
+        </section>
+  <!-- end -->
   <p class="address">选择粮草：<span class="absolute-r">可用粮草（<b class="red">${total_point_limit!'0'}</b>）</span></p>
   <input type="text" class="address" value="" />
   <p class="address">选择优惠券：</p>

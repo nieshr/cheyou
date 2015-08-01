@@ -23,6 +23,7 @@
    html,#allmap {width: 100%; height:100%; margin:0;font-family:"微软雅黑";}     <#-- 去掉了body @by zhangji-->
    .dituliebiao_rt{width:743px; margin-top:20px; height:650px;float:right;}
    .dituliebiao_lt{ margin-top:20px;}
+   .dituliebiao_lt{width:457px; height:650px; overflow:hidden; float:left;}
    .fr{float:right;}                <#--  @by zhangji-->
 </style>
 

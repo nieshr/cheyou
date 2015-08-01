@@ -116,7 +116,7 @@ public class TdOrderController extends AbstractPaytypeController {
     public String orderInfo(HttpServletRequest req, HttpServletResponse resp,
             ModelMap map) {
         String username = (String) req.getSession().getAttribute("username");
-
+        System.err.println("进入！");
         if (null == username) {
             return "redirect:/login";
         }
@@ -151,7 +151,6 @@ public class TdOrderController extends AbstractPaytypeController {
         if (null != selectedGoodsList) {
             for (TdCartGoods cg : selectedGoodsList) {
                 TdGoods goods = tdGoodsService.findOne(cg.getGoodsId());
-
                 if (null != goods && null != goods.getPointLimited()) {
                     totalPointLimited += goods.getPointLimited()
                             * cg.getQuantity();

@@ -15,4 +15,5 @@ public interface TdDemandRepo extends
            JpaSpecificationExecutor<TdDemand> 
 {
    TdDemand findByStatusId(Long statusId);
+   List<TdDemand> findByStatusIdOrderByIdDesc(Long statusId);
 } 

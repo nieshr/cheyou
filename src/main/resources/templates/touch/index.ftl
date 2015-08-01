@@ -11,7 +11,6 @@
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
 
-
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
@@ -19,7 +18,91 @@ $(document).ready(function(){
     indexBanner("box","sum",300,5000,"num");
     searchTextClear(".comserch_text","搜索关键字","#999","#333");
 });
+
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
 </script>
+
+<#if miao_cur_page??>
+     <#list miao_cur_page.content as item>
+<script>
+$(document).ready(function(){
+
+ setInterval("timer${item_index}()",1000);
+
+   
+});
+
+
+function timer${item_index}()
+{
+console.debug('1111')
+<#if item.isFlashSale && item.flashSaleStartTime < .now && item.flashSaleStopTime gt .now>
+    var ts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+    
+    var allts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")}))
+               - (new Date(${item.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStartTime?string("dd")}, 
+                ${item.flashSaleStartTime?string("HH")}, 
+                ${item.flashSaleStartTime?string("mm")}, 
+                ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数
+                
+    if (0 >= ts)
+    {
+        window.location.reload();
+    }
+    
+    var date = new Date();
+    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+    dd = checkTime(dd);
+    hh = checkTime(hh);
+    mm = checkTime(mm);
+    ss = checkTime(ss);
+    $("#timeLeft${item_index}").html("<b>"+dd+"</b>:<b>"+hh+"</b>:<b>"+mm+"</b>:<b>"+ss+"</b>");
+    console.debug(dd-hh-mm-ss);
+    var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
+    
+    //var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    $("#flashPrice${item_index}").html("￥" + s_x);              
+</#if>
+}
+
+</script>
+    </#list>
+</#if>
+
+
+
 </head>
 
 <body>
@@ -32,7 +115,10 @@ $(document).ready(function(){
         </form>
     </section>
     <a class="a1" style="top:9px; left:0;" href="/touch"><img src="<#if site??>${site.logoUri!''}</#if>" height="40" /></a>
-    <a class="a2" href="/touch/cart"><img src="/touch/images/qq.png" height="30" /></a>
+    <a class="a2" href="/touch/cart">
+    	<img src="/touch/images/qq.png" height="30" />
+    	<span class="sp1"><#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if></span>
+    </a>
   </div>
 </header>
 <section id="box">
@@ -84,7 +170,7 @@ $(document).ready(function(){
   </menu>
 </section>
 
-<h3 class="indextit mainbox mt10"><span>1元秒杀</span>
+<h3 class="indextit mainbox mt10"><span>1元抢拍</span>
 <#--
 <p><b>1</b><b>1</b>:<b>1</b><b>1</b>:<b>1</b><b>1</b></p>
 -->
@@ -108,10 +194,11 @@ $(document).ready(function(){
                 <#if item_index lt 2>
                     <td>
                         <a href="/touch/goods/${item.id}?qiang=1">
-                          <p class="fs08">${item.title!''}</p>
+                          <p class="fs08" >${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
-                          <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                          <img src="${item.coverImageUri!''}" />
+                          <p id="timeLeft${item_index}"><b>0</b><b>0</b>:<b>0</b><b>0</b>:<b>0</b><b>0</b></p>
+                          <p class="fs07 red" id="flashPrice${item_index}">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
+                          <img src="${item.coverImageUri!''}" width="185px"/>
                         </a>
                     </td>
                 </#if>
@@ -124,10 +211,11 @@ $(document).ready(function(){
                 <#if item_index gt 1 && item_index < 4>
                     <td>
                         <a href="/touch/goods/${item.id}?qiang=1">
-                          <p class="fs08">${item.title!''}</p>
+                          <p class="fs08" >${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
-                          <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                          <img src="${item.coverImageUri!''}" />
+                           <p id="timeLeft${item_index}"><b>0</b><b>0</b>:<b>0</b><b>0</b>:<b>0</b><b>0</b></p>
+                          <p class="fs07 red" id="flashPrice${item_index}">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
+                          <img src="${item.coverImageUri!''}" width="185px"/>
                         </a>
                     </td>
                 </#if>
@@ -149,14 +237,14 @@ $(document).ready(function(){
                       <p class="fs08">${item.title!''}</p>
                       <p class="fs07 c9">${item.subTitle!''}</p>
                       <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                      <img src="${item.coverImageUri!''}" />
+                      <img src="${item.coverImageUri!''}" width="188px"/>
                     </a>
                 </td>
             </#if>
         </#list>
       </#if>
 
-      <td rowspan="2" width="40%" style="border:none;">
+      <td rowspan="2" width="35%" style="border:none;">
         <#if touch_tuan_ad_list??>
             <#list touch_tuan_ad_list as item>
                 <a href="${item.linkUri!''}" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if>>
@@ -178,7 +266,7 @@ $(document).ready(function(){
                           <p class="fs08">${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
                           <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                          <img src="${item.coverImageUri!''}" />
+                          <img src="${item.coverImageUri!''}" width="188px"/>
                         </a>
                     </td>
                 </#if>
