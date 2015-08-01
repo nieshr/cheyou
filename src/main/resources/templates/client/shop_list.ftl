@@ -119,7 +119,9 @@ function loadMap(x, y)
                                 <a class="fl" href="#"><img src="/client/images/content/start03.png" /></a>
                                 </p>
                             -->
-                            <p class="dianouweizhi"><a href="javascript:;" onclick="loadMap(${item.longitude!'110'}, ${item.latitude!'39'});">店铺位置</a></p>
+                            <p class="dianouweizhi">
+                                <a href="javascript:;" onclick="loadMap(<#if item.longitude??>${item.longitude?string("0.000000")}<#else>110</#if>, <#if item.latitude??>${item.latitude?string("0.000000")}<#else>39</#if>);">店铺位置</a>
+                            </p>
                             </div>
                         </li>
                     </#list>
