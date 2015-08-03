@@ -130,7 +130,8 @@ function clearSelect()
     <a class="a1" href="/">首页</a>
     <#if category_tree_list??>
         <#list category_tree_list as category>
-            <span> > </span><a class="a2" href="/list/${category.id}">${category.title!""}</a>
+            <span> > </span>
+            <a class="a2" href="/list/${category.id}">${category.title!""}</a>
         </#list>
     </#if>
     <span> > ${goods.name!''}</span>
