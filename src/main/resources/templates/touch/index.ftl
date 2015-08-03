@@ -28,6 +28,13 @@ function checkTime(i)
 }
 </script>
 
+
+<!--
+    --------------------------start-----------------------------
+    判断有无一元秒拍商品，
+    添加倒计时
+    @author libiao
+-->
 <#if miao_cur_page??>
      <#list miao_cur_page.content as item>
 <script>
@@ -100,7 +107,9 @@ console.debug('1111')
 </script>
     </#list>
 </#if>
-
+<!--
+   -----------------------------------END------------------------------ 
+-->
 
 
 </head>

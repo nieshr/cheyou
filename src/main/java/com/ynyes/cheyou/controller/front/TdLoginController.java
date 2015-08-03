@@ -24,7 +24,9 @@ import com.alipay.util.AlipayNotify;
 import com.alipay.util.AlipaySubmit;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
+import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
+import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
 import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.service.TdCommonService;
@@ -413,8 +415,12 @@ public class TdLoginController {
 				OpenID openIDObj = new OpenID(accessToken);
 				openID = openIDObj.getUserOpenID();
 
-				System.err.println("欢迎你，代号为 " + openID + " 的用户!");
-
+				//利用获取到的accessToken,openid 去获取用户在Qzone的昵称
+				UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
+                UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
+                if (userInfoBean.getRet() == 0) {
+                   map.addAttribute("nickName",userInfoBean.getNickname());
+                }
 				
 				//根据openID查找用户
 				map.put("alipay_user_id", openID);
