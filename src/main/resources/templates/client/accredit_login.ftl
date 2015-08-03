@@ -81,6 +81,8 @@ function cliLogin(){
   </div>
 </header>
 <div class="main">
+    <!--QQ登录显示用户在Qzone的昵称-->
+    <#if nickName??><p style=" width: 360px;text-align: right;">车有同盟欢迎您：${nickName}</p></#if>
 <div class="contenta">
             <div class="lefta">
                 <h3><i></i>绑定已有账号</h3>
@@ -100,6 +102,8 @@ function cliLogin(){
             <div class="clear"></div>
        </div><!--logingbg END-->
 </div>
+
+
 <footer class="loginfoot">
     <nav>
         <#if help_level0_cat_list??>
