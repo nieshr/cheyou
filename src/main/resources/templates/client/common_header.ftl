@@ -204,8 +204,12 @@ function delItem(id)
                         <div class="clear"></div>
                     </div>
                     <#if item.isSelected>
-                        <#assign totalGoods=totalGoods+item.quantity>
-                        <#assign totalPrice=totalPrice+item.price*item.quantity>
+                        <#if item.quantity??>
+                            <#assign totalGoods=totalGoods+item.quantity>
+                            <#if item.price??>
+                                <#assign totalPrice=totalPrice+item.price*item.quantity>
+                            </#if>
+                        </#if>
                     </#if>
                 </#list>
                 
