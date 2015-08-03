@@ -130,7 +130,8 @@ function clearSelect()
     <a class="a1" href="/">首页</a>
     <#if category_tree_list??>
         <#list category_tree_list as category>
-            <span> > </span><a class="a2" href="/list/${category.id}">${category.title!""}</a>
+            <span> > </span>
+            <a class="a2" href="/list/${category.id}">${category.title!""}</a>
         </#list>
     </#if>
     <span> > ${goods.name!''}</span>
@@ -416,7 +417,7 @@ function checkTime(i)
           <td colspan="2">
             <a id="addCart" href="/cart/init?id=${goods.id}<#if qiang??>&qiang=${qiang}</#if>" class="sub sub01">加入购物车</a>
             <div class="buy_share">
-              <a class="buy_share_a" href="javascript:addCollect(${goods.id});">关注商品</a>
+              <a class="buy_share_a" href="javascript:addCollect(${goods.id});">收藏商品</a>
               <p>关注人数：<span class="red">${total_collects!'0'}</span>人</p>
             </div>
             <div class="clear"></div>

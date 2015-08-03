@@ -38,6 +38,7 @@ ${goods.detail!''}
 <section class="botlogin">
   <#if username??>
   <a href="/touch/user">${username!''}</a>
+  <a class="ml20" href="/touch/logout">退出</a>
   <#else>
   <a href="/touch/login">登录</a><a class="ml20" href="/touch/reg">注册</a>
   </#if>

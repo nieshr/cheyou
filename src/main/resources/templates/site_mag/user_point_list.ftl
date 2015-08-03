@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="/mag/style/idialog.css" rel="stylesheet" id="lhgdialoglink">
-<title>积分记录</title>
+<title>粮草记录</title>
 <script type="text/javascript" src="/mag/js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="/mag/js/lhgdialog.js"></script>
 <script type="text/javascript" src="/mag/js/layout.js"></script>
@@ -40,7 +40,7 @@ var theForm = document.forms['form1'];
   <i class="arrow"></i>
   <a href="/Verwalter/user/list"><span>用户列表</span></a>
   <i class="arrow"></i>
-  <span>积分记录</span>
+  <span>粮草记录</span>
 </div>
 <!--/导航栏-->
 
@@ -63,7 +63,7 @@ var theForm = document.forms['form1'];
   <tbody>
   <tr class="odd_bg">
     <th align="center" width="15%">用户名</th>
-    <th align="center" width="10%">积分</th>
+    <th align="center" width="10%">粮草</th>
     <th align="left" width="18%">涉及订单</th>
     <th align="left">备注</th>
     <th align="left" width="16%">时间</th>

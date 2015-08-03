@@ -13,7 +13,7 @@
     <div class="mymember_menu_part">
         <a class="mymember_menu_tit" href="/user/collect/list"><img src="/client/images/mymember/menu02.png" />关注中心</a>
         <div>
-            <a href="/user/collect/list">关注商品</a>
+            <a href="/user/collect/list">收藏商品</a>
             <a href="/user/recent/list">浏览历史</a>
         </div>
     </div>

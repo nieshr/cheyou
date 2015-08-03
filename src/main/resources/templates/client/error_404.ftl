@@ -53,7 +53,7 @@ h5 {margin:0 auto;width:410px;}
     <a href="#">手机通讯</a>
     <a href="#">云南特产</a>
     <a href="#">家居用品</a>
-    <a href="#">积分商城</a>
+    <a href="#">粮草商城</a>
     <a href="#">团购</a>
     <div class="clear"></div>
   </div>

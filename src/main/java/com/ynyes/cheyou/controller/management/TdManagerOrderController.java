@@ -397,11 +397,14 @@ public class TdManagerOrderController {
         {
             size = SiteMagConstant.pageSize;;
         }
-        
+        /**
+         * @author libiao
+         * 添加订单金额统计
+         */
         Double price = new Double(0.00);
         if (null != statusId)
         {
-            if (statusId.equals(0L)) // 全部订单
+            if (statusId.equals(0L)) // 判断为全部订单
             {
             	List<TdOrder> list = tdOrderService.findAll();
             	for (int i = 0; i < list.size(); i++) {
@@ -411,6 +414,7 @@ public class TdManagerOrderController {
             }
             else
             {
+            	//判断为状态订单（1:待确认 2:待付款 3:待发货 4:待收货 5: 待评价 6: 已完成 7: 已取消8: 支付取消(失败)）
             	List<TdOrder> orderList = tdOrderService.findByStatusId(statusId);
             	for (int i = 0; i < orderList.size(); i++) {
             		price += orderList.get(i).getTotalPrice();
