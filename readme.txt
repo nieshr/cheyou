@@ -49,7 +49,7 @@ src/main/resources：所有页面相关，
 		/user/updatePassword  ---跳转修改密码
 		/user/address  ---跳转收货地址
 		/user/collect  ---跳转我的收藏
-		/user/point  ---跳转我的积分
+		/user/point  ---跳转我的粮草
 		
 		订单
 		/order/list --跳转所有订单页面

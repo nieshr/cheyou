@@ -76,12 +76,11 @@ public class TdCommonService {
         
         // 顶部小图广告
         TdAdType adType = tdAdTypeService.findByTitle("搜索框左侧小图广告");
-
         if (null != adType) {
             map.addAttribute("top_small_ad_list", tdAdService
                     .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
         }
-
+        
         // 网站基本信息
         TdSetting setting = tdSettingService.findTopBy();
         

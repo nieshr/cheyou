@@ -209,7 +209,7 @@ $(function () {
     <dd><span><#if user??>${user.userLevelTitle!""}</#if></span></dd>
   </dl>
   <dl>
-    <dt>用户积分</dt>
+    <dt>用户粮草</dt>
     <dd><span><#if user??>${user.totalPoints!""}</#if></span></dd>
   </dl>
   <dl>

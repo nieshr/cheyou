@@ -382,31 +382,31 @@ $(function () {
     </div> 
     <div class="tab-content" style="display: none;">
         <dl>
-            <dt>注册成功奖励积分</dt>
+            <dt>注册成功奖励粮草</dt>
             <dd>
                 <input name="registerSuccessPoints" type="text" value="<#if setting??>${setting.registerSuccessPoints!"50"}<#else>50</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip"></span>
             </dd>
         </dl>
         <dl>
-            <dt>分享注册奖励积分</dt>
+            <dt>分享注册奖励粮草</dt>
             <dd>
                 <input name="registerSharePoints" type="text" value="<#if setting??>${setting.registerSharePoints!"20"}<#else>20</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip"></span>
             </dd>
         </dl>
         <dl>
-            <dt>分享商品奖励积分</dt>
+            <dt>分享商品奖励粮草</dt>
             <dd>
                 <input name="goodsSharePoints" type="text" value="<#if setting??>${setting.goodsSharePoints!"10"}<#else>10</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip"></span>
             </dd>
         </dl>
         <dl>
-            <dt>商品分享每日积分限额</dt>
+            <dt>商品分享每日粮草限额</dt>
             <dd>
                 <input name="goodsShareLimits" type="text" value="<#if setting??>${setting.goodsShareLimits!"50"}<#else>50</#if>" class="input normal" datatype="n" sucmsg=" ">
-                <span class="Validform_checktip">同一天通过商品分享获得的积分超过该值将不再奖励积分</span>
+                <span class="Validform_checktip">同一天通过商品分享获得的粮草超过该值将不再奖励粮草</span>
             </dd>
         </dl>
     </div>    
