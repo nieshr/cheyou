@@ -15,9 +15,43 @@
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
+<!-- 用户名中间变为*号  2015-8-4 15:38:18 mdj  -->
 $(document).ready(function(){
-  
+    var pElement = $(".userName").toArray();
+    for(var i = 0;i < pElement.length;i++)
+    {
+       var originName = pElement[i].innerHTML
+       var name =  changeName(originName)
+       pElement[i].innerText="用户名："+name
+    }
+
 });
+/**
+ * 隐藏用户名
+ * @author mdj
+ */
+ function changeName(p)
+{
+    var temp = p
+    if(temp.length == 11)
+    {
+        var changeStr = temp.substring(3, 7)
+        temp = temp.replace(changeStr,"****")
+    }
+    else
+    {
+        var startStr = ""
+        var strLength = temp.length;
+        for (var i = 0; i < strLength - 4; i++)
+        {
+            startStr += "*";
+        }
+        var changeStr = temp.substring(2, strLength - 2)
+
+        temp = temp.replace(changeStr, startStr)
+    }
+    return temp;
+}
 // 提交评论
 function submitComment()
 {
@@ -198,6 +232,8 @@ function starChange(type, stars)
         }
     }
 }
+
+
 </script>
 </head>
 
@@ -260,7 +296,7 @@ function starChange(type, stars)
         <#list comment_page.content as item>
             <li>
                 <p>${item.content!''}</p>
-                <p class="c9">用户名：${item.username!''}<span>时间：${item.commentTime?string("yyyy-MM-dd")}</span></p>
+                <p id="userNameText" class="c9"><label class="userName">${item.username!''}</label><span>时间：${item.commentTime?string("yyyy-MM-dd")}</span></p>
             </li>
         </#list>
     </#if>

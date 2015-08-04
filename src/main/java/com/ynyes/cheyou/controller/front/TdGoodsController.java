@@ -18,6 +18,7 @@ import com.ynyes.cheyou.entity.TdProduct;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.entity.TdSetting;
 import com.ynyes.cheyou.entity.TdUser;
+import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.entity.TdUserConsult;
 import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.service.TdCommonService;
@@ -409,6 +410,17 @@ public class TdGoodsController {
         {
             map.addAttribute("comment_page", tdUserCommentService
                     .findByGoodsIdAndIsShowable(goodsId, page, ClientConstant.pageSize));
+            //add mdj start
+//            Page<TdUserComment> comment_page = tdUserCommentService
+//                    .findByGoodsIdAndIsShowable(goodsId, page, ClientConstant.pageSize);
+//            List<TdUserComment> tdcomment_list =comment_page.getContent();
+//            for(int i = 0;i<tdcomment_list.size();i++)
+//            {
+//            	TdUserComment tdcomment = tdcomment_list.get(i);
+//            	tdcomment.getUsername();
+//            	System.out.println("---------------------"+tdcomment.getUsername()+"=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+//            }
+            //add mdj end
         }
         else
         {
