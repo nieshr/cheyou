@@ -123,7 +123,7 @@ console.debug('1111')
             <input type="submit" class="sub" value="" />
         </form>
     </section>
-    <a class="a1" style="top:9px; left:0;" href="/touch"><img src="<#if site??>${site.logoUri!''}</#if>" height="40" /></a>
+    <a class="a1" style="top:3px; left:1;" href="/touch"><img src="<#if site??>${site.logoUri!''}</#if>" height="40" /></a>
     <a class="a2" href="/touch/cart">
     	<img src="/touch/images/qq.png" height="30" />
     	<span class="sp1"><#if cart_goods_list??>${cart_goods_list?size}<#else>0</#if></span>

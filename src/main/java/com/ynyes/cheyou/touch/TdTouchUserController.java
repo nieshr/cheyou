@@ -31,6 +31,7 @@ import com.ynyes.cheyou.entity.TdUserConsult;
 import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.entity.TdUserRecentVisit;
 import com.ynyes.cheyou.entity.TdUserReturn;
+import com.ynyes.cheyou.repository.TdOrderRepo;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdOrderGoodsService;
@@ -707,6 +708,7 @@ public class TdTouchUserController {
             res.put("message", "商品ID不能为空！");
             return res;
         }
+        TdOrder tdorder = tdOrderService.findByUsername(username, 0, 0);
         
         TdGoods goods = tdGoodsService.findOne(tdComment.getGoodsId());
         
@@ -808,7 +810,7 @@ public class TdTouchUserController {
         res.put("code", 1);
         
         String username = (String) req.getSession().getAttribute("username");
-        
+    
         if (null == username)
         {
             res.put("message", "请先登录！");
