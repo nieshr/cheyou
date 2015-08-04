@@ -48,7 +48,6 @@ $(document).ready(function(){
 
 function timer${item_index}()
 {
-console.debug('1111')
 <#if item.isFlashSale && item.flashSaleStartTime < .now && item.flashSaleStopTime gt .now>
     var ts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
                 parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
@@ -70,7 +69,7 @@ console.debug('1111')
                 ${item.flashSaleStartTime?string("mm")}, 
                 ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数
                 
-    if (0 >= ts)
+    if (0 == ts)
     {
         window.location.reload();
     }
