@@ -1269,7 +1269,7 @@ public class TdUserController extends AbstractPaytypeController {
                 .findByIsRecommendTypeTrueAndIsOnSaleTrueOrderByIdDesc(0,
                         ClientConstant.pageSize));
 
-        return "/client/user_info";
+        return "/client/user_index";
     }
 
     @RequestMapping(value = "/user/info", method = RequestMethod.POST)

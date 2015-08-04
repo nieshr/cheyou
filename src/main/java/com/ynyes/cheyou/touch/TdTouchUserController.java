@@ -708,7 +708,7 @@ public class TdTouchUserController {
             res.put("message", "商品ID不能为空！");
             return res;
         }
-        TdOrder tdorder = tdOrderService.findByUsername(username, 0, 0);
+//        TdOrder tdorder = tdOrderService.findByUsername(username, 0, 0);
         
         TdGoods goods = tdGoodsService.findOne(tdComment.getGoodsId());
         

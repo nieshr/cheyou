@@ -32,7 +32,6 @@ $(document).ready(function(){
     
     $("#id-plus").click(function(){
         var q = parseInt($("#quantity").val());
-        
         <#if goods.leftNumber??>
             if (q < ${goods.leftNumber!'0'})
             {
@@ -222,7 +221,7 @@ function addCollect(goodsId)
     <div class="buynum">
       <a id="id-plus" href="javascript:;">+</a>
       <a class="a1"id="id-minus" href="javascript:;">-</a>
-      <input type="text" class="text" value="1" />
+      <input type="text" id="quantity" class="text" value="1" />
     </div>
     <a id="addCart" class="fr" href="/cart/init?id=${goods.id}<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
     <div class="clear"></div>

@@ -97,6 +97,13 @@ function __doPostBack(eventTarget, eventArgument) {
         theForm.submit();
     }
 }
+
+function confirmCopy(id)
+{
+    $.dialog.confirm("确定复制该商品吗？", function () {
+        window.location.href = "/Verwalter/goods/copy?id=" + id;
+    });
+}
 </script>
 
 <!--导航栏-->
@@ -199,8 +206,9 @@ function __doPostBack(eventTarget, eventArgument) {
                 
             </div>
             <div class="foot">
-              <p class="time"><#if content.onSaleTime??>${content.onSaleTime?string("yyyy-MM-dd HH:mm:ss")}</#if></p>
-              <a href="/Verwalter/goods/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}" title="编辑" class="edit">编辑</a>
+                <p class="time"><#if content.onSaleTime??>${content.onSaleTime?string("yyyy-MM-dd HH:mm:ss")}</#if></p>
+                <a href="/Verwalter/goods/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}" title="编辑" class="edit">编辑</a>
+                <a href="javascript:confirmCopy(${content.id!""});" title="复制商品" class="show">复制</a>
             </div>
         </div>
     </li>
