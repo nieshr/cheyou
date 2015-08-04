@@ -54,7 +54,7 @@ DD_belatedPNG.fix('.,img,background');
   
     <div class="mymember_mainbox">
       <div class="mymember_info mymember_info02">
-        <div class="mymember_order_search"> 积分记录 可用积分<#if point_page?? && point_page.content?? && point_page.content[0]??>${point_page.content[0].totalPoint!'0'}<#else>0</#if>个 
+        <div class="mymember_order_search"> 粮草记录 可用粮草<#if point_page?? && point_page.content?? && point_page.content[0]??>${point_page.content[0].totalPoint!'0'}<#else>0</#if>个 
             <div class="clear"></div>
         </div>
         <table class="tb-void">

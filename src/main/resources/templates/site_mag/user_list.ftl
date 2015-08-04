@@ -80,7 +80,7 @@ var theForm = document.forms['form1'];
     <th align="center" width="12%">邮箱</th>
     <th width="12%">手机号</th>
     <th width="8%">最近登录</th>
-    <th width="8%">积分</th>
+    <th width="8%">粮草</th>
     <th width="6%">状态</th>
     <th width="6%">操作</th>
   </tr>
@@ -104,8 +104,8 @@ var theForm = document.forms['form1'];
                     <h4><b>${user.username!""}</b> (姓名：${user.realName!""})</h4>
                     <i>注册时间：${user.registerTime!""}</i>
                     <span>
-                      <a class="amount" href="/Verwalter/user/point/list?userId=${user.id}" title="积分">积分</a>
-                      <a class="point" href="/Verwalter/user/collect/list?userId=${user.id}" title="关注商品">关注商品</a>
+                      <a class="amount" href="/Verwalter/user/point/list?userId=${user.id}" title="粮草">粮草</a>
+                      <a class="point" href="/Verwalter/user/collect/list?userId=${user.id}" title="收藏商品">收藏商品</a>
                       <a class="msg" href="/Verwalter/user/recent/list?userId=${user.id}" title="浏览历史">浏览历史</a>
                       <#if user.roleId?? && user.roleId==1>
                           <a class="sms" href="/Verwalter/user/reward/list?userId=${user.id}" title="返现记录">返现记录</a>

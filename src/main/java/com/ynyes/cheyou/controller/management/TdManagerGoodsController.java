@@ -1,7 +1,9 @@
 package com.ynyes.cheyou.controller.management;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdGoods;
+import com.ynyes.cheyou.entity.TdGoodsParameter;
 import com.ynyes.cheyou.entity.TdPriceChangeLog;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.service.TdArticleService;
 import com.ynyes.cheyou.service.TdBrandService;
+import com.ynyes.cheyou.service.TdGoodsParameterService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdManagerLogService;
 import com.ynyes.cheyou.service.TdParameterService;
@@ -72,6 +76,9 @@ public class TdManagerGoodsController {
 
     @Autowired
     TdPriceChangeLogService tdPriceChangeLogService;
+    
+    @Autowired
+    TdGoodsParameterService tdGoodsParameterService;
 
     @RequestMapping(value = "/edit/parameter/{categoryId}", method = RequestMethod.POST)
     public String parameter(@PathVariable Long categoryId, ModelMap map,
@@ -705,7 +712,7 @@ public class TdManagerGoodsController {
     }
 
     @RequestMapping(value = "/edit")
-    public String goodsEdit(Long pid, Long id, String __EVENTTARGET,
+    public String goodsEdit(Long id, String __EVENTTARGET,
             String __EVENTARGUMENT, String __VIEWSTATE, ModelMap map,
             HttpServletRequest req) {
         String username = (String) req.getSession().getAttribute("manager");
@@ -757,6 +764,139 @@ public class TdManagerGoodsController {
         }
 
         return "/site_mag/goods_edit";
+    }
+    
+    @RequestMapping(value = "/copy")
+    public String goodsCopy(TdGoods tdGoods, String __VIEWSTATE, ModelMap map,
+            HttpServletRequest req) {
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username) {
+            return "redirect:/Verwalter/login";
+        }
+
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+
+        if (null != tdGoods)
+        {
+            TdGoods newGoods = new TdGoods();
+            
+            newGoods.setAfterMarketService(tdGoods.getAfterMarketService());
+            newGoods.setAveragePoints(tdGoods.getAveragePoints());
+            newGoods.setBrandId(tdGoods.getBrandId());
+            newGoods.setBrandTitle(tdGoods.getBrandTitle());
+            newGoods.setCategoryId(tdGoods.getCategoryId());
+            newGoods.setCategoryIdTree(tdGoods.getCategoryIdTree());
+            newGoods.setCategoryTitle(tdGoods.getCategoryTitle());
+            newGoods.setCode(tdGoods.getCode());
+            newGoods.setCombList(null);
+            newGoods.setConfiguration(tdGoods.getConfiguration());
+            newGoods.setCostPrice(tdGoods.getCostPrice());
+            newGoods.setCoverImageHeight(tdGoods.getCoverImageHeight());
+            newGoods.setCoverImageWidth(tdGoods.getCoverImageWidth());
+            newGoods.setCoverImageUri(tdGoods.getCoverImageUri());
+            newGoods.setCreateTime(new Date());
+            newGoods.setDeliveryArea(tdGoods.getDeliveryArea());
+            newGoods.setDetail(tdGoods.getDetail());
+            newGoods.setFlashSaleImage(tdGoods.getFlashSaleImage());
+            newGoods.setFlashSaleLeftNumber(tdGoods.getFlashSaleLeftNumber());
+            newGoods.setFlashSalePrice(tdGoods.getFlashSalePrice());
+            newGoods.setFlashSaleSoldNumber(tdGoods.getFlashSaleSoldNumber());
+            newGoods.setFlashSaleStartTime(tdGoods.getFlashSaleStartTime());
+            newGoods.setFlashSaleStopTime(tdGoods.getFlashSaleStopTime());
+            newGoods.setGroupSaleHundredPrice(tdGoods.getGroupSaleHundredPrice());
+            newGoods.setGroupSaleImage(tdGoods.getGroupSaleImage());
+            newGoods.setGroupSaleLeftNumber(tdGoods.getGroupSaleLeftNumber());
+            newGoods.setGroupSalePrice(tdGoods.getGroupSalePrice());
+            newGoods.setGroupSaleSevenPrice(tdGoods.getGroupSaleSevenPrice());
+            newGoods.setGroupSaleSoldNumber(tdGoods.getGroupSaleSoldNumber());
+            newGoods.setGroupSaleStartTime(tdGoods.getGroupSaleStartTime());
+            newGoods.setGroupSaleStopTime(tdGoods.getGroupSaleStopTime());
+            newGoods.setGroupSaleTenPrice(tdGoods.getGroupSaleTenPrice());
+            newGoods.setGroupSaleThreePrice(tdGoods.getGroupSaleThreePrice());
+            newGoods.setIncludePrice(tdGoods.getIncludePrice());
+            newGoods.setIsFlashSale(tdGoods.getIsFlashSale());
+            newGoods.setIsGroupSale(tdGoods.getIsGroupSale());
+            newGoods.setIsGroupSaleHundred(tdGoods.getIsGroupSaleHundred());
+            newGoods.setIsHot(tdGoods.getIsHot());
+            newGoods.setIsNew(tdGoods.getIsNew());
+            newGoods.setIsOnSale(tdGoods.getIsOnSale());
+            newGoods.setIsRecommendIndex(tdGoods.getIsRecommendIndex());
+            newGoods.setIsRecommendType(tdGoods.getIsRecommendType());
+            newGoods.setIsSpecialPrice(tdGoods.getIsSpecialPrice());
+            newGoods.setLeftNumber(tdGoods.getLeftNumber());
+            newGoods.setMarketPrice(tdGoods.getMarketPrice());
+            newGoods.setName(tdGoods.getName());
+            newGoods.setNumberDecType(tdGoods.getNumberDecType());
+            newGoods.setOnSaleTime(tdGoods.getOnSaleTime());
+            newGoods.setOutFactoryPrice(tdGoods.getOutFactoryPrice());
+            
+            List<TdGoodsParameter> paramList = tdGoods.getParamList();
+            
+            if (null != paramList && paramList.size() > 0)
+            {
+                List<TdGoodsParameter> newParamList = new ArrayList<TdGoodsParameter>();
+                
+                for (TdGoodsParameter tgp : paramList)
+                {
+                    if (null != tgp)
+                    {
+                        TdGoodsParameter newTgp = new TdGoodsParameter();
+                        
+                        newTgp.setParamCategory(tgp.getParamCategory());
+                        newTgp.setParamId(tgp.getParamId());
+                        newTgp.setParamName(tgp.getParamName());
+                        newTgp.setValue(tgp.getValue());
+                        
+                        newParamList.add(newTgp);
+                    }
+                }
+                
+                newGoods.setParamList(newParamList);
+                
+                tdGoodsParameterService.save(newParamList);
+            }
+            
+            
+            newGoods.setParamValueCollect(tdGoods.getParamValueCollect());
+            newGoods.setPlatformServiceReturnRation(tdGoods.getPlatformServiceReturnRation());
+            newGoods.setPointLimited(tdGoods.getPointLimited());
+            newGoods.setPriceUnit(tdGoods.getPriceUnit());
+            newGoods.setProductId(tdGoods.getProductId());
+            newGoods.setPromotion(tdGoods.getPromotion());
+            newGoods.setProviderId(tdGoods.getProviderId());
+            newGoods.setProviderTitle(tdGoods.getProviderTitle());
+            newGoods.setReturnPoints(tdGoods.getReturnPoints());
+            newGoods.setReturnPrice(tdGoods.getReturnPrice());
+            newGoods.setSalePrice(tdGoods.getSalePrice());
+            newGoods.setSaleType(tdGoods.getSaleType());
+            newGoods.setSelectOneValue(tdGoods.getSelectOneValue());
+            newGoods.setSelectThreeValue(tdGoods.getSelectThreeValue());
+            newGoods.setSelectTwoValue(tdGoods.getSelectTwoValue());
+            newGoods.setSeoDescription(tdGoods.getSeoDescription());
+            newGoods.setSeoKeywords(tdGoods.getSeoKeywords());
+            newGoods.setSeoTitle(tdGoods.getSeoTitle());
+            newGoods.setService(tdGoods.getService());
+            newGoods.setShopReturnRation(tdGoods.getShopReturnRation());
+            newGoods.setShowPictures(tdGoods.getShowPictures());
+            newGoods.setSoldNumber(tdGoods.getSoldNumber());
+            newGoods.setSortId(tdGoods.getSortId());
+            newGoods.setSubTitle(tdGoods.getSubTitle());
+            newGoods.setTags(tdGoods.getTags());
+            newGoods.setTitle(tdGoods.getTitle());
+            newGoods.setTotalComb(0);
+            newGoods.setTotalComments(0L);
+            newGoods.setTotalGift(0);
+            newGoods.setTrainServiceReturnRation(tdGoods.getTrainServiceReturnRation());
+            newGoods.setUserLevelLimit(tdGoods.getUserLevelLimit());
+            newGoods.setVideoUri(tdGoods.getVideoUri());
+            newGoods.setWarehouseId(tdGoods.getWarehouseId());
+            newGoods.setWarehouseTitle(tdGoods.getWarehouseTitle());
+            
+            tdGoodsService.save(newGoods, username);
+            tdManagerLogService.addLog("add", "用户复制商品", req);
+        }
+
+        return "redirect:/Verwalter/goods/list";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)

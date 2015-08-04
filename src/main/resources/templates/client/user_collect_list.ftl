@@ -67,7 +67,7 @@ function __doPostBack(eventTarget, eventArgument) {
     <div class="mymember_mainbox">
         <div class="mymember_info mymember_info02">
             <div class="mymember_order_search"> 
-                <a class="a001" href="/user/collect/list">关注商品</a>
+                <a class="a001" href="/user/collect/list">收藏商品</a>
                 <input class="mysub" type="submit" value="查询">
                 <input class="mytext" type="text" name="keywords" onfocus="if(value=='商品名称') {value=''}" onblur="if (value=='') {value='商品名称'}" value="${keywords!'商品名称'}">
                 <div class="clear"></div>

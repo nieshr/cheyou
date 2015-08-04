@@ -130,7 +130,8 @@ function clearSelect()
     <a class="a1" href="/">首页</a>
     <#if category_tree_list??>
         <#list category_tree_list as category>
-            <span> > </span><a class="a2" href="/list/${category.id}">${category.title!""}</a>
+            <span> > </span>
+            <a class="a2" href="/list/${category.id}">${category.title!""}</a>
         </#list>
     </#if>
     <span> > ${goods.name!''}</span>
@@ -252,11 +253,29 @@ function checkTime(i)
               <span class="red mr10 ml10" id="lday">0</span>天<span class="red mr10 ml10" id="lhour">0</span>时<span class="red ml10 mr10" id="lmin">0</span>分<span class="red ml10 mr10" id="lsec">0</span>秒
             </p>
           </div>
+      <#elseif qiang?? && qiang != 1 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
+            <p class="p1">
+              <span class="mr10">预付价</span>
+              <span class="red fs24 lh30 mr20">￥：<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></span>
+              <span class="unl-th c9">￥：<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span>
+            </p>
+            <p class="p1">
+              <span class="mr10">三人团价</span>
+              <span class="lh30 mr20">￥：<#if goods.groupSaleThreePrice??>${goods.groupSaleThreePrice?string("0.00")}</#if></span>
+            </p>
+            <p class="p1">
+              <span class="mr10">七人团价</span>
+              <span class="lh30 mr20">￥：<#if goods.groupSaleSevenPrice??>${goods.groupSaleSevenPrice?string("0.00")}</#if></span>
+            </p>
+            <p class="p1">
+              <span class="mr10">十人团价</span>
+              <span class="lh30 mr20">￥：<#if goods.groupSaleTenPrice??>${goods.groupSaleTenPrice?string("0.00")}</#if></span>
+            </p>
       <#else>
           <div class="pro_price">
             <p class="p1">
               <span class="mr10">同盟价</span>
-              <#if qiang?? && qiang != 1 && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
+              <#if qiang?? && qiang != 1 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
                 <span class="red fs24 lh30 mr20">￥：<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></span>
               <#else>
                 <span class="red fs24 lh30 mr20">￥：<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></span>
@@ -398,7 +417,7 @@ function checkTime(i)
           <td colspan="2">
             <a id="addCart" href="/cart/init?id=${goods.id}<#if qiang??>&qiang=${qiang}</#if>" class="sub sub01">加入购物车</a>
             <div class="buy_share">
-              <a class="buy_share_a" href="javascript:addCollect(${goods.id});">关注商品</a>
+              <a class="buy_share_a" href="javascript:addCollect(${goods.id});">收藏商品</a>
               <p>关注人数：<span class="red">${total_collects!'0'}</span>人</p>
             </div>
             <div class="clear"></div>
@@ -413,6 +432,7 @@ function checkTime(i)
 </div><!--pro_info END-->
 
 <div class="main pt20">
+  <#if !qiang??>
   <section class="pro_assort">
     <menu id="assort_menu">
       <a class="sel" href="javascript:;">推荐配套</a>
@@ -465,6 +485,7 @@ function checkTime(i)
     </div>
     <div class="clear"></div>
   </section><!--pro_assort END-->
+  </#if>
   
   <div class="clear h20"></div>
   

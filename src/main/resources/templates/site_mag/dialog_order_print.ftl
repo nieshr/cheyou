@@ -52,10 +52,10 @@
                         <tbody><tr>
                             <td align="left" style="background: #ccc;">商品名称</td>
                             <td width="12%" align="left" style="background: #ccc;">成交价</td>
-                            <td width="10%" align="left" style="background: #ccc;">积分</td>
+                            <td width="10%" align="left" style="background: #ccc;">粮草</td>
                             <td width="10%" align="left" style="background: #ccc;">数量</td>
                             <td width="12%" align="left" style="background: #ccc;">金额合计</td>
-                            <td width="12%" align="left" style="background: #ccc;">积分合计</td>
+                            <td width="12%" align="left" style="background: #ccc;">粮草合计</td>
                         </tr>
                     <#if order??>
                         <#list order.orderGoodsList as og>

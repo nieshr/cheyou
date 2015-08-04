@@ -181,10 +181,6 @@ public class TdGoods {
     @Column(scale=2)
     private Double includePrice;
     
-    // 组合销售时的价格
-    @Column(scale=2)
-    private Double combPrice;
-    
     // 仓库ID
     @Column
     private Long warehouseId;
@@ -204,10 +200,6 @@ public class TdGoods {
     // 库存数量
     @Column
     private Long leftNumber;
-    
-    // 库存信息
-    @Column
-    private Long storehouseId;
  
     // 该版本的已售数量
     @Column
@@ -686,15 +678,7 @@ public class TdGoods {
     public void setIncludePrice(Double includePrice) {
         this.includePrice = includePrice;
     }
-
-    public Double getCombPrice() {
-        return combPrice;
-    }
-
-    public void setCombPrice(Double combPrice) {
-        this.combPrice = combPrice;
-    }
-
+    
     public Long getLeftNumber() {
         return leftNumber;
     }
@@ -718,15 +702,7 @@ public class TdGoods {
     public void setWarehouseTitle(String warehouseTitle) {
         this.warehouseTitle = warehouseTitle;
     }
-
-    public Long getStorehouseId() {
-        return storehouseId;
-    }
-
-    public void setStorehouseId(Long storehouseId) {
-        this.storehouseId = storehouseId;
-    }
-
+    
     public Long getSoldNumber() {
         return soldNumber;
     }

@@ -138,7 +138,7 @@
         function OrderInvalid() {
             var dialog = $.dialog({
                 title: '取消订单',
-                content: '操作提示信息：<br />1、设为作废订单，将不可逆转；<br />2、会员用户，自动检测退还金额或积分到账户；<br />3、请单击相应按钮继续下一步操作！',
+                content: '操作提示信息：<br />1、设为作废订单，将不可逆转；<br />2、会员用户，自动检测退还金额或粮草到账户；<br />3、请单击相应按钮继续下一步操作！',
                 min: false,
                 max: false,
                 lock: true,
@@ -796,7 +796,7 @@
                     </tr>
                     <tr>
                         <th>
-                            可获取积分总计
+                            可获取粮草总计
                         </th>
                         <td>
                             <div class="position">

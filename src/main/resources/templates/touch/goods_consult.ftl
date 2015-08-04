@@ -44,7 +44,7 @@ function submitConsult()
 <body>
 <header class="comhead">
   <div class="main">
-    <p>商品咨询</p>
+    <p>留言咨询</p>
     <a class="a1" href="javascript:history.go(-1);">返回</a>
     <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
   </div>
@@ -82,6 +82,7 @@ function submitConsult()
 <section class="botlogin">
   <#if username??>
   <a href="/touch/user">${username!''}</a>
+  <a class="ml20" href="/touch/logout">退出</a>
   <#else>
   <a href="/touch/login">登录</a><a class="ml20" href="/touch/reg">注册</a>
   </#if>
