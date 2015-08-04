@@ -19,6 +19,7 @@ import com.ynyes.cheyou.entity.TdGoodsParameter;
 import com.ynyes.cheyou.entity.TdPriceChangeLog;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.entity.TdProvider;
+import com.ynyes.cheyou.entity.TdSite;
 import com.ynyes.cheyou.entity.TdWarehouse;
 import com.ynyes.cheyou.repository.TdGoodsRepo;
 
@@ -64,6 +65,9 @@ public class TdGoodsService {
 
     @Autowired
     TdPriceChangeLogService tdPriceChangeLogService;
+    
+    @Autowired
+    TdSiteService tdSiteService;
 
     /**
      * 查找所有商品
@@ -1920,6 +1924,15 @@ public class TdGoodsService {
             e.setOnSaleTime(new Date());
         }
 
+        // 站点
+        if (null != e.getSiteId()) {
+            TdSite s = tdSiteService.findOne(e.getSiteId());
+
+            if (null != s) {
+                e.setSiteTitle(s.getTitle());
+            }
+        }
+        
         // 仓库名
         if (null != e.getWarehouseId()) {
             TdWarehouse w = tdWarehouseService.findOne(e.getWarehouseId());

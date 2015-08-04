@@ -181,6 +181,14 @@ public class TdGoods {
     @Column(scale=2)
     private Double includePrice;
     
+    // 站点ID
+    @Column
+    private Long siteId;
+    
+    // 站点名
+    @Column
+    private String siteTitle;
+    
     // 仓库ID
     @Column
     private Long warehouseId;
@@ -314,6 +322,22 @@ public class TdGoods {
     @Column
     private Boolean isGroupSaleHundred;
     
+    // 百人团开始时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date groupSaleHundredStartTime;
+    
+    // 百人团结束时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date groupSaleHundredStopTime;
+    
+    // 百人团预付定金
+    @Column(scale=2)
+    private Double groupSalePrePayPrice;
+    
     // 百人团价格
     @Column(scale=2)
     private Double groupSaleHundredPrice;
@@ -322,13 +346,21 @@ public class TdGoods {
     @Column
     private String groupSaleImage;
     
-    // 限时抢购剩余数量
+    // 团购剩余数量
     @Column
     private Long groupSaleLeftNumber;
     
-    // 限时抢购已售数量
+    // 团购已售数量
     @Column
     private Long groupSaleSoldNumber;
+    
+    // 百人团剩余数量
+    @Column
+    private Long groupSaleHundredLeftNumber;
+    
+    // 百人团已售数量
+    @Column
+    private Long groupSaleHundredSoldNumber;
     
     // 品牌
     @Column
@@ -1071,7 +1103,63 @@ public class TdGoods {
         this.trainServiceReturnRation = trainServiceReturnRation;
     }
 
-	@Override
+	public Long getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(Long siteId) {
+        this.siteId = siteId;
+    }
+
+    public String getSiteTitle() {
+        return siteTitle;
+    }
+
+    public void setSiteTitle(String siteTitle) {
+        this.siteTitle = siteTitle;
+    }
+
+    public Date getGroupSaleHundredStartTime() {
+        return groupSaleHundredStartTime;
+    }
+
+    public void setGroupSaleHundredStartTime(Date groupSaleHundredStartTime) {
+        this.groupSaleHundredStartTime = groupSaleHundredStartTime;
+    }
+
+    public Date getGroupSaleHundredStopTime() {
+        return groupSaleHundredStopTime;
+    }
+
+    public void setGroupSaleHundredStopTime(Date groupSaleHundredStopTime) {
+        this.groupSaleHundredStopTime = groupSaleHundredStopTime;
+    }
+
+    public Double getGroupSalePrePayPrice() {
+        return groupSalePrePayPrice;
+    }
+
+    public void setGroupSalePrePayPrice(Double groupSalePrePayPrice) {
+        this.groupSalePrePayPrice = groupSalePrePayPrice;
+    }
+
+    public Long getGroupSaleHundredLeftNumber() {
+        return groupSaleHundredLeftNumber;
+    }
+
+    public void setGroupSaleHundredLeftNumber(Long groupSaleHundredLeftNumber) {
+        this.groupSaleHundredLeftNumber = groupSaleHundredLeftNumber;
+    }
+
+    public Long getGroupSaleHundredSoldNumber() {
+        return groupSaleHundredSoldNumber;
+    }
+
+    public void setGroupSaleHundredSoldNumber(Long groupSaleHundredSoldNumber) {
+        this.groupSaleHundredSoldNumber = groupSaleHundredSoldNumber;
+    }
+
+    @Override
 	public String toString() {
 		return "TdGoods [id=" + id + ", productId=" + productId + ", name=" + name + "]";
 	}

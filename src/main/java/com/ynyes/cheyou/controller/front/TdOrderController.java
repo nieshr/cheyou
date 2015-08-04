@@ -992,7 +992,7 @@ public class TdOrderController extends AbstractPaytypeController {
 
         // 给用户发送短信
         if (null != tdUser && null != tdUser.getMobile()) {
-            SMSUtil.send(tdUser.getMobile(), "16910",
+            SMSUtil.send(tdUser.getMobile(), "29040",
                     new String[] { tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
                             tdOrder.getOrderNumber().substring(tdOrder.getOrderNumber().length()-4)});
@@ -1001,10 +1001,11 @@ public class TdOrderController extends AbstractPaytypeController {
         // 给商户发短信
         if (null != tdShop && null != tdUser && null != tdShop.getMobile())
         {
-            SMSUtil.send(tdShop.getMobile(), "16912",
+            SMSUtil.send(tdShop.getMobile(), "29039",
                 new String[] { tdShop.getTitle(),
                 tdUser.getUsername(),
-                tdOrder.getOrderGoodsList().get(0).getGoodsTitle()});
+                tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
+                tdOrder.getAppointmentTime().toString()});
         }
 
         List<TdOrderGoods> tdOrderGoodsList = tdOrder.getOrderGoodsList();

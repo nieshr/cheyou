@@ -34,6 +34,7 @@ import com.ynyes.cheyou.service.TdPriceChangeLogService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.service.TdProductService;
 import com.ynyes.cheyou.service.TdProviderService;
+import com.ynyes.cheyou.service.TdSiteService;
 import com.ynyes.cheyou.service.TdWarehouseService;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
@@ -79,6 +80,9 @@ public class TdManagerGoodsController {
     
     @Autowired
     TdGoodsParameterService tdGoodsParameterService;
+    
+    @Autowired
+    TdSiteService tdSiteService;
 
     @RequestMapping(value = "/edit/parameter/{categoryId}", method = RequestMethod.POST)
     public String parameter(@PathVariable Long categoryId, ModelMap map,
@@ -727,6 +731,8 @@ public class TdManagerGoodsController {
         map.addAttribute("category_list", tdProductCategoryService.findAll());
 
         map.addAttribute("warehouse_list", tdWarehouseService.findAll());
+        
+        map.addAttribute("site_list", tdSiteService.findAll());
 
         map.addAttribute("provider_list", tdProviderService.findAll());
 
@@ -829,6 +835,8 @@ public class TdManagerGoodsController {
             newGoods.setNumberDecType(tdGoods.getNumberDecType());
             newGoods.setOnSaleTime(tdGoods.getOnSaleTime());
             newGoods.setOutFactoryPrice(tdGoods.getOutFactoryPrice());
+            newGoods.setSiteId(tdGoods.getSiteId());
+            newGoods.setSiteTitle(tdGoods.getSiteTitle());
             
             List<TdGoodsParameter> paramList = tdGoods.getParamList();
             

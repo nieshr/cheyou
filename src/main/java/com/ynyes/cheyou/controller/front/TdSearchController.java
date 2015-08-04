@@ -11,8 +11,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ynyes.cheyou.entity.TdArticleCategory;
 import com.ynyes.cheyou.entity.TdKeywords;
-import com.ynyes.cheyou.entity.TdProductCategory;
+import com.ynyes.cheyou.service.TdArticleCategoryService;
+import com.ynyes.cheyou.service.TdArticleService;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdKeywordsService;
@@ -38,6 +40,12 @@ public class TdSearchController {
     
     @Autowired
     private TdProductCategoryService tdProductCategoryService;
+    
+    @Autowired
+    private TdArticleCategoryService tdArticleCategoryService;
+    
+    @Autowired
+    private TdArticleService tdArticleService;
     
     @RequestMapping(value="/search", method = RequestMethod.GET)
     public String list(String keywords, Integer page, HttpServletRequest req, ModelMap map){
@@ -70,6 +78,18 @@ public class TdSearchController {
             }
             
             map.addAttribute("goods_page", tdGoodsService.searchGoods(keywords.trim(), page, ClientConstant.pageSize));
+        }
+        
+        // 商城资讯
+        List<TdArticleCategory> articleCatList = tdArticleCategoryService
+                .findByMenuId(10L);
+
+        if (null != articleCatList && articleCatList.size() > 0) {
+            Long articleCatId = articleCatList.get(0).getId();
+
+            map.addAttribute("news_page", tdArticleService
+                    .findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(10L,
+                            articleCatId, 0, ClientConstant.pageSize));
         }
         
         map.addAttribute("pageId", page);

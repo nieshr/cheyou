@@ -32,6 +32,7 @@ import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayTypeService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.util.SMSUtil;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
 /**
@@ -666,6 +667,15 @@ public class TdManagerOrderController {
                     order.setExpressNumber(expressNumber);
                     order.setStatusId(4L);
                     order.setSendTime(new Date());
+                    
+                    TdUser tdUser = tdUserService.findByUsername(order.getUsername());
+                    
+                    if (null != tdUser)
+                    {
+                        SMSUtil.send(tdUser.getMobile(), "28744",
+                                new String[] { order.getUsername(),
+                                        order.getOrderNumber()});
+                    }
                 }
             }
             // 确认收货

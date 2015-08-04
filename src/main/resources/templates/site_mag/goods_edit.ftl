@@ -357,6 +357,21 @@ function del_goods_comb(obj) {
                 </div>
             </dd>
         </dl>
+        <#if site_list??>
+        <dl>
+            <dt>所属站点</dt>
+            <dd>
+                <div class="rule-single-select">
+                    <select name="siteId" datatype="*0-100" sucmsg=" ">
+                        <option value="" <#if !site_list??>selected="selected"</#if>>请选择...</option>
+                        <#list site_list as w>
+                            <option value="${w.id!""}" <#if goods?? && goods.siteId?? && goods.siteId==w.id>selected="selected"</#if>>${w.title!""}</option>
+                        </#list>
+                    </select>
+                </div>
+            </dd>
+        </dl>
+        </#if>
         <dl>
             <dt>推荐类型</dt>
             <dd>
@@ -575,14 +590,14 @@ function del_goods_comb(obj) {
         <dl>
             <dt>平台服务费比例</dt>
             <dd>
-                <input name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <input name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.06")}<#else>0.06</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">平台服务费 = 销售价 * 平台服务费比例</span>
             </dd>
         </dl>
         <dl>
             <dt>培训服务费比例</dt>
             <dd>
-                <input name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <input name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.02")}<#else>0.02</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">培训服务费 = 销售价 * 培训服务费比例</span>
             </dd>
         </dl>
@@ -620,7 +635,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>库存余量</dt>
             <dd>
-                <input name="leftNumber" type="text" value="<#if goods?? && goods.leftNumber??>${goods.leftNumber?c!"1"}<#else>1</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <input name="leftNumber" type="text" value="<#if goods?? && goods.leftNumber??>${goods.leftNumber?c!"99"}<#else>99</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">库存为0时显示为缺货</span>
             </dd>
         </dl>
@@ -699,9 +714,17 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">已销售商品数量</span>
             </dd>
         </dl>
-        
         <dl>
-            <dt>支持团购</dt>
+            <dt>团购展示图片</dt>
+            <dd>
+                <input id="groupSaleImage" name="groupSaleImage" type="text" value="<#if goods??>${goods.groupSaleImage!""}</#if>" class="input normal upload-path">
+                <div class="upload-box upload-img"></div>
+                <div id="thumb_ImgUrl_show2" class="photo-list thumb_ImgUrl_show">
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>开启十人团</dt>
             <dd>
                 <div class="rule-multi-radio">
                     <span>
@@ -714,7 +737,7 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
-            <dt>开始时间</dt>
+            <dt>十人团开始时间</dt>
             <dd>
                 <div class="input-date">
                     <input name="groupSaleStartTime" type="text" value="<#if goods??>${goods.groupSaleStartTime!""}</#if>" class="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" ">
@@ -723,24 +746,14 @@ function del_goods_comb(obj) {
                 <span class="Validform_checktip">不选择默认为当前时间</span>
             </dd>
         </dl>
-        
         <dl>
-            <dt>结束时间</dt>
+            <dt>十人团结束时间</dt>
             <dd>
                 <div class="input-date">
                     <input name="groupSaleStopTime" type="text" value="<#if goods??>${goods.groupSaleStopTime!""}</#if>" class="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" ">
                     <i>日期</i>
                 </div>
                 <span class="Validform_checktip">不选择默认为当前时间</span>
-            </dd>
-        </dl>
-        <dl>
-            <dt>团购展示图片</dt>
-            <dd>
-                <input id="groupSaleImage" name="groupSaleImage" type="text" value="<#if goods??>${goods.groupSaleImage!""}</#if>" class="input normal upload-path">
-                <div class="upload-box upload-img"></div>
-                <div id="thumb_ImgUrl_show2" class="photo-list thumb_ImgUrl_show">
-                </div>
             </dd>
         </dl>
         <dl>
@@ -785,13 +798,6 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
-            <dt>百人团价格</dt>
-            <dd>
-                <input name="groupSaleHundredPrice" type="text" value="<#if goods?? && goods.groupSaleHundredPrice??>${goods.groupSaleHundredPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">十人团商品团购价格</span>
-            </dd>
-        </dl>
-        <dl>
             <dt>团购剩余数量</dt>
             <dd>
                 <input name="groupSaleLeftNumber" type="text" value="<#if goods?? && goods.groupSaleLeftNumber??>${goods.groupSaleLeftNumber?c}<#else>0</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
@@ -803,6 +809,54 @@ function del_goods_comb(obj) {
             <dd>
                 <input name="groupSaleSoldNumber" type="text" value="<#if goods?? && goods.groupSaleSoldNumber??>${goods.groupSaleSoldNumber?c}<#else>0</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
                 <span class="Validform_checktip">团购已售商品数量</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>百人团开始时间</dt>
+            <dd>
+                <div class="input-date">
+                    <input name="groupSaleHundredStartTime" type="text" value="<#if goods??>${goods.groupSaleHundredStartTime!""}</#if>" class="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" ">
+                    <i>日期</i>
+                </div>
+                <span class="Validform_checktip">不选择默认为当前时间</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>百人团结束时间</dt>
+            <dd>
+                <div class="input-date">
+                    <input name="groupSaleHundredStopTime" type="text" value="<#if goods??>${goods.groupSaleHundredStopTime!""}</#if>" class="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" ">
+                    <i>日期</i>
+                </div>
+                <span class="Validform_checktip">不选择默认为当前时间</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>百人团预付定金</dt>
+            <dd>
+                <input name="groupSalePrePayPrice" type="text" value="<#if goods?? && goods.groupSalePrePayPrice??>${goods.groupSalePrePayPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">预付定金额度</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>百人团价格</dt>
+            <dd>
+                <input name="groupSaleHundredPrice" type="text" value="<#if goods?? && goods.groupSaleHundredPrice??>${goods.groupSaleHundredPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <span class="Validform_checktip">十人团商品团购价格</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>百人团剩余数量</dt>
+            <dd>
+                <input name="groupSaleHundredLeftNumber" type="text" value="<#if goods?? && goods.groupSaleHundredLeftNumber??>${goods.groupSaleHundredLeftNumber?c}<#else>0</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
+                <span class="Validform_checktip">为0时百人团结束</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>百人团销量</dt>
+            <dd>
+                <input name="groupSaleHundredSoldNumber" type="text" value="<#if goods?? && goods.groupSaleHundredSoldNumber??>${goods.groupSaleHundredSoldNumber?c}<#else>0</#if>" class="input normal" datatype="n0-10" sucmsg=" ">
+                <span class="Validform_checktip">百人团已售商品数量</span>
             </dd>
         </dl>
     </div>
