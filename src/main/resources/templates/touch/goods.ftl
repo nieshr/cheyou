@@ -223,7 +223,7 @@ function addCollect(goodsId)
       <a class="a1"id="id-minus" href="javascript:;">-</a>
       <input type="text" id="quantity" class="text" value="1" />
     </div>
-    <a id="addCart" class="fr" href="/cart/init?id=${goods.id}<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
+    <a id="addCart" class="fr" href="/cart/init?id=${goods.id}&m=1<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
     <div class="clear"></div>
   </div>
 </footer>

@@ -40,8 +40,18 @@ public class TdCartController {
     @Autowired
     private TdCommonService tdCommonService;
 
+    /**
+     * 加入购物车
+     * @param id
+     * @param quantity
+     * @param zpid
+     * @param qiang 抢购类型 0：正常销售 >0：促销
+     * @param m 是否是触屏 0: 否 1: 是
+     * @param req
+     * @return
+     */
     @RequestMapping(value = "/cart/init")
-    public String addCart(Long id, Long quantity, String zpid, Integer qiang,
+    public String addCart(Long id, Long quantity, String zpid, Integer qiang, Integer m,
             HttpServletRequest req) {
         // 是否已登录
         boolean isLoggedIn = true;
@@ -51,6 +61,11 @@ public class TdCartController {
         if (null == username) {
             isLoggedIn = false;
             username = req.getSession().getId();
+        }
+        
+        if (null == m)
+        {
+            m = 0;
         }
         
         if (null == quantity || quantity.compareTo(1L) < 0)
@@ -237,14 +252,19 @@ public class TdCartController {
             }
         }
 
-        return "redirect:/cart/add?id=" + id;
+        return "redirect:/cart/add?id=" + id + "&m=" + m;
     }
 
     @RequestMapping(value = "/cart/add")
-    public String cartInit(Long id, Device device, HttpServletRequest req, ModelMap map) {
+    public String cartInit(Long id, Integer m, Device device, HttpServletRequest req, ModelMap map) {
         tdCommonService.setHeader(map, req);
         
-        if (device.isMobile() || device.isTablet()) { // 移动端浏览器
+        if (null == m)
+        {
+            m = 0;
+        }
+        
+        if (m.equals(1)) { // 移动端浏览器
             
             return "/touch/cart_add_res";
         }

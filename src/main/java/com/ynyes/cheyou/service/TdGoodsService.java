@@ -65,7 +65,7 @@ public class TdGoodsService {
 
     @Autowired
     TdPriceChangeLogService tdPriceChangeLogService;
-    
+
     @Autowired
     TdSiteService tdSiteService;
 
@@ -134,21 +134,23 @@ public class TdGoodsService {
 
         return repository.findByIsOnSaleFalse(pageRequest);
     }
-    
-    public Page<TdGoods> findByIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(int page, int size) {
+
+    public Page<TdGoods> findByIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
+            int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId"));
 
         return repository.findByIsOnSaleFalseAndIsFlashSaleTrue(pageRequest);
     }
-    
-    public Page<TdGoods> findByIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(int page, int size) {
+
+    public Page<TdGoods> findByIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
+            int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId"));
 
         return repository.findByIsOnSaleFalseAndIsGroupSaleTrue(pageRequest);
     }
-    
+
     public Page<TdGoods> findAllAndIsOnSaleTrue(int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
 
@@ -221,7 +223,7 @@ public class TdGoodsService {
                 .findByTitleContainingAndIsOnSaleFalseOrSubTitleContainingAndIsOnSaleFalseOrDetailContainingAndIsOnSaleFalseOrderBySortIdAsc(
                         keywords, keywords, keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
             String keywords, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -230,7 +232,7 @@ public class TdGoodsService {
                 .findByTitleContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrSubTitleContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrDetailContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
                         keywords, keywords, keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -251,7 +253,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -263,7 +265,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsFlashSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -287,7 +289,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -299,7 +301,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleTrueAndIsFlashSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -323,7 +325,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -335,7 +337,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -347,7 +349,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleFalseAndIsFlashSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -597,20 +599,22 @@ public class TdGoodsService {
 
         String catIdStr = "[" + catId + "]";
 
-        return repository.findByCategoryIdTreeContainingAndIsFlashSaleTrueOrderBySortIdAsc(
-                catIdStr, pageRequest);
+        return repository
+                .findByCategoryIdTreeContainingAndIsFlashSaleTrueOrderBySortIdAsc(
+                        catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsGroupSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
 
         String catIdStr = "[" + catId + "]";
 
-        return repository.findByCategoryIdTreeContainingAndIsGroupSaleTrueOrderBySortIdAsc(
-                catIdStr, pageRequest);
+        return repository
+                .findByCategoryIdTreeContainingAndIsGroupSaleTrueOrderBySortIdAsc(
+                        catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -621,7 +625,7 @@ public class TdGoodsService {
                 .findByCategoryIdTreeContainingAndIsOnSaleTrueOrderBySortIdAsc(
                         catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -632,7 +636,7 @@ public class TdGoodsService {
                 .findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
                         catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsFlashSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -654,7 +658,7 @@ public class TdGoodsService {
                 .findByCategoryIdTreeContainingAndIsOnSaleFalseOrderBySortIdAsc(
                         catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -665,7 +669,7 @@ public class TdGoodsService {
                 .findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
                         catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -1344,6 +1348,30 @@ public class TdGoodsService {
                         keywords, keywords, keywords, keywords, pageRequest);
     }
 
+    /**
+     * 搜索商品
+     * 
+     * @param keywords 关键字
+     * @param page 页号
+     * @param size 页大小
+     * @param sortName 排序字段名
+     * @param sd 排序方向
+     * @return
+     */
+    public Page<TdGoods> searchGoods(String keywords, int page, int size,
+            String sortName, Direction dir) {
+        if (null == keywords || null == sortName) {
+            return null;
+        }
+
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(
+                dir, sortName));
+
+        return repository
+                .findByTitleContainingIgnoreCaseAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(
+                        keywords, keywords, keywords, keywords, pageRequest);
+    }
+
     public Page<TdGoods> findByCategoryIdAndSalePriceBetweenAndParamsLikeAndIsOnSaleTrueOrderBySalePriceAsc(
             long catId, double priceLow, double priceHigh, int page, int size,
             List<String> paramValueList) {
@@ -1932,7 +1960,7 @@ public class TdGoodsService {
                 e.setSiteTitle(s.getTitle());
             }
         }
-        
+
         // 仓库名
         if (null != e.getWarehouseId()) {
             TdWarehouse w = tdWarehouseService.findOne(e.getWarehouseId());
@@ -2059,11 +2087,11 @@ public class TdGoodsService {
 
     /**
      * 根据商品Id查找所属类别Id
+     * 
      * @param id
      * @return
      */
-    public TdGoods findProductIdById(Long id)
-    {
-    	return repository.findOne(id);
+    public TdGoods findProductIdById(Long id) {
+        return repository.findOne(id);
     }
 }

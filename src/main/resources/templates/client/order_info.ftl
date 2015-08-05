@@ -166,7 +166,7 @@
          <h3>选择线下同盟店</h3>
           
              
-            <select name="shopId" id="formselect"datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
+            <select name="shopId" id="formselect" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
                 <option>请选择</option>
                 <#if shop_list??>
                     <#list shop_list as item>

@@ -117,8 +117,8 @@ function timer${item_index}()
 <header class="index_top">
   <div class="main">
     <section class="comserch">
-        <form action="/search" method="get">
-            <input type="text" class="text comserch_text" name="keywords" value="${keywords!''}"/>
+        <form action="/touch/search" method="get">
+            <input type="text" class="text comserch_text" name="keywords" value="${keywords!keywords_list[0].title}"/>
             <input type="submit" class="sub" value="" />
         </form>
     </section>
@@ -385,7 +385,7 @@ function timer${item_index}()
   <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
 </section>
 <footer class="comfoot main">
-    <a href="/">电脑版</a>
+    <a href="/index">电脑版</a>
     <a href="/touch">触屏版</a>
 </footer>
 <p class="bottext mainbox">${site.copyright!''}</p>

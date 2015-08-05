@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if productCategory??>${productCategory.seoTitle!''}-</#if>车有同盟</title>
-<meta name="keywords" content="<#if productCategory??>${productCategory.seoKeywords!''}</#if>" />
-<meta name="description" content="<#if productCategory??>${productCategory.seoDescription!''}</#if>" />
-<meta name="copyright" content="云南车有同盟商贸有限公司 版权所有" /> 
+<title><#if keywords??>${keywords!''}-</#if>车有同盟</title>
+<meta name="keywords" content="<#if site??>${site.seoKeywords!''}</#if>" />
+<meta name="description" content="<#if site??>${site.seoDescription!''}</#if>" />
+<meta name="copyright" content="${site.copyright!''}" /> 
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js"></script>
@@ -26,6 +26,11 @@ function setprice() {
     var url = '/list/' + $('#urlcoll').val();
     if (price != "0-0") { url += "_" + price; }
     location.href = url;
+}
+function btnPageSubmit() 
+{
+    window.location.href = "/search?keywords=${keywords!''}&page="
+    + (parseInt($('#iPageNum').val()) - 1);
 }
 </script>
 
@@ -194,7 +199,7 @@ $(document).ready(function(){
                     <#if goods_page.number+1 == 1>
                         <a class="a1 a0" href="javascript:;"><span>上一页</span></a>
                     <#else>
-                        <a class="a1 a0" href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>上一页</span></a>
+                        <a class="a1 a0" href="/search?keywords=${keywords!''}&page=${goods_page.number-1}"><span>上一页</span></a>
                     </#if>
                     
                     <#if goods_page.totalPages gt 0>
@@ -203,7 +208,7 @@ $(document).ready(function(){
                                 <#if page == goods_page.number+1>
                                     <a class="sel" href="javascript:;">${page}</a>
                                 <#else>
-                                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${page-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>">${page}</a> <#-- ${page} -->
+                                    <a href="/search?keywords=${keywords!''}&page=${page-1}">${page}</a> <#-- ${page} -->
                                 </#if>
                                 <#assign continueEnter=false>
                             <#else>
@@ -218,7 +223,7 @@ $(document).ready(function(){
                     <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
                         <a class="a2" href="javascript:;"><span>下一页</span></a>
                     <#else>
-                        <a class="a2" href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>下一页</span></a>
+                        <a class="a2" href="/search?keywords=${keywords!''}&page=${goods_page.number+1}"><span>下一页</span></a>
                     </#if>
                 </#if>
                 <span> 共<b>${goods_page.totalPages}</b>页 </span>
