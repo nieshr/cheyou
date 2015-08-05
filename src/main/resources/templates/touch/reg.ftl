@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-    searchTextClear(".logintext01","手机号/邮箱","#999","#333");
+  <!--  searchTextClear(".logintext01","手机号/邮箱","#999","#333");-->
     searchTextClear(".logintext02","输入验证码","#999","#333");
     
     //初始化表单验证
@@ -42,7 +42,7 @@ $(document).ready(function(){
     <form id="form1" method="post" action="/touch/reg">
         <p style="color: #F00">${error!''}</p>
         <div class="logintext">
-            <input class="logintext01" name="username" type="text" datatype="s6-20"/>
+            <input class="logintext01" name="username" type="text" datatype="s6-20" placeholder="手机号/邮箱" <#if registername??>value="${registername}"</#if>/>
         </div>
         <div class="logintext">
             <input class="logintext02" name="password" type="password" datatype="s6-20"/>
