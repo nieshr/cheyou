@@ -40,28 +40,32 @@ public class TdTouchCartController {
 
         String username = (String) req.getSession().getAttribute("username");
 
+        // 未登录用户的购物车商品
         List<TdCartGoods> cartSessionGoodsList = tdCartGoodsService
                 .findByUsername(req.getSession().getId());
 
         if (null == username) {
             username = req.getSession().getId();
         } else {
-            // 合并商品
+            // 已登录用户的购物车
             List<TdCartGoods> cartUserGoodsList = tdCartGoodsService
                     .findByUsername(username);
 
+            // 将未登录用户的购物车加入已登录用户购物车中
             for (TdCartGoods cg : cartSessionGoodsList) {
                 cg.setUsername(username);
                 cartUserGoodsList.add(cg);
             }
 
-            tdCartGoodsService.save(cartUserGoodsList);
+            cartUserGoodsList = tdCartGoodsService.save(cartUserGoodsList);
 
+            // 删除重复的商品
             for (TdCartGoods cg1 : cartUserGoodsList) {
+                
                 List<TdCartGoods> findList = tdCartGoodsService
-                        .findByGoodsIdAndQiangAndUsername(cg1.getGoodsId(), cg1.getQiang(), username);
+                        .findByGoodsIdAndUsername(cg1.getGoodsId(), username);
 
-                if (findList.size() > 1) {
+                if (null != findList && findList.size() > 1) {
                     tdCartGoodsService.delete(findList.subList(1,
                             findList.size()));
                 }
@@ -69,7 +73,8 @@ public class TdTouchCartController {
         }
 
         List<TdCartGoods> resList = tdCartGoodsService.findByUsername(username);
-        map.addAttribute("cart_goods_list", resList);
+        
+        map.addAttribute("cart_goods_list", tdCartGoodsService.updateGoodsInfo(resList));
 
         tdCommonService.setHeader(map, req);
 
@@ -91,14 +96,21 @@ public class TdTouchCartController {
         if (null != id) {
             for (TdCartGoods cartGoods : cartGoodsList) {
                 if (cartGoods.getId().equals(id)) {
-                    cartGoods.setIsSelected(!cartGoods.getIsSelected());
+                    if (null == cartGoods.getIsSelected() || false == cartGoods.getIsSelected())
+                    {
+                        cartGoods.setIsSelected(true);
+                    }
+                    else
+                    {
+                        cartGoods.setIsSelected(false);
+                    }
                     cartGoods = tdCartGoodsService.save(cartGoods);
                     break;
                 }
             }
         }
 
-        map.addAttribute("cart_goods_list", cartGoodsList);
+        map.addAttribute("cart_goods_list", tdCartGoodsService.updateGoodsInfo(cartGoodsList));
 
         return "/touch/cart_goods";
     }
@@ -131,7 +143,7 @@ public class TdTouchCartController {
             tdCartGoodsService.save(cartGoodsList);
         }
 
-        map.addAttribute("cart_goods_list", cartGoodsList);
+        map.addAttribute("cart_goods_list", tdCartGoodsService.updateGoodsInfo(cartGoodsList));
 
         return "/touch/cart_goods";
     }
@@ -156,7 +168,7 @@ public class TdTouchCartController {
         }
 
         map.addAttribute("cart_goods_list",
-                tdCartGoodsService.findByUsername(username));
+                tdCartGoodsService.updateGoodsInfo(tdCartGoodsService.findByUsername(username)));
 
         return "/touch/cart_goods";
     }
@@ -184,7 +196,7 @@ public class TdTouchCartController {
         }
 
         map.addAttribute("cart_goods_list",
-                tdCartGoodsService.findByUsername(username));
+                tdCartGoodsService.updateGoodsInfo(tdCartGoodsService.findByUsername(username)));
 
         return "/touch/cart_goods";
     }
@@ -207,7 +219,7 @@ public class TdTouchCartController {
         }
 
         map.addAttribute("cart_goods_list",
-                tdCartGoodsService.findByUsername(username));
+                tdCartGoodsService.updateGoodsInfo(tdCartGoodsService.findByUsername(username)));
 
         return "/touch/cart_goods";
     }

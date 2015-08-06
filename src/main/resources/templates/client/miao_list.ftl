@@ -143,7 +143,7 @@ function timer${item_index}()
                         <#elseif type?? && type=="passed">
                         <a href="javascript:;">已经结束</a>
                         <#else>
-                        <a href="/cart/init?id=${item.id}&qiang=1">立即购买</a>
+                        <a href="/order/buy/qiang?gid=${item.id}">立即购买</a>
                         </#if>
                     </div>
           

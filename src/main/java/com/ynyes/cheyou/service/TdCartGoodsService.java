@@ -103,14 +103,14 @@ public class TdCartGoodsService {
         return repository.findAll(pageRequest);
     }
     
-    public TdCartGoods findTopByGoodsIdAndQiangAndUsername(long goodsId, int qiang, String username)
+    public TdCartGoods findTopByGoodsIdAndUsername(long goodsId, String username)
     {
         if (null == username)
         {
             return null;
         }
         
-        return repository.findTopByGoodsIdAndQiangAndUsername(goodsId, qiang, username);
+        return repository.findTopByGoodsIdAndUsername(goodsId, username);
     }
     
 //    public List<TdCartGoods> findByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username)
@@ -123,14 +123,14 @@ public class TdCartGoodsService {
 //        return repository.findByGoodsIdAndPriceAndUsername(goodsId, price, username);
 //    }
     
-    public List<TdCartGoods> findByGoodsIdAndQiangAndUsername(Long goodsId, Integer qiang, String username)
+    public List<TdCartGoods> findByGoodsIdAndUsername(Long goodsId, String username)
     {
-        if (null == goodsId || null == qiang || null == username)
+        if (null == goodsId || null == username)
         {
             return null;
         }
         
-        return repository.findByGoodsIdAndQiangAndUsername(goodsId, qiang, username);
+        return repository.findByGoodsIdAndUsername(goodsId, username);
     }
     
     public List<TdCartGoods> findByUsername(String username)
@@ -155,27 +155,7 @@ public class TdCartGoodsService {
                 {
                     cartGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
                     cartGoods.setGoodsTitle(goods.getTitle());
-                    
-                    // 更新价格
-                    if (cartGoods.getQiang().equals(0))
-                    {
-                        cartGoods.setPrice(goods.getSalePrice());
-                    }
-                    // 秒杀价格以加入购物车时为准
-                    else if (cartGoods.getQiang().equals(1))
-                    {
-                        
-                    }
-                    // 更新百人团价格
-                    else if (cartGoods.getQiang().equals(100))
-                    {
-                        cartGoods.setPrice(goods.getGroupSalePrePayPrice());
-                    }
-                    // 更新十人团价格
-                    else
-                    {
-                        cartGoods.setPrice(goods.getGroupSalePrice());
-                    }
+                    cartGoods.setPrice(goods.getSalePrice());
                 }
             }
         }

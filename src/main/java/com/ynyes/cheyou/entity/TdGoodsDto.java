@@ -1,31 +1,17 @@
 package com.ynyes.cheyou.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 
 /**
- * 购物车
+ * 立即购买商品，不需要存储数据库
  * 
  * @author Sharon
  *
  */
 
-@Entity
-public class TdCartGoods {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    // 用户
-    @Column
-    private String username;
+public class TdGoodsDto {
     
     // 商品ID
-    @Column
     private Long goodsId;
     
     // 商品标题
@@ -38,32 +24,10 @@ public class TdCartGoods {
     private Long quantity;
     
     // 成交价
-    @Column
     private Double price;
     
-    // 是否选中，选中的商品将进行结算
-    @Column
-    private Boolean isSelected;
-    
-    // 是否是登陆用户
-    @Column
-    private Boolean isLoggedIn;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    // 销售方式 0-正常销售 1-组合销售 2-秒杀 3-十人团 4-百人团
+    private Integer saleId;
 
     public Long getGoodsId() {
         return goodsId;
@@ -105,19 +69,11 @@ public class TdCartGoods {
         this.price = price;
     }
 
-    public Boolean getIsSelected() {
-        return isSelected;
+    public Integer getSaleId() {
+        return saleId;
     }
 
-    public void setIsSelected(Boolean isSelected) {
-        this.isSelected = isSelected;
-    }
-
-    public Boolean getIsLoggedIn() {
-        return isLoggedIn;
-    }
-
-    public void setIsLoggedIn(Boolean isLoggedIn) {
-        this.isLoggedIn = isLoggedIn;
+    public void setSaleId(Integer saleId) {
+        this.saleId = saleId;
     }
 }

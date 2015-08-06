@@ -1,5 +1,6 @@
 package com.ynyes.cheyou.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -2169,12 +2170,40 @@ public class TdGoodsService {
     }
 
     /**
-     * 根据商品Id查找所属类别Id
+     * 计算实时秒杀价
      * 
-     * @param id
+     * @param goods
      * @return
      */
-    public TdGoods findProductIdById(Long id) {
-        return repository.findOne(id);
+    public Double getFlashPrice(TdGoods goods)
+    {
+        if (null == goods)
+        {
+            return null;
+        }
+        
+        Double flashPrice = null;
+        Date curr = new Date();
+        
+        if (null != goods.getIsFlashSale()
+                && null != goods.getFlashSaleStartTime()
+                && null != goods.getFlashSaleStopTime()
+                && null != goods.getFlashSalePrice() && goods.getIsFlashSale()
+                && goods.getFlashSaleStopTime().after(curr)
+                && goods.getFlashSaleStartTime().before(curr)) {
+            // 剩余毫秒数
+            long ts = goods.getFlashSaleStopTime().getTime() - curr.getTime();
+            // 总共毫秒数
+            long allts = goods.getFlashSaleStopTime().getTime()
+                    - goods.getFlashSaleStartTime().getTime();
+
+            flashPrice = goods.getFlashSalePrice() * ts / allts;
+
+            BigDecimal b = new BigDecimal(flashPrice);
+
+            flashPrice = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        }
+        
+        return flashPrice;
     }
 }

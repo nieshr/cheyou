@@ -3,9 +3,14 @@
         <a class="mymember_menu_tit" href="/user/order/list/0"><img src="/client/images/mymember/menu01.png" />订单中心</a>
         <div>
             <a href="/user/order/list/0">全部订单</a>
+            <#--
             <a href="/user/order/list/1">待确认订单</a>
+            -->
             <a href="/user/order/list/2">待付款订单</a>
-            <a href="/user/order/list/4">待收货订单</a>
+            <a href="/user/order/list/3">待付尾款订单</a>
+            <a href="/user/order/list/4">待服务订单</a>
+            <a href="/user/order/list/5">待评价订单</a>
+            <a href="/user/order/list/6">已完成订单</a>
             <a href="/user/order/list/7">取消订单记录</a>
         </div>
     </div>

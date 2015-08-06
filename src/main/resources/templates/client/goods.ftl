@@ -48,7 +48,7 @@
             $("#quantity").val(q-1);
         }
         
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val());
     });
     
     $("#id-plus").click(function(){
@@ -66,17 +66,17 @@
         <#else>
             $("#quantity").val(q+1);
         </#if>
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val());
     
     });
     
     $("#zhAddCart").click(function(){
         var str = "";
         $(".comboCheckBox:checked").each(function(){
-            str += $(this).attr("zpid");
+            str += $(this).attr("zhid");
             str += ",";
         });
-        var href = "/cart/init?id=" + ${goods.id} + "&zpid=" + str;
+        var href = "/order/buy/comb?gid=" + ${goods.id} + "&zhid=" + str;
         
         window.location = href;
         
@@ -460,7 +460,11 @@ function checkTime(i)
         </tr>
         <tr>
           <td colspan="2">
-            <a id="addCart" href="/cart/init?id=${goods.id}<#if qiang??>&qiang=${qiang}</#if>" class="sub sub01">加入购物车</a>
+            <#if qiang??>
+                <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id}" class="sub sub01">立即购买</a>
+            <#else>
+                <a id="addCart" href="/cart/init?id=${goods.id}" class="sub sub01">加入购物车</a>
+            </#if>
             <div class="buy_share">
               <a class="buy_share_a" href="javascript:addCollect(${goods.id});">收藏商品</a>
               <p>关注人数：<span class="red">${total_collects!'0'}</span>人</p>
@@ -504,7 +508,7 @@ function checkTime(i)
                         <a href="/goods/${item.goodsId}"><img src="${item.coverImageUri!''}" width="114" height="114"/></a>
                         <p style="height: 35px; overflow: hidden;">${item.goodsTitle!''}</p>
                         <p class="p1">
-                            <input type="checkbox" class="comboCheckBox" zpid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
+                            <input type="checkbox" class="comboCheckBox" zhid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
                             <span>${item.currentPrice?string("0.00")}</span>
                         </p>原价：<del>¥<#if item.goodsPrice??>${item.goodsPrice?string("0.00")}</#if></del>
                     </div>
@@ -522,7 +526,7 @@ function checkTime(i)
             <p>组合价：￥<span class="red" id="combCurrentPrice">${goods.salePrice?string("0.00")}</span></p>
             <p>原价：￥<span class="unl-th" id="combOriginPrice">${goods.salePrice?string("0.00")}</span></p>
             <p>已节省：￥<span id="combSave">0.00</span></p>
-            <input id="zhAddCart" class="sub" type="submit" value="加入购物车" />
+            <input id="zhAddCart" class="sub" type="submit" value="立即购买" />
         </div>
         <div class="clear"></div>
       </li>

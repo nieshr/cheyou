@@ -65,9 +65,9 @@ DD_belatedPNG.fix('.,img,background');
                 <#elseif order.statusId==2>
                     待付款
                 <#elseif order.statusId==3>
-                    待发货
+                    待付尾款
                 <#elseif order.statusId==4>
-                    待收货
+                    待服务
                 <#elseif order.statusId==5>
                     待评价
                 <#elseif order.statusId==6>
@@ -85,11 +85,13 @@ DD_belatedPNG.fix('.,img,background');
                 <#if order.statusId==1>
                     请稍等，我们将尽快确认您的订单。
                 <#elseif order.statusId==2>
-                    亲爱的客户，此订单还未支付您可以<a href="/order/dopay/${order.id!""}" style="color: #F00;">去支付</a>或者<span id="change_paytype" data-orderid="${order.id!""}" style="color: #F00;cursor:pointer;">修改支付方式</span>。
+                    亲爱的客户，此订单还未支付，您可以<a href="/order/dopay/${order.id!""}" style="color: #F00;">去支付</a>或者<span id="change_paytype" data-orderid="${order.id!""}" style="color: #F00;cursor:pointer;">修改支付方式</span>。
                 <#elseif order.statusId==3>
-                    亲爱的客户，我们将尽快为您发货。
+                    亲爱的客户，此订单还需支付尾款，您可以<a href="/order/dopayleft/${order.id!""}" style="color: #F00;">去支付</a>或者<span id="change_paytype" data-orderid="${order.id!""}" style="color: #F00;cursor:pointer;">修改支付方式</span>。
                 <#elseif order.statusId==4>
-                    亲爱的客户，商品已发出，请检查商品包装完整。
+                    亲爱的客户，订单支付成功，您可以到店进行消费。
+                <#elseif order.statusId==5>
+                    亲爱的客户，您已消费成功，您可以<a href="/user/comment/list">发表评论</a>。
                 <#elseif order.statusId==6>
                     亲爱的客户，此订单已交易成功。
                 <#elseif order.statusId==8>
@@ -106,23 +108,23 @@ DD_belatedPNG.fix('.,img,background');
         <#if order??>
             <#if order.statusId==2>
                 <p><i></i>订单付款</p>
-                <p><i></i><b></b>卖家发货</p>
-                <p><i></i><b></b>确认收货</p>
+                <p><i></i><b></b>到店消费</p>
+                <p><i></i><b></b>评价</p>
                 <p><i></i><b></b>完成</p>
             <#elseif order.statusId==3>
                 <p class="mysel"><i></i>订单付款</p>
-                <p><i></i><b></b>卖家发货</p>
-                <p><i></i><b></b>确认收货</p>
+                <p><i></i><b></b>到店消费</p>
+                <p><i></i><b></b>评价</p>
                 <p><i></i><b></b>完成</p>
             <#elseif order.statusId==4>
                 <p class="mysel"><i></i>订单付款</p>
-                <p class="mysel"><i></i><b></b>卖家发货</p>
-                <p><i></i><b></b>确认收货</p>
+                <p class="mysel"><i></i><b></b>到店消费</p>
+                <p><i></i><b></b>评价</p>
                 <p><i></i><b></b>完成</p>
             <#elseif order.statusId==6>
                 <p class="mysel"><i></i>订单付款</p>
-                <p class="mysel"><i></i><b></b>卖家发货</p>
-                <p class="mysel"><i></i><b></b>确认收货</p>
+                <p class="mysel"><i></i><b></b>到店消费</p>
+                <p class="mysel"><i></i><b></b>评价</p>
                 <p class="mysel"><i></i><b></b>完成</p>
             </#if>
         </#if>

@@ -19,11 +19,11 @@ public interface TdCartGoodsRepo extends
 		JpaSpecificationExecutor<TdCartGoods> 
 {
 //    TdCartGoods findTopByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username);
-    TdCartGoods findTopByGoodsIdAndQiangAndUsername(Long goodsId, Integer qiang, String username);
+    TdCartGoods findTopByGoodsIdAndUsername(Long goodsId, String username);
     
 //    List<TdCartGoods> findByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username);
     
-    List<TdCartGoods> findByGoodsIdAndQiangAndUsername(Long goodsId, Integer qiang, String username);
+    List<TdCartGoods> findByGoodsIdAndUsername(Long goodsId, String username);
     
     List<TdCartGoods> findByUsername(String username);
     

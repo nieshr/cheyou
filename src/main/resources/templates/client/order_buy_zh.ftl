@@ -69,7 +69,7 @@
     
     <div class="clear h30"></div>
     
-    <form id="form1" name="form1" action="/order/submit" method="post">
+    <form id="form1" name="form1" action="/order/buysubmit" method="post">
         
         <table class="address_tab">
             <tr>
@@ -233,6 +233,7 @@
             <#list buy_goods_list as sg>
                 <#assign totalQuantity=totalQuantity+sg.quantity>
                 <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
+                <p>${sg.goodsTitle!''} * ${sg.quantity!''} = ${sg.price}</p>
             </#list>
         </#if>
       
