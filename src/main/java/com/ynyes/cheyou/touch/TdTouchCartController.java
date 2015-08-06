@@ -59,7 +59,7 @@ public class TdTouchCartController {
 
             for (TdCartGoods cg1 : cartUserGoodsList) {
                 List<TdCartGoods> findList = tdCartGoodsService
-                        .findByGoodsIdAndPriceAndUsername(cg1.getGoodsId(), cg1.getPrice(), username);
+                        .findByGoodsIdAndQiangAndUsername(cg1.getGoodsId(), cg1.getQiang(), username);
 
                 if (findList.size() > 1) {
                     tdCartGoodsService.delete(findList.subList(1,

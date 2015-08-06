@@ -42,9 +42,9 @@ public class TdCartController {
 
     /**
      * 加入购物车
-     * @param id
-     * @param quantity
-     * @param zpid
+     * @param id 商品ID
+     * @param quantity 数量 
+     * @param zpid 组合ID
      * @param qiang 抢购类型 0：正常销售 >0：促销
      * @param m 是否是触屏 0: 否 1: 是
      * @param req
@@ -115,48 +115,19 @@ public class TdCartController {
                 
                 List<TdCartGoods> oldCartGoodsList = null;
                 
-                // 抢购
-                if (qiang.equals(1))
-                {
-                    if (goods.getIsFlashSale()
-                            && goods.getFlashSaleStopTime().after(new Date())
-                            && goods.getFlashSaleStartTime().before(new Date())) 
-                    {
-                        oldCartGoodsList = tdCartGoodsService
-                                .findByGoodsIdAndPriceAndUsername(id, qiangPrice, username);
-                    }
-                }
-                // 团购
-                else if (qiang.equals(3) || qiang.equals(7) || qiang.equals(10))
-                {
-                    if (goods.getIsGroupSale()
-                            && goods.getGroupSaleStopTime().after(new Date())
-                            && goods.getGroupSaleStartTime().before(new Date())) 
-                    {
-                        oldCartGoodsList = tdCartGoodsService
-                                .findByGoodsIdAndPriceAndUsername(id, goods.getGroupSalePrice(), username);
-                    }
-                }
-                else
-                {
-                    oldCartGoodsList = tdCartGoodsService
-                        .findByGoodsIdAndPriceAndUsername(id, goods.getSalePrice(), username);
-                }
+                // 购物车是否已有该商品
+                oldCartGoodsList = tdCartGoodsService
+                                .findByGoodsIdAndQiangAndUsername(id, qiang, username);
                 
-                // 有多项，则删除
-                if (null != oldCartGoodsList && oldCartGoodsList.size() > 1) {
-                    tdCartGoodsService.delete(oldCartGoodsList);
-                }
-                // 仅有一项，数量相加
-                else if (null != oldCartGoodsList && oldCartGoodsList.size() == 1)
-                {
+                // 有多项，则在第一项上数量进行相加
+                if (null != oldCartGoodsList && oldCartGoodsList.size() > 0) {
                     long oldQuantity = oldCartGoodsList.get(0).getQuantity();
                     oldCartGoodsList.get(0).setQuantity(oldQuantity + quantity);
                     tdCartGoodsService.save(oldCartGoodsList.get(0));
                 }
+                // 新增购物车项
                 else
                 {
-
                     TdCartGoods cartGoods = new TdCartGoods();
                     
                     cartGoods.setIsLoggedIn(isLoggedIn);
@@ -167,7 +138,7 @@ public class TdCartController {
                     cartGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
                     cartGoods.setGoodsTitle(goods.getTitle());
     
-                    if (qiang.equals(1)) // 抢购价
+                    if (qiang.equals(1)) // 抢购价，只需要设置秒杀价，正常价和团购价在读取购物车时从商品表读
                     {
                         if (goods.getIsFlashSale()
                                 && goods.getFlashSaleStopTime().after(new Date())
@@ -175,20 +146,6 @@ public class TdCartController {
                         {
                             cartGoods.setPrice(qiangPrice);
                         }
-                    }
-                    // 团购
-                    else if (qiang.equals(3) || qiang.equals(7) || qiang.equals(10))
-                    {
-                        if (goods.getIsGroupSale()
-                                && goods.getGroupSaleStopTime().after(new Date())
-                                && goods.getGroupSaleStartTime().before(new Date())) 
-                        {
-                            cartGoods.setPrice(goods.getGroupSalePrice());
-                        }
-                    }
-                    else // 正常价
-                    {
-                        cartGoods.setPrice(goods.getSalePrice());
                     }
                     
                     cartGoods.setQiang(qiang);
@@ -222,16 +179,19 @@ public class TdCartController {
                             continue;
                         }
 
+                        // 查找已有商品
                         TdCartGoods oldCartGoods = tdCartGoodsService
-                                .findTopByGoodsIdAndPriceAndUsername(combGoods.getGoodsId(),
-                                                                    combGoods.getCurrentPrice(),
+                                .findTopByGoodsIdAndQiangAndUsername(combGoods.getGoodsId(),
+                                                                    0,
                                                                     username);
 
+                        // 购物车已有该赠品，数量+1
                         if (null != oldCartGoods) 
                         {
                             oldCartGoods.setQuantity(oldCartGoods.getQuantity().longValue() + 1L);
                             tdCartGoodsService.save(oldCartGoods);
                         }
+                        // 将赠品加进购物车
                         else
                         {
                             TdCartGoods cartGoods = new TdCartGoods();
@@ -243,6 +203,7 @@ public class TdCartController {
                             cartGoods.setGoodsCoverImageUri(combGoods.getCoverImageUri());
                             cartGoods.setGoodsTitle(combGoods.getGoodsTitle());
                             cartGoods.setPrice(combGoods.getCurrentPrice());
+                            cartGoods.setQiang(1); // 设置为1，将不会进行价格的刷新
                             cartGoods.setQuantity(1L);
     
                             tdCartGoodsService.save(cartGoods);
@@ -277,27 +238,29 @@ public class TdCartController {
 
         String username = (String) req.getSession().getAttribute("username");
 
+        // 未登录用户的购物车商品
         List<TdCartGoods> cartSessionGoodsList = tdCartGoodsService
                 .findByUsername(req.getSession().getId());
 
         if (null == username) {
             username = req.getSession().getId();
         } else {
-            // 合并商品
+            // 已登录用户的购物车
             List<TdCartGoods> cartUserGoodsList = tdCartGoodsService
                     .findByUsername(username);
 
+            // 将未登录用户的购物车加入已登录用户购物车中
             for (TdCartGoods cg : cartSessionGoodsList) {
                 cg.setUsername(username);
                 cartUserGoodsList.add(cg);
             }
 
-            tdCartGoodsService.save(cartUserGoodsList);
+            cartUserGoodsList = tdCartGoodsService.save(cartUserGoodsList);
 
             for (TdCartGoods cg1 : cartUserGoodsList) {
                 
                 List<TdCartGoods> findList = tdCartGoodsService
-                        .findByGoodsIdAndPriceAndUsername(cg1.getGoodsId(), cg1.getPrice(), username);
+                        .findByGoodsIdAndQiangAndUsername(cg1.getGoodsId(), cg1.getQiang(), username);
 
                 if (null != findList && findList.size() > 1) {
                     tdCartGoodsService.delete(findList.subList(1,
@@ -307,7 +270,9 @@ public class TdCartController {
         }
 
         List<TdCartGoods> resList = tdCartGoodsService.findByUsername(username);
-        map.addAttribute("cart_goods_list", resList);
+        
+        
+        map.addAttribute("cart_goods_list", tdCartGoodsService.updateGoodsInfo(resList));
 
         tdCommonService.setHeader(map, req);
 
@@ -333,14 +298,21 @@ public class TdCartController {
         if (null != id) {
             for (TdCartGoods cartGoods : cartGoodsList) {
                 if (cartGoods.getId().equals(id)) {
-                    cartGoods.setIsSelected(!cartGoods.getIsSelected());
+                    if (null == cartGoods.getIsSelected() || false == cartGoods.getIsSelected())
+                    {
+                        cartGoods.setIsSelected(true);
+                    }
+                    else
+                    {
+                        cartGoods.setIsSelected(false);
+                    }
                     cartGoods = tdCartGoodsService.save(cartGoods);
                     break;
                 }
             }
         }
 
-        map.addAttribute("cart_goods_list", cartGoodsList);
+        map.addAttribute("cart_goods_list", tdCartGoodsService.updateGoodsInfo(cartGoodsList));
 
         return "/client/cart_goods";
     }
@@ -373,7 +345,7 @@ public class TdCartController {
             tdCartGoodsService.save(cartGoodsList);
         }
 
-        map.addAttribute("cart_goods_list", cartGoodsList);
+        map.addAttribute("cart_goods_list", tdCartGoodsService.updateGoodsInfo(cartGoodsList));
 
         return "/client/cart_goods";
     }
@@ -398,7 +370,7 @@ public class TdCartController {
         }
 
         map.addAttribute("cart_goods_list",
-                tdCartGoodsService.findByUsername(username));
+                tdCartGoodsService.updateGoodsInfo(tdCartGoodsService.findByUsername(username)));
 
         return "/client/cart_goods";
     }
@@ -426,7 +398,7 @@ public class TdCartController {
         }
 
         map.addAttribute("cart_goods_list",
-                tdCartGoodsService.findByUsername(username));
+                tdCartGoodsService.updateGoodsInfo(tdCartGoodsService.findByUsername(username)));
 
         return "/client/cart_goods";
     }
@@ -449,7 +421,7 @@ public class TdCartController {
         }
 
         map.addAttribute("cart_goods_list",
-                tdCartGoodsService.findByUsername(username));
+                tdCartGoodsService.updateGoodsInfo(tdCartGoodsService.findByUsername(username)));
 
         return "/client/cart_goods";
     }

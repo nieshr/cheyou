@@ -5,16 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import com.ynyes.cheyou.entity.TdAdType;
 import com.ynyes.cheyou.entity.TdArticleCategory;
+import com.ynyes.cheyou.entity.TdDemand;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.entity.TdSetting;
-import com.ynyes.cheyou.entity.TdUserSuggestion;
-import com.ynyes.cheyou.entity.TdDemand;
 
 @Service
 public class TdCommonService {
@@ -68,10 +66,10 @@ public class TdCommonService {
             map.addAttribute("user",
                     tdUserService.findByUsernameAndIsEnabled(username));
             map.addAttribute("cart_goods_list",
-                    tdCartGoodsService.findByUsername(username));
+                    tdCartGoodsService.updateGoodsInfo(tdCartGoodsService.findByUsername(username)));
         } else {
             map.addAttribute("cart_goods_list",
-                    tdCartGoodsService.findByUsername(req.getSession().getId()));
+                    tdCartGoodsService.updateGoodsInfo(tdCartGoodsService.findByUsername(req.getSession().getId())));
         }
         
         // 顶部小图广告
