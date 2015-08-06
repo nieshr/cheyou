@@ -1351,11 +1351,16 @@ public class TdGoodsService {
     /**
      * 搜索商品
      * 
-     * @param keywords 关键字
-     * @param page 页号
-     * @param size 页大小
-     * @param sortName 排序字段名
-     * @param sd 排序方向
+     * @param keywords
+     *            关键字
+     * @param page
+     *            页号
+     * @param size
+     *            页大小
+     * @param sortName
+     *            排序字段名
+     * @param sd
+     *            排序方向
      * @return
      */
     public Page<TdGoods> searchGoods(String keywords, int page, int size,
@@ -1364,8 +1369,8 @@ public class TdGoodsService {
             return null;
         }
 
-        PageRequest pageRequest = new PageRequest(page, size, new Sort(
-                dir, sortName));
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(dir,
+                sortName));
 
         return repository
                 .findByTitleContainingIgnoreCaseAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(
@@ -1896,6 +1901,84 @@ public class TdGoodsService {
         }
 
         return repository.findOne(id);
+    }
+
+    /**
+     * 判断该商品是否正在进行秒杀
+     * 
+     * @param tdGoods
+     * @return
+     */
+    public boolean isFlashSaleTrue(TdGoods tdGoods) {
+        if (null == tdGoods) {
+            return false;
+        }
+
+        Date curr = new Date();
+
+        if (null != tdGoods.getIsFlashSale() && tdGoods.getIsFlashSale()
+                && null != tdGoods.getFlashSaleStartTime()
+                && tdGoods.getFlashSaleStartTime().before(curr)
+                && null != tdGoods.getFlashSaleStopTime()
+                && tdGoods.getFlashSaleStopTime().after(curr)
+                && null != tdGoods.getFlashSaleLeftNumber()
+                && tdGoods.getFlashSaleLeftNumber().compareTo(0L) > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 判断该商品是否正在进行十人团
+     * 
+     * @param tdGoods
+     * @return
+     */
+    public boolean isGroupSaleTrue(TdGoods tdGoods) {
+        if (null == tdGoods) {
+            return false;
+        }
+
+        Date curr = new Date();
+
+        if (null != tdGoods.getIsGroupSale() && tdGoods.getIsGroupSale()
+                && null != tdGoods.getGroupSaleStartTime()
+                && tdGoods.getGroupSaleStartTime().before(curr)
+                && null != tdGoods.getGroupSaleStopTime()
+                && tdGoods.getGroupSaleStopTime().after(curr)
+                && null != tdGoods.getGroupSaleLeftNumber()
+                && tdGoods.getGroupSaleLeftNumber().compareTo(0L) > 0) {
+            return true;
+        }
+
+        return false;
+    }
+    
+    /**
+     * 判断该商品是否正在进行百人团
+     * 
+     * @param tdGoods 商品
+     * @return
+     */
+    public boolean isGroupSaleHundredTrue(TdGoods tdGoods) {
+        if (null == tdGoods) {
+            return false;
+        }
+
+        Date curr = new Date();
+
+        if (null != tdGoods.getIsGroupSaleHundred() && tdGoods.getIsGroupSaleHundred()
+                && null != tdGoods.getGroupSaleHundredStartTime()
+                && tdGoods.getGroupSaleHundredStartTime().before(curr)
+                && null != tdGoods.getGroupSaleHundredStopTime()
+                && tdGoods.getGroupSaleHundredStopTime().after(curr)
+                && null != tdGoods.getGroupSaleHundredLeftNumber()
+                && tdGoods.getGroupSaleHundredLeftNumber().compareTo(0L) > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

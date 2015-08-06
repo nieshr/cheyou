@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.cheyou.entity.TdCartGoods;
+import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.repository.TdCartGoodsRepo;
 
 /**
@@ -27,6 +28,8 @@ public class TdCartGoodsService {
     @Autowired
     TdCartGoodsRepo repository;
     
+    @Autowired
+    TdGoodsService tdGoodsService;
     /**
      * 删除
      * 
@@ -100,24 +103,83 @@ public class TdCartGoodsService {
         return repository.findAll(pageRequest);
     }
     
-    public TdCartGoods findTopByGoodsIdAndPriceAndUsername(long goodsId, double price, String username)
+    public TdCartGoods findTopByGoodsIdAndQiangAndUsername(long goodsId, int qiang, String username)
     {
-        return repository.findTopByGoodsIdAndPriceAndUsername(goodsId, price, username);
-    }
-    
-    public List<TdCartGoods> findByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username)
-    {
-        if (null == goodsId || null == price || null == username)
+        if (null == username)
         {
             return null;
         }
         
-        return repository.findByGoodsIdAndPriceAndUsername(goodsId, price, username);
+        return repository.findTopByGoodsIdAndQiangAndUsername(goodsId, qiang, username);
+    }
+    
+//    public List<TdCartGoods> findByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username)
+//    {
+//        if (null == goodsId || null == price || null == username)
+//        {
+//            return null;
+//        }
+//        
+//        return repository.findByGoodsIdAndPriceAndUsername(goodsId, price, username);
+//    }
+    
+    public List<TdCartGoods> findByGoodsIdAndQiangAndUsername(Long goodsId, Integer qiang, String username)
+    {
+        if (null == goodsId || null == qiang || null == username)
+        {
+            return null;
+        }
+        
+        return repository.findByGoodsIdAndQiangAndUsername(goodsId, qiang, username);
     }
     
     public List<TdCartGoods> findByUsername(String username)
     {
         return repository.findByUsername(username);
+    }
+    
+    public List<TdCartGoods> updateGoodsInfo(List<TdCartGoods> cartGoodsList)
+    {
+        if (null == cartGoodsList || cartGoodsList.size() < 0)
+        {
+            return null;
+        }
+        
+        for (TdCartGoods cartGoods : cartGoodsList)
+        {
+            if (null != cartGoods)
+            {
+                TdGoods goods = tdGoodsService.findOne(cartGoods.getGoodsId());
+                
+                if (null != goods)
+                {
+                    cartGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
+                    cartGoods.setGoodsTitle(goods.getTitle());
+                    
+                    // 更新价格
+                    if (cartGoods.getQiang().equals(0))
+                    {
+                        cartGoods.setPrice(goods.getSalePrice());
+                    }
+                    // 秒杀价格以加入购物车时为准
+                    else if (cartGoods.getQiang().equals(1))
+                    {
+                        
+                    }
+                    // 更新百人团价格
+                    else if (cartGoods.getQiang().equals(100))
+                    {
+                        cartGoods.setPrice(goods.getGroupSalePrePayPrice());
+                    }
+                    // 更新十人团价格
+                    else
+                    {
+                        cartGoods.setPrice(goods.getGroupSalePrice());
+                    }
+                }
+            }
+        }
+        return cartGoodsList;
     }
     
     public List<TdCartGoods> findByUsernameAndIsSelectedTrue(String username)
