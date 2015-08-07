@@ -29,6 +29,7 @@ function submitConsult()
             if (0 == res.code)
             {
                 alert("提交咨询成功，请耐心等待审核~~");
+                window.location.reload();
             }
             else
             {
@@ -67,7 +68,7 @@ function submitConsult()
     <#if consult_page??>
         <#list consult_page.content as item>
         <li>
-            <p class="p1">${item.username!''} ${item.content!''}</p>
+            <p class="p1">${item.username?substring(0, 3)}****: ${item.content!''}</p>
             <#if item.isReplied?? && item.isReplied>
                 <p class="p2">商家回复：${item.reply!''}</p>
             </#if>

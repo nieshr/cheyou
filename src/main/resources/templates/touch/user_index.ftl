@@ -48,9 +48,7 @@ $(document).ready(function(){
 <menu class="main memberlist">
   <a href="/touch/user/order/list/0">全部订单</a>
   <a href="/touch/user/point/list">我的粮草（${user.totalPoints!0}）</a>
-  <#--
-  <a href="#">我的优惠券</a>
-  -->
+  <a href="/touch/user/coupon/list">我的优惠券</a>
   <a href="/touch/user/collect/list">我的收藏</a>
   <a href="/touch/user/info">个人信息设置</a>
 </menu>

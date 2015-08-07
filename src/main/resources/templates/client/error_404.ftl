@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>博大生活网——找不到该页面</title>
+<title>车有同盟——找不到该页面</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="copyright" content="" />
@@ -45,20 +45,6 @@ h5 {margin:0 auto;width:410px;}
 </head>
 
 <body>
-<div class="header">
-  <div class="nav">
-    <a class="a1" href="#"><img src="images/404/404_logo.png" /></a>
-    <a href="#">网站首页</a>
-    <a href="#">母婴用品</a>
-    <a href="#">手机通讯</a>
-    <a href="#">云南特产</a>
-    <a href="#">家居用品</a>
-    <a href="#">粮草商城</a>
-    <a href="#">团购</a>
-    <div class="clear"></div>
-  </div>
-</div><!--header END-->
-
 <h2><img src="images/404/404_img.jpg" /></h2>
 <h3>抱歉！您访问的页面已经删除或更改地址</h3>
 <h4>请<a href="#">返回首页</a>查看</h4>

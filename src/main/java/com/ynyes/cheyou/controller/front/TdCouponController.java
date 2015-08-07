@@ -22,6 +22,7 @@ import com.ynyes.cheyou.service.TdCouponService;
 import com.ynyes.cheyou.service.TdCouponTypeService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdUserRecentVisitService;
+import com.ynyes.cheyou.util.SMSUtil;
 
 /**
  * 
@@ -159,6 +160,10 @@ public class TdCouponController {
 	    getCoupon.setUsername(username);
 	    
 	    tdCouponService.save(getCoupon);
+	    
+	    // 发送短信
+	    SMSUtil.send(mobile, "28745", new String[] { username,
+	                    mobile.substring(mobile.length() - 4)});
 	    
 	    res.put("code", 0);
 	    

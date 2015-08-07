@@ -28,8 +28,8 @@ menu.protext a.a2 span { background: url(../images/zx.png) no-repeat left center
 /*首页部分*/
 .index_top { width: 100%; background: #fff; padding: 15px 0; height: 40px; }
 .index_top a.a1 { position: absolute; left: 2%; top: 0px; }
-.index_top a.a2 { position: absolute; right: 2%; top: 5px; }
-.index_top .comserch { width: 38%; padding: 0 10% 0 1%; margin: 0 0 0 35%; border:1px solid #ddd; border-radius:5px;}
+.index_top a.a2 { position: absolute; right: 7%; top: 5px; }
+.index_top .comserch { width: 45%; padding: 0 5% 0 3%; margin: 0 0 0 26%; border:1px solid #ddd; border-radius:5px;}
 .indexnav { width: 100%; background: #fff; padding: 15px 0 5px; }
 .indexnav li { width: 25%; margin-bottom: 15px; display: block; float: left; text-align: center; }
 .indexnav li a { font-size: 0.8em; display: inline-block; }

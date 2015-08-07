@@ -8,9 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ynyes.cheyou.entity.TdSetting;
 import com.ynyes.cheyou.entity.TdUser;
-import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserPointService;
@@ -35,9 +33,11 @@ public class TdTouchRegController {
     private TdCommonService tdCommonService;
     
     @RequestMapping("/touch/reg")
-    public String reg(Integer errCode, Integer shareId, HttpServletRequest request, ModelMap map) {
+    public String reg(Integer errCode, 
+    				  Integer shareId,
+    				  HttpServletRequest request,
+    				  ModelMap map) {
         String username = (String) request.getSession().getAttribute("username");
-        
         if (null != shareId)
         {
             map.addAttribute("share_id", shareId);
@@ -49,9 +49,9 @@ public class TdTouchRegController {
         if (null == username) {
             if (null != errCode)
             {
-                if (errCode.equals(1))
+                if(errCode.equals(1))
                 {
-                    map.addAttribute("error", "验证码错误");
+                	map.addAttribute("error","验证码错误");
                 }
                 else if (errCode.equals(2))
                 {
@@ -83,16 +83,16 @@ public class TdTouchRegController {
      */
     @RequestMapping(value="/touch/reg",method=RequestMethod.POST)
     public String reg(String username,
-                    String mobile,
-                    String password,
-                    String email,
-                    String smsCode,
-                    String code,
-                    String carCode,
-                    Long shareId,
-                    HttpServletRequest request){
+                      String mobile,
+                      String password,
+                      String email,
+                      String smsCode,
+                      String code,
+                      String carCode,
+                      Long shareId,
+                      HttpServletRequest request){
         String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
-        String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
+/*        String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
         
         if (null == codeBack || null == smsCodeSave)
         {
@@ -212,6 +212,26 @@ public class TdTouchRegController {
             return "redirect:/touch/user";
         }
         
-        return "redirect:/touch/user?shareId=" + shareId;
+        return "redirect:/touch/user?shareId=" + shareId;*/
+        
+        if (!codeBack.equalsIgnoreCase(code))
+        {
+        	return "redirect:/touch/reg?errCode=1";
+        }
+        
+        TdUser user = tdUserService.findByUsername(username);
+        
+        if (null != user)
+        {
+            return "redirect:/touch/reg?errCode=2";
+        }
+        
+        user = tdUserService.addNewUser(null, username, password, null, null, null);
+        
+        user = tdUserService.save(user);
+        
+        request.getSession().setAttribute("username", username);
+        
+        return "redirect:/touch/user";
     }
 }

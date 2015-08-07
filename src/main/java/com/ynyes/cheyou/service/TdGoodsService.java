@@ -1,5 +1,6 @@
 package com.ynyes.cheyou.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import com.ynyes.cheyou.entity.TdGoodsParameter;
 import com.ynyes.cheyou.entity.TdPriceChangeLog;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.entity.TdProvider;
+import com.ynyes.cheyou.entity.TdSite;
 import com.ynyes.cheyou.entity.TdWarehouse;
 import com.ynyes.cheyou.repository.TdGoodsRepo;
 
@@ -65,6 +67,9 @@ public class TdGoodsService {
     @Autowired
     TdPriceChangeLogService tdPriceChangeLogService;
 
+    @Autowired
+    TdSiteService tdSiteService;
+
     /**
      * 查找所有商品
      * 
@@ -77,6 +82,10 @@ public class TdGoodsService {
 
         return repository.findAll(pageRequest);
     }
+    public TdGoods findById(Long id)
+    {
+		return repository.findById(id);
+	}
 
     public Page<TdGoods> findAllOrderBySortIdAsc(int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
@@ -130,21 +139,23 @@ public class TdGoodsService {
 
         return repository.findByIsOnSaleFalse(pageRequest);
     }
-    
-    public Page<TdGoods> findByIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(int page, int size) {
+
+    public Page<TdGoods> findByIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
+            int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId"));
 
         return repository.findByIsOnSaleFalseAndIsFlashSaleTrue(pageRequest);
     }
-    
-    public Page<TdGoods> findByIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(int page, int size) {
+
+    public Page<TdGoods> findByIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
+            int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId"));
 
         return repository.findByIsOnSaleFalseAndIsGroupSaleTrue(pageRequest);
     }
-    
+
     public Page<TdGoods> findAllAndIsOnSaleTrue(int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
 
@@ -217,7 +228,7 @@ public class TdGoodsService {
                 .findByTitleContainingAndIsOnSaleFalseOrSubTitleContainingAndIsOnSaleFalseOrDetailContainingAndIsOnSaleFalseOrderBySortIdAsc(
                         keywords, keywords, keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
             String keywords, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -226,7 +237,7 @@ public class TdGoodsService {
                 .findByTitleContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrSubTitleContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrDetailContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
                         keywords, keywords, keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -247,7 +258,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -259,7 +270,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsFlashSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -283,7 +294,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -295,7 +306,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleTrueAndIsFlashSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -319,7 +330,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -331,7 +342,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -343,7 +354,7 @@ public class TdGoodsService {
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
-    
+
     public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleFalseAndIsFlashSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -593,20 +604,22 @@ public class TdGoodsService {
 
         String catIdStr = "[" + catId + "]";
 
-        return repository.findByCategoryIdTreeContainingAndIsFlashSaleTrueOrderBySortIdAsc(
-                catIdStr, pageRequest);
+        return repository
+                .findByCategoryIdTreeContainingAndIsFlashSaleTrueOrderBySortIdAsc(
+                        catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsGroupSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
 
         String catIdStr = "[" + catId + "]";
 
-        return repository.findByCategoryIdTreeContainingAndIsGroupSaleTrueOrderBySortIdAsc(
-                catIdStr, pageRequest);
+        return repository
+                .findByCategoryIdTreeContainingAndIsGroupSaleTrueOrderBySortIdAsc(
+                        catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -617,7 +630,7 @@ public class TdGoodsService {
                 .findByCategoryIdTreeContainingAndIsOnSaleTrueOrderBySortIdAsc(
                         catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -628,7 +641,7 @@ public class TdGoodsService {
                 .findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
                         catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsFlashSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -650,7 +663,7 @@ public class TdGoodsService {
                 .findByCategoryIdTreeContainingAndIsOnSaleFalseOrderBySortIdAsc(
                         catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -661,7 +674,7 @@ public class TdGoodsService {
                 .findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsFlashSaleTrueOrderBySortIdAsc(
                         catIdStr, pageRequest);
     }
-    
+
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size);
@@ -1340,6 +1353,35 @@ public class TdGoodsService {
                         keywords, keywords, keywords, keywords, pageRequest);
     }
 
+    /**
+     * 搜索商品
+     * 
+     * @param keywords
+     *            关键字
+     * @param page
+     *            页号
+     * @param size
+     *            页大小
+     * @param sortName
+     *            排序字段名
+     * @param sd
+     *            排序方向
+     * @return
+     */
+    public Page<TdGoods> searchGoods(String keywords, int page, int size,
+            String sortName, Direction dir) {
+        if (null == keywords || null == sortName) {
+            return null;
+        }
+
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(dir,
+                sortName));
+
+        return repository
+                .findByTitleContainingIgnoreCaseAndIsOnSaleTrueOrSubTitleContainingAndIsOnSaleTrueOrParamValueCollectContainingAndIsOnSaleTrueOrDetailContainingAndIsOnSaleTrue(
+                        keywords, keywords, keywords, keywords, pageRequest);
+    }
+
     public Page<TdGoods> findByCategoryIdAndSalePriceBetweenAndParamsLikeAndIsOnSaleTrueOrderBySalePriceAsc(
             long catId, double priceLow, double priceHigh, int page, int size,
             List<String> paramValueList) {
@@ -1867,6 +1909,84 @@ public class TdGoodsService {
     }
 
     /**
+     * 判断该商品是否正在进行秒杀
+     * 
+     * @param tdGoods
+     * @return
+     */
+    public boolean isFlashSaleTrue(TdGoods tdGoods) {
+        if (null == tdGoods) {
+            return false;
+        }
+
+        Date curr = new Date();
+
+        if (null != tdGoods.getIsFlashSale() && tdGoods.getIsFlashSale()
+                && null != tdGoods.getFlashSaleStartTime()
+                && tdGoods.getFlashSaleStartTime().before(curr)
+                && null != tdGoods.getFlashSaleStopTime()
+                && tdGoods.getFlashSaleStopTime().after(curr)
+                && null != tdGoods.getFlashSaleLeftNumber()
+                && tdGoods.getFlashSaleLeftNumber().compareTo(0L) > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 判断该商品是否正在进行十人团
+     * 
+     * @param tdGoods
+     * @return
+     */
+    public boolean isGroupSaleTrue(TdGoods tdGoods) {
+        if (null == tdGoods) {
+            return false;
+        }
+
+        Date curr = new Date();
+
+        if (null != tdGoods.getIsGroupSale() && tdGoods.getIsGroupSale()
+                && null != tdGoods.getGroupSaleStartTime()
+                && tdGoods.getGroupSaleStartTime().before(curr)
+                && null != tdGoods.getGroupSaleStopTime()
+                && tdGoods.getGroupSaleStopTime().after(curr)
+                && null != tdGoods.getGroupSaleLeftNumber()
+                && tdGoods.getGroupSaleLeftNumber().compareTo(0L) > 0) {
+            return true;
+        }
+
+        return false;
+    }
+    
+    /**
+     * 判断该商品是否正在进行百人团
+     * 
+     * @param tdGoods 商品
+     * @return
+     */
+    public boolean isGroupSaleHundredTrue(TdGoods tdGoods) {
+        if (null == tdGoods) {
+            return false;
+        }
+
+        Date curr = new Date();
+
+        if (null != tdGoods.getIsGroupSaleHundred() && tdGoods.getIsGroupSaleHundred()
+                && null != tdGoods.getGroupSaleHundredStartTime()
+                && tdGoods.getGroupSaleHundredStartTime().before(curr)
+                && null != tdGoods.getGroupSaleHundredStopTime()
+                && tdGoods.getGroupSaleHundredStopTime().after(curr)
+                && null != tdGoods.getGroupSaleHundredLeftNumber()
+                && tdGoods.getGroupSaleHundredLeftNumber().compareTo(0L) > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * 保存类型
      * 
      * @param e
@@ -1918,6 +2038,15 @@ public class TdGoodsService {
         // 上架时间
         if (null == e.getOnSaleTime() && e.getIsOnSale()) {
             e.setOnSaleTime(new Date());
+        }
+
+        // 站点
+        if (null != e.getSiteId()) {
+            TdSite s = tdSiteService.findOne(e.getSiteId());
+
+            if (null != s) {
+                e.setSiteTitle(s.getTitle());
+            }
         }
 
         // 仓库名
@@ -2045,12 +2174,40 @@ public class TdGoodsService {
     }
 
     /**
-     * 根据商品Id查找所属类别Id
-     * @param id
+     * 计算实时秒杀价
+     * 
+     * @param goods
      * @return
      */
-    public TdGoods findProductIdById(Long id)
+    public Double getFlashPrice(TdGoods goods)
     {
-    	return repository.findOne(id);
+        if (null == goods)
+        {
+            return null;
+        }
+        
+        Double flashPrice = null;
+        Date curr = new Date();
+        
+        if (null != goods.getIsFlashSale()
+                && null != goods.getFlashSaleStartTime()
+                && null != goods.getFlashSaleStopTime()
+                && null != goods.getFlashSalePrice() && goods.getIsFlashSale()
+                && goods.getFlashSaleStopTime().after(curr)
+                && goods.getFlashSaleStartTime().before(curr)) {
+            // 剩余毫秒数
+            long ts = goods.getFlashSaleStopTime().getTime() - curr.getTime();
+            // 总共毫秒数
+            long allts = goods.getFlashSaleStopTime().getTime()
+                    - goods.getFlashSaleStartTime().getTime();
+
+            flashPrice = goods.getFlashSalePrice() * ts / allts;
+
+            BigDecimal b = new BigDecimal(flashPrice);
+
+            flashPrice = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        }
+        
+        return flashPrice;
     }
 }

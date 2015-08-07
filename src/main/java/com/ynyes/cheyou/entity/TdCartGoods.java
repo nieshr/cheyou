@@ -29,24 +29,17 @@ public class TdCartGoods {
     private Long goodsId;
     
     // 商品标题
-    @Column
     private String goodsTitle;
     
     // 商品封面
-    @Column
     private String goodsCoverImageUri;
     
     // 商品数量
-    @Column
     private Long quantity;
     
     // 成交价
     @Column
     private Double price;
-    
-    // 销售类型
-    @Column
-    private Integer qiang;
     
     // 是否选中，选中的商品将进行结算
     @Column
@@ -126,13 +119,5 @@ public class TdCartGoods {
 
     public void setIsLoggedIn(Boolean isLoggedIn) {
         this.isLoggedIn = isLoggedIn;
-    }
-
-    public Integer getQiang() {
-        return qiang;
-    }
-
-    public void setQiang(Integer qiang) {
-        this.qiang = qiang;
     }
 }

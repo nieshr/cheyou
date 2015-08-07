@@ -56,21 +56,70 @@ public class TdTouchLoginController {
     }
     
     /**
-     * 
-     * 密码找回<BR>
-     * 方法名：forget<BR>
-     * 创建人：guozhengyang <BR>
-     * 时间：2015年2月2日-下午4:37:35 <BR>
-     * @return String<BR>
-     * @param  [参数1]   [参数1说明]
-     * @param  [参数2]   [参数2说明]
-     * @exception <BR>
-     * @since  1.0.0
+     * 找回密码
+     * @author mdj
+     * @param req
+     * @param map
+     * @return
      */
-//    @RequestMapping("/forget")
-//    public String forget(){
-//        return "/front/forget";
-//    }
+    @RequestMapping("/touch/find")
+    public String findPassword(Integer errCode,HttpServletRequest request, ModelMap map,String name)
+    {
+    	String username = (String) request.getSession().getAttribute("username");
+    	/**
+    	 * errCode = 0 代表验证码出错   1，用户不存在
+    	 */
+    	tdCommonService.setHeader(map, request);
+    	if (null == username)
+    	{
+            if (null != errCode)
+            {
+                if (errCode.equals(0))
+                {
+                    map.addAttribute("error", "验证码错误");
+                }
+                else if(errCode.equals(1))
+                {
+                	map.addAttribute("error", "用户不存在");
+				}
+                
+                map.addAttribute("errCode", errCode);
+            }
+            map.addAttribute("username",name);
+            
+            return "/touch/find";
+        }
+        return "redirect:/touch";
+    }
+    
+    @RequestMapping(value="/touch/find",method = RequestMethod.POST)
+    public String findPassword(String username,String code,HttpServletRequest request,ModelMap map)
+    {
+    	String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
+    	
+    	if(codeBack == null)
+    	{
+    		return "redirect:/touch/find?name=" + username;
+    	}
+    	
+    	if (!codeBack.equalsIgnoreCase(code))
+    	{
+			return "redirect:/touch/find?name=" + username +"&errCode=0";
+		}
+    	
+        TdUser tdUser = tdUserService.findByUsername(username);
+        
+        if(tdUser == null)
+        {
+        	return "redirect:/touch/find?name" + username +"&errCode=1";
+        }
+        
+        String mobile  = tdUser.getMobile();
+        
+        map.addAttribute("mobile", mobile);
+        
+        return "/touch/find_confirm";
+    }
     
     @RequestMapping(value="/touch/login",method = RequestMethod.POST)
     @ResponseBody

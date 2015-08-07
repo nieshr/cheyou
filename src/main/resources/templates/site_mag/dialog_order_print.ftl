@@ -89,20 +89,21 @@
                             <td width="56%">姓名：${order.shippingName!''}<br>                          
                             </td>
                         </tr>
+                        <#--
                         <tr>
                             <td valign="top">支付方式：${order.payTypeTitle!''}</td>
                             <td>送货地址：
                                 ${order.shippingAddress!''}<br>
                             </td>
                         </tr>
+                        -->
+                        <tr>
+                            <td valign="top">用户留言：${order.userRemarkInfo!''}</td>
+                            <td valign="top">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：${order.shippingPhone!''}</td>
+                        </tr>
                         <tr>
                             <td>车型：${order.carType!''}</td>
                             <td>车牌：${order.carCode!''}</td>
-                        </tr>
-                        <tr>
-                            <td valign="top">用户留言：${order.userRemarkInfo!''}
-                            </td>
-                            <td valign="top">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：${order.shippingPhone!''}</td>
                         </tr>
                         <tr>
                             <td valign="top">订单备注：${order.remarkInfo!''}</td>

@@ -95,7 +95,7 @@ $(document).ready(function(){
 
 <div class="main">
     <div class="nygg">
-        <div class="bt mt15"><a href="#">通知公告</a></div>
+        <div class="bt mt15"><a href="/info/list/10">通知公告</a></div>
         <ul>
             <#if news_page??>
                 <#list news_page.content as item>

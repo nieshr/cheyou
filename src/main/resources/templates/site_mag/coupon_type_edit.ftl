@@ -92,7 +92,7 @@ $(function () {
     <dl>
         <dt>满减券使用额度</dt>
         <dd>
-          <input name="canUsePrice" type="text" value="<#if coupon_type?? && coupon_type.canUsePrice>${coupon_type.canUsePrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+          <input name="canUsePrice" type="text" value="<#if coupon_type?? && coupon_type.canUsePrice?? && coupon_type.canUsePrice>${coupon_type.canUsePrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
           <span class="Validform_checktip">消费满该额度时可使用，仅对满减券有效</span>
         </dd>
     </dl>

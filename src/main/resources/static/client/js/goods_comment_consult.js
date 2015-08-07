@@ -18,6 +18,7 @@ function getCommentByStars(goodsId, stars, page)
         url:"/goods/comment/" + goodsId + "?stars=" + stars + "&page=" + page,
         success:function(res){
             $("#comment-list").html(res);
+            getElement();
         }
     });
 }

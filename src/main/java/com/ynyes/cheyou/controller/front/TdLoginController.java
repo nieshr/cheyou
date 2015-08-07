@@ -11,6 +11,7 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.w3c.dom.css.ElementCSSInlineStyle;
 
 import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
@@ -197,6 +199,93 @@ public class TdLoginController {
 		}
 	}
 
+	/**
+	 * @author lc
+	 * @return 
+	 * @注释：密码找回
+	 */
+	@RequestMapping(value = "/login/password_retrieve", method = RequestMethod.GET)
+	public String Retrieve(HttpServletRequest req, ModelMap map){
+		tdCommonService.setHeader(map, req);
+		return "/client/user_retrieve_step1";
+	}
+	
+	@RequestMapping(value = "/login/password_retrieve", method = RequestMethod.POST)
+	@ResponseBody
+	public  Map<String, Object> Check(String username, String code, HttpServletRequest request){
+		Map<String, Object> res = new HashMap<String, Object>();
+		res.put("code", 1);
+		
+		if (username.isEmpty()) {
+			res.put("msg", "用户名不能为空");
+		}
+		
+		String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
+		if (!codeBack.equalsIgnoreCase(code)){
+			res.put("msg", "验证码错误");
+			return res;
+		 }
+		 
+		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+		if (null != user) {
+			
+			request.getSession().setAttribute("username", user.getUsername());
+            
+			res.put("code", 0);
+		}
+		else {
+			res.put("msg", "用户不存在");
+		}
+		
+		return res;
+	}
+	
+	@RequestMapping(value = "/login/retrieve_step2", method = RequestMethod.GET)
+	public String Step2(Integer errCode, HttpServletRequest req, ModelMap map){
+		tdCommonService.setHeader(map, req);
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+		
+		 if (null != errCode)
+         {
+             if (errCode.equals(1))
+             {
+                 map.addAttribute("error", "验证码错误");
+             }
+             
+             map.addAttribute("errCode", errCode);
+         }
+		 
+		map.put("user", user);
+		
+		return "/client/user_retrieve_step2";
+	}
+	@RequestMapping(value = "/login/retrieve_step2", method = RequestMethod.POST)
+	public String Step2(String smsCode,HttpServletRequest req, ModelMap map){
+		
+		String smsCodeSave = (String) req.getSession().getAttribute("SMSCODE");
+		if (!smsCodeSave.equalsIgnoreCase(smsCode)) {
+			return "redirect:/login/retrieve_step2?errCode=4";
+		}
+		String username = (String) req.getSession().getAttribute("username");
+		map.put("username", username);
+		tdCommonService.setHeader(map, req);
+		
+		return "/client/user_retrieve_step3";
+	}
+	
+	@RequestMapping(value = "/login/retrieve_step3", method = RequestMethod.POST)
+	public String Step3(String password, HttpServletRequest req, ModelMap map){
+		String username = (String) req.getSession().getAttribute("username");
+		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+		if (null != password) {
+			user.setPassword(password);
+			tdUserService.save(user);
+			tdCommonService.setHeader(map, req);
+			return "/client/user_retrieve_ok";
+		}
+		return "/client/error_404";
+	}
 	/**
 	 * @author lc
 	 * @注释：支付宝登陆信息提交

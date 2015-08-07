@@ -71,15 +71,17 @@ DD_belatedPNG.fix('.,img,background');
                         <#elseif status_id==2>
                             待付款订单
                         <#elseif status_id==3>
-                            待发货订单
+                            待服务订单
                         <#elseif status_id==4>
-                            待收货订单
+                            待付尾款订单
                         <#elseif status_id==5>
                             待评价订单
                         <#elseif status_id==6>
                             已完成订单
                         <#elseif status_id==7>
                             已取消订单
+                        <#elseif status_id==9>
+                            已删除订单
                         </#if>
                     </a>
                 </div>
@@ -125,16 +127,25 @@ DD_belatedPNG.fix('.,img,background');
                                         待确认
                                     <#elseif order.statusId==2>
                                         <p>待付款</p>
+                                        <#--
+                                        <a href="/order/cancel/${order.id}">取消订单</a>
+                                        -->
                                         <a href="/order/dopay/${order.id}">立即支付</a>
                                     <#elseif order.statusId==3>
-                                        待发货
+                                        <p>待付尾款</p>
+                                        <a href="/user/dopayleft/${order.id}">付尾款</a>
                                     <#elseif order.statusId==4>
-                                        待收货
+                                        待服务
                                     <#elseif order.statusId==5>
                                         <p>待评价</p>
                                         <a href="/user/comment/list">发表评论</a>
                                     <#elseif order.statusId==6>
                                         已完成
+                                    <#elseif order.statusId==7>
+                                        <p>已取消</p>
+                                        <#--
+                                        <a href="/order/delete/${order.id}">删除</a>
+                                        -->
                                     </#if>
                                 </p>
                               </td>

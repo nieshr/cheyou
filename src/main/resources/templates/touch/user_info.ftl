@@ -8,11 +8,11 @@
 <meta name="copyright" content="" />
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="js/common.js"></script>
+<script src="/touch/js/jquery-1.9.1.min.js"></script>
+<script src="/touch/js/common.js"></script>
 
-<link href="css/common.css" rel="stylesheet" type="text/css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -27,7 +27,7 @@ $(document).ready(function(){
   <div class="main">
     <p>个人信息设置</p>
     <a class="a1" href="javascript:history.go(-1);">返回</a>
-    <a class="a2" href="/touch"><img src="images/home.png" height="25" /></a>
+    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
   </div>
 </header>
 <div class="comhead_bg"></div>

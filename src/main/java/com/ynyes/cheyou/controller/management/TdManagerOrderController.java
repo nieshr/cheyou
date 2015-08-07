@@ -32,6 +32,7 @@ import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayTypeService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.util.SMSUtil;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
 /**
@@ -643,8 +644,36 @@ public class TdManagerOrderController {
             {
                 if (order.getStatusId().equals(2L))
                 {
-                    order.setStatusId(3L);
+                    // 需付尾款
+                    if (null != order.getTotalLeftPrice() && order.getTotalLeftPrice() > 0)
+                    {
+                        order.setStatusId(3L);
+                    }
+                    // 不需付尾款，直接跳到可到店服务
+                    else
+                    {
+                        order.setStatusId(4L);
+                    }
+
                     order.setPayTime(new Date());
+                }
+            }
+            // 确认付尾款
+            else if (type.equalsIgnoreCase("orderPayLeft"))
+            {
+                if (order.getStatusId().equals(3L))
+                {
+                    order.setStatusId(4L);
+                    order.setPayLeftTime(new Date());
+                }
+            }
+            // 确认已服务
+            else if (type.equalsIgnoreCase("orderService"))
+            {
+                if (order.getStatusId().equals(4L))
+                {
+                    order.setStatusId(5L);
+                    order.setServiceTime(new Date());
                 }
             }
             // 货到付款确认付款
@@ -666,6 +695,15 @@ public class TdManagerOrderController {
                     order.setExpressNumber(expressNumber);
                     order.setStatusId(4L);
                     order.setSendTime(new Date());
+                    
+                    TdUser tdUser = tdUserService.findByUsername(order.getUsername());
+                    
+                    if (null != tdUser)
+                    {
+                        SMSUtil.send(tdUser.getMobile(), "28744",
+                                new String[] { order.getUsername(),
+                                        order.getOrderNumber()});
+                    }
                 }
             }
             // 确认收货

@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><#if productCategory??>${productCategory.seoTitle!''}-</#if>车有同盟</title>
-<meta name="keywords" content="<#if productCategory??>${productCategory.seoKeywords!''}</#if>" />
-<meta name="description" content="<#if productCategory??>${productCategory.seoDescription!''}</#if>" />
-<meta name="copyright" content="云南车有同盟商贸有限公司 版权所有" /> 
+<title><#if keywords??>${keywords!''}-</#if>车有同盟</title>
+<meta name="keywords" content="<#if site??>${site.seoKeywords!''}</#if>" />
+<meta name="description" content="<#if site??>${site.seoDescription!''}</#if>" />
+<meta name="copyright" content="${site.copyright!''}" /> 
 
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js"></script>
@@ -26,6 +26,11 @@ function setprice() {
     var url = '/list/' + $('#urlcoll').val();
     if (price != "0-0") { url += "_" + price; }
     location.href = url;
+}
+function btnPageSubmit() 
+{
+    window.location.href = "/search?keywords=${keywords!''}&page="
+    + (parseInt($('#iPageNum').val()) - 1);
 }
 </script>
 
@@ -51,12 +56,13 @@ $(document).ready(function(){
 
 <div class="main">
     <div class="nygg">
-        <div class="bt mt15"><a href="#">通知公告</a></div>
+        <div class="bt mt15"><a href="/info/list/10">通知公告</a></div>
         <ul>
-            <li><a href="#">【紧急】关于‘以聚会照’诈...</a></li>
-            <li><a href="#">【紧急】关于‘以聚会照’诈...</a></li>
-            <li><a href="#">【紧急】关于‘以聚会照’诈...</a></li>
-            <li><a href="#">【紧急】关于‘以聚会照’诈...</a></li>
+            <#if news_page??>
+                <#list news_page.content as item>
+                    <li><a href="/info/content/${item.id}?mid=12" style="margin-left: 12px;">${item.title!''}</a></li>
+                </#list>
+            </#if>
         </ul>
     </div>
     <menu class="column_qg main border-df">
@@ -78,6 +84,7 @@ $(document).ready(function(){
     <div class="clear30"></div>  
     
     <section class="column_left">
+        <#--
         <ul class="xcjly">
             <div class="nyltbt">
                 <h4 class="nylt"><a href="#"><img src="/client/images/nylt_03.png" />行车记录仪</a></h4>
@@ -90,6 +97,7 @@ $(document).ready(function(){
                 <h4 class="nylt"><a href="#"><img src="/client/images/nylt_06.png" />行车记录仪</a></h4>
             </div>
         </ul>
+        -->
     
         <h3 class="tit">热卖排行</h3>
 
@@ -122,7 +130,7 @@ $(document).ready(function(){
             </#if>
         </menu>
     </section>
-  
+    
     <div class="column_right">
         
         
@@ -134,13 +142,13 @@ $(document).ready(function(){
                 <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
                     <a href="javascript:;"><img src="/client/images/page_n.png" height="11" /></a>
                 <#else>
-                    <a href="${categoryId!'0'}-${brandIndex!0}<#if param_index_list??><#list param_index_list as pindex>-${pindex!'0'}</#list></#if>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_n.png" height="11" /></a> <#-- goods_page.number+1 -->
+                    <a href="/search?keywords=${keywords!''}&page=${goods_page.number+1}"><img src="/client/images/page_n.png" height="11" /></a> <#-- goods_page.number+1 -->
                 </#if>
                         
                 <#if goods_page.number+1 == 1>
                     <a href="javascript:;"><img src="/client/images/page_l.png" height="11" /></a>
                 <#else>
-                    <a href="${categoryId!'0'}-${brandIndex!0}<#if param_index_list??><#list param_index_list as pindex>-${pindex!'0'}</#list></#if>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><img src="/client/images/page_l.png" height="11" /></a> <#-- goods_page.number-1 -->
+                    <a href="/search?keywords=${keywords!''}&page=${goods_page.number-1}"><img src="/client/images/page_l.png" height="11" /></a> <#-- goods_page.number-1 -->
                 </#if>
                 <span><font class="fc"><#if goods_page.totalPages==0>0<#else>${goods_page.number+1}</#if></font>/${goods_page.totalPages!"0"}页</span>
             </div>
@@ -153,21 +161,24 @@ $(document).ready(function(){
             <#if goods_page??>
             <#list goods_page.content as goods>
                 <li>
-                    <a class="a1" href="/goods/${goods.id}"><img src="${goods.coverImageUri!''}" title="${goods.title!''} ${goods.subTitle!''}"/></a>
+                    <a class="a1" href="/goods/${goods.id}"><img src="${goods.coverImageUri!''}" width="210" height="210" title="${goods.title!''} ${goods.subTitle!''}"/></a>
                     <p class="fs20 jiage lh35 red">￥${goods.salePrice?string("0.00")}</p><del class="yuanjia">¥${goods.marketPrice?string("0.00")}</del>
                     
                     <div class="clear"></div>
         
                     <a class="block h20 overflow" href="/goods/${goods.id}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a>
                     <a class="block fs12 blue h20 overflow" href="/goods/${goods.id}">${goods.subTitle!""}</a>
-                    <p class="fs14 w84 fl">关注：<span class="blue">523</span>人</p>
-                    <div class="yh fr">
-                        <p><a href="/goods/${goods.id}">送粮草</a></p>
-                    </div>
-                    <div class="yh fr">
-                        <p><a href="/goods/${goods.id}">赠品</a></p>
-                    </div>
-                    
+                    <p class="fs14 w84 fl">评论：<span class="blue">${goods.totalComments!'0'}</span>人</p>
+                    <#if goods.returnPoints?? && goods.returnPoints gt 0>
+                        <div class="yh fr">
+                            <p><a href="/goods/${goods.id}">送粮草</a></p>
+                        </div>
+                    </#if>
+                    <#if goods.giftList?? && goods.giftList?size gt 0>
+                        <div class="yh fr">
+                            <p><a href="/goods/${goods.id}">赠品</a></p>
+                        </div>
+                    </#if>
                     <div class="clear5"></div>
                     
                     <div class="goumai">
@@ -188,7 +199,7 @@ $(document).ready(function(){
                     <#if goods_page.number+1 == 1>
                         <a class="a1 a0" href="javascript:;"><span>上一页</span></a>
                     <#else>
-                        <a class="a1 a0" href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>上一页</span></a>
+                        <a class="a1 a0" href="/search?keywords=${keywords!''}&page=${goods_page.number-1}"><span>上一页</span></a>
                     </#if>
                     
                     <#if goods_page.totalPages gt 0>
@@ -197,7 +208,7 @@ $(document).ready(function(){
                                 <#if page == goods_page.number+1>
                                     <a class="sel" href="javascript:;">${page}</a>
                                 <#else>
-                                    <a href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${page-1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>">${page}</a> <#-- ${page} -->
+                                    <a href="/search?keywords=${keywords!''}&page=${page-1}">${page}</a> <#-- ${page} -->
                                 </#if>
                                 <#assign continueEnter=false>
                             <#else>
@@ -212,7 +223,7 @@ $(document).ready(function(){
                     <#if goods_page.number+1 == goods_page.totalPages || goods_page.totalPages==0>
                         <a class="a2" href="javascript:;"><span>下一页</span></a>
                     <#else>
-                        <a class="a2" href="${categoryId!'0'}-${brandIndex!0}<#list param_index_list as pindex>-${pindex!'0'}</#list>-${orderId!'0'}-${soldId!'0'}-${priceId!'0'}-${timeId!'0'}-${goods_page.number+1}-${leftId!'0'}<#if priceLow?? && priceHigh??>_${priceLow?string("#.##")}-${priceHigh?string("#.##")}</#if>"><span>下一页</span></a>
+                        <a class="a2" href="/search?keywords=${keywords!''}&page=${goods_page.number+1}"><span>下一页</span></a>
                     </#if>
                 </#if>
                 <span> 共<b>${goods_page.totalPages}</b>页 </span>

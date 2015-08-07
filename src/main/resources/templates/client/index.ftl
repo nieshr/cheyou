@@ -714,9 +714,11 @@ function timer8${item_index}()
 </script>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
+
+                                    <a class="pro" href="/goods/${item.id}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
+
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft8${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice8${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -733,7 +735,7 @@ function timer8${item_index}()
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
                                         <img src="${item.coverImageUri!''}" width="110" height="110"/>
-                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -817,9 +819,11 @@ function timer15${item_index}()
 </script>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
+
+                                    <a class="pro" href="/goods/${item.id}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
+
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft15${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice15${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -836,7 +840,7 @@ function timer15${item_index}()
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
                                         <img src="${item.coverImageUri!''}" width="110" height="110"/>
-                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -919,9 +923,10 @@ function timer23${item_index}()
 </script>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
+                                    <a class="pro" href="/goods/${item.id}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
+
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft23${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice23${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -938,7 +943,7 @@ function timer23${item_index}()
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
                                         <img src="${item.coverImageUri!''}" width="110" height="110"/>
-                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -966,9 +971,11 @@ function timer23${item_index}()
                         <#list miao_next_8_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
+
+                                    <a class="pro" href="/goods/${item.id}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
+
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -985,7 +992,7 @@ function timer23${item_index}()
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
                                         <img src="${item.coverImageUri!''}" width="110" height="110"/>
-                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1000,9 +1007,10 @@ function timer23${item_index}()
                         <#list miao_next_15_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
+                                    <a class="pro" href="/goods/${item.id}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
+
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -1019,7 +1027,7 @@ function timer23${item_index}()
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
                                         <img src="${item.coverImageUri!''}" width="110" height="110"/>
-                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1034,9 +1042,10 @@ function timer23${item_index}()
                         <#list miao_next_23_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
+                                    <a class="pro" href="/goods/${item.id}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
+
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -1053,7 +1062,7 @@ function timer23${item_index}()
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
                                         <img src="${item.coverImageUri!''}" width="110" height="110"/>
-                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1081,9 +1090,10 @@ function timer23${item_index}()
                         <#list miao_prev_8_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
+                                    <a class="pro" href="/goods/${item.id}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
+
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -1100,7 +1110,7 @@ function timer23${item_index}()
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
                                         <img src="${item.coverImageUri!''}" width="110" height="110"/>
-                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1115,9 +1125,11 @@ function timer23${item_index}()
                         <#list miao_prev_15_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
+
+                                    <a class="pro" href="/goods/${item.id}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
+
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
@@ -1134,7 +1146,7 @@ function timer23${item_index}()
                                 <dd>
                                     <a href="/goods/${item.id}?qiang=1">
                                         <img src="${item.coverImageUri!''}" width="110" height="110"/>
-                                        <p class="fs18 lh25 fw-b" style="width: 244px; height: 27px; overflow: hidden;">${item.title!''}</p>
+                                        <p class="fs18 lh25 fw-b">${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 244px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
                                         <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1149,9 +1161,10 @@ function timer23${item_index}()
                         <#list miao_prev_23_page.content as item>
                             <#if item_index==0>
                                 <dt>
-                                    <img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/>
+                                    <a class="pro" href="/goods/${item.id}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
                                     <a class="fs18 lh25 fw-b" href="/goods/${item.id}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="height: 22px; float: left; overflow: hidden;">${item.subTitle!''}</p>
+
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="javascript:;">￥<b><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>

@@ -78,7 +78,7 @@
                     <a class="red" href="javascript:toggleNewAddress();">新增安装信息</a>
                 </th>
                 <td>
-                    <input id="input-address-id" type="hidden" name="addressId" value="" datatype="n" nullmsg="请选择收货地址!"/>
+                    <input id="input-address-id" type="hidden" name="addressId" value="" datatype="n" nullmsg="请选择安装信息!"/>
                     <#if user.shippingAddressList?? && user.shippingAddressList?size gt 0>
                         <#list user.shippingAddressList as address>
                             <a href="javascript:;" onclick="javascript:selectAddress(this, ${address.id});">
@@ -99,10 +99,9 @@
             <table class="mymember_address">
                   <tbody>
                   <tr>
-                    <th>姓名*：</th>
+                    <th>*姓名：</th>
                     <td>
                         <input class="mytext" id="receiverName" value="" type="text">
-                        <span>收货人姓名</span>
                     </td>
                   </tr>
                   <tr>
@@ -110,7 +109,7 @@
                   </tr>
               <#--    
                   <tr>
-                    <th>地区*：</th>
+                    <th>*地区：</th>
                     <td>
                       <div id="address">
                       <select id="prov" class="prov" style="width: 100px;"></select>
@@ -120,32 +119,32 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>详细地址*：</th>
+                    <th>*详细地址：</th>
                     <td>
                         <input class="mytext" id="detailAdd" value="" type="text">
                     </td>
                   </tr>
                   <tr>
-                    <th>邮政编码*：</th>
+                    <th>*邮政编码：</th>
                     <td>
                         <input class="mytext" id="postcode" value="" type="text">
                     </td>
                   </tr>
                   -->
                   <tr>
-                    <th>手机*：</th>
+                    <th>*手机：</th>
                     <td>
                         <input class="mytext" id="mobile" value="" type="text">
                     </td>
                   </tr>
                   <tr>
-                  <th>车牌（选填）*：</th>
+                  <th>车牌（选填）：</th>
                   <td>
                   <input class="mytext" id="receiverCarcode" value="" type="text"/>
                   </td>
                   </tr>
                   <tr>
-                  <th>车型（选填）*：</th>
+                  <th>车型（选填）：</th>
                   <td>
                    <input class="mytext" id="receiverCartype" value="" type="text"/>
                   </td>
@@ -166,7 +165,7 @@
          <h3>选择线下同盟店</h3>
           
              
-            <select name="shopId" id="formselect"datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
+            <select name="shopId" id="formselect" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
                 <option>请选择</option>
                 <#if shop_list??>
                     <#list shop_list as item>
@@ -230,8 +229,8 @@
         
         <#assign totalQuantity=0>
         <#assign totalPrice=0>
-        <#if selected_goods_list??>
-            <#list selected_goods_list as sg>
+        <#if buy_goods_list??>
+            <#list buy_goods_list as sg>
                 <#assign totalQuantity=totalQuantity+sg.quantity>
                 <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
             </#list>

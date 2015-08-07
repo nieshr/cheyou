@@ -61,7 +61,6 @@ public interface TdOrderRepo extends
      * @author libiao
      */
     List<TdOrder> findByStatusId(Long statusId);
-    
 //    List<TdOrder> findAll();
     
 }

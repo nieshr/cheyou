@@ -41,7 +41,6 @@ $(document).ready(function(){
             <b><img src="${cg.goodsCoverImageUri}" /></b>
             <p>${cg.goodsTitle!''}<span class="sp1">￥${cg.goodsSalePrice?string("0.00")}</span></p>
             <p class="p1">${cg.goodsSubTitle!''}</p>
-            
             <div class="clear"></div>
         </a>
     </#list>

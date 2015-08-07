@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/Validform_v5.3.2_min.js"></script>
 <script src="/touch/js/common.js"></script>
 <script src="/touch/js/order_info.js"></script>
 
@@ -20,8 +21,13 @@
 <!-- add link 2015-7-31 11:24:56 mdj end -->
 <script type="text/javascript">
 $(document).ready(function(){
-  
+    $("#form1").Validform({
+        tiptype: 1
+    });
 });
+</script>
+<script type="text/javascript">
+    var forPaymentFllow = true;
 </script>
 </head>
 
@@ -36,14 +42,15 @@ $(document).ready(function(){
 <div class="comhead_bg"></div>
 <!--header END-->
 
+<form id="form1" name="form1" action="/touch/order/submit" method="post">
 <div class="mainbox">
   <p class="address">选择线下同盟店：</p>
   <div class="address">
-    <select style="width:100%;">
+    <select name="shopId" style="width:100%;" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
         <option value="">请选择同盟店</option>
         <#if diy_site_list??>
             <#list diy_site_list as item>
-                <option value="item.id">${item.title!''}</option>
+                <option value="${item.id}">${item.title!''}</option>
             </#list>
         </#if>
     </select>
@@ -55,8 +62,10 @@ $(document).ready(function(){
       <a href="javascript:;"><img src="/client/images/content/rl.png" /></a>
   </section>
   <!-- end -->
-  <p class="address">选择粮草：<span class="absolute-r">可用粮草（<b class="red">${total_point_limit!'0'}</b>）</span></p>
-  <input type="text" class="address" value="" />
+  <p class="address">使用粮草：
+    <span>（可用：${total_point_limit!'0'}）</span>
+  </p>
+  <input type="text" class="address" value="0" name="pointUse" value="0" onchange="pointChange(this, $(this).val(), ${total_point_limit!'0'});"/>
   <p class="address">选择优惠券：</p>
   <div class="address">
     <select id="couponSelect" name="couponId" style="width:100%;" onchange="couponChange();">
@@ -70,11 +79,10 @@ $(document).ready(function(){
   </div>
   <p class="address">选择支付方式：</p>
   <ul class="paystyle">
-    <#if pay_type_list??>
-        <#list pay_type_list as pay_type>
-            <li><input type="radio" datatype="n" value="${pay_type.id!''}"/><span>${pay_type.title!''}</span></li>
-        </#list>
-    </#if>
+    <#assign maxMethodCount=5/>
+    <#assign changePayMethod=false/>
+    <#include "/client/paybox_common.ftl" />
+    
   </ul>
   <div class="clear"></div>
   <p class="address">留言：</p>
@@ -100,5 +108,6 @@ $(document).ready(function(){
     <input class="sub" type="submit" value="提交订单（<#if totalQuantity??>${totalQuantity!'0'}</#if>）" />
   </div>
 </footer>
+</form>
 </body>
 </html>
