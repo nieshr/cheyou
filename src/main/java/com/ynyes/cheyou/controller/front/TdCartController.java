@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ynyes.cheyou.entity.TdCartGoods;
 import com.ynyes.cheyou.entity.TdGoods;
-import com.ynyes.cheyou.entity.TdGoodsCombination;
-import com.ynyes.cheyou.entity.TdGoodsGift;
 import com.ynyes.cheyou.service.TdCartGoodsService;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdGoodsCombinationService;

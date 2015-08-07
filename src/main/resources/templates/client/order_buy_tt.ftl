@@ -161,8 +161,8 @@
      
         <div class="clear h20"></div>
         
-        <section class="order_check fl">
-        <h3>选择线下同盟店</h3>
+       <section class="order_check fl">
+         <h3>选择线下同盟店</h3>
           
              
             <select name="shopId" id="formselect" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
@@ -192,33 +192,10 @@
             <input name="appointmentTime" type="text" value="" datatype="*" class="text input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" errormsg="请选择预约安装时间" nullmsg="请选择预约安装时间">
             <a href="javascript:;"><img src="/client/images/content/rl.png" /></a>
         </section>
-        
         <div class="clear h20"></div>
-        
         <#assign maxMethodCount=5/>
         <#assign changePayMethod=false/>
         <#include "/client/paybox_common.ftl" />
-        <div class="clear h10"></div>
-        <div class="car_pay">
-            <span class="mr10 inblock" style="width:100px;">优惠券</span>
-            <select id="couponSelect" name="couponId" onchange="couponChange();">
-                <#if coupon_list??>
-                    <option value="" fee="0">不使用优惠券</option>
-                    <#list coupon_list as item>
-                        <option value="${item.id}">${item.typeTitle!''}</option>
-                    </#list>
-                </#if>
-            </select>&nbsp;&nbsp;
-            <span class="red">抵用金额：￥0.00</span>
-        </div>
-        
-        <div class="clear h20"></div>
-        
-        <div class="car_pay">
-            <span class="mr10 inblock" style="width:100px;">使用粮草</span>
-            <input type="text" name="pointUse" value="0" onchange="pointChange(this, $(this).val(), ${total_point_limit!'0'});" style="width:94px; text-align:right;"/>&nbsp;&nbsp;
-            <span class="red">可用粮草：${total_point_limit!'0'}</span>
-        </div>
         
         <div class="clear h20"></div>
         
@@ -243,7 +220,7 @@
                 <#assign totalQuantity=totalQuantity+sg.quantity>
                 <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
                 <tr>
-                    <td width="110"><a href="/goods/${sg.goodsId}"><img src="${sg.goodsCoverImageUri!''}" width="100" height="100"/></a></td>
+                    <td width="110"><a href="/goods/${sg.goodsId}?qiang=3"><img src="${sg.goodsCoverImageUri!''}" width="100" height="100"/></a></td>
                     <td width="800" style="text-align:left;"><a href="/goods/${sg.goodsId}">${sg.goodsTitle!''}</a></td>
                     <td width="150" style="text-align:center;"><#if sg.price??>${sg.price?string("0.00")}</#if></td>
                     <td width="150" style="text-align:center;">×${sg.quantity!''}</td>
@@ -254,7 +231,7 @@
         </#if>
         
         <div class="clear h20"></div>
-      
+        
         <div class="car_btn">
             <a class="ml20 fc" href="javascript:window.history.back();">返回上一页</a>
             <span>应付总额：商品价格（¥<b id="goodsFee">${totalPrice?string("0.00")}</b>）

@@ -133,7 +133,7 @@ DD_belatedPNG.fix('.,img,background');
                                         <a href="/order/dopay/${order.id}">立即支付</a>
                                     <#elseif order.statusId==3>
                                         <p>待付尾款</p>
-                                        <a href="/user/dopayleft/${order.id}">付尾款</a>
+                                        <a href="/order/dopayleft/${order.id}">去支付</a>
                                     <#elseif order.statusId==4>
                                         待服务
                                     <#elseif order.statusId==5>

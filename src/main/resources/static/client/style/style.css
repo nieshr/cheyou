@@ -498,7 +498,8 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	width:8px;
 	height:15px;
 	top:-3px;
-	background:#ddddde;}
+	/* background:#ddddde; */
+	}
 .team_men dd.sel {
 	background:#ff6700;}
 .team_men p {

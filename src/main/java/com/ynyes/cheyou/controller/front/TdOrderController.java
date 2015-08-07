@@ -574,6 +574,10 @@ public class TdOrderController extends AbstractPaytypeController {
                     // 尾款
                     totalLeftPrice = goods.getGroupSaleTenPrice()
                             - goods.getGroupSalePrice();
+                    
+                    if (totalLeftPrice < 0) {
+                        totalLeftPrice = 0.0;
+                    }
 
                     // 数量
                     orderGoods.setQuantity(1L);
@@ -1592,7 +1596,7 @@ public class TdOrderController extends AbstractPaytypeController {
             return "/client/error_404";
         }
 
-        String amount = order.getTotalPrice().toString();
+        String amount = order.getTotalLeftPrice().toString();
         req.setAttribute("totalPrice", amount);
 
         String payForm = "";
@@ -1845,7 +1849,7 @@ public class TdOrderController extends AbstractPaytypeController {
             return result;
         }
 
-        if (order.getStatusId() != 2l || order.getStatusId() != 3l) {
+        if (!order.getStatusId().equals(2L) && !order.getStatusId().equals(3L)) {
             result.put("message", "订单不能修改支付方式！");
             return result;
         }
@@ -1906,10 +1910,19 @@ public class TdOrderController extends AbstractPaytypeController {
         // 同盟店
         TdDiySite tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
 
-        // 待服务
-        tdOrder.setStatusId(4L);
-
-        tdOrder = tdOrderService.save(tdOrder);
+        if (tdOrder.getStatusId().equals(2L) && !tdOrder.getTotalLeftPrice().equals(0))
+        {
+            // 待付尾款
+            tdOrder.setStatusId(3L);
+            tdOrder = tdOrderService.save(tdOrder);
+            return;
+        }
+        else
+        {
+            // 待服务
+            tdOrder.setStatusId(4L);
+            tdOrder = tdOrderService.save(tdOrder);
+        }
 
         // 给用户发送短信
         if (null != tdUser && null != tdUser.getMobile()) {
@@ -1930,7 +1943,7 @@ public class TdOrderController extends AbstractPaytypeController {
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
                             tdOrder.getAppointmentTime().toString() });
         }
-
+        
         List<TdOrderGoods> tdOrderGoodsList = tdOrder.getOrderGoodsList();
 
         Long totalPoints = 0L;
