@@ -46,7 +46,17 @@ DD_belatedPNG.fix('.,img,background');
 <!-- header开始 -->
 <#include "/client/common_header.ftl" />
 <!-- header结束 -->
- <a href="/">首页</a>
+
+<div class="main">
+    <div class="clear h30"></div>
+  
+  <div class="car_success">
+    <p class=" fs20 lh40 pt20 red pb10">修改成功！已成功登陆</p>
+    <p class="pt20"><a class="c9" href="/">返回主页</a></p>
+  </div>
+  
+  <div class="clear"></div> 
+</div><!--main END-->
 <!--主体结束-->
 <#include "/client/common_footer.ftl" />
 <!--底部结束-->

@@ -251,6 +251,14 @@ public class TdOrderService {
     }
     
     /**
+	 * @author lc
+	 * @注释：线下同盟店信息
+	 */
+    public List<TdOrder> findByshopIdAndstatusId(long shopId, long statusId){
+    	return (List<TdOrder>) repository.findByShopIdAndStatusIdOrderByIdDesc(shopId, statusId);
+    }
+    
+    /**
      * 按交易状态查询
      * @author libiao
      */

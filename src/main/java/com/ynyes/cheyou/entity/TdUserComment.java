@@ -110,8 +110,21 @@ public class TdUserComment {
     // 排序号
     @Column
     private Long sortId;
+    
+    // 同盟店id
+    @Column
+    private Long diysiteId;
+    
+    
+    public Long getDiysiteId() {
+		return diysiteId;
+	}
 
-    public Long getId() {
+	public void setDiysiteId(Long diysiteId) {
+		this.diysiteId = diysiteId;
+	}
+
+	public Long getId() {
         return id;
     }
 

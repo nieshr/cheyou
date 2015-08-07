@@ -109,17 +109,15 @@ function loadMap(x, y)
                             <div class="mendianditu_rt">
                             <h4><a href="/shop/${item.id}">${item.title!''}</a></h4>
                             <p>${item.address!''}</p>
-                            <p>服务电话：<span>${item.serviceTele!''}</span><p>
-                            <#--
-                                <p>本店共完成<span><a href="#">120</a></span>个安装单，有<span><a href="#">197</a></span>条评论</p>
-                                <p class="dituxinxin">
-                                <a class="fl" href="#"><img src="/client/images/content/start01.png" /></a>
-                                <a class="fl" href="#"><img src="/client/images/content/start01.png" /></a>
-                                <a class="fl" href="#"><img src="/client/images/content/start01.png" /></a>
-                                <a class="fl" href="#"><img src="/client/images/content/start02.png" /></a>
-                                <a class="fl" href="#"><img src="/client/images/content/start03.png" /></a>
-                                </p>
-                            -->
+                            <p>服务电话：<span>${item.serviceTele!''}</span><p>                          
+                            <p>本店共完成<span><a href="#"><#if ("shop_orderFinish_"+item.id)?eval??>${("shop_orderFinish_"+item.id)?eval}<#else>100</#if></a></span>个安装单，有<span><a href="#"><#if ("shop_orderComment_"+item.id)?eval?? && ("shop_orderComment_"+item.id)?eval!=0>${("shop_orderComment_"+item.id)?eval}<#else>32</#if></a></span>条评论</p>
+                            <p class="dituxinxin">
+                                <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 0 >start01.png<#else>start03.png</#if>" /></a>
+                                <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 1 >start01.png<#else>start03.png</#if>" /></a>
+                                <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 2 >start01.png<#else>start03.png</#if>" /></a>
+                                <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 3 >start01.png<#else>start03.png</#if>" /></a>
+                                <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 4 >start02.png<#else>start03.png</#if>" /></a>
+                            </p>
                             <p class="dianouweizhi">
                                 <a href="javascript:;" onclick="loadMap(<#if item.longitude??>${item.longitude?string("0.000000")}<#else>110</#if>, <#if item.latitude??>${item.latitude?string("0.000000")}<#else>39</#if>);">店铺位置</a>
                             </p>

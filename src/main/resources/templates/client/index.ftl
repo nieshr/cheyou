@@ -1240,7 +1240,7 @@ function timer23${item_index}()
                         </div>
                         <p class="p1">
                             预付定金:<#if item.groupSaleHundredPrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
-                            <a href="/cart/init?id=1&qiang=<#if item.isGroupSaleHundred?? && item.isGroupSaleHundred>100<#else>3</#if>">立即参加</a>
+                            <a href="/cart/init?id=1&qiang=<#if item.isGroupSaleHundred?? && item.isGroupSaleHundred>100<#else>3</#if>">立即参团</a>
                         </p>
                     </div>
                 </#list>
@@ -1277,7 +1277,7 @@ function timer23${item_index}()
                         </div>
                         <p class="p1">
                             预付定金:<#if item.groupSaleHundredPrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
-                            <a href="/cart/init?id=1&qiang=<#if item.isGroupSaleHundred?? && item.isGroupSaleHundred>100<#else>3</#if>">立即参加</a>
+                            <a href="/cart/init?id=1&qiang=<#if item.isGroupSaleHundred?? && item.isGroupSaleHundred>100<#else>3</#if>">立即参团</a>
                         </p>
                     </div>
                 </#list>
@@ -1314,7 +1314,7 @@ function timer23${item_index}()
                         </div>
                         <p class="p1">
                             预付定金:<#if item.groupSaleHundredPrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
-                            <a href="/cart/init?id=1&qiang=<#if item.isGroupSaleHundred?? && item.isGroupSaleHundred>100<#else>3</#if>">立即参加</a>
+                            <a href="/cart/init?id=1&qiang=<#if item.isGroupSaleHundred?? && item.isGroupSaleHundred>100<#else>3</#if>">立即参团</a>
                         </p>
                     </div>
                 </#list>
