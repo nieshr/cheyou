@@ -69,7 +69,7 @@
     
     <div class="clear h30"></div>
     
-    <form id="form1" name="form1" action="/order/submit" method="post">
+    <form id="form1" name="form1" action="/order/buysubmit" method="post">
         
         <table class="address_tab">
             <tr>
@@ -196,27 +196,6 @@
         <#assign maxMethodCount=5/>
         <#assign changePayMethod=false/>
         <#include "/client/paybox_common.ftl" />
-        <div class="clear h10"></div>
-        <div class="car_pay">
-            <span class="mr10 inblock" style="width:100px;">优惠券</span>
-            <select id="couponSelect" name="couponId" onchange="couponChange();">
-                <#if coupon_list??>
-                    <option value="" fee="0">不使用优惠券</option>
-                    <#list coupon_list as item>
-                        <option value="${item.id}">${item.typeTitle!''}</option>
-                    </#list>
-                </#if>
-            </select>&nbsp;&nbsp;
-            <span class="red">抵用金额：￥0.00</span>
-        </div>
-        
-        <div class="clear h20"></div>
-        
-        <div class="car_pay">
-            <span class="mr10 inblock" style="width:100px;">使用粮草</span>
-            <input type="text" name="pointUse" value="0" onchange="pointChange(this, $(this).val(), ${total_point_limit!'0'});" style="width:94px; text-align:right;"/>&nbsp;&nbsp;
-            <span class="red">可用粮草：${total_point_limit!'0'}</span>
-        </div>
         
         <div class="clear h20"></div>
         
@@ -233,6 +212,7 @@
             <#list buy_goods_list as sg>
                 <#assign totalQuantity=totalQuantity+sg.quantity>
                 <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
+                <p>${sg.goodsTitle!''} * ${sg.quantity!''} = ${sg.price}</p>
             </#list>
         </#if>
       

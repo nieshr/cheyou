@@ -18,9 +18,12 @@ public interface TdCartGoodsRepo extends
 		PagingAndSortingRepository<TdCartGoods, Long>,
 		JpaSpecificationExecutor<TdCartGoods> 
 {
-    TdCartGoods findTopByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username);
+//    TdCartGoods findTopByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username);
+    TdCartGoods findTopByGoodsIdAndUsername(Long goodsId, String username);
     
-    List<TdCartGoods> findByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username);
+//    List<TdCartGoods> findByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username);
+    
+    List<TdCartGoods> findByGoodsIdAndUsername(Long goodsId, String username);
     
     List<TdCartGoods> findByUsername(String username);
     

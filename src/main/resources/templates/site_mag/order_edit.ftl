@@ -13,6 +13,8 @@
         $(function () {
             $("#btnConfirm").click(function () { OrderConfirm(); });   //确认订单
             $("#btnPayment").click(function () { OrderPayment(); });   //确认付款
+            $("#btnPaymentLeft").click(function () { OrderPaymentLeft(); });   //确认付尾款
+            $("#btnService").click(function () { OrderService(); });   //确认到店消费
 
             $("#btnHDFKPayment").click(function () { OrderHDFKPayment(); });   //确认货到付款已付款
             $("#btnOrderExpress").click(function () { OrderExpress(); });   //确认发货
@@ -73,6 +75,28 @@
                 return false;
             });
         }
+        
+        //确认付尾款
+        function OrderPaymentLeft() {
+            var dialog = $.dialog.confirm('操作提示信息：<br />1、该订单使用在线支付方式，付尾款成功后自动确认；<br />2、如客户确实已打款而没有自动确认可使用该功能；<br />3、确认付款后无法修改金额，确认要继续吗？', function () {
+                var orderNumber = $.trim($("#spanOrderNumber").text());
+                var postData = { "orderNumber": orderNumber, "type": "orderPayLeft" };
+                //发送AJAX请求
+                sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
+                return false;
+            });
+        }
+        
+        //确认到店消费
+        function OrderService() {
+            var dialog = $.dialog.confirm('操作提示信息：<br />确认已到店消费？', function () {
+                var orderNumber = $.trim($("#spanOrderNumber").text());
+                var postData = { "orderNumber": orderNumber, "type": "orderService" };
+                //发送AJAX请求
+                sendAjaxUrl(dialog, postData, "/Verwalter/order/param/edit");
+                return false;
+            });
+        }
 
         //确认货到付款已付款
         function OrderHDFKPayment() {
@@ -100,7 +124,7 @@
         
         //确认完成
         function OrderComplete() {
-             var dialog = $.dialog.confirm('确认该订单已完成？', function () {
+             var dialog = $.dialog.confirm('确认后用户将不能进行评价，是否继续？', function () {
                 var orderNumber = $.trim($("#spanOrderNumber").text());
                 var postData = { "orderNumber": orderNumber, "type": "orderFinish" };
                 //发送AJAX请求
@@ -359,80 +383,46 @@
                             </span>
                         </div>
                     <#elseif order.statusId == 2>
-                        <#if order.isOnlinePay>
-                            <div class="order-flow-left">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">订单已生成</p>
-                                    <p>${order.orderTime!""}</p>
-                                </span>
-                            </div>
+                        <div class="order-flow-left">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">订单已生成</p>
+                                <p>${order.orderTime!""}</p>
+                            </span>
+                        </div>
+                        <div class="order-flow-wait">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">待付款</p>
+                            </span>
+                        </div>
+                        <#if order.totalLeftPrice?? && order.totalLeftPrice gt 0>
                             <div class="order-flow-wait">
                                 <a class="order-flow-input"></a>
                                 <span>
-                                    <p class="name">待付款</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">待发货</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">待收货</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">待评价</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-right-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">未完成</p>
-                                    <p></p>
-                                </span>
-                            </div>
-                        <#else>
-                            <div class="order-flow-left">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">订单已生成</p>
-                                    <p>${order.orderTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已确认</p>
-                                    <p>${order.checkTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">待付款</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">待评价</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-right-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">未完成</p>
-                                    <p></p>
+                                    <p class="name">待付尾款</p>
                                 </span>
                             </div>
                         </#if>
+                        <div class="order-flow-wait">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">待服务</p>
+                            </span>
+                        </div>
+                        <div class="order-flow-wait">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">待评价</p>
+                            </span>
+                        </div>
+                        <div class="order-flow-right-wait">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">完成</p>
+                                <p></p>
+                            </span>
+                        </div>
                     <#elseif order.statusId == 3>
                         <div class="order-flow-left">
                             <a class="order-flow-input"></a>
@@ -448,16 +438,18 @@
                                 <p>${order.payTime!""}</p>
                             </span>
                         </div>
+                        <#if order.totalLeftPrice?? && order.totalLeftPrice gt 0>
+                            <div class="order-flow-wait">
+                                <a class="order-flow-input"></a>
+                                <span>
+                                    <p class="name">待付尾款</p>
+                                </span>
+                            </div>
+                        </#if>
                         <div class="order-flow-wait">
                             <a class="order-flow-input"></a>
                             <span>
-                                <p class="name">待发货</p>
-                            </span>
-                        </div>
-                        <div class="order-flow-wait">
-                            <a class="order-flow-input"></a>
-                            <span>
-                                <p class="name">待收货</p>
+                                <p class="name">待服务</p>
                             </span>
                         </div>
                         <div class="order-flow-wait">
@@ -469,7 +461,7 @@
                         <div class="order-flow-right-wait">
                             <a class="order-flow-input"></a>
                             <span>
-                                <p class="name">未完成</p>
+                                <p class="name">完成</p>
                                 <p></p>
                             </span>
                         </div>
@@ -488,17 +480,19 @@
                                 <p>${order.payTime!""}</p>
                             </span>
                         </div>
-                        <div class="order-flow-arrive">
-                            <a class="order-flow-input"></a>
-                            <span>
-                                <p class="name">已发货</p>
-                                <p>${order.sendTime!''}</p>
-                            </span>
-                        </div>
+                        <#if order.totalLeftPrice?? && order.totalLeftPrice gt 0>
+                            <div class="order-flow-arrive">
+                                <a class="order-flow-input"></a>
+                                <span>
+                                    <p class="name">已付尾款</p>
+                                    <p>${order.payLeftTime!''}</p>
+                                </span>
+                            </div>
+                        </#if>
                         <div class="order-flow-wait">
                             <a class="order-flow-input"></a>
                             <span>
-                                <p class="name">待收货</p>
+                                <p class="name">待服务</p>
                             </span>
                         </div>
                         <div class="order-flow-wait">
@@ -510,169 +504,98 @@
                         <div class="order-flow-right-wait">
                             <a class="order-flow-input"></a>
                             <span>
-                                <p class="name">未完成</p>
+                                <p class="name">完成</p>
                                 <p></p>
                             </span>
                         </div>
                     <#elseif order.statusId == 5>
-                        <#if order.isOnlinePay>
-                            <div class="order-flow-left">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">订单已生成</p>
-                                    <p>${order.orderTime!""}</p>
-                                </span>
-                            </div>
+                        <div class="order-flow-left">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">订单已生成</p>
+                                <p>${order.orderTime!""}</p>
+                            </span>
+                        </div>
+                        <div class="order-flow-arrive">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">已付款</p>
+                                <p>${order.payTime!""}</p>
+                            </span>
+                        </div>
+                        <#if order.totalLeftPrice?? && order.totalLeftPrice gt 0>
                             <div class="order-flow-arrive">
                                 <a class="order-flow-input"></a>
                                 <span>
-                                    <p class="name">已付款</p>
-                                    <p>${order.payTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已发货</p>
-                                    <p>${order.sendTime!''}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已收货</p>
-                                    <p>${order.receiveTime!''}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">待评价</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-right-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">未完成</p>
-                                </span>
-                            </div>
-                        <#else>
-                            <div class="order-flow-left">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">订单已生成</p>
-                                    <p>${order.orderTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已确认</p>
-                                    <p>${order.checkTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已付款</p>
-                                    <p>${order.payTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">待评价</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-right-wait">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">未完成</p>
-                                    <p></p>
+                                    <p class="name">已付尾款</p>
+                                    <p>${order.payLeftTime!''}</p>
                                 </span>
                             </div>
                         </#if>
+                        <div class="order-flow-arrive">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">已服务</p>
+                                <p>${order.serviceTime!''}</p>
+                            </span>
+                        </div>
+                        <div class="order-flow-wait">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">待评价</p>
+                            </span>
+                        </div>
+                        <div class="order-flow-right-wait">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">完成</p>
+                            </span>
+                        </div>
                     <#elseif order.statusId == 6>
-                        <#if order.isOnlinePay>
-                            <div class="order-flow-left">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">订单已生成</p>
-                                    <p>${order.orderTime!""}</p>
-                                </span>
-                            </div>
+                        <div class="order-flow-left">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">订单已生成</p>
+                                <p>${order.orderTime!""}</p>
+                            </span>
+                        </div>
+                        <div class="order-flow-arrive">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">已付款</p>
+                                <p>${order.payTime!""}</p>
+                            </span>
+                        </div>
+                        <#if order.totalLeftPrice?? && order.totalLeftPrice gt 0>
                             <div class="order-flow-arrive">
                                 <a class="order-flow-input"></a>
                                 <span>
-                                    <p class="name">已付款</p>
-                                    <p>${order.payTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已发货</p>
-                                    <p>${order.sendTime!''}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已收货</p>
-                                    <p>${order.receiveTime!''}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已评价</p>
-                                    <p>${order.finishTime!''}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-right-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已完成</p>
-                                    <p>${order.finishTime!''}</p>
-                                </span>
-                            </div>
-                        <#else>
-                            <div class="order-flow-left">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">订单已生成</p>
-                                    <p>${order.orderTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已确认</p>
-                                    <p>${order.checkTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已付款</p>
-                                    <p>${order.payTime!""}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已评价</p>
-                                    <p>${order.finishTime!''}</p>
-                                </span>
-                            </div>
-                            <div class="order-flow-right-arrive">
-                                <a class="order-flow-input"></a>
-                                <span>
-                                    <p class="name">已完成</p>
-                                    <p>${order.finishTime!''}</p>
+                                    <p class="name">已付尾款</p>
+                                    <p>${order.payLeftTime!''}</p>
                                 </span>
                             </div>
                         </#if>
+                        <div class="order-flow-arrive">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">已服务</p>
+                                <p>${order.serviceTime!''}</p>
+                            </span>
+                        </div>
+                        <div class="order-flow-arrive">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">已评价</p>
+                                <p>${order.commentTime!''}</p>
+                            </span>
+                        </div>
+                        <div class="order-flow-right-arrive">
+                            <a class="order-flow-input"></a>
+                            <span>
+                                <p class="name">已完成</p>
+                                <p>${order.finishTime!''}</p>
+                            </span>
+                        </div>
                     <#elseif order.statusId == 7>
                         <div class="order-flow-left">
                             <a class="order-flow-input"></a>
@@ -768,6 +691,7 @@
                             </div>
                         </td>
                     </tr>
+                    <#--
                     <tr>
                         <th>
                             配送费用
@@ -781,6 +705,7 @@
                             </div>
                         </td>
                     </tr>
+                    -->
                     <tr>
                         <th>
                             支付手续费
@@ -811,6 +736,20 @@
                         <td>
                             ${order.totalPrice?string("0.00")}元</td>
                     </tr>
+                    <tr>
+                        <th>
+                            支付方式
+                        </th>
+                        <td>${order.payTypeTitle!""}</td>
+                    </tr>
+                    <#--
+                    <tr>
+                        <th>
+                            配送方式
+                        </th>
+                        <td>${order.deliverTypeTitle!""}</td>
+                    </tr>
+                    -->
                 </tbody>
                 </table>
             </dd>
@@ -906,24 +845,15 @@
         -->
         
         <dl>
-            <dt>支付配送</dt>
+            <dt>备注</dt>
             <dd>
+                
                 <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
-                    <tbody><tr>
-                        <th width="20%">
-                            支付方式
-                        </th>
-                        <td>${order.payTypeTitle!""}</td>
-                    </tr>
-                    <tr>
-                        <th>
-                            配送方式
-                        </th>
-                        <td>${order.deliverTypeTitle!""}</td>
-                    </tr>
+                    <tbody>
+                    
                     
                     <tr>
-                        <th>
+                        <th  width="20%">
                             用户留言
                         </th>
                         <td>${order.userRemarkInfo!""}</td>
@@ -952,16 +882,12 @@
                 <input type="button" id="btnConfirm" value="确认订单" class="btn">
                 <input type="button" id="btnCancel" value="取消订单" class="btn green">
             <#elseif order.statusId==2>
-                <#if order.isOnlinePay>
-                    <input type="button" id="btnPayment" value="确认付款" class="btn">
-                    <input type="button" id="btnCancel" value="取消订单" class="btn green">
-                <#else>
-                    <input type="button" id="btnHDFKPayment" value="确认付款" class="btn">
-                </#if>
+                <input type="button" id="btnPayment" value="确认付款" class="btn">
+                <input type="button" id="btnCancel" value="取消订单" class="btn green">
             <#elseif order.statusId==3>
-                <input type="button" id="btnOrderExpress" value="确认发货" class="btn">
+                <input type="button" id="btnPaymentLeft" value="确认尾款已付" class="btn">
             <#elseif order.statusId==4>
-                <input type="button" id="btnOrderReceive" value="确认收货" class="btn green">
+                <input type="button" id="btnService" value="确认到店消费" class="btn green">
             <#elseif order.statusId==5>
                 <input type="button" id="btnOrderComplete" value="确认完成" class="btn">
             </#if>

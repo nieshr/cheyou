@@ -2,16 +2,13 @@ package com.ynyes.cheyou.touch;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.neo4j.cypher.internal.compiler.v2_1.ast.rewriters.namedPatternPartRemover;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ynyes.cheyou.entity.TdSetting;
 import com.ynyes.cheyou.entity.TdUser;
-import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserPointService;

@@ -154,10 +154,20 @@ public class TdOrder {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date payTime;
     
+    // 付尾款时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date payLeftTime;
+    
     // 配送时间
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date deliveryTime;
+    
+    // 服务时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date serviceTime;
     
     // 收货时间
     @Column
@@ -174,7 +184,7 @@ public class TdOrder {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date finishTime;
     
-    // 订单状态  1:待确认 2:待付款 3:待发货 4:待收货 5: 待评价 6: 已完成 7: 已取消8: 支付取消(失败)
+    // 订单状态 2:待付款 3:待付尾款 4:待服务 5:待评价 6: 已完成 7: 已取消 8: 支付取消(失败) 9: 已删除
     @Column
     private Long statusId;
     
@@ -210,6 +220,10 @@ public class TdOrder {
     // 订单总金额
     @Column(scale=2)
     private Double totalPrice;
+    
+    // 订单尾款总金额，有些订单需付尾款
+    @Column(scale=2)
+    private Double totalLeftPrice;
     
     // 排序号
     @Column
@@ -609,4 +623,28 @@ public class TdOrder {
 	public void setCarType(String carType) {
 		this.carType = carType;
 	}
+
+    public Double getTotalLeftPrice() {
+        return totalLeftPrice;
+    }
+
+    public void setTotalLeftPrice(Double totalLeftPrice) {
+        this.totalLeftPrice = totalLeftPrice;
+    }
+
+    public Date getPayLeftTime() {
+        return payLeftTime;
+    }
+
+    public void setPayLeftTime(Date payLeftTime) {
+        this.payLeftTime = payLeftTime;
+    }
+
+    public Date getServiceTime() {
+        return serviceTime;
+    }
+
+    public void setServiceTime(Date serviceTime) {
+        this.serviceTime = serviceTime;
+    }
 }
