@@ -208,6 +208,14 @@ public class TdUserCommentService {
     }
     
     /**
+	 * @author lc
+	 * @注释：查询同盟店评价
+	 */
+    public List<TdUserComment> findByDiysiteIdOrderByIdDesc(long diysiteId){
+    	return repository.findByDiysiteIdOrderByIdDesc(diysiteId);
+    }
+    
+    /**
      * 保存
      * 
      * @param e

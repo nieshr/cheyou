@@ -1,6 +1,7 @@
 package com.ynyes.cheyou.service;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdUser;
+import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.repository.TdDiySiteRepo;
 
 /**
@@ -26,6 +28,9 @@ import com.ynyes.cheyou.repository.TdDiySiteRepo;
 public class TdDiySiteService {
     @Autowired
     TdDiySiteRepo repository;
+    
+    @Autowired
+    TdUserCommentService TdUserCommentService;
     
     @Autowired
     TdUserService tdUserService;
@@ -157,5 +162,34 @@ public class TdDiySiteService {
     public TdDiySite findbyUsername(String username){
 		
     	return (repository.findByUsernameAndIsEnableTrue(username)); 	
+    }
+    
+    /**
+	 * @author lc
+	 * @注释：同盟店评价信息
+	 */
+    public int ContdiysiteComment(Long diysiteId) {
+		List<TdUserComment> tdUserComment_list = TdUserCommentService.findByDiysiteIdOrderByIdDesc(diysiteId);
+		return tdUserComment_list.size();
+	}
+    
+    public float diysiteServiceStars(Long diysiteId){
+    	List<TdUserComment> tdUserComment_list = TdUserCommentService.findByDiysiteIdOrderByIdDesc(diysiteId);
+    	
+    	if (null != tdUserComment_list) {
+    		Long[] result = new Long[20];
+        	int temp = 0;
+        	if (tdUserComment_list.size()==0) {
+				return (float) 4.5;
+			}
+        	for(int i = 0; i < 20; i++){
+        		result[i] = tdUserComment_list.get(Math.abs(new Random().nextInt())%tdUserComment_list.size()).getServiceStar();
+        		temp = (int) (temp + result[i]);
+        	}
+        	return temp/20;
+		}
+    	
+    	return (float) 4.5;
+    	
     }
 }

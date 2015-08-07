@@ -11,41 +11,27 @@
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
 
+
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
 
-<script type="text/javascript">
-$(document).ready(function(){
-  searchTextClear(".logintext01","手机号/邮箱","#999","#333");
-  searchTextClear(".logintext02","输入验证码","#999","#333");
-});
-</script>
 </head>
 
 <body>
 <header class="comhead">
   <div class="main">
     <p>找回密码</p>
-    <a class="a1" href="#">返回</a>
-    <a class="a2" href="#"><img src="images/home.png" height="25" /></a>
+    <a class="a1" href="javascript:history.go(-1);">返回</a>
+    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
   </div>
 </header>
 <div class="comhead_bg"></div>
-<section class="loginbox">
-  <div class="main">
-    <div class="logintext">
-    <input type="text" class="logintext01" value="" />
-    </div>
-    <div class="logintext logintext_y">
-    <input type="text" class="logintext02" value="" />
-    </div>
-    <a href="#" class="login_yzm"><img src="images/yzm.png" /></a>
-    <div class="clear"></div>
-    <input type="submit" class="loginbtn" value="下一步" />
-      </div>
-  
-</section>
+    <section class="loginbox">
+       <p>修改成功，并已成功登陆</p>
+                        
+    </section>
 <div class="clear h15"></div>
+
 
 </body>
 </html>

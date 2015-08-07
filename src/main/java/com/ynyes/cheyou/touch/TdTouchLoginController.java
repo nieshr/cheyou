@@ -62,10 +62,11 @@ public class TdTouchLoginController {
      * @param map
      * @return
      */
-    @RequestMapping("/touch/find")
+    @RequestMapping("/touch/retrieve")
     public String findPassword(Integer errCode,HttpServletRequest request, ModelMap map,String name)
     {
     	String username = (String) request.getSession().getAttribute("username");
+    	
     	/**
     	 * errCode = 0 代表验证码出错   1，用户不存在
     	 */
@@ -77,49 +78,100 @@ public class TdTouchLoginController {
                 if (errCode.equals(0))
                 {
                     map.addAttribute("error", "验证码错误");
+                    return "/touch/user_retrieve";
                 }
                 else if(errCode.equals(1))
                 {
                 	map.addAttribute("error", "用户不存在");
+                    return "/touch/user_retrieve";
 				}
                 
                 map.addAttribute("errCode", errCode);
+                return "/touch/user_retrieve_step2";
             }
             map.addAttribute("username",name);
-            
-            return "/touch/find";
+            return "/touch/user_retrieve";         
         }
         return "redirect:/touch";
     }
     
-    @RequestMapping(value="/touch/find",method = RequestMethod.POST)
+    @RequestMapping(value="/touch/retrieve",method = RequestMethod.POST)
     public String findPassword(String username,String code,HttpServletRequest request,ModelMap map)
     {
     	String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
     	
     	if(codeBack == null)
     	{
-    		return "redirect:/touch/find?name=" + username;
+    		return "redirect:/touch/retrieve?name=" + username;
     	}
     	
     	if (!codeBack.equalsIgnoreCase(code))
     	{
-			return "redirect:/touch/find?name=" + username +"&errCode=0";
+			return "redirect:/touch/retrieve?name=" + username +"&errCode=0";
 		}
     	
         TdUser tdUser = tdUserService.findByUsername(username);
         
         if(tdUser == null)
         {
-        	return "redirect:/touch/find?name" + username +"&errCode=1";
+        	return "redirect:/touch/retrieve?name" + username +"&errCode=1";
         }
         
         String mobile  = tdUser.getMobile();
         
         map.addAttribute("mobile", mobile);
         
-        return "/touch/find_confirm";
+        tdCommonService.setHeader(map, request);
+        
+        request.getSession().setAttribute("retrieve_username", tdUser.getUsername());
+        
+        map.put("user", tdUser);
+        
+        return "/touch/user_retrieve_step2";
     }
+    
+    /**
+	 * @author lc
+	 * @注释：
+	 */
+    @RequestMapping(value = "/touch/retrieve_step2", method = RequestMethod.POST)
+	public String Step2(String smsCode,HttpServletRequest req, ModelMap map){
+		if (null == smsCode) {
+			return "redirect:/touch/retrieve?errCode=4";
+		}
+    	
+		String smsCodeSave = (String) req.getSession().getAttribute("SMSCODE");
+		if (null == smsCodeSave) {
+			String username = (String) req.getSession().getAttribute("retrieve_username");
+			TdUser tdUser = tdUserService.findByUsername(username);
+			tdCommonService.setHeader(map, req);
+	        
+	        map.put("user", tdUser);
+			return "/touch/user_retrieve_step2";
+		}
+		if (!smsCodeSave.equalsIgnoreCase(smsCode)) {
+			return "redirect:/touch/retrieve?errCode=4";
+		}
+		String username = (String) req.getSession().getAttribute("retrieve_username");
+		map.put("retrieve_username", username);
+		tdCommonService.setHeader(map, req);
+		
+		return "/touch/user_retrieve_step3";
+	}
+    @RequestMapping(value = "/touch/retrieve_step3", method = RequestMethod.POST)
+	public String Step3(String password, HttpServletRequest req, ModelMap map){
+		String username = (String) req.getSession().getAttribute("retrieve_username");
+		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+		if (null != password) {
+			user.setPassword(password);
+			tdUserService.save(user);
+			tdCommonService.setHeader(map, req);
+			req.getSession().setAttribute("username", user.getUsername());
+			return "/touch/user_retrieve_ok";
+		}
+		return "/touch/error_404";
+	}
+    
     
     @RequestMapping(value="/touch/login",method = RequestMethod.POST)
     @ResponseBody

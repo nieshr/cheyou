@@ -22,8 +22,10 @@ import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.entity.TdUserConsult;
 import com.ynyes.cheyou.entity.TdUserLevel;
+import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.entity.TdUserReturn;
 import com.ynyes.cheyou.entity.TdDemand;
+import com.ynyes.cheyou.entity.TdSetting;
 import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdManagerLogService;
 import com.ynyes.cheyou.service.TdUserCashRewardService;
@@ -227,7 +229,7 @@ public class TdManagerUserController {
     }
     
     @RequestMapping(value="/save")
-    public String orderEdit(TdUser tdUser,
+    public String orderEdit(TdUser tdUser,Long totalPoints, String totalPointsRemarks,
                         String __VIEWSTATE,
                         ModelMap map,
                         HttpServletRequest req){
@@ -238,6 +240,23 @@ public class TdManagerUserController {
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        /**
+		 * @author lc
+		 * @注释：手动修改用户积分
+		 */
+        if (null != totalPoints) {
+			tdUser.setTotalPoints(totalPoints);
+			TdUserPoint userPoint = new TdUserPoint();
+	        
+	        userPoint.setTotalPoint(totalPoints);
+	        userPoint.setUsername(tdUser.getUsername());
+	        userPoint.setPoint(totalPoints);
+			if (null !=totalPointsRemarks) {	
+		        userPoint.setDetail(totalPointsRemarks);   
+			}
+			userPoint = tdUserPointService.save(userPoint);
+		}
         
         if (null == tdUser.getId())
         {

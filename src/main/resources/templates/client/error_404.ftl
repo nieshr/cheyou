@@ -47,7 +47,7 @@ h5 {margin:0 auto;width:410px;}
 <body>
 <h2><img src="images/404/404_img.jpg" /></h2>
 <h3>抱歉！您访问的页面已经删除或更改地址</h3>
-<h4>请<a href="#">返回首页</a>查看</h4>
+<h4>请<a href="/">返回首页</a>查看</h4>
 
 </body>
 </html>

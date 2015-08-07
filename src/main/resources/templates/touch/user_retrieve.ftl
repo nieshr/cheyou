@@ -16,7 +16,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-  searchTextClear(".logintext01","手机号/邮箱","#999","#333");
+  searchTextClear(".logintext01","用户名/手机号","#999","#333");
   searchTextClear(".logintext02","输入验证码","#999","#333");
 });
 </script>
@@ -31,7 +31,7 @@ $(document).ready(function(){
   </div>
 </header>
 <div class="comhead_bg"></div>
-<form id="form1" method="post" action="/touch/find">
+<form id="form1" method="post" action="/touch/retrieve">
     <section class="loginbox">
       <div class="main">
         <p style="color: #F00">${error!''}</p>

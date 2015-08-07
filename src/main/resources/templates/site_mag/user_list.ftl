@@ -117,7 +117,8 @@ var theForm = document.forms['form1'];
                 <td align="center">${user.email!""}</td>
                 <td align="center">${user.mobile!""}</td>
                 <td align="center">${user.lastLoginTime!""}</td>
-                <td align="center">${user.totalPoints!""}</td>
+                <td align="center">${user.totalPoints!""}                    
+                </td>
                 <td align="center"><#if user.statusId??><#if user.statusId==0>待审核<#elseif user.statusId==1>正常</#if></#if></td>
                 <td align="center">
                     <a href="/Verwalter/user/edit?id=${user.id}&roleId=${roleId!""}">修改</a> | 

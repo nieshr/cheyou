@@ -127,12 +127,21 @@ function move()
             <#if username??>
                 <a href="/user">${username}<i></i></a>
                 <a href="/logout">退出<i></i></a>
+            <!-- lichong -->
+            <#elseif diysiteUsername??>
+                <a href="/user/diysite/order/list/0">${diysiteUsername}<i></i></a>
+                <a href="/logout">退出<i></i></a>
             <#else>
                 <a href="/login" target="_blank">登录<i></i></a>
                 <a href="/reg" target="_blank">免费注册<i></i></a>
-            </#if>     
-            <a href="/user/order/list/0">我的订单</a>
-            <a href="/user">会员中心</a>
+            </#if>
+            <#if diysiteUsername??>     
+                <a href="/user/diysite/order/list/0">我的订单</a>
+            <#else>
+                <a href="/user/order/list/0">我的订单</a>
+                <a href="/user">会员中心</a>
+            </#if>
+            
             <a href="#">在线咨询</a>
       
             服务热线：<#if site??>${site.telephone!''}

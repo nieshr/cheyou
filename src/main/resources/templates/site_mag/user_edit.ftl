@@ -133,6 +133,24 @@ $(function () {
             <span class="Validform_checktip">
         </span></dd>
     </dl>
+    <!--lichong -->
+  <dl>
+    <dt>用户粮草</dt>
+    <dd><span><#if user??>${user.totalPoints!""}</#if></span></dd>
+  </dl>
+  <dl>
+    <dt>修改用户粮草</dt>
+    <dd>
+        <input name="totalPoints" type="text" class="input ">
+    </dd>
+  </dl>
+  <dl>
+    <dt>修改备注</dt>
+    <dd>       
+        <textarea name="totalPointsRemarks" rows="2" cols="20" class="input normal"></textarea>
+        <span class="Validform_checktip">*用户粮草修改备注</span>
+    </dd>
+  </dl>
   <dl>
     <dt>真实姓名</dt>
     <dd><input name="realName" type="text" value="<#if user??>${user.realName!""}</#if>" class="input normal"></dd>
@@ -208,10 +226,7 @@ $(function () {
     <dt>用户等级名称</dt>
     <dd><span><#if user??>${user.userLevelTitle!""}</#if></span></dd>
   </dl>
-  <dl>
-    <dt>用户粮草</dt>
-    <dd><span><#if user??>${user.totalPoints!""}</#if></span></dd>
-  </dl>
+ 
   <dl>
     <dt>咨询总数</dt>
     <dd><span><#if user??>${user.totalConsults!""}</#if></span></dd>

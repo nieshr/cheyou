@@ -58,4 +58,10 @@ public interface TdUserCommentRepo extends
     Page<TdUserComment> findByGoodsIdAndStatusIdAndStarsOrderByIdDesc(Long goodsId, Long statusId, Long stars, Pageable page);
     
     Long countByGoodsIdAndStatusIdAndStars(Long goodsId, Long statusId, Long stars);
+    
+    /**
+	 * @author lc
+	 * @注释：
+	 */
+    List<TdUserComment> findByDiysiteIdOrderByIdDesc(Long diysiteId);
 }
