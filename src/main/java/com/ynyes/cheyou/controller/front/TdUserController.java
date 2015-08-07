@@ -1131,12 +1131,13 @@ public class TdUserController extends AbstractPaytypeController {
     @RequestMapping(value = "/user/consult/add", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> consultAdd(HttpServletRequest req,
-            TdUserConsult tdConsult, String code, ModelMap map) {
+            TdUserConsult tdConsult,String code, ModelMap map) {
         Map<String, Object> res = new HashMap<String, Object>();
         res.put("code", 1);
 
         String username = (String) req.getSession().getAttribute("username");
 
+        
         if (null == username) {
             res.put("message", "请先登录！");
             return res;

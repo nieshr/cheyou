@@ -493,8 +493,10 @@ public class TdLoginController {
 
 		tdCommonService.setHeader(map, request);
 		try {
+			System.err.println("code-------"+code);
+			System.err.println("state-------"+state);
 			AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
-
+			System.err.println("accessTokenObj--------"+accessTokenObj);
 			String accessToken = null, openID = null;
 			long tokenExpireIn = 0L;
 
@@ -504,6 +506,8 @@ public class TdLoginController {
 				System.err.print("没有获取到响应参数");
 			} else {
 				accessToken = accessTokenObj.getAccessToken();
+				System.err.println("accessToken-------"+accessToken);
+				
 				tokenExpireIn = accessTokenObj.getExpireIn();
 
 				request.getSession().setAttribute("demo_access_token", accessToken);
@@ -512,12 +516,13 @@ public class TdLoginController {
 				// 利用获取到的accessToken 去获取当前用的openid -------- start
 				OpenID openIDObj = new OpenID(accessToken);
 				openID = openIDObj.getUserOpenID();
+				System.err.println("openID-----------"+openID);
 
 				//利用获取到的accessToken,openid 去获取用户在Qzone的昵称
 				UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
                 UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
                 if (userInfoBean.getRet() == 0) {
-                   map.addAttribute("nickName",userInfoBean.getNickname());
+                   map.put("nickName",userInfoBean.getNickname());
                 }
 				
 				//根据openID查找用户
