@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ynyes.cheyou.entity.TdCartGoods;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdGoodsCombination;
+import com.ynyes.cheyou.entity.TdGoodsGift;
 import com.ynyes.cheyou.service.TdCartGoodsService;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdGoodsCombinationService;
@@ -39,6 +40,9 @@ public class TdCartController {
 
     @Autowired
     private TdCommonService tdCommonService;
+    
+    @Autowired
+    private TdGoodsService tdGoodService;
 
     /**
      * 加入购物车
@@ -279,29 +283,32 @@ public class TdCartController {
 
         List<TdCartGoods> cartSessionGoodsList = tdCartGoodsService
                 .findByUsername(req.getSession().getId());
-
-        if (null == username) {
+        if (null == username)
+        {
             username = req.getSession().getId();
-        } else {
+        }
+        else
+        {
             // 合并商品
             List<TdCartGoods> cartUserGoodsList = tdCartGoodsService
                     .findByUsername(username);
 
-            for (TdCartGoods cg : cartSessionGoodsList) {
+            for (TdCartGoods cg : cartSessionGoodsList)
+            {
                 cg.setUsername(username);
                 cartUserGoodsList.add(cg);
             }
 
             tdCartGoodsService.save(cartUserGoodsList);
 
-            for (TdCartGoods cg1 : cartUserGoodsList) {
-                
+            for (TdCartGoods cg1 : cartUserGoodsList) 
+            {
                 List<TdCartGoods> findList = tdCartGoodsService
                         .findByGoodsIdAndPriceAndUsername(cg1.getGoodsId(), cg1.getPrice(), username);
 
-                if (null != findList && findList.size() > 1) {
-                    tdCartGoodsService.delete(findList.subList(1,
-                            findList.size()));
+                if (null != findList && findList.size() > 1) 
+                {
+                    tdCartGoodsService.delete(findList.subList(1,findList.size()));
                 }
             }
         }
@@ -311,7 +318,8 @@ public class TdCartController {
 
         tdCommonService.setHeader(map, req);
 
-        if (null == resList || resList.size() == 0) {
+        if (null == resList || resList.size() == 0)
+        {
             return "/client/cart_null";
         }
 

@@ -24,7 +24,7 @@ $(document).ready(function(){
 <body>
 <header class="comhead">
   <div class="main">
-    <p>我的收藏</p>
+    <p>我的优惠卷</p>
     <a class="a1" href="javascript:history.go(-1);">返回</a>
     <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
   </div>
@@ -33,16 +33,14 @@ $(document).ready(function(){
 
 <div class="main comcheck">
 </div><!--comcheck END-->
-
+<hr/>  
 <menu class="whitebg mymenu_list">
-<#if collect_page??>
-    <#list collect_page.content as cg>
-        <a href="/touch/goods/${cg.goodsId}">
-            <b><img src="${cg.goodsCoverImageUri}" /></b>
-            <p>${cg.goodsTitle!''}<span class="sp1">￥${cg.goodsSalePrice?string("0.00")}</span></p>
-            <p class="p1">${cg.goodsSubTitle!''}</p>
+<#if coupan_list??>
+    <#list coupan_list as cg>
+            <b><img src="${cg.typePicUri}" /></b>
+            <p>有效期至：${cg.expireTime!''}<span class="sp1">${cg.isUsed?string("未用", "已使用")}</span></p>
             <div class="clear"></div>
-        </a>
+            <hr/>
     </#list>
 </#if>
 </menu>

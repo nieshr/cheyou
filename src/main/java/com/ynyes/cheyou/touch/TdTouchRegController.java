@@ -38,7 +38,6 @@ public class TdTouchRegController {
     @RequestMapping("/touch/reg")
     public String reg(Integer errCode, 
     				  Integer shareId,
-    				  String registername,
     				  HttpServletRequest request,
     				  ModelMap map) {
         String username = (String) request.getSession().getAttribute("username");
@@ -56,7 +55,6 @@ public class TdTouchRegController {
                 if(errCode.equals(1))
                 {
                 	map.addAttribute("error","验证码错误");
-                	map.addAttribute("registername",registername);
                 }
                 else if (errCode.equals(2))
                 {
@@ -221,7 +219,7 @@ public class TdTouchRegController {
         
         if (!codeBack.equalsIgnoreCase(code))
         {
-        	return "redirect:/touch/reg?errCode=1&registername="+username;
+        	return "redirect:/touch/reg?errCode=1";
         }
         
         TdUser user = tdUserService.findByUsername(username);

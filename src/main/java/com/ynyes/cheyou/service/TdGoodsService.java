@@ -81,6 +81,10 @@ public class TdGoodsService {
 
         return repository.findAll(pageRequest);
     }
+    public TdGoods findById(Long id)
+    {
+		return repository.findById(id);
+	}
 
     public Page<TdGoods> findAllOrderBySortIdAsc(int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(

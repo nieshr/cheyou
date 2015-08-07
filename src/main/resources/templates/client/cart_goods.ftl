@@ -29,6 +29,7 @@
                 </td>
                 <td class="red">￥${(cg.price*cg.quantity)?string("0.00")}</td>
                 <td><a class="del" href="javascript:delCartItem(${cg.id});">删除</a></td>
+                <#if cg.giftList??><#list cg.giftList as gif><td >${gif.name!''}</td></#list></#if>
                 <#if cg.isSelected>
                     <#assign totalGoods=totalGoods+cg.quantity>
                     <#assign totalPrice=totalPrice+cg.price*cg.quantity>

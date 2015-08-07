@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.cheyou.entity.TdCoupon;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdOrderGoods;
@@ -31,8 +32,8 @@ import com.ynyes.cheyou.entity.TdUserConsult;
 import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.entity.TdUserRecentVisit;
 import com.ynyes.cheyou.entity.TdUserReturn;
-import com.ynyes.cheyou.repository.TdOrderRepo;
 import com.ynyes.cheyou.service.TdCommonService;
+import com.ynyes.cheyou.service.TdCouponService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdOrderGoodsService;
 import com.ynyes.cheyou.service.TdOrderService;
@@ -67,6 +68,9 @@ public class TdTouchUserController {
     
     @Autowired
     private TdOrderService tdOrderService;
+    
+    @Autowired
+    private TdCouponService tdCoupanService;
     
     @Autowired
     private TdUserPointService tdUserPointService;
@@ -534,6 +538,43 @@ public class TdTouchUserController {
         map.addAttribute("point_page", pointPage);
         
         return "/touch/user_point_list";
+    }
+    /**
+     * 优惠卷
+     * @author mdj
+     * @param req
+     * @param page
+     * @param map
+     * @return
+     */
+    @RequestMapping(value = "/user/coupon/list")
+    public String couponList(HttpServletRequest req, Integer page,
+                        ModelMap map){
+        String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            return "redirect:/login";
+        }
+        
+        tdCommonService.setHeader(map, req);
+        
+        if (null == page)
+        {
+            page = 0;
+        }
+        
+        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        map.addAttribute("user", tdUser);
+        
+        List<TdCoupon> coupanList = null;
+        
+        coupanList =tdCoupanService.findByUsername(username);
+        
+        map.addAttribute("coupan_list", coupanList);
+        
+        return "/touch/user_coupon_list";
     }
     
     @RequestMapping(value = "/user/return/{orderId}")

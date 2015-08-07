@@ -71,7 +71,7 @@ $(document).ready(function(){
     </div>
     <input id="btn_login" type="submit" class="loginbtn" value="登录" />
     <p class="login_a">
-      <a href="javascript:;">找回密码</a>
+      <a href="/touch/find;">找回密码</a>
       <a class="a1" href="/touch/reg">注册</a>
     </p>
   </div>
