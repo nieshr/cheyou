@@ -312,7 +312,13 @@ public class TdManagerManagerController {
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
-
+        
+        /**
+		 * @author lc
+		 * @注释：添加角色类型
+		 */
+        map.addAttribute("role_list", tdManagerRoleService.findAll());
+        
         if (null != id)
         {
             map.addAttribute("tdManager", tdManagerService.findOne(id));

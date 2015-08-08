@@ -17,6 +17,11 @@
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
 
+<script type="text/javascript" src="/mag/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/mag/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/mag/js/lhgdialog.js"></script>
+<link href="/mag/style/style.css" rel="stylesheet" type="text/css">
+<link href="/mag/style/idialog.css" rel="stylesheet" id="lhgdialoglink">
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -33,8 +38,43 @@ DD_belatedPNG.fix('.,img,background');
     menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
     navDownList("navdown","li",".nav_showbox");
     menuDownList("mainnavdown","#navdown",".a2","sel");
-    checkNowHover("shopping_down","shopping_sel");
+    checkNowHover("shopping_down","shopping_sel");   
 });
+
+   $(function () {
+        $("#btnService").click(function () { OrderService(); });   //确认到店消费
+   });
+   
+    //确认到店消费
+        function OrderService() {
+            var dialog = $.dialog.confirm('操作提示信息：<br />确认已到店消费？', function () {
+                var orderNumber = $.trim($("#spanOrderNumber").text());
+                var postData = { "orderNumber": orderNumber, "type": "orderService" };
+                //发送AJAX请求
+                sendAjaxUrl(dialog, postData, "/diysite/order/param/edit");
+                return false;
+            });
+        }
+     //发送AJAX请求
+        function sendAjaxUrl(winObj, postData, sendUrl) {
+            $.ajax({
+                type: "post",
+                url: sendUrl,
+                data: postData,
+                dataType: "json",
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.dialog.alert('尝试发送失败，错误信息：' + errorThrown, function () { }, winObj);
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        winObj.close();
+                        $.dialog.tips(data.msg, 2, '32X32/succ.png', function () { location.reload(); }); //刷新页面
+                    } else {
+                        $.dialog.alert('错误提示：' + data.message, function () { }, winObj);
+                    }
+                }
+            });
+        }    
 </script>
 
 </head>
@@ -71,9 +111,9 @@ DD_belatedPNG.fix('.,img,background');
                         <#elseif status_id==2>
                             待付款订单
                         <#elseif status_id==3>
-                            待服务订单
-                        <#elseif status_id==4>
                             待付尾款订单
+                        <#elseif status_id==4>
+                            待服务订单
                         <#elseif status_id==5>
                             待评价订单
                         <#elseif status_id==6>
@@ -105,7 +145,7 @@ DD_belatedPNG.fix('.,img,background');
                     <#if order_page??>
                         <#list order_page.content as order>
                             <tr>
-                              <th colspan="7">订单编号：<a href="javascript:;">${order.orderNumber!''}</a></th>
+                              <th colspan="7">订单编号：<a href="javascript:;" id="spanOrderNumber">${order.orderNumber!''}</a></th>
                             </tr>
                             <tr>
                               <td class="td001">
@@ -135,7 +175,8 @@ DD_belatedPNG.fix('.,img,background');
                                         <p>待付尾款</p>
                               <!--          <a href="/user/dopayleft/${order.id}">付尾款</a> -->
                                     <#elseif order.statusId==4>
-                                        待服务
+                                        <p>待服务</p>
+                                        <input type="button" id="btnService" value="确认核销" class="btn green">
                                     <#elseif order.statusId==5>
                                         <p>待评价</p>
                                 <!--        <a href="/user/comment/list">发表评论</a>  -->

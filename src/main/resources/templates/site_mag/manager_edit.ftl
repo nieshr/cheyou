@@ -83,6 +83,23 @@ $(function () {
         </dd>
     </dl>
     <dl>
+        <dt>角色分配</dt>
+        <dd>
+                <div class="rule-single-select">
+                    <select name="roleId" id="roleId" datatype="*" sucmsg=" ">
+                        <#if !tdManager??>
+                        <option value="">请选择类型...</option>
+                        </#if>
+                        <#if role_list??>
+                            <#list role_list as c>
+                                <option value="${c.id!""}" <#if tdManager?? && tdManager.roleId?? && tdManager.roleId==c.id>selected="selected"</#if>>${c.title!""}</option>
+                            </#list>
+                        </#if>
+                    </select>
+                </div>
+        </dd>
+    </dl>
+    <dl>
         <dt>姓名</dt>
         <dd>
             <input name="realName" type="text" value="<#if tdManager??>${tdManager.realName!""}</#if>" class="input normal" datatype="*0-100" sucmsg=" ">

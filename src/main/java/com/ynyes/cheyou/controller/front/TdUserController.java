@@ -541,27 +541,45 @@ public class TdUserController extends AbstractPaytypeController {
         return "/client/diysite_order_list";
     }
     
-    @RequestMapping(value = "/user/diysite/order")
-    public String diysiteorder(Long id, HttpServletRequest req, ModelMap map) {
-        String username = (String) req.getSession().getAttribute("username");
-        if (null == username) {
-            return "redirect:/login";
-        }
+    
+    @RequestMapping(value = "/user/diysite/member")
+    public String diysitemember(HttpServletRequest req, Integer page,
+            String keywords, ModelMap map) {
+    	 String username = (String) req.getSession().getAttribute("diysiteUsername");
 
-        tdCommonService.setHeader(map, req);
+         if (null == username) {
+             return "redirect:/login";
+         }
 
-        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+         tdCommonService.setHeader(map, req);
 
-        map.addAttribute("user", tdUser);
+         if (null == page) {
+             page = 0;
+         }
 
-        if (null != id) {
-            map.addAttribute("order", tdOrderService.findOne(id));
-        }
+         TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
 
-        // 支付方式列表
-        setPayTypes(map, false, true, req);
+         map.addAttribute("user", tdUser);
 
-        return "/client/diysite_order_detail";
+         Page<TdUser> memberPage = null;
+
+         if (null == keywords || keywords.isEmpty()) {
+        	 if (null!=tdUser.getUpperDiySiteId()) {
+        		 memberPage = tdUserService.findByshopId(tdUser.getUpperDiySiteId(), page,
+                         ClientConstant.pageSize);
+			}
+        	 
+         } else {
+        	 if (null!=tdUser.getUpperDiySiteId()) {
+        	 memberPage = tdUserService.findByShopIdAndSearch(
+                     tdUser.getUpperDiySiteId(), keywords, page, ClientConstant.pageSize);
+        	 }
+         }
+
+         map.addAttribute("member_page", memberPage);
+         map.addAttribute("keywords", keywords);
+
+         return "/client/diysite_member_list";
     }
 
     @RequestMapping(value = "/user/collect/list")

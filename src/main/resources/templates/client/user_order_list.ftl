@@ -71,9 +71,9 @@ DD_belatedPNG.fix('.,img,background');
                         <#elseif status_id==2>
                             待付款订单
                         <#elseif status_id==3>
-                            待服务订单
-                        <#elseif status_id==4>
                             待付尾款订单
+                        <#elseif status_id==4>
+                            待服务订单
                         <#elseif status_id==5>
                             待评价订单
                         <#elseif status_id==6>
