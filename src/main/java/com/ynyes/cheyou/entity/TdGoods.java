@@ -402,6 +402,10 @@ public class TdGoods {
     @Column
     private Long totalComments;
     
+    // 关注数
+    @Column
+    private Long totalCollects;
+    
     // 同盟店返利比例
     @Column(scale=2)
     private Double shopReturnRation;
@@ -1159,10 +1163,16 @@ public class TdGoods {
         this.groupSaleHundredSoldNumber = groupSaleHundredSoldNumber;
     }
 
+    public Long getTotalCollects() {
+        return totalCollects;
+    }
+
+    public void setTotalCollects(Long totalCollects) {
+        this.totalCollects = totalCollects;
+    }
+
     @Override
 	public String toString() {
 		return "TdGoods [id=" + id + ", productId=" + productId + ", name=" + name + "]";
 	}
-    
-    
 }

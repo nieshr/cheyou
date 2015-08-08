@@ -46,12 +46,16 @@ function checkTime(i)
 
 <div class="main">
     <section class="team_tit">
-        <img class="tit" src="/client/images/miao.png" />
-        <div class="time">
-            <a href="/promotion/miao">正在抢拍</a>
+        <img class="tit" src="/client/images/tg_tit.png">
+        <div class="time <#if type??>outtime</#if>">
+          <a href="/promotion/miao">正在抢拍</a>
         </div>
-        <a class="a1" href="/promotion/miao?type=ongoing"><i></i>即将开始</a>
-        <a class="a1 a2" href="/promotion/miao?type=passed"><i></i>已经结束</a>
+        <div class="time <#if !type?? || type="passed">outtime</#if>" style="left:325px;">
+          <a href="/promotion/miao?type=ongoing">即将开始</a>
+        </div>
+        <div class="time <#if !type?? || type="ongoing">outtime</#if>" style="left:500px;">
+          <a href="/promotion/miao?type=passed">已经结束</a>
+        </div>
     </section>
   
     <#if miao_goods_page??>

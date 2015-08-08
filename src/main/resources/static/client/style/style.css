@@ -138,8 +138,8 @@
 #proshowimg { width:396px;height:396px; border-left:1px solid #eee;border-bottom:1px solid #eee;}
 #proshowimg li { width:100%; position:absolute;left:0;top:0; height:396px; overflow:hidden;}
 #proshowimg li img { width:100%;}
-#proshowmenu { width:100%; text-align:center;}
-#proshowmenu li { display:inline-block;margin:0 5px; width:80px; height:80px; overflow:hidden; border:1px solid #eee; *float:left;}
+#proshowmenu { width:340px; text-align:center; margin:0 auto; height:80px; overflow:hidden;}
+#proshowmenu li { display:inline-block;margin:0 5px; width:73px; height:73px; overflow:hidden; border:1px solid #eee;float:left;}
 #proshowmenu li img { width:100%;}
 #proshowmenu li.sel { border:1px solid #ff8800;}
 .pro_num { color:#999;}
@@ -498,8 +498,7 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	width:8px;
 	height:15px;
 	top:-3px;
-	/* background:#ddddde; */
-	}
+	background:#ddddde;}
 .team_men dd.sel {
 	background:#ff6700;}
 .team_men p {
@@ -1082,12 +1081,28 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	float:right;
 	width:280px;
 	margin-left:20px;}
+#proshowlast,#proshownext {
+	position:absolute;
+	display:inline-block;
+	width:15px;
+	text-align:center;
+	height:73px;
+	line-height:73px;
+	left:10px;
+	top:0;
+	border:1px solid #ccc;}
+#proshownext {
+	left:auto;
+	right:10px;}
 
 
-
-
-
-
+.team_tit .outtime {
+	background:url(../images/tg_dian.png) no-repeat center 18px;}
+.team_tit .outtime a {
+	color:#999;
+	font-size:16px;}
+.team_tit .outtime p {
+	display:none;}
 
 
 

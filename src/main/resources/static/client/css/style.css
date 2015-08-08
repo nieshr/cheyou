@@ -417,19 +417,6 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	position:absolute;
 	left:0;
 	top:0;}
-.team_tit .time {
-	background:url(../images/tg_titnow.png) no-repeat;
-	width:129px;
-	height:107px;
-	position:absolute;
-	left:140px;
-	top:0;}
-.team_tit .time a {
-	color:#fff;
-	font-size:20px;
-	display:block;
-	text-align:center;
-	margin-top:45px;}
 .team_tit .time p {
 	color:#000;
 	font-size:12px;

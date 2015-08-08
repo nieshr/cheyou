@@ -632,6 +632,15 @@ public class TdUserController extends AbstractPaytypeController {
             // 删除收藏
             if (null != collect) {
                 tdUserCollectService.delete(collect);
+                
+                TdGoods goods = tdGoodsService.findOne(collect.getGoodsId());
+                
+                if (null != goods && null != goods.getTotalCollects())
+                {
+                    goods.setTotalCollects(goods.getTotalCollects() - 1L);
+                    
+                    tdGoodsService.save(goods);
+                }
             }
         }
 
@@ -669,6 +678,15 @@ public class TdUserController extends AbstractPaytypeController {
                 res.put("message", "商品不存在");
                 return res;
             }
+            
+            if (null == goods.getTotalCollects())
+            {
+                goods.setTotalCollects(0L);
+            }
+            
+            goods.setTotalCollects(goods.getTotalCollects() + 1L);
+            
+            tdGoodsService.save(goods);
 
             TdUserCollect collect = new TdUserCollect();
 

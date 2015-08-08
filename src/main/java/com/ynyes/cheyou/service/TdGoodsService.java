@@ -2039,6 +2039,15 @@ public class TdGoodsService {
         return false;
     }
 
+    public TdGoods save(TdGoods e)
+    {
+        if (null == e)
+        {
+            return null;
+        }
+        
+        return repository.save(e);
+    }
     /**
      * 保存类型
      * 

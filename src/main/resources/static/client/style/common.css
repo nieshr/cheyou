@@ -739,8 +739,22 @@ margin:0 2px;}
 .darkpage .text { height:30px; line-height:30px; width:50px;border:1px solid #2b3243; float:left; text-align:center;}
 .darkpage .sp1 { border:none;}
 .darkpage .sub { height:32px; width:50px;float:left; text-align:center; background:#2b3243; color:#fff; cursor:pointer;}
-
-
+.floatboxlist {
+	display:none;
+	position:absolute;
+	right:43px;
+	top:34px;
+	width:100px;
+	padding:10px;
+	}
+.floatboxlist a {
+	width:100%;
+	opacity:1;
+	line-height:30px;
+	border:1px solid #ddd;
+	background:#fff;
+	height:30px;
+	text-align:center;}
 
 
 
