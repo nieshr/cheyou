@@ -65,7 +65,7 @@ public class TdOrder {
     @Column
     private Long shopId;
     
-    // 支付方式名称
+    // 支付方式名称(同盟店名称)
     @Column
     private String shopTitle;
     

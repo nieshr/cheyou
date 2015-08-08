@@ -237,17 +237,17 @@ public class TdOrderService {
         
         return repository.findByshopTitleAndOrderTimeAfterAndOrderNumberContainingOrderByIdDesc(diysitename, time, keywords, pageRequest);
     }
-    public Page<TdOrder> findByDiysitenameAndStatusIdAndTimeAfterAndSearch(String username, long statusId, Date time, String keywords, int page, int size)
+    public Page<TdOrder> findByDiysitenameAndStatusIdAndTimeAfterAndSearch(String diysitename, long statusId, Date time, String keywords, int page, int size)
     {
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByshopTitleAndStatusIdAndOrderTimeAfterAndOrderNumberContainingOrderByIdDesc(username, statusId, time, keywords, pageRequest);
+        return repository.findByshopTitleAndStatusIdAndOrderTimeAfterAndOrderNumberContainingOrderByIdDesc(diysitename, statusId, time, keywords, pageRequest);
     }
-    public Page<TdOrder> findByDiysitenameAndStatusIdAndTimeAfter(String username, long statusId, Date time, int page, int size)
+    public Page<TdOrder> findByDiysitenameAndStatusIdAndTimeAfter(String diysitename, long statusId, Date time, int page, int size)
     {
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByshopTitleAndStatusIdAndOrderTimeAfterOrderByIdDesc(username, statusId, time, pageRequest);
+        return repository.findByshopTitleAndStatusIdAndOrderTimeAfterOrderByIdDesc(diysitename, statusId, time, pageRequest);
     }
     
     /**
