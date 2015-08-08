@@ -139,7 +139,7 @@ public class TdDiySiteService {
             
             if (null == user )
             {
-                user = tdUserService.addNewUser(null, e.getUsername(), e.getPassword(), e.getMobile(), null, null);
+                user = tdUserService.addNewUser(e.getUsername(), e.getPassword(), e.getMobile(), null, null);
                 
                 user.setRoleId(2L); // 加盟商用户
                

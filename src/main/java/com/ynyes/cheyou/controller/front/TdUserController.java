@@ -1353,31 +1353,31 @@ public class TdUserController extends AbstractPaytypeController {
         return "/client/user_distributor_return";
     }
 
-    @RequestMapping(value = "/user/distributor/lower")
-    public String distributorLowerList(HttpServletRequest req, Integer page,
-            ModelMap map) {
-
-        String username = (String) req.getSession().getAttribute("username");
-
-        if (null == username) {
-            return "redirect:/login";
-        }
-
-        tdCommonService.setHeader(map, req);
-
-        if (null == page) {
-            page = 0;
-        }
-
-        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
-
-        map.addAttribute("user", user);
-        map.addAttribute("lower_page", tdUserService
-                .findByUpperUsernameAndIsEnabled(username, page,
-                        ClientConstant.pageSize));
-
-        return "/client/user_distributor_lower";
-    }
+//    @RequestMapping(value = "/user/distributor/lower")
+//    public String distributorLowerList(HttpServletRequest req, Integer page,
+//            ModelMap map) {
+//
+//        String username = (String) req.getSession().getAttribute("username");
+//
+//        if (null == username) {
+//            return "redirect:/login";
+//        }
+//
+//        tdCommonService.setHeader(map, req);
+//
+//        if (null == page) {
+//            page = 0;
+//        }
+//
+//        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+//
+//        map.addAttribute("user", user);
+//        map.addAttribute("lower_page", tdUserService
+//                .findByUpperUsernameAndIsEnabled(username, page,
+//                        ClientConstant.pageSize));
+//
+//        return "/client/user_distributor_lower";
+//    }
 
     @RequestMapping(value = "/user/distributor/bankcard")
     public String distributorLowerList(HttpServletRequest req, ModelMap map) {

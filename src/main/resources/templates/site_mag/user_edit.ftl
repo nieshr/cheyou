@@ -94,26 +94,30 @@ $(function () {
 
 <!--基本资料-->
 <div class="tab-content">
+    <#--
   <dl>
     <dt>用户类型</dt>
     <dd>
       <div class="rule-multi-radio multi-radio">
         <span>
-            <input type="radio" name="roleId" value="0" datatype="n" <#if user?? && user.roleId?? && user.roleId==0>checked="checked"</#if>><label>普通用户</label>
-            <input type="radio" name="roleId" value="1" datatype="n" <#if user?? && user.roleId?? && user.roleId==1>checked="checked"</#if>><label>分销商</label>
+            <input type="radio" name="roleId" value="0" datatype="n" <#if !user?? || user.roleId?? && user.roleId==0>checked="checked"</#if>><label>普通用户</label>
+            <input type="radio" name="roleId" value="1" datatype="n" <#if user?? && user.roleId?? && user.roleId==1>checked="checked"</#if>><label>同盟店</label>
         </span>
       </div>
       <span class="Validform_checktip"></span>
     </dd>
   </dl>
+    -->
   <dl>
     <dt>用户状态</dt>
     <dd>
       <div class="rule-multi-radio">
         <span id="rblStatus">
+            <#--
             <input type="radio" name="statusId" value="0" datatype="n" <#if user?? && user.statusId?? && user.statusId==0>checked="checked"</#if>>
             <label>待审核</label>
-            <input type="radio" name="statusId" value="1" datatype="n" <#if user?? && user.statusId?? && user.statusId==1>checked="checked"</#if>>
+            -->
+            <input type="radio" name="statusId" value="1" datatype="n" <#if !user?? || user.statusId?? && user.statusId==1>checked="checked"</#if>>
             <label>正常</label>
             <input type="radio" name="statusId" value="2" datatype="n" <#if user?? && user.statusId?? && user.statusId==2>checked="checked"</#if>>
             <label>禁用</label>
@@ -136,7 +140,7 @@ $(function () {
     <!--lichong -->
   <dl>
     <dt>用户粮草</dt>
-    <dd><span><#if user??>${user.totalPoints!""}</#if></span></dd>
+    <dd><span><#if user??>${user.totalPoints!"0"}</#if></span></dd>
   </dl>
   <dl>
     <dt>修改用户粮草</dt>

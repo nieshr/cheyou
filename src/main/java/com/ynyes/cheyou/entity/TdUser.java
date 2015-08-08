@@ -51,9 +51,9 @@ public class TdUser {
 	@Column
 	private String qqUserId;	
 
-	// 上级用户名
+	// 所属同盟店ID
     @Column
-    private String upperUsername;
+    private Long upperDiySiteId;
 	
 	// 昵称
     @Column
@@ -258,12 +258,12 @@ public class TdUser {
         this.username = username;
     }
 
-    public String getUpperUsername() {
-        return upperUsername;
+    public Long getUpperDiySiteId() {
+        return upperDiySiteId;
     }
 
-    public void setUpperUsername(String upperUsername) {
-        this.upperUsername = upperUsername;
+    public void setUpperDiySiteId(Long upperDiySiteId) {
+        this.upperDiySiteId = upperDiySiteId;
     }
 
     public String getNickname() {

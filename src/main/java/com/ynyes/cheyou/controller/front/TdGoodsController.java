@@ -18,7 +18,6 @@ import com.ynyes.cheyou.entity.TdProduct;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.entity.TdSetting;
 import com.ynyes.cheyou.entity.TdUser;
-import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.entity.TdUserConsult;
 import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.service.TdCommonService;

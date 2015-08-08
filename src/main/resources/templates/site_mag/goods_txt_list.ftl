@@ -213,7 +213,7 @@ function __doPostBack(eventTarget, eventArgument) {
             </td>
             <td align="center">
                 <a href="javascript:confirmCopy(${content.id!""});" title="复制商品" class="show">复制</a>
-                <a href="/Verwalter/goods/edit?__VIEWSTATE=${__VIEWSTATE!""}">修改</a>
+                <a href="/Verwalter/goods/edit?id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">修改</a>
             </td>
         </tr>
     </#list>

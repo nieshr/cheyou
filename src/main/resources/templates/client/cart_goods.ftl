@@ -15,7 +15,7 @@
         <#list cart_goods_list as cg>
             <tr>
                 <td width="20">
-                    <input type="checkbox" onclick="javascript:toggleSelect(${cg.id});" <#if cg.isSelected>checked="checked"<#else><#assign allChecked=false></#if>/>
+                    <input type="checkbox" onclick="javascript:toggleSelect(${cg.id});" <#if cg.isSelected?? && cg.isSelected>checked="checked"<#else><#assign allChecked=false></#if>/>
                 </td>
                 <td width="110">
                     <a href="/goods/${cg.goodsId}"><img src="${cg.goodsCoverImageUri!''}" width="100" /></a>

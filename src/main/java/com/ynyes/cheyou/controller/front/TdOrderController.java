@@ -707,7 +707,7 @@ public class TdOrderController extends AbstractPaytypeController {
         }
 
         // 基本信息
-        tdOrder.setUsername(username);
+        tdOrder.setUsername(user.getUsername());
         tdOrder.setOrderTime(current);
 
         // 订单号
@@ -758,6 +758,13 @@ public class TdOrderController extends AbstractPaytypeController {
             if (null != shop) {
                 tdOrder.setShopId(shop.getId());
                 tdOrder.setShopTitle(shop.getTitle());
+                
+                // 用户归属
+                if (null != user.getUpperDiySiteId())
+                {
+                    user.setUpperDiySiteId(shop.getId());
+                    user = tdUserService.save(user);
+                }
             }
         }
         
@@ -794,6 +801,13 @@ public class TdOrderController extends AbstractPaytypeController {
             
             // 添加积分使用记录
             if (null != user) {
+                if (null == user.getTotalPoints())
+                {
+                    user.setTotalPoints(0L);
+                    
+                    user = tdUserService.save(user);
+                }
+                
                 if (pointUse.compareTo(0L) >= 0
                         && null != user.getTotalPoints()
                         && user.getTotalPoints().compareTo(pointUse) >= 0) {
@@ -1295,7 +1309,7 @@ public class TdOrderController extends AbstractPaytypeController {
         }
 
         // 基本信息
-        tdOrder.setUsername(username);
+        tdOrder.setUsername(user.getUsername());
         tdOrder.setOrderTime(current);
 
         // 订单号
@@ -1346,6 +1360,13 @@ public class TdOrderController extends AbstractPaytypeController {
             if (null != shop) {
                 tdOrder.setShopId(shop.getId());
                 tdOrder.setShopTitle(shop.getTitle());
+                
+                // 用户归属
+                if (null != user.getUpperDiySiteId())
+                {
+                    user.setUpperDiySiteId(shop.getId());
+                    user = tdUserService.save(user);
+                }
             }
         }
 
@@ -1402,6 +1423,13 @@ public class TdOrderController extends AbstractPaytypeController {
 
         // 添加积分使用记录
         if (null != user) {
+            if (null == user.getTotalPoints())
+            {
+                user.setTotalPoints(0L);
+                
+                user = tdUserService.save(user);
+            }
+            
             if (pointUse.compareTo(0L) >= 0 && null != user.getTotalPoints()
                     && user.getTotalPoints().compareTo(pointUse) >= 0) {
                 TdUserPoint userPoint = new TdUserPoint();

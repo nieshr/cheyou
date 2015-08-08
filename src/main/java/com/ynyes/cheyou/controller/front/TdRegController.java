@@ -201,7 +201,7 @@ public class TdRegController {
         }
         
         
-       TdUser user = tdUserService.addNewUser(null, username, password, mobile, email, carCode);
+       TdUser user = tdUserService.addNewUser(username, password, mobile, email, carCode);
         
         if (null == user)
         {

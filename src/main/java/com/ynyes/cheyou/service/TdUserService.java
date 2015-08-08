@@ -104,7 +104,7 @@ public class TdUserService {
         repository.save(userList);
     }
     
-    public TdUser addNewUser(String upperUsername, String username, String password, String mobile, String email, String carCode)
+    public TdUser addNewUser(String username, String password, String mobile, String email, String carCode)
     {
         if (null == username || null == password || username.isEmpty() || password.isEmpty())
         {
@@ -157,8 +157,6 @@ public class TdUserService {
         userPoint = tdUserPointService.save(userPoint);
         
         user.setTotalPoints(userPoint.getTotalPoint()); // 积分
-        
-        user.setUpperUsername(upperUsername);
         
         TdUserLevel level = tdUserLevelService.findByLevelIdAndIsEnableTrue(1L);
         
@@ -296,16 +294,16 @@ public class TdUserService {
         return repository.findByUsernameAndIdNot(username, id);
     }
     
-    public Page<TdUser> findByUpperUsernameAndIsEnabled(String username, int page, int size)
+    public Page<TdUser> findByUpperDiySiteIdAndIsEnabled(Long upperDiySiteId, int page, int size)
     {
-        if (null == username)
+        if (null == upperDiySiteId)
         {
             return null;
         }
         
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByUpperUsernameAndStatusIdOrderByIdDesc(username, 1L, pageRequest);
+        return repository.findByUpperDiySiteIdAndStatusIdOrderByIdDesc(upperDiySiteId, 1L, pageRequest);
     }
    /**
     *  手机号查找

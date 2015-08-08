@@ -1,7 +1,5 @@
 package com.ynyes.cheyou.repository;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -39,7 +37,7 @@ public interface TdUserRepo extends
     
     TdUser findByUsernameAndIdNot(String username, Long id);
     
-    Page<TdUser> findByUpperUsernameAndStatusIdOrderByIdDesc(String upperUsername, Long statusId, Pageable page);
+    Page<TdUser> findByUpperDiySiteIdAndStatusIdOrderByIdDesc(Long upperDiySiteId, Long statusId, Pageable page);
     
     TdUser findByMobileAndStatusIdOrMobileAndStatusId(String mobile,Long statusId,String mobile1,Long statusId1);		//手机号已验证查找
     

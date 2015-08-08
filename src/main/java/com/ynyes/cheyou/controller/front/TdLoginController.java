@@ -11,7 +11,6 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.w3c.dom.css.ElementCSSInlineStyle;
 
 import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
@@ -426,7 +424,7 @@ public class TdLoginController {
 
 			return "redirect:/";
 		} else {
-			user = tdUserService.addNewUser(null, alipayusername, "123456", null, null, null);
+			user = tdUserService.addNewUser(alipayusername, "123456", null, null, null);
 			/**
 			 * @author libiao
 			 * 判断新建账号为QQ还是支付宝

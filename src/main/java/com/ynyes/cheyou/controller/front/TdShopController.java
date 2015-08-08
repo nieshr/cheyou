@@ -10,7 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ynyes.cheyou.entity.TdCartGoods;
 import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.service.TdArticleCategoryService;
@@ -20,8 +19,6 @@ import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdUserRecentVisitService;
 import com.ynyes.cheyou.util.ClientConstant;
-
-import net.wimpi.telnetd.io.terminal.ansi;
 
 /**
  * 
@@ -128,7 +125,7 @@ public class TdShopController {
                      List<TdOrder> tdOrders1 = tdOrderService.findByshopIdAndstatusId(diySite.getId(), 6L);
                      map.addAttribute("shop_orderFinish_"+diySite.getId(), tdOrders.size()+tdOrders1.size());
                      map.addAttribute("shop_orderComment_"+diySite.getId(), tdDiySiteService.ContdiysiteComment(diySite.getId()));
-                     int a  = tdDiySiteService.ContdiysiteComment(diySite.getId());
+//                     int a  = tdDiySiteService.ContdiysiteComment(diySite.getId());
                      map.addAttribute("shop_serviceStars"+diySite.getId(), tdDiySiteService.diysiteServiceStars(diySite.getId()));
                  }
 			}

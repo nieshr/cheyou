@@ -18,14 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.cheyou.entity.TdDemand;
 import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.entity.TdUserConsult;
 import com.ynyes.cheyou.entity.TdUserLevel;
 import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.entity.TdUserReturn;
-import com.ynyes.cheyou.entity.TdDemand;
-import com.ynyes.cheyou.entity.TdSetting;
 import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdManagerLogService;
 import com.ynyes.cheyou.service.TdUserCashRewardService;
