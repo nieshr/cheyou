@@ -14,7 +14,12 @@
           <!--  <a href="/user/order/list/7">取消订单记录</a> -->
         </div>
     </div>
-   
+    <div class="mymember_menu_part">
+        <a class="mymember_menu_tit" href="/user/point/list"><img src="/client/images/mymember/menu03.png" />资产中心</a>
+        <div>
+            <a href="/user/diysite/member">所属会员</a>
+        </div>
+    </div>
     <div class="mymember_menu_part"> 
         <a class="mymember_menu_tit" href="#"><img src="/client/images/mymember/menu05.png" />加盟商中心</a>
         <div> <a href="/shop/list">进入加盟商列表</a> </div>

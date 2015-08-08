@@ -47,5 +47,11 @@ public interface TdUserRepo extends
     TdUser findByQqUserId(String qqUserId);
 
     TdUser findByAlipayUserId(String alipay_userid);	//支付宝用户名查找
-
+    
+    /**
+	 * @author lc
+	 * @注释：查找同盟店所属会员
+	 */
+    Page<TdUser> findByUpperDiySiteIdContainingOrderByIdDesc(Long shopId, String keyword, Pageable page);
+    Page<TdUser> findByUpperDiySiteIdOrderByIdDesc(Long shopId, Pageable page);
 }

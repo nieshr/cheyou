@@ -355,6 +355,20 @@ public class TdUserService {
     	return repository.findByAlipayUserId(alipayname);
 
     }
+    
+    /**
+	 * @author lc
+	 * @注释：查找同盟店所属会员
+	 */
+    public Page<TdUser> findByShopIdAndSearch(Long shopId, String keywords, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByUpperDiySiteIdContainingOrderByIdDesc(shopId, keywords, pageRequest);
+    }
+    
+    public Page<TdUser> findByshopId(Long shopId, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByUpperDiySiteIdOrderByIdDesc(shopId, pageRequest);
+    }
     /**
      * 查找
      * 
