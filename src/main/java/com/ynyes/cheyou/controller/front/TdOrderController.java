@@ -1953,23 +1953,25 @@ public class TdOrderController extends AbstractPaytypeController {
         }
 
         // 给用户发送短信
-        if (null != tdUser && null != tdUser.getMobile()) {
+        if (null != tdUser) {
             SMSUtil.send(
-                    tdUser.getMobile(),
+                    tdOrder.getShippingPhone(),
                     "29040",
                     new String[] {
                             tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
-                            tdOrder.getOrderNumber().substring(
-                                    tdOrder.getOrderNumber().length() - 4) });
+                            tdOrder.getOrderNumber().substring(tdOrder.getOrderNumber().length() - 4)});
+            System.out.println("---Sharon---: 向用户"+tdOrder.getShippingPhone()+"发送短信");
         }
 
         // 给商户发短信
         if (null != tdShop && null != tdUser && null != tdShop.getMobile()) {
-            SMSUtil.send(tdShop.getMobile(), "29039",
+            SMSUtil.send(tdShop.getMobile(), 
+                    "29039",
                     new String[] { tdShop.getTitle(), tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
                             tdOrder.getAppointmentTime().toString() });
+            System.out.println("---Sharon---: 向同盟店"+tdShop.getMobile()+"发送短信");
         }
         
         List<TdOrderGoods> tdOrderGoodsList = tdOrder.getOrderGoodsList();

@@ -93,7 +93,8 @@ public class TdCartGoodsService {
     
     public List<TdCartGoods> findAll()
     {
-        return (List<TdCartGoods>) repository.findAll();
+        Sort sort = new Sort(Direction.DESC, "id");
+        return (List<TdCartGoods>) repository.findAll(sort);
     }
     
     public Page<TdCartGoods> findAllOrderByIdDesc(int page, int size)
@@ -113,16 +114,6 @@ public class TdCartGoodsService {
         return repository.findTopByGoodsIdAndUsername(goodsId, username);
     }
     
-//    public List<TdCartGoods> findByGoodsIdAndPriceAndUsername(Long goodsId, Double price, String username)
-//    {
-//        if (null == goodsId || null == price || null == username)
-//        {
-//            return null;
-//        }
-//        
-//        return repository.findByGoodsIdAndPriceAndUsername(goodsId, price, username);
-//    }
-    
     public List<TdCartGoods> findByGoodsIdAndUsername(Long goodsId, String username)
     {
         if (null == goodsId || null == username)
@@ -135,7 +126,7 @@ public class TdCartGoodsService {
     
     public List<TdCartGoods> findByUsername(String username)
     {
-        return repository.findByUsername(username);
+        return repository.findByUsernameOrderByIdDesc(username);
     }
     
     public List<TdCartGoods> updateGoodsInfo(List<TdCartGoods> cartGoodsList)
@@ -164,7 +155,7 @@ public class TdCartGoodsService {
     
     public List<TdCartGoods> findByUsernameAndIsSelectedTrue(String username)
     {
-        return repository.findByUsernameAndIsSelectedTrue(username);
+        return repository.findByUsernameAndIsSelectedTrueOrderByIdDesc(username);
     }
     
     public void delete(Iterable<TdCartGoods> entities)

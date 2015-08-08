@@ -33,7 +33,7 @@ public interface TdUserRepo extends
     
     TdUser findByUsernameAndStatusIdOrUsernameAndStatusId(String username, Long statusId, String username1, Long statusId1);
     
-    TdUser findByUsername(String username);
+    TdUser findByUsernameIgnoreCase(String username);
     
     TdUser findByUsernameAndIdNot(String username, Long id);
     

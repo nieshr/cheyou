@@ -161,8 +161,7 @@ public class TdCartController {
 
             for (TdCartGoods cg1 : cartUserGoodsList) 
             {
-            // 删除重复的商品
-                
+                // 删除重复的商品
                 List<TdCartGoods> findList = tdCartGoodsService
                         .findByGoodsIdAndUsername(cg1.getGoodsId(), username);
 

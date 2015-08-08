@@ -111,7 +111,7 @@ public class TdUserService {
             return null;
         }
         
-        if (null != repository.findByUsername(username))
+        if (null != repository.findByUsernameIgnoreCase(username))
         {
             return null;
         }
@@ -183,7 +183,7 @@ public class TdUserService {
             return null;
         }
         
-        TdUser user = repository.findByUsername(username);
+        TdUser user = repository.findByUsernameIgnoreCase(username);
         
         if (null == user)
         {
@@ -281,7 +281,7 @@ public class TdUserService {
             return null;
         }
         
-        return repository.findByUsername(username);
+        return repository.findByUsernameIgnoreCase(username);
     }
     
     public TdUser findByUsernameAndIdNot(String username, Long id)
