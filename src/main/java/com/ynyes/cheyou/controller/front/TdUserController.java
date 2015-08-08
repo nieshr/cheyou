@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdDemand;
+import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdOrderGoods;
@@ -35,6 +36,7 @@ import com.ynyes.cheyou.entity.TdUserReturn;
 import com.ynyes.cheyou.entity.TdUserSuggestion;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdDemandService;
+import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdOrderGoodsService;
 import com.ynyes.cheyou.service.TdOrderService;
@@ -83,6 +85,8 @@ public class TdUserController extends AbstractPaytypeController {
     @Autowired
     private TdUserCommentService tdUserCommentService;
 
+    @Autowired
+    private TdDiySiteService tdDiySiteService;
     /**
      * 投诉service
      * 
@@ -382,7 +386,8 @@ public class TdUserController extends AbstractPaytypeController {
         }
 
         TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
-
+        TdDiySite tdDiySite = tdDiySiteService.findbyUsername(username);
+        
         map.addAttribute("user", tdUser);
         map.addAttribute("status_id", statusId);
         map.addAttribute("time_id", timeId);
@@ -392,21 +397,21 @@ public class TdUserController extends AbstractPaytypeController {
         if (timeId.equals(0)) {
             if (statusId.equals(0)) {
                 if (null != keywords && !keywords.isEmpty()) {
-                    orderPage = tdOrderService.findByUsernameAndSearch(
-                            username, keywords, page, ClientConstant.pageSize);
+                    orderPage = tdOrderService.findByDiysitenameAndSearch(
+                    		tdDiySite.getTitle(), keywords, page, ClientConstant.pageSize);
                 } else {
-                    orderPage = tdOrderService.findByUsername(username, page,
+                    orderPage = tdOrderService.findByDiysitename(tdDiySite.getTitle(), page,
                             ClientConstant.pageSize);
                 }
             } else {
                 if (null != keywords && !keywords.isEmpty()) {
                     orderPage = tdOrderService
-                            .findByUsernameAndStatusIdAndSearch(username,
+                            .findByDiysitenameAndStatusIdAndSearch(tdDiySite.getTitle(),
                                     statusId, keywords, page,
                                     ClientConstant.pageSize);
                 } else {
-                    orderPage = tdOrderService.findByUsernameAndStatusId(
-                            username, statusId, page, ClientConstant.pageSize);
+                    orderPage = tdOrderService.findByDiysitenameAndStatusId(
+                    		tdDiySite.getTitle(), statusId, page, ClientConstant.pageSize);
                 }
             }
         } else if (timeId.equals(1)) {
@@ -419,22 +424,22 @@ public class TdUserController extends AbstractPaytypeController {
             if (statusId.equals(0)) {
                 if (null != keywords && !keywords.isEmpty()) {
                     orderPage = tdOrderService
-                            .findByUsernameAndTimeAfterAndSearch(username,
+                            .findByDiysitenameAndTimeAfterAndSearch(tdDiySite.getTitle(),
                                     time, keywords, page,
                                     ClientConstant.pageSize);
                 } else {
-                    orderPage = tdOrderService.findByUsernameAndTimeAfter(
-                            username, time, page, ClientConstant.pageSize);
+                    orderPage = tdOrderService.findByDiysitenameAndTimeAfter(
+                    		tdDiySite.getTitle(), time, page, ClientConstant.pageSize);
                 }
             } else {
                 if (null != keywords && !keywords.isEmpty()) {
                     orderPage = tdOrderService
-                            .findByUsernameAndStatusIdAndTimeAfterAndSearch(
-                                    username, statusId, time, keywords, page,
+                            .findByDiysitenameAndStatusIdAndTimeAfterAndSearch(
+                            		tdDiySite.getTitle(), statusId, time, keywords, page,
                                     ClientConstant.pageSize);
                 } else {
                     orderPage = tdOrderService
-                            .findByUsernameAndStatusIdAndTimeAfter(username,
+                            .findByDiysitenameAndStatusIdAndTimeAfter(tdDiySite.getTitle(),
                                     statusId, time, page,
                                     ClientConstant.pageSize);
                 }
@@ -449,22 +454,22 @@ public class TdUserController extends AbstractPaytypeController {
             if (statusId.equals(0)) {
                 if (null != keywords && !keywords.isEmpty()) {
                     orderPage = tdOrderService
-                            .findByUsernameAndTimeAfterAndSearch(username,
+                            .findByDiysitenameAndTimeAfterAndSearch(tdDiySite.getTitle(),
                                     time, keywords, page,
                                     ClientConstant.pageSize);
                 } else {
-                    orderPage = tdOrderService.findByUsernameAndTimeAfter(
-                            username, time, page, ClientConstant.pageSize);
+                    orderPage = tdOrderService.findByDiysitenameAndTimeAfter(
+                    		tdDiySite.getTitle(), time, page, ClientConstant.pageSize);
                 }
             } else {
                 if (null != keywords && !keywords.isEmpty()) {
                     orderPage = tdOrderService
-                            .findByUsernameAndStatusIdAndTimeAfterAndSearch(
-                                    username, statusId, time, keywords, page,
+                            .findByDiysitenameAndStatusIdAndTimeAfterAndSearch(
+                            		tdDiySite.getTitle(), statusId, time, keywords, page,
                                     ClientConstant.pageSize);
                 } else {
                     orderPage = tdOrderService
-                            .findByUsernameAndStatusIdAndTimeAfter(username,
+                            .findByDiysitenameAndStatusIdAndTimeAfter(tdDiySite.getTitle(),
                                     statusId, time, page,
                                     ClientConstant.pageSize);
                 }
@@ -479,22 +484,22 @@ public class TdUserController extends AbstractPaytypeController {
             if (statusId.equals(0)) {
                 if (null != keywords && !keywords.isEmpty()) {
                     orderPage = tdOrderService
-                            .findByUsernameAndTimeAfterAndSearch(username,
+                            .findByDiysitenameAndTimeAfterAndSearch(tdDiySite.getTitle(),
                                     time, keywords, page,
                                     ClientConstant.pageSize);
                 } else {
-                    orderPage = tdOrderService.findByUsernameAndTimeAfter(
-                            username, time, page, ClientConstant.pageSize);
+                    orderPage = tdOrderService.findByDiysitenameAndTimeAfter(
+                    		tdDiySite.getTitle(), time, page, ClientConstant.pageSize);
                 }
             } else {
                 if (null != keywords && !keywords.isEmpty()) {
                     orderPage = tdOrderService
-                            .findByUsernameAndStatusIdAndTimeAfterAndSearch(
-                                    username, statusId, time, keywords, page,
+                            .findByDiysitenameAndStatusIdAndTimeAfterAndSearch(
+                            		tdDiySite.getTitle(), statusId, time, keywords, page,
                                     ClientConstant.pageSize);
                 } else {
                     orderPage = tdOrderService
-                            .findByUsernameAndStatusIdAndTimeAfter(username,
+                            .findByDiysitenameAndStatusIdAndTimeAfter(tdDiySite.getTitle(),
                                     statusId, time, page,
                                     ClientConstant.pageSize);
                 }
@@ -509,22 +514,22 @@ public class TdUserController extends AbstractPaytypeController {
             if (statusId.equals(0)) {
                 if (null != keywords && !keywords.isEmpty()) {
                     orderPage = tdOrderService
-                            .findByUsernameAndTimeAfterAndSearch(username,
+                            .findByDiysitenameAndTimeAfterAndSearch(tdDiySite.getTitle(),
                                     time, keywords, page,
                                     ClientConstant.pageSize);
                 } else {
-                    orderPage = tdOrderService.findByUsernameAndTimeAfter(
-                            username, time, page, ClientConstant.pageSize);
+                    orderPage = tdOrderService.findByDiysitenameAndTimeAfter(
+                    		tdDiySite.getTitle(), time, page, ClientConstant.pageSize);
                 }
             } else {
                 if (null != keywords && !keywords.isEmpty()) {
                     orderPage = tdOrderService
-                            .findByUsernameAndStatusIdAndTimeAfterAndSearch(
-                                    username, statusId, time, keywords, page,
+                            .findByDiysitenameAndStatusIdAndTimeAfterAndSearch(
+                            		tdDiySite.getTitle(), statusId, time, keywords, page,
                                     ClientConstant.pageSize);
                 } else {
                     orderPage = tdOrderService
-                            .findByUsernameAndStatusIdAndTimeAfter(username,
+                            .findByDiysitenameAndStatusIdAndTimeAfter(tdDiySite.getTitle(),
                                     statusId, time, page,
                                     ClientConstant.pageSize);
                 }
@@ -533,7 +538,7 @@ public class TdUserController extends AbstractPaytypeController {
 
         map.addAttribute("order_page", orderPage);
 
-        return "/client/user_order_list";
+        return "/client/diysite_order_list";
     }
     
     @RequestMapping(value = "/user/diysite/order")
