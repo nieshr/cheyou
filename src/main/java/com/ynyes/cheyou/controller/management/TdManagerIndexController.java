@@ -65,7 +65,7 @@ public class TdManagerIndexController {
 			for(int i = 0; i < rootMenuList.size() && total_index < tdManagerRole.getTotalPermission(); i++){
 				if(null!=tdManagerRole.getPermissionList().get(total_index)){
 					if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && !(tdManagerRole.getPermissionList().get(total_index).getIsView())) {
-					//	rootMenuList.remove(i);
+						rootMenuList.remove(i);
 					}
 				}
 					total_index = total_index + 1;

@@ -235,13 +235,15 @@ public class TdManagerManagerController {
 //        for(int i = 0; i < tdManagerPermissionList.getPermissionlist().size(); i++){
 //        	System.out.println(tdManagerPermissionList.getPermissionlist().get(i).getIsView()+" "+i);
 //        }
-//        
-        for (int i = 0; i < tdManagerRole.getPermissionList().size(); i++) {
-			if (null == tdManagerRole.getPermissionList().get(i).getIsView()) {
-				tdManagerRole.getPermissionList().get(i).setIsView(false);
-			}					
+//      
+        if (null != tdManagerRole.getPermissionList()) {
+        	 for (int i = 0; i < tdManagerRole.getPermissionList().size(); i++) {
+     			if (null == tdManagerRole.getPermissionList().get(i).getIsView()) {
+     				tdManagerRole.getPermissionList().get(i).setIsView(false);
+     			}					
+     		}
 		}
-        
+               
         if (null != tdManagerPermissionList && null !=tdManagerPermissionList.getPermissionlist()  ) {
         	if (tdManagerPermissionList.getPermissionlist().size() < tdManagerRole.getPermissionList().size()) {
     			for(int i = 0; i < tdManagerPermissionList.getPermissionlist().size(); i++){
@@ -277,9 +279,12 @@ public class TdManagerManagerController {
     		}
 		}
         else{
-        	for(int i = 0; i < tdManagerRole.getPermissionList().size(); i++){
-        		tdManagerRole.getPermissionList().get(i).setIsView(false);
+        	if (null != tdManagerRole.getPermissionList()) {
+        		for(int i = 0; i < tdManagerRole.getPermissionList().size(); i++){
+            		tdManagerRole.getPermissionList().get(i).setIsView(false);
+            	}
         	}
+        	
         }
         
         
