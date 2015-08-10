@@ -26,7 +26,6 @@ package com.cloopen.rest.sdk.utils.encoder;
 
  import java.io.OutputStream;
 import java.io.PushbackInputStream;
- import java.io.PrintStream;
 
  /**
    32    * This class implements a BASE64 Character decoder as specified in RFC1521.

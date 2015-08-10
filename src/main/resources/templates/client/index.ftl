@@ -509,7 +509,7 @@ function delItem(id)
                                     <table class="nav_more">
                                         <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
                                             <tr>
-                                                <th width="90"><span><a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a></span></th>
+                                                <th width="120"><span><a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a></span></th>
                                                 <td>
                                                     <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
                                                         <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>

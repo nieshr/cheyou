@@ -187,10 +187,12 @@ public class TdCartController {
 				tdGoodsList.add(tdGoods);
 			}
 		}
+        
         if (tdGoodsList != null && tdGoodsList.size()>=1)
         {
         	map.addAttribute("goods_list",tdGoodsList);
 		}
+        
         map.addAttribute("cart_goods_list", tdCartGoodsService.updateGoodsInfo(resList));
         
         tdCommonService.setHeader(map, req);

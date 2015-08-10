@@ -53,12 +53,13 @@ public class TdUploadController {
             return res;
         }
 
-        String name = Filedata.getOriginalFilename();
-
-        if (null == Filedata || Filedata.isEmpty() || null == name) {
+        if (null == Filedata || Filedata.isEmpty()) {
             res.put("msg", "图片不存在");
             return res;
         }
+
+        String name = Filedata.getOriginalFilename();
+//        String contentType = Filedata.getContentType();
 
         String ext = name.substring(name.lastIndexOf("."));
 

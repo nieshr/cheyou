@@ -5,7 +5,6 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.neo4j.cypher.internal.compiler.v2_1.ast.rewriters.flattenBooleanOperators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,7 +14,6 @@ import com.ynyes.cheyou.entity.TdManager;
 import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.entity.TdNavigationMenu;
 import com.ynyes.cheyou.entity.TdSetting;
-import com.ynyes.cheyou.repository.TdManagerRepo;
 import com.ynyes.cheyou.service.TdManagerRoleService;
 import com.ynyes.cheyou.service.TdManagerService;
 import com.ynyes.cheyou.service.TdNavigationMenuService;
@@ -53,9 +51,14 @@ public class TdManagerIndexController {
 		 * @注释：管理员角色判断
 		 */
         TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
-        TdManagerRole tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        TdManagerRole tdManagerRole = null;
         
-        if (!tdManagerRole.getIsSys()) {
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole && !tdManagerRole.getIsSys()) {
         	List<TdNavigationMenu> rootMenuList = tdNavigationMenuService
                     .findByParentIdAndSort(0L);
         	int total_index = 0;
