@@ -128,7 +128,7 @@ DD_belatedPNG.fix('.,img,background');
                     <#if collect_page??>
                         <#list collect_page.content as cgoods>
                         <a class="mymember_gzlist" href="/goods/${cgoods.goodsId!''}">
-                            <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" />
+                            <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" width="180" height="180"/>
                             <p>${cgoods.goodsTitle!''}</p>
                             <h6>￥${cgoods.goodsSalePrice?string("#.##")}</h6>
                         </a>
@@ -152,7 +152,7 @@ DD_belatedPNG.fix('.,img,background');
             <#if recommend_goods_page??>
                 <#list recommend_goods_page.content as item>
                     <a class="mymember_hot_list" href="/goods/${item.id}">
-                        <img src="${item.coverImageUri!''}" />
+                        <img src="${item.coverImageUri!''}" width="75" height="75"/>
                         <p>${item.title!''}</p>
                         <b>￥${item.salePrice?string("0.00")}</b>
                     </a>
@@ -170,7 +170,7 @@ DD_belatedPNG.fix('.,img,background');
                 <#if recent_page??>
                     <#list recent_page.content as rgoods>
                         <a class="mymember_hot_story" href="/goods/${rgoods.goodsId}">
-                            <img src="${rgoods.goodsCoverImageUri!''}" />
+                            <img src="${rgoods.goodsCoverImageUri!''}" width="65" height="65"/>
                             <p>￥${rgoods.goodsSalePrice?string("#.##")}</p>
                         </a>
                     </#list>

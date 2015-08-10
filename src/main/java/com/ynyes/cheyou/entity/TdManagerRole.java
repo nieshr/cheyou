@@ -36,7 +36,7 @@ public class TdManagerRole {
     @OneToMany
     @JoinColumn(name="roleId")
     private List<TdManagerPermission> permissionList;
-    
+      
     // 权限总数
     @Column
     private Integer totalPermission;

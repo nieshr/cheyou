@@ -59,38 +59,52 @@ public class TdManagerIndexController {
         	List<TdNavigationMenu> rootMenuList = tdNavigationMenuService
                     .findByParentIdAndSort(0L);
         	int total_index = 0;
-			for(int i = 0; i < rootMenuList.size(); i++){
+			for(int i = 0; i < rootMenuList.size() && total_index < tdManagerRole.getTotalPermission(); i++){
 				if(null!=tdManagerRole.getPermissionList().get(total_index)){
 					if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && !(tdManagerRole.getPermissionList().get(total_index).getIsView())) {
-						rootMenuList.remove(total_index);
+					//	rootMenuList.remove(i);
 					}
 				}
 					total_index = total_index + 1;
+					TdNavigationMenu rootMenu = null;
+					if (i < rootMenuList.size()) {
+					    rootMenu = rootMenuList.get(i);
+					}
 					
-					TdNavigationMenu rootMenu = rootMenuList.get(i);
-
 	                // 取一级菜单列表
-	                List<TdNavigationMenu> level0MenuList = tdNavigationMenuService
-	                        .findByParentIdAndSort(rootMenu.getId());
+	                List<TdNavigationMenu> level0MenuList = null;
+	                if (null != rootMenu) {
+	                	level0MenuList = tdNavigationMenuService
+		                        .findByParentIdAndSort(rootMenu.getId());
+					}
+	                		
 	                if (null != level0MenuList && level0MenuList.size() > 0){
-		                for(int j = 0; j < level0MenuList.size(); j++){
+		                for(int j = 0; j < level0MenuList.size() && total_index < tdManagerRole.getTotalPermission(); j++){
 		                	if(null!=tdManagerRole.getPermissionList().get(total_index)){
 		                		if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && !(tdManagerRole.getPermissionList().get(total_index).getIsView())) {
-			                		level0MenuList.remove(total_index);
+			                		level0MenuList.remove(j);
 			    				}
 		                	}
 			                	total_index = total_index + 1;
 			                	
-			                	TdNavigationMenu level0Menu = level0MenuList.get(j);
-			
+			                	TdNavigationMenu level0Menu = null;
+			                	if (j < level0MenuList.size()) {
+			                		level0Menu = level0MenuList.get(j);
+								}			                	
+			                 
 			                    // 取二级菜单列表
-			                    List<TdNavigationMenu> level1MenuList = tdNavigationMenuService
-			                            .findByParentIdAndSort(level0Menu.getId());
+			                	
+			                    List<TdNavigationMenu> level1MenuList = null;
+			                    if(null != level0Menu){
+			                    	level1MenuList = tdNavigationMenuService
+				                            .findByParentIdAndSort(level0Menu.getId());
+			                    }
+			                     
 			                    if (null != level1MenuList && level1MenuList.size() > 0) {
-				                    for(int c = 0; c < level1MenuList.size(); c++){
+				                    for(int c = 0; c < level1MenuList.size() && total_index < tdManagerRole.getTotalPermission(); c++){
 				                    	if(null!=tdManagerRole.getPermissionList().get(total_index)){
 				                    		if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && !(tdManagerRole.getPermissionList().get(total_index).getIsView())) {
-					                    		level1MenuList.remove(total_index);
+					                    		level1MenuList.remove(c);
 					        				}
 					                    	
 				                    	}
