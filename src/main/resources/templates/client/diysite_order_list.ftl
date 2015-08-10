@@ -17,6 +17,11 @@
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
 
+<script type="text/javascript" src="/mag/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/mag/js/Validform_v5.3.2_min.js"></script>
+<script type="text/javascript" src="/mag/js/lhgdialog.js"></script>
+<link href="/mag/style/style.css" rel="stylesheet" type="text/css">
+<link href="/mag/style/idialog.css" rel="stylesheet" id="lhgdialoglink">
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -33,8 +38,43 @@ DD_belatedPNG.fix('.,img,background');
     menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
     navDownList("navdown","li",".nav_showbox");
     menuDownList("mainnavdown","#navdown",".a2","sel");
-    checkNowHover("shopping_down","shopping_sel");
+    checkNowHover("shopping_down","shopping_sel");   
 });
+
+   $(function () {
+        $("#btnService").click(function () { OrderService(); });   //确认到店消费
+   });
+   
+    //确认到店消费
+        function OrderService() {
+            var dialog = $.dialog.confirm('操作提示信息：<br />确认已到店消费？', function () {
+                var orderNumber = $.trim($("#spanOrderNumber").text());
+                var postData = { "orderNumber": orderNumber, "type": "orderService" };
+                //发送AJAX请求
+                sendAjaxUrl(dialog, postData, "/diysite/order/param/edit");
+                return false;
+            });
+        }
+     //发送AJAX请求
+        function sendAjaxUrl(winObj, postData, sendUrl) {
+            $.ajax({
+                type: "post",
+                url: sendUrl,
+                data: postData,
+                dataType: "json",
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.dialog.alert('尝试发送失败，错误信息：' + errorThrown, function () { }, winObj);
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        winObj.close();
+                        $.dialog.tips(data.msg, 2, '32X32/succ.png', function () { location.reload(); }); //刷新页面
+                    } else {
+                        $.dialog.alert('错误提示：' + data.message, function () { }, winObj);
+                    }
+                }
+            });
+        }    
 </script>
 
 </head>
@@ -46,9 +86,9 @@ DD_belatedPNG.fix('.,img,background');
 <div class="mymember_out">
     <div class="mymember_main">
     <div class="myclear" style="height:20px;"></div>
-    <#include "/client/common_user_menu.ftl" />
+    <#include "/client/diysite_user_menu.ftl" />
   
-    <form name="form1" action="/user/order/list/${status_id}" method="POST">
+    <form name="form1" action="/user/diysite/order/list/${status_id}" method="POST">
         <script type="text/javascript">
             var theForm = document.forms['form1'];
             if (!theForm) {
@@ -100,17 +140,17 @@ DD_belatedPNG.fix('.,img,background');
                             </select>
                         </th>
                         <th width="80"></th>
-                        <th width="60">操作</th>
+                        <th width="60">返利</th>
                     </tr>    
                     <#if order_page??>
                         <#list order_page.content as order>
                             <tr>
-                              <th colspan="7">订单编号：<a href="/user/order?id=${order.id}">${order.orderNumber!''}</a></th>
+                              <th colspan="7">订单编号：<a href="javascript:;" id="spanOrderNumber">${order.orderNumber!''}</a></th>
                             </tr>
                             <tr>
                               <td class="td001">
                                 <#list order.orderGoodsList as og>
-                                    <a href="/goods/${og.goodsId}"><img src="${og.goodsCoverImageUri}"></a>
+                                    <a href="javascript:;"><img src="${og.goodsCoverImageUri}" title="${og.goodsTitle}"></a>
                                 </#list>
                               </td>
                               <td>${order.shippingName!''}</td>
@@ -130,15 +170,16 @@ DD_belatedPNG.fix('.,img,background');
                                         <#--
                                         <a href="/order/cancel/${order.id}">取消订单</a>
                                         -->
-                                        <a href="/order/dopay/${order.id}">立即支付</a>
+                            <!--            <a href="/order/dopay/${order.id}">立即支付</a> -->
                                     <#elseif order.statusId==3>
                                         <p>待付尾款</p>
-                                        <a href="/order/dopayleft/${order.id}">去支付</a>
+                              <!--          <a href="/user/dopayleft/${order.id}">付尾款</a> -->
                                     <#elseif order.statusId==4>
-                                        待服务
+                                        <p>待服务</p>
+                                        <input type="button" id="btnService" value="确认核销" class="btn green">
                                     <#elseif order.statusId==5>
                                         <p>待评价</p>
-                                        <a href="/user/comment/list">发表评论</a>
+                                <!--        <a href="/user/comment/list">发表评论</a>  -->
                                     <#elseif order.statusId==6>
                                         已完成
                                     <#elseif order.statusId==7>
@@ -150,12 +191,12 @@ DD_belatedPNG.fix('.,img,background');
                                 </p>
                               </td>
                               <td class="td003"> 
-                                <p><a href="/user/order?id=${order.id}">查看</a></p>
+                        <!--        <p><a href="/user/order?id=${order.id}">查看</a></p>
                                 <#if order.statusId==5>
                                     <p><a href="/user/comment/list">评价</a></p>
                                 <#elseif order.statusId==6>
                                     <p><a href="/user/return/${order.id}">申请返修/退换货</a></p>
-                                </#if>
+                                </#if>  -->
                               </td>
                             </tr>
                         </#list>
@@ -171,7 +212,7 @@ DD_belatedPNG.fix('.,img,background');
                                 <#if page == order_page.number+1>
                                     <a class="mysel" href="javascript:;">${page}</a>
                                 <#else>
-                                    <a href="/user/order/list/${statusId}?page=${page-1}&timeId=${time_id}&keywords=${keywords!''}">${page}</a>
+                                    <a href="/user/diysite/order/list/${statusId}?page=${page-1}&timeId=${time_id}&keywords=${keywords!''}">${page}</a>
                                 </#if>
                                 <#assign continueEnter=false>
                             <#else>

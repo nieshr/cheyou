@@ -590,14 +590,14 @@ function del_goods_comb(obj) {
         <dl>
             <dt>平台服务费比例</dt>
             <dd>
-                <input name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.06")}<#else>0.06</#if>" class="input normal" sucmsg="">
+                <input name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.00")}<#else>0.06</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">平台服务费 = 销售价 * 平台服务费比例</span>
             </dd>
         </dl>
         <dl>
             <dt>培训服务费比例</dt>
             <dd>
-                <input name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.02")}<#else>0.02</#if>" class="input normal" sucmsg="">
+                <input name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.00")}<#else>0.02</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">培训服务费 = 销售价 * 培训服务费比例</span>
             </dd>
         </dl>

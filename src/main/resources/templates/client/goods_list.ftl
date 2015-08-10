@@ -255,7 +255,7 @@ $(document).ready(function(){
         
                     <a class="block h20 overflow" href="/goods/${goods.id}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a>
                     <a class="block fs12 blue h20 overflow" href="/goods/${goods.id}">${goods.subTitle!""}</a>
-                    <p class="fs14 w84 fl">评论：<span class="blue">${goods.totalComments!'0'}</span>人</p>
+                    <p class="fs14 w84 fl">关注：<span class="blue">${goods.totalCollects!'0'}</span>人</p>
                     <#if goods.returnPoints?? && goods.returnPoints gt 0>
                         <div class="yh fr">
                             <p><a href="/goods/${goods.id}">送粮草</a></p>

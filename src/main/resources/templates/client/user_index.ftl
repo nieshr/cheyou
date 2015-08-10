@@ -123,17 +123,22 @@ DD_belatedPNG.fix('.,img,background');
         <div class="mymember_info mymember_info02">
             <h3>我关注的商品</h3>
             <div id="mymember_gzbox">
-                <#if collect_page??>
-                    <#list collect_page.content as cgoods>
-                    <a class="mymember_gzlist" href="/goods/${cgoods.goodsId!''}">
-                        <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" />
-                        <p>${cgoods.goodsTitle!''}</p>
-                        <h6>￥${cgoods.goodsSalePrice?string("#.##")}</h6>
-                    </a>
-                    </#list>
-                </#if>
+               <ul>
+                 <li>
+                    <#if collect_page??>
+                        <#list collect_page.content as cgoods>
+                        <a class="mymember_gzlist" href="/goods/${cgoods.goodsId!''}">
+                            <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" />
+                            <p>${cgoods.goodsTitle!''}</p>
+                            <h6>￥${cgoods.goodsSalePrice?string("#.##")}</h6>
+                        </a>
+                        </#list>
+                    </#if>
+                  </li>
+                </ul>
                 <div class="myclear"></div>
                 <a id="mymember_gznext" href="#"><img src="/client/images/mymember/arrow02.jpg" /></a>
+                
             </div>
         </div><!--mymember_info END-->
     

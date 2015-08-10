@@ -45,7 +45,7 @@ public interface TdOrderRepo extends
     
     /**
 	 * @author lichong
-	 * @注释：
+	 * @注释：同盟店订单查询
 	 */
     Page<TdOrder> findByshopTitleOrderByIdDesc(String diystiename, Pageable page);
     Page<TdOrder> findByshopTitleAndOrderNumberContainingOrderByIdDesc(String diystiename, String keywords, Pageable page);
@@ -55,6 +55,12 @@ public interface TdOrderRepo extends
     Page<TdOrder> findByshopTitleAndStatusIdAndOrderTimeAfterAndOrderNumberContainingOrderByIdDesc(String diystiename, Long statusId, Date time, String keywords, Pageable page);
     Page<TdOrder> findByshopTitleAndOrderTimeAfterAndOrderNumberContainingOrderByIdDesc(String diystiename, Date time, String keywords, Pageable page);
     Page<TdOrder> findByshopTitleAndStatusIdAndOrderTimeAfterOrderByIdDesc(String diystiename, Long statusId, Date time, Pageable page);
+    
+    /**
+	 * @author lc
+	 * @注释：同盟店信息查询
+	 */
+    List<TdOrder> findByShopIdAndStatusIdOrderByIdDesc(long shopId, long statusId);
     
     /**
      * 按交易状态查询

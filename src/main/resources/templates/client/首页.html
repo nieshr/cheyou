@@ -1,0 +1,1854 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>车友同盟</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="copyright" content="" />
+<!--[if IE]>
+   <script src="js/html5.js"></script>
+<![endif]-->
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/ljs-v1.01.js"></script>
+
+<link href="style/common.css" rel="stylesheet" type="text/css" />
+<link href="style/cytm.css" rel="stylesheet" type="text/css" />
+<link href="style/cartoon.css" rel="stylesheet" type="text/css" />
+<link href="style/style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+  $(document).ready(function(){
+	menuDownList("top_phone","#top_phonelist",".a1","sel");
+	phoneListMore();//单独下拉
+    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
+	navDownList("navdown","li",".nav_showbox");
+	//menuDownList("mainnavdown","#navdown",".a2","sel");
+	checkNowHover("shopping_down","shopping_sel");
+	checkBoxShow("topcheck","a","topsum","li","sel");
+	checkBoxShow("teamadmenu","a","teamadsum","a","sel");
+	
+	floatBoxQQ();
+});
+
+$(function(){
+	//左右滚动幻灯片广告
+	var essayad = {
+			 "boxid":"indexadbox",//最外层id
+			 "sumid":"indexadsum",//列表id
+			 "li01":"threeli01",//li标签id
+			 "li02":"threeli02",//重复li二号id
+			 "stylename":"indexadpart",//内部滚动的标签class
+			 "numid":"indexadnum",//数字id
+			 "boxwidth":758,//宽度
+			 "boxheight":282,//高度
+			 "preid":"indexadpre",//上一个id
+			 "nextid":"indexadnext",//下一个id
+			 "speed":5000,// 切换速度
+			 "gospeed":500//轮换速度
+		  };
+	$.ljs_adcartoon.arrowNum(essayad);
+	
+	var shopad = {
+			 "boxid":"shopadbox",//最外层id
+			 "sumid":"shopadsum",//列表id
+			 "li01":"shopli01",//li标签id
+			 "li02":"shopli02",//重复li二号id
+			 "stylename":"indexadpart",//内部滚动的标签class
+			 "numid":"shopadnum",//数字id
+			 "boxwidth":335,//宽度
+			 "boxheight":323,//高度
+			 "preid":"shopadpre",//上一个id
+			 "nextid":"shopadnext",//下一个id
+			 "speed":5000,// 切换速度
+			 "gospeed":500//轮换速度
+		  };
+	$.ljs_adcartoon.arrowNum(shopad);
+	});
+</script>
+</head>
+
+<body>
+<a class="w100 block ta-c" href="#" style=" background:url(images/photo/index.png) no-repeat top center; height:200px;"></a>
+<div class="top">
+    <div class="w1200 top1">
+        <p class="huanyin">商城访问量：<span class="blue">24234</span></p>
+            <p class="huanyin">在线人数：<span class="blue">3586</span></p>
+    
+        <div class="wdbgg">
+        <a href="#">登陆</a>
+        <a href="#">免费注册</a>
+        <a href="#">我的订单</a>
+        <a href="#">会员中心</a>
+        <a href="#">在线咨询</a>
+        服务热线：400-666-5030
+        </div>
+        
+      </div>
+    </div>
+<div class="w1200 top2">
+    <div class="logo"><a href="#"><img src="images/liebiao_03.png" width="200" height="100" /></a></div>
+    <div class="tpgg"><a href="#"><img src="images/liebiao_06.png" width="70" height="38" /></a></div>
+  <div class="ssbox">
+        <div class="clear"></div>
+        <input type="text" class="ss_txt"  />
+        <input type="submit" class="ss_btn" value="" />
+  </div>
+  <div id="shopping_down" class="shopping_box">
+    <span class="sp1">5</span>
+    <a class="a9" href="#"><img src="images/liebiao_09.png" width="28" height="28" />购物车<i></i></a>
+    <menu>
+      <!--<h3 class="ta-c pa15 fs14 fw400">购物车中还没有商品，赶紧选购吧！</h3>-->
+      <h2>最新加入的商品</h2>
+      <h3 class="tit">
+        <span>满减</span>
+        购满1999元，即可享受满减优惠 小计：￥2888.00
+      </h3>
+      <div class="shopping_list">
+        <div class="clear"></div>
+        <a class="a2" href="#"><img src="images/liebiao_23.png" /></a>
+        <a class="a3" href="#">得力(deli)0012 优质高强度订书钉12# 1000枚/盒 10盒装</a>
+        <p>￥2888.00 x1<a href="#">删除</a></p>
+        <div class="clear"></div>
+      </div>
+      <div class="shopping_list">
+        <div class="clear"></div>
+        <a class="a2" href="#"><img src="images/liebiao_23.png" /></a>
+        <a class="a3" href="#">得力(deli)0012 优质高强度订书钉12# 1000枚/盒 10盒装</a>
+        <p>￥2888.00 x1<a href="#">删除</a></p>
+        <div class="clear"></div>
+      </div>
+      <div class="shopping_list">
+        <div class="clear"></div>
+        <a class="a2" href="#"><img src="images/liebiao_23.png" /></a>
+        <a class="a3" href="#">得力(deli)0012 优质高强度订书钉12# 1000枚/盒 10盒装</a>
+        <p>￥2888.00 x1<a href="#">删除</a></p>
+        <div class="clear"></div>
+      </div><!--shopping_list END-->
+      <h3 class="tit">
+        <span>满减</span>
+        购满1999元，即可享受满减优惠 小计：￥2888.00
+      </h3>
+      <div class="shopping_list">
+        <div class="clear"></div>
+        <a class="a2" href="#"><img src="images/liebiao_23.png" /></a>
+        <a class="a3" href="#">得力(deli)0012 优质高强度订书钉12# 1000枚/盒 10盒装</a>
+        <p>￥2888.00 x1<a href="#">删除</a></p>
+        <div class="clear"></div>
+      </div><!--shopping_list END-->
+      <h4 class="shopping_price">
+        共1件商品 &nbsp;&nbsp;共计<span class="fw-b">￥2288.00</span>
+        <a href="#">去结算</a>
+      </h4>
+    </menu>
+  </div>
+</div>
+<aside class="floatbox" id="floatbox">
+  <a class="a0" href="#" title="微信客服">
+	  <img src="images/float_ico01.png" width="42" height="42" alt="微信客服" />
+	  <span>
+	   <img src="images/sys02.png" />
+	  </span>
+  </a>
+  <a href="#" title="在线咨询" id="floatqq">
+    <img src="images/float_ico02.png" width="42" height="42" alt="在线咨询" />
+  </a>
+  <a class="a0" href="#" title="新浪微博">
+    <img src="images/float_ico03.png" width="42" height="42" alt="新浪微博" />
+  </a>
+  <a class="a0" href="#" title="服务热线">
+	  <img src="images/float_ico04.png" width="42" height="42" alt="服务热线" />
+	  <span>
+	   <img src="images/sys02.png" />
+	  </span>
+  </a>
+  <a class="a0" href="javascript:$('html,body').animate({scrollTop:0},500);" title="到顶部">
+    <img src="images/float_ico05.png" width="42" height="42" alt="到顶部" />
+  </a>
+  
+  <div class="floatboxlist" id="floatboxlist">
+    <a href="#">联系客户1号</a>
+    <a href="#">联系客户1号</a>
+    <a href="#">联系客户1号</a>
+    <a href="#">联系客户1号</a>
+  </div>
+</aside>
+<nav class="navbox">
+<div class="w1200">
+  <section class="navlist" id="mainnavdown">
+    <a href="#" class="a2">全部商品分类</a>
+    <ul class="navlistout" id="navdown">
+      <li>
+        <h3><a href="#">汽车贴膜</a></h3>
+        
+        <div class="nav_showbox">
+          <div class="clear"></div>
+          
+          <table class="nav_more">
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">苹果</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+          </table>
+          <div class="clear"></div>
+        </div>
+      </li>
+      <li>
+        <h3><a href="#">汽车美容</a></h3>
+        
+        <div class="nav_showbox">
+          <div class="clear"></div>
+          
+          <table class="nav_more">
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">苹果</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+          </table>
+          <div class="clear"></div>
+        </div>
+      </li>
+      <li>
+        <h3><a href="#">汽车坐垫</a></h3>
+        
+        <div class="nav_showbox">
+          <div class="clear"></div>
+          
+          <table class="nav_more">
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+          </table>
+          <div class="clear"></div>
+        </div>
+      </li>
+      <li>
+        <h3><a href="#">汽车脚垫</a></h3>
+        
+        <div class="nav_showbox">
+          <div class="clear"></div>
+          
+          <table class="nav_more">
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+          </table>
+          <div class="clear"></div>
+        </div>
+      </li>
+      
+      <li>
+        <h3><a href="#">真皮座椅</a></h3>
+        
+        <div class="nav_showbox">
+          <div class="clear"></div>
+          
+          <table class="nav_more">
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+          </table>
+          <div class="clear"></div>
+        </div>
+      </li>
+      <li>
+        <h3><a href="#">车载电器</a></h3>
+        
+        <div class="nav_showbox">
+          <div class="clear"></div>
+          
+          <table class="nav_more">
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+      <li>
+        <h3><a href="#">汽车改装</a></h3>
+        
+        <div class="nav_showbox">
+          <div class="clear"></div>
+          
+          <table class="nav_more">
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+      <li>
+        <h3><a href="#">其他商品</a></h3>
+        
+        <div class="nav_showbox">
+          <div class="clear"></div>
+          
+          <table class="nav_more">
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+      <li>
+        <h3><a href="#">自驾游</a></h3>
+        
+        <div class="nav_showbox">
+          <div class="clear"></div>
+          
+          <table class="nav_more">
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+            <tr>
+              <th width="90"><span>品牌</span></th>
+              <td>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+                <a href="#">得力</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+    </ul><!--navlistout END-->
+  </section>
+  <a class="a1" href="#">首页</a>
+  <a class="a1" href="#">免费领取</a>
+  <a class="a1" href="#">1元抢拍</a>
+  <a class="a1" href="#">百人团购</a>
+  <a class="a1" href="#">购物返利</a>
+  <a class="a1" href="#">施工案例</a>
+  <a class="a1" href="#">地图导航</a>
+  <a class="a1" href="#">自驾游</a>
+  <a class="a1" href="#">加盟热线</a>
+
+  </div>
+  
+</nav>
+<div class="clear"></div>
+
+<div class="main">
+  <section class="index_right">
+    <menu class="threeshop">
+      <a href="#"><img src="images/images/index_ico01.png" /><p>昆明同盟店</p></a>
+      <a href="#"><img src="images/images/index_ico01.png" /><p>地州同盟店</p></a>
+      <a href="#"><img src="images/images/index_ico01.png" /><p>省外同盟店</p></a>
+    </menu>
+    <p class="index_qd">
+      <a href="#"><img src="images/images/index_ico04.png" /></a>
+      2015.6.23 星期二
+    </p>
+    <a class="index_free" href="#">免费洗车券</a>
+    <a class="index_free" href="#">免费打蜡券</a>
+    <a class="index_free" href="#">200元优惠券</a>
+    <div class="index_ask">
+      <a class="fl" href="#">免费询价</a>
+      <a class="fr" href="#">免费安装</a>
+      <div class="clear"></div>
+    </div>
+    <h3 class="lh30 fs16 w100">商城快报<a class="absolute-r fw400 fs14">更多 ></a></h3>
+    <a class="block mt5" href="#">我是各种标题内容</a>
+    <a class="block mt5" href="#">我是各种标题内容</a>
+    <a class="block mt5" href="#">我是各种标题内容</a>
+    <a class="block mt5" href="#">我是各种标题内容</a>
+    <a class="block mt5" href="#">我是各种标题内容</a>
+    <a class="block mt5" href="#">我是各种标题内容</a>
+    <a class="block mt5" href="#">我是各种标题内容</a>
+  </section><!--index_right END-->
+  
+  <section class="index_topad">
+    <a id="indexadpre" href="javascript:void(0);">上一页</a>
+<a id="indexadnext" href="javascript:void(0);">下一页</a>
+<div id="indexadbox">
+  <ul id="indexadsum">
+    <li id="threeli01">
+      <a class="indexadpart" href="#"><img src="images/images/index_img02.png" width="758" height="282" /></a>
+      <a class="indexadpart" href="#"><img src="images/images/index_img02.png" width="758" height="282" /></a>
+      <a class="indexadpart" href="#"><img src="images/images/index_img02.png" width="758" height="282" /></a>
+    </li>
+    <li id="threeli02"></li>
+  </ul>
+  <div style="clear:both;"></div>
+</div><!--ad END-->
+    <div class="index_topcheck" id="topcheck">
+      <a class="sel" href="#">汽车贴膜</a>
+      <a href="#">汽车美容</a>
+      <a href="#">汽车坐垫</a>
+      <a href="#">汽车脚垫</a>
+      <a href="#">真皮座椅</a>
+      <a href="#">车载电器</a>
+      <a href="#">汽车改装</a>
+      <a href="#">自驾游</a>
+      <div class="clear"></div>
+    </div>
+    <ul class="index_topsum" id="topsum">
+      <li>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮111胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+        <a href="#">
+          <p class="lh30 fs20">固特异轮胎</p>
+          <p class="ta-r c9">全国包邮 安装免费</p>
+          <p class="ta-r sc">￥：1333.00</p>
+          <img src="images/liebiao_23.png" height="100" />
+        </a>
+      </li>
+    </ul>
+  </section><!--index_topad END-->
+  <section class="index_topleft">
+    <a href="#"><img src="images/images/index_ico05.png" /></a>
+  </section>
+  <div class="clear h30"></div>
+  
+  <section class="indextit">
+    <h3>1元抢拍</h3>
+    <a class="a1" href="#">抢拍细则</a>
+    <menu>
+      <a class="sel" href="#">今日抢购</a>
+      <a href="#">明日抢购</a>
+      <a href="#">往期回顾</a>
+    </menu>
+    <div class="clear"></div>
+  </section>
+  <ul class="index_knock">
+    <li>
+      <menu>
+        <div>
+        <a class="sel" href="#">08:00抢拍<i></i></a>
+        <a href="#">15:00抢拍<i></i></a>
+        <a href="#">23:00抢拍<i></i></a>
+        </div>
+        <a href="#">抢拍细则</a>
+      </menu>
+      <div class="knockbox">
+        <dl>
+          <dt>
+            <img class="pro" src="images/liebiao_23.png" />
+            <a class="fs18 lh25 fw-b" href="#">我是文字的标题之类的东西哟</a>
+            <p class="c9 pt10 pb20">机器小小 收纳方便 功率巨大</p>
+            <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">06:22:45</span><span class="rd3 ml20">255</span>人关注</p>
+            <a class="a1" href="#">￥<b>399.00</b><span>￥：500.00</span></a>
+            <div class="qgtime">
+              <a>实时查询</a>
+              <i></i>
+              <div>
+                <p>时间：19:55</p>
+                <p>价格：299.00</p>
+              </div>
+            </div>
+          </dt>
+          <dd>
+            <a href="#">
+              <img src="images/liebiao_23.png" width="150" />
+              <p class="fs18 lh25 fw-b">我是标题文字</p>
+              <p class="c9 pb20">机器小小 收纳方便 功率巨大</p>
+              <p class="sc pt20 lh30">￥<span class="fw-b fs20">299.00</span></p>
+              <p><span class="rd3">255</span>人关注</p>
+            </a>
+            <a style="border:none;" href="#">
+              <img src="images/liebiao_23.png" width="150" />
+              <p class="fs18 lh25 fw-b">我是标题文字</p>
+              <p class="c9 pb20">机器小小 收纳方便 功率巨大</p>
+              <p class="sc pt20 lh30">￥<span class="fw-b fs20">299.00</span></p>
+              <p><span class="rd3">255</span>人关注</p>
+            </a>
+          </dd>
+          <dd>
+            <a href="#">
+              <img src="images/liebiao_23.png" width="150" />
+              <p class="fs18 lh25 fw-b">我是标题文字</p>
+              <p class="c9 pb20">机器小小 收纳方便 功率巨大</p>
+              <p class="sc pt20 lh30">￥<span class="fw-b fs20">299.00</span></p>
+              <p><span class="rd3">255</span>人关注</p>
+            </a>
+            <a style="border:none;" href="#">
+              <img src="images/liebiao_23.png" width="150" />
+              <p class="fs18 lh25 fw-b">我是标题文字</p>
+              <p class="c9 pb20">机器小小 收纳方便 功率巨大</p>
+              <p class="sc pt20 lh30">￥<span class="fw-b fs20">299.00</span></p>
+              <p><span class="rd3">255</span>人关注</p>
+            </a>
+          </dd>
+        </dl>
+        
+      </div><!--knockbox END-->
+      <div class="clear"></div>
+    </li>
+  </ul>
+  <div class="clear h30"></div>
+  <section class="indextit">
+    <h3>百人团购</h3>
+    <a class="a1" href="#">团购细则</a>
+    <menu>
+      <a class="sel" href="#">本期团购</a>
+      <a href="#">下期预告</a>
+      <a href="#">往期团购</a>
+    </menu>
+    <div class="clear"></div>
+  </section>
+  <div class="index_team">
+    <a class="block ta-c" href="#"><img src="images/liebiao_23.png" height="200" /></a>
+    <a class="block mt5 fs16" href="#">我是名称之类的东西</a>
+    <p class="fs12 blue">我是文字说明之类的东西</p>
+    <div class="team_men">
+        <dl>
+          <dt></dt>
+          <dd class="sel"></dd>
+          <dd style="left:66%;"></dd>
+        </dl>
+        <p>
+          <span>￥900</span>
+          三人团
+        </p>
+        <p>
+          <span>￥800</span>
+          七人团
+        </p>
+        <p>
+          <span>￥500</span>
+          十人团
+        </p>
+        <div class="clear"></div>
+      </div><!--team_men END-->
+      <p class="p1">预付定金:299元<a href="#">立即参加</a></p>
+  </div>
+  <div class="index_team">
+    <a class="block ta-c" href="#"><img src="images/liebiao_23.png" height="200" /></a>
+    <a class="block mt5 fs16" href="#">我是名称之类的东西</a>
+    <p class="fs12 blue">我是文字说明之类的东西</p>
+    <div class="team_men">
+        <dl>
+          <dt></dt>
+          <dd class="sel"></dd>
+          <dd style="left:66%;"></dd>
+        </dl>
+        <p>
+          <span>￥900</span>
+          三人团
+        </p>
+        <p>
+          <span>￥800</span>
+          七人团
+        </p>
+        <p>
+          <span>￥500</span>
+          十人团
+        </p>
+        <div class="clear"></div>
+      </div><!--team_men END-->
+      <p class="p1">预付定金:299元<a href="#">立即参加</a></p>
+  </div>
+  <div class="index_team">
+    <a class="block ta-c" href="#"><img src="images/liebiao_23.png" height="200" /></a>
+    <a class="block mt5 fs16" href="#">我是名称之类的东西</a>
+    <p class="fs12 blue">我是文字说明之类的东西</p>
+    <div class="team_men">
+        <dl>
+          <dt></dt>
+          <dd class="sel"></dd>
+          <dd style="left:66%;"></dd>
+        </dl>
+        <p>
+          <span>￥900</span>
+          三人团
+        </p>
+        <p>
+          <span>￥800</span>
+          七人团
+        </p>
+        <p>
+          <span>￥500</span>
+          十人团
+        </p>
+        <div class="clear"></div>
+      </div><!--team_men END-->
+      <p class="p1">预付定金:299元<a href="#">立即参加</a></p>
+  </div>
+  <div class="index_team">
+    <a class="block ta-c" href="#"><img src="images/liebiao_23.png" height="200" /></a>
+    <a class="block mt5 fs16" href="#">我是名称之类的东西</a>
+    <p class="fs12 blue">我是文字说明之类的东西</p>
+    <div class="team_men">
+        <dl>
+          <dt></dt>
+          <dd class="sel"></dd>
+          <dd style="left:66%;"></dd>
+        </dl>
+        <p>
+          <span>￥900</span>
+          三人团
+        </p>
+        <p>
+          <span>￥800</span>
+          七人团
+        </p>
+        <p>
+          <span>￥500</span>
+          十人团
+        </p>
+        <div class="clear"></div>
+      </div><!--team_men END-->
+      <p class="p1">预付定金:299元<a href="#">立即参加</a></p>
+  </div>
+  <div class="index_team">
+    <a class="block ta-c" href="#"><img src="images/liebiao_23.png" height="200" /></a>
+    <a class="block mt5 fs16" href="#">我是名称之类的东西</a>
+    <p class="fs12 blue">我是文字说明之类的东西</p>
+    <div class="team_men">
+        <dl>
+          <dt></dt>
+          <dd class="sel"></dd>
+          <dd style="left:66%;"></dd>
+        </dl>
+        <p>
+          <span>￥900</span>
+          三人团
+        </p>
+        <p>
+          <span>￥800</span>
+          七人团
+        </p>
+        <p>
+          <span>￥500</span>
+          十人团
+        </p>
+        <div class="clear"></div>
+      </div><!--team_men END-->
+      <p class="p1">预付定金:299元<a href="#">立即参加</a></p>
+  </div>
+  <div class="clear h30"></div> 
+  <section class="teambanner">
+    <div id="teamadsum">
+      <a href="#"><img src="images/images/index_img03.png" width="608" height="332" /></a>
+      <a href="#"><img src="images/images/index_img03.png" width="608" height="332" /></a>
+      <a href="#"><img src="images/images/index_img03.png" width="608" height="332" /></a>
+      <a href="#"><img src="images/images/index_img03.png" width="608" height="332" /></a>
+      <a href="#"><img src="images/images/index_img03.png" width="608" height="332" /></a>
+      <a href="#"><img src="images/images/index_img03.png" width="608" height="332" /></a>
+      <a href="#"><img src="images/images/index_img03.png" width="608" height="332" /></a>
+    </div>
+    <menu id="teamadmenu">
+      <a class="sel" href="#">百人团购</a>
+      <a href="#">汽车贴膜</a>
+      <a href="#">漆面镀膜</a>
+      <a href="#">车身改色膜</a>
+      <a href="#">汽车保险</a>
+      <a href="#">车载电器</a>
+      <a href="#">汽车机油</a>
+    </menu>
+  </section><!--teambanner END-->
+  <section class="index_gz">
+    <h3>即将火热开团</h3>
+    <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
+    <b><i></i></b>
+    <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
+    <b><i></i></b>
+    <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
+    <b><i></i></b>
+    <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
+    <b><i></i></b>
+    <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
+    <b><i></i></b>
+    <p><a href="#">汽车贴膜</a><span class="c9">低于市场价20%</span><span class="sp1">6955人关注</span></p>
+    <b><i></i></b>  
+  </section>
+  <section class="index_mt">
+    <h3>车友还想团购</h3>
+    <p class="pt15">网友123*****34留言：</p>
+    <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
+    <p class="pt15">网友123*****34留言：</p>
+    <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
+    <a href="#"><img src="images/images/index_ico09.png" /></a>
+  </section>
+  <div class="clear h20"></div> 
+  <a href="#"><img src="images/images/index_img04.png" /></a>
+  <div class="clear h30"></div> 
+  <section class="indextit">
+    <h3>商品分类</h3>
+    <div class="clear"></div>
+  </section>
+  
+  <a id="shopadpre" href="javascript:void(0);">上一页</a>
+  <a id="shopadnext" href="javascript:void(0);">下一页</a>
+<div id="shopadbox">
+  <ul id="shopadsum">
+    <li id="shopli01">
+      <a class="indexadpart" href="#"><img src="images/images/index_img05.png" width="335" height="323" /></a>
+      <a class="indexadpart" href="#"><img src="images/images/index_img05.png" width="335" height="323" /></a>
+      <a class="indexadpart" href="#"><img src="images/images/index_img05.png" width="335" height="323" /></a>
+    </li>
+    <li id="shopli02"></li>
+  </ul>
+  <div style="clear:both;"></div>
+</div><!--ad END-->
+  
+  <table class="propart">
+    <tr>
+      <td><a href="#"><img src="images/images/ico_nav01.png" />
+<p>汽车贴膜</p></a></td>
+      <td><a href="#"><img src="images/images/ico_nav02.png" />
+<p>汽车贴膜</p></a></td>
+      <td><a href="#"><img src="images/images/ico_nav03.png" />
+<p>汽车贴膜</p></a></td>
+      <td><a href="#"><img src="images/images/ico_nav04.png" />
+<p>汽车贴膜</p></a></td>
+      <td><a href="#"><img src="images/images/ico_nav05.png" />
+<p>汽车贴膜</p></a></td>
+    </tr>
+    <tr>
+      <td><a href="#"><img src="images/images/ico_nav06.png" />
+<p>汽车贴膜</p></a></td>
+      <td><a href="#"><img src="images/images/ico_nav07.png" />
+<p>汽车贴膜</p></a></td>
+      <td><a href="#"><img src="images/images/ico_nav08.png" />
+<p>汽车贴膜</p></a></td>
+      <td><a href="#"><img src="images/images/ico_nav09.png" />
+<p>汽车贴膜</p></a></td>
+      <td style="border:none;"><a href="#"><p>更多项目</p>
+<p>敬请关注</p></a></td>
+    </tr>  
+  </table>
+  <div class="clear h30"></div>
+  <section class="indextit">
+    <h3>自驾游</h3>
+    <menu>
+      <a class="sel" href="#">昆明</a>
+      <a href="#">省内</a>
+      <a href="#">国内</a>
+    </menu>
+    <div class="clear"></div>
+  </section>
+  <div class="clear h10"></div>
+  <div class="index_tour">
+    <a class="a1" href="#"><img src="images/images/index_img06.png" width="230" height="341" /></a>
+    <a class="a2" href="#">
+      <p class="fs20">昆明-大理</p>
+      <p class="fs16">三天两夜自驾游</p>
+    </a>
+    <p class="pa10">我是文字说明的东西哦我是文字说明的东西哦我是文字说明的东西哦</p>
+    <p class="lh30 sc fs24 p1">￥2470<span class="c9 fs12 ml10">￥2999</span></p>
+    <p class="p2">关注人数：<span class="blue">15555</span>人</p>
+  </div>
+  <div class="index_tourlist">
+    <a class="block w100 mb5" href="#"><img class="w100" src="images/images/index_img06.png" height="230" /></a>
+    <a href="#">我是文字标题之类的我是文字标题之类的</a>
+    <p class="lh30 sc fs24 ta-r pt5">￥2700<span class="c9 fs12 ml10">￥2999</span></p>
+    <p>关注人数：<span class="blue">15555</span>人</p>
+  </div>
+  <div class="index_tourlist">
+    <a class="block w100 mb5" href="#"><img class="w100" src="images/images/index_img06.png" height="230" /></a>
+    <a href="#">我是文字标题之类的我是文字标题之类的</a>
+    <p class="lh30 sc fs24 ta-r pt5">￥2700<span class="c9 fs12 ml10">￥2999</span></p>
+    <p>关注人数：<span class="blue">15555</span>人</p>
+  </div>
+  <div class="index_tourlist">
+    <a class="block w100 mb5" href="#"><img class="w100" src="images/images/index_img06.png" height="230" /></a>
+    <a href="#">我是文字标题之类的我是文字标题之类的</a>
+    <p class="lh30 sc fs24 ta-r pt5">￥2700<span class="c9 fs12 ml10">￥2999</span></p>
+    <p>关注人数：<span class="blue">15555</span>人</p>
+  </div>
+  <div class="index_tourlist">
+    <a class="block w100 mb5" href="#"><img class="w100" src="images/images/index_img06.png" height="230" /></a>
+    <a href="#">我是文字标题之类的我是文字标题之类的</a>
+    <p class="lh30 sc fs24 ta-r pt5">￥2700<span class="c9 fs12 ml10">￥2999</span></p>
+    <p>关注人数：<span class="blue">15555</span>人</p>
+  </div>
+  
+  <div class="clear h30"></div>
+  <section class="index_botlist">
+    <h3>养车宝典</h3>
+    <a href="#">我是标题啥的就不说了哈</a>
+    <a href="#">我是标题啥的就不说了哈</a>
+    <a href="#">我是标题啥的就不说了哈</a>
+    <a href="#">我是标题啥的就不说了哈</a>
+    <a href="#">我是标题啥的就不说了哈</a>
+    <a href="#">我是标题啥的就不说了哈</a>
+    <a href="#">我是标题啥的就不说了哈</a>
+    <a href="#">我是标题啥的就不说了哈</a>
+    <a href="#">我是标题啥的就不说了哈</a>
+  </section>
+  <section class="index_botad01">
+    <a><img src="images/images/index_img02.png" width="570" height="375" /></a>
+  </section>
+  <section class="index_botad02">
+    <a><img src="images/images/index_img02.png" width="280" height="375" /></a>
+  </section>
+  
+  <div class="clear"></div> 
+</div><!--main END-->
+
+<div class="clear h50"></div>
+<div class="down">
+<section class="index_center">
+  <table>
+    <tr>
+      <td>
+        <a href="#"><img src="images/liebiao_39.png" />100％正品保障<br>
+        厂商审核      商品抽检</a>
+      </td>
+      <td>
+        <a href="images/hzd_39.png"><img src="images/liebiao_41.png" />100％品牌制造商<br>
+        品牌设计      厂价直销</a>
+      </td>
+      <td>
+        <a href="#"><img src="images/liebiao_44.png" />售后保障<br>
+        无忧退换      安装服务</a>
+      </td>
+      
+    </tr>
+  </table>
+</section><!--index_center END-->
+</div>
+<div class="down2">
+<div class="main">
+<ul style="height:30px;">
+<li><a href="#">关于商城</a></li>
+<li><a href="#">招商加盟</a></li>
+<li><a href="#">联系我们</a></li>
+<li><a href="#">服务条款</a></li>
+<li><a href="#">用户中心</a></li>
+<li><a href="#">支付方式</a></li>
+<li><a href="#">售后保障</a></li>
+<li><a href="#">帮助信息</a></li>
+<li><a href="#">网站地图</a></li>
+</ul>
+<p>
+友情链接： <span class="youqin"><a href="#">汽车之家</a></span><span class="youqin"><a href="#">光大银行</a></span><br />
+版权所有 车有同盟 © Copyright 2003 - 2015. cytm99.com. All Rights Reserved. 滇ICP备15000306号-1<br />
+云南省昆明市五华区教场西路6号 电话：400-666-5030 <br />
+          <span class="flr"><a title="云南网站建设" href="http://www.ynyes.com" target="_blank">网站建设</a>技术支持：<a title="云南网站建设" href="http://www.ynyes.com" target="_blank">昆明天度网络公司</a></span>
+
+</p>
+</div>
+</div>
+</body>
+</html>

@@ -51,15 +51,17 @@ var theForm = document.forms['form1'];
         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
       </ul>
+      <#--
       <div class="menu-list">
         <div class="rule-single-select single-select">
         <select name="roleId" onchange="javascript:setTimeout(__doPostBack('roleId',''), 0)" style="display: none;">
         	<option <#if !roleId??>selected="selected"</#if> value="">所有用户组</option>
         	<option <#if roleId?? && roleId==0>selected="selected"</#if> value="0">普通会员</option>
-        	<option <#if roleId?? && roleId==1>selected="selected"</#if> value="1">分销商</option>
+        	<option <#if roleId?? && roleId==1>selected="selected"</#if> value="1">同盟店</option>
         </select>
         </div>
       </div>
+      -->
     </div>
     <div class="r-list">
       <input name="keywords" type="text" class="keyword" value="${keywords!""}">
@@ -113,11 +115,12 @@ var theForm = document.forms['form1'];
                     </span>
                   </div>
                 </td>
-                <td><#if user.roleId?? && user.roleId==0>普通会员<#elseif user.roleId?? && user.roleId==1>分销商</#if></td>
+                <td><#if user.roleId?? && user.roleId==0>普通会员<#elseif user.roleId?? && user.roleId==1>同盟店</#if></td>
                 <td align="center">${user.email!""}</td>
                 <td align="center">${user.mobile!""}</td>
                 <td align="center">${user.lastLoginTime!""}</td>
-                <td align="center">${user.totalPoints!""}</td>
+                <td align="center">${user.totalPoints!""}                    
+                </td>
                 <td align="center"><#if user.statusId??><#if user.statusId==0>待审核<#elseif user.statusId==1>正常</#if></#if></td>
                 <td align="center">
                     <a href="/Verwalter/user/edit?id=${user.id}&roleId=${roleId!""}">修改</a> | 

@@ -104,14 +104,14 @@ public class TdUserService {
         repository.save(userList);
     }
     
-    public TdUser addNewUser(String upperUsername, String username, String password, String mobile, String email, String carCode)
+    public TdUser addNewUser(String username, String password, String mobile, String email, String carCode)
     {
         if (null == username || null == password || username.isEmpty() || password.isEmpty())
         {
             return null;
         }
         
-        if (null != repository.findByUsername(username))
+        if (null != repository.findByUsernameIgnoreCase(username))
         {
             return null;
         }
@@ -158,8 +158,6 @@ public class TdUserService {
         
         user.setTotalPoints(userPoint.getTotalPoint()); // 积分
         
-        user.setUpperUsername(upperUsername);
-        
         TdUserLevel level = tdUserLevelService.findByLevelIdAndIsEnableTrue(1L);
         
         if (null != level)
@@ -185,7 +183,7 @@ public class TdUserService {
             return null;
         }
         
-        TdUser user = repository.findByUsername(username);
+        TdUser user = repository.findByUsernameIgnoreCase(username);
         
         if (null == user)
         {
@@ -283,7 +281,7 @@ public class TdUserService {
             return null;
         }
         
-        return repository.findByUsername(username);
+        return repository.findByUsernameIgnoreCase(username);
     }
     
     public TdUser findByUsernameAndIdNot(String username, Long id)
@@ -296,16 +294,16 @@ public class TdUserService {
         return repository.findByUsernameAndIdNot(username, id);
     }
     
-    public Page<TdUser> findByUpperUsernameAndIsEnabled(String username, int page, int size)
+    public Page<TdUser> findByUpperDiySiteIdAndIsEnabled(Long upperDiySiteId, int page, int size)
     {
-        if (null == username)
+        if (null == upperDiySiteId)
         {
             return null;
         }
         
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByUpperUsernameAndStatusIdOrderByIdDesc(username, 1L, pageRequest);
+        return repository.findByUpperDiySiteIdAndStatusIdOrderByIdDesc(upperDiySiteId, 1L, pageRequest);
     }
    /**
     *  手机号查找
@@ -356,6 +354,20 @@ public class TdUserService {
     	}
     	return repository.findByAlipayUserId(alipayname);
 
+    }
+    
+    /**
+	 * @author lc
+	 * @注释：查找同盟店所属会员
+	 */
+    public Page<TdUser> findByShopIdAndSearch(Long shopId, String keywords, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByUpperDiySiteIdContainingOrderByIdDesc(shopId, keywords, pageRequest);
+    }
+    
+    public Page<TdUser> findByshopId(Long shopId, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByUpperDiySiteIdOrderByIdDesc(shopId, pageRequest);
     }
     /**
      * 查找

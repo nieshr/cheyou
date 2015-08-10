@@ -11,7 +11,6 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.w3c.dom.css.ElementCSSInlineStyle;
 
 import com.alipay.config.AlipayConfig;
 import com.alipay.util.AlipayNotify;
@@ -64,9 +62,11 @@ public class TdLoginController {
 			referer = "/";
 		}
 		/**
-		 * @author lc @注释：
+		 * @author lc 
+		 * @注释：同盟店登录
 		 */
-		TdUser tdUser = tdUserService.findByUsername(username);
+		String diysiteUsername = (String) req.getSession().getAttribute("diysiteUsername");
+		TdUser tdUser = tdUserService.findByUsername(diysiteUsername);
 		if (null != tdUser.getRoleId() && tdUser.getRoleId().equals(2L)) {
 			return "redirect:/user/diysite/order/list/0";
 		}
@@ -133,7 +133,7 @@ public class TdLoginController {
 				}
 			}
 			user = tdUserService.save(user);
-			request.getSession().setAttribute("username", user.getUsername());
+			
 
 			res.put("code", 0);
 
@@ -143,8 +143,10 @@ public class TdLoginController {
 			 */
 			if(null != user.getRoleId() && user.getRoleId().equals(2L)){
 				res.put("role", 2);
+				request.getSession().setAttribute("diysiteUsername", user.getUsername());
+				return res;
 			}
-
+			request.getSession().setAttribute("username", user.getUsername());
 			return res;
 		}
 		/**
@@ -180,7 +182,7 @@ public class TdLoginController {
 				}
 			}
 			user = tdUserService.save(user);
-			request.getSession().setAttribute("username", user.getUsername());
+			
 
 			res.put("code", 0);
 
@@ -190,8 +192,10 @@ public class TdLoginController {
 			 */
 			if (user.getRoleId() == 2L) {
 				res.put("role", 2);
+				request.getSession().setAttribute("diysiteUsername", user.getUsername());
+				return res;
 			}
-
+			request.getSession().setAttribute("username", user.getUsername());
 			return res;
 		} else { // 账号-手机都未通过验证，则用户不存在
 			res.put("msg", "不存在该用户");
@@ -229,7 +233,7 @@ public class TdLoginController {
 		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
 		if (null != user) {
 			
-			request.getSession().setAttribute("username", user.getUsername());
+			request.getSession().setAttribute("retrieve_username", user.getUsername());
             
 			res.put("code", 0);
 		}
@@ -243,7 +247,7 @@ public class TdLoginController {
 	@RequestMapping(value = "/login/retrieve_step2", method = RequestMethod.GET)
 	public String Step2(Integer errCode, HttpServletRequest req, ModelMap map){
 		tdCommonService.setHeader(map, req);
-		String username = (String) req.getSession().getAttribute("username");
+		String username = (String) req.getSession().getAttribute("retrieve_username");
 		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
 		
 		 if (null != errCode)
@@ -262,13 +266,15 @@ public class TdLoginController {
 	}
 	@RequestMapping(value = "/login/retrieve_step2", method = RequestMethod.POST)
 	public String Step2(String smsCode,HttpServletRequest req, ModelMap map){
-		
+		if (null == smsCode) {
+			return "redirect:/login/retrieve_step2?errCode=4";
+		}
 		String smsCodeSave = (String) req.getSession().getAttribute("SMSCODE");
 		if (!smsCodeSave.equalsIgnoreCase(smsCode)) {
 			return "redirect:/login/retrieve_step2?errCode=4";
 		}
-		String username = (String) req.getSession().getAttribute("username");
-		map.put("username", username);
+		String username = (String) req.getSession().getAttribute("retrieve_username");
+		map.put("retrieve_username", username);
 		tdCommonService.setHeader(map, req);
 		
 		return "/client/user_retrieve_step3";
@@ -276,12 +282,13 @@ public class TdLoginController {
 	
 	@RequestMapping(value = "/login/retrieve_step3", method = RequestMethod.POST)
 	public String Step3(String password, HttpServletRequest req, ModelMap map){
-		String username = (String) req.getSession().getAttribute("username");
+		String username = (String) req.getSession().getAttribute("retrieve_username");
 		TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
 		if (null != password) {
 			user.setPassword(password);
 			tdUserService.save(user);
 			tdCommonService.setHeader(map, req);
+			req.getSession().setAttribute("username", user.getUsername());
 			return "/client/user_retrieve_ok";
 		}
 		return "/client/error_404";
@@ -417,7 +424,7 @@ public class TdLoginController {
 
 			return "redirect:/";
 		} else {
-			user = tdUserService.addNewUser(null, alipayusername, "123456", null, null, null);
+			user = tdUserService.addNewUser(alipayusername, "123456", null, null, null);
 			/**
 			 * @author libiao
 			 * 判断新建账号为QQ还是支付宝
@@ -484,8 +491,10 @@ public class TdLoginController {
 
 		tdCommonService.setHeader(map, request);
 		try {
+			System.err.println("code-------"+code);
+			System.err.println("state-------"+state);
 			AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
-
+			System.err.println("accessTokenObj--------"+accessTokenObj);
 			String accessToken = null, openID = null;
 			long tokenExpireIn = 0L;
 
@@ -495,6 +504,8 @@ public class TdLoginController {
 				System.err.print("没有获取到响应参数");
 			} else {
 				accessToken = accessTokenObj.getAccessToken();
+				System.err.println("accessToken-------"+accessToken);
+				
 				tokenExpireIn = accessTokenObj.getExpireIn();
 
 				request.getSession().setAttribute("demo_access_token", accessToken);
@@ -503,12 +514,13 @@ public class TdLoginController {
 				// 利用获取到的accessToken 去获取当前用的openid -------- start
 				OpenID openIDObj = new OpenID(accessToken);
 				openID = openIDObj.getUserOpenID();
+				System.err.println("openID-----------"+openID);
 
 				//利用获取到的accessToken,openid 去获取用户在Qzone的昵称
 				UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
                 UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
                 if (userInfoBean.getRet() == 0) {
-                   map.addAttribute("nickName",userInfoBean.getNickname());
+                   map.put("nickName",userInfoBean.getNickname());
                 }
 				
 				//根据openID查找用户

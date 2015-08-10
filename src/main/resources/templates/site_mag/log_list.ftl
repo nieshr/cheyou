@@ -75,7 +75,7 @@ var theForm = document.forms['form1'];
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${item_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${item.id}">
+                    <input type="hidden" name="listId" value="${item.id?c}">
                 </td>
                 <td align="center">${item.username!""}</td>
                 <td align="center"><a href="/Verwalter/manager/log?action=${item.actionType}">${item.actionType!""}</a></td>

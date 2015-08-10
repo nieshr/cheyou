@@ -574,6 +574,10 @@ public class TdOrderController extends AbstractPaytypeController {
                     // 尾款
                     totalLeftPrice = goods.getGroupSaleTenPrice()
                             - goods.getGroupSalePrice();
+                    
+                    if (totalLeftPrice < 0) {
+                        totalLeftPrice = 0.0;
+                    }
 
                     // 数量
                     orderGoods.setQuantity(1L);
@@ -703,7 +707,7 @@ public class TdOrderController extends AbstractPaytypeController {
         }
 
         // 基本信息
-        tdOrder.setUsername(username);
+        tdOrder.setUsername(user.getUsername());
         tdOrder.setOrderTime(current);
 
         // 订单号
@@ -754,6 +758,13 @@ public class TdOrderController extends AbstractPaytypeController {
             if (null != shop) {
                 tdOrder.setShopId(shop.getId());
                 tdOrder.setShopTitle(shop.getTitle());
+                
+                // 用户归属
+                if (null != user.getUpperDiySiteId())
+                {
+                    user.setUpperDiySiteId(shop.getId());
+                    user = tdUserService.save(user);
+                }
             }
         }
         
@@ -790,6 +801,13 @@ public class TdOrderController extends AbstractPaytypeController {
             
             // 添加积分使用记录
             if (null != user) {
+                if (null == user.getTotalPoints())
+                {
+                    user.setTotalPoints(0L);
+                    
+                    user = tdUserService.save(user);
+                }
+                
                 if (pointUse.compareTo(0L) >= 0
                         && null != user.getTotalPoints()
                         && user.getTotalPoints().compareTo(pointUse) >= 0) {
@@ -1291,7 +1309,7 @@ public class TdOrderController extends AbstractPaytypeController {
         }
 
         // 基本信息
-        tdOrder.setUsername(username);
+        tdOrder.setUsername(user.getUsername());
         tdOrder.setOrderTime(current);
 
         // 订单号
@@ -1342,6 +1360,13 @@ public class TdOrderController extends AbstractPaytypeController {
             if (null != shop) {
                 tdOrder.setShopId(shop.getId());
                 tdOrder.setShopTitle(shop.getTitle());
+                
+                // 用户归属
+                if (null != user.getUpperDiySiteId())
+                {
+                    user.setUpperDiySiteId(shop.getId());
+                    user = tdUserService.save(user);
+                }
             }
         }
 
@@ -1398,6 +1423,13 @@ public class TdOrderController extends AbstractPaytypeController {
 
         // 添加积分使用记录
         if (null != user) {
+            if (null == user.getTotalPoints())
+            {
+                user.setTotalPoints(0L);
+                
+                user = tdUserService.save(user);
+            }
+            
             if (pointUse.compareTo(0L) >= 0 && null != user.getTotalPoints()
                     && user.getTotalPoints().compareTo(pointUse) >= 0) {
                 TdUserPoint userPoint = new TdUserPoint();
@@ -1592,7 +1624,7 @@ public class TdOrderController extends AbstractPaytypeController {
             return "/client/error_404";
         }
 
-        String amount = order.getTotalPrice().toString();
+        String amount = order.getTotalLeftPrice().toString();
         req.setAttribute("totalPrice", amount);
 
         String payForm = "";
@@ -1845,7 +1877,7 @@ public class TdOrderController extends AbstractPaytypeController {
             return result;
         }
 
-        if (order.getStatusId() != 2l || order.getStatusId() != 3l) {
+        if (!order.getStatusId().equals(2L) && !order.getStatusId().equals(3L)) {
             result.put("message", "订单不能修改支付方式！");
             return result;
         }
@@ -1906,31 +1938,42 @@ public class TdOrderController extends AbstractPaytypeController {
         // 同盟店
         TdDiySite tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
 
-        // 待服务
-        tdOrder.setStatusId(4L);
-
-        tdOrder = tdOrderService.save(tdOrder);
+        if (tdOrder.getStatusId().equals(2L) && !tdOrder.getTotalLeftPrice().equals(0))
+        {
+            // 待付尾款
+            tdOrder.setStatusId(3L);
+            tdOrder = tdOrderService.save(tdOrder);
+            return;
+        }
+        else
+        {
+            // 待服务
+            tdOrder.setStatusId(4L);
+            tdOrder = tdOrderService.save(tdOrder);
+        }
 
         // 给用户发送短信
-        if (null != tdUser && null != tdUser.getMobile()) {
+        if (null != tdUser) {
             SMSUtil.send(
-                    tdUser.getMobile(),
+                    tdOrder.getShippingPhone(),
                     "29040",
                     new String[] {
                             tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
-                            tdOrder.getOrderNumber().substring(
-                                    tdOrder.getOrderNumber().length() - 4) });
+                            tdOrder.getOrderNumber().substring(tdOrder.getOrderNumber().length() - 4)});
+            System.out.println("---Sharon---: 向用户"+tdOrder.getShippingPhone()+"发送短信");
         }
 
         // 给商户发短信
         if (null != tdShop && null != tdUser && null != tdShop.getMobile()) {
-            SMSUtil.send(tdShop.getMobile(), "29039",
+            SMSUtil.send(tdShop.getMobile(), 
+                    "29039",
                     new String[] { tdShop.getTitle(), tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
                             tdOrder.getAppointmentTime().toString() });
+            System.out.println("---Sharon---: 向同盟店"+tdShop.getMobile()+"发送短信");
         }
-
+        
         List<TdOrderGoods> tdOrderGoodsList = tdOrder.getOrderGoodsList();
 
         Long totalPoints = 0L;

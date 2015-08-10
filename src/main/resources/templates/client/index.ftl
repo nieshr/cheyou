@@ -1222,7 +1222,7 @@ function timer23${item_index}()
     <div class="clear h30"></div>
     
     <section class="indextit">
-        <h3>百人团购</h3>
+        <h3>十人团购</h3>
         <a class="a1" href="javascript:;">团购细则</a>
         <menu id="tuan-menu">
             <a class="sel" href="javascript:;" onmouseenter="javascript:tuanPageChang(0);">本期团购</a>
@@ -1243,8 +1243,8 @@ function timer23${item_index}()
                         <p class="fs12 blue" style="overflow: hidden;height: 20px;">${item.subTitle!''}</p>
                         <div class="team_men">
                             <dl>
-                                <dt></dt>
-                                <dd class="sel"></dd>
+                                <dt style="width: <#if item.groupSaleSoldNumber??><#if item.groupSaleSoldNumber/10 gt 1>100<#else>${item.groupSaleSoldNumber * 10}</#if><#else>0</#if>%;"></dt>
+                                <#--<dd class="sel"></dd>-->
                                 <dd style="left:66%;"></dd>
                             </dl>
                             <p>
@@ -1253,7 +1253,7 @@ function timer23${item_index}()
                             </p>
                             <p>
                                 <span><#if item.groupSaleSevenPrice??>￥${item.groupSaleSevenPrice?string(0.00)}</#if></span>
-                                七人团
+                                五人团
                             </p>
                             <p>
                                 <span><#if item.groupSaleTenPrice??>￥${item.groupSaleTenPrice?string(0.00)}</#if></span>
@@ -1262,8 +1262,8 @@ function timer23${item_index}()
                             <div class="clear"></div>
                         </div>
                         <p class="p1">
-                            预付定金:<#if item.groupSaleHundredPrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
-                            <a href="/cart/init?id=1&qiang=<#if item.isGroupSaleHundred?? && item.isGroupSaleHundred>100<#else>3</#if>">立即参加</a>
+                            预付定金:<#if item.groupSalePrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
+                            <a href="/order/buy/tentuan?gid=${item.id}">立即参加</a>
                         </p>
                     </div>
                 </#list>
@@ -1280,8 +1280,7 @@ function timer23${item_index}()
                         <p class="fs12 blue" style="overflow: hidden;height: 20px;">${item.subTitle!''}</p>
                         <div class="team_men">
                             <dl>
-                                <dt></dt>
-                                <dd class="sel"></dd>
+                                <dt style="width: 0%"></dt>
                                 <dd style="left:66%;"></dd>
                             </dl>
                             <p>
@@ -1290,7 +1289,7 @@ function timer23${item_index}()
                             </p>
                             <p>
                                 <span><#if item.groupSaleSevenPrice??>￥${item.groupSaleSevenPrice?string(0.00)}</#if></span>
-                                七人团
+                                五人团
                             </p>
                             <p>
                                 <span><#if item.groupSaleTenPrice??>￥${item.groupSaleTenPrice?string(0.00)}</#if></span>
@@ -1299,8 +1298,8 @@ function timer23${item_index}()
                             <div class="clear"></div>
                         </div>
                         <p class="p1">
-                            预付定金:<#if item.groupSaleHundredPrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
-                            <a href="/cart/init?id=1&qiang=<#if item.isGroupSaleHundred?? && item.isGroupSaleHundred>100<#else>3</#if>">立即参加</a>
+                            预付定金:<#if item.groupSalePrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
+                            <a href="/goods/${item.id}?qiang=3">查看详情</a>
                         </p>
                     </div>
                 </#list>
@@ -1317,8 +1316,7 @@ function timer23${item_index}()
                         <p class="fs12 blue" style="overflow: hidden;height: 20px;">${item.subTitle!''}</p>
                         <div class="team_men">
                             <dl>
-                                <dt></dt>
-                                <dd class="sel"></dd>
+                                <dt style="width: 100%"></dt>
                                 <dd style="left:66%;"></dd>
                             </dl>
                             <p>
@@ -1327,7 +1325,7 @@ function timer23${item_index}()
                             </p>
                             <p>
                                 <span><#if item.groupSaleSevenPrice??>￥${item.groupSaleSevenPrice?string(0.00)}</#if></span>
-                                七人团
+                                五人团
                             </p>
                             <p>
                                 <span><#if item.groupSaleTenPrice??>￥${item.groupSaleTenPrice?string(0.00)}</#if></span>
@@ -1336,8 +1334,8 @@ function timer23${item_index}()
                             <div class="clear"></div>
                         </div>
                         <p class="p1">
-                            预付定金:<#if item.groupSaleHundredPrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
-                            <a href="/cart/init?id=1&qiang=<#if item.isGroupSaleHundred?? && item.isGroupSaleHundred>100<#else>3</#if>">立即参加</a>
+                            预付定金:<#if item.groupSalePrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
+                            <a href="/goods/${item.id}?qiang=3">查看详情</a>
                         </p>
                     </div>
                 </#list>

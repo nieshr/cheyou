@@ -209,12 +209,28 @@
         <#assign totalQuantity=0>
         <#assign totalPrice=0>
         <#if buy_goods_list??>
+            <table class="car_list">
+            <tr>
+                <th colspan="2">商品信息</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>合计</th>
+            </tr>
             <#list buy_goods_list as sg>
                 <#assign totalQuantity=totalQuantity+sg.quantity>
                 <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
-                <p>${sg.goodsTitle!''} * ${sg.quantity!''} = ${sg.price}</p>
+                <tr>
+                    <td width="110"><a href="/goods/${sg.goodsId}?qiang=1"><img src="${sg.goodsCoverImageUri!''}" width="100" height="100"/></a></td>
+                    <td width="800" style="text-align:left;"><a href="/goods/${sg.goodsId}">${sg.goodsTitle!''}</a></td>
+                    <td width="150" style="text-align:center;"><#if sg.price??>${sg.price?string("0.00")}</#if></td>
+                    <td width="150" style="text-align:center;">×${sg.quantity!''}</td>
+                    <td class="red ml100">￥<#if sg.price?? && sg.quantity??>${(sg.price * sg.quantity)?string("0.00")}</#if></td>
+                </tr>
             </#list>
+            </table>
         </#if>
+        
+        <div class="clear h20"></div>
       
         <div class="car_btn">
             <a class="ml20 fc" href="javascript:window.history.back();">返回上一页</a>

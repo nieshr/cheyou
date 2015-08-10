@@ -61,11 +61,11 @@ public class TdOrder {
     @Column
     private String postalCode;
     
-    // 支付方式
+    // 支付方式(线下同盟店)
     @Column
     private Long shopId;
     
-    // 支付方式名称
+    // 支付方式名称(同盟店名称)
     @Column
     private String shopTitle;
     

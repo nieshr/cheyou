@@ -1,7 +1,5 @@
 package com.ynyes.cheyou.repository;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -35,11 +33,11 @@ public interface TdUserRepo extends
     
     TdUser findByUsernameAndStatusIdOrUsernameAndStatusId(String username, Long statusId, String username1, Long statusId1);
     
-    TdUser findByUsername(String username);
+    TdUser findByUsernameIgnoreCase(String username);
     
     TdUser findByUsernameAndIdNot(String username, Long id);
     
-    Page<TdUser> findByUpperUsernameAndStatusIdOrderByIdDesc(String upperUsername, Long statusId, Pageable page);
+    Page<TdUser> findByUpperDiySiteIdAndStatusIdOrderByIdDesc(Long upperDiySiteId, Long statusId, Pageable page);
     
     TdUser findByMobileAndStatusIdOrMobileAndStatusId(String mobile,Long statusId,String mobile1,Long statusId1);		//手机号已验证查找
     
@@ -49,5 +47,11 @@ public interface TdUserRepo extends
     TdUser findByQqUserId(String qqUserId);
 
     TdUser findByAlipayUserId(String alipay_userid);	//支付宝用户名查找
-
+    
+    /**
+	 * @author lc
+	 * @注释：查找同盟店所属会员
+	 */
+    Page<TdUser> findByUpperDiySiteIdContainingOrderByIdDesc(Long shopId, String keyword, Pageable page);
+    Page<TdUser> findByUpperDiySiteIdOrderByIdDesc(Long shopId, Pageable page);
 }

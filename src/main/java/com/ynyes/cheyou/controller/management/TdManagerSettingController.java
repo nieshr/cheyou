@@ -1,7 +1,5 @@
 package com.ynyes.cheyou.controller.management;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ynyes.cheyou.entity.TdDemand;
 import com.ynyes.cheyou.entity.TdServiceItem;
 import com.ynyes.cheyou.entity.TdSetting;
-import com.ynyes.cheyou.entity.TdShippingAddress;
-import com.ynyes.cheyou.entity.TdUser;
-import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.entity.TdUserSuggestion;
 import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdManagerLogService;

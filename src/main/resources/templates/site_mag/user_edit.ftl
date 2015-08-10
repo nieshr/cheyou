@@ -94,26 +94,30 @@ $(function () {
 
 <!--基本资料-->
 <div class="tab-content">
+    <#--
   <dl>
     <dt>用户类型</dt>
     <dd>
       <div class="rule-multi-radio multi-radio">
         <span>
-            <input type="radio" name="roleId" value="0" datatype="n" <#if user?? && user.roleId?? && user.roleId==0>checked="checked"</#if>><label>普通用户</label>
-            <input type="radio" name="roleId" value="1" datatype="n" <#if user?? && user.roleId?? && user.roleId==1>checked="checked"</#if>><label>分销商</label>
+            <input type="radio" name="roleId" value="0" datatype="n" <#if !user?? || user.roleId?? && user.roleId==0>checked="checked"</#if>><label>普通用户</label>
+            <input type="radio" name="roleId" value="1" datatype="n" <#if user?? && user.roleId?? && user.roleId==1>checked="checked"</#if>><label>同盟店</label>
         </span>
       </div>
       <span class="Validform_checktip"></span>
     </dd>
   </dl>
+    -->
   <dl>
     <dt>用户状态</dt>
     <dd>
       <div class="rule-multi-radio">
         <span id="rblStatus">
+            <#--
             <input type="radio" name="statusId" value="0" datatype="n" <#if user?? && user.statusId?? && user.statusId==0>checked="checked"</#if>>
             <label>待审核</label>
-            <input type="radio" name="statusId" value="1" datatype="n" <#if user?? && user.statusId?? && user.statusId==1>checked="checked"</#if>>
+            -->
+            <input type="radio" name="statusId" value="1" datatype="n" <#if !user?? || user.statusId?? && user.statusId==1>checked="checked"</#if>>
             <label>正常</label>
             <input type="radio" name="statusId" value="2" datatype="n" <#if user?? && user.statusId?? && user.statusId==2>checked="checked"</#if>>
             <label>禁用</label>
@@ -133,6 +137,24 @@ $(function () {
             <span class="Validform_checktip">
         </span></dd>
     </dl>
+    <!--lichong -->
+  <dl>
+    <dt>用户粮草</dt>
+    <dd><span><#if user??>${user.totalPoints!"0"}</#if></span></dd>
+  </dl>
+  <dl>
+    <dt>修改用户粮草</dt>
+    <dd>
+        <input name="totalPoints" type="text" class="input ">
+    </dd>
+  </dl>
+  <dl>
+    <dt>修改备注</dt>
+    <dd>       
+        <textarea name="totalPointsRemarks" rows="2" cols="20" class="input normal"></textarea>
+        <span class="Validform_checktip">*用户粮草修改备注</span>
+    </dd>
+  </dl>
   <dl>
     <dt>真实姓名</dt>
     <dd><input name="realName" type="text" value="<#if user??>${user.realName!""}</#if>" class="input normal"></dd>
@@ -208,10 +230,7 @@ $(function () {
     <dt>用户等级名称</dt>
     <dd><span><#if user??>${user.userLevelTitle!""}</#if></span></dd>
   </dl>
-  <dl>
-    <dt>用户粮草</dt>
-    <dd><span><#if user??>${user.totalPoints!""}</#if></span></dd>
-  </dl>
+ 
   <dl>
     <dt>咨询总数</dt>
     <dd><span><#if user??>${user.totalConsults!""}</#if></span></dd>

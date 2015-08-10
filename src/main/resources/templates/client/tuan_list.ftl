@@ -62,6 +62,7 @@ $(document).ready(function(){
 <#include "/client/common_header.ftl" />
 
 <div class="main">
+    <#--
     <section class="team_tit">
         <img class="tit" src="/client/images/tg_tit.png" />
         <div class="time">
@@ -69,7 +70,19 @@ $(document).ready(function(){
         </div>
         <a class="a1" href="/promotion/tuan?type=ongoing"><i></i>下期预告</a>
         <a class="a1 a2" href="/promotion/tuan?type=passed"><i></i>往期回顾</a>
-        <#-- <a class="a3" href="#">团购细则</a> -->
+    </section>
+    -->
+    <section class="team_tit">
+        <img class="tit" src="/client/images/tg_tit.png">
+        <div class="time <#if type??>outtime</#if>">
+          <a href="/promotion/tuan">本期团购</a>
+        </div>
+        <div class="time <#if !type?? || type="passed">outtime</#if>" style="left:325px;">
+          <a href="/promotion/tuan?type=ongoing">下期预告</a>
+        </div>
+        <div class="time <#if !type?? || type="ongoing">outtime</#if>" style="left:500px;">
+          <a href="/promotion/tuan?type=passed">往期回顾</a>
+        </div>
     </section>
   
     <div class="clear h40"></div>
@@ -113,19 +126,22 @@ function timer${item_index}()
 }
         </script>
             <section class="team_ad">
+                <#if type?? && type=="passed">
+                    <i class="yiyuanjieshu"></i>
+                <#elseif type?? && type="ongoing">
+                    <i class="yiyuanjijiang"></i>
+                </#if>
                 <a class="fl" href="/goods/${item.id!''}?qiang=<#if item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 3>3<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 7>7<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber gt 6>10</#if>">
                     <img src="${item.groupSaleImage!''}" height="392" width="732" />
                 </a>
                 <div class="team_info">
                     <p class="ta-r"><img src="/client/images/tg_top.png" /></p>
-                    <a class="fs20 block pl15 pt5" href="/goods/${item.id!''}?qiang=<#if item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 3>3<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 7>7<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber gt 6>10</#if>">${item.title!''}</a>
+                    <a class="fs20 block pl15 pt5" href="/goods/${item.id?c}?qiang=<#if item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 3>3<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 7>7<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber gt 6>10</#if>">${item.title!''}</a>
                     <p class="red pt10 pl15 fs16">${item.subTitle!''}</p>
                     <p id="timeLeft${item_index}" class="p1 mb20">剩余时间：</p>
                     <div class="team_men fl">
                         <dl>
-                            <dt></dt>
-                            <dd class="sel"></dd>
-                            <dd style="left:66%;"></dd>
+                            <dt style="width: <#if item.groupSaleSoldNumber??><#if item.groupSaleSoldNumber/10 gt 1>100<#else>${item.groupSaleSoldNumber * 10}</#if><#else>0</#if>%;"></dt>
                         </dl>
                         <p>
                             <span>￥<#if item.groupSaleThreePrice??>${item.groupSaleThreePrice?string("0.00")}</#if></span>
@@ -133,7 +149,7 @@ function timer${item_index}()
                         </p>
                         <p>
                             <span>￥<#if item.groupSaleSevenPrice??>${item.groupSaleSevenPrice?string("0.00")}</#if></span>
-                            七人团
+                            五人团
                         </p>
                         <p>
                             <span>￥<#if item.groupSaleTenPrice??>${item.groupSaleTenPrice?string("0.00")}</#if></span>
@@ -151,7 +167,9 @@ function timer${item_index}()
                     <p class="ml20 pt20 c3 fs16">市场价：<span class="unl-th">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span></p>
                     <p class="team_red">
                         <span>预付定金：￥<#if item.groupSalePrice??>${item.groupSalePrice?string("0.00")}</#if></span>
-                        <a href="/cart/init?id=${item.id}&qiang=<#if item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 3>3<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 7>7<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber gt 6>10</#if>">立即参团</a>
+                        <#if !type??>
+                            <a href="/order/buy/tentuan?id=${item.id}">立即参团</a>
+                        </#if>
                     </p>
                 </div>
                 <div class="clear"></div>

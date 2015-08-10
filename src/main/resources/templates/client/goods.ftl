@@ -467,7 +467,7 @@ function checkTime(i)
             </#if>
             <div class="buy_share">
               <a class="buy_share_a" href="javascript:addCollect(${goods.id});">收藏商品</a>
-              <p>关注人数：<span class="red">${total_collects!'0'}</span>人</p>
+              <p>关注人数：<span class="red">${goods.totalCollects!'0'}</span>人</p>
             </div>
             <div class="clear"></div>
           </td>

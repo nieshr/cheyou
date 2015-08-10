@@ -226,7 +226,7 @@ public class TdTouchRegController {
             return "redirect:/touch/reg?errCode=2";
         }
         
-        user = tdUserService.addNewUser(null, username, password, null, null, null);
+        user = tdUserService.addNewUser(username, password, null, null, null);
         
         user = tdUserService.save(user);
         

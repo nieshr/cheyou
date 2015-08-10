@@ -25,7 +25,7 @@ public interface TdCartGoodsRepo extends
     
     List<TdCartGoods> findByGoodsIdAndUsername(Long goodsId, String username);
     
-    List<TdCartGoods> findByUsername(String username);
+    List<TdCartGoods> findByUsernameOrderByIdDesc(String username);
     
-    List<TdCartGoods> findByUsernameAndIsSelectedTrue(String username);
+    List<TdCartGoods> findByUsernameAndIsSelectedTrueOrderByIdDesc(String username);
 }
