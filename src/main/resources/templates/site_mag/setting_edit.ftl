@@ -233,12 +233,34 @@ $(function () {
             </dd>
         </dl>
         <dl>
-            <dt>在线客服QQ</dt>
+            <dt>一号客服QQ</dt>
             <dd>
-                <input name="qq" type="text" value="<#if setting??>${setting.qq!""}</#if>" class="input normal" datatype="n0-100" sucmsg=" ">
+                <input name="qq1" type="text" value="<#if setting??>${setting.qq1!""}</#if>" class="input normal" datatype="n0-100" sucmsg=" ">
                 <span class="Validform_checktip"></span>
             </dd>
         </dl>
+         <dl>
+            <dt>二号客服QQ</dt>
+            <dd>
+                <input name="qq2" type="text" value="<#if setting??>${setting.qq2!""}</#if>" class="input normal" datatype="n0-100" sucmsg=" ">
+                <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
+         <dl>
+            <dt>三号客服QQ</dt>
+            <dd>
+                <input name="qq3" type="text" value="<#if setting??>${setting.qq3!""}</#if>" class="input normal" datatype="n0-100" sucmsg=" ">
+                <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
+         <dl>
+            <dt>四号客服QQ</dt>
+            <dd>
+                <input name="qq4" type="text" value="<#if setting??>${setting.qq4!""}</#if>" class="input normal" datatype="n0-100" sucmsg=" ">
+                <span class="Validform_checktip"></span>
+            </dd>
+        </dl>
+        
         <dl>
             <dt>管理员邮箱</dt>
             <dd>

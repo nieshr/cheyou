@@ -34,6 +34,7 @@ textarea.input { width: 98%; height:50px; color:#666;}
 <#-- 投诉 -->
 <script>
 $(document).ready(function(){
+    floatBoxQQ();
     $("#suggestionForm1").Validform({
         tiptype: 3,
         ajaxPost:true,
@@ -270,10 +271,34 @@ function delItem(id)
 
 
 
-<aside class="floatbox">
-    <a href="javascript:;" title="微信客服"><img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服" /><span><img src="${site.wxQrCode!''}" width="84" height="84"/></span></a>
-    <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq!''}&site=qq&menu=yes" target="_blank" title="在线咨询"><img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询" /></a>
-    <a href="javascript:;" title="新浪微博"><img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" /><span><img src="${site.weiboQrCode!''}" width="84" height="84"/></span></a>
-    <a href="javascript:showSuggestion();" title="投诉"><img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线"/></a>
-    <a href="javascript:move();" title="到顶部"><img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" /></a>
+<aside class="floatbox" id="floatbox">
+    <a class="a0" href="javascript:;" title="微信客服">
+        <img src="/client/images/float_ico01.png" width="42" height="42" alt="微信客服" />
+        <span>
+            <img src="${site.wxQrCode!''}" width="84" height="84"/>
+        </span>
+    </a>
+    
+    <a href="javascript:;" title="在线咨询" id="floatqq"><img src="/client/images/float_ico02.png" width="42" height="42" alt="在线咨询" /></a>
+    
+    <a class="a0" href="javascript:;" title="新浪微博">
+        <img src="/client/images/float_ico03.png" width="42" height="42" alt="新浪微博" />
+        <span>
+            <img src="${site.weiboQrCode!''}" width="84" height="84"/>
+        </span>
+    </a>
+    <a class="a0" class="a0" href="javascript:showSuggestion();" title="投诉">
+        <img src="/client/images/float_ico04.png" width="42" height="42" alt="服务热线"/>
+    </a>
+    <a class="a0" href="javascript:move();" title="到顶部">
+        <img src="/client/images/float_ico05.png" width="42" height="42" alt="到顶部" />
+    </a>
+    
+    <div class="floatboxlist" id="floatboxlist">
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq1!''}&site=qq&menu=yes">联系客户1号</a>
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq2!''}&site=qq&menu=yes">联系客户2号</a>
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq3!''}&site=qq&menu=yes">联系客户3号</a>
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq4!''}&site=qq&menu=yes">联系客户4号</a>
+  </div>
+    
 </aside>

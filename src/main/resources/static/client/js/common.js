@@ -467,3 +467,18 @@ function productBoxWidth(_name){
 	}	
 }
 
+function floatBoxQQ(){
+	var _box = $("#floatbox");
+	var _obj = $("#floatqq");
+	var _menu = $("#floatboxlist");
+	_obj.hover(function(){
+		_menu.fadeIn(200);
+		});
+	_box.find(".a0").hover(function(){
+		_menu.fadeOut(200);
+		});
+	_box.mouseleave(function(){
+		_menu.fadeOut(200);
+		});
+}
+

@@ -49,9 +49,18 @@ public class TdSetting {
     @Column
     private String fax;
     
-    // 在线客服QQ
+    // 客服QQ
     @Column
-    private String qq;
+    private String qq1;
+    
+    @Column
+    private String qq2;
+    
+    @Column
+    private String qq3;
+    
+    @Column
+    private String qq4;
     
     // 管理员邮箱
     @Column
@@ -185,7 +194,40 @@ public class TdSetting {
         this.domainName = domainName;
     }
 
-    public String getLogoUri() {
+    
+    public String getQq1() {
+		return qq1;
+	}
+
+	public void setQq1(String qq1) {
+		this.qq1 = qq1;
+	}
+
+	public String getQq2() {
+		return qq2;
+	}
+
+	public void setQq2(String qq2) {
+		this.qq2 = qq2;
+	}
+
+	public String getQq3() {
+		return qq3;
+	}
+
+	public void setQq3(String qq3) {
+		this.qq3 = qq3;
+	}
+
+	public String getQq4() {
+		return qq4;
+	}
+
+	public void setQq4(String qq4) {
+		this.qq4 = qq4;
+	}
+
+	public String getLogoUri() {
         return logoUri;
     }
 
@@ -223,14 +265,6 @@ public class TdSetting {
 
     public void setFax(String fax) {
         this.fax = fax;
-    }
-
-    public String getQq() {
-        return qq;
-    }
-
-    public void setQq(String qq) {
-        this.qq = qq;
     }
 
     public String getAdminEmail() {

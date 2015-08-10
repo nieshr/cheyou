@@ -1,5 +1,6 @@
 package com.ynyes.cheyou.controller.front;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -177,8 +178,23 @@ public class TdCartController {
 
         List<TdCartGoods> resList = tdCartGoodsService.findByUsername(username);
         
+        /*  添加gift  mdj 2015-8-7 09:57:28*/
+        List<TdGoods> tdGoodsList = new ArrayList<>();
+        for (TdCartGoods tdCartGoods : resList) 
+        { 
+			TdGoods tdGoods = tdGoodService.findById(tdCartGoods.getGoodsId());
+			List<TdGoodsGift> tdGoodGiftUserList = tdGoods.getGiftList();
+			if (tdGoodGiftUserList != null && tdGoodGiftUserList.size()>=1)
+			{
+				tdGoodsList.add(tdGoods);
+			}
+		}
+        if (tdGoodsList != null && tdGoodsList.size()>=1)
+        {
+        	map.addAttribute("goods_list",tdGoodsList);
+		}
         map.addAttribute("cart_goods_list", tdCartGoodsService.updateGoodsInfo(resList));
-
+        
         tdCommonService.setHeader(map, req);
 
         if (null == resList || resList.size() == 0)
