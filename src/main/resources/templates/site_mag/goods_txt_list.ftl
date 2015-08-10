@@ -183,7 +183,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <input type="hidden" name="listId" id="listId" value="${content.id}">
             </td>
             <td>${content.id!''}</td>
-            <td><a href="/Verwalter/goods/edit?__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></td>
+            <td><a href="/Verwalter/goods/edit?id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></td>
             <td>
                 <#if category_list?? && content.categoryId??>
                     <#list category_list as cat>

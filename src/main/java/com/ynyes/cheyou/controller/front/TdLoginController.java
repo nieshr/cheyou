@@ -66,7 +66,9 @@ public class TdLoginController {
 		 * @注释：同盟店登录
 		 */
 		String diysiteUsername = (String) req.getSession().getAttribute("diysiteUsername");
+		
 		TdUser tdUser = tdUserService.findByUsername(diysiteUsername);
+		
 		if (null != tdUser.getRoleId() && tdUser.getRoleId().equals(2L)) {
 			return "redirect:/user/diysite/order/list/0";
 		}

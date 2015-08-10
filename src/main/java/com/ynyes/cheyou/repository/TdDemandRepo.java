@@ -1,6 +1,7 @@
 package com.ynyes.cheyou.repository;
 
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
