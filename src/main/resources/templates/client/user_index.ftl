@@ -84,7 +84,7 @@ DD_belatedPNG.fix('.,img,background');
                         <td align="left"  colspan="2">
                             <#if order.orderGoodsList??>
                                 <#list order.orderGoodsList as og>
-                                    <a href="/goods/${og.goodsId}"><img src="${og.goodsCoverImageUri!''}" alt="${og.goodsTitle!''}" width="50" align="left" /></a>
+                                    <a href="/goods/${og.goodsId}"><img src="${og.goodsCoverImageUri!''}" alt="${og.goodsTitle!''}" width="50" height="50" align="left" /></a>
                                 </#list>
                             </#if>
                         </td>
