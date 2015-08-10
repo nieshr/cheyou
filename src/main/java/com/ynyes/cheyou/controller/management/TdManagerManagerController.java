@@ -203,7 +203,6 @@ public class TdManagerManagerController {
                         {
                             map.addAttribute("level_" + i + j + "_menu_list", level1MenuList);
                         }
-                        
                     }
                 }
                 
