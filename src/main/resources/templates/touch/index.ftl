@@ -48,7 +48,7 @@ $(document).ready(function(){
 
 function timer${item_index}()
 {
-<#if item.isFlashSale && item.flashSaleStartTime < .now && item.flashSaleStopTime gt .now>
+    <#if item.isFlashSale && item.flashSaleStartTime < .now && item.flashSaleStopTime gt .now>
     var ts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
                 parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
                 ${item.flashSaleStopTime?string("dd")}, 
@@ -107,7 +107,7 @@ function timer${item_index}()
     </#list>
 </#if>
 <!--
-   -----------------------------------END------------------------------ 
+-----------------------------------END------------------------------ 
 -->
 
 
@@ -141,11 +141,11 @@ function timer${item_index}()
 </section><!--我是banner-->
 <section class="indexnav">
   <nav class="main">
-    <#if top_category_list??>
-        <#list top_category_list as item>
-            <#if item_index < 8>
+    <#if navi_item_list??>
+        <#list navi_item_list as item>
+            <#if item_index gt 0 && item_index < 9>
                 <li>
-                  <a href="/touch/list/${item.id}"><img src="${item.imgUrl!''}" /><p>${item.title!''}</p></a>
+                  <a href="/touch/<#if item.linkUri!="/">${item.linkUri}</#if>"><img src="${item.iconUri!''}" /><p>${item.title!''}</p></a>
                 </li>
             </#if>
         </#list>
@@ -186,20 +186,10 @@ function timer${item_index}()
 
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">
-    <tr>  
-      <td rowspan="2" width="35%" style="border:none;">
-        <#if touch_miao_ad_list??>
-            <#list touch_miao_ad_list as item>
-                <a href="${item.linkUri!''}" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if>>
-                  <img src="${item.fileUri!''}" />
-                </a>
-                <#break>
-            </#list>
-        </#if>
-      </td>     
+    <tr>   
         <#if miao_cur_page??>
             <#list miao_cur_page.content as item>
-                <#if item_index lt 2>
+                <#if item_index < 3>
                     <td>
                         <a href="/touch/goods/${item.id}?qiang=1">
                           <p class="fs08" >${item.title!''}</p>
@@ -216,7 +206,7 @@ function timer${item_index}()
     <tr>
         <#if miao_cur_page??>
             <#list miao_cur_page.content as item>
-                <#if item_index gt 1 && item_index < 4>
+                <#if item_index gt 2 && item_index < 6>
                     <td>
                         <a href="/touch/goods/${item.id}?qiang=1">
                           <p class="fs08" >${item.title!''}</p>
@@ -233,15 +223,15 @@ function timer${item_index}()
   </table>
 </section>
 
-<h3 class="indextit mainbox"><span>百人团购</span><a href="/touch/promotion/tuan">+更多</a></h3>
+<h3 class="indextit mainbox"><span>十人团购</span><a href="/touch/promotion/tuan">+更多</a></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">
     <tr>  
       <#if tuan_cur_page??>
         <#list tuan_cur_page.content as item>
-            <#if item_index lt 2>
+            <#if item_index lt 3>
                 <td style="width:30%;">
-                    <a href="/touch/goods/${item.id}?qiang=1">
+                    <a href="/touch/goods/${item.id}?qiang=3">
                       <p class="fs08">${item.title!''}</p>
                       <p class="fs07 c9">${item.subTitle!''}</p>
                       <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
@@ -252,25 +242,14 @@ function timer${item_index}()
         </#list>
       </#if>
 
-      <td rowspan="2" width="35%" style="border:none;">
-        <#if touch_tuan_ad_list??>
-            <#list touch_tuan_ad_list as item>
-                <a href="${item.linkUri!''}" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if>>
-                  <img src="${item.fileUri!''}" />
-                </a>
-                <#break>
-            </#list>
-        </#if>
-      </td>
-
     </tr>
     <tr>
    
         <#if tuan_cur_page??>
             <#list tuan_cur_page.content as item>
-                <#if item_index gt 1 && item_index lt 4>
+                <#if item_index gt 2 && item_index lt 6>
                     <td style="width:30%;">
-                        <a href="/touch/goods/${item.id}?qiang=1">
+                        <a href="/touch/goods/${item.id}?qiang=3">
                           <p class="fs08">${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
                           <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>

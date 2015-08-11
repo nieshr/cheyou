@@ -100,20 +100,24 @@ function toggleNewAddress()
 function submitAddress()
 {
     var receiverName = $("#receiverName").val();
-    var prov = $("#prov").val();
-    var city = $("#city").val();
-    var dist = $("#dist").val();
-    var detail = $("#detailAdd").val();
-    var postcode = $("#postcode").val();
+  
+  //  var prov = $("#prov").val();
+  //  var city = $("#city").val();
+  //  var dist = $("#dist").val();
+  //  var detail = $("#detailAdd").val();
+  //  var postcode = $("#postcode").val();
+    
     var mobile = $("#mobile").val();
+    var receiverCarcode = $("#receiverCarcode").val();     //增加车牌 by zhangji
+    var receiverCartype = $("#receiverCartype").val();     //车型
     
     if (undefined == receiverName || "" == receiverName)
     {
-        alert("收货人不能为空");
+        alert("姓名不能为空");
         $("#receiverName").focus();
         return;
     }
-    
+   /** 
     if (undefined == prov || "" == prov)
     {
         alert("省市不能为空");
@@ -134,10 +138,10 @@ function submitAddress()
         $("#detailAdd").focus();
         return;
     }
-    
+    **/
     if (undefined == mobile || "" == mobile)
     {
-        alert("联系电话不能为空");
+        alert("手机号码不能为空");
         $("#mobile").focus();
         return;
     }
@@ -147,17 +151,20 @@ function submitAddress()
         url:"/user/address/ajax/add",
         data:{
             "receiverName": receiverName, 
-            "prov": prov,
-            "city": city,
-            "dist": dist,
-            "detail": detail,
-            "postcode": postcode,
-            "mobile": mobile 
+         //   "prov": prov,
+         //   "city": city,
+         //   "dist": dist,
+         //   "detail": detail,
+         //   "postcode": postcode,
+            "mobile": mobile, 
+            "receiverCarcode":receiverCarcode,     //新加车牌  by zhangji
+            "receiverCartype":receiverCartype       //新加车型
         },
         
         success:function(res) {
             if (0 == res.code)
             {
+                
                 window.location.reload();
             }
             else

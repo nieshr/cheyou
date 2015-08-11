@@ -664,7 +664,7 @@ function delItem(id)
   
     <section class="indextit">
         <h3>1元抢拍</h3>
-        <a class="a1" href="javascript:;">抢拍细则</a>
+        <a class="a1" href="/info/list/12?catId=24">抢拍细则</a>
         <menu id="miao-menu">
             <a class="sel" href="javascript:;" onmouseenter="javascript:miaoPageChang(0);">今日抢拍</a>
             <a href="javascript:;" onmouseenter="javascript:miaoPageChang(1);">明日抢拍</a>
@@ -681,7 +681,7 @@ function delItem(id)
                     <a href="javascript:miaoClockChang(1);">14:00抢拍<i></i></a>
                     <a href="javascript:miaoClockChang(2);">20:00抢拍<i></i></a>
                 </div>
-                <a href="javascript:;">抢拍细则</a>
+                <a href="/info/list/12?catId=24">抢拍细则</a>
             </menu>
             <div class="knockbox miaocur">
                 <dl>
@@ -1181,7 +1181,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                     <a href="javascript:miaoClockNextChange(1);">14:00抢拍<i></i></a>
                     <a href="javascript:miaoClockNextChange(2);">20:00抢拍<i></i></a>
                 </div>
-                <a href="javascript:;">抢拍细则</a>
+                <a href="/info/list/12?catId=24">抢拍细则</a>
             </menu>
             <div class="knockbox miaonext">
                 <dl>
@@ -1300,7 +1300,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                     <a href="javascript:miaoClockPrevChange(1);">14:00抢拍<i></i></a>
                     <a href="javascript:miaoClockPrevChange(2);">20:00抢拍<i></i></a>
                 </div>
-                <a href="javascript:;">抢拍细则</a>
+                <a href="/info/list/12?catId=24">抢拍细则</a>
             </menu>
             <div class="knockbox miaoprev">
                 <dl>
@@ -1418,7 +1418,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     
     <section class="indextit">
         <h3>十人团购</h3>
-        <a class="a1" href="javascript:;">团购细则</a>
+        <a class="a1" href="/info/list/12?catId=24">团购细则</a>
         <menu id="tuan-menu">
             <a class="sel" href="javascript:;" onmouseenter="javascript:tuanPageChang(0);">本期团购</a>
             <a href="javascript:;" onmouseenter="javascript:tuanPageChang(1);">下期预告</a>
@@ -1610,7 +1610,9 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </section>
     
     <section class="index_gz">
-        <h3>即将火热开团</h3>
+        <h3>百人团购
+            <a class="a1" style="font-size:14px; margin-left:12px;" href="/info/list/12?catId=24">团购细则</a>    
+        </h3>
             <#if tuan_next_page??>
                 <#list tuan_next_page.content as item>
                     <p>
@@ -1630,12 +1632,10 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
            <#assign n = 0>
                
                <#list demand_list?sort_by(["time"])?reverse as show>  
-                   <#if show_index < 4>
-                <#--      <#if show.statusId = 1>   -->                       
+                   <#if show_index < 4>                    
                           <p class="pt15">网友<span style="color:red;">${show.name!''}</span>留言：</p>
                           <p style="text-indent:2em;">${show.content!''}</p>
-                          <#assign n = n + 1>     
-                <#--     </#if>    -->
+                          <#assign n = n + 1>    
                    </#if>
                </#list>
               

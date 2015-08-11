@@ -34,7 +34,7 @@ $(document).ready(function(){
 <body>
 <header class="comhead">
   <div class="main">
-    <p>购物车</p>
+    <p>立即购买</p>
     <a class="a1" href="javascript:history.go(-1);">返回</a>
     <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
   </div>
@@ -42,9 +42,9 @@ $(document).ready(function(){
 <div class="comhead_bg"></div>
 <!--header END-->
 
-<form id="form1" name="form1" action="/touch/order/submit" method="post">
+<form id="form1" name="form1" action="/touch/order/buysubmit" method="post">
 <div class="mainbox">
-<table class="address_tab">
+    <table class="address_tab">
             <tr>
                 <th width="140">
                     <p>安装信息</p>
@@ -99,8 +99,9 @@ $(document).ready(function(){
                     <td><input onclick="javascript:submitAddress();" class="mysub" type="button" value="保存"></td>
                   </tr>
                 </tbody>
-                </table>
-            </div>
+            </table>
+        </div>
+
   <p class="address">选择线下同盟店：</p>
   <div class="address">
     <select name="shopId" style="width:100%;" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
@@ -119,21 +120,6 @@ $(document).ready(function(){
       <a href="javascript:;"><img src="/client/images/content/rl.png" /></a>
   </section>
   <!-- end -->
-  <p class="address">使用粮草：
-    <span>（可用：${total_point_limit!'0'}）</span>
-  </p>
-  <input type="text" class="address" value="0" name="pointUse" value="0" onchange="pointChange(this, $(this).val(), ${total_point_limit!'0'});"/>
-  <p class="address">选择优惠券：</p>
-  <div class="address">
-    <select id="couponSelect" name="couponId" style="width:100%;" onchange="couponChange();">
-        <#if coupon_list??>
-            <option value="" fee="0">不使用优惠券</option>
-            <#list coupon_list as item>
-                <option value="${item.id}">${item.typeTitle!''}</option>
-            </#list>
-        </#if>
-    </select>
-  </div>
   <p class="address">选择支付方式：</p>
   <ul class="paystyle">
     <#assign maxMethodCount=5/>
@@ -148,11 +134,26 @@ $(document).ready(function(){
     <#assign totalQuantity=0>
     <#assign totalPrice=0>
     <#if buy_goods_list??>
-        <#list buy_goods_list as sg>
-            <#assign totalQuantity=totalQuantity+sg.quantity>
-            <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
-        </#list>
-    </#if>
+            <table class="car_list">
+            <tr>
+                <th colspan="2">商品信息</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>合计</th>
+            </tr>
+            <#list buy_goods_list as sg>
+                <#assign totalQuantity=totalQuantity+sg.quantity>
+                <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
+                <tr>
+                    <td width="110"><a href="/goods/${sg.goodsId}?qiang=1"><img src="${sg.goodsCoverImageUri!''}" width="100" height="100"/></a></td>
+                    <td width="800" style="text-align:left;"><a href="/goods/${sg.goodsId}">${sg.goodsTitle!''}</a></td>
+                    <td width="150" style="text-align:center;"><#if sg.price??>${sg.price?string("0.00")}</#if></td>
+                    <td width="150" style="text-align:center;">×${sg.quantity!''}</td>
+                    <td class="red ml100">￥<#if sg.price?? && sg.quantity??>${(sg.price * sg.quantity)?string("0.00")}</#if></td>
+                </tr>
+            </#list>
+            </table>
+        </#if>
         
   <p class="address ta-r">共<#if totalQuantity??>${totalQuantity!'0'}</#if>件商品，合计￥<span id="totalFee" class="red">${totalPrice?string('0.00')}</span></p>
 </div>

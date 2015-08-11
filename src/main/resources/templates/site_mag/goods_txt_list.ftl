@@ -134,7 +134,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <option <#if categoryId??><#else>selected="selected"</#if> value="">所有类别</option>
                 <#if category_list??>
                     <#list category_list as c>
-                        <option value="${c.id!""}" <#if categoryId?? && c.id==categoryId>selected="selected"</#if> ><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                        <option value="${c.id?c}" <#if categoryId?? && c.id==categoryId>selected="selected"</#if> ><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
                     </#list>
                 </#if>
             </select>
@@ -180,10 +180,10 @@ function __doPostBack(eventTarget, eventArgument) {
                 <span class="checkall" style="vertical-align:middle;">
                     <input id="listChkId" type="checkbox" name="listChkId" value="${content_index}" >
                 </span>
-                <input type="hidden" name="listId" id="listId" value="${content.id}">
+                <input type="hidden" name="listId" id="listId" value="${content.id?c}">
             </td>
-            <td>${content.id!''}</td>
-            <td><a href="/Verwalter/goods/edit?id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></td>
+            <td>${content.id?c}</td>
+            <td><a href="/Verwalter/goods/edit?id=${content.id?c}&__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></td>
             <td>
                 <#if category_list?? && content.categoryId??>
                     <#list category_list as cat>
@@ -200,9 +200,9 @@ function __doPostBack(eventTarget, eventArgument) {
             </td>
             <td>
               <div class="btn-tools">
-                <a title="上架/下架" class="hot <#if content.isOnSale?? && content.isOnSale>selected</#if>" href="javascript:__doPostBack('btnOnSale','${content.id!''}')"></a>
-                <a title="改价" class="change" href="javascript:showDialogChangePrice('${content.id!""}')"></a>
-                <a title="改价记录" class="record" href="javascript:showDialogPriceLog('${content.id!""}')"></a>
+                <a title="上架/下架" class="hot <#if content.isOnSale?? && content.isOnSale>selected</#if>" href="javascript:__doPostBack('btnOnSale','${content.id?c}')"></a>
+                <a title="改价" class="change" href="javascript:showDialogChangePrice('${content.id?c}')"></a>
+                <a title="改价记录" class="record" href="javascript:showDialogPriceLog('${content.id?c}')"></a>
                 <#--
                 <a id="rptList1_ctl01_lbtnIsTop" title="设置置顶" class="top" href="javascript:__doPostBack('rptList1$ctl01$lbtnIsTop','')"></a>
                 <a id="rptList1_ctl01_lbtnIsRed" title="设置推荐" class="red" href="javascript:__doPostBack('rptList1$ctl01$lbtnIsRed','')"></a>
@@ -212,8 +212,8 @@ function __doPostBack(eventTarget, eventArgument) {
               </div>
             </td>
             <td align="center">
-                <a href="javascript:confirmCopy(${content.id!""});" title="复制商品" class="show">复制</a>
-                <a href="/Verwalter/goods/edit?id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">修改</a>
+                <a href="javascript:confirmCopy(${content.id?c});" title="复制商品" class="show">复制</a>
+                <a href="/Verwalter/goods/edit?id=${content.id?c}&__VIEWSTATE=${__VIEWSTATE!""}">修改</a>
             </td>
         </tr>
     </#list>
