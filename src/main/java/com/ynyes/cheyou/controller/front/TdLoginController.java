@@ -68,10 +68,12 @@ public class TdLoginController {
 		String diysiteUsername = (String) req.getSession().getAttribute("diysiteUsername");
 		
 		TdUser tdUser = tdUserService.findByUsername(diysiteUsername);
-		
-		if (null != tdUser.getRoleId() && tdUser.getRoleId().equals(2L)) {
-			return "redirect:/user/diysite/order/list/0";
+		if(null != tdUser){
+			if (null != tdUser.getRoleId() && tdUser.getRoleId().equals(2L)) {
+				return "redirect:/user/diysite/order/list/0";
+			}
 		}
+		
 		return "redirect:" + referer;
 	}
 
