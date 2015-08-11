@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ynyes.cheyou.entity.TdManager;
+import com.ynyes.cheyou.entity.TdManagerPermission;
+import com.ynyes.cheyou.entity.TdManagerPermissionList;
 import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.entity.TdNavigationMenu;
 import com.ynyes.cheyou.service.TdManagerLogService;
@@ -201,7 +203,6 @@ public class TdManagerManagerController {
                         {
                             map.addAttribute("level_" + i + j + "_menu_list", level1MenuList);
                         }
-                        
                     }
                 }
                 
@@ -214,7 +215,7 @@ public class TdManagerManagerController {
     }
     
     @RequestMapping(value="/role/save")
-    public String roleSave(TdManagerRole tdManagerRole,
+    public String roleSave(TdManagerRole tdManagerRole, TdManagerPermissionList tdManagerPermissionList,
                         String __VIEWSTATE,
                         ModelMap map,
                         HttpServletRequest req){
@@ -225,6 +226,67 @@ public class TdManagerManagerController {
         }
         
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        /**
+		 * @author lc
+		 * @注释：权限修改
+		 */
+//        for(int i = 0; i < tdManagerPermissionList.getPermissionlist().size(); i++){
+//        	System.out.println(tdManagerPermissionList.getPermissionlist().get(i).getIsView()+" "+i);
+//        }
+//      
+        if (null != tdManagerRole.getPermissionList()) {
+        	 for (int i = 0; i < tdManagerRole.getPermissionList().size(); i++) {
+     			if (null == tdManagerRole.getPermissionList().get(i).getIsView()) {
+     				tdManagerRole.getPermissionList().get(i).setIsView(false);
+     			}					
+     		}
+		}
+               
+        if (null != tdManagerPermissionList && null !=tdManagerPermissionList.getPermissionlist()  ) {
+        	if (tdManagerPermissionList.getPermissionlist().size() < tdManagerRole.getPermissionList().size()) {
+    			for(int i = 0; i < tdManagerPermissionList.getPermissionlist().size(); i++){
+    				if (null != tdManagerPermissionList.getPermissionlist().get(i).getIsView() && tdManagerPermissionList.getPermissionlist().get(i).getIsView() ) {
+    					tdManagerRole.getPermissionList().get(i).setIsView(true);
+    				}else{
+    					tdManagerRole.getPermissionList().get(i).setIsView(false);
+    				}
+    			}
+    			for(int i = tdManagerPermissionList.getPermissionlist().size(); i < tdManagerRole.getPermissionList().size(); i++){
+    				tdManagerRole.getPermissionList().get(i).setIsView(false);
+    			}
+    		}else{
+    			for(int i = 0; i < tdManagerPermissionList.getPermissionlist().size(); i++){
+    				if (i >= tdManagerRole.getPermissionList().size()) {
+						TdManagerPermission tdManagerPermission = new TdManagerPermission();
+						if (null != tdManagerPermissionList.getPermissionlist().get(i).getIsView() && tdManagerPermissionList.getPermissionlist().get(i).getIsView()) {
+							tdManagerPermission.setIsView(true);
+						}else{
+							tdManagerPermission.setIsView(false);
+						}
+						
+						tdManagerRole.getPermissionList().add(tdManagerPermission);
+					}else{
+						if (null != tdManagerPermissionList.getPermissionlist().get(i).getIsView() && tdManagerPermissionList.getPermissionlist().get(i).getIsView()) {
+	    					tdManagerRole.getPermissionList().get(i).setIsView(true);
+	    				}else{
+	    					tdManagerRole.getPermissionList().get(i).setIsView(false);
+	    				}
+					}
+    				  				    				
+    			}
+    		}
+		}
+        else{
+        	if (null != tdManagerRole.getPermissionList()) {
+        		for(int i = 0; i < tdManagerRole.getPermissionList().size(); i++){
+            		tdManagerRole.getPermissionList().get(i).setIsView(false);
+            	}
+        	}
+        	
+        }
+        
+        
         
         tdManagerRoleService.save(tdManagerRole);
         

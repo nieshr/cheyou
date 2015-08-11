@@ -69,6 +69,18 @@ function mymemberRightMove(boxid,_width,_height,nextid,_speed,_num,arrname){
 			_move = 0;
 			});
 }
+
+//lichong 价格实时查询
+function priceSearch(priceid,searchid,x,y){
+	var price_box = $("#"+priceid);
+	var search = $("#"+searchid);
+	var temp= document.getElementById("search"); 
+	var search_x = temp.offsetLeft;
+	
+	price_box.css({"display:inline-block;  padding:5px;	border:1px solid #ddd;  position:absolute; top:-65px; left:"+(x-search_x)+"px; font-size:12px;"});
+	search.css({"width:"+(x-search_x)+"px;	display:block;	height:7px;	border-radius:4px;	background:#019ad3;}");
+}
+
 function evaluateShow(boxid,_name){
 	var _box = $("#"+boxid);
 	var _display = _box.css("display");
@@ -130,6 +142,7 @@ function myLeftMunu(){
 		
 		});
 	//alert(_menu.length)
+	
 }
 
 

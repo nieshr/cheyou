@@ -24,10 +24,8 @@
   24    */
 package com.cloopen.rest.sdk.utils.encoder;
 
-import java.io.OutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * This class implements a BASE64 Character encoder as specified in RFC1521.

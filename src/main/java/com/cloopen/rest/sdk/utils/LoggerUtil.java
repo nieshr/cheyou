@@ -1,9 +1,7 @@
 package com.cloopen.rest.sdk.utils;
 
 import java.util.Date;
-import java.util.Properties;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 

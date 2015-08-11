@@ -25,12 +25,12 @@
 
 package com.cloopen.rest.sdk.utils.encoder;
 
-import java.io.OutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PushbackInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PushbackInputStream;
 import java.nio.ByteBuffer;
 
 /**

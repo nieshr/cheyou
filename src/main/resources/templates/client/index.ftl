@@ -217,6 +217,25 @@ $(function(){
           };
     $.ljs_adcartoon.arrowNum(shopad);
     });
+    
+    function mouseMove(ev) 
+{ 
+Ev= ev || window.event; 
+var mousePos = mouseCoords(ev); 
+document.getElementById("xxx").value = mousePos.x; 
+document.getElementById("yyy").value = mousePos.y; 
+} 
+function mouseCoords(ev) 
+{ 
+if(ev.pageX || ev.pageY){ 
+return {x:ev.pageX, y:ev.pageY}; 
+} 
+return{ 
+x:ev.clientX + document.body.scrollLeft - document.body.clientLeft, 
+y:ev.clientY + document.body.scrollTop - document.body.clientTop 
+}; 
+} 
+document.onmousemove = mouseMove;
 </script>
 <meta property="qc:admins" content="274143415163145116375" />
 </head>
@@ -490,7 +509,7 @@ function delItem(id)
                                     <table class="nav_more">
                                         <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
                                             <tr>
-                                                <th width="90"><span><a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a></span></th>
+                                                <th width="120"><span><a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a></span></th>
                                                 <td>
                                                     <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
                                                         <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
@@ -541,10 +560,10 @@ function delItem(id)
     </a>
     
     <div class="floatboxlist" id="floatboxlist">
-    <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq1!''}&site=qq&menu=yes">联系客户1号</a>
-    <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq2!''}&site=qq&menu=yes">联系客户2号</a>
-    <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq3!''}&site=qq&menu=yes">联系客户3号</a>
-    <a href="http://wpa.qq.com/msgrd?v=3&uin=${site.qq4!''}&site=qq&menu=yes">联系客户4号</a>
+    <a href="<#if site.qq1??>http://wpa.qq.com/msgrd?v=3&uin=${site.qq1!''}&site=qq&menu=yes<#else>#</#if>">联系客户1号</a>
+    <a href="<#if site.qq2??>http://wpa.qq.com/msgrd?v=3&uin=${site.qq2!''}&site=qq&menu=yes<#else>#</#if>">联系客户2号</a>
+    <a href="<#if site.qq3??>http://wpa.qq.com/msgrd?v=3&uin=${site.qq3!''}&site=qq&menu=yes<#else>#</#if>">联系客户3号</a>
+    <a href="<#if site.qq4??>http://wpa.qq.com/msgrd?v=3&uin=${site.qq4!''}&site=qq&menu=yes<#else>#</#if>">联系客户4号</a>
   </div>
     
 </aside>

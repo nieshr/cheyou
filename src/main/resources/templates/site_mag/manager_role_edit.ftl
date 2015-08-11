@@ -21,6 +21,8 @@ $(function () {
         }
     });
 });
+
+
 </script>
 </head>
 
@@ -92,8 +94,9 @@ $(function () {
                         </td>
                         <td>
                             <span class="cbllist">
-                                <input type="checkbox" name="permissionList[${total_index}].isView" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isView?? && tdRole.permissionList[total_index].isView>checked="checked"</#if>>
-                                <label> 显示 </label>
+                           <!--     <input type="checkbox" name="permissionList[${total_index}].isView" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isView?? && tdRole.permissionList[total_index].isView>checked="checked"</#if>> -->
+                                <input type="checkbox" name="permissionlist[${total_index}].isView" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isView?? && tdRole.permissionList[total_index].isView>checked="checked"</#if>>
+                                <label> 开启 </label>
                             </span>
                             <#assign total_index=total_index+1>
                         </td>
@@ -110,8 +113,8 @@ $(function () {
                                 </td>
                                 <td>
                                     <span class="cbllist">
-                                        <input type="checkbox" name="permissionList[${total_index}].isView" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isView?? && tdRole.permissionList[total_index].isView>checked="checked"</#if>>
-                                        <label> 显示 </label>
+                                        <input type="checkbox" name="permissionlist[${total_index}].isView" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isView?? && tdRole.permissionList[total_index].isView>checked="checked"</#if>>
+                                        <label> 使能 </label>
                                     </span>
                                     <#assign total_index=total_index+1>
                                 </td>
@@ -128,14 +131,14 @@ $(function () {
                                         </td>
                                         <td>
                                             <span class="cbllist">
-                                                <input type="checkbox" name="permissionList[${total_index}].isView" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isView?? && tdRole.permissionList[total_index].isView>checked="checked"</#if>>
-                                                <label> 显示 </label>
-                                                <input type="checkbox" name="permissionList[${total_index}].isAdd" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isAdd?? && tdRole.permissionList[total_index].isAdd>checked="checked"</#if>>
+                                                <input type="checkbox" name="permissionlist[${total_index}].isView" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isView?? && tdRole.permissionList[total_index].isView>checked="checked"</#if>>
+                                                <label> 使能</label>
+                                        <!--        <input type="checkbox" name="permissionList[${total_index}].isAdd" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isAdd?? && tdRole.permissionList[total_index].isAdd>checked="checked"</#if>>
                                                 <label> 新增 </label>
                                                 <input type="checkbox" name="permissionList[${total_index}].isModify" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isModify?? && tdRole.permissionList[total_index].isModify>checked="checked"</#if>>
                                                 <label> 修改 </label>
                                                 <input type="checkbox" name="permissionList[${total_index}].isDelete" <#if tdRole?? && tdRole.permissionList[total_index]?? && tdRole.permissionList[total_index].isDelete?? && tdRole.permissionList[total_index].isDelete>checked="checked"</#if>>
-                                                <label> 删除 </label>
+                                                <label> 删除 </label> -->
                                             </span>
                                             <#assign total_index=total_index+1>
                                         </td>

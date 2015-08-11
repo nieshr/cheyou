@@ -125,7 +125,7 @@ public class TdUserService {
         user.setCarCode(carCode);
         user.setRegisterTime(new Date());
         user.setLastLoginTime(new Date());
-        user.setStatusId(0L); // 待审核
+        user.setStatusId(1L); // 正常
         user.setRoleId(0L); // 普通用户
         
         user.setTotalCashRewards(0L);

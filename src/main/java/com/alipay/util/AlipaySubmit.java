@@ -14,11 +14,11 @@ import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import com.alipay.config.AlipayConfig;
+import com.alipay.sign.MD5;
 import com.alipay.util.httpClient.HttpProtocolHandler;
 import com.alipay.util.httpClient.HttpRequest;
 import com.alipay.util.httpClient.HttpResponse;
 import com.alipay.util.httpClient.HttpResultType;
-import com.alipay.sign.MD5;
 
 /* *
  *类名：AlipaySubmit
