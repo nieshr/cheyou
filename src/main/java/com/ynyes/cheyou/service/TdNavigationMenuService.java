@@ -39,6 +39,14 @@ public class TdNavigationMenuService {
     }
     
     /**
+	 * @author lc
+	 * @注释：
+	 */
+    public List<TdNavigationMenu> findAll() {
+		return repository.findByIsEnableTrueOrderBySortIdAsc();
+	}
+    
+    /**
      * 删除
      * 
      * @param id 菜单项ID

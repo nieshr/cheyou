@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.cheyou.entity.TdManagerRole;
+import com.ynyes.cheyou.entity.TdNavigationMenu;
 import com.ynyes.cheyou.repository.TdManagerRoleRepo;
 
 /**
@@ -30,6 +31,8 @@ public class TdManagerRoleService {
     @Autowired
     TdManagerPermissionService tdManagerPermissionService;
     
+    @Autowired
+    TdNavigationMenuService tdNavigationMenuService;
     /**
      * 删除
      * 
@@ -119,7 +122,11 @@ public class TdManagerRoleService {
         // 修改时
         if (null != e.getPermissionList())
         {
-            e.setTotalPermission(e.getPermissionList().size());
+        	List<TdNavigationMenu> temp = tdNavigationMenuService.findAll();
+        	if (null != temp) {
+        	//	e.setTotalPermission(e.getPermissionList().size());
+        		e.setTotalPermission(temp.size());
+			}     
         }
         else
         {

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.event.ChangeEvent;
+import javax.swing.text.ChangedCharSetException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,16 +63,30 @@ public class TdManagerIndexController {
         if (null != tdManagerRole && !tdManagerRole.getIsSys()) {
         	List<TdNavigationMenu> rootMenuList = tdNavigationMenuService
                     .findByParentIdAndSort(0L);
+        	TdNavigationMenu rootmenuList[] = null;
+        	if (null !=rootMenuList ) {
+        		//将list中的数据存入数组中
+                rootmenuList = new TdNavigationMenu[rootMenuList.size()];
+            	for(int i = 0; i < rootMenuList.size(); i++){
+            		rootmenuList[i] = rootMenuList.get(i);
+            	}
+			}
+        	
+        	int tempNumber = 0;
         	int total_index = 0;
-			for(int i = 0; i < rootMenuList.size() && total_index < tdManagerRole.getTotalPermission(); i++){
-				if(null!=tdManagerRole.getPermissionList().get(total_index)){
-					if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && !(tdManagerRole.getPermissionList().get(total_index).getIsView())) {
-						rootMenuList.remove(i);
+			for(int i = 0; i < rootmenuList.length && total_index < tdManagerRole.getTotalPermission(); i++){
+					if (total_index >= tdManagerRole.getPermissionList().size()) {
+						//rootMenuList.remove(i);
+						rootmenuList[i] = null;
+					}else{
+						if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && (tdManagerRole.getPermissionList().get(total_index).getIsView())==false) {
+							rootmenuList[i] = null;
+						}
 					}
-				}
+	
 					total_index = total_index + 1;
 					TdNavigationMenu rootMenu = null;
-					if (i < rootMenuList.size()) {
+					if (i < rootmenuList.length) {
 					    rootMenu = rootMenuList.get(i);
 					}
 					
@@ -79,19 +95,35 @@ public class TdManagerIndexController {
 	                if (null != rootMenu) {
 	                	level0MenuList = tdNavigationMenuService
 		                        .findByParentIdAndSort(rootMenu.getId());
+					}else{
+						
 					}
-	                		
-	                if (null != level0MenuList && level0MenuList.size() > 0){
-		                for(int j = 0; j < level0MenuList.size() && total_index < tdManagerRole.getTotalPermission(); j++){
-		                	if(null!=tdManagerRole.getPermissionList().get(total_index)){
-		                		if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && !(tdManagerRole.getPermissionList().get(total_index).getIsView())) {
-			                		level0MenuList.remove(j);
-			    				}
-		                	}
+	                
+	                TdNavigationMenu level0menuList[] = null;
+	                if (null != level0MenuList) {
+	                	//将list中的数据存入数组中
+		                level0menuList = new TdNavigationMenu[level0MenuList.size()];
+		            	for(int a = 0; a < level0MenuList.size(); a++){
+		            		level0menuList[a] = level0MenuList.get(a);
+		            	}
+					}
+	                
+	                if (null != level0menuList && level0menuList.length > 0){
+		                for(int j = 0; j < level0menuList.length && total_index < tdManagerRole.getTotalPermission(); j++){
+		                	if (total_index >= tdManagerRole.getPermissionList().size()) {
+		                		level0menuList[j] = null;
+							}else{
+								if(null!=tdManagerRole.getPermissionList().get(total_index)){
+			                		if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && (tdManagerRole.getPermissionList().get(total_index).getIsView())==false) {
+			                			level0menuList[j] = null;
+				    				}
+			                	}
+							}
+		                	
 			                	total_index = total_index + 1;
 			                	
 			                	TdNavigationMenu level0Menu = null;
-			                	if (j < level0MenuList.size()) {
+			                	if (j < level0menuList.length) {
 			                		level0Menu = level0MenuList.get(j);
 								}			                	
 			                 
@@ -102,17 +134,33 @@ public class TdManagerIndexController {
 			                    	level1MenuList = tdNavigationMenuService
 				                            .findByParentIdAndSort(level0Menu.getId());
 			                    }
-			                     
-			                    if (null != level1MenuList && level1MenuList.size() > 0) {
-				                    for(int c = 0; c < level1MenuList.size() && total_index < tdManagerRole.getTotalPermission(); c++){
-				                    	if(null!=tdManagerRole.getPermissionList().get(total_index)){
-				                    		if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && !(tdManagerRole.getPermissionList().get(total_index).getIsView())) {
-					                    		level1MenuList.remove(c);
-					        				}
-					                    	
-				                    	}
+			                    
+			                    TdNavigationMenu level1menuList[] = null;
+			                    if (null != level1MenuList) {
+			                    	//将list中的数据存入数组中
+					            	level1menuList = new TdNavigationMenu[level1MenuList.size()];
+					            	for(int b = 0; b < level1MenuList.size(); b++){
+					            		level1menuList[b] = level1MenuList.get(b);
+					            	}
+								}
+			                    
+			                    if (null != level1menuList && level1menuList.length > 0) {
+				                    for(int c = 0; c < level1menuList.length && total_index < tdManagerRole.getTotalPermission(); c++){
+				                    	if (total_index >= tdManagerRole.getPermissionList().size()) {
+				                    		level1menuList[c] = null;
+										}else{
+											if(null!=tdManagerRole.getPermissionList().get(total_index)){
+					                    		if (null!=(tdManagerRole.getPermissionList().get(total_index).getIsView()) && (tdManagerRole.getPermissionList().get(total_index).getIsView())==false) {
+					                    			level1menuList[c] = null;
+						        				}
+						                    	
+					                    	}
+										}
+				                    	
 				                    	total_index = total_index + 1;
 				                    }
+				                    
+				                    change(level1MenuList, level1menuList);
 				                    if (null != level1MenuList && level1MenuList.size() > 0) {
 					                    map.addAttribute("level_" + i + j + "_menu_list",
 					                                level1MenuList);
@@ -120,6 +168,7 @@ public class TdManagerIndexController {
 			                    }
 	
 		                }
+		                change(level0MenuList, level0menuList);
 		                if (null != level0MenuList && level0MenuList.size() > 0){
 			                map.addAttribute("level_" + i + "_menu_list",
 			                        level0MenuList);
@@ -127,6 +176,7 @@ public class TdManagerIndexController {
 	                }    		
 				
 			}
+			change(rootMenuList, rootmenuList);
 			if (null != rootMenuList && rootMenuList.size() > 0){
 				map.addAttribute("root_menu_list", rootMenuList);
 		    }
@@ -168,7 +218,22 @@ public class TdManagerIndexController {
         
         return "/site_mag/frame";
     }
-
+    
+    /**
+	 * @author lc
+	 * @注释：
+	 */
+    public List<TdNavigationMenu> change(List<TdNavigationMenu> list, TdNavigationMenu shu[]){
+    	list.clear();
+    	for(int i = 0; i < shu.length; i++){
+    		if (null != shu[i]) {
+				list.add(shu[i]);
+			}
+    	}
+    	
+    	return list;
+    } 
+    
     @RequestMapping(value = "/Verwalter/center")
     public String center(ModelMap map, HttpServletRequest req) {
         String username = (String) req.getSession().getAttribute("manager");
