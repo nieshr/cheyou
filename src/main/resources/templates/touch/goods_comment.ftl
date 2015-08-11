@@ -246,59 +246,28 @@ function starChange(type, stars)
   </div>
 </header>
 <div class="comhead_bg"></div>
-<!--header END-->
 
-<div class="mainbox myassess">
-<form id="commentForm" action="javascript:submitComment();">
-    <input type="hidden" name="goodsId" value=${goodsId} />
-    <p class="fs08 pb10">商品质量满意度：
-        <input id="goodsStar" name="goodsStar" type="hidden" value="1" />
-        <a class="goodsStar" href="javascript:starChange('goodsStar', 1);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="goodsStar" href="javascript:starChange('goodsStar', 2);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="goodsStar" href="javascript:starChange('goodsStar', 3);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="goodsStar" href="javascript:starChange('goodsStar', 4);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="goodsStar" href="javascript:starChange('goodsStar', 5);"><img src="/touch/images/star01.png" height="15" /></a>
-    </p>
-    <p class="fs08 pb10">专业技能满意度：
-        <input id="skillStar" name="skillStar" type="hidden" value="1" />
-        <a class="skillStar" href="javascript:starChange('skillStar', 1);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="skillStar" href="javascript:starChange('skillStar', 2);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="skillStar" href="javascript:starChange('skillStar', 3);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="skillStar" href="javascript:starChange('skillStar', 4);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="skillStar" href="javascript:starChange('skillStar', 5);"><img src="/touch/images/star01.png" height="15" /></a>
-    </p>
-    <p class="fs08 pb10">服务态度满意度：
-        <input id="serviceStar" name="serviceStar" type="hidden" value="1" />
-        <a class="serviceStar" href="javascript:starChange('serviceStar', 1);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="serviceStar" href="javascript:starChange('serviceStar', 2);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="serviceStar" href="javascript:starChange('serviceStar', 3);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="serviceStar" href="javascript:starChange('serviceStar', 4);"><img src="/touch/images/star01.png" height="15" /></a>
-        <a class="serviceStar" href="javascript:starChange('serviceStar', 5);"><img src="/touch/images/star01.png" height="15" /></a>
-    </p>
-    <textarea name="content" datatype="*5-255" nullmsg="请输入评价内容"></textarea>
-    <p class="pt10 pb10 w100">
-        <input type="radio" name="stars" value="3" datatype="n" nullmsg="请点击进行评价"/> 好评
-        <input type="radio" name="stars" value="2" datatype="n" nullmsg="请点击进行评价"/> 中评
-        <input type="radio" name="stars" value="1" datatype="n" nullmsg="请点击进行评价"/> 差评
-    </p>
-    <input type="submit" value="提交" class="sub" />
-    <div class="clear h20"></div>
-</div><!--main END-->
 
 <ul class="main myassesslist">
-  <li>
-    <input type="radio" />全部评价
-    <input type="radio" />好评
-    <input type="radio" />中评
-    <input type="radio" />差评
-  </li>
-    <#if comment_page??>
+    <#--
+    <li>
+        <input type="radio" />全部评价
+        <input type="radio" />好评
+        <input type="radio" />中评
+        <input type="radio" />差评
+    </li>
+    -->
+    <#if comment_page?? && comment_page.content?size gt 0>
         <#list comment_page.content as item>
             <li>
                 <p>${item.content!''}</p>
                 <p id="userNameText" class="c9"><label class="userName">${item.username!''}</label><span>时间：${item.commentTime?string("yyyy-MM-dd")}</span></p>
             </li>
         </#list>
+    <#else>
+        <li>
+        <p>暂无评价</p>
+        </li>
     </#if>
 </ul>
 

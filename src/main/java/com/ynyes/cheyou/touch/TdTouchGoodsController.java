@@ -199,119 +199,172 @@ public class TdTouchGoodsController {
         }
         
         // 获取商品的其他版本
-        if (null != goods.getProductId())
-        {
+        if (null != goods.getProductId()) {
             TdProduct product = tdProductService.findOne(goods.getProductId());
-            
-            if (null != product)
-            {
-                List<TdGoods> productGoodsList = tdGoodsService.findByProductIdAndIsOnSaleTrue(goods.getProductId());
-                
+
+            if (null != product) {
+                List<TdGoods> productGoodsList = tdGoodsService
+                        .findByProductIdAndIsOnSaleTrue(goods.getProductId());
+
+                // 总的规格总类数量
                 int totalSelects = product.getTotalSelects();
-                
+
                 List<String> selectOneList = new ArrayList<String>();
                 List<String> selectTwoList = new ArrayList<String>();
                 List<String> selectThreeList = new ArrayList<String>();
-                
+
                 List<TdGoods> selectOneGoodsList = new ArrayList<TdGoods>();
                 List<TdGoods> selectTwoGoodsList = new ArrayList<TdGoods>();
                 List<TdGoods> selectThreeGoodsList = new ArrayList<TdGoods>();
-                
+
                 String sOne = null;
                 String sTwo = null;
                 String sThree = null;
-                
+
                 map.addAttribute("total_select", totalSelects);
-                
-                switch (totalSelects)
-                {
+
+                switch (totalSelects) {
                 case 1:
-                    sOne = goods.getSelectOneValue().trim();
+                    // 规格一的值
+                    sOne = goods.getSelectOneValue();
                     
-                    for (TdGoods pdtGoods : productGoodsList)
+                    if (null != sOne)
                     {
+                        sOne = sOne.trim();
+                    }
+
+                    for (TdGoods pdtGoods : productGoodsList) {
+                        // 其他同类商品规格一的值
                         String s1 = pdtGoods.getSelectOneValue().trim();
-                        if (!selectOneList.contains(s1))
-                        {
+
+                        // 规格值不同时加入展示列表
+                        if (!selectOneList.contains(s1)) {
                             selectOneList.add(s1);
                             selectOneGoodsList.add(pdtGoods);
                         }
                     }
-                    
-                    map.addAttribute("select_one_name", product.getSelectOneName());
+
+                    map.addAttribute("select_one_name",
+                            product.getSelectOneName());
                     map.addAttribute("one_selected", sOne);
-                    map.addAttribute("select_one_goods_list", selectOneGoodsList);
-                    
+                    map.addAttribute("select_one_goods_list",
+                            selectOneGoodsList);
+
                     break;
                 case 2:
-                    sOne = goods.getSelectOneValue().trim();
-                    sTwo = goods.getSelectTwoValue().trim();
+                    // 规格一、 二的值
+                    sOne = goods.getSelectOneValue();
                     
-                    for (TdGoods pdtGoods : productGoodsList)
+                    if (null != sOne)
                     {
+                        sOne = sOne.trim();
+                    }
+                    
+                    sTwo = goods.getSelectTwoValue();
+                    
+                    if (null != sTwo)
+                    {
+                        sTwo = sTwo.trim();
+                    }
+
+                    for (TdGoods pdtGoods : productGoodsList) {
+                        // 其他商品规格一、二的值
                         String s1 = pdtGoods.getSelectOneValue().trim();
                         String s2 = pdtGoods.getSelectTwoValue().trim();
-                        
-                        if (!selectOneList.contains(s1))
-                        {
+
+                        // 规格一不同商品
+                        if (!selectOneList.contains(s1)) {
                             selectOneList.add(s1);
                             selectOneGoodsList.add(pdtGoods);
                         }
-                        
-                        if (!selectTwoList.contains(s2))
-                        {
+
+                        // 规格二不同， 规格一相同的商品
+                        if (!selectTwoList.contains(s2)
+                                && sOne.equalsIgnoreCase(s1)) {
                             selectTwoList.add(s2);
                             selectTwoGoodsList.add(pdtGoods);
                         }
                     }
-                    
-                    map.addAttribute("select_one_name", product.getSelectOneName());
-                    map.addAttribute("select_two_name", product.getSelectTwoName());
+
+                    map.addAttribute("select_one_name",
+                            product.getSelectOneName());
+                    map.addAttribute("select_two_name",
+                            product.getSelectTwoName());
                     map.addAttribute("one_selected", sOne);
                     map.addAttribute("two_selected", sTwo);
-                    map.addAttribute("select_one_goods_list", selectOneGoodsList);
-                    map.addAttribute("select_two_goods_list", selectTwoGoodsList);
+                    map.addAttribute("select_one_goods_list",
+                            selectOneGoodsList);
+                    map.addAttribute("select_two_goods_list",
+                            selectTwoGoodsList);
                     break;
-                    
+
                 case 3:
-                    sOne = goods.getSelectOneValue().trim();
-                    sTwo = goods.getSelectTwoValue().trim();
-                    sThree = goods.getSelectThreeValue().trim();
+                    // 规格一、二、三的值
+                    sOne = goods.getSelectOneValue();
                     
-                    for (TdGoods pdtGoods : productGoodsList)
+                    if (null != sOne)
                     {
+                        sOne = sOne.trim();
+                    }
+                    
+                    sTwo = goods.getSelectTwoValue();
+                    
+                    if (null != sTwo)
+                    {
+                        sTwo = sTwo.trim();
+                    }
+                    
+                    sThree = goods.getSelectThreeValue();
+                    
+                    if (null != sThree)
+                    {
+                        sThree = sThree.trim();
+                    }
+
+                    for (TdGoods pdtGoods : productGoodsList) {
+                        // 其他商品规格一、二、三的值
                         String s1 = pdtGoods.getSelectOneValue().trim();
                         String s2 = pdtGoods.getSelectTwoValue().trim();
                         String s3 = pdtGoods.getSelectThreeValue().trim();
-                        
-                        if (!selectOneList.contains(s1))
+
+                        // 规格一不同商品
+                        if (!selectOneList.contains(s1)) 
                         {
                             selectOneList.add(s1);
                             selectOneGoodsList.add(pdtGoods);
                         }
-                        
-                        if (!selectTwoList.contains(s2))
-                        {
+
+                        // 规格二不同， 规格一的商品
+                        if (!selectTwoList.contains(s2)
+                                && sOne.equalsIgnoreCase(s1)) {
                             selectTwoList.add(s2);
                             selectTwoGoodsList.add(pdtGoods);
                         }
-                        
-                        if (!selectThreeList.contains(s3))
-                        {
+
+                        // 规格三不同， 规格一、二相同的商品
+                        if (!selectThreeList.contains(s3)
+                                && sTwo.equalsIgnoreCase(s2)
+                                && sOne.equalsIgnoreCase(s1)) {
                             selectThreeList.add(s3);
                             selectThreeGoodsList.add(pdtGoods);
                         }
                     }
-                    
-                    map.addAttribute("select_one_name", product.getSelectOneName());
-                    map.addAttribute("select_two_name", product.getSelectTwoName());
-                    map.addAttribute("select_three_name", product.getSelectThreeName());
+
+                    map.addAttribute("select_one_name",
+                            product.getSelectOneName());
+                    map.addAttribute("select_two_name",
+                            product.getSelectTwoName());
+                    map.addAttribute("select_three_name",
+                            product.getSelectThreeName());
                     map.addAttribute("one_selected", sOne);
                     map.addAttribute("two_selected", sTwo);
                     map.addAttribute("three_selected", sThree);
-                    map.addAttribute("select_one_goods_list", selectOneGoodsList);
-                    map.addAttribute("select_two_goods_list", selectTwoGoodsList);
-                    map.addAttribute("select_three_goods_list", selectThreeGoodsList);
+                    map.addAttribute("select_one_goods_list",
+                            selectOneGoodsList);
+                    map.addAttribute("select_two_goods_list",
+                            selectTwoGoodsList);
+                    map.addAttribute("select_three_goods_list",
+                            selectThreeGoodsList);
                     break;
                 }
             }

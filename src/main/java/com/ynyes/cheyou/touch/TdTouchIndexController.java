@@ -217,7 +217,7 @@ public class TdTouchIndexController {
                 .findByGroupSaleGoingToStartOrderByGroupSaleStartTimeAsc(0, 5));
         // 正在进行团购
         map.addAttribute("tuan_cur_page", tdGoodsService
-                .findByGroupSalingOrderByGroupSaleStartTimeAsc(0, 5));
+                .findByGroupSalingOrderByGroupSaleStartTimeAsc(0, 6));
 
         // 已经结束秒杀
         map.addAttribute("miao_prev_page", tdGoodsService
@@ -227,7 +227,7 @@ public class TdTouchIndexController {
                 .findByFlashSaleGoingToStartOrderByFlashSaleStartTimeAsc(0, 5));
         // 正在秒杀
         map.addAttribute("miao_cur_page", tdGoodsService
-                .findByFlashSalingOrderByFlashSaleStartTimeAsc(0, 5));
+                .findByFlashSalingOrderByFlashSaleStartTimeAsc(0, 6));
         
         // 首页推荐商品
         map.addAttribute("index_recommend_goods_page", tdGoodsService

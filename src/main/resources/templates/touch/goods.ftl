@@ -94,32 +94,166 @@ function addCollect(goodsId)
     <#if goods.showPictures??>
         <#list goods.showPictures?split(",") as uri>
             <#if ""!=uri>
-                <li><img src="${uri!''}" /></li>
+                <li><img src="${uri!''}"/></li>
             </#if>
         </#list>
     </#if>
   </ul>
   <div class="clear"></div>
 </section><!--我是banner-->
+<#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
+<p class="mainbox timebox">剩余时间：<b id="lday">0</b>天<b id="lhour">0</b>时<b id="lmin">0</b>分<b id="lsec">0</b>秒</p>
+<script type="text/javascript">
+$(document).ready(function(){
+    setInterval("timer()",1000);
+});
+
+function timer()
+{
+    var ts = (new Date(${goods.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${goods.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${goods.flashSaleStopTime?string("dd")}, 
+                ${goods.flashSaleStopTime?string("HH")}, 
+                ${goods.flashSaleStopTime?string("mm")}, 
+                ${goods.flashSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+                
+    var allts = (new Date(${goods.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${goods.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${goods.flashSaleStopTime?string("dd")}, 
+                ${goods.flashSaleStopTime?string("HH")}, 
+                ${goods.flashSaleStopTime?string("mm")}, 
+                ${goods.flashSaleStopTime?string("ss")}))
+               - (new Date(${goods.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${goods.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${goods.flashSaleStartTime?string("dd")}, 
+                ${goods.flashSaleStartTime?string("HH")}, 
+                ${goods.flashSaleStartTime?string("mm")}, 
+                ${goods.flashSaleStartTime?string("ss")}));//总共的毫秒数
+                
+    if (0 == ts)
+    {
+        window.location.reload();
+    }
+    
+    var date = new Date();
+    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+    dd = checkTime(dd);
+    hh = checkTime(hh);
+    mm = checkTime(mm);
+    ss = checkTime(ss);
+    
+    $("#lday").html(dd);
+    $("#lhour").html(hh);
+    $("#lmin").html(mm);
+    $("#lsec").html(ss);
+    
+    var price = ${goods.flashSalePrice?string("0.00")} * ts / allts;
+    
+    var s_x = price.toFixed(2).toString();
+    
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    $("#currPrice").html("￥" + s_x);
+}
+
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
+</script>
+<#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
+<p class="mainbox timebox">剩余时间：<b id="lday">0</b>天<b id="lhour">0</b>时<b id="lmin">0</b>分<b id="lsec">0</b>秒</p>
+<script type="text/javascript">
+$(document).ready(function(){
+    setInterval("timer()",1000);
+});
+
+function timer()
+{
+    var ts = (new Date(${goods.groupSaleStopTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleStopTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleStopTime?string("dd")}, 
+                ${goods.groupSaleStopTime?string("HH")}, 
+                ${goods.groupSaleStopTime?string("mm")}, 
+                ${goods.groupSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+                
+    var allts = (new Date(${goods.groupSaleStopTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleStopTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleStopTime?string("dd")}, 
+                ${goods.groupSaleStopTime?string("HH")}, 
+                ${goods.groupSaleStopTime?string("mm")}, 
+                ${goods.groupSaleStopTime?string("ss")}))
+               - (new Date(${goods.groupSaleStartTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleStartTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleStartTime?string("dd")}, 
+                ${goods.groupSaleStartTime?string("HH")}, 
+                ${goods.groupSaleStartTime?string("mm")}, 
+                ${goods.groupSaleStartTime?string("ss")}));//总共的毫秒数
+                
+    if (0 == ts)
+    {
+        window.location.reload();
+    }
+    
+    var date = new Date();
+    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+    dd = checkTime(dd);
+    hh = checkTime(hh);
+    mm = checkTime(mm);
+    ss = checkTime(ss);
+    
+    $("#lday").html(dd);
+    $("#lhour").html(hh);
+    $("#lmin").html(mm);
+    $("#lsec").html(ss);
+}
+
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
+</script>
+</#if>
 <div class="main" style="z-index:10;">
   <a class="pro_share" href="javascript:addCollect(${goods.id});">关注</a>
-  <h3 class="protext red">￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span></h3>
+  <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
+    <h3 class="protext red"><b id="currPrice">￥<#if goods.flashSalePrice??>${goods.flashSalePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.salePrice?string("0.00")}</#if></span></h3>
+  <#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
+    <h3 class="protext red"><b>￥<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></b></h3>
+    <h3 class="protext">三人团价格: ￥：<#if goods.groupSaleThreePrice??>${goods.groupSaleThreePrice?string("0.00")}</#if></h3>
+    <h3 class="protext">五人团价格: ￥：<#if goods.groupSaleSevenPrice??>${goods.groupSaleSevenPrice?string("0.00")}</#if></h3>
+    <h3 class="protext">十人团价格: ￥：<#if goods.groupSaleTenPrice??>${goods.groupSaleTenPrice?string("0.00")}</#if></h3>
+  <#elseif qiang?? && qiang == 100 && goods.groupSaleHundredStartTime?? && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime?? && goods.groupSaleHundredStopTime gt .now>
+    <h3 class="protext red"><b>￥<#if goods.groupSalePrePayPrice??>${goods.groupSalePrePayPrice?string("0.00")}</#if></b></h3>
+    <h3 class="protext">百人团价格: ￥：<#if goods.groupSaleHundredPrice??>${goods.groupSaleHundredPrice?string("0.00")}</#if></h3>
+  <#else>
+    <h3 class="protext red"><b>￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span></h3>
+  </#if>
   <p class="center fs09">${goods.title!''}</p>
   <p class="center fs07 red mb10">${goods.subTitle!''}</p>
 
   <div class="protext">
     <table>
-        <tr>
-            <th width="80">选择同盟店：</th>
-            <td>
-              <select>
-                <option value="">请选择...</option>
-                <#list diy_site_list as item>
-                    <option value="${item.id}">${item.title!''}</option>
-                </#list>
-              </select> 
-            </td>
-        </tr>
+        
       
         <#if total_select??>
             <#if 1==total_select>
@@ -217,15 +351,47 @@ function addCollect(goodsId)
 <p class="bottext mainbox">${site.icpNumber!''}</p>
 <div class="buyfoot_bg"></div>
 <footer class="buyfoot">
-  <div class="mainbox">
-    <div class="buynum">
-      <a id="id-plus" href="javascript:;">+</a>
-      <a class="a1"id="id-minus" href="javascript:;">-</a>
-      <input type="text" id="quantity" class="text" value="1" />
-    </div>
-    <a id="addCart" class="fr" href="/cart/init?id=${goods.id}&m=1<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
-    <div class="clear"></div>
-  </div>
+    <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
+        <div class="mainbox">
+            <div class="buynum">
+                <a disabled="disabled" href="javascript:;">+</a>
+                <a class="a1" disabled="disabled" href="javascript:;">-</a>
+                <input type="text" disabled="disabled" class="text" value="1" />
+            </div>
+            <a id="addCart" class="fr" href="/touch/order/buy/qiang?gid=${goods.id}">立即购买</a>
+            <div class="clear"></div>
+        </div>
+    <#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
+        <div class="mainbox">
+            <div class="buynum">
+                <a disabled="disabled" href="javascript:;">+</a>
+                <a class="a1" disabled="disabled" href="javascript:;">-</a>
+                <input type="text" disabled="disabled" class="text" value="1" />
+            </div>
+            <a id="addCart" class="fr" href="/touch/order/buy/tentuan?gid=${goods.id}">立即购买</a>
+            <div class="clear"></div>
+        </div>
+    <#elseif qiang?? && qiang == 100 && goods.groupSaleHundredStartTime?? && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime?? && goods.groupSaleHundredStopTime gt .now>
+        <div class="mainbox">
+            <div class="buynum">
+                <a disabled="disabled" href="javascript:;">+</a>
+                <a class="a1" disabled="disabled" href="javascript:;">-</a>
+                <input type="text" disabled="disabled" class="text" value="1" />
+            </div>
+            <a id="addCart" class="fr" href="/touch/order/buy/baituan?gid=${goods.id}">立即购买</a>
+            <div class="clear"></div>
+        </div>
+    <#else>
+        <div class="mainbox">
+            <div class="buynum">
+                <a id="id-plus" href="javascript:;">+</a>
+                <a class="a1"id="id-minus" href="javascript:;">-</a>
+                <input type="text" id="quantity" class="text" value="1" />
+            </div>
+            <a id="addCart" class="fr" href="/cart/init?id=${goods.id}&m=1<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
+            <div class="clear"></div>
+        </div>
+    </#if>
 </footer>
 </body>
 </html>
