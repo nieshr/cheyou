@@ -7,17 +7,17 @@
         
         <#list cart_goods_list as cg>
             <li>
-              <a class="a1 <#if cg.isSelected>sel<#else><#assign allChecked=false></#if>" href="javascript:toggleSelect(${cg.id});">&nbsp;</a>
+              <a class="a1 <#if cg.isSelected>sel<#else><#assign allChecked=false></#if>" href="javascript:toggleSelect(${cg.id?c});">&nbsp;</a>
               <a class="a2" href="/touch/goods/${cg.goodsId}<#if cg.qiang??>?qiang=${cg.qiang!''}</#if>" style="background-image:url(${cg.goodsCoverImageUri!''}); height:64px;">
                 <p>${cg.goodsTitle!''}</p>
               </a>
               <div class="car_num">
                 <span class="red">￥${(cg.price*cg.quantity)?string("0.00")}</span>
                 <input type="text" class="text" value="${cg.quantity!''}" />
-                <a class="min" href="javascript:minusNum(${cg.id});">-</a>
-                <a class="plus" href="javascript:addNum(${cg.id});">+</a>
+                <a class="min" href="javascript:minusNum(${cg.id?c});">-</a>
+                <a class="plus" href="javascript:addNum(${cg.id?c});">+</a>
               </div>
-              <a class="a3" href="javascript:delCartItem(${cg.id});"><img src="/touch/images/delete.png" height="20" /></a>
+              <a class="a3" href="javascript:delCartItem(${cg.id?c});"><img src="/touch/images/delete.png" height="20" /></a>
               <div class="clear"></div>
               <#if cg.isSelected>
                 <#assign totalGoods=totalGoods+cg.quantity>

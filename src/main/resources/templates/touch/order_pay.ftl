@@ -25,7 +25,7 @@ $(document).ready(function(){
 <body>
 <header class="comhead">
   <div class="main">
-    <p>购物车</p>
+    <p>订单</p>
     <a class="a1" href="javascript:history.go(-1);">返回</a>
     <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
   </div>
@@ -36,10 +36,12 @@ $(document).ready(function(){
 <div id="main" class="page-main">
     <div class="car_success">
         <p class="fc fs30 lh40 pb10">订单提交成功! </p>
-        <p> 订单号：<a href="/touch/user/order?id=${order.id!''}">${order.orderNumber!''}</a></p>
+        <p> 订单号：<a href="/touch/user/order?id=${order.id!''}" style="color: #FF0000;">${order.orderNumber!''}</a></p>
         <p> 支付方式：${order.payTypeTitle!''}</p>
-        <p>应付金额￥${order.totalPrice?string('0.00')} <a class="blue" href="/touch/order/dopay/${order.id}">点击支付</a></p>
-        <p>您还可以 <a class="blue" href="/touch/user/order/list/0">查看订单</a>或在订单详情页面<a class="blue" href="/touch/user/order?id=${order.id!''}">修改支付方式</a></p>
+        <p>应付金额￥${order.totalPrice?string('0.00')} 
+            <a class="blue" href="/touch/order/dopay/${order.id}" style="color: #FF0000;">点击支付</a></p>
+        <p>您还可以在订单详情页面
+            <a class="blue" style="color: #FF0000;" href="/touch/user/order?id=${order.id!''}">修改支付方式</a></p>
     </div>
 </div>
 

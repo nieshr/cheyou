@@ -179,7 +179,7 @@ function clearSelect()
             <a class="a2" href="/list/${category.id}">${category.title!""}</a>
         </#list>
     </#if>
-    <span> > ${goods.name!''}</span>
+    <span> > ${goods.name!(goods.title!'')}</span>
   </h2>
     <div class="pro_box">
     <section class="proinfo_left">
@@ -298,7 +298,7 @@ function checkTime(i)
               <span class="red mr10 ml10" id="lday">0</span>天<span class="red mr10 ml10" id="lhour">0</span>时<span class="red ml10 mr10" id="lmin">0</span>分<span class="red ml10 mr10" id="lsec">0</span>秒
             </p>
           </div>
-      <#elseif qiang?? && qiang != 1 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
+      <#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
             <p class="p1">
               <span class="mr10">预付价</span>
               <span class="red fs24 lh30 mr20">￥：<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></span>
@@ -315,6 +315,16 @@ function checkTime(i)
             <p class="p1">
               <span class="mr10">十人团价</span>
               <span class="lh30 mr20">￥：<#if goods.groupSaleTenPrice??>${goods.groupSaleTenPrice?string("0.00")}</#if></span>
+            </p>
+      <#elseif qiang?? && qiang == 100 && goods.groupSaleHundredStartTime?? && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime?? && goods.groupSaleHundredStopTime gt .now>
+            <p class="p1">
+              <span class="mr10">预付价</span>
+              <span class="red fs24 lh30 mr20">￥：<#if goods.groupSalePrePayPrice??>${goods.groupSalePrePayPrice?string("0.00")}</#if></span>
+              <span class="unl-th c9">￥：<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></span>
+            </p>
+            <p class="p1">
+              <span class="mr10">百人团价格</span>
+              <span class="lh30 mr20">￥：<#if goods.groupSaleHundredPrice??>${goods.groupSaleHundredPrice?string("0.00")}</#if></span>
             </p>
       <#else>
           <div class="pro_price">

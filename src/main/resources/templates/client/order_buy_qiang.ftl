@@ -83,7 +83,6 @@
                         <#list user.shippingAddressList as address>
                             <a href="javascript:;" onclick="javascript:selectAddress(this, ${address.id});">
                                 <p>姓名：${address.receiverName!''}</p>
-                           <#--     <p class="p1">收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>  -->
                                 <p>手机：${address.receiverMobile!''}</p>                              
                                 <p>车牌：${address.receiverCarcode!'' }</p>
                                 <P>车型：${address.receiverCartype!'' }</P>
@@ -104,33 +103,6 @@
                         <input class="mytext" id="receiverName" value="" type="text">
                     </td>
                   </tr>
-                  <tr>
-              <#--    <th>姓名</th>  -->
-                  </tr>
-              <#--    
-                  <tr>
-                    <th>*地区：</th>
-                    <td>
-                      <div id="address">
-                      <select id="prov" class="prov" style="width: 100px;"></select>
-                      <select id="city" class="city" style="width: 100px;"></select>
-                      <select id="dist" class="dist" style="width: 100px;"></select>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>*详细地址：</th>
-                    <td>
-                        <input class="mytext" id="detailAdd" value="" type="text">
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>*邮政编码：</th>
-                    <td>
-                        <input class="mytext" id="postcode" value="" type="text">
-                    </td>
-                  </tr>
-                  -->
                   <tr>
                     <th>*手机：</th>
                     <td>
@@ -173,19 +145,7 @@
                         <p>${item.address}</p>
                     </#list>                  
                 </#if>
-            </select>
-       <#--
-                 <#if shop_list??>
-                     <#list shop_list as item>
-                        <table id="${item.id}" style="display:">
-                             <tr>
-                             
-                               <td>${item.address}</td>
-                             </tr>
-                         </table>
-                       </#list>
-                 </#if>
-        -->          
+            </select>     
         </section>
         <section class="order_check fr" style="width:40%;">
             <h3>选择预约安装时间</h3>
@@ -236,8 +196,6 @@
             <a class="ml20 fc" href="javascript:window.history.back();">返回上一页</a>
             <span>应付总额：商品价格（¥<b id="goodsFee">${totalPrice?string("0.00")}</b>）
                 + 支付手续费（¥<b id="payTypeFee">0.00</b>）
-                - 粮草抵扣（￥<b id="pointFee">0.00</b>）
-                - 优惠券（￥<b id="couponFee">0.00</b>）
                 = ￥<b class="red fs18" id="totalFee">${totalPrice?string('0.00')}</b></span>
             <input class="sub" type="submit" value="提交订单" />
         </div>
