@@ -1574,6 +1574,8 @@ public class TdUserController extends AbstractPaytypeController {
         }
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
     	user.setHeadImageUri(imgUrl);
+    	tdUserService.save(user);
+    	
     	return "client/user_index";
     }
     

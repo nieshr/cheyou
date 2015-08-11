@@ -48,7 +48,7 @@ $(document).ready(function(){
 
 function timer${item_index}()
 {
-<#if item.isFlashSale && item.flashSaleStartTime < .now && item.flashSaleStopTime gt .now>
+    <#if item.isFlashSale && item.flashSaleStartTime < .now && item.flashSaleStopTime gt .now>
     var ts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
                 parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
                 ${item.flashSaleStopTime?string("dd")}, 
