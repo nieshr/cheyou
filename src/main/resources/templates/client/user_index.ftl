@@ -23,6 +23,7 @@
 <script type="text/javascript" src="/mag/js/swfupload.queue.js"></script>
 <script type="text/javascript" src="/client/js/swfupload.handlers.js"></script>
 <script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
+<script type="text/javascript" src="/mag/js/layout.js"></script>
 
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
@@ -48,7 +49,7 @@ $(function () {
     //初始化上传控件
     $(".upload-img").each(function () {
         $(this).InitSWFUpload({ 
-            sendurl: "/Verwalter/upload", 
+            sendurl: "/Verwalter/upload/client", 
             flashurl: "/mag/js/swfupload.swf"
         });
     });
@@ -62,14 +63,13 @@ $(function () {
    {
        var element = document.getElementsByName("imgUrl");
        var oneElement = element[0];
-       alert($("#imageURL").attr("src"));
        imageUrl=$("#imageURL").attr("src");
        if (null == imageUrl)
         {
             return;
         }
     
-   <!--
+   <#--
     $.ajax({
         type:"post",
         url:"/user/headImageUrl",
@@ -84,7 +84,8 @@ $(function () {
     });
     -->
     $.post("/user/headImageUrl",{"imgUrl": imageUrl},function(date){
-       console.debug(date) 
+       console.debug(date);
+        alert("头像更改成功");
     })
    }
 </script>
@@ -111,7 +112,7 @@ $(function () {
                         <a class="mymember_header test_img" href="#">
                             <img class="test_img1"src="${user.headImageUri!'/mag/style/user_avatar.png'}" width="120" height="120"/>
                         </a>
-                        <div class="upload-box upload-img"></div>
+                        <div style="margin-left:25px;margin-top:10px;" class="upload-box upload-img"></div>
                     </th>
                     <td><a href="/user/order/list/2"><img src="/client/images/mymember/buy01.png" />待付款：<span>${total_unpayed!0}</span></a></td>
                     <td><a href="/user/order/list/3"><img src="/client/images/mymember/buy02.png" />待发货：<span>${total_undelivered!0}</span></a></td>
