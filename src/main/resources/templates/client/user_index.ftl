@@ -19,6 +19,11 @@
 <script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/goods_comment_consult.js"></script>
 
+<script type="text/javascript" src="/mag/js/swfupload.js"></script>
+<script type="text/javascript" src="/mag/js/swfupload.queue.js"></script>
+<script type="text/javascript" src="/client/js/swfupload.handlers.js"></script>
+<script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
+
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -30,14 +35,60 @@ DD_belatedPNG.fix('.,img,background');
 <![endif]-->
 <script type="text/javascript">
   $(document).ready(function(){
-	menuDownList("top_phone","#top_phonelist",".a1","sel");
-	phoneListMore();//单独下拉
+    menuDownList("top_phone","#top_phonelist",".a1","sel");
+    phoneListMore();//单独下拉
     menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-	navDownList("navdown","li",".nav_showbox");
-	menuDownList("mainnavdown","#navdown",".a2","sel");
-	checkNowHover("shopping_down","shopping_sel");
+    navDownList("navdown","li",".nav_showbox");
+    menuDownList("mainnavdown","#navdown",".a2","sel");
+    checkNowHover("shopping_down","shopping_sel");
 });
+
+$(function () {
+
+    //初始化上传控件
+    $(".upload-img").each(function () {
+        $(this).InitSWFUpload({ 
+            sendurl: "/Verwalter/upload", 
+            flashurl: "/mag/js/swfupload.swf"
+        });
+    });
+});
+
+ 
 </script>
+
+<script type="text/javascript">
+   function testImg(imageUrl)
+   {
+       var element = document.getElementsByName("imgUrl");
+       var oneElement = element[0];
+       alert($("#imageURL").attr("src"));
+       imageUrl=$("#imageURL").attr("src");
+       if (null == imageUrl)
+        {
+            return;
+        }
+    
+   <!--
+    $.ajax({
+        type:"post",
+        url:"/user/headImageUrl",
+        async:"true",
+        data:{"imgUrl": imageUrl},
+        error:function(){
+            alert("发送失败");
+        },
+        success:function(data){
+            alert("更改成功");
+        }
+    });
+    -->
+    $.post("/user/headImageUrl",{"imgUrl": imageUrl},function(date){
+       console.debug(date) 
+    })
+   }
+</script>
+
 </head>
 <body>
 <#include "/client/common_header.ftl" />
@@ -50,18 +101,22 @@ DD_belatedPNG.fix('.,img,background');
     <div class="myclear" style="height:20px;"></div>
   
     <#include "/client/common_user_menu.ftl" />
-  
+    
     <div class="mymember_center">
         <div class="mymember_info mymember_info01">
+        <form method="post" action="/user/headImageUrl" id="testImage">
             <table>
                 <tr>
                     <th width="150" rowspan="2">
-                        <a class="mymember_header" href="/user"><img src="${user.headImageUri!'/mag/style/user_avatar.png'}" /></a>
+                        <a class="mymember_header test_img" href="#">
+                            <img class="test_img1"src="${user.headImageUri!'/mag/style/user_avatar.png'}" width="120" height="120"/>
+                        </a>
+                        <div class="upload-box upload-img"></div>
                     </th>
                     <td><a href="/user/order/list/2"><img src="/client/images/mymember/buy01.png" />待付款：<span>${total_unpayed!0}</span></a></td>
                     <td><a href="/user/order/list/3"><img src="/client/images/mymember/buy02.png" />待发货：<span>${total_undelivered!0}</span></a></td>
                     <th rowspan="2" class="mymember_fen">
-                        <a href="/user/point/list"><img src="/client/images/mymember/buy05.png" /><p>粮草：<span>${user.totalPoints!0}</span></p></a>
+                        <a href="/user/point/list"><img src="/client/images/mymember/buy05.png" /><p>积分：<span>${user.totalPoints!0}</span></p></a>
                     </th>
                 </tr>
                 <tr>
@@ -69,6 +124,7 @@ DD_belatedPNG.fix('.,img,background');
                     <td><a href="/user/order/list/6"><img src="/client/images/mymember/buy04.png" />已完成：<span>${total_finished!'0'}</span></a></td>
                 </tr>
             </table>
+            </form>
         </div>
     
         <div class="mymember_info mymember_info02">

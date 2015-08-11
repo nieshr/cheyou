@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.http.impl.cookie.PublicSuffixListParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -1556,7 +1557,26 @@ public class TdUserController extends AbstractPaytypeController {
 
         return "redirect:/user/password";
     }
-
+    
+    /**
+     * @author mdj
+     * @param rep
+     * @param imgUrl 头像图片地址
+     * @return
+     */
+    @RequestMapping(value = "/user/headImageUrl", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveHeadPortrait(String imgUrl,HttpServletRequest rep)
+    {
+    	String username = (String)rep.getSession().getAttribute("username");
+    	if (null == username) {
+            return "redirect:/login";
+        }
+        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+    	user.setHeadImageUri(imgUrl);
+    	return "client/user_index";
+    }
+    
     @ModelAttribute
     public void getModel(
             @RequestParam(value = "addressId", required = false) Long addressId,
