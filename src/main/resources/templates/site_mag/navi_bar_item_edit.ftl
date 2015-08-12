@@ -107,6 +107,19 @@ $(function () {
         </dd>
     </dl>
     <dl>
+        <dt>触屏版使用</dt>
+        <dd>
+            <div class="rule-multi-radio">
+                <span id="rblStatus">
+                    <input type="radio" name="isTouchShow" value="1" <#if navi_bar_item?? && navi_bar_item.isTouchShow?? && navi_bar_item.isTouchShow>checked="checked"</#if>>
+                    <label>是</label>
+                    <input type="radio" name="isTouchShow" value="0" <#if !navi_bar_item?? || !navi_bar_item.isTouchShow?? || !navi_bar_item.isTouchShow>checked="checked"</#if>>
+                    <label>否</label>
+                </span>
+            </div>
+        </dd>
+    </dl>
+    <dl>
         <dt>排序数字</dt>
         <dd>
             <input name="sortId" type="text" value="<#if navi_bar_item??>${navi_bar_item.sortId!""}<#else>99</#if>" class="input txt100" datatype="n" sucmsg=" ">

@@ -37,6 +37,10 @@ public class TdNaviBarItem {
     @Column
     private Boolean isEnable;
     
+    // 是否是触屏版显示
+    @Column
+    private Boolean isTouchShow;
+    
     // 链接地址
     @Column
     private String linkUri;
@@ -87,5 +91,13 @@ public class TdNaviBarItem {
 
     public void setLinkUri(String linkUri) {
         this.linkUri = linkUri;
+    }
+
+    public Boolean getIsTouchShow() {
+        return isTouchShow;
+    }
+
+    public void setIsTouchShow(Boolean isTouchShow) {
+        this.isTouchShow = isTouchShow;
     }
 }

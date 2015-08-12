@@ -67,6 +67,7 @@ var theForm = document.forms['form1'];
     <th align="center" width="10%">图标</th>
     <th align="center">跳转地址</th>
     <th align="center" width="10%">是否使能</th>
+    <th align="center" width="10%">使用位置</th>
     <th width="8%">排序</th>
     <th width="6%">操作</th>
   </tr>
@@ -83,6 +84,7 @@ var theForm = document.forms['form1'];
             <td align="center"><img src="${item.iconUri!''}" width="25 height="25"/></td>
             <td align="center">${item.linkUri!""}</td>
             <td align="center"><#if item.isEnable?? && item.isEnable>是<#else>否</#if></td>
+            <td align="center"><#if item.isTouchShow?? && item.isTouchShow>触屏<#else>PC</#if></td>
             <td align="center">
                 <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
             </td>
