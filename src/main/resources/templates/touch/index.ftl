@@ -145,7 +145,7 @@ function timer${item_index}()
         <#list navi_item_list as item>
             <#if item_index gt 0 && item_index < 9>
                 <li>
-                  <a href="/touch/<#if item.linkUri!="/">${item.linkUri}</#if>"><img src="${item.iconUri!''}" /><p>${item.title!''}</p></a>
+                  <a href="/touch<#if item.linkUri!="/">${item.linkUri}</#if>"><img src="${item.iconUri!''}" /><p>${item.title!''}</p></a>
                 </li>
             </#if>
         </#list>

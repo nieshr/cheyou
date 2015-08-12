@@ -6,28 +6,19 @@
 <meta name="keywords" content="${site.seoKeywords!''}">
 <meta name="description" content="${site.seoDescription!''}">
 <meta name="copyright" content="${site.copyright!''}" />
-<!--[if IE]>
-   <script src="/client/js/html5.js"></script>
-<![endif]-->
-<script src="/client/js/jquery-1.9.1.min.js"></script>
-<script src="/client/js/Validform_v5.3.2_min.js"></script>
-<script src="/client/js/common.js"></script>
-<script src="/client/js/ljs-v1.01.js"></script>
-<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+<script src="/touch/js/jquery-1.9.1.min.js"></script>
+<script src="/touch/js/common.js"></script>
+<script src="/touch/js/Validform_v5.3.2_min.js"></script>
+
+<link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/style2.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
 $(document).ready(function(){
-    menuDownList("top_phone","#top_phonelist",".a1","sel");
-    phoneListMore();//单独下拉
-    menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
-    navDownList("navdown","li",".nav_showbox");
-    menuDownList("mainnavdown","#navdown",".a2","sel");
-    checkNowHover("shopping_down","shopping_sel");
-    
-    // 优惠券切换店铺
+      // 优惠券切换店铺
     $(".couponSel").change(function(){
         $(this).siblings(".mt5").eq(0).children(".red").eq(0).html($(this).find("option:selected").attr("tn"));
     });
@@ -69,14 +60,15 @@ function hideDialog()
 {
     $("#checkDialog").css("display", "none");
 }
+
 </script>
 </head>
 <body>
 <div id="checkDialog" class="mianfeilingqutanchu" style="display: none;position: fixed; top: 0px; left: 0px;">
     <div class="mianfeilingqutanchu_dl">
         <section class="loginbox">
-            <a class="fr" style="z-index:999999999; /* margin-top:50px; */ margin-left: 410px;position: absolute;" href="javascript:hideDialog();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="25" height="25"></a>
-            <form id="form1" action="/coupon/request" method="post">
+            <a class="fr" style="z-index:999999999; /* margin-top:50px;  margin-left: 410px;position: absolute;*/" href="javascript:hideDialog();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="25" height="25"></a>
+            <form id="form1" action="/touch/coupon/request" method="post">
                 <span class="Validform_checktip">请填写领取信息</span>
                 <input id="couponId" name="couponId" class="text" type="hidden" value="" datatype="n"/>
                 <p><b style="color: #FF0000;">*</b> 请输入姓名</p>
@@ -92,7 +84,7 @@ function hideDialog()
           
                 <div class="clear h15"></div>
                 <p class="pb10">
-                    <span class="absolute-r"><a href="/reg">免费注册</a> | <a href="/login">登录</a></span>
+                    <span class="absolute-r"><a href="/touch/login">登录</a> | <a href="/touch/reg">注册</a></span>
                 </p>
                 <div class="clear h40"></div>
                 <input type="submit" class="sub" value="免费领取" />
@@ -101,15 +93,23 @@ function hideDialog()
         </section>
     </div>
 </div>
-<#include "/client/common_header.ftl" />
 
-<div class="main">
-    
+<header class="comhead">
+  <div class="main">
+    <p>免费领取</p>
+    <a class="a1" href="javascript:history.go(-1);">返回</a>
+    <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
+  </div>
+</header>
+<div class="comhead_bg"></div>
+<!--header END-->
+
+<menu class="mainbox freelist">
     <#if coupon_type_list??>
         <#list coupon_type_list as item>
             <div class="mianfeilingqu">
                 <div class="mianfeilingqu_left">
-                    <img src="${item.picUri!''}" width="874" height="350">
+                    <img src="${item.picUri!''}" class="couponimg">
                     <div class="mendian">
                         <span>同盟店:</span>
                         <select class="couponSel">
@@ -134,27 +134,43 @@ function hideDialog()
                     </div>
                 </div>
                 <div class="mianfeilingqu_right">
+                
                     <h3>领取车友</h3>
                     <ul>
                         <#if ("distributed_coupon_" + item.id + "_list")?eval?? >
                             <#list ("distributed_coupon_" + item.id + "_list")?eval as distributedCoupon>
-                                <#if distributedCoupon_index < 10>
+                                <#if distributedCoupon_index lt 10>
                                 <li><span class="red"><#if distributedCoupon.mobile??>${distributedCoupon.mobile?substring(0, 7)}****</#if></span><span class="fr"><#if distributedCoupon.getTime??>${distributedCoupon.getTime?string("yyyy.MM.dd")}</#if></span></li>
                                 </#if>
                             </#list>
-                        </#if> 
+                       <#else>
+                            <li><span class="red">暂无人领取</span></li>
+                       </#if> 
                     </ul>
+                
                 </div>
             </div>
         </#list>
     </#if>
-    
-    <div class="clear"></div>
+</menu>
 
-</div>
-
-<div class="clear h50"></div>
-
-<#include "/client/common_footer.ftl" />
+<div class="clear h40"></div>
+<section class="botlogin">
+  <#if username??>
+  <a href="/touch/user">${username!''}</a>
+  <a class="ml20" href="/touch/logout">退出</a>
+  <#else>
+  <a href="/touch/login">登录</a><a class="ml20" href="/touch/reg">注册</a>
+  </#if>
+  <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
+</section>
+<div class="clear"></div>
+<footer class="comfoot main">
+    <a href="/coupon/list">电脑版</a>
+    <a href="/touch/coupon/list">触屏版</a>
+</footer>
+<p class="bottext mainbox">${site.copyright!''}</p>
+<p class="bottext mainbox">${site.icpNumber!''}</p>
+<!--没有任何代码-->
 </body>
 </html>
