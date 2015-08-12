@@ -356,7 +356,7 @@ function commentJump()
                                               <div class="myclear"></div>
                                             </div>
                                             <div class="mymember_eva_div">
-                                              <b><font>* </font>同盟店专业技能：</b>
+                                              <b><font>* </font>同盟店：</b>
                                               <div class="myclear"></div>
                                               <input id="skillStar" name="skillStar" type="hidden" value="1" />
                                               <a class="skillStar a001" href="javascript:starChange('skillStar', 1);"><img src="/client/images/content/start03.png"></a>
