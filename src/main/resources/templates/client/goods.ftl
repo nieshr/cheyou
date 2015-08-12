@@ -453,8 +453,10 @@ function checkTime(i)
                 <span class="fl ml10">库存
                 <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
                     ${goods.flashSaleLeftNumber!'0'}
-                <#elseif qiang?? && qiang!=1 && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
+                <#elseif qiang?? && qiang==3 && goods.groupSaleStartTime < .now && goods.groupSaleStopTime gt .now>
                     ${goods.groupSaleLeftNumber!'0'}
+                <#elseif qiang?? && qiang==100 && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime gt .now>
+                    ${goods.groupSaleHundredLeftNumber!'0'}
                 <#else>
                     ${goods.leftNumber!'0'}
                 </#if>

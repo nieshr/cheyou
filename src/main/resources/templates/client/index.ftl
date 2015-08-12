@@ -786,13 +786,17 @@ function priceSearch${item_index}(priceid,boxid,x,y){
                 ${item.flashSaleStartTime?string("mm")}, 
                 ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数      
                 
-    _search.hover(function(){
-            var _search_x = _progress_bar.offset().left;
-            var _mouseposX = document.getElementById(x).value;
-            var resoult = _mouseposX - _search_x;
-            var newprice = price - (price/250) * resoult;
-            
-            var search_time = (allts/250) * resoult; //查询位置毫秒数
+    _search.hover(function(){           
+          },function(){
+              _progress_bar.css({"width":"50%px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+              price_box.css({"display":"none"})
+              });
+              
+    _search.mousemove(function(e){
+            var _nowX = e.pageX - _search.offset().left;
+            var _nowY = e.pageY - _search.offset().top;
+            var newprice = price - (price/250) * _nowX;
+            var search_time = (allts/250) * _nowX; //查询位置毫秒数
             var dd = parseInt(search_time / 1000 / 60 / 60 / 24, 10);//计算天数
             var hh = parseInt(search_time / 1000 / 60 / 60 % 24, 10);//计算小时数
             var mm = parseInt(search_time / 1000 / 60 % 60, 10);//计算分钟数
@@ -802,18 +806,18 @@ function priceSearch${item_index}(priceid,boxid,x,y){
             hh = checkTime(hh);
             mm = checkTime(mm);
             ss = checkTime(ss);
+            
             $("#priceid${item_index}").html("<p>"+"时间："
                                             +hh+":"+mm
                                             +"</p>"
                                             +"<p>"+"价格："+parseInt(newprice)
                                             +"</p>");
-            
-            _progress_bar.css({"width":resoult+"px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
-            price_box.css({"display":"inline-block","padding":"5px","border":"1px solid #ddd","position":"absolute","top":"-65px","left":resoult-25+"px","font-size":"12px"});
-          },function(){
-              _progress_bar.css({"width":"50%px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
-              price_box.css({"display":"none"})
-              });
+            _progress_bar.css({"width":_nowX+"px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+            if(_nowX > 195){
+                _nowX = 195;
+            }
+            price_box.css({"display":"inline-block","padding":"5px","border":"1px solid #ddd","position":"absolute","top":"-65px","left":_nowX-25+"px","font-size":"12px"});
+    });
     
 }
 </script>
@@ -834,7 +838,7 @@ function priceSearch${item_index}(priceid,boxid,x,y){
                                             <p>鼠标放到进度条试试</p>
                                         </div>                                       
                                     </div>
-                                                                        
+                                                                     
                                 </dt>
                             <#else>
                                 <dd>
@@ -949,12 +953,17 @@ function priceSearch1${item_index}(priceid,boxid,x,y){
                 ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数      
                 
     _search.hover(function(){
-            var _search_x = _progress_bar.offset().left;
-            var _mouseposX = document.getElementById(x).value;
-            var resoult = _mouseposX - _search_x;
-            var newprice = price - (price/250) * resoult;
             
-            var search_time = (allts/250) * resoult; //查询位置毫秒数
+          },function(){
+              _progress_bar.css({"width":"50%px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+              price_box.css({"display":"none"})
+              });
+              
+    _search.mousemove(function(e){
+            var _nowX = e.pageX - _search.offset().left;
+            var _nowY = e.pageY - _search.offset().top;
+            var newprice = price - (price/250) * _nowX;
+            var search_time = (allts/250) * _nowX; //查询位置毫秒数
             var dd = parseInt(search_time / 1000 / 60 / 60 / 24, 10);//计算天数
             var hh = parseInt(search_time / 1000 / 60 / 60 % 24, 10);//计算小时数
             var mm = parseInt(search_time / 1000 / 60 % 60, 10);//计算分钟数
@@ -969,14 +978,12 @@ function priceSearch1${item_index}(priceid,boxid,x,y){
                                             +"</p>"
                                             +"<p>"+"价格："+parseInt(newprice)
                                             +"</p>");
-            
-            _progress_bar.css({"width":resoult+"px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
-            price_box.css({"display":"inline-block","padding":"5px","border":"1px solid #ddd","position":"absolute","top":"-65px","left":resoult-25+"px","font-size":"12px"});
-          },function(){
-              _progress_bar.css({"width":"50%px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
-              price_box.css({"display":"none"})
-              });
-    
+            _progress_bar.css({"width":_nowX+"px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+            if(_nowX > 195){
+                _nowX = 195;
+            }
+            price_box.css({"display":"inline-block","padding":"5px","border":"1px solid #ddd","position":"absolute","top":"-65px","left":_nowX-25+"px","font-size":"12px"});
+    });
 }
 
 </script>
@@ -1110,12 +1117,17 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                 ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数      
                 
     _search.hover(function(){
-            var _search_x = _progress_bar.offset().left;
-            var _mouseposX = document.getElementById(x).value;
-            var resoult = _mouseposX - _search_x;
-            var newprice = price - (price/250) * resoult;
             
-            var search_time = (allts/250) * resoult; //查询位置毫秒数
+          },function(){
+              _progress_bar.css({"width":"50%px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+              price_box.css({"display":"none"})
+              });
+    
+    _search.mousemove(function(e){
+            var _nowX = e.pageX - _search.offset().left;
+            var _nowY = e.pageY - _search.offset().top;
+            var newprice = price - (price/250) * _nowX;
+            var search_time = (allts/250) * _nowX; //查询位置毫秒数
             var dd = parseInt(search_time / 1000 / 60 / 60 / 24, 10);//计算天数
             var hh = parseInt(search_time / 1000 / 60 / 60 % 24, 10);//计算小时数
             var mm = parseInt(search_time / 1000 / 60 % 60, 10);//计算分钟数
@@ -1130,14 +1142,12 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                             +"</p>"
                                             +"<p>"+"价格："+parseInt(newprice)
                                             +"</p>");
-            
-            _progress_bar.css({"width":resoult+"px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
-            price_box.css({"display":"inline-block","padding":"5px","border":"1px solid #ddd","position":"absolute","top":"-65px","left":resoult-25+"px","font-size":"12px"});
-          },function(){
-              _progress_bar.css({"width":"50%px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
-              price_box.css({"display":"none"})
-              });
-    
+            _progress_bar.css({"width":_nowX+"px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+            if(_nowX > 195){
+                _nowX = 195;
+            }
+            price_box.css({"display":"inline-block","padding":"5px","border":"1px solid #ddd","position":"absolute","top":"-65px","left":_nowX-25+"px","font-size":"12px"});
+    });
 }
 </script>
                             <#if item_index==0>
@@ -1201,8 +1211,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <a>实时查询</a>
                                         <i></i>
                                         <div>
-                                            <p>时间：19:55</p>
-                                            <p>价格：299.00</p>
+                                            <p>时间：</p>
+                                            <p>价格：</p>
                                         </div>
                                     </div>
                                 </dt>
@@ -1236,8 +1246,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <a>实时查询</a>
                                         <i></i>
                                         <div>
-                                            <p>时间：19:55</p>
-                                            <p>价格：299.00</p>
+                                            <p>时间：</p>
+                                            <p>价格：</p>
                                         </div>
                                     </div>
                                 </dt>
@@ -1271,8 +1281,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <a>实时查询</a>
                                         <i></i>
                                         <div>
-                                            <p>时间：19:55</p>
-                                            <p>价格：299.00</p>
+                                            <p>时间：</p>
+                                            <p>价格：</p>
                                         </div>
                                     </div>
                                 </dt>
@@ -1319,8 +1329,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <a>实时查询</a>
                                         <i></i>
                                         <div>
-                                            <p>时间：19:55</p>
-                                            <p>价格：299.00</p>
+                                            <p>时间：</p>
+                                            <p>价格：</p>
                                         </div>
                                     </div>
                                 </dt>
@@ -1355,8 +1365,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <a>实时查询</a>
                                         <i></i>
                                         <div>
-                                            <p>时间：19:55</p>
-                                            <p>价格：299.00</p>
+                                            <p>时间：</p>
+                                            <p>价格：</p>
                                         </div>
                                     </div>
                                 </dt>
@@ -1390,8 +1400,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <a>实时查询</a>
                                         <i></i>
                                         <div>
-                                            <p>时间：19:55</p>
-                                            <p>价格：299.00</p>
+                                            <p>时间：</p>
+                                            <p>价格：</p>
                                         </div>
                                     </div>
                                 </dt>
