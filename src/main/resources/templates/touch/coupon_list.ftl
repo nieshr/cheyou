@@ -39,6 +39,7 @@ $(document).ready(function(){
             }
         }
     });
+    $("#Validform_msg").hide();
 });
 
 function showDialog(id)
@@ -67,7 +68,7 @@ function hideDialog()
 <div id="checkDialog" class="mianfeilingqutanchu" style="display: none;position: fixed; top: 0px; left: 0px;">
     <div class="mianfeilingqutanchu_dl">
         <section class="loginbox">
-            <a class="fr" style="z-index:999999999; /* margin-top:50px;  margin-left: 410px;position: absolute;*/" href="javascript:hideDialog();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="25" height="25"></a>
+            <a class="fr" style="z-index:999999999; /* margin-top:50px; position: absolute;*/  margin-right: 10px;" href="javascript:hideDialog();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="25" height="25"></a>
             <form id="form1" action="/touch/coupon/request" method="post">
                 <span class="Validform_checktip">请填写领取信息</span>
                 <input id="couponId" name="couponId" class="text" type="hidden" value="" datatype="n"/>
@@ -84,7 +85,7 @@ function hideDialog()
           
                 <div class="clear h15"></div>
                 <p class="pb10">
-                    <span class="absolute-r"><a href="/touch/login">登录</a> | <a href="/touch/reg">注册</a></span>
+                    <span class="absolute-r" style="padding-bottom:10px;"><a href="/touch/login">登录</a> | <a href="/touch/reg">注册</a></span>
                 </p>
                 <div class="clear h40"></div>
                 <input type="submit" class="sub" value="免费领取" />
