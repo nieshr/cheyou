@@ -19,4 +19,5 @@ public interface TdNaviBarItemRepo extends
 		JpaSpecificationExecutor<TdNaviBarItem> 
 {
     List<TdNaviBarItem> findByIsEnableTrueOrderBySortIdAsc();
+    List<TdNaviBarItem> findByIsEnableTrueAndIsTouchShowTrueOrderBySortIdAsc();
 }

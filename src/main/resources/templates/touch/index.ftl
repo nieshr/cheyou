@@ -35,14 +35,11 @@ function checkTime(i)
     添加倒计时
     @author libiao
 -->
-<#if miao_cur_page??>
-     <#list miao_cur_page.content as item>
+<#if flash_goods_list??>
+     <#list flash_goods_list as item>
 <script>
 $(document).ready(function(){
-
- setInterval("timer${item_index}()",1000);
-
-   
+    setInterval("timer${item_index}()",1000);
 });
 
 
@@ -141,11 +138,11 @@ function timer${item_index}()
 </section><!--我是banner-->
 <section class="indexnav">
   <nav class="main">
-    <#if navi_item_list??>
-        <#list navi_item_list as item>
-            <#if item_index gt 0 && item_index < 9>
+    <#if touch_navi_item_list??>
+        <#list touch_navi_item_list as item>
+            <#if item_index < 8>
                 <li>
-                  <a href="/touch/<#if item.linkUri!="/">${item.linkUri}</#if>"><img src="${item.iconUri!''}" /><p>${item.title!''}</p></a>
+                  <a href="${item.linkUri}"><img src="${item.iconUri!''}" /><p>${item.title!''}</p></a>
                 </li>
             </#if>
         </#list>
@@ -179,22 +176,19 @@ function timer${item_index}()
 </section>
 
 <h3 class="indextit mainbox mt10"><span>1元抢拍</span>
-<#--
-<p><b>1</b><b>1</b>:<b>1</b><b>1</b>:<b>1</b><b>1</b></p>
--->
 <a href="/touch/promotion/miao">+更多</a></h3>
 
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">
     <tr>   
-        <#if miao_cur_page??>
-            <#list miao_cur_page.content as item>
+        <#if flash_goods_list??>
+            <#list flash_goods_list as item>
                 <#if item_index < 3>
                     <td>
                         <a href="/touch/goods/${item.id}?qiang=1">
                           <p class="fs08" >${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
-                          <p id="timeLeft${item_index}"><b>0</b><b>0</b>:<b>0</b><b>0</b>:<b>0</b><b>0</b></p>
+                          <p id="timeLeft${item_index}"><b>00</b>天<b>00</b>时<b>00</b>分<b>00</b>秒</p>
                           <p class="fs07 red" id="flashPrice${item_index}">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
                           <img src="${item.coverImageUri!''}" width="185px"/>
                         </a>
@@ -204,14 +198,14 @@ function timer${item_index}()
         </#if>
     </tr>
     <tr>
-        <#if miao_cur_page??>
-            <#list miao_cur_page.content as item>
+        <#if flash_goods_list??>
+            <#list flash_goods_list as item>
                 <#if item_index gt 2 && item_index < 6>
                     <td>
                         <a href="/touch/goods/${item.id}?qiang=1">
                           <p class="fs08" >${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
-                           <p id="timeLeft${item_index}"><b>0</b><b>0</b>:<b>0</b><b>0</b>:<b>0</b><b>0</b></p>
+                           <p id="timeLeft${item_index}"><b>00</b>天<b>00</b>时<b>00</b>分<b>00</b>秒</p>
                           <p class="fs07 red" id="flashPrice${item_index}">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
                           <img src="${item.coverImageUri!''}" width="185px"/>
                         </a>
@@ -234,17 +228,15 @@ function timer${item_index}()
                     <a href="/touch/goods/${item.id}?qiang=3">
                       <p class="fs08">${item.title!''}</p>
                       <p class="fs07 c9">${item.subTitle!''}</p>
-                      <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
+                      <p class="fs07 red">￥<#if item.groupSalePrice??>${item.groupSalePrice?string("0.00")}</#if></p>
                       <img src="${item.coverImageUri!''}" width="188px"/>
                     </a>
                 </td>
             </#if>
         </#list>
       </#if>
-
     </tr>
     <tr>
-   
         <#if tuan_cur_page??>
             <#list tuan_cur_page.content as item>
                 <#if item_index gt 2 && item_index lt 6>
@@ -252,7 +244,7 @@ function timer${item_index}()
                         <a href="/touch/goods/${item.id}?qiang=3">
                           <p class="fs08">${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
-                          <p class="fs07 red">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
+                          <p class="fs07 red">￥<#if item.groupSalePrice??>${item.groupSalePrice?string("0.00")}</#if></p>
                           <img src="${item.coverImageUri!''}" width="188px"/>
                         </a>
                     </td>
@@ -262,6 +254,46 @@ function timer${item_index}()
     </tr>
   </table>
 </section>
+
+
+<h3 class="indextit mainbox"><span>百人团购</span><a href="/touch/promotion/tuan">+更多</a></h3>
+<section class="indexlist">
+  <table style="border-collapse:separate; border-spacing:5px;">
+    <tr>
+        <#if baituan_cur_page??>
+            <#list baituan_cur_page.content as item>
+                <#if item_index lt 3>
+                    <td style="width:30%;">
+                        <a href="/touch/goods/${item.id}?qiang=100">
+                            <p class="fs08">${item.title!''}</p>
+                            <p class="fs07 c9">${item.subTitle!''}</p>
+                            <p class="fs07 red">￥<#if item.groupSalePrePayPrice??>${item.groupSalePrePayPrice?string("0.00")}</#if></p>
+                            <img src="${item.coverImageUri!''}" width="188px"/>
+                        </a>
+                    </td>
+                </#if>
+            </#list>
+        </#if>
+    </tr>
+    <tr>
+        <#if baituan_cur_page??>
+            <#list baituan_cur_page.content as item>
+                <#if item_index gt 2 && item_index lt 6>
+                    <td style="width:30%;">
+                        <a href="/touch/goods/${item.id}?qiang=100">
+                            <p class="fs08">${item.title!''}</p>
+                            <p class="fs07 c9">${item.subTitle!''}</p>
+                            <p class="fs07 red">￥<#if item.groupSalePrePayPrice??>${item.groupSalePrePayPrice?string("0.00")}</#if></p>
+                            <img src="${item.coverImageUri!''}" width="188px"/>
+                        </a>
+                    </td>
+                </#if>
+            </#list>
+        </#if>
+    </tr>
+  </table>
+</section>
+
 <h3 class="indextit mainbox"><span>服务项目</span><#--<a href="#">+更多</a>--></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:3px;">
@@ -302,7 +334,7 @@ function timer${item_index}()
   </table>
 </section>
 
-<h3 class="indextit mainbox"><span>自驾游</span><#if self_drive_product_category??><a href="/touch/list/${self_drive_product_category.id}">+更多</a></#if></h3>
+<h3 class="indextit mainbox mt10"><span>自驾游</span><#if self_drive_product_category??><a href="/touch/list/${self_drive_product_category.id}">+更多</a></#if></h3>
 
 <section class="indexlist">
   <table style="table-layout:fixed;" class="index_my">
@@ -322,14 +354,7 @@ function timer${item_index}()
     
   </table>
 </section>
-<!--
-<h3 class="indextit mainbox mb5"><span>养车护车</span><#--<a href="#">+更多</a>--></h3>
-<#if curing_page??>
-    <#list curing_page.content as item>
-        <a class="block center fs08 mb10" href="/info/content/${item.id}?mid=11">${item.title!''}</a>
-    </#list>
-</#if>
--->
+
 <h3 class="indextit mainbox"><span>特别推荐</span><#--<a href="#">+更多</a>--></h3>
 
 <section class="indexlist">

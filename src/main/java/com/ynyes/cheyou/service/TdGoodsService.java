@@ -437,6 +437,23 @@ public class TdGoodsService {
                 .findByIsGroupSaleTrueAndIsOnSaleTrueAndGroupSaleStopTimeAfterAndGroupSaleStartTimeBeforeOrderByGroupSaleStartTimeAsc(
                         new Date(), new Date(), pageRequest);
     }
+    
+    /**
+     * 正在百人团购商品
+     * 
+     * @param page
+     * @param size
+     * @return
+     */
+    public Page<TdGoods> findByGroupSalingHundredOrderByGroupSaleStartTimeAsc(
+            int page, int size) {
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(
+                Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
+
+        return repository
+                .findByIsGroupSaleHundredTrueAndIsOnSaleTrueAndGroupSaleHundredStopTimeAfterAndGroupSaleHundredStartTimeBeforeOrderByGroupSaleHundredStartTimeAsc(
+                        new Date(), new Date(), pageRequest);
+    }
 
     /**
      * 即将开始团购
@@ -513,7 +530,8 @@ public class TdGoodsService {
      * @return
      */
     public Page<TdGoods> findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(
-            Date startTime, int page, int size) {
+            Date startTime, int page, int size) 
+    {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
 

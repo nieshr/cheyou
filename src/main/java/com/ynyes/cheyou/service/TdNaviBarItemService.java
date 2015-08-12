@@ -110,6 +110,11 @@ public class TdNaviBarItemService {
         return repository.findByIsEnableTrueOrderBySortIdAsc();
     }
     
+    public List<TdNaviBarItem> findByIsEnableTrueAndIsTouchShowTrueOrderBySortIdAsc()
+    {
+        return repository.findByIsEnableTrueAndIsTouchShowTrueOrderBySortIdAsc();
+    }
+    
     /**
      * 保存
      * 

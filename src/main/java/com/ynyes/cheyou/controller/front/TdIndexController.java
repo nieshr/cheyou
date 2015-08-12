@@ -63,6 +63,11 @@ public class TdIndexController {
     @RequestMapping
     public String index(HttpServletRequest req, Device device, ModelMap map) {
         
+        // 触屏
+        if (device.isMobile() || device.isTablet()) {
+            return "redirect:/touch/";
+        }
+        
         tdCommonService.setHeader(map, req);
 
         // 商城快报
@@ -304,30 +309,6 @@ public class TdIndexController {
         map.addAttribute("index_recommend_goods_page", tdGoodsService
                 .findByIsRecommendIndexTrueAndIsOnSaleTrueOrderByIdDesc(0, 4));
 
-        // 触屏页中部广告
-        adType = tdAdTypeService.findByTitle("触屏页中部广告");
-
-        if (null != adType) {
-            map.addAttribute("touch_middle_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
-        }
-
-        // 触屏页秒杀栏旁边广告
-        adType = tdAdTypeService.findByTitle("触屏页秒杀栏旁边广告");
-
-        if (null != adType) {
-            map.addAttribute("touch_miao_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
-        }
-
-        // 触屏页团购栏旁边广告
-        adType = tdAdTypeService.findByTitle("触屏页团购栏旁边广告");
-
-        if (null != adType) {
-            map.addAttribute("touch_tuan_ad_list", tdAdService
-                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
-        }
-
         // 自驾游
         TdProductCategory pCat = tdProductCategoryService.findByTitle("自驾游");
 
@@ -339,11 +320,6 @@ public class TdIndexController {
                     tdGoodsService
                             .findByCategoryIdTreeContainingAndIsOnSaleTrueOrderBySortIdAsc(
                                     pCat.getId(), 0, 5));
-        }
-
-        // 触屏
-        if (device.isMobile() || device.isTablet()) {
-            return "/touch/index";
         }
 
         return "/client/index";
