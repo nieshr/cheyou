@@ -170,7 +170,6 @@ function hideDialog()
     <a href="/touch/coupon/list">触屏版</a>
 </footer>
 <p class="bottext mainbox">${site.copyright!''}</p>
-<p class="bottext mainbox">${site.icpNumber!''}</p>
 <!--没有任何代码-->
 </body>
 </html>
