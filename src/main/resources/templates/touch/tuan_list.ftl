@@ -24,7 +24,7 @@ $(document).ready(function(){
 <body>
 <header class="comhead">
   <div class="main">
-    <p>团购列表</p>
+    <p>十人团购</p>
     <a class="a1" href="javascript:history.go(-1);">返回</a>
     <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
   </div>
@@ -81,18 +81,22 @@ function timer${item_index}()
     <a href="/goods/${item.id!''}?qiang=<#if item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 3>3<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 7>7<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber gt 6>10</#if>">
         <b><img src="${item.groupSaleImage!''}" /></b>
         <p class="p1">${item.title!''}</p>
+        <p>
+            预付价<span  class="red p3">￥<#if item.groupSalePrice??>${item.groupSalePrice?string("0.00")}</#if></span>
+            
+        </p>
         <p class="p2">已售：<span class="red">${item.groupSaleSoldNumber!'0'}</span>份</p>
         <p>
-            <span  class="red p3">￥<#if item.groupSaleThreePrice??>${item.groupSaleThreePrice?string("0.00")}</#if></span>
-            三人团
+            三人团<span  class=" p3">￥<#if item.groupSaleThreePrice??>${item.groupSaleThreePrice?string("0.00")}</#if></span>
+            
         </p>
         <p>
-            <span class="red p3">￥<#if item.groupSaleSevenPrice??>${item.groupSaleSevenPrice?string("0.00")}</#if></span>
-            七人团
+            五人团<span class=" p3">￥<#if item.groupSaleSevenPrice??>${item.groupSaleSevenPrice?string("0.00")}</#if></span>
+            
         </p>
         <p>
-            <span class="red p3">￥<#if item.groupSaleTenPrice??>${item.groupSaleTenPrice?string("0.00")}</#if></span>
-            十人团
+            十人团<span class=" p3">￥<#if item.groupSaleTenPrice??>${item.groupSaleTenPrice?string("0.00")}</#if></span>
+            
         </p>
         <div class="clear"></div>
     </a>

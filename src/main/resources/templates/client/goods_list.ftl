@@ -99,7 +99,7 @@ $(document).ready(function(){
         <ul>
             <#if news_page??>
                 <#list news_page.content as item>
-                    <li><a href="/info/content/${item.id}?mid=12" style="margin-left: 12px;">${item.title!''}</a></li>
+                    <li><a href="/info/content/${item.id?c}?mid=12" style="margin-left: 12px;">${item.title!''}</a></li>
                 </#list>
             </#if>
         </ul>
@@ -110,7 +110,7 @@ $(document).ready(function(){
         <#if most_sold_list??>
             <#list most_sold_list as item>
                 <#if item_index < 3>
-                    <a class="list" href="/goods/${item.id}">
+                    <a class="list" href="/goods/${item.id?c}">
                         <img src="${item.coverImageUri!''}" title="${item.title!''} ${item.subTitle!''}"/>
                         <p class="pt10 pb10 h30 overflow">${item.title!""} ${item.version!""} ${item.color!""} ${item.capacity!""}</p>
                         <p class="red fs16">￥${item.salePrice?string("0.00")}</p>
@@ -144,7 +144,7 @@ $(document).ready(function(){
             <#if hot_sale_list??>
                 <#list hot_sale_list as item>
                     <#if item_index < 5>
-                        <a class="scan" href="/goods/${item.id}">
+                        <a class="scan" href="/goods/${item.id?c}">
                             <img src="${item.coverImageUri!''}" title="${item.title!''} ${item.subTitle!''}"/>
                             <div class="num1">${item_index+1}</div>
                             <p class=" h40 overflow">${item.title!""} ${item.version!""} ${item.color!""} ${item.capacity!""}</p>
@@ -248,29 +248,29 @@ $(document).ready(function(){
             <#if goods_page??>
             <#list goods_page.content as goods>
                 <li>
-                    <a class="a1" href="/goods/${goods.id}"><img src="${goods.coverImageUri!''}" width="210" height="210" title="${goods.title!''} ${goods.subTitle!''}"/></a>
+                    <a class="a1" href="/goods/${goods.id?c}"><img src="${goods.coverImageUri!''}" width="210" height="210" title="${goods.title!''} ${goods.subTitle!''}"/></a>
                     <p class="fs20 jiage lh35 red">￥${goods.salePrice?string("0.00")}</p><del class="yuanjia">¥${goods.marketPrice?string("0.00")}</del>
                     
                     <div class="clear"></div>
         
-                    <a class="block h20 overflow" href="/goods/${goods.id}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a>
-                    <a class="block fs12 blue h20 overflow" href="/goods/${goods.id}">${goods.subTitle!""}</a>
+                    <a class="block h20 overflow" href="/goods/${goods.id?c}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""}</a>
+                    <a class="block fs12 blue h20 overflow" href="/goods/${goods.id?c}">${goods.subTitle!""}</a>
                     <p class="fs14 w84 fl">关注：<span class="blue">${goods.totalCollects!'0'}</span>人</p>
                     <#if goods.returnPoints?? && goods.returnPoints gt 0>
                         <div class="yh fr">
-                            <p><a href="/goods/${goods.id}">送粮草</a></p>
+                            <p><a href="/goods/${goods.id?c}">送粮草</a></p>
                         </div>
                     </#if>
                     <#if goods.giftList?? && goods.giftList?size gt 0>
                         <div class="yh fr">
-                            <p><a href="/goods/${goods.id}">赠品</a></p>
+                            <p><a href="/goods/${goods.id?c}">赠品</a></p>
                         </div>
                     </#if>
                     <div class="clear5"></div>
                     
                     <div class="goumai">
-                        <a class="a8" href="/cart/init?id=${goods.id}" target="_blank"><img src="/client/images/liebiao_31.png" />加入购物车</a>
-                        <a class="a7" href="javascript:addCollect(${goods.id});"><img src="/client/images/liebiao_34.png" />关注</a>
+                        <a class="a8" href="/cart/init?id=${goods.id?c}" target="_blank"><img src="/client/images/liebiao_31.png" />加入购物车</a>
+                        <a class="a7" href="javascript:addCollect(${goods.id?c});"><img src="/client/images/liebiao_34.png" />关注</a>
                         <p class="clear"></p>
                     </div>
                 </li>

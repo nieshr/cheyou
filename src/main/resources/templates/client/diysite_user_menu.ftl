@@ -17,7 +17,7 @@
     <div class="mymember_menu_part">
         <a class="mymember_menu_tit" href="/user/point/list"><img src="/client/images/mymember/menu03.png" />资产中心</a>
         <div>
-            <a href="/user/diysite/member">所属会员</a>
+            <a href="/user/diysite/member">会员列表</a>
         </div>
     </div>
     <div class="mymember_menu_part"> 

@@ -15,6 +15,7 @@
 <script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 
+
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
@@ -217,7 +218,8 @@ $(function(){
           };
     $.ljs_adcartoon.arrowNum(shopad);
     });
-    
+
+//lichong 获取鼠标坐标    
     function mouseMove(ev) 
 { 
 Ev= ev || window.event; 
@@ -241,6 +243,8 @@ document.onmousemove = mouseMove;
 </head>
 
 <body>
+<input type="hidden" name="mouseposX" id="xxx" value="0">
+<input type="hidden" name="mouseposY" id="yyy" value="0">
 <#if index_top_ad_list?? && index_top_ad_list?size gt 0>
     <#list index_top_ad_list as item>
         <a class="w100 block ta-c" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}" style=" background:url(${item.fileUri!''}) no-repeat top center; height:100px;"></a>
@@ -685,12 +689,15 @@ function delItem(id)
                         <#list miao_cur_8_page.content as item>
 <script>
 $(document).ready(function(){
+     
+    
     <#if item.flashSaleStartTime gt .now>
         $("#timeLeft8${item_index}").html("尚未开始");
     <#elseif item.flashSaleStopTime < .now>
         $("#timeLeft8${item_index}").html("已经结束");
     <#else>
         setInterval("timer8${item_index}()",1000);
+        priceSearch${item_index}("priceid${item_index}","search${item_index}","xxx","yyy");
     </#if>
 });
 
@@ -753,6 +760,62 @@ function timer8${item_index}()
                     
 </#if>
 }
+
+//lichong 价格实时查询
+function priceSearch${item_index}(priceid,boxid,x,y){
+    var price_box = $("#"+priceid);
+    var _search = $("#"+boxid);
+    var _progress_bar = _search.find("i");
+    
+    
+    var _search_y = 250;
+    <#if item.flashSalePrice??>
+    var price = ${item.flashSalePrice?c};
+    
+    </#if>   
+    var allts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")}))
+               - (new Date(${item.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStartTime?string("dd")}, 
+                ${item.flashSaleStartTime?string("HH")}, 
+                ${item.flashSaleStartTime?string("mm")}, 
+                ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数      
+                
+    _search.hover(function(){
+            var _search_x = _progress_bar.offset().left;
+            var _mouseposX = document.getElementById(x).value;
+            var resoult = _mouseposX - _search_x;
+            var newprice = price - (price/250) * resoult;
+            
+            var search_time = (allts/250) * resoult; //查询位置毫秒数
+            var dd = parseInt(search_time / 1000 / 60 / 60 / 24, 10);//计算天数
+            var hh = parseInt(search_time / 1000 / 60 / 60 % 24, 10);//计算小时数
+            var mm = parseInt(search_time / 1000 / 60 % 60, 10);//计算分钟数
+            var ss = parseInt(search_time / 1000 % 60, 10);//计算秒数
+            hh = (hh + 10) % 24;
+            dd = checkTime(dd);
+            hh = checkTime(hh);
+            mm = checkTime(mm);
+            ss = checkTime(ss);
+            $("#priceid${item_index}").html("<p>"+"时间："
+                                            +hh+":"+mm
+                                            +"</p>"
+                                            +"<p>"+"价格："+parseInt(newprice)
+                                            +"</p>");
+            
+            _progress_bar.css({"width":resoult+"px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+            price_box.css({"display":"inline-block","padding":"5px","border":"1px solid #ddd","position":"absolute","top":"-65px","left":resoult-25+"px","font-size":"12px"});
+          },function(){
+              _progress_bar.css({"width":"50%px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+              price_box.css({"display":"none"})
+              });
+    
+}
 </script>
                             <#if item_index==0>
                                 <dt>
@@ -764,14 +827,14 @@ function timer8${item_index}()
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft8${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice8${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
-                                    <div class="qgtime">
+                                    <div class="qgtime" id="search${item_index}">
                                         <a>实时查询</a>
-                                        <i></i>
-                                        <div>
-                                            <p>时间：19:55</p>
-                                            <p>价格：299.00</p>
-                                        </div>
+                                        <i></i> 
+                                        <div id="priceid${item_index}">
+                                            <p>鼠标放到进度条试试</p>
+                                        </div>                                       
                                     </div>
+                                                                        
                                 </dt>
                             <#else>
                                 <dd>
@@ -798,6 +861,7 @@ $(document).ready(function(){
         $("#timeLeft15${item_index}").html("已经结束");
     <#else>
         setInterval("timer15${item_index}()",1000);
+        priceSearch1${item_index}("priceid1${item_index}","search1${item_index}","xxx","yyy");
     </#if>
 });
 
@@ -858,6 +922,63 @@ function timer15${item_index}()
                     
 </#if>
 }
+
+//lichong 价格实时查询
+function priceSearch1${item_index}(priceid,boxid,x,y){
+    var price_box = $("#"+priceid);
+    var _search = $("#"+boxid);
+    var _progress_bar = _search.find("i");
+    
+    
+    var _search_y = 250;
+    <#if item.flashSalePrice??>
+    var price = ${item.flashSalePrice?c};
+    
+    </#if>   
+    var allts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")}))
+               - (new Date(${item.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStartTime?string("dd")}, 
+                ${item.flashSaleStartTime?string("HH")}, 
+                ${item.flashSaleStartTime?string("mm")}, 
+                ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数      
+                
+    _search.hover(function(){
+            var _search_x = _progress_bar.offset().left;
+            var _mouseposX = document.getElementById(x).value;
+            var resoult = _mouseposX - _search_x;
+            var newprice = price - (price/250) * resoult;
+            
+            var search_time = (allts/250) * resoult; //查询位置毫秒数
+            var dd = parseInt(search_time / 1000 / 60 / 60 / 24, 10);//计算天数
+            var hh = parseInt(search_time / 1000 / 60 / 60 % 24, 10);//计算小时数
+            var mm = parseInt(search_time / 1000 / 60 % 60, 10);//计算分钟数
+            var ss = parseInt(search_time / 1000 % 60, 10);//计算秒数
+            hh = (hh + 14) % 24;
+            dd = checkTime(dd);
+            hh = checkTime(hh);
+            mm = checkTime(mm);
+            ss = checkTime(ss);
+            $("#priceid1${item_index}").html("<p>"+"时间："
+                                            +hh+":"+mm
+                                            +"</p>"
+                                            +"<p>"+"价格："+parseInt(newprice)
+                                            +"</p>");
+            
+            _progress_bar.css({"width":resoult+"px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+            price_box.css({"display":"inline-block","padding":"5px","border":"1px solid #ddd","position":"absolute","top":"-65px","left":resoult-25+"px","font-size":"12px"});
+          },function(){
+              _progress_bar.css({"width":"50%px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+              price_box.css({"display":"none"})
+              });
+    
+}
+
 </script>
                             <#if item_index==0>
                                 <dt>
@@ -869,13 +990,12 @@ function timer15${item_index}()
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft15${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice15${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
-                                    <div class="qgtime">
+                                    <div class="qgtime" id="search1${item_index}">
                                         <a>实时查询</a>
-                                        <i></i>
-                                        <div>
-                                            <p>时间：19:55</p>
-                                            <p>价格：299.00</p>
-                                        </div>
+                                        <i></i> 
+                                        <div id="priceid1${item_index}">
+                                            <p>鼠标放到进度条试试</p>
+                                        </div>                                       
                                     </div>
                                 </dt>
                             <#else>
@@ -903,6 +1023,7 @@ $(document).ready(function(){
         $("#timeLeft23${item_index}").html("已经结束");
     <#else>
         setInterval("timer23${item_index}()",1000);
+        priceSearch2${item_index}("priceid2${item_index}","search2${item_index}","xxx","yyy");
     </#if>
 });
 
@@ -962,6 +1083,62 @@ function timer23${item_index}()
     $("#flashPrice23${item_index}").html(s_x);
 </#if>
 }
+
+//lichong 价格实时查询
+function priceSearch2${item_index}(priceid,boxid,x,y){
+    var price_box = $("#"+priceid);
+    var _search = $("#"+boxid);
+    var _progress_bar = _search.find("i");
+    
+    
+    var _search_y = 250;
+    <#if item.flashSalePrice??>
+    var price = ${item.flashSalePrice?c};
+    
+    </#if>   
+    var allts = (new Date(${item.flashSaleStopTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStopTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStopTime?string("dd")}, 
+                ${item.flashSaleStopTime?string("HH")}, 
+                ${item.flashSaleStopTime?string("mm")}, 
+                ${item.flashSaleStopTime?string("ss")}))
+               - (new Date(${item.flashSaleStartTime?string("yyyy")}, 
+                parseInt(${item.flashSaleStartTime?string("MM")}, 10)-1, 
+                ${item.flashSaleStartTime?string("dd")}, 
+                ${item.flashSaleStartTime?string("HH")}, 
+                ${item.flashSaleStartTime?string("mm")}, 
+                ${item.flashSaleStartTime?string("ss")}));//总共的毫秒数      
+                
+    _search.hover(function(){
+            var _search_x = _progress_bar.offset().left;
+            var _mouseposX = document.getElementById(x).value;
+            var resoult = _mouseposX - _search_x;
+            var newprice = price - (price/250) * resoult;
+            
+            var search_time = (allts/250) * resoult; //查询位置毫秒数
+            var dd = parseInt(search_time / 1000 / 60 / 60 / 24, 10);//计算天数
+            var hh = parseInt(search_time / 1000 / 60 / 60 % 24, 10);//计算小时数
+            var mm = parseInt(search_time / 1000 / 60 % 60, 10);//计算分钟数
+            var ss = parseInt(search_time / 1000 % 60, 10);//计算秒数
+            hh = (hh + 20) % 24;
+            dd = checkTime(dd);
+            hh = checkTime(hh);
+            mm = checkTime(mm);
+            ss = checkTime(ss);
+            $("#priceid2${item_index}").html("<p>"+"时间："
+                                            +hh+":"+mm
+                                            +"</p>"
+                                            +"<p>"+"价格："+parseInt(newprice)
+                                            +"</p>");
+            
+            _progress_bar.css({"width":resoult+"px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+            price_box.css({"display":"inline-block","padding":"5px","border":"1px solid #ddd","position":"absolute","top":"-65px","left":resoult-25+"px","font-size":"12px"});
+          },function(){
+              _progress_bar.css({"width":"50%px","display":"block","height":"7px","border-radius":"4px","background":"#019ad3"});
+              price_box.css({"display":"none"})
+              });
+    
+}
 </script>
                             <#if item_index==0>
                                 <dt>
@@ -972,13 +1149,12 @@ function timer23${item_index}()
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft23${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
                                     <a class="a1" href="/goods/${item.id}?qiang=1">￥<b id="flashPrice23${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
                                         <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
-                                    <div class="qgtime">
+                                    <div class="qgtime" id="search2${item_index}">
                                         <a>实时查询</a>
-                                        <i></i>
-                                        <div>
-                                            <p>时间：19:55</p>
-                                            <p>价格：299.00</p>
-                                        </div>
+                                        <i></i> 
+                                        <div id="priceid2${item_index}">
+                                            <p>鼠标放到进度条试试</p>
+                                        </div>                                       
                                     </div>
                                 </dt>
                             <#else>
