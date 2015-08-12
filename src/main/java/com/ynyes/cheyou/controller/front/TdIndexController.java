@@ -238,6 +238,11 @@ public class TdIndexController {
         // 正在进行团购
         map.addAttribute("tuan_cur_page", tdGoodsService
                 .findByGroupSalingOrderByGroupSaleStartTimeAsc(0, 5));
+        
+        // 正在进行百人团购
+        map.addAttribute("baituan_cur_page", tdGoodsService
+                .findByGroupSalingHundredOrderByGroupSaleStartTimeAsc(0, 6));
+
 
 //         已经结束秒杀
 //        map.addAttribute("miao_prev_page", tdGoodsService

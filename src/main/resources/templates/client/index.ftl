@@ -1613,12 +1613,12 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
         <h3>百人团购
             <a class="a1" style="font-size:14px; margin-left:12px;" href="/info/list/12?catId=24">团购细则</a>    
         </h3>
-            <#if tuan_next_page??>
-                <#list tuan_next_page.content as item>
+            <#if baituan_cur_page??>
+                <#list baituan_cur_page.content as item>
                     <p>
-                        <a href="/promotion/tuan?type=ongoing">${item.title!''}</a>
-                        <span class="c9">低于市场价${((item.salePrice - item.groupSalePrice)/item.salePrice*100)?string("0")}%</span>
-                        <span class="sp1">${item.totalComments!'0'}人关注</span>
+                        <a href="/goods/${item.id?c}?qiang=100">${item.title!''}</a>
+                        <span class="c9">低于市场价${((item.salePrice - item.groupSaleHundredPrice)/item.salePrice*100)?string("0")}%</span>
+                        <span class="sp1">${item.totalCollects!'0'}人关注</span>
                     </p>
                     <b><i></i></b>
                 </#list>
