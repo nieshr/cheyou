@@ -85,7 +85,12 @@ function hideDialog()
           
                 <div class="clear h15"></div>
                 <p class="pb10">
-                    <span class="absolute-r" style="padding-bottom:10px;"><a href="/touch/login">登录</a> | <a href="/touch/reg">注册</a></span>
+                    <span class="absolute-r" style="padding-bottom:10px;">
+                          <#if username??>
+                          <#else>
+                          <a href="/touch/login">登录</a><a class="ml20" href="/touch/reg">注册</a>
+                          </#if>
+                    </span>
                 </p>
                 <div class="clear h40"></div>
                 <input type="submit" class="sub" value="免费领取" />
@@ -152,13 +157,15 @@ function hideDialog()
                 </div>
             </div>
         </#list>
+    <#else>
+        <a href="/touch">逛逛其他的</a>
     </#if>
 </menu>
 
 <div class="clear h40"></div>
 <section class="botlogin">
   <#if username??>
-  <a href="/touch/user">${username!''}</a>
+  <a href="/touch/user">${username}</a>
   <a class="ml20" href="/touch/logout">退出</a>
   <#else>
   <a href="/touch/login">登录</a><a class="ml20" href="/touch/reg">注册</a>

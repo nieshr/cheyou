@@ -18,7 +18,6 @@ import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdUserRecentVisitService;
-import com.ynyes.cheyou.util.ClientConstant;
 
 /**
  * 

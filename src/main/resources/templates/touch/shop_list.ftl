@@ -1,23 +1,60 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>同盟店列表</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="copyright" content="" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8;" />
+<title><#if site??>${site.seoTitle!''}-</#if>车有同盟</title>
+<meta name="keywords" content="${site.seoKeywords!''}">
+<meta name="description" content="${site.seoDescription!''}">
+<meta name="copyright" content="${site.copyright!''}" />
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-
+<style type="text/css">  
+body, html,#myMap {width: 100%;height: 100%;overflow: hidden;margin:0;}  
+</style> 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
 
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lwRXRetipHPGz8y6lzUlUZfc"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  
+hideMap();
 });
+
+function loadMap(x, y)
+{
+    showMap();
+    // 百度地图API功能
+    /*
+    var map = new BMap.Map("myMap");    // 创建Map实例
+    map.centerAndZoom(new BMap.Point(x, y), 16);  // 初始化地图,设置中心点坐标和地图级别
+    
+    map.setCurrentCity("昆明");          // 设置地图显示的城市 此项是必须设置的
+    
+    map.addOverlay(new BMap.Marker(new BMap.Point(x, y)); // 创建点
+    */
+    
+    var map = new BMap.Map("myMap");
+    var point = new BMap.Point(x, y);
+    map.centerAndZoom(point, 16);
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+    var marker = new BMap.Marker(new BMap.Point(x, y)); // 创建点
+    map.addOverlay(marker);
+}
+
+function hideMap()
+{
+    $("#allMap").hide();
+}
+
+function showMap(longitude,latitude)
+{
+    $("#allMap").show();
+}
+
+
 </script>
 </head>
 
@@ -31,48 +68,62 @@ $(document).ready(function(){
 </header>
 <div class="comhead_bg"></div>
 <!--header END-->
+
+
+<!--地图的添加 2015-8-12 19:49:37 mdj-->
+<div id="allMap" style="width:90%;margin-left:auto;margin-right:auto; height:90%;margin-bottom:auto;z-index:999999999;">
+    <a class="fr" style="z-index:999999999; /* margin-top:50px; position: absolute;*/  margin-right: 10px;" href="javascript:hideMap();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="25" height="25"></a>
+    <div id="myMap">
+    </div>
+</div>
+<!--地图结束     2015-8-12 19:49:37 mdj-->
 <ul class="main shoplist">
     <#if shop_list??>
         <#list shop_list as item>
-        
+        <li>
+            <a class="a1" href="#"><img src="${item.imageUri}" /></a>
+            <p class="p1">${item.title}
+              <span>
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 1 >star01.png<#else>star03.png</#if>" height="15" />
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 1 >star01.png<#else>star03.png</#if>" height="15" />
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 2 >star01.png<#else>star03.png</#if>" height="15" />
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 3 >star01.png<#else>star03.png</#if>" height="15" />
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 4 >star02.png<#else>star03.png</#if>" height="15" />
+              </span>
+            </p>
+            <p class="p2">详细地址：${item.address}</p>
+            <p class="p2">
+              <a href="javascript:loadMap(<#if item.longitude??>${item.longitude?string("0.000000")}<#else>110</#if>, <#if item.latitude??>${item.latitude?string("0.000000")}<#else>39</#if>);">查看地图</a>
+            <a class="a2" href="tel://${item.complainTele}">拨打电话</a>
+            </p>
+            <div class="clear"></div>
+          </li>
         </#list>
+    <#else>
+    <li>暂无商店</li>
     </#if>
-  
-  <li>
-    <a class="a1" href="#"><img src="/touch/images/img01.png" /></a>
-    <p class="p1">我是商店的名车哦
-      <span>
-        <img src="/touch/images/star01.png" height="15" />
-        <img src="/touch/images/star01.png" height="15" />
-        <img src="/touch/images/star01.png" height="15" />
-        <img src="/touch/images/star01.png" height="15" />
-        <img src="/touch/images/star01.png" height="15" />
-      </span>
-    </p>
-    <p class="p2">详细地址：我是地址的东西文字描述</p>
-    <p class="p2">
-      <a href="#">查看地图</a>
-      <a class="a2" href="#">拨打电话</a>
-    </p>
-    <div class="clear"></div>
-  </li>
   
 </ul>
 
 
 <div class="clear"></div>
-<a class="ma15 ta-c block" href="#"><img src="/touch/images/more.png" height="20" /></a>
+<#--<a class="ma15 ta-c block" href="#"><img src="/touch/images/more.png" height="20" /></a>-->
 <div class="clear h20"></div>
 <section class="botlogin">
-  <a href="#">登录</a><a class="ml20" href="#">注册</a>
-  <a class="a1" href="#">TOP</a>
+  <#if username??>
+  <a href="/touch/user">${username}</a>
+  <a class="ml20" href="/touch/logout">退出</a>
+  <#else>
+  <a href="/touch/login">登录</a><a class="ml20" href="/touch/reg">注册</a>
+  </#if>
+  <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
 </section>
+<div class="clear"></div>
 <footer class="comfoot main">
-    <a href="#">电脑版</a>
-    <a href="#">触屏版</a>
+    <a href="/shop/list">电脑版</a>
+    <a href="/touch/shop/list">触屏版</a>
 </footer>
-<p class="bottext mainbox">Copyright©2015 www.cytm99.com 保留所有版权</p>
-<p class="bottext mainbox">滇ICP备0932488号</p>
-
+<p class="bottext mainbox">${site.copyright!''}</p>
+<!--没有任何代码-->
 </body>
 </html>
