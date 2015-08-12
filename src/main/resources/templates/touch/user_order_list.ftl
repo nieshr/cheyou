@@ -44,7 +44,7 @@ $(document).ready(function(){
 <menu class="whitebg mymenu_list">
 <#if order_page??>
     <#list order_page.content as order>
-        <h4>订单号：${order.orderNumber!''}<span>共<b class="red">${order.orderGoodsList?size}</b>件商品，总计<b class="red">￥${order.totalPrice?string("0.00")}</b>元</span></h4>
+        <h4>订单号：<a href="/touch/user/order?id=${order.id}">${order.orderNumber!''}</a><span>共<b class="red">${order.orderGoodsList?size}</b>件商品，总计<b class="red">￥${order.totalPrice?string("0.00")}</b>元</span></h4>
         <#list order.orderGoodsList as og>
             <a href="/touch/goods/${og.goodsId}">
                 <b><img src="${og.goodsCoverImageUri}" /></b>

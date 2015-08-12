@@ -192,7 +192,7 @@ $(function () {
                   </li>
                 </ul>
                 <div class="myclear"></div>
-                <a id="mymember_gznext" href="#"><img src="/client/images/mymember/arrow02.jpg" /></a>
+                <a id="mymember_gznext" href="javascript:;"><img src="/client/images/mymember/arrow02.jpg" /></a>
                 
             </div>
         </div><!--mymember_info END-->

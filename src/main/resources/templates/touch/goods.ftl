@@ -358,7 +358,11 @@ function checkTime(i)
                 <a class="a1" disabled="disabled" href="javascript:;">-</a>
                 <input type="text" disabled="disabled" class="text" value="1" />
             </div>
-            <a id="addCart" class="fr" href="/touch/order/buy/qiang?gid=${goods.id}">立即购买</a>
+            <#if goods.flashSaleLeftNumber gt 0>
+                <a id="addCart" class="fr" href="/touch/order/buy/qiang?gid=${goods.id}">立即购买</a>
+            <#else>
+                <a id="addCart" class="fr" href="#">抢购结束</a>
+            </#if>
             <div class="clear"></div>
         </div>
     <#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
@@ -368,7 +372,11 @@ function checkTime(i)
                 <a class="a1" disabled="disabled" href="javascript:;">-</a>
                 <input type="text" disabled="disabled" class="text" value="1" />
             </div>
-            <a id="addCart" class="fr" href="/touch/order/buy/tentuan?gid=${goods.id}">立即购买</a>
+            <#if goods.groupSaleLeftNumber gt 0>
+                <a id="addCart" class="fr" href="/touch/order/buy/tentuan?gid=${goods.id}">立即购买</a>
+            <#else>
+                <a id="addCart" class="fr" href="#">团购结束</a>
+            </#if>
             <div class="clear"></div>
         </div>
     <#elseif qiang?? && qiang == 100 && goods.groupSaleHundredStartTime?? && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime?? && goods.groupSaleHundredStopTime gt .now>
@@ -378,7 +386,12 @@ function checkTime(i)
                 <a class="a1" disabled="disabled" href="javascript:;">-</a>
                 <input type="text" disabled="disabled" class="text" value="1" />
             </div>
-            <a id="addCart" class="fr" href="/touch/order/buy/baituan?gid=${goods.id}">立即购买</a>
+            <#if goods.groupSaleHundredLeftNumber gt 0>
+                <a id="addCart" class="fr" href="/touch/order/buy/baituan?gid=${goods.id}">立即购买</a>
+            <#else>
+                <a id="addCart" class="fr" href="#">团购结束</a>
+            </#if>
+            
             <div class="clear"></div>
         </div>
     <#else>
@@ -388,7 +401,11 @@ function checkTime(i)
                 <a class="a1"id="id-minus" href="javascript:;">-</a>
                 <input type="text" id="quantity" class="text" value="1" />
             </div>
-            <a id="addCart" class="fr" href="/cart/init?id=${goods.id}&m=1<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
+            <#if goods.leftNumber gt 0>
+                <a id="addCart" class="fr" href="/cart/init?id=${goods.id}&m=1<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
+            <#else>
+                <a id="addCart" class="fr" href="#">库存不足</a>
+            </#if>
             <div class="clear"></div>
         </div>
     </#if>

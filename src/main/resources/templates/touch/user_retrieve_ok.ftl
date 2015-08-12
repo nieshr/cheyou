@@ -27,7 +27,7 @@
 </header>
 <div class="comhead_bg"></div>
     <section class="loginbox">
-       <p>修改成功，并已成功登陆</p>
+       <p class="fc fs30 lh40 pb10">修改成功，并已成功登陆!</p>
                         
     </section>
 <div class="clear h15"></div>

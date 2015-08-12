@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdCoupon;
+import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdOrderGoods;
@@ -34,6 +35,7 @@ import com.ynyes.cheyou.entity.TdUserRecentVisit;
 import com.ynyes.cheyou.entity.TdUserReturn;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdCouponService;
+import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdOrderGoodsService;
 import com.ynyes.cheyou.service.TdOrderService;
@@ -99,6 +101,9 @@ public class TdTouchUserController {
     @Autowired
     private TdCommonService tdCommonService;
     
+    @Autowired
+    private TdDiySiteService tdDiySiteService;
+    
     @RequestMapping(value = "/user")
     public String user(HttpServletRequest req, ModelMap map) {
         String username = (String) req.getSession().getAttribute("username");
@@ -142,7 +147,7 @@ public class TdTouchUserController {
         
         if (null == username)
         {
-            return "redirect:/login";
+            return "redirect:/touch/login";
         }
         
         tdCommonService.setHeader(map, req);
@@ -332,7 +337,7 @@ public class TdTouchUserController {
         String username = (String) req.getSession().getAttribute("username");
         if (null == username)
         {
-            return "redirect:/login";
+            return "redirect:/touch/login";
         }
         
         tdCommonService.setHeader(map, req);
@@ -341,12 +346,20 @@ public class TdTouchUserController {
         
         map.addAttribute("user", tdUser);
         
+        /**
+		 * @author lc
+		 * @注释：添加同盟店信息
+		 */
+        Long shopid = tdOrderService.findOne(id).getShopId();
+        TdDiySite tdDiySite = tdDiySiteService.findOne(shopid);
+        map.addAttribute("diysite", tdDiySite);
+        
         if (null != id)
         {
             map.addAttribute("order", tdOrderService.findOne(id));
         }
         
-        return "/client/user_order_detail";
+        return "/touch/user_order_detail";
     }
     
     @RequestMapping(value = "/user/collect/list")

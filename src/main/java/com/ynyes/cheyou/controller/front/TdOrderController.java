@@ -1202,7 +1202,17 @@ public class TdOrderController extends AbstractPaytypeController {
 
                     soldNumber += quantity;
                     goods.setSoldNumber(soldNumber);
-
+                    
+                    /**
+					 * @author lc
+					 * @注释：更新库存
+					 */
+                    Long leftNumber = goods.getLeftNumber();
+                    if (leftNumber >= quantity) {
+                    	leftNumber = leftNumber - quantity;
+					}               
+                    goods.setLeftNumber(leftNumber);
+                    
                     // 保存商品
                     tdGoodsService.save(goods, username);
                 }

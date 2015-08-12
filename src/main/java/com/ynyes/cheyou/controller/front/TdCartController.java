@@ -283,7 +283,7 @@ public class TdCartController {
 
         if (null != id) {
             TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
-
+            
             if (cartGoods.getUsername().equalsIgnoreCase(username)) {
                 long quantity = cartGoods.getQuantity();
                 cartGoods.setQuantity(quantity + 1);

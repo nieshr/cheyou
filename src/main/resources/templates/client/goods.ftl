@@ -436,12 +436,20 @@ function checkTime(i)
         </#if>
         <tr>
             <th>数量</th>
-            <td>
-                <input name="quantity" type="text" id="quantity" value="1" class="text" />
+            <td>                
+                <#if qiang??>                
+                    <input name="quantity" type="text" id="quantity" value="1" class="text" />
+                    <div class="plus">
+                        <a disabled="disabled" href="javascript:;"></a>
+                        <a disabled="disabled" class="down" href="javascript:;"></a>                   
+                    </div>
+                <#else>
+                    <input name="quantity" type="text" id="quantity" value="1" class="text" />
                 <div class="plus">
                     <a id="id-plus" href="javascript:;"></a>
                     <a id="id-minus" class="down" href="javascript:;"></a>
-                </div>
+                </div> 
+                </#if>                                               
                 <span class="fl ml10">库存
                 <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
                     ${goods.flashSaleLeftNumber!'0'}
@@ -471,9 +479,19 @@ function checkTime(i)
         <tr>
           <td colspan="2">
             <#if qiang??>
-                <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id}" class="sub sub01">立即购买</a>
+                <#if qiang==1 && goods.flashSaleLeftNumber gt 0>
+                     <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id}" class="sub sub01">立即购买</a>
+                <#elseif qiang!=1 && goods.groupSaleLeftNumber gt 0>
+                     <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id}" class="sub sub01">立即购买</a>
+                <#else>
+                     <a id="addCart" href="#" class="sub sub01">库存不足</a>   
+                </#if>
             <#else>
-                <a id="addCart" href="/cart/init?id=${goods.id}" class="sub sub01">加入购物车</a>
+                <#if goods.leftNumber gt 0>
+                    <a id="addCart" href="/cart/init?id=${goods.id}" class="sub sub01">加入购物车</a>
+                <#else>
+                    <a id="addCart" href="#" class="sub sub01">库存不足</a>
+                </#if>
             </#if>
             <div class="buy_share">
               <a class="buy_share_a" href="javascript:addCollect(${goods.id});">收藏商品</a>
