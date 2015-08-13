@@ -76,6 +76,18 @@ function timer${item_index}()
     var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
     var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
     var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+     if(ss < 0){
+    	ss = 0;
+    }
+    if(mm < 0){
+    	mm = 0;
+    }
+    if(hh < 0){
+    	hh = 0;
+    }
+    if(dd < 0){
+    	dd = 0;
+    }
     dd = checkTime(dd);
     hh = checkTime(hh);
     mm = checkTime(mm);
@@ -83,7 +95,9 @@ function timer${item_index}()
     $("#timeLeft${item_index}").html("<b>"+dd+"</b>:<b>"+hh+"</b>:<b>"+mm+"</b>:<b>"+ss+"</b>");
     console.debug(dd-hh-mm-ss);
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
-    
+    if(price < 1){
+    	price = 1;
+    }
     //var s_x = Math.round(price).toString();
     var s_x = price.toFixed(2).toString();
     
@@ -256,7 +270,7 @@ function timer${item_index}()
 </section>
 
 
-<h3 class="indextit mainbox"><span>百人团购</span><a href="/touch/promotion/tuan">+更多</a></h3>
+<h3 class="indextit mainbox"><span>百人团购</span><a href="/touch/promotion/baituan">+更多</a></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">
     <tr>
