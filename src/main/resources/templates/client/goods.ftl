@@ -48,7 +48,7 @@
             $("#quantity").val(q-1);
         }
         
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val());
+        $("#addCart").attr("href", "/cart/init?id=${goods.id?c}&quantity=" + $("#quantity").val());
     });
     
     $("#id-plus").click(function(){
@@ -66,7 +66,7 @@
         <#else>
             $("#quantity").val(q+1);
         </#if>
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val());
+        $("#addCart").attr("href", "/cart/init?id=${goods.id?c}&quantity=" + $("#quantity").val());
     
     });
     
@@ -76,7 +76,7 @@
             str += $(this).attr("zhid");
             str += ",";
         });
-        var href = "/order/buy/comb?gid=" + ${goods.id} + "&zhid=" + str;
+        var href = "/order/buy/comb?gid=" + ${goods.id?c} + "&zhid=" + str;
         
         window.location = href;
         
@@ -176,7 +176,7 @@ function clearSelect()
     <#if category_tree_list??>
         <#list category_tree_list as category>
             <span> > </span>
-            <a class="a2" href="/list/${category.id}">${category.title!""}</a>
+            <a class="a2" href="/list/${category.id?c}">${category.title!""}</a>
         </#list>
     </#if>
     <span> > ${goods.name!(goods.title!'')}</span>
@@ -362,7 +362,7 @@ function checkTime(i)
                 <select>
                     <option value="">请选择...</option>
                     <#list diy_site_list as item>
-                        <option value="${item.id}">${item.title!''}</option>
+                        <option value="${item.id?c}">${item.title!''}</option>
                     </#list>
                 </select>
               </td>
@@ -375,7 +375,7 @@ function checkTime(i)
                     <td>
                         <#if select_one_goods_list??>
                         <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
+                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/goods/${item.id?c}">${item.selectOneValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -386,7 +386,7 @@ function checkTime(i)
                     <td>
                         <#if select_one_goods_list??>
                         <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
+                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/goods/${item.id?c}">${item.selectOneValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -396,7 +396,7 @@ function checkTime(i)
                     <td>
                         <#if select_two_goods_list??>
                         <#list select_two_goods_list as item>
-                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/goods/${item.id?c}">${item.selectTwoValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -407,7 +407,7 @@ function checkTime(i)
                     <td>
                         <#if select_one_goods_list??>
                         <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectOneValue}</a>
+                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/goods/${item.id?c}">${item.selectOneValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -417,7 +417,7 @@ function checkTime(i)
                     <td>
                         <#if select_two_goods_list??>
                         <#list select_two_goods_list as item>
-                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectTwoValue}</a>
+                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/goods/${item.id?c}">${item.selectTwoValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -427,7 +427,7 @@ function checkTime(i)
                     <td>
                         <#if select_three_goods_list??>
                         <#list select_three_goods_list as item>
-                            <a <#if item.selectThreeValue==three_selected>class="sel"</#if> href="/goods/${item.id}">${item.selectThreeValue}</a>
+                            <a <#if item.selectThreeValue==three_selected>class="sel"</#if> href="/goods/${item.id?c}">${item.selectThreeValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -482,21 +482,21 @@ function checkTime(i)
           <td colspan="2">
             <#if qiang??>
                 <#if qiang==1 && goods.flashSaleLeftNumber gt 0>
-                     <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id}" class="sub sub01">立即购买</a>
+                     <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id?c}" class="sub sub01">立即购买</a>
                 <#elseif qiang!=1 && goods.groupSaleLeftNumber gt 0>
-                     <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id}" class="sub sub01">立即购买</a>
+                     <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id?c}" class="sub sub01">立即购买</a>
                 <#else>
                      <a id="addCart" href="#" class="sub sub01">库存不足</a>   
                 </#if>
             <#else>
                 <#if goods.leftNumber gt 0>
-                    <a id="addCart" href="/cart/init?id=${goods.id}" class="sub sub01">加入购物车</a>
+                    <a id="addCart" href="/cart/init?id=${goods.id?c}" class="sub sub01">加入购物车</a>
                 <#else>
                     <a id="addCart" href="#" class="sub sub01">库存不足</a>
                 </#if>
             </#if>
             <div class="buy_share">
-              <a class="buy_share_a" href="javascript:addCollect(${goods.id});">收藏商品</a>
+              <a class="buy_share_a" href="javascript:addCollect(${goods.id?c});">收藏商品</a>
               <p>关注人数：<span class="red">${goods.totalCollects!'0'}</span>人</p>
             </div>
             <div class="clear"></div>
@@ -522,7 +522,7 @@ function checkTime(i)
       <ul id="assort_sum">
       <li>
         <div class="part">
-          <a href="/goods/${goods.id}"><img src="${goods.coverImageUri!''}" width="114" height="114" /></a>
+          <a href="/goods/${goods.id?c}"><img src="${goods.coverImageUri!''}" width="114" height="114" /></a>
           <p style="height: 33px; overflow: hidden;">${goods.title!''}</p>
           <p class="p1"><span>￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></span></p>
         </div>
@@ -538,7 +538,7 @@ function checkTime(i)
                         <a href="/goods/${item.goodsId}"><img src="${item.coverImageUri!''}" width="114" height="114"/></a>
                         <p style="height: 35px; overflow: hidden;">${item.goodsTitle!''}</p>
                         <p class="p1">
-                            <input type="checkbox" class="comboCheckBox" zhid="${item.id}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
+                            <input type="checkbox" class="comboCheckBox" zhid="${item.id?c}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
                             <span>${item.currentPrice?string("0.00")}</span>
                         </p>原价：<del>¥<#if item.goodsPrice??>${item.goodsPrice?string("0.00")}</#if></del>
                     </div>
@@ -617,7 +617,7 @@ function checkTime(i)
         <#if hot_list??>
             <#list hot_list as item>
                 <#if item_index < 5>
-                    <a class="scan" href="/goods/${item.id}">
+                    <a class="scan" href="/goods/${item.id?c}">
                         <img src="${item.coverImageUri!''}" title="${item.title!''} ${item.subTitle!''}"/>
                         <p style="overflow: hidden; height: 61px;">${item.title!""}</p>
                         <p class="red">￥${item.salePrice?string("0.00")}</p>
@@ -697,7 +697,7 @@ function checkTime(i)
         <section class="pro_myseek">
             <#if username??>
                 <form id="consultForm" action="javascript:submitConsult();">
-                    <input type="hidden" name="goodsId" value=${goods.id} />
+                    <input type="hidden" name="goodsId" value=${goods.id?c} />
                     <h3 class="lh30 fs18 fw400 pb10"><span class="circle_tit">我要咨询</span></h3>
                     <menu>
                         <textarea name="content" datatype="*5-255" nullmsg="请输入咨询内容"></textarea>

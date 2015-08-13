@@ -471,6 +471,23 @@ public class TdGoodsService {
                 .findByIsGroupSaleTrueAndIsOnSaleTrueAndGroupSaleStartTimeAfterOrderByGroupSaleStartTimeAsc(
                         new Date(), pageRequest);
     }
+    
+    /**
+     * 即将开始百人团购
+     * 
+     * @param page
+     * @param size
+     * @return
+     */
+    public Page<TdGoods> findByGroupSaleHundredGoingToStartOrderByGroupSaleHundredStartTimeAsc(
+            int page, int size) {
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(
+                Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
+
+        return repository
+                .findByIsGroupSaleHundredTrueAndIsOnSaleTrueAndGroupSaleHundredStartTimeAfterOrderByGroupSaleHundredStartTimeAsc(
+                        new Date(), pageRequest);
+    }
 
     /**
      * 已结束团购
@@ -486,6 +503,23 @@ public class TdGoodsService {
 
         return repository
                 .findByIsGroupSaleTrueAndIsOnSaleTrueAndGroupSaleStopTimeBeforeOrderByGroupSaleStartTimeAsc(
+                        new Date(), pageRequest);
+    }
+    
+    /**
+     * 已经结束百人团购
+     * 
+     * @param page
+     * @param size
+     * @return
+     */
+    public Page<TdGoods> findByGroupSaleHundredEndedOrderByGroupSaleHundredStartTimeAsc(
+            int page, int size) {
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(
+                Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
+
+        return repository
+                .findByIsGroupSaleHundredTrueAndIsOnSaleTrueAndGroupSaleHundredStopTimeBeforeOrderByGroupSaleHundredStartTimeAsc(
                         new Date(), pageRequest);
     }
 
@@ -504,6 +538,23 @@ public class TdGoodsService {
         return repository
                 .findByIsGroupSaleTrueAndIsOnSaleTrueOrderByGroupSaleStartTimeAsc(pageRequest);
     }
+    
+    /**
+     * 所有百人团
+     * 
+     * @param page
+     * @param size
+     * @return
+     */
+    public Page<TdGoods> findByGroupSaleHundredAllOrderByGroupSaleHundredStartTimeAsc(
+            int page, int size) {
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(
+                Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
+
+        return repository
+                .findByIsGroupSaleHundredTrueAndIsOnSaleTrueOrderByGroupSaleHundredStartTimeAsc(pageRequest);
+    }
+    
 
     /**
      * 正在秒杀商品

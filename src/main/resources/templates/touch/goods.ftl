@@ -27,7 +27,7 @@ $(document).ready(function(){
             $("#quantity").val(q-1);
         }
         
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+        $("#addCart").attr("href", "/cart/init?id=${goods.id?c}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
     });
     
     $("#id-plus").click(function(){
@@ -44,7 +44,7 @@ $(document).ready(function(){
         <#else>
             $("#quantity").val(q+1);
         </#if>
-        $("#addCart").attr("href", "/cart/init?id=${goods.id}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+        $("#addCart").attr("href", "/cart/init?id=${goods.id?c}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
     
     });
 });
@@ -234,7 +234,7 @@ function checkTime(i)
 </script>
 </#if>
 <div class="main" style="z-index:10;">
-  <a class="pro_share" href="javascript:addCollect(${goods.id});">关注</a>
+  <a class="pro_share" href="javascript:addCollect(${goods.id?c});">关注</a>
   <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
     <h3 class="protext red"><b id="currPrice">￥<#if goods.flashSalePrice??>${goods.flashSalePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.salePrice?string("0.00")}</#if></span></h3>
   <#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
@@ -262,7 +262,7 @@ function checkTime(i)
                     <td>
                         <#if select_one_goods_list??>
                         <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
+                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -273,7 +273,7 @@ function checkTime(i)
                     <td>
                         <#if select_one_goods_list??>
                         <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
+                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -283,7 +283,7 @@ function checkTime(i)
                     <td>
                         <#if select_two_goods_list??>
                         <#list select_two_goods_list as item>
-                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectTwoValue}</a>
+                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -294,7 +294,7 @@ function checkTime(i)
                     <td>
                         <#if select_one_goods_list??>
                         <#list select_one_goods_list as item>
-                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectOneValue}</a>
+                            <a <#if item.selectOneValue==one_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectOneValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -304,7 +304,7 @@ function checkTime(i)
                     <td>
                         <#if select_two_goods_list??>
                         <#list select_two_goods_list as item>
-                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectTwoValue}</a>
+                            <a <#if item.selectTwoValue==two_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectTwoValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -314,7 +314,7 @@ function checkTime(i)
                     <td>
                         <#if select_three_goods_list??>
                         <#list select_three_goods_list as item>
-                            <a <#if item.selectThreeValue==three_selected>class="sel"</#if> href="/touch/goods/${item.id}">${item.selectThreeValue}</a>
+                            <a <#if item.selectThreeValue==three_selected>class="sel"</#if> href="/touch/goods/${item.id?c}">${item.selectThreeValue}</a>
                         </#list>
                         </#if>
                     </td>
@@ -326,10 +326,10 @@ function checkTime(i)
     </table>
   </div>
   
-  <a class="protext" href="/touch/goods/detail/${goods.id}">图文详情</a>
-  <a class="protext" href="/touch/goods/param/${goods.id}">规格参数</a>
-  <a class="protext" href="/touch/goods/comment/${goods.id}">车友评价（${comment_count!'0'}）</a>
-  <a class="protext" href="/touch/goods/consult/${goods.id}">留言咨询（${consult_page.totalElements!'0'}）</a>
+  <a class="protext" href="/touch/goods/detail/${goods.id?}">图文详情</a>
+  <a class="protext" href="/touch/goods/param/${goods.id?}">规格参数</a>
+  <a class="protext" href="/touch/goods/comment/${goods.id?c}">车友评价（${comment_count!'0'}）</a>
+  <a class="protext" href="/touch/goods/consult/${goods.id?c}">留言咨询（${consult_page.totalElements!'0'}）</a>
  
 </div><!--main END-->
 
@@ -344,8 +344,8 @@ function checkTime(i)
   <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
 </section>
 <footer class="comfoot main">
-    <a href="/goods/${goods.id}">电脑版</a>
-    <a href="/touch/goods/${goods.id}">触屏版</a>
+    <a href="/goods/${goods.id?c}">电脑版</a>
+    <a href="/touch/goods/${goods.id?c}">触屏版</a>
 </footer>
 <p class="bottext mainbox">${site.copyright!''}</p>
 <p class="bottext mainbox">${site.icpNumber!''}</p>
@@ -359,7 +359,7 @@ function checkTime(i)
                 <input type="text" disabled="disabled" class="text" value="1" />
             </div>
             <#if goods.flashSaleLeftNumber gt 0>
-                <a id="addCart" class="fr" href="/touch/order/buy/qiang?gid=${goods.id}">立即购买</a>
+                <a id="addCart" class="fr" href="/touch/order/buy/qiang?gid=${goods.id?c}">立即购买</a>
             <#else>
                 <a id="addCart" class="fr" href="#">抢购结束</a>
             </#if>
@@ -373,7 +373,7 @@ function checkTime(i)
                 <input type="text" disabled="disabled" class="text" value="1" />
             </div>
             <#if goods.groupSaleLeftNumber gt 0>
-                <a id="addCart" class="fr" href="/touch/order/buy/tentuan?gid=${goods.id}">立即购买</a>
+                <a id="addCart" class="fr" href="/touch/order/buy/tentuan?gid=${goods.id?c}">立即购买</a>
             <#else>
                 <a id="addCart" class="fr" href="#">团购结束</a>
             </#if>
@@ -387,7 +387,7 @@ function checkTime(i)
                 <input type="text" disabled="disabled" class="text" value="1" />
             </div>
             <#if goods.groupSaleHundredLeftNumber gt 0>
-                <a id="addCart" class="fr" href="/touch/order/buy/baituan?gid=${goods.id}">立即购买</a>
+                <a id="addCart" class="fr" href="/touch/order/buy/baituan?gid=${goods.id?c}">立即购买</a>
             <#else>
                 <a id="addCart" class="fr" href="#">团购结束</a>
             </#if>
@@ -402,7 +402,7 @@ function checkTime(i)
                 <input type="text" id="quantity" class="text" value="1" />
             </div>
             <#if goods.leftNumber gt 0>
-                <a id="addCart" class="fr" href="/cart/init?id=${goods.id}&m=1<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
+                <a id="addCart" class="fr" href="/cart/init?id=${goods.id?c}&m=1<#if qiang??>&qiang=${qiang}</#if>">加入购物车</a>
             <#else>
                 <a id="addCart" class="fr" href="#">库存不足</a>
             </#if>

@@ -53,8 +53,6 @@ public class TdTouchShopController {
 	    
 	    tdCommonService.setHeader(map, req);
         
-        String username = (String) req.getSession().getAttribute("username");
-        
         if (null == cid)
         {
             cid = 0;

@@ -18,6 +18,6 @@ public interface TdNaviBarItemRepo extends
 		PagingAndSortingRepository<TdNaviBarItem, Long>,
 		JpaSpecificationExecutor<TdNaviBarItem> 
 {
-    List<TdNaviBarItem> findByIsEnableTrueOrderBySortIdAsc();
+    List<TdNaviBarItem> findByIsEnableTrueAndIsTouchShowNullOrIsEnableTrueAndIsTouchShowFalseOrderBySortIdAsc();
     List<TdNaviBarItem> findByIsEnableTrueAndIsTouchShowTrueOrderBySortIdAsc();
 }

@@ -87,8 +87,20 @@ $(function () {
     </dd>
   </dl>
   
-  <dl>
-    <dt>所属同盟店</dt>
+  
+    
+    <#if diy_site_list??>
+        <#list diy_site_list as item>
+            <dl>
+                <dt>所属同盟店</dt>
+                <dd>
+                    <input name="leftNumber" type="text" value="<#if coupon??>${coupon.leftNumber?c!""}<#else>1</#if>" class="input small" datatype="n" sucmsg=" ">
+                    <span class="Validform_checktip"></span>
+                </dd> 
+            </dl>
+        </#list>
+    </#if>
+    <#--
     <dd>
         <div class="rule-single-select">
             <select name="diySiteId" datatype="*" sucmsg=" ">
@@ -103,7 +115,7 @@ $(function () {
             </select>
         </div>
     </dd>
-  </dl>
+    -->
   
   <dl>
     <dt>剩余数量</dt>
