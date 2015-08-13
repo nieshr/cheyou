@@ -76,44 +76,46 @@ public class TdTouchPromotionController {
 
             return "/touch/tuan_list";
         }
-        else if (promotionType.equalsIgnoreCase("baituan"))
-        {
-            if (null == type)
-            {
-                type = "";
-            }
-            
-            switch (type)
-            {
-            case "all":
-                // 所有百人团
-                map.addAttribute("tuan_goods_page", tdGoodsService
-                        .findByGroupSaleHundredAllOrderByGroupSaleHundredStartTimeAsc(page,
-                                ClientConstant.pageSize));
-                break;
-            case "passed":
-                // 已经结束百人团
-                map.addAttribute("tuan_goods_page", tdGoodsService
-                        .findByGroupSaleHundredEndedOrderByGroupSaleHundredStartTimeAsc(page,
-                                ClientConstant.pageSize));
-                break;
-            case "ongoing":
-                // 即将开始百人团
-                map.addAttribute(
-                        "tuan_goods_page",
-                        tdGoodsService
-                                .findByGroupSaleHundredGoingToStartOrderByGroupSaleHundredStartTimeAsc(
-                                        page, ClientConstant.pageSize));
-                break;
-            default:
-                // 正在进行百人团
-                map.addAttribute("tuan_goods_page", tdGoodsService
-                        .findByGroupSalingHundredOrderByGroupSaleStartTimeAsc(page,
-                                ClientConstant.pageSize));
-                    break;
-            }
+        /**
+		 * @author lc
+		 * 添加百人团
+		 */	
+        else if (promotionType.equalsIgnoreCase("baituan")){
+        	 if (null == type)
+             {
+                 type = "";
+             }
+        	 switch (type)
+             {
+             case "all":
+                 // 所有团购
+                 map.addAttribute("baituan_goods_page", tdGoodsService
+                         .findByGroupSaleAllOrderByGroupSaleStartTimeAsc(page,
+                                 ClientConstant.pageSize));
+                 break;
+             case "passed":
+                 // 已经结束百人团购
+                 map.addAttribute("baituan_goods_page", tdGoodsService
+                         .findByGroupSaleEndedHundredOrderByGroupSaleHundredStartTimeAsc(page,
+                                 ClientConstant.pageSize));
+                 break;
+             case "ongoing":
+                 // 即将开始百人团购
+                 map.addAttribute(
+                         "baituan_goods_page",
+                         tdGoodsService
+                                 .findByGroupSaleGoingToHundredOrderByGroupSaleHundredStartTimeAsc(
+                                         page, ClientConstant.pageSize));
+                 break;
+             default:
+                 // 正在百人团购
+                 map.addAttribute("baituan_goods_page", tdGoodsService
+                         .findByGroupSalingHundredOrderByGroupSaleStartTimeAsc(page,
+                                 ClientConstant.pageSize));
+                     break;
+             }
 
-            return "/touch/bai_tuan_list";
+             return "/touch/baituan_list";
         }
         else if (promotionType.equalsIgnoreCase("miao")) // 秒杀
         {

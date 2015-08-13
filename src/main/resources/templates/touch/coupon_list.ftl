@@ -132,16 +132,16 @@ function hideDialog()
                     </div>
                     <div class="clear"></div>
                     <div class="zongshushengyu">
-                        <p class="mt5">总数剩余：<span class="red">${couponCount?c!'0'}</span>张</p>
+                        <p class="mt5" style=" line-height: 30px;width: 50%; display: inline-block;">总数剩余：<span class="red">${couponCount?c!'0'}</span>张</p>
                     </div>
                     <div class="clear"></div>
                     <div class="linquanniu">
                         <a href="javascript:showDialog(${item_index});">点击领取</a> 
                     </div>
                 </div>
-                <div class="mianfeilingqu_right">
+                <div class="mianfeilingqu_right" style=" border-bottom: solid 2px #333; margin-bottom: 20px;">
                 
-                    <h3>领取车友</h3>
+                    <h3 style="font-size: 1em;">领取车友</h3>
                     <ul>
                         <#if ("distributed_coupon_" + item.id + "_list")?eval?? >
                             <#list ("distributed_coupon_" + item.id + "_list")?eval as distributedCoupon>
@@ -160,6 +160,7 @@ function hideDialog()
     <#else>
         <a href="/touch">逛逛其他的</a>
     </#if>
+</div>
 </menu>
 
 <div class="clear h40"></div>
