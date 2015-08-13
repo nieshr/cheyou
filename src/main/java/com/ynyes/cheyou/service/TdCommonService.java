@@ -145,7 +145,7 @@ public class TdCommonService {
 
         // 导航菜单
         map.addAttribute("navi_item_list",
-                tdNaviBarItemService.findByIsEnableTrueOrderBySortIdAsc());
+                tdNaviBarItemService.findByPCTdNaviBarItem());
         
         // 商城服务
         map.addAttribute("service_item_list", tdServiceItemService.findByIsEnableTrueOrderBySortIdAsc());

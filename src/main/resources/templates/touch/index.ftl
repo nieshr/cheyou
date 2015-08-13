@@ -256,7 +256,7 @@ function timer${item_index}()
 </section>
 
 
-<h3 class="indextit mainbox"><span>百人团购</span><a href="/touch/promotion/tuan">+更多</a></h3>
+<h3 class="indextit mainbox"><span>百人团购</span><a href="/touch/promotion/baituan">+更多</a></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">
     <tr>

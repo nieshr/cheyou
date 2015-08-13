@@ -131,4 +131,22 @@ public class TdNaviBarItemService {
         
         return (List<TdNaviBarItem>) repository.save(entities);
     }
+    
+    /**
+	 * @author lc
+	 * 获取pc版导航菜单
+	 */
+    public List<TdNaviBarItem> findByPCTdNaviBarItem(){
+    	List<TdNaviBarItem> allNaviBarlist = repository.findByIsEnableTrueOrderBySortIdAsc();
+    	
+    	for(int i = 0; i < allNaviBarlist.size(); i++){
+    		if (null != allNaviBarlist.get(i).getIsTouchShow() && true == allNaviBarlist.get(i).getIsTouchShow()) {
+				allNaviBarlist.remove(i);
+				i = i - 1;
+			}
+    	}
+    	return allNaviBarlist;
+    }
+    
+    
 }
