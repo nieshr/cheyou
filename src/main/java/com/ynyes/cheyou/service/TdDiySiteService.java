@@ -186,7 +186,7 @@ public class TdDiySiteService {
     		Long[] result = new Long[20];
         	int temp = 0;
         	if (tdUserComment_list.size()==0) {
-				return (float) 4.5;
+				return (float) 0.0;
 			}
         	for(int i = 0; i < 20; i++){
         		result[i] = tdUserComment_list.get(Math.abs(new Random().nextInt())%tdUserComment_list.size()).getServiceStar();
@@ -195,7 +195,7 @@ public class TdDiySiteService {
         	return temp/20;
 		}
     	
-    	return (float) 4.5;
+    	return (float) 0.0;
     	
     }
 }

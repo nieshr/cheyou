@@ -42,6 +42,8 @@ function loadMap(x, y)
     map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
     var marker = new BMap.Marker(new BMap.Point(x, y)); // 创建点
     map.addOverlay(marker);
+    map.addControl(new BMap.ZoomControl());//添加缩放控件
+    
 }
 
 function hideMap()
@@ -52,6 +54,11 @@ function hideMap()
 function showMap(longitude,latitude)
 {
     $("#allMap").show();
+}
+
+function hideSerivceStars()
+{
+    $("#serviceStars").hide();
 }
 
 
@@ -71,7 +78,7 @@ function showMap(longitude,latitude)
 
 
 <!--地图的添加 2015-8-12 19:49:37 mdj-->
-<div id="allMap" style="width:90%;margin-left:auto;margin-right:auto; height:90%;margin-bottom:auto;z-index:999999999;">
+<div id="allMap" style="width:90%;margin-left:auto;margin-right:auto; height:80%;margin-bottom:auto;z-index:999999999;">
     <a class="fr" style="z-index:999999999; /* margin-top:50px; position: absolute;*/  margin-right: 10px;" href="javascript:hideMap();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="25" height="25"></a>
     <div id="myMap">
     </div>
@@ -83,12 +90,15 @@ function showMap(longitude,latitude)
         <li>
             <a class="a1" href="#"><img src="${item.imageUri}" /></a>
             <p class="p1">${item.title}
-              <span>
-                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 1 >star01.png<#else>star03.png</#if>" height="15" />
-                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 1 >star01.png<#else>star03.png</#if>" height="15" />
-                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 2 >star01.png<#else>star03.png</#if>" height="15" />
-                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 3 >star01.png<#else>star03.png</#if>" height="15" />
-                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 4 >star02.png<#else>star03.png</#if>" height="15" />
+              <span id="serviceStars">
+                <#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval lte 0 >
+                <#else>
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval lt 1.0>star02.png<#else>star01.png</#if>" height="15" />
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval lt 1.5>star03.png<#elseif ("shop_serviceStars"++item.id)?eval gte 1.5 && ("shop_serviceStars"++item.id)?eval lt 2.0>star02.png<#else>star01.png</#if>" height="15" />
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval lt 2.5>star03.png<#elseif ("shop_serviceStars"++item.id)?eval gte 2.5 && ("shop_serviceStars"++item.id)?eval lt 3.0>star02.png<#else>star01.png</#if>" height="15" />
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval lt 3.5>star03.png<#elseif ("shop_serviceStars"++item.id)?eval gte 3.5 && ("shop_serviceStars"++item.id)?eval lt 4.0>star02.png<#else>star01.png</#if>" height="15" />
+                <img src="/touch/images/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval lt 4.5>star03.png<#elseif ("shop_serviceStars"++item.id)?eval gte 4.5 && ("shop_serviceStars"++item.id)?eval lt 5.0>star02.png<#else>star01.png</#if>" height="15" />
+                </#if>
               </span>
             </p>
             <p class="p2">详细地址：${item.address}</p>
