@@ -227,7 +227,7 @@ input.orange_btn { color: #fff; font-size: 0.8em; background: #f4b93a; width: 10
 .shoplist p.p2 { width:78%;}
 .shoplist p.p2 a { display:inline-block; border-radius:3px; color:#fff; padding:0 10px 0 30px; background:#978de6 url(../images/shop01.png) no-repeat 10px center; background-size:auto 14px; line-height:25px; margin-right:10px;}
 .shoplist p.p2 a.a2 {background:#4d99e5 url(../images/shop02.png) no-repeat 10px center; background-size:auto 14px;}
-.freelist a { display:block; width:100%; text-align:center; margin:0 0 10px 0; border:1px solid #eee;}
+.freelist a {display: block; width: 50%; height: 30px; text-align: center; margin: 0 auto; border: 1px solid #eee; background: #ff4454; color: #FFF; line-height: 30px;}
 .timebox,.myorder_list a p.p4 { font-size:0.8em; line-height:25px;}
 .timebox b,.myorder_list a p.p4 span { display:inline-block; padding:0 3px; background:#2b2e34; color:#fff; border-radius:2px; margin:0 1px;}
 .myassess textarea { width:100%; height:100px; border:1px solid #eee;}
