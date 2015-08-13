@@ -140,6 +140,18 @@ function timer()
     var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
     var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
     var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+     if(ss < 0){
+    	ss = 0;
+    }
+    if(mm < 0){
+    	mm = 0;
+    }
+    if(hh < 0){
+    	hh = 0;
+    }
+    if(dd < 0){
+    	dd = 0;
+    }
     dd = checkTime(dd);
     hh = checkTime(hh);
     mm = checkTime(mm);
@@ -151,7 +163,9 @@ function timer()
     $("#lsec").html(ss);
     
     var price = ${goods.flashSalePrice?string("0.00")} * ts / allts;
-    
+    if(price < 1){
+    	price = 1;
+    }
     var s_x = price.toFixed(2).toString();
     
     var pos_decimal = s_x.indexOf('.');
