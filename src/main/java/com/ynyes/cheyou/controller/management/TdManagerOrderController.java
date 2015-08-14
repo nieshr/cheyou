@@ -432,6 +432,7 @@ public class TdManagerOrderController {
 			type = 0L;
 		}
         Double price = new Double(0.00);
+        Double sales = new Double(0.00);
         if (null != statusId) {
 			if (statusId.equals(0L)) {				
             	if (type.equals(0L)) {
@@ -439,12 +440,28 @@ public class TdManagerOrderController {
                 	for (int i = 0; i < list.size(); i++) {
                 		price += list.get(i).getTotalPrice();
                 	}
+                	for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
                 	map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
 				}
             	else {
             		List<TdOrder> list = tdOrderService.findBytypeIdOrderByIdDesc(type);
             		for (int i = 0; i < list.size(); i++) {
                 		price += list.get(i).getTotalPrice();
+                	}
+            		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
                 	}
             		map.addAttribute("order_page", tdOrderService.findBytypeIdOrderByIdDesc(type, page, size));
 				}				
@@ -454,6 +471,14 @@ public class TdManagerOrderController {
 					for (int i = 0; i < list.size(); i++) {
 	            		price += list.get(i).getTotalPrice();
 	            	}
+					for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
 					map.addAttribute("order_page", tdOrderService.findByStatusOrderByIdDesc(statusId, page, size));
 				}
 				else{					
@@ -461,6 +486,14 @@ public class TdManagerOrderController {
 	        		for (int i = 0; i < list.size(); i++) {
 	            		price += list.get(i).getTotalPrice();
 	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
 	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTypeOrderByIdDesc(statusId, type, page, size));
 				}
 				
@@ -470,6 +503,7 @@ public class TdManagerOrderController {
         // 参数注回
 //        map.addAttribute("dateId",dateId);
         map.addAttribute("price",price);
+        map.addAttribute("sales",sales);
         map.addAttribute("page", page);
         map.addAttribute("size", size);
         map.addAttribute("keywords", keywords);

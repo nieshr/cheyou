@@ -78,7 +78,10 @@ function __doPostBack(eventTarget, eventArgument) {
                     </li>
                     </#if>
                     <li>
-                        <a class="all"><span>销售额：￥${price!0.00}</span></a>
+                        <a class="all"><span>订单总额：￥${price!0.00}</span></a>
+                    </li>
+                    <li>
+                        <a class="all"><span>销售额：￥${sales!0.00}</span></a>
                     </li>
                     <li>
                     	<a class="all" href="/Verwalter/order/list/${statusId!''}/1"><span>普通订单</span></a>
