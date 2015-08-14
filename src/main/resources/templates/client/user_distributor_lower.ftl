@@ -82,7 +82,7 @@ DD_belatedPNG.fix('.,img,background');
                         <#if lower_page??>
                             <#list lower_page.content as user>
                                 <tr class="">
-                                    <td width="9%">${user.id!''}</td>
+                                    <td width="9%">${user.id?c}</td>
                                     <td width="17%">${user.username!''}</td>
                                     <td width="16%">${user.registerTime!''}</td>
                                     <td width="12%">${user.lastLoginTime!''}</td>

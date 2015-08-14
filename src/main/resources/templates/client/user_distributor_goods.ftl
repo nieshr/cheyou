@@ -76,12 +76,12 @@ function __doPostBack(eventTarget, eventArgument) {
             <#list goods_page.content as item>
                 <tr id="tr_1424195166">
                     <td>
-                        <a href="/goods/${item.id}" target="_blank">
+                        <a href="/goods/${item.id?c}" target="_blank">
                             <strong><img width="100" height="100" src="${item.coverImageUri!''}"></strong>
                         </a>
                     </td>
                     <td class="tb01">
-                        <a href="/goods/${item.id}" target="_blank">${item.title!''}</a>
+                        <a href="/goods/${item.id?c}" target="_blank">${item.title!''}</a>
                     </td>
                     <td class="tb02">￥${item.salePrice?string("0.00")}</td>
                     <td>￥${item.returnPrice?string("0.00")}</td>

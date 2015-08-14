@@ -81,7 +81,7 @@
                     <input id="input-address-id" type="hidden" name="addressId" value="" datatype="n" nullmsg="请选择安装信息!"/>
                     <#if user.shippingAddressList?? && user.shippingAddressList?size gt 0>
                         <#list user.shippingAddressList as address>
-                            <a href="javascript:;" onclick="javascript:selectAddress(this, ${address.id});">
+                            <a href="javascript:;" onclick="javascript:selectAddress(this, ${address.id?c});">
                                 <p>姓名：${address.receiverName!''}</p>
                            <#--     <p class="p1">收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>  -->
                                 <p>手机：${address.receiverMobile!''}</p>                              
@@ -169,7 +169,7 @@
                 <option>请选择</option>
                 <#if shop_list??>
                     <#list shop_list as item>
-                        <option value="${item.id}">${item.title!''}</option>
+                        <option value="${item.id?c}">${item.title!''}</option>
                         <p>${item.address}</p>
                     </#list>                  
                 </#if>

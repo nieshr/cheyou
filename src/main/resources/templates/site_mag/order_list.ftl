@@ -80,6 +80,21 @@ function __doPostBack(eventTarget, eventArgument) {
                     <li>
                         <a class="all"><span>销售额：￥${price!0.00}</span></a>
                     </li>
+                    <li>
+                    	<a class="all" href="/Verwalter/order/list/${statusId!''}/1"><span>普通订单</span></a>
+                    </li>                  
+                    <li>
+                    	<a class="all" href="/Verwalter/order/list/${statusId!''}/2"><span>组合购买订单</span></a>
+                    </li>
+                    <li>
+                    	<a class="all" href="/Verwalter/order/list/${statusId!''}/3"><span>抢购订单</span></a>
+                    </li>
+                    <li>
+                    	<a class="all" href="/Verwalter/order/list/${statusId!''}/4"><span>十人团订单</span></a>
+                    </li>
+                    <li>
+                    	<a class="all" href="/Verwalter/order/list/${statusId!''}/5"><span>百人团订单</span></a>
+                    </li>
                 </ul>
             </div>
             <div class="r-list">

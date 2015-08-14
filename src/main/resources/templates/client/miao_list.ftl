@@ -129,11 +129,11 @@ function timer${item_index}()
                     <i class="yiyuanjieshu"></i> 
                 </#if>
                 <div class="yiyuqiangpailiebiao_lt">
-                    <a href="/goods/${item.id!''}?qiang=1"><img src="${item.flashSaleImage!''}" width="624" height="332" /></a>
+                    <a href="/goods/${item.id?c}?qiang=1"><img src="${item.flashSaleImage!''}" width="624" height="332" /></a>
                 </div>
                 <div class="yiyuqiangpailiebiao_rt">
                     <div class="yiyuqiangpailiebiao_rt_bt">
-                        <h4><a href="/goods/${item.id!''}?qiang=1">${item.title!''}</a></h4>
+                        <h4><a href="/goods/${item.id?c}?qiang=1">${item.title!''}</a></h4>
                         <span>${item.subTitle!''}</span>
                     </div>
                     
@@ -147,7 +147,7 @@ function timer${item_index}()
                         <#elseif type?? && type=="passed">
                         <a href="javascript:;">已经结束</a>
                         <#else>
-                        <a href="/order/buy/qiang?gid=${item.id}">立即购买</a>
+                        <a href="/order/buy/qiang?gid=${item.id?c}">立即购买</a>
                         </#if>
                     </div>
           
@@ -156,7 +156,7 @@ function timer${item_index}()
                     <div class="yiyuqiangpailiebiao_rt_lanse">
                         <p>市场价：<del>¥${item.marketPrice?string("0.00")}</del></p>
                         <p class="lh40"><span class="red">${item.flashSaleSoldNumber!'0'}</span>人抢拍</p>
-                        <p class="lh40"><a href="/goods/${item.id}?qiang=1">查看详情</a></p>
+                        <p class="lh40"><a href="/goods/${item.id?c}?qiang=1">查看详情</a></p>
                     </div>
                     
                     <div class="clear"></div>

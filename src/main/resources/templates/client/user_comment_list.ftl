@@ -332,8 +332,8 @@ function commentJump()
                             <#else>
                                 <tr id="comment-tr${order_index}${item_index}" class="hide">
                                     <form class="commentForm" action="/user/comment/add" method="post">
-                                        <input type="hidden" name="orderId" value=${order.id} />
-                                        <input type="hidden" name="ogId" value=${item.id} />
+                                        <input type="hidden" name="orderId" value=${order.id?c} />
+                                        <input type="hidden" name="ogId" value=${item.id?c} />
                                         <input type="hidden" name="goodsId" value=${item.goodsId} />
                                         <td class="td004" colspan="4">
                                             <div class="pb20 lh25">

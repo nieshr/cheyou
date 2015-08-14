@@ -62,33 +62,23 @@ $(document).ready(function(){
 <#include "/client/common_header.ftl" />
 
 <div class="main">
-    <#--
     <section class="team_tit">
-        <img class="tit" src="/client/images/tg_tit.png" />
-        <div class="time">
-            <a href="/promotion/tuan">本期团购</a>
-        </div>
-        <a class="a1" href="/promotion/tuan?type=ongoing"><i></i>下期预告</a>
-        <a class="a1 a2" href="/promotion/tuan?type=passed"><i></i>往期回顾</a>
-    </section>
-    -->
-    <section class="team_tit">
-        <a href="/promotion/baituan"><img class="tit" src="/client/images/tg_tit.png"></a>
+        <img class="tit" src="/client/images/tg_tit1.png">
         <div class="time <#if type??>outtime</#if>">
-          <a href="/promotion/tuan">本期团购</a>
+          <a href="/promotion/baituan">本期团购</a>
         </div>
         <div class="time <#if !type?? || type="passed">outtime</#if>" style="left:325px;">
-          <a href="/promotion/tuan?type=ongoing">下期预告</a>
+          <a href="/promotion/baituan?type=ongoing">下期预告</a>
         </div>
         <div class="time <#if !type?? || type="ongoing">outtime</#if>" style="left:500px;">
-          <a href="/promotion/tuan?type=passed">往期回顾</a>
+          <a href="/promotion/baituan?type=passed">往期回顾</a>
         </div>
     </section>
   
     <div class="clear h40"></div>
   
-    <#if tuan_goods_page??>
-        <#list tuan_goods_page.content as item>
+    <#if baituan_goods_page??>
+        <#list baituan_goods_page.content as item>
         <script>
 $(document).ready(function(){
     setInterval("timer${item_index}()",1000);
@@ -96,14 +86,14 @@ $(document).ready(function(){
 
 function timer${item_index}()
 {
-<#if item.isGroupSale && item.groupSaleStartTime < .now && item.groupSaleStopTime gt .now>
-    var ts = (new Date(${item.groupSaleStopTime?string("yyyy")}, 
-                parseInt(${item.groupSaleStopTime?string("MM")}, 10)-1, 
-                ${item.groupSaleStopTime?string("dd")}, 
-                ${item.groupSaleStopTime?string("HH")}, 
-                ${item.groupSaleStopTime?string("mm")}, 
-                ${item.groupSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
-    if (0 == ts)
+<#if item.isGroupSaleHundred && item.groupSaleHundredStartTime < .now && item.groupSaleHundredStopTime gt .now>
+    var ts = (new Date(${item.groupSaleHundredStopTime?string("yyyy")}, 
+                parseInt(${item.groupSaleHundredStopTime?string("MM")}, 10)-1, 
+                ${item.groupSaleHundredStopTime?string("dd")}, 
+                ${item.groupSaleHundredStopTime?string("HH")}, 
+                ${item.groupSaleHundredStopTime?string("mm")}, 
+                ${item.groupSaleHundredStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+    if (0 > ts)
     {
         window.location.reload();
     }
@@ -131,7 +121,7 @@ function timer${item_index}()
                 <#elseif type?? && type="ongoing">
                     <i class="yiyuanjijiang"></i>
                 </#if>
-                <a class="fl" href="/goods/${item.id?c}?qiang=<#if item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 3>3<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber < 7>7<#elseif item.groupSaleSoldNumber?? && item.groupSaleSoldNumber gt 6>10</#if>">
+                <a class="fl" href="/goods/${item.id?c}?qiang=100">
                     <img src="${item.groupSaleImage!''}" height="392" width="732" />
                 </a>
                 <div class="team_info">
@@ -143,7 +133,7 @@ function timer${item_index}()
                         <dl>
                             <dt style="width: <#if item.groupSaleSoldNumber??><#if item.groupSaleSoldNumber/10 gt 1>100<#else>${item.groupSaleSoldNumber * 10}</#if><#else>0</#if>%;"></dt>
                         </dl>
-                        <p>
+                   <!--     <p>
                             <span>￥<#if item.groupSaleThreePrice??>${item.groupSaleThreePrice?string("0.00")}</#if></span>
                             三人团
                         </p>
@@ -154,21 +144,21 @@ function timer${item_index}()
                         <p>
                             <span>￥<#if item.groupSaleTenPrice??>${item.groupSaleTenPrice?string("0.00")}</#if></span>
                             十人团
-                        </p>
+                        </p>-->
                         <div class="clear"></div>
                     </div>
                     
                     <div class="team_num fr">
-                        <p>已有<span class="red">${item.groupSaleSoldNumber!'0'}</span>人参团</p>
+                        <p>已有<span class="red">${item.groupSaleHundredSoldNumber!'0'}</span>人参团</p>
                     </div>
                     
                     <div class="clear"></div>
                     
                     <p class="ml20 pt20 c3 fs16">市场价：<span class="unl-th">￥<#if item.marketPrice??>${item.marketPrice?string("0.00")}</#if></span></p>
                     <p class="team_red">
-                        <span>预付定金：￥<#if item.groupSalePrice??>${item.groupSalePrice?string("0.00")}</#if></span>
+                        <span>预付定金：￥<#if item.groupSalePrePayPrice??>${item.groupSalePrePayPrice?string("0.00")}</#if></span>
                         <#if !type??>
-                            <a href="/order/buy/tentuan?id=${item.id?c}">立即参团</a>
+                            <a href="/order/buy/baituan?id=${item.id?c}">立即参团</a>
                         </#if>
                     </p>
                 </div>
@@ -181,21 +171,21 @@ function timer${item_index}()
   
   
     <div class="darkpage">
-        <#if tuan_goods_page??>
+        <#if baituan_goods_page??>
             <#assign continueEnter=false>
-            <#if tuan_goods_page.number+1 == 1>
+            <#if baituan_goods_page.number+1 == 1>
                 <a href="javascript:;">上一页</a>
             <#else>
-                <a href="/promotion/tuan?page=${tuan_goods_page.number-1}<#if type??>&type=${type}</#if>">上一页</a>
+                <a href="/promotion/baituan?page=${baituan_goods_page.number-1}<#if type??>&type=${type}</#if>">上一页</a>
             </#if>
             
-            <#if tuan_goods_page.totalPages gt 0>
-                <#list 1..tuan_goods_page.totalPages as page>
-                    <#if page <= 3 || (tuan_goods_page.totalPages-page) < 3 || (tuan_goods_page.number+1-page)?abs<3 >
-                        <#if page == tuan_goods_page.number+1>
-                            <a class="sel" href="/promotion/tuan?page=${page-1}<#if type??>&type=${type}</#if>">${page}</a>
+            <#if baituan_goods_page.totalPages gt 0>
+                <#list 1..baituan_goods_page.totalPages as page>
+                    <#if page <= 3 || (baituan_goods_page.totalPages-page) < 3 || (baituan_goods_page.number+1-page)?abs<3 >
+                        <#if page == baituan_goods_page.number+1>
+                            <a class="sel" href="/promotion/baituan?page=${page-1}<#if type??>&type=${type}</#if>">${page}</a>
                         <#else>
-                            <a href="/promotion/tuan?page=${page-1}<#if type??>&type=${type}</#if>">${page}</a>
+                            <a href="/promotion/baituan?page=${page-1}<#if type??>&type=${type}</#if>">${page}</a>
                         </#if>
                         <#assign continueEnter=false>
                     <#else>
@@ -207,18 +197,18 @@ function timer${item_index}()
                 </#list>
             </#if>
             
-            <#if tuan_goods_page.number+1 == tuan_goods_page.totalPages || tuan_goods_page.totalPages==0>
+            <#if baituan_goods_page.number+1 == baituan_goods_page.totalPages || baituan_goods_page.totalPages==0>
                 <a href="javascript:;">下一页</a>
             <#else>
-                <a href="/promotion/tuan?page=${tuan_goods_page.number+1}<#if type??>&type=${type}</#if>">下一页</a>
+                <a href="/promotion/baituan?page=${baituan_goods_page.number+1}<#if type??>&type=${type}</#if>">下一页</a>
             </#if>
         </#if>
-        <span class="sp1">共${tuan_goods_page.totalPages!'0'}页</span>
+        <span class="sp1">共${baituan_goods_page.totalPages!'0'}页</span>
         <div>
             <span class="fl mr5">到第</span>
             <input id="pageNo" type="text" value="${page!'1'}" class="text" />
             <span class="fl mr5 ml5">页</span>
-            <input type="submit" class="sub" onclick="javascript:window.location='/promotion/tuan?page='+(parseInt($('#pageNo').val())-1)+'<#if type??>&type=${type}</#if>'" value="确定" />
+            <input type="submit" class="sub" onclick="javascript:window.location='/promotion/baituan?page='+(parseInt($('#pageNo').val())-1)+'<#if type??>&type=${type}</#if>'" value="确定" />
             <p class="clear"></p>
         </div>
     </div>

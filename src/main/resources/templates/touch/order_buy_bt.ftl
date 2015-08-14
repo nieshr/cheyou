@@ -54,7 +54,7 @@ $(document).ready(function(){
                     <input id="input-address-id" type="hidden" name="addressId" value="" datatype="n" nullmsg="请选择安装信息!"/>
                     <#if user.shippingAddressList?? && user.shippingAddressList?size gt 0>
                         <#list user.shippingAddressList as address>
-                            <a href="javascript:;" onclick="javascript:selectAddress(this, ${address.id});">
+                            <a href="javascript:;" onclick="javascript:selectAddress(this, ${address.id?c});">
                                 <p>姓名：${address.receiverName!''}</p>
                                 <p>手机：${address.receiverMobile!''}</p>                              
                                 <p>车牌：${address.receiverCarcode!'' }</p>
@@ -108,7 +108,7 @@ $(document).ready(function(){
         <option value="">请选择同盟店</option>
         <#if shop_list??>
             <#list shop_list as item>
-                <option value="${item.id}">${item.title!''}</option>
+                <option value="${item.id?c}">${item.title!''}</option>
             </#list>
         </#if>
     </select>

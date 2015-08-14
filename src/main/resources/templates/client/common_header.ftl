@@ -210,7 +210,7 @@ function delItem(id)
                         <div class="clear"></div>
                         <a class="a2" href="/goods/${item.goodsId}"><img src="${item.goodsCoverImageUri!''}" /></a>
                         <a class="a3" href="/goods/${item.goodsId}">${item.goodsTitle!''}</a>
-                        <p>￥<#if item.price??>${item.price?string("0.00")} x ${item.quantity!'0'}</#if><a href="javascript:delItem(${item.id});">删除</a></p>
+                        <p>￥<#if item.price??>${item.price?string("0.00")} x ${item.quantity!'0'}</#if><a href="javascript:delItem(${item.id?c});">删除</a></p>
                         <div class="clear"></div>
                     </div>
                     <#if item.isSelected>
@@ -241,18 +241,18 @@ function delItem(id)
                 <#if top_cat_list??>
                     <#list top_cat_list as item>
                         <li>
-                            <h3><a href="/list/${item.id}">${item.title!''}</a></h3>
+                            <h3><a href="/list/${item.id?c}">${item.title!''}</a></h3>
                             <div class="nav_showbox">
                                 <div class="clear"></div>
                                 <#if ("second_level_"+item_index+"_cat_list")?eval?? >
                                     <table class="nav_more">
                                         <#list ("second_level_"+item_index+"_cat_list")?eval as secondLevelItem>
                                             <tr>
-                                                <th width="120"><span><a href="/list/${secondLevelItem.id}">${secondLevelItem.title!''}</a></span></th>
+                                                <th width="120"><span><a href="/list/${secondLevelItem.id?c}">${secondLevelItem.title!''}</a></span></th>
                                                 <td>
                                                     <#if ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval?? >
                                                         <#list ("third_level_"+item_index+secondLevelItem_index+"_cat_list")?eval as thirdLevelItem>
-                                                            <a href="/list/${thirdLevelItem.id}">${thirdLevelItem.title!''}</a>
+                                                            <a href="/list/${thirdLevelItem.id?c}">${thirdLevelItem.title!''}</a>
                                                         </#list>
                                                     </#if>
                                                 </td>

@@ -346,9 +346,10 @@ public class TdManagerOrderController {
     
     
     // 订单列表
-    @RequestMapping(value="/list/{statusId}")
+    @RequestMapping(value="/list/{statusId}/{type}")
     public String goodsListDialog(String keywords,
                                 @PathVariable Long statusId,
+                                @PathVariable Long type,
                                 Integer page, 
                                 Integer size,
                                 String __EVENTTARGET,
@@ -398,31 +399,73 @@ public class TdManagerOrderController {
         {
             size = SiteMagConstant.pageSize;;
         }
+//        /**
+//         * @author libiao
+//         * 添加订单金额统计
+//         */
+//        Double price = new Double(0.00);
+//        if (null != statusId)
+//        {
+//            if (statusId.equals(0L)) // 判断为全部订单
+//            {
+//            	List<TdOrder> list = tdOrderService.findAll();
+//            	for (int i = 0; i < list.size(); i++) {
+//            		price += list.get(i).getTotalPrice();
+//            	}
+//                map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
+//            }
+//            else
+//            {
+//            	//判断为状态订单（1:待确认 2:待付款 3:待发货 4:待收货 5: 待评价 6: 已完成 7: 已取消8: 支付取消(失败)）
+//            	List<TdOrder> orderList = tdOrderService.findByStatusId(statusId);
+//            	for (int i = 0; i < orderList.size(); i++) {
+//            		price += orderList.get(i).getTotalPrice();
+//            	}
+//                map.addAttribute("order_page", tdOrderService.findByStatusIdOrderByIdDesc(statusId, page, size));
+//            }
+//        }
         /**
-         * @author libiao
-         * 添加订单金额统计
-         */
+		 * @author lc
+		 * 订单类型筛选和销售额计算
+		 */
+        if (null == type) {
+			type = 0L;
+		}
         Double price = new Double(0.00);
-        if (null != statusId)
-        {
-            if (statusId.equals(0L)) // 判断为全部订单
-            {
-            	List<TdOrder> list = tdOrderService.findAll();
-            	for (int i = 0; i < list.size(); i++) {
-            		price += list.get(i).getTotalPrice();
-            	}
-                map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
-            }
-            else
-            {
-            	//判断为状态订单（1:待确认 2:待付款 3:待发货 4:待收货 5: 待评价 6: 已完成 7: 已取消8: 支付取消(失败)）
-            	List<TdOrder> orderList = tdOrderService.findByStatusId(statusId);
-            	for (int i = 0; i < orderList.size(); i++) {
-            		price += orderList.get(i).getTotalPrice();
-            	}
-                map.addAttribute("order_page", tdOrderService.findByStatusIdOrderByIdDesc(statusId, page, size));
-            }
-        }
+        if (null != statusId) {
+			if (statusId.equals(0L)) {				
+            	if (type.equals(0L)) {
+            		List<TdOrder> list = tdOrderService.findAll();
+                	for (int i = 0; i < list.size(); i++) {
+                		price += list.get(i).getTotalPrice();
+                	}
+                	map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
+				}
+            	else {
+            		List<TdOrder> list = tdOrderService.findBytypeIdOrderByIdDesc(type);
+            		for (int i = 0; i < list.size(); i++) {
+                		price += list.get(i).getTotalPrice();
+                	}
+            		map.addAttribute("order_page", tdOrderService.findBytypeIdOrderByIdDesc(type, page, size));
+				}				
+			}else{
+				if (type.equals(0L)) {
+					List<TdOrder> list = tdOrderService.findByStatusOrderByIdDesc(statusId);
+					for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+					map.addAttribute("order_page", tdOrderService.findByStatusOrderByIdDesc(statusId, page, size));
+				}
+				else{					
+					List<TdOrder> list = tdOrderService.findByStatusAndTypeIdOrderByIdDesc(statusId, type);
+	        		for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTypeOrderByIdDesc(statusId, type, page, size));
+				}
+				
+			}
+		}
         
         // 参数注回
 //        map.addAttribute("dateId",dateId);

@@ -78,7 +78,7 @@ function timer${item_index}()
 </#if>
 }
 </script>
-    <a href="/touch/goods/${item.id!''}?qiang=100">
+    <a href="/touch/goods/${item.id?c}?qiang=100">
         <b><img src="${item.groupSaleImage!''}" /></b>
         <p class="p1">${item.title!''}</p>
         <p>

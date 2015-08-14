@@ -62,7 +62,7 @@ function loadMore()
 <menu class="whitebg myorder_list" id="goods-menu">
     <#if goods_page??>
         <#list goods_page.content as item>
-            <a href="/touch/goods/${item.id!''}">
+            <a href="/touch/goods/${item.id?c!''}">
                 <b><img src="${item.coverImageUri!''}" /></b>
                 <p class="p1">${item.title!''}</p>
                 <p class="p2">${item.subTitle!''}</p>

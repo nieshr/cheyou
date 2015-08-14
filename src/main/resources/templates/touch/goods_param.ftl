@@ -59,8 +59,8 @@ $(document).ready(function(){
   <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
 </section>
 <footer class="comfoot main">
-    <a href="/goods/${goods.id}">电脑版</a>
-    <a href="/touch/goods/${goods.id}">触屏版</a>
+    <a href="/goods/${goods.id?c}">电脑版</a>
+    <a href="/touch/goods/${goods.id?c}">触屏版</a>
 </footer>
 <p class="bottext mainbox">${site.copyright!''}</p>
 <p class="bottext mainbox">${site.icpNumber!''}</p>

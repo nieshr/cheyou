@@ -92,7 +92,7 @@ DD_belatedPNG.fix('.,img,background');
                 <span style="position:absolute;right:88px;top:-13px;">
                 <img src="/client/images/mymember/arrow06.gif"></span>
                 <input type="hidden" name="goodsId" value="${order_goods.goodsId!''}" />
-                <input type="hidden" name="id" value="${order.id!''}" />
+                <input type="hidden" name="id" value="${order.id?c}" />
                 <div class="mymember_eva_div">
                   <b><font>* </font>问题描述：</b>
                   <textarea name="reason" datatype="*5-255" errormsg="问题描述必须大于5个字符，小于255个字符" <#if has_returned??>disabled</#if>></textarea>

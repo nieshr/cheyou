@@ -7,7 +7,7 @@
                 <#if user.shippingAddressList?? && user.shippingAddressList?size gt 0>
                     <#list user.shippingAddressList as address>
                         <div class="s_gwc2_1_b">
-                            <a class="selAddress" href="javascript:void(0);" aid="${address.id}">
+                            <a class="selAddress" href="javascript:void(0);" aid="${address.id?c}">
                             <p>收货人：${address.receiverName!''}</p>
                             <p>收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>
                             <p>联系方式：${address.receiverMobile!''}</p>

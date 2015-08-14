@@ -199,7 +199,7 @@ function timer${item_index}()
             <#list flash_goods_list as item>
                 <#if item_index < 3>
                     <td>
-                        <a href="/touch/goods/${item.id}?qiang=1">
+                        <a href="/touch/goods/${item.id?c}?qiang=1">
                           <p class="fs08" >${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
                           <p id="timeLeft${item_index}"><b>00</b>天<b>00</b>时<b>00</b>分<b>00</b>秒</p>
@@ -216,7 +216,7 @@ function timer${item_index}()
             <#list flash_goods_list as item>
                 <#if item_index gt 2 && item_index < 6>
                     <td>
-                        <a href="/touch/goods/${item.id}?qiang=1">
+                        <a href="/touch/goods/${item.id?c}?qiang=1">
                           <p class="fs08" >${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
                            <p id="timeLeft${item_index}"><b>00</b>天<b>00</b>时<b>00</b>分<b>00</b>秒</p>
@@ -239,7 +239,7 @@ function timer${item_index}()
         <#list tuan_cur_page.content as item>
             <#if item_index lt 3>
                 <td style="width:30%;">
-                    <a href="/touch/goods/${item.id}?qiang=3">
+                    <a href="/touch/goods/${item.id?c}?qiang=3">
                       <p class="fs08">${item.title!''}</p>
                       <p class="fs07 c9">${item.subTitle!''}</p>
                       <p class="fs07 red">￥<#if item.groupSalePrice??>${item.groupSalePrice?string("0.00")}</#if></p>
@@ -255,7 +255,7 @@ function timer${item_index}()
             <#list tuan_cur_page.content as item>
                 <#if item_index gt 2 && item_index lt 6>
                     <td style="width:30%;">
-                        <a href="/touch/goods/${item.id}?qiang=3">
+                        <a href="/touch/goods/${item.id?c}?qiang=3">
                           <p class="fs08">${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
                           <p class="fs07 red">￥<#if item.groupSalePrice??>${item.groupSalePrice?string("0.00")}</#if></p>
@@ -278,7 +278,7 @@ function timer${item_index}()
             <#list baituan_cur_page.content as item>
                 <#if item_index lt 3>
                     <td style="width:30%;">
-                        <a href="/touch/goods/${item.id}?qiang=100">
+                        <a href="/touch/goods/${item.id?c}?qiang=100">
                             <p class="fs08">${item.title!''}</p>
                             <p class="fs07 c9">${item.subTitle!''}</p>
                             <p class="fs07 red">￥<#if item.groupSalePrePayPrice??>${item.groupSalePrePayPrice?string("0.00")}</#if></p>
@@ -294,7 +294,7 @@ function timer${item_index}()
             <#list baituan_cur_page.content as item>
                 <#if item_index gt 2 && item_index lt 6>
                     <td style="width:30%;">
-                        <a href="/touch/goods/${item.id}?qiang=100">
+                        <a href="/touch/goods/${item.id?c}?qiang=100">
                             <p class="fs08">${item.title!''}</p>
                             <p class="fs07 c9">${item.subTitle!''}</p>
                             <p class="fs07 red">￥<#if item.groupSalePrePayPrice??>${item.groupSalePrePayPrice?string("0.00")}</#if></p>
@@ -316,7 +316,7 @@ function timer${item_index}()
             <#list top_category_list as item>
                 <#if item_index < 5>
                     <td>
-                        <a class="a3" href="/touch/list/${item.id}">
+                        <a class="a3" href="/touch/list/${item.id?c}">
                           <p>${item.title!''}</p>
                           <img src="${item.imgUrl!''}" />
                         </a>
@@ -330,7 +330,7 @@ function timer${item_index}()
             <#list top_category_list as item>
                 <#if item_index gt 4 && item_index < 9>
                     <td>
-                        <a class="a3" href="/touch/list/${item.id}">
+                        <a class="a3" href="/touch/list/${item.id?c}">
                           <p>${item.title!''}</p>
                           <img src="${item.imgUrl!''}" />
                         </a>
@@ -348,7 +348,7 @@ function timer${item_index}()
   </table>
 </section>
 
-<h3 class="indextit mainbox mt10"><span>自驾游</span><#if self_drive_product_category??><a href="/touch/list/${self_drive_product_category.id}">+更多</a></#if></h3>
+<h3 class="indextit mainbox mt10"><span>自驾游</span><#if self_drive_product_category??><a href="/touch/list/${self_drive_product_category.id?c}">+更多</a></#if></h3>
 
 <section class="indexlist">
   <table style="table-layout:fixed;" class="index_my">
@@ -356,7 +356,7 @@ function timer${item_index}()
         <#if self_drive_goods_page??>
             <#list self_drive_goods_page.content as item>
                 <td rowspan="2" width="30%">                 
-                    <a class="ta-c" href="/touch/goods/${item.id}">
+                    <a class="ta-c" href="/touch/goods/${item.id?c}">
                       <img src="${item.coverImageUri!''}" />
                       <p class="fs08 ta-l">${item.title!''}</p>
                       <p class="fs10 red ta-l">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>
@@ -377,7 +377,7 @@ function timer${item_index}()
         <#if index_recommend_goods_page??>
             <#list index_recommend_goods_page.content as item>
                 <td rowspan="2" width="30%">
-                    <a class="ta-c" href="/touch/goods/${item.id}">
+                    <a class="ta-c" href="/touch/goods/${item.id?c}">
                         <p class="fs08" style="overflow: hidden; height: 16px;">${item.title!''}</p>
                         <p class="fs07 c9" style="overflow: hidden; height: 16px;">${item.subTitle!''}</p>
                         <p class="fs07 red">￥<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></p>

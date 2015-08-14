@@ -85,9 +85,9 @@ DD_belatedPNG.fix('.,img,background');
                 <#if order.statusId==1>
                     请稍等，我们将尽快确认您的订单。
                 <#elseif order.statusId==2>
-                    亲爱的客户，此订单还未支付，您可以<a href="/order/dopay/${order.id!""}" style="color: #F00;">去支付</a>或者<span id="change_paytype" data-orderid="${order.id!""}" style="color: #F00;cursor:pointer;">修改支付方式</span>。
+                    亲爱的客户，此订单还未支付，您可以<a href="/order/dopay/${order.id?c}" style="color: #F00;">去支付</a>或者<span id="change_paytype" data-orderid="${order.id?c}" style="color: #F00;cursor:pointer;">修改支付方式</span>。
                 <#elseif order.statusId==3>
-                    亲爱的客户，此订单还需支付尾款，您可以<a href="/order/dopayleft/${order.id!""}" style="color: #F00;">去支付</a>或者<span id="change_paytype" data-orderid="${order.id!""}" style="color: #F00;cursor:pointer;">修改支付方式</span>。
+                    亲爱的客户，此订单还需支付尾款，您可以<a href="/order/dopayleft/${order.id?c}" style="color: #F00;">去支付</a>或者<span id="change_paytype" data-orderid="${order.id?c}" style="color: #F00;cursor:pointer;">修改支付方式</span>。
                 <#elseif order.statusId==4>
                     亲爱的客户，订单支付成功，您可以到店进行消费。
                 <#elseif order.statusId==5>

@@ -105,7 +105,7 @@ DD_belatedPNG.fix('.,img,background');
                     <#if order_page??>
                         <#list order_page.content as order>
                             <tr>
-                              <th colspan="7">订单编号：<a href="/user/order?id=${order.id}">${order.orderNumber!''}</a></th>
+                              <th colspan="7">订单编号：<a href="/user/order?id=${order.id?c}">${order.orderNumber!''}</a></th>
                             </tr>
                             <tr>
                               <td class="td001">
@@ -130,10 +130,10 @@ DD_belatedPNG.fix('.,img,background');
                                         <#--
                                         <a href="/order/cancel/${order.id}">取消订单</a>
                                         -->
-                                        <a href="/order/dopay/${order.id}">立即支付</a>
+                                        <a href="/order/dopay/${order.id?c}">立即支付</a>
                                     <#elseif order.statusId==3>
                                         <p>待付尾款</p>
-                                        <a href="/order/dopayleft/${order.id}">去支付</a>
+                                        <a href="/order/dopayleft/${order.id?c}">去支付</a>
                                     <#elseif order.statusId==4>
                                         待服务
                                     <#elseif order.statusId==5>
@@ -150,11 +150,11 @@ DD_belatedPNG.fix('.,img,background');
                                 </p>
                               </td>
                               <td class="td003"> 
-                                <p><a href="/user/order?id=${order.id}">查看</a></p>
+                                <p><a href="/user/order?id=${order.id?c}">查看</a></p>
                                 <#if order.statusId==5>
                                     <p><a href="/user/comment/list">评价</a></p>
                                 <#elseif order.statusId==6>
-                                    <p><a href="/user/return/${order.id}">申请返修/退换货</a></p>
+                                    <p><a href="/user/return/${order.id?c}">申请返修/退换货</a></p>
                                 </#if>
                               </td>
                             </tr>

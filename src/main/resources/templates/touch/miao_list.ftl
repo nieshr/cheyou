@@ -86,7 +86,7 @@ function timer${item_index}()
 </#if>
 }
 </script>
-            <a href="/touch/goods/${item.id!''}?qiang=1">
+            <a href="/touch/goods/${item.id?c!''}?qiang=1">
                 <b><img src="${item.flashSaleImage!''}" /></b>
                 <p class="p1">${item.title!''}</p>
                 <p class="p2">抢拍：<span class="red">${item.flashSaleSoldNumber!'0'}</span>人</p>

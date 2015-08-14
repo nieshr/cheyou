@@ -102,12 +102,12 @@ function loadMap(x, y)
                     <#list shop_list as item>
                         <li>
                             <div class="mendiantupian">
-                                <a href="/shop/${item.id}">
+                                <a href="/shop/${item.id?c}">
                                     <img src="${item.imageUri!''}" width="137" height="104" />
                                 </a>
                             </div>
                             <div class="mendianditu_rt">
-                            <h4><a href="/shop/${item.id}">${item.title!''}</a></h4>
+                            <h4><a href="/shop/${item.id?c}">${item.title!''}</a></h4>
                             <p>${item.address!''}</p>
                             <p>服务电话：<span>${item.serviceTele!''}</span><p>                          
                             <p>本店共完成<span><a href="#"><#if ("shop_orderFinish_"+item.id)?eval??>${("shop_orderFinish_"+item.id)?eval}<#else>100</#if></a></span>个安装单，有<span><a href="#"><#if ("shop_orderComment_"+item.id)?eval?? && ("shop_orderComment_"+item.id)?eval!=0>${("shop_orderComment_"+item.id)?eval}<#else>32</#if></a></span>条评论</p>

@@ -60,7 +60,7 @@ DD_belatedPNG.fix('.,img,background');
             <th width="80">下单时间</th>
           </tr>
           <tr>
-            <td><a href="/user/order?id=${order.id}">${order.orderNumber!''}</a></td>
+            <td><a href="/user/order?id=${order.id?c}">${order.orderNumber!''}</a></td>
             <td align="left"><table width="100" border="0" align="left">
                 <tbody>
                 <tr>
@@ -71,7 +71,7 @@ DD_belatedPNG.fix('.,img,background');
                             <#if og.isReturnApplied?? && og.isReturnApplied>
                                 <span>已申请退换货</span>
                             <#else>
-                                <a href="/user/return/${order.id}?id=${og.id}">申请</a>
+                                <a href="/user/return/${order.id?c}?id=${og.id?c}">申请</a>
                             </#if>
                         </td>
                     </#list>

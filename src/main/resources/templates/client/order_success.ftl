@@ -63,7 +63,7 @@ $(document).ready(function(){
                 <div class="o-price">
                     <em>货到付款</em><strong><#if order??>${order.totalPrice?string("0.00")}<#else>0</#if></strong><em>元</em>
                 </div>
-                <div class="o-detail" id="orderDetail"><a href="/user/order?id=<#if order??>${order.id}</#if>">订单详情 ></a></div>
+                <div class="o-detail" id="orderDetail"><a href="/user/order?id=<#if order??>${order.id?c}</#if>">订单详情 ></a></div>
                 
             </div>
             <div class="clr"></div>

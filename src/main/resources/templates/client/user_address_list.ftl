@@ -109,8 +109,8 @@ DD_belatedPNG.fix('.,img,background');
                     <td>${address.receiverCarcode!''}</td>          
                     <td>${address.receiverCartype!''}</td>
                     <td>
-                      <p><a href="/user/address/update?id=${address.id}">修改</a></p>
-                      <p><a href="/user/address/delete?id=${address.id}">删除</a></p>
+                      <p><a href="/user/address/update?id=${address.id?c}">修改</a></p>
+                      <p><a href="/user/address/delete?id=${address.id?c}">删除</a></p>
                     </td>
                   </tr>
             </#list>
@@ -123,7 +123,7 @@ DD_belatedPNG.fix('.,img,background');
     <h3>添加/修改</h3> 
     <form method="post" action="/user/address/save" id="form1">
     <table class="mymember_address">
-      <input class="mytext" name="addressId" type="hidden" value="<#if address??>${address.id}</#if>">
+      <input class="mytext" name="addressId" type="hidden" value="<#if address??>${address.id?c}</#if>">
       <tbody>
       <tr>
         <th align="center">姓名：</th>

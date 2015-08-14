@@ -90,7 +90,7 @@ DD_belatedPNG.fix('.,img,background');
                         <#if reward_page??>
                             <#list reward_page.content as reward>
                                 <tr class="">
-                                    <td width="19%" height="35">${reward.id!''}</td>
+                                    <td width="19%" height="35">${reward.id?c}</td>
                                     <td width="17%">${reward.rewardTime!''}</td>
                                     <td width="16%">${reward.lowerUsername!''}</td>
                                     <td width="25%">${reward.orderNumber!''}</td>

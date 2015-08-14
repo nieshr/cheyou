@@ -133,7 +133,7 @@ $(function () {
                 <#list order_page.content as order>
                     <#if order_index < 5>
                     <tr>
-                        <th colspan="7">订单编号：<a href="/user/order?id=${order.id}">${order.orderNumber!''}</a></th>
+                        <th colspan="7">订单编号：<a href="/user/order?id=${order.id?c}">${order.orderNumber!''}</a></th>
                     </tr>
                     <tr>
                         <td align="left"  colspan="2">
@@ -166,7 +166,7 @@ $(function () {
                             </p>          
                         </td>
                         <td class="td003">
-                            <a href="/user/order?id=${order.id}">查看</a>          
+                            <a href="/user/order?id=${order.id?c}">查看</a>          
                         </td>
                     </tr>
                     </#if>
@@ -206,7 +206,7 @@ $(function () {
             <li>
             <#if recommend_goods_page??>
                 <#list recommend_goods_page.content as item>
-                    <a class="mymember_hot_list" href="/goods/${item.id}">
+                    <a class="mymember_hot_list" href="/goods/${item.id?c}">
                         <img src="${item.coverImageUri!''}" width="75" height="75"/>
                         <p>${item.title!''}</p>
                         <b>￥${item.salePrice?string("0.00")}</b>

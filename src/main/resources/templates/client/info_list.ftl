@@ -104,8 +104,8 @@ $(function(){
             <#list info_page.content as item>
                 <li>
                   <#--<img class="img01" src="/client/images/photo/img17.png" width="50" height="50" />-->
-                  <a class="a1" href="/info/content/${item.id}?mid=${mid}"><img src="${item.imgUrl!''}" width="181" height="166" /></a>
-                  <a class="a2" href="/info/content/${item.id}?mid=${mid}">${item.title!''}<#--<span>经验</span>--></a>
+                  <a class="a1" href="/info/content/${item.id?c}?mid=${mid}"><img src="${item.imgUrl!''}" width="181" height="166" /></a>
+                  <a class="a2" href="/info/content/${item.id?c}?mid=${mid}">${item.title!''}<#--<span>经验</span>--></a>
                   <p class="fs12 pt5 pb5">作者：<span class="rd3 mr10">${item.source!''}</span></p>
                   <p class="c7">${item.brief!''}</p>
                   <#--

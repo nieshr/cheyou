@@ -56,10 +56,10 @@ $(document).ready(function(){
         <div class="essaycon">${info.content!''}</div>
         <div class="clear h20"></div>
         <#if prev_info??>
-            <p class="mb10">上一篇：<a href="/info/content/${prev_info.id}?mid=${mid}">${prev_info.title!''}</a></p>
+            <p class="mb10">上一篇：<a href="/info/content/${prev_info.id?c}?mid=${mid}">${prev_info.title!''}</a></p>
         </#if>
         <#if next_info??>
-            <p>下一篇：<a href="/info/content/${next_info.id}?mid=${mid}">${next_info.title!''}</a></p>
+            <p>下一篇：<a href="/info/content/${next_info.id?c}?mid=${mid}">${next_info.title!''}</a></p>
         </#if>
         <div class="clear h20"></div>
         

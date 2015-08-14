@@ -36,12 +36,12 @@ $(document).ready(function(){
 <div id="main" class="page-main">
     <div class="car_success">
         <p class="fc fs30 lh40 pb10">订单提交成功! </p>
-        <p> 订单号：<a href="/touch/user/order?id=${order.id!''}" style="color: #FF0000;">${order.orderNumber!''}</a></p>
+        <p> 订单号：<a href="/touch/user/order?id=${order.id?c!''}" style="color: #FF0000;">${order.orderNumber!''}</a></p>
         <p> 支付方式：${order.payTypeTitle!''}</p>
         <p>应付金额￥${order.totalPrice?string('0.00')} 
-            <a class="blue" href="/touch/order/dopay/${order.id}" style="color: #FF0000;">点击支付</a></p>
+            <a class="blue" href="/touch/order/dopay/${order.id?c}" style="color: #FF0000;">点击支付</a></p>
         <p>您还可以在订单详情页面
-            <a class="blue" style="color: #FF0000;" href="/touch/user/order?id=${order.id!''}">修改支付方式</a></p>
+            <a class="blue" style="color: #FF0000;" href="/touch/user/order?id=${order.id?c!''}">修改支付方式</a></p>
     </div>
 </div>
 

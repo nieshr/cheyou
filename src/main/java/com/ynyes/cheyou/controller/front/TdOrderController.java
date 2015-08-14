@@ -850,6 +850,29 @@ public class TdOrderController extends AbstractPaytypeController {
 
         // 保存订单商品及订单
         tdOrderGoodsService.save(orderGoodsList);
+        /**
+		 * @author lc
+		 * @注释：订单类型设置 
+		 */
+        tdOrder.setTypeId(0L);
+        for(TdOrderGoods tdOrderGoods : orderGoodsList){
+        	if (tdOrderGoods.getGoodsSaleType() == 1) {
+				tdOrder.setTypeId(2L);
+			}       	
+        }
+        //抢购 团购 都只有一个商品
+        for(TdOrderGoods tdOrderGoods : orderGoodsList){
+        	if (tdOrderGoods.getGoodsSaleType() == 2) {
+				tdOrder.setTypeId(3L);
+			}
+        	else if (tdOrderGoods.getGoodsSaleType() == 3) {
+        		tdOrder.setTypeId(4L);
+			}
+        	else if (tdOrderGoods.getGoodsSaleType() == 4) {
+        		tdOrder.setTypeId(5L);
+			}
+        }
+        
         tdOrder = tdOrderService.save(tdOrder);
 
         // if (tdOrder.getIsOnlinePay()) {
@@ -1355,6 +1378,11 @@ public class TdOrderController extends AbstractPaytypeController {
 
         // 保存订单商品及订单
         tdOrderGoodsService.save(orderGoodsList);
+        /**
+		 * @author lc
+		 * @注释：设置订单类型
+		 */
+        tdOrder.setTypeId(1L);
         tdOrder = tdOrderService.save(tdOrder);
 
         // 添加积分使用记录

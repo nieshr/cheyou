@@ -188,6 +188,10 @@ public class TdOrder {
     @Column
     private Long statusId;
     
+    // 订单类型 1：普通订单 2：组合购买订单 3：抢购订单 4：十人团订单  5：百人团订单
+    @Column
+    private Long typeId;
+    
     // 订单取消原因
     @Column
     private String cancelReason;
@@ -240,15 +244,23 @@ public class TdOrder {
     // 是否在线付款
     @Column
     private Boolean isOnlinePay;
-
+        
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
+         
+	public void setId(Long id) {
         this.id = id;
     }
 
+	public Long getTypeId() {
+			return typeId;
+	}
+
+	public void setTypeId(Long typeId) {
+			this.typeId = typeId;
+	}
+	
     public String getOrderNumber() {
         return orderNumber;
     }

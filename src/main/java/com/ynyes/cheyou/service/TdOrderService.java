@@ -259,6 +259,32 @@ public class TdOrderService {
     }
     
     /**
+	 * @author lc
+	 * @注释：根据订单类型和订单状态进行查询
+	 */
+    public Page<TdOrder> findByStatusAndTypeOrderByIdDesc(long statusId, long typeId, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByStatusIdAndTypeIdOrderByIdDesc(statusId, typeId, pageRequest);
+    }
+    public List<TdOrder> findByStatusAndTypeIdOrderByIdDesc(long statusId, long typeId){
+    	return repository.findByStatusIdAndTypeIdOrderByIdDesc(statusId, typeId);
+    }
+    public Page<TdOrder> findByStatusOrderByIdDesc(long StatusId, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByStatusIdOrderByIdDesc(StatusId, pageRequest);
+    }
+    public List<TdOrder> findByStatusOrderByIdDesc(long StatusId){
+    	return repository.findByStatusIdOrderByIdDesc(StatusId);
+    }
+    public Page<TdOrder> findBytypeIdOrderByIdDesc(long typeId, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findBytypeIdOrderByIdDesc(typeId, pageRequest);
+    }
+    public List<TdOrder> findBytypeIdOrderByIdDesc(long typeId){
+    	return repository.findBytypeIdOrderByIdDesc(typeId);
+    }
+    
+    /**
      * 按交易状态查询
      * @author libiao
      */

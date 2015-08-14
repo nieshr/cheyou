@@ -1,9 +1,9 @@
-/* 首页 */
+/* 棣栭〉 */
 .overflow{ overflow:hidden;}
 .pore{position:relative;}
 .w1200{width:1200px; margin:0 auto;}
 .w1059{width:1059px; margin:0 auto;}
-/* 栏目页面 */
+/* 鏍忕洰椤甸潰 */
 .column_qg {height:160px; overflow:hidden; padding:15px 0 0 0; float:right; width:964px;border: solid 1px #eeeeee;}
 .column_qg a.a1 { font-size:18px;color:#fff; line-height:25px; display:inline-block; width:40px; position:absolute; right:9px;top:49px;}
 .column_qg a.a1:hover { color:#f60;}
@@ -88,7 +88,7 @@
 .goumai .a7 img{margin-top:11px; margin-right:5px;}
 
 
-/* 商品详细页 */
+/* 鍟嗗搧璇︾粏椤� */
 .pro_info { width:100%; min-width:1200px; margin:0 auto;}
 .pro_tit { font-weight:400; padding:0 0 20px;}
 .pro_tit .a1 { font-size:14px; color:#333; line-height:40px;}
@@ -217,7 +217,7 @@
 .pro_myseek .sub:hover { background:#e8323d;}
 .pro_myseek_list li { width:87%; padding:15px 11% 15px 2%; line-height:25px; border-bottom:1px dashed #ddd;}
 .pro_myseek_list li .sp1 { position:absolute; right:2%; top:15px; color:#999;}
-/* 购物车部分 */
+/* 璐墿杞﹂儴鍒� */
 .car_top { width:100%;}
 .car_top p { float:left; display:block; width:33%; height:35px; line-height:35px; text-align:center; color:#fff; background:#ddd;}
 .car_top p i { position:absolute;right:-20px;top:0; display:block; width:50px; border-right:4px solid #fff; height:35px; background:#ddd;
@@ -393,7 +393,7 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 .pay_style span { display:block; width:148px; height:43px; border:1px solid #eee; text-align:center;}
 
 
-/*=====================以下部分是Validform必须的====================*/
+/*=====================浠ヤ笅閮ㄥ垎鏄疺alidform蹇呴』鐨�====================*/
 .Validform_checktip{ margin-left:8px; line-height:20px; height:20px; overflow:hidden; color:#999; font-size:12px; }
 .Validform_right{ color:#22A011; padding-left:20px; background:url(valid_icons.png) no-repeat -40px -20px; }
 .Validform_wrong{ color:#EA5D0E; padding-left:20px; white-space:nowrap; background:url(valid_icons.png) no-repeat -20px -40px; }
@@ -406,7 +406,7 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 #Validform_msg a.Validform_close:link,#Validform_msg a.Validform_close:visited{ line-height:30px; position:absolute; right:10px; top:0px; color:#fff; text-decoration:none; }
 #Validform_msg a.Validform_close:hover{color:#ccc;}
 #Validform_msg .Validform_info{padding:10px;border:1px solid #bbb; border-top:none; text-align:left;}
-/*=====================以上部分是Validform必须的====================*/
+/*=====================浠ヤ笂閮ㄥ垎鏄疺alidform蹇呴』鐨�====================*/
 .hide {display: none;}
 
 .team_tit {
@@ -417,6 +417,7 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	position:absolute;
 	left:0;
 	top:0;}
+
 .team_tit .time {
 	background:url(../images/tg_titnow.png) no-repeat;
 	width:129px;

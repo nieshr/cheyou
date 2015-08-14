@@ -98,8 +98,8 @@ $(document).ready(function(){
 </section>
 <div class="clear h40"></div>
 <footer class="comfoot main">
-    <a href="/user/order?id=${order.id}">电脑版</a>
-    <a href="/touch/user/order?id=${order.id}">触屏版</a>
+    <a href="/user/order?id=${order.id?c}">电脑版</a>
+    <a href="/touch/user/order?id=${order.id?c}">触屏版</a>
 </footer>
 <p class="bottext mainbox">${site.copyright!''}</p>
 <div class="buyfoot_bg"></div>
@@ -108,9 +108,9 @@ $(document).ready(function(){
     <#if order.statusId==7>
     <#else>
         <#if order.statusId==2>
-           <a class="fr" href="/touch/order/dopay/${order.id}">付款</a>
+           <a class="fr" href="/touch/order/dopay/${order.id?c}">付款</a>
         <#elseif order.statusId==3>
-           <a class="fr" href="/touch/order/dopayleft/${order.id}">付款</a>
+           <a class="fr" href="/touch/order/dopayleft/${order.id?c}">付款</a>
         <#elseif order.statusId==5>
            <a class="fr" href="#">评价</a>
         </#if>

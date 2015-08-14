@@ -63,6 +63,16 @@ public interface TdOrderRepo extends
     List<TdOrder> findByShopIdAndStatusIdOrderByIdDesc(long shopId, long statusId);
     
     /**
+	 * @author lc
+	 * @注释：按订单类型和状态查询
+	 */
+    Page<TdOrder> findByStatusIdAndTypeIdOrderByIdDesc(long statusId, long typeId, Pageable page);
+    List<TdOrder> findByStatusIdAndTypeIdOrderByIdDesc(long statusId, long typeId);
+    Page<TdOrder> findByStatusIdOrderByIdDesc(long statusId, Pageable page);
+    List<TdOrder> findByStatusIdOrderByIdDesc(long statusId);
+    Page<TdOrder> findBytypeIdOrderByIdDesc(long typeId, Pageable page);
+    List<TdOrder> findBytypeIdOrderByIdDesc(long typeId);
+    /**
      * 按交易状态查询
      * @author libiao
      */
