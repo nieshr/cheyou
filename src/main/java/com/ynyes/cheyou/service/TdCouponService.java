@@ -141,6 +141,16 @@ public class TdCouponService {
         return repository.findByTypeIdAndIsDistributtedTrueOrderByIdDesc(typeId);
     }
     
+    public TdCoupon findTopByTypeIdAndDiySiteIdAndIsDistributtedFalse(Long typeId, Long diySiteId)
+    {
+        if (null == typeId || null == diySiteId)
+        {
+            return null;
+        }
+        
+        return repository.findTopByTypeIdAndDiySiteIdAndIsDistributtedFalse(typeId, diySiteId);
+    }
+    
     public Page<TdCoupon> findByIsDistributtedFalseOrderBySortIdAsc(int page, int size)
     {
         PageRequest pageRequest = new PageRequest(page, size);

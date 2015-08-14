@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ynyes.cheyou.entity.TdCoupon;
 import com.ynyes.cheyou.entity.TdCouponType;
+import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.service.TdCouponService;
 import com.ynyes.cheyou.service.TdCouponTypeService;
 import com.ynyes.cheyou.service.TdDiySiteService;
@@ -326,6 +327,8 @@ public class TdManagerCouponController {
     @RequestMapping(value="/save")
     public String orderEdit(TdCoupon tdCoupon,
                         String __VIEWSTATE,
+                        Long[] leftNumbers,
+                        Long typeId,
                         ModelMap map,
                         HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
@@ -339,13 +342,45 @@ public class TdManagerCouponController {
         if (null == tdCoupon.getId())
         {
             tdManagerLogService.addLog("add", "用户修改优惠券", req);
+            
+            List<TdDiySite> tdDiySiteList = tdDiySiteService.findByIsEnableTrue();
+            
+            if (null != tdDiySiteList && tdDiySiteList.size() > 0
+                    && null != leftNumbers && leftNumbers.length > 0
+                    && null != typeId)
+            {
+                for (int i=0; i<tdDiySiteList.size(); i++)
+                {
+                    TdDiySite tds = tdDiySiteList.get(i);
+                    
+                    if (null != tds && leftNumbers.length > i)
+                    {
+                        TdCoupon coupon = tdCouponService.findTopByTypeIdAndDiySiteIdAndIsDistributtedFalse(typeId, tds.getId());
+                        
+                        if (null == coupon)
+                        {
+                            coupon = new TdCoupon();
+                            coupon.setDiySiteId(tds.getId());
+                            coupon.setLeftNumber(leftNumbers[i]);
+                            coupon.setTypeId(typeId);
+                            coupon.setSortId(99L);
+                        }
+                        else
+                        {
+                            coupon.setLeftNumber(coupon.getLeftNumber() + leftNumbers[i]);
+                        }
+                        
+                        tdCouponService.save(coupon);
+                    }
+                }
+            }
+            
         }
         else
         {
             tdManagerLogService.addLog("edit", "用户修改优惠券", req);
+            tdCouponService.save(tdCoupon);
         }
-        
-        tdCouponService.save(tdCoupon);
         
         return "redirect:/Verwalter/coupon/list";
     }

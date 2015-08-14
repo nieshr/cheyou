@@ -86,27 +86,24 @@ $(function () {
         </div>
     </dd>
   </dl>
-  
-  
-    
+<#if  !coupon??>
     <#if diy_site_list??>
-        <#list diy_site_list as item>
-            <dl>
-                <dt>所属同盟店</dt>
-                <dd>
-                    <input name="leftNumber" type="text" value="<#if coupon??>${coupon.leftNumber?c!""}<#else>1</#if>" class="input small" datatype="n" sucmsg=" ">
-                    <span class="Validform_checktip"></span>
-                </dd> 
-            </dl>
-        </#list>
+    <#list diy_site_list as item>
+        <dl>
+            <dt>${item.title!''}</dt>
+            <dd>
+                <input name="leftNumbers" type="text" value="10" class="input small" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip"></span>
+            </dd> 
+        </dl>
+    </#list>
     </#if>
-    <#--
+<#else>
+  <dl>
+    <dt>所属同盟店</dt>
     <dd>
         <div class="rule-single-select">
-            <select name="diySiteId" datatype="*" sucmsg=" ">
-                <#if !coupon?? || !coupon.diySiteId??>
-                    <option value="">请选择同盟店...</option>
-                </#if>
+            <select name="diySiteId" datatype="*" sucmsg=" " disabled="disabled">
                 <#if diy_site_list??>
                     <#list diy_site_list as item>
                         <option value="${item.id!""}" <#if coupon?? && coupon.diySiteId?? && coupon.diySiteId==item.id>selected="selected"</#if>>${item.title!""}</option>
@@ -115,8 +112,8 @@ $(function () {
             </select>
         </div>
     </dd>
-    -->
-  
+  </dl>
+    
   <dl>
     <dt>剩余数量</dt>
     <dd>
@@ -124,7 +121,6 @@ $(function () {
       <span class="Validform_checktip"></span>
     </dd>
   </dl>
-
   <dl>
     <dt>排序数字</dt>
     <dd>
@@ -132,6 +128,10 @@ $(function () {
       <span class="Validform_checktip">*数字，越小越向前</span>
     </dd>
   </dl>
+</#if>
+  
+
+  
   
 </div>
 <!--/内容-->
