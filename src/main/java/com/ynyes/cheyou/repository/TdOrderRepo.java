@@ -73,6 +73,18 @@ public interface TdOrderRepo extends
     Page<TdOrder> findBytypeIdOrderByIdDesc(long typeId, Pageable page);
     List<TdOrder> findBytypeIdOrderByIdDesc(long typeId);
     /**
+	 * @author lc
+	 * @注释： 按时间、订单类型和订单状态查询
+	 */
+    Page<TdOrder> findByOrderTimeAfterOrderByIdDesc(Date time, Pageable page);
+    List<TdOrder> findByOrderTimeAfterOrderByIdDesc(Date time);
+    Page<TdOrder> findByStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(long statusId, long typeId, Date time, Pageable page);
+    List<TdOrder> findByStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(long statusId, long typeId, Date time);
+    Page<TdOrder> findByStatusIdAndOrderTimeAfterOrderByIdDesc(long statusId, Date time, Pageable page);
+    List<TdOrder> findByStatusIdAndOrderTimeAfterOrderByIdDesc(long statusId, Date time);
+    Page<TdOrder> findBytypeIdAndOrderTimeAfterOrderByIdDesc(long typeId, Date time, Pageable page);
+    List<TdOrder> findBytypeIdAndOrderTimeAfterOrderByIdDesc(long typeId, Date time);
+    /**
      * 按交易状态查询
      * @author libiao
      */

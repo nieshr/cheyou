@@ -283,7 +283,41 @@ public class TdOrderService {
     public List<TdOrder> findBytypeIdOrderByIdDesc(long typeId){
     	return repository.findBytypeIdOrderByIdDesc(typeId);
     }
+    /**
+	 * @author lc
+	 * @注释 按时间、订单类型和订单状态查询
+	 */
+    public Page<TdOrder> findByTimeAfterOrderByIdDesc(Date time, int page, int size)
+    {
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByOrderTimeAfterOrderByIdDesc(time, pageRequest);
+    }
+    public List<TdOrder> findByTimeAfterOrderByIdDesc(Date time){
+    	return repository.findByOrderTimeAfterOrderByIdDesc(time);
+    }
     
+    public Page<TdOrder> findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(long statusId, long typeId, Date time, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(statusId, typeId, time, pageRequest);
+    }
+    public List<TdOrder> findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(long statusId, long typeId, Date time){
+    	return repository.findByStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(statusId, typeId, time);
+    }
+    public Page<TdOrder> findByStatusAndTimeAfterOrderByIdDesc(long StatusId, Date time, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByStatusIdAndOrderTimeAfterOrderByIdDesc(StatusId, time, pageRequest);
+    }
+    public List<TdOrder> findByStatusAndTimeAfterOrderByIdDesc(long StatusId, Date time){
+    	return repository.findByStatusIdAndOrderTimeAfterOrderByIdDesc(StatusId, time);
+    }
+    public Page<TdOrder> findBytypeIdAndTimeAfterOrderByIdDesc(long typeId, Date time, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findBytypeIdAndOrderTimeAfterOrderByIdDesc(typeId, time, pageRequest);
+    }
+    public List<TdOrder> findBytypeIdAndTimeAfterOrderByIdDesc(long typeId, Date time){
+    	return repository.findBytypeIdAndOrderTimeAfterOrderByIdDesc(typeId, time);
+    }
     /**
      * 按交易状态查询
      * @author libiao

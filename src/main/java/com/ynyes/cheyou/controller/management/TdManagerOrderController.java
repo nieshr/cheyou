@@ -1,5 +1,6 @@
 package com.ynyes.cheyou.controller.management;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -352,6 +353,7 @@ public class TdManagerOrderController {
                                 @PathVariable Long type,
                                 Integer page, 
                                 Integer size,
+                                Integer timeId,
                                 String __EVENTTARGET,
                                 String __EVENTARGUMENT,
                                 String __VIEWSTATE,
@@ -399,6 +401,10 @@ public class TdManagerOrderController {
         {
             size = SiteMagConstant.pageSize;;
         }
+        
+        if (null == timeId) {
+            timeId = 0;
+        }
 //        /**
 //         * @author libiao
 //         * 添加订单金额统计
@@ -426,64 +432,89 @@ public class TdManagerOrderController {
 //        }
         /**
 		 * @author lc
-		 * 订单类型筛选和销售额计算
+		 * @注释：时间删选
 		 */
-        if (null == type) {
-			type = 0L;
-		}
         Double price = new Double(0.00);
         Double sales = new Double(0.00);
-        if (null != statusId) {
-			if (statusId.equals(0L)) {				
-            	if (type.equals(0L)) {
-            		List<TdOrder> list = tdOrderService.findAll();
-                	for (int i = 0; i < list.size(); i++) {
-                		price += list.get(i).getTotalPrice();
-                	}
-                	for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
-                	map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
-				}
-            	else {
-            		List<TdOrder> list = tdOrderService.findBytypeIdOrderByIdDesc(type);
-            		for (int i = 0; i < list.size(); i++) {
-                		price += list.get(i).getTotalPrice();
-                	}
-            		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
-            		map.addAttribute("order_page", tdOrderService.findBytypeIdOrderByIdDesc(type, page, size));
-				}				
-			}else{
-				if (type.equals(0L)) {
-					List<TdOrder> list = tdOrderService.findByStatusOrderByIdDesc(statusId);
-					for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-					for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
-					map.addAttribute("order_page", tdOrderService.findByStatusOrderByIdDesc(statusId, page, size));
-				}
-				else{					
-					List<TdOrder> list = tdOrderService.findByStatusAndTypeIdOrderByIdDesc(statusId, type);
-	        		for (int i = 0; i < list.size(); i++) {
+        if (timeId.equals(0)) {
+        	if (null != statusId) {
+    			if (statusId.equals(0L)) {				
+                	if (type.equals(0L)) {
+                		List<TdOrder> list = tdOrderService.findAll();
+                    	for (int i = 0; i < list.size(); i++) {
+                    		price += list.get(i).getTotalPrice();
+                    	}
+                    	for(int i = 0; i < list.size(); i++){
+                    		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                    			
+    						}
+                    		else{
+                    			sales += list.get(i).getTotalPrice();
+                    		}
+                    	}
+                    	map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
+    				}
+                	else {
+                		List<TdOrder> list = tdOrderService.findBytypeIdOrderByIdDesc(type);
+                		for (int i = 0; i < list.size(); i++) {
+                    		price += list.get(i).getTotalPrice();
+                    	}
+                		for(int i = 0; i < list.size(); i++){
+                    		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                    			
+    						}
+                    		else{
+                    			sales += list.get(i).getTotalPrice();
+                    		}
+                    	}
+                		map.addAttribute("order_page", tdOrderService.findBytypeIdOrderByIdDesc(type, page, size));
+    				}				
+    			}else{
+    				if (type.equals(0L)) {
+    					List<TdOrder> list = tdOrderService.findByStatusOrderByIdDesc(statusId);
+    					for (int i = 0; i < list.size(); i++) {
+    	            		price += list.get(i).getTotalPrice();
+    	            	}
+    					for(int i = 0; i < list.size(); i++){
+                    		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                    			
+    						}
+                    		else{
+                    			sales += list.get(i).getTotalPrice();
+                    		}
+                    	}
+    					map.addAttribute("order_page", tdOrderService.findByStatusOrderByIdDesc(statusId, page, size));
+    				}
+    				else{					
+    					List<TdOrder> list = tdOrderService.findByStatusAndTypeIdOrderByIdDesc(statusId, type);
+    	        		for (int i = 0; i < list.size(); i++) {
+    	            		price += list.get(i).getTotalPrice();
+    	            	}
+    	        		for(int i = 0; i < list.size(); i++){
+                    		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                    			
+    						}
+                    		else{
+                    			sales += list.get(i).getTotalPrice();
+                    		}
+                    	}
+    	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTypeOrderByIdDesc(statusId, type, page, size));
+    				}
+    				
+    			}
+    		}
+		}
+        else if (timeId.equals(1)) {
+        	Date cur = new Date();
+            Calendar calendar = Calendar.getInstance();// 日历对象
+            calendar.setTime(cur);// 设置当前日期
+          //  calendar.add(Calendar.MONTH, -1);// 月份减一
+            calendar.add(Calendar.DAY_OF_MONTH, -1);
+            Date time = calendar.getTime();
+        	if (statusId.equals(0L)) {
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
+        			for (int i = 0; i < list.size(); i++) {
 	            		price += list.get(i).getTotalPrice();
 	            	}
 	        		for(int i = 0; i < list.size(); i++){
@@ -494,11 +525,422 @@ public class TdManagerOrderController {
                 			sales += list.get(i).getTotalPrice();
                 		}
                 	}
-	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTypeOrderByIdDesc(statusId, type, page, size));
-				}
-				
-			}
+	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+        		}
+        	}
+        	else{
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+        		}
+        	}
 		}
+        else if (timeId.equals(2)) {
+        	Date cur = new Date();
+            Calendar calendar = Calendar.getInstance();// 日历对象
+            calendar.setTime(cur);// 设置当前日期
+          //  calendar.add(Calendar.MONTH, -1);// 月份减一
+            calendar.add(Calendar.DAY_OF_MONTH, -7);
+            Date time = calendar.getTime();
+            if (statusId.equals(0L)) {
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+        		}
+        	}
+        	else{
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+        		}
+        	}
+		}
+        else if (timeId.equals(3)) {
+        	Date cur = new Date();
+            Calendar calendar = Calendar.getInstance();// 日历对象
+            calendar.setTime(cur);// 设置当前日期
+            calendar.add(Calendar.MONTH, -1);// 月份减一
+           // calendar.add(Calendar.DAY_OF_MONTH, -7);
+            Date time = calendar.getTime();
+            if (statusId.equals(0L)) {
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+        		}
+        	}
+        	else{
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+        		}
+        	}
+		}
+        else if (timeId.equals(4)) {
+        	Date cur = new Date();
+            Calendar calendar = Calendar.getInstance();// 日历对象
+            calendar.setTime(cur);// 设置当前日期
+            calendar.add(Calendar.MONTH, -3);// 月份减一
+           // calendar.add(Calendar.DAY_OF_MONTH, -7);
+            Date time = calendar.getTime();
+            if (statusId.equals(0L)) {
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+        		}
+        	}
+        	else{
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+        		}
+        	}
+		}
+        else if (timeId.equals(6)) {
+        	Date cur = new Date();
+            Calendar calendar = Calendar.getInstance();// 日历对象
+            calendar.setTime(cur);// 设置当前日期
+            calendar.add(Calendar.MONTH, -6);// 月份减一
+           // calendar.add(Calendar.DAY_OF_MONTH, -7);
+            Date time = calendar.getTime();
+            if (statusId.equals(0L)) {
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+        		}
+        	}
+        	else{
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+        		}
+        	}
+		}
+        else if (timeId.equals(12)) {
+        	Date cur = new Date();
+            Calendar calendar = Calendar.getInstance();// 日历对象
+            calendar.setTime(cur);// 设置当前日期
+            calendar.add(Calendar.MONTH, -12);// 月份减一
+           // calendar.add(Calendar.DAY_OF_MONTH, -7);
+            Date time = calendar.getTime();
+            if (statusId.equals(0L)) {
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+        		}
+        	}
+        	else{
+        		if (type.equals(0L)) {
+        			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+        		}
+        		else{
+        			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
+        			for (int i = 0; i < list.size(); i++) {
+	            		price += list.get(i).getTotalPrice();
+	            	}
+	        		for(int i = 0; i < list.size(); i++){
+                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+                			
+						}
+                		else{
+                			sales += list.get(i).getTotalPrice();
+                		}
+                	}
+	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+        		}
+        	}
+		}
+        /**
+		 * @author lc
+		 * 订单类型筛选和销售额计算
+		 */               
+        
         
         // 参数注回
 //        map.addAttribute("dateId",dateId);
@@ -508,6 +950,12 @@ public class TdManagerOrderController {
         map.addAttribute("size", size);
         map.addAttribute("keywords", keywords);
         map.addAttribute("statusId", statusId);
+        /**
+		 * @author lc
+		 * @注释：添加时间删选参数
+		 */
+        map.addAttribute("time_id", timeId);
+        map.addAttribute("type", type);
         map.addAttribute("__EVENTTARGET", __EVENTTARGET);
         map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
