@@ -191,12 +191,7 @@ DD_belatedPNG.fix('.,img,background');
                                 </p>
                               </td>
                               <td class="td003"> 
-                        <!--        <p><a href="/user/order?id=${order.id}">查看</a></p>
-                                <#if order.statusId==5>
-                                    <p><a href="/user/comment/list">评价</a></p>
-                                <#elseif order.statusId==6>
-                                    <p><a href="/user/return/${order.id}">申请返修/退换货</a></p>
-                                </#if>  -->
+                                   ${order.rebate!''}
                               </td>
                             </tr>
                         </#list>

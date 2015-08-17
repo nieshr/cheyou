@@ -87,7 +87,7 @@ public class TdDiySite {
     @Column
     private String mobile;
     
-    // 经度
+    // 返利
     @Column
     private Double totalCash;
 

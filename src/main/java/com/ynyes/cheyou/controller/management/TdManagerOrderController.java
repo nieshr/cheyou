@@ -21,9 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdDeliveryType;
 import com.ynyes.cheyou.entity.TdDiySite;
+import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdOrder;
+import com.ynyes.cheyou.entity.TdOrderGoods;
 import com.ynyes.cheyou.entity.TdPayType;
 import com.ynyes.cheyou.entity.TdUser;
+import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.service.TdArticleService;
 import com.ynyes.cheyou.service.TdDeliveryTypeService;
 import com.ynyes.cheyou.service.TdDiySiteService;
@@ -32,6 +35,7 @@ import com.ynyes.cheyou.service.TdManagerLogService;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayTypeService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
+import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.util.SMSUtil;
 import com.ynyes.cheyou.util.SiteMagConstant;
@@ -63,6 +67,9 @@ public class TdManagerOrderController {
     
     @Autowired
     TdDiySiteService tdDiySiteService;
+    
+    @Autowired
+    TdUserPointService tdUserPointService;
     
     @Autowired
     TdOrderService tdOrderService;
@@ -1190,6 +1197,68 @@ public class TdManagerOrderController {
                 {
                     order.setStatusId(4L);
                     order.setPayLeftTime(new Date());
+                    /**
+					 * @author lc
+					 * @注释：添加同盟店所获返利
+					 */
+                    // 用户
+                    TdUser tdUser = tdUserService.findByUsername(order.getUsername());
+
+                    // 同盟店
+                    TdDiySite tdShop = tdDiySiteService.findOne(order.getShopId());
+                    List<TdOrderGoods> tdOrderGoodsList = order.getOrderGoodsList();
+
+                    Long totalPoints = 0L;
+                    Double totalCash = 0.0;
+
+                    // 返利总额
+                    if (null != tdOrderGoodsList) {
+                        for (TdOrderGoods tog : tdOrderGoodsList) {
+                            if (0 == tog.getGoodsSaleType()) // 正常销售
+                            {
+                                TdGoods tdGoods = tdGoodsService.findOne(tog.getGoodsId());
+
+                                if (null != tdGoods && null != tdGoods.getReturnPoints()) {
+                                    totalPoints += tdGoods.getReturnPoints();
+
+                                    if (null != tdGoods.getShopReturnRation()) {
+                                        totalCash = tdGoods.getSalePrice()
+                                                * tdGoods.getShopReturnRation();
+                                    }
+                                }
+                            }
+                        }
+
+                        // 用户返利
+                        if (null != tdUser) {
+                            TdUserPoint userPoint = new TdUserPoint();
+
+                            userPoint.setDetail("购买商品赠送粮草");
+                            userPoint.setOrderNumber(order.getOrderNumber());
+                            userPoint.setPoint(totalPoints);
+                            userPoint.setPointTime(new Date());
+                            userPoint.setTotalPoint(tdUser.getTotalPoints() + totalPoints);
+                            userPoint.setUsername(tdUser.getUsername());
+
+                            userPoint = tdUserPointService.save(userPoint);
+
+                            tdUser.setTotalPoints(userPoint.getTotalPoint());
+
+                            tdUserService.save(tdUser);
+                        }
+                    }
+
+                    // 同盟店返利
+                    if (null != tdShop) {
+                        if (null == tdShop.getTotalCash()) {
+                            tdShop.setTotalCash(totalCash);
+                        } else {
+                            tdShop.setTotalCash(tdShop.getTotalCash() + totalCash);
+                        }
+                        order.setRebate(totalCash);//设置订单同盟店所获返利
+                        order = tdOrderService.save(order);
+                        tdDiySiteService.save(tdShop);
+                    }
                 }
             }
             // 确认已服务

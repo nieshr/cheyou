@@ -26,11 +26,13 @@ public class CcopHttpClient
 
    X509TrustManager tm = new X509TrustManager()
     {
-      public void checkClientTrusted(X509Certificate[] chain,String authType)
+      @Override
+	public void checkClientTrusted(X509Certificate[] chain,String authType)
 			 throws java.security.cert.CertificateException {
       }
 
-      public void checkServerTrusted(X509Certificate[] chain,String authType)
+      @Override
+	public void checkServerTrusted(X509Certificate[] chain,String authType)
  			 throws java.security.cert.CertificateException {
         if ((chain == null) || (chain.length == 0))
           throw new IllegalArgumentException("null or zero-length certificate chain");
@@ -50,7 +52,8 @@ public class CcopHttpClient
           throw new CertificateException("服务端证书验证失败！");
       }
 
-      public X509Certificate[] getAcceptedIssuers()
+      @Override
+	public X509Certificate[] getAcceptedIssuers()
       {
         return new X509Certificate[0];
       }

@@ -1,6 +1,8 @@
 package com.ynyes.cheyou.controller.management;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdCoupon;
 import com.ynyes.cheyou.entity.TdCouponType;
@@ -256,6 +260,7 @@ public class TdManagerCouponController {
         if (null != id)
         {
             map.addAttribute("coupon", tdCouponService.findOne(id));
+            return "/site_mag/coupon_edit_hasId";
         }
         return "/site_mag/coupon_edit";
     }
@@ -349,30 +354,55 @@ public class TdManagerCouponController {
                     && null != leftNumbers && leftNumbers.length > 0
                     && null != typeId)
             {
-                for (int i=0; i<tdDiySiteList.size(); i++)
-                {
-                    TdDiySite tds = tdDiySiteList.get(i);
+            	/**
+				 * @author lc
+				 * @注释：如果不是免费洗车券和免费打蜡券就不存在同盟店
+				 */
+            	TdCouponType tdCouponType = tdCouponTypeService.findOne(typeId);
+            	
+            	if (tdCouponType.getTitle().equals("免费打蜡券") || tdCouponType.getTitle().equals("免费洗车券")) {
+            		 for (int i=0; i<tdDiySiteList.size(); i++)
+                     {
+                         TdDiySite tds = tdDiySiteList.get(i);
+                         
+                         if (null != tds && leftNumbers.length > i)
+                         {
+                             TdCoupon coupon = tdCouponService.findTopByTypeIdAndDiySiteIdAndIsDistributtedFalse(typeId, tds.getId());
+                             
+                             if (null == coupon)
+                             {
+                                 coupon = new TdCoupon();
+                                 coupon.setDiySiteId(tds.getId());
+                                 coupon.setLeftNumber(leftNumbers[i]);
+                                 coupon.setTypeId(typeId);
+                                 coupon.setSortId(99L);
+                             }
+                             else
+                             {
+                                 coupon.setLeftNumber(coupon.getLeftNumber() + leftNumbers[i]);
+                             }
+                             
+                             tdCouponService.save(coupon);
+                         }
+                     }
+				}else{
+					TdCoupon coupon = tdCouponService.findByTypeId(typeId);
                     
-                    if (null != tds && leftNumbers.length > i)
+                    if (null == coupon)
                     {
-                        TdCoupon coupon = tdCouponService.findTopByTypeIdAndDiySiteIdAndIsDistributtedFalse(typeId, tds.getId());
-                        
-                        if (null == coupon)
-                        {
-                            coupon = new TdCoupon();
-                            coupon.setDiySiteId(tds.getId());
-                            coupon.setLeftNumber(leftNumbers[i]);
-                            coupon.setTypeId(typeId);
-                            coupon.setSortId(99L);
-                        }
-                        else
-                        {
-                            coupon.setLeftNumber(coupon.getLeftNumber() + leftNumbers[i]);
-                        }
-                        
-                        tdCouponService.save(coupon);
+                        coupon = new TdCoupon();                        
+                        coupon.setLeftNumber(leftNumbers[0]);
+                        coupon.setTypeId(typeId);
+                        coupon.setSortId(99L);
                     }
-                }
+                    else
+                    {
+                        coupon.setLeftNumber(coupon.getLeftNumber() + leftNumbers[0]);
+                    }
+                    
+                    tdCouponService.save(coupon);
+				}
+               
             }
             
         }
@@ -384,7 +414,29 @@ public class TdManagerCouponController {
         
         return "redirect:/Verwalter/coupon/list";
     }
+    /**
+	 * @author lc
+	 * @注释：通过id返回title
+	 */
+    @RequestMapping(value = "/getTitle", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> login(Long typeId, 
+			 HttpServletRequest request) {
+    	Map<String, Object> res = new HashMap<String, Object>();
 
+		res.put("code", 1);
+		if (null == typeId) {
+			res.put("msg", "error");
+			return res;
+		}
+		
+		TdCouponType tdCouponType = tdCouponTypeService.findOne(typeId);
+		res.put("typetitle", tdCouponType.getTitle());
+		res.put("code", 0);
+		return res;
+    }
+	
+	
     @ModelAttribute
     public void getModel(@RequestParam(value = "couponTypeId", required = false) Long couponTypeId,
                         @RequestParam(value = "couponId", required = false) Long couponId,
