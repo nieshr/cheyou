@@ -35,6 +35,42 @@ $(function () {
         $(".thumb_ImgUrl_show").show();
     }
 });
+
+function getType()
+{
+	var id = document.getElementById("type").value;
+	
+	 $.ajax({
+                type: "post",
+                url: "/Verwalter/coupon/getTitle",
+                data: { "typeId": id },
+                dataType: "json",
+                success: function (data) { 
+                <!-- 修改 -->                 
+                    if (data.code == 0) {
+                       document.getElementById("typetitle").value = data.typetitle;
+                       var total = document.getElementById("total").value;
+                       if(data.typetitle!="免费洗车券" && data.typetitle!="免费打蜡券"){
+                      	    var number = parseInt(total) + 1;                       	                          		                       		                       		                     
+                       		for(var i=1; i<=total; i++){
+                       			$(".tab-content dl").eq(i).css("display", "none");
+                       		}
+                       		$(".tab-content dl").eq(number).css("display", "block");
+                       }
+                       else{
+                           var number = parseInt(total) + 1;                                             	  
+                       	   $(".tab-content dl").eq(number).css("display", "none");                      
+                       	   for(var i=0; i<=total; i++){
+                       			$(".tab-content dl").eq(i).css("display", "block");
+                       	   }
+                       }
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+	 
+}
 </script>
 </head>
 
@@ -73,23 +109,24 @@ $(function () {
     <dt>优惠券类型</dt>
     <dd>
         <div class="rule-single-select">
-            <select name="typeId" datatype="*" sucmsg=" ">
+            <select id="type" name="typeId" datatype="*" sucmsg=" "  onchange="getType();" >
                 <#if !coupon??>
                 <option value="">请选择类型...</option>
-                </#if>
+                </#if>             
                 <#if coupon_type_list??>
                     <#list coupon_type_list as c>
-                        <option value="${c.id!""}" <#if coupon?? && coupon.typeId==c.id>selected="selected"</#if>>${c.title!""}</option>
-                    </#list>
+                        <option value="${c.id!""}" <#if coupon?? && coupon.typeId==c.id>selected="selected"</#if>>${c.title!""}</option>                                                                  
+                    </#list>                                                                                
                 </#if>
-            </select>
+                <input type="hidden" name="typetitle" id="typetitle" value="">
+            </select> 
         </div>
     </dd>
   </dl>
 <#if  !coupon??>
     <#if diy_site_list??>
     <#list diy_site_list as item>
-        <dl>
+      <dl>  
             <dt>${item.title!''}</dt>
             <dd>
                 <input name="leftNumbers" type="text" value="10" class="input small" datatype="n" sucmsg=" ">
@@ -97,7 +134,16 @@ $(function () {
             </dd> 
         </dl>
     </#list>
+    
     </#if>
+    <dl style="display: none">  
+            <dt>数量</dt>
+            <dd>
+                <input name="leftNumbers" type="text" value="10" class="input small" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip"></span>
+            </dd> 
+    </dl>
+    <input type="hidden" name="total" id="total" value="${diy_site_list?size}">
 <#else>
   <dl>
     <dt>所属同盟店</dt>

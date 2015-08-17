@@ -44,6 +44,7 @@ public class BASE64Encoder extends CharacterEncoder
 {
 
 	/** this class encodes three bytes per atom. */
+	@Override
 	protected int bytesPerAtom()
 	{
 		return (3);
@@ -53,6 +54,7 @@ public class BASE64Encoder extends CharacterEncoder
 	 * this class encodes 57 bytes per line. This results in a maximum of 57/3 *
 	 * 4 or 76 characters per output line. Not counting the line termination.
 	 */
+	@Override
 	protected int bytesPerLine()
 	{
 		return (57);
@@ -77,6 +79,7 @@ public class BASE64Encoder extends CharacterEncoder
 	 * characters. Note that if the length in len is less than three is encodes
 	 * either one or two '=' signs to indicate padding characters.
 	 */
+	@Override
 	protected void encodeAtom(OutputStream outStream, byte data[], int offset,
 			int len) throws IOException
 	{

@@ -61,13 +61,16 @@ public class TdOrder {
     @Column
     private String postalCode;
     
-    // 支付方式(线下同盟店)
+    // 线下同盟店
     @Column
     private Long shopId;
     
-    // 支付方式名称(同盟店名称)
+    // 同盟店名称
     @Column
     private String shopTitle;
+    
+    // 同盟店所获返利
+    private Double rebate;
     
     // 支付方式
     @Column
@@ -587,9 +590,17 @@ public class TdOrder {
 
     public void setCommentTime(Date commentTime) {
         this.commentTime = commentTime;
-    }
+    }   
+    
+    public Double getRebate() {
+		return rebate;
+	}
 
-    public Long getPointUse() {
+	public void setRebate(Double rebate) {
+		this.rebate = rebate;
+	}
+
+	public Long getPointUse() {
         return pointUse;
     }
 

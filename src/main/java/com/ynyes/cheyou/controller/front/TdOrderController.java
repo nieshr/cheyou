@@ -1987,7 +1987,8 @@ public class TdOrderController extends AbstractPaytypeController {
             } else {
                 tdShop.setTotalCash(tdShop.getTotalCash() + totalCash);
             }
-
+            tdOrder.setRebate(totalCash);//设置订单同盟店所获返利
+            tdOrder = tdOrderService.save(tdOrder);
             tdDiySiteService.save(tdShop);
         }
     }

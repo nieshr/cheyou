@@ -255,7 +255,7 @@ public class TdOrderService {
 	 * @注释：线下同盟店信息
 	 */
     public List<TdOrder> findByshopIdAndstatusId(long shopId, long statusId){
-    	return (List<TdOrder>) repository.findByShopIdAndStatusIdOrderByIdDesc(shopId, statusId);
+    	return repository.findByShopIdAndStatusIdOrderByIdDesc(shopId, statusId);
     }
     
     /**

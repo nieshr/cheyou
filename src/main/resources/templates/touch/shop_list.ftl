@@ -8,7 +8,7 @@
 <meta name="copyright" content="${site.copyright!''}" />
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <style type="text/css">  
-body, html,#myMap {width: 100%;height: 100%;overflow: hidden;margin:0;}  
+body, html,#myMap {width: 100%;height: 100%;margin:0;}  
 </style> 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>

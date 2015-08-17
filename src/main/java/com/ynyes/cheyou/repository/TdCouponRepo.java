@@ -38,4 +38,6 @@ public interface TdCouponRepo extends
     Page<TdCoupon> findByIsDistributtedTrueOrderBySortIdAsc(Pageable page);
     
     List<TdCoupon> findTypeIdDistinctByIsDistributtedFalse();
+    
+    TdCoupon findByTypeId(Long typeId);
 }

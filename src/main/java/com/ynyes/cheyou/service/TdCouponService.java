@@ -174,7 +174,17 @@ public class TdCouponService {
         
         return repository.findTopByTypeIdAndMobileAndIsDistributtedTrue(typeId, mobile);
     }
-    
+    /**
+	 * @author lc
+	 * @注释：根据类型查找优惠券
+	 */
+    public TdCoupon findByTypeId(Long typeId){
+    	 if (null == typeId )
+         {
+             return null;
+         }
+    	 return repository.findByTypeId(typeId);
+    }
     /**
      * 保存
      * 
