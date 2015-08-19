@@ -7,14 +7,19 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdUser;
+import com.ynyes.cheyou.service.TdCommonService;
+import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdUserService;
 
@@ -27,7 +32,65 @@ public class TdDiysiteController {
 	TdOrderService tdOrderService;
 	
 	@Autowired
+	TdCommonService tdCommonService;
+	
+	@Autowired
 	TdUserService tdUserService;
+	
+	@Autowired
+	TdDiySiteService tdDiySiteService;
+	
+	/**
+	 * @author lc
+	 * @注释：订单收入
+	 */
+//	@RequestMapping(value = "/orderincome")
+//	public String orderList(Integer page,
+//	                        Integer timeId, 
+//	                        HttpServletRequest req,
+//	                        ModelMap map) {
+//		String username = (String) req.getSession().getAttribute("diysiteUsername");
+//
+//        if (null == username) {
+//            return "redirect:/login";
+//        }
+//        
+//        tdCommonService.setHeader(map, req);
+//
+//        if (null == page) {
+//            page = 0;
+//        }
+//
+//        if (null == timeId) {
+//            timeId = 0;
+//        }
+//        
+//        
+//        Double sales = new Double(0.00);
+//        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+//        TdDiySite tdDiySite = tdDiySiteService.findbyUsername(username);
+//        Page<TdOrder> orderPage = null;
+//        
+//        if (timeId.equals(0)) {
+//			
+//		}else if (timeId.equals(1)) {
+//			
+//		}else if (timeId.equals(2)) {
+//			
+//		}else if (timeId.equals(3)) {
+//			
+//		}else if (timeId.equals(4)) {
+//			
+//		}else if (timeId.equals(6)) {
+//			
+//		}else if (timeId.equals(12)) {
+//			
+//		}
+//        map.addAttribute("time_id", timeId);
+//        map.addAttribute("sales",sales);
+//        map.addAttribute("page", page);
+//        
+//	}
 	
 	@RequestMapping(value="/param/edit", method = RequestMethod.POST)
     @ResponseBody

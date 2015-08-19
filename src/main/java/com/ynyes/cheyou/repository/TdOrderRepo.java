@@ -64,6 +64,16 @@ public interface TdOrderRepo extends
     
     /**
 	 * @author lc
+	 * @注释：同盟店订单收入查询
+	 */
+    List<TdOrder> findByStatusIdOrStatusIdAndShopTitle(Long statusId, Long statusId1, String diystiename);
+    Page<TdOrder> findByStatusIdOrStatusIdAndShopTitleOrderByIdDesc(Long statusId, Long statusId1, String diystiename, Pageable page);
+    
+    List<TdOrder> findByStatusIdOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(Long statusId, Long statusId1, String diystiename, Date time);
+    Page<TdOrder> findByStatusIdOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(Long statusId, Long statusId1, String diystiename, Date time, Pageable page);
+    
+    /**
+	 * @author lc
 	 * @注释：按订单类型和状态查询
 	 */
     Page<TdOrder> findByStatusIdAndTypeIdOrderByIdDesc(long statusId, long typeId, Pageable page);

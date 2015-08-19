@@ -1,5 +1,11 @@
 package com.ynyes.cheyou.controller.management;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -7,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -40,6 +48,16 @@ import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.util.SMSUtil;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
+import scala.xml.dtd.PublicID;
+
+import org.apache.activemq.blob.DefaultBlobDownloadStrategy;
+import org.apache.commons.io.FileUtils;
+import org.apache.jasper.tagplugins.jstl.core.Import;
+import org.apache.poi.hssf.usermodel.HSSFCell;  
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;  
+import org.apache.poi.hssf.usermodel.HSSFRow;  
+import org.apache.poi.hssf.usermodel.HSSFSheet;  
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 /**
  * 后台首页控制器
  * 
@@ -354,7 +372,8 @@ public class TdManagerOrderController {
     
     
     // 订单列表
-    @RequestMapping(value="/list/{statusId}/{type}")
+    @SuppressWarnings("deprecation")
+	@RequestMapping(value="/list/{statusId}/{type}")
     public String goodsListDialog(String keywords,
                                 @PathVariable Long statusId,
                                 @PathVariable Long type,
@@ -367,7 +386,9 @@ public class TdManagerOrderController {
                                 Long[] listId,
                                 Integer[] listChkId,
                                 ModelMap map,
+                                String exportUrl,
 //                                String dateId,
+                                HttpServletResponse resp,
                                 HttpServletRequest req){
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
@@ -389,6 +410,11 @@ public class TdManagerOrderController {
             {
                 btnDelete(listId, listChkId);
                 tdManagerLogService.addLog("delete", "删除订单", req);
+            }
+            else if (__EVENTTARGET.equalsIgnoreCase("export"))
+            {
+            	exportUrl = SiteMagConstant.backupPath;
+                tdManagerLogService.addLog("export", "导出订单", req);
             }
             else if (__EVENTTARGET.equalsIgnoreCase("btnPage"))
             {
@@ -412,31 +438,44 @@ public class TdManagerOrderController {
         if (null == timeId) {
             timeId = 0;
         }
-//        /**
-//         * @author libiao
-//         * 添加订单金额统计
-//         */
-//        Double price = new Double(0.00);
-//        if (null != statusId)
-//        {
-//            if (statusId.equals(0L)) // 判断为全部订单
-//            {
-//            	List<TdOrder> list = tdOrderService.findAll();
-//            	for (int i = 0; i < list.size(); i++) {
-//            		price += list.get(i).getTotalPrice();
-//            	}
-//                map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
-//            }
-//            else
-//            {
-//            	//判断为状态订单（1:待确认 2:待付款 3:待发货 4:待收货 5: 待评价 6: 已完成 7: 已取消8: 支付取消(失败)）
-//            	List<TdOrder> orderList = tdOrderService.findByStatusId(statusId);
-//            	for (int i = 0; i < orderList.size(); i++) {
-//            		price += orderList.get(i).getTotalPrice();
-//            	}
-//                map.addAttribute("order_page", tdOrderService.findByStatusIdOrderByIdDesc(statusId, page, size));
-//            }
-//        }
+        
+        
+        /**
+  		 * @author lc
+  		 * @注释：根据不同条件导出excel文件
+  		 */
+          // 第一步，创建一个webbook，对应一个Excel文件  
+          HSSFWorkbook wb = new HSSFWorkbook();  
+          // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
+          HSSFSheet sheet = wb.createSheet("order");  
+          // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short  
+          HSSFRow row = sheet.createRow((int) 0);  
+          // 第四步，创建单元格，并设置值表头 设置表头居中  
+          HSSFCellStyle style = wb.createCellStyle();  
+          style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+          
+          HSSFCell cell = row.createCell((short) 0);  
+          cell.setCellValue("订单号");  
+          cell.setCellStyle(style);  
+          cell = row.createCell((short) 1);  
+          cell.setCellValue("会员账号");  
+          cell.setCellStyle(style);  
+          cell = row.createCell((short) 2);  
+          cell.setCellValue("支付方式");  
+          cell.setCellStyle(style);  
+          cell = row.createCell((short) 3);  
+          cell.setCellValue("配送方式");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 4);  
+          cell.setCellValue("订单状态");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 5);  
+          cell.setCellValue("总金额");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 6);  
+          cell.setCellValue("下单时间");  
+          cell.setCellStyle(style);
+        
         /**
 		 * @author lc
 		 * @注释：时间删选
@@ -447,139 +486,125 @@ public class TdManagerOrderController {
         	if (null != statusId) {
     			if (statusId.equals(0L)) {				
                 	if (type.equals(0L)) {
-                		List<TdOrder> list = tdOrderService.findAll();
-                    	for (int i = 0; i < list.size(); i++) {
-                    		price += list.get(i).getTotalPrice();
-                    	}
-                    	for(int i = 0; i < list.size(); i++){
-                    		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                    			
-    						}
-                    		else{
-                    			sales += list.get(i).getTotalPrice();
-                    		}
-                    	}
+                		List<TdOrder> list = tdOrderService.findAll();                   	
+                    	price = countprice(list);
+                    	sales = countsales(list);
                     	map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
+                    	if (null != exportUrl) {
+                    		Page<TdOrder> tdOrderPage = tdOrderService.findAllOrderByIdDesc(page, size);
+                          	
+                          	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                          		download(wb, username, resp);
+							}                          	                          
+						}
     				}
                 	else {
                 		List<TdOrder> list = tdOrderService.findBytypeIdOrderByIdDesc(type);
-                		for (int i = 0; i < list.size(); i++) {
-                    		price += list.get(i).getTotalPrice();
-                    	}
-                		for(int i = 0; i < list.size(); i++){
-                    		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                    			
-    						}
-                    		else{
-                    			sales += list.get(i).getTotalPrice();
-                    		}
-                    	}
+                		price = countprice(list);
+                    	sales = countsales(list);
                 		map.addAttribute("order_page", tdOrderService.findBytypeIdOrderByIdDesc(type, page, size));
+                		if (null != exportUrl) {
+                    		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdOrderByIdDesc(type, page, size);
+                          	
+                          	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                          		download(wb, username, resp);
+							}                         	                           
+						}
     				}				
     			}else{
     				if (type.equals(0L)) {
     					List<TdOrder> list = tdOrderService.findByStatusOrderByIdDesc(statusId);
-    					for (int i = 0; i < list.size(); i++) {
-    	            		price += list.get(i).getTotalPrice();
-    	            	}
-    					for(int i = 0; i < list.size(); i++){
-                    		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                    			
-    						}
-                    		else{
-                    			sales += list.get(i).getTotalPrice();
-                    		}
-                    	}
+    					price = countprice(list);
+                    	sales = countsales(list);
     					map.addAttribute("order_page", tdOrderService.findByStatusOrderByIdDesc(statusId, page, size));
+    					if (null != exportUrl) {
+                    		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusOrderByIdDesc(statusId, page, size);
+                          	
+                          	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                          		download(wb, username, resp);
+							}                         	                           
+						}
     				}
     				else{					
     					List<TdOrder> list = tdOrderService.findByStatusAndTypeIdOrderByIdDesc(statusId, type);
-    	        		for (int i = 0; i < list.size(); i++) {
-    	            		price += list.get(i).getTotalPrice();
-    	            	}
-    	        		for(int i = 0; i < list.size(); i++){
-                    		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                    			
-    						}
-                    		else{
-                    			sales += list.get(i).getTotalPrice();
-                    		}
-                    	}
+    					price = countprice(list);
+                    	sales = countsales(list);
     	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTypeOrderByIdDesc(statusId, type, page, size));
+    	        		if (null != exportUrl) {
+                    		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTypeOrderByIdDesc(statusId, type, page, size);
+                          	
+                          	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                          		download(wb, username, resp);
+							}                         	                           
+						}
     				}
     				
     			}
     		}
 		}
         else if (timeId.equals(1)) {
-        	Date cur = new Date();
+        	Date cur = new Date(); 
             Calendar calendar = Calendar.getInstance();// 日历对象
             calendar.setTime(cur);// 设置当前日期
           //  calendar.add(Calendar.MONTH, -1);// 月份减一
-            calendar.add(Calendar.DAY_OF_MONTH, -1);
+          //  calendar.add(Calendar.DAY_OF_MONTH, -1);
             Date time = calendar.getTime();
+            time.setHours(0);
+            time.setMinutes(0);            
         	if (statusId.equals(0L)) {
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
         	else{
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
 		}
@@ -593,65 +618,57 @@ public class TdManagerOrderController {
             if (statusId.equals(0L)) {
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
         	else{
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
 		}
@@ -665,65 +682,57 @@ public class TdManagerOrderController {
             if (statusId.equals(0L)) {
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
         	else{
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
 		}
@@ -737,65 +746,57 @@ public class TdManagerOrderController {
             if (statusId.equals(0L)) {
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
         	else{
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
 		}
@@ -809,65 +810,57 @@ public class TdManagerOrderController {
             if (statusId.equals(0L)) {
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
         	else{
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
 		}
@@ -881,74 +874,60 @@ public class TdManagerOrderController {
             if (statusId.equals(0L)) {
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByTimeAfterOrderByIdDesc(time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
         	else{
         		if (type.equals(0L)) {
         			List<TdOrder> list = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         		else{
         			List<TdOrder> list = tdOrderService.findByStatusAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time);
-        			for (int i = 0; i < list.size(); i++) {
-	            		price += list.get(i).getTotalPrice();
-	            	}
-	        		for(int i = 0; i < list.size(); i++){
-                		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
-                			
-						}
-                		else{
-                			sales += list.get(i).getTotalPrice();
-                		}
-                	}
+        			price = countprice(list);
+                	sales = countsales(list);
 	        		map.addAttribute("order_page", tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size));
+	        		if (null != exportUrl) {
+                		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
+                      	
+                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      		download(wb, username, resp);
+						}                         	                           
+					}
         		}
         	}
-		}
-        /**
-		 * @author lc
-		 * 订单类型筛选和销售额计算
-		 */               
-        
-        
+		}       
         // 参数注回
 //        map.addAttribute("dateId",dateId);
         map.addAttribute("price",price);
@@ -968,6 +947,110 @@ public class TdManagerOrderController {
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
         
         return "/site_mag/order_list";
+    }
+    /**
+	 * @author lc
+	 * @注释：将page中的订单数据存入excel表格中
+	 */
+    @SuppressWarnings("deprecation")
+	public boolean ImportData(Page<TdOrder> tdOrderPage, HSSFRow row, HSSFCell cell, HSSFSheet sheet){
+    	for (int i = 0; i < tdOrderPage.getContent().size(); i++)  
+        {  
+            row = sheet.createRow((int) i + 1);  
+            TdOrder tdOrder = tdOrderPage.getContent().get(i);  
+            // 第四步，创建单元格，并设置值  
+            row.createCell((short) 0).setCellValue(tdOrder.getOrderNumber());  
+            row.createCell((short) 1).setCellValue(tdOrder.getUsername());  
+            row.createCell((short) 2).setCellValue(tdOrder.getPayTypeTitle());
+            row.createCell((short) 3).setCellValue(tdOrder.getDeliverTypeTitle());
+            if (tdOrder.getStatusId().equals(2L)) {
+            	row.createCell((short) 4).setCellValue("待付款");
+			}else if (tdOrder.getStatusId().equals(3L)) {
+				row.createCell((short) 4).setCellValue("待付尾款");
+			}else if (tdOrder.getStatusId().equals(4L)) {
+				row.createCell((short) 4).setCellValue("待服务");
+			}else if (tdOrder.getStatusId().equals(5L)) {
+				row.createCell((short) 4).setCellValue("待评价 ");
+			}else if (tdOrder.getStatusId().equals(6L)) {
+				row.createCell((short) 4).setCellValue("已完成");
+			}else if (tdOrder.getStatusId().equals(7L)) {
+				row.createCell((short) 4).setCellValue("已取消");
+			}else if (tdOrder.getStatusId().equals(8L)) {
+				row.createCell((short) 4).setCellValue("支付取消(失败)");
+			}else if (tdOrder.getStatusId().equals(9L)) {
+				row.createCell((short) 4).setCellValue("已删除");
+			}
+            
+            row.createCell((short) 5).setCellValue(tdOrder.getTotalPrice());
+            cell = row.createCell((short) 6);  
+            cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getOrderTime()));                                
+      
+        } 
+    	return true;
+    }
+    /**
+	 * @author lc
+	 * @注释：文件写入和下载
+	 */
+    public Boolean download(HSSFWorkbook wb, String exportUrl, HttpServletResponse resp){
+    	 try  
+         {  
+	          FileOutputStream fout = new FileOutputStream(exportUrl+"order.xls");  
+	          OutputStreamWriter writer = new OutputStreamWriter(fout, "utf8");	                       	     
+	          wb.write(fout);  
+	          fout.close();
+         }catch (Exception e)  
+         {  
+             e.printStackTrace();  
+         } 
+    	 OutputStream os;
+		 try {
+				os = resp.getOutputStream();
+				File file = new File(exportUrl + "order.xls");
+                 
+             if (file.exists())
+                 {
+                   try {
+                         resp.reset();
+                         resp.setHeader("Content-Disposition", "attachment; filename="
+                                 + "order.xls");
+                         resp.setContentType("application/octet-stream; charset=utf-8");
+                         os.write(FileUtils.readFileToByteArray(file));
+                         os.flush();
+                     } finally {
+                         if (os != null) {
+                             os.close();
+                         }
+                     }
+             }
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		 }
+		 return true;	
+    }
+    /**
+	 * @author lc
+	 * @注释：计算总额和销售额
+	 */
+    public Double countprice(List<TdOrder> list){
+    	Double price = new Double(0.00);       
+    	for (int i = 0; i < list.size(); i++) {
+    		price += list.get(i).getTotalPrice();
+    	}
+    	return price;
+    }
+    public Double countsales(List<TdOrder> list){
+    	Double sales = new Double(0.00);
+    	for(int i = 0; i < list.size(); i++){
+    		if (list.get(i).getStatusId().equals(2L) || list.get(i).getStatusId().equals(7L)) {	
+    			
+			}
+    		else{
+    			sales += list.get(i).getTotalPrice();
+    		}
+    	}
+    	return sales;
     }
     
     @RequestMapping(value="/setting/pay/save", method = RequestMethod.POST)
@@ -1205,7 +1288,14 @@ public class TdManagerOrderController {
                     TdUser tdUser = tdUserService.findByUsername(order.getUsername());
 
                     // 同盟店
-                    TdDiySite tdShop = tdDiySiteService.findOne(order.getShopId());
+                    TdDiySite tdShop = null;
+                    if (null != tdUser.getUpperDiySiteId()) {
+                    	// 同盟店
+                        tdShop = tdDiySiteService.findOne(tdUser.getUpperDiySiteId());
+            		}else{
+            			// 同盟店
+            	        tdShop = tdDiySiteService.findOne(order.getShopId());
+            		}
                     List<TdOrderGoods> tdOrderGoodsList = order.getOrderGoodsList();
 
                     Long totalPoints = 0L;

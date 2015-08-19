@@ -257,6 +257,24 @@ public class TdOrderService {
     public List<TdOrder> findByshopIdAndstatusId(long shopId, long statusId){
     	return repository.findByShopIdAndStatusIdOrderByIdDesc(shopId, statusId);
     }
+    /**
+	 * @author lc
+	 * @注释：订单收入查询
+	 */
+    public List<TdOrder> findAllVerifyBelongShopTitle(String diysitename){
+    	return repository.findByStatusIdOrStatusIdAndShopTitle(5L, 6L, diysitename);
+    }
+    public Page<TdOrder> findAllVerifyBelongShopTitleOrderByIdDesc(String diysitename, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByStatusIdOrStatusIdAndShopTitleOrderByIdDesc(5L, 6L, diysitename, pageRequest);
+    }
+    public List<TdOrder> findAllVerifyBelongShopTitleAndTimeAfter(String diysitename, Date time){
+    	return repository.findByStatusIdOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(5L, 6L, diysitename, time);
+    }
+    public Page<TdOrder> findAllVerifyBelongShopTitleTimeAfterOrderByIdDesc(String diysitename, Date time,  int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByStatusIdOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(5L, 6L, diysitename, time, pageRequest);
+    }
     
     /**
 	 * @author lc

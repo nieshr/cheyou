@@ -325,10 +325,10 @@
 <form name="form1" method="post" action="/Verwalter/order/save" id="form1">
     <!--导航栏-->
     <div class="location" style="position: fixed; top: 0px;">
-        <a href="/Verwalter/order/list/${statusId!"0"}" class="back"><i></i><span>返回列表页</span></a>
+        <a href="/Verwalter/order/list/${statusId!"0"}/0" class="back"><i></i><span>返回列表页</span></a>
         <a href="/Verwalter/center" class="home"><i></i><span>首页</span></a>
         <i class="arrow"></i>
-        <a href="/Verwalter/order/list/${statusId!"0"}"><span>订单管理</span></a>
+        <a href="/Verwalter/order/list/${statusId!"0"}/0"><span>订单管理</span></a>
         <i class="arrow"></i><span>订单详细</span>
     </div>
     <div class="line10">

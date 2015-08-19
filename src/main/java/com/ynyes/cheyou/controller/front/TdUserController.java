@@ -361,7 +361,8 @@ public class TdUserController extends AbstractPaytypeController {
      * @author lc
      * @注释：同盟店订单查询
      */
-    @RequestMapping(value = "/user/diysite/order/list/{statusId}")
+    @SuppressWarnings("deprecation")
+	@RequestMapping(value = "/user/diysite/order/list/{statusId}")
     public String diysiteorderList(@PathVariable Integer statusId, Integer page,
             String keywords, Integer timeId, HttpServletRequest req,
             ModelMap map) {
@@ -418,6 +419,70 @@ public class TdUserController extends AbstractPaytypeController {
             Date cur = new Date();
             Calendar calendar = Calendar.getInstance();// 日历对象
             calendar.setTime(cur);// 设置当前日期
+            //calendar.add(Calendar.MONTH, -1);// 月份减一
+            //calendar.add(Calendar.DAY_OF_MONTH, -1);
+            Date time = calendar.getTime();
+            time.setHours(0);
+            time.setMinutes(0);
+            if (statusId.equals(0)) {
+                if (null != keywords && !keywords.isEmpty()) {
+                    orderPage = tdOrderService
+                            .findByDiysitenameAndTimeAfterAndSearch(tdDiySite.getTitle(),
+                                    time, keywords, page,
+                                    ClientConstant.pageSize);
+                } else {
+                    orderPage = tdOrderService.findByDiysitenameAndTimeAfter(
+                    		tdDiySite.getTitle(), time, page, ClientConstant.pageSize);
+                }
+            } else {
+                if (null != keywords && !keywords.isEmpty()) {
+                    orderPage = tdOrderService
+                            .findByDiysitenameAndStatusIdAndTimeAfterAndSearch(
+                            		tdDiySite.getTitle(), statusId, time, keywords, page,
+                                    ClientConstant.pageSize);
+                } else {
+                    orderPage = tdOrderService
+                            .findByDiysitenameAndStatusIdAndTimeAfter(tdDiySite.getTitle(),
+                                    statusId, time, page,
+                                    ClientConstant.pageSize);
+                }
+            }
+        }else if (timeId.equals(2)) {
+            Date cur = new Date();
+            Calendar calendar = Calendar.getInstance();// 日历对象
+            calendar.setTime(cur);// 设置当前日期
+            //calendar.add(Calendar.MONTH, -1);// 月份减一
+            calendar.add(Calendar.DAY_OF_MONTH, -7);
+            Date time = calendar.getTime();
+
+            if (statusId.equals(0)) {
+                if (null != keywords && !keywords.isEmpty()) {
+                    orderPage = tdOrderService
+                            .findByDiysitenameAndTimeAfterAndSearch(tdDiySite.getTitle(),
+                                    time, keywords, page,
+                                    ClientConstant.pageSize);
+                } else {
+                    orderPage = tdOrderService.findByDiysitenameAndTimeAfter(
+                    		tdDiySite.getTitle(), time, page, ClientConstant.pageSize);
+                }
+            } else {
+                if (null != keywords && !keywords.isEmpty()) {
+                    orderPage = tdOrderService
+                            .findByDiysitenameAndStatusIdAndTimeAfterAndSearch(
+                            		tdDiySite.getTitle(), statusId, time, keywords, page,
+                                    ClientConstant.pageSize);
+                } else {
+                    orderPage = tdOrderService
+                            .findByDiysitenameAndStatusIdAndTimeAfter(tdDiySite.getTitle(),
+                                    statusId, time, page,
+                                    ClientConstant.pageSize);
+                }
+            }
+        }  
+        else if (timeId.equals(3)) {
+            Date cur = new Date();
+            Calendar calendar = Calendar.getInstance();// 日历对象
+            calendar.setTime(cur);// 设置当前日期
             calendar.add(Calendar.MONTH, -1);// 月份减一
             Date time = calendar.getTime();
 
@@ -444,7 +509,7 @@ public class TdUserController extends AbstractPaytypeController {
                                     ClientConstant.pageSize);
                 }
             }
-        } else if (timeId.equals(3)) {
+        } else if (timeId.equals(4)) {
             Date cur = new Date();
             Calendar calendar = Calendar.getInstance();// 日历对象
             calendar.setTime(cur);// 设置当前日期
@@ -540,8 +605,36 @@ public class TdUserController extends AbstractPaytypeController {
 
         return "/client/diysite_order_list";
     }
-    
-    
+    /**
+	 * @author lc
+	 * @注释：同盟店订单详情
+	 */
+    @RequestMapping(value = "/diysite/order")
+    public String diysiteorder(Long id, HttpServletRequest req, ModelMap map) {
+        String username = (String) req.getSession().getAttribute("diysiteUsername");
+        if (null == username) {
+            return "redirect:/login";
+        }
+
+        tdCommonService.setHeader(map, req);
+
+        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+
+        map.addAttribute("user", tdUser);
+
+        if (null != id) {
+            map.addAttribute("order", tdOrderService.findOne(id));
+        }
+
+        // 支付方式列表
+        setPayTypes(map, false, true, req);
+
+        return "/client/diysite_order_detail";
+    }
+    /**
+	 * @author lc
+	 * @注释：所属会员
+	 */
     @RequestMapping(value = "/user/diysite/member")
     public String diysitemember(HttpServletRequest req, Integer page,
             String keywords, ModelMap map) {
@@ -560,20 +653,21 @@ public class TdUserController extends AbstractPaytypeController {
          TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
 
          map.addAttribute("user", tdUser);
-
+         
+         TdDiySite tdDiySite = tdDiySiteService.findbyUsername(username);
+         
          Page<TdUser> memberPage = null;
-
+         
          if (null == keywords || keywords.isEmpty()) {
-        	 if (null!=tdUser.getUpperDiySiteId()) {
-        		 memberPage = tdUserService.findByshopId(tdUser.getUpperDiySiteId(), page,
+        	 if (null != tdDiySite) {
+        		 memberPage = tdUserService.findByshopId(tdDiySite.getId(), page,
                          ClientConstant.pageSize);
-			}
-        	 
-         } else {
-        	 if (null!=tdUser.getUpperDiySiteId()) {
-        	 memberPage = tdUserService.findByShopIdAndSearch(
-                     tdUser.getUpperDiySiteId(), keywords, page, ClientConstant.pageSize);
-        	 }
+			}       		        	 
+         } else { 
+        	 if (null != tdDiySite) {
+        		 memberPage = tdUserService.findByShopIdAndSearch(
+            			 tdDiySite.getId(), keywords, page, ClientConstant.pageSize);
+			}       	 
          }
 
          map.addAttribute("member_page", memberPage);

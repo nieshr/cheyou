@@ -1898,9 +1898,20 @@ public class TdOrderController extends AbstractPaytypeController {
 
         // 用户
         TdUser tdUser = tdUserService.findByUsername(tdOrder.getUsername());
-
-        // 同盟店
-        TdDiySite tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
+        
+        /**
+		 * @author lc
+		 * @注释：根据用户所属同盟店id查询同盟店
+		 */
+        TdDiySite tdShop = null;
+        if (null != tdUser.getUpperDiySiteId()) {
+        	// 同盟店
+            tdShop = tdDiySiteService.findOne(tdUser.getUpperDiySiteId());
+		}else{
+			// 同盟店
+	        tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
+		}
+        
 
         if (tdOrder.getStatusId().equals(2L) && !tdOrder.getTotalLeftPrice().equals(0))
         {
