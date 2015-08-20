@@ -97,7 +97,7 @@ public class TdManagerDatabaseController {
          
                     // 调用 mysql 的 cmd:
                     Process child = rt
-                            .exec("/usr/bin/mysqldump -uroot -proot --set-charset=utf8 rongcheng");// 设置导出编码为utf8。这里必须是utf8
+                            .exec("/usr/bin/mysqldump -uroot -proot --set-charset=utf8 cheyou");// 设置导出编码为utf8。这里必须是utf8
          
                     // 把进程执行中的控制台输出信息写入.sql文件，即生成了备份文件。注：如果不对控制台信息进行读出，则会导致进程堵塞无法运行
                     InputStream in = child.getInputStream();// 控制台的输出信息作为输入流

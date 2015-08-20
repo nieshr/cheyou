@@ -30,6 +30,7 @@ function __doPostBack(eventTarget, eventArgument) {
         theForm.submit();
     }
 }
+
 </script>
 
     <!--导航栏-->
@@ -97,6 +98,21 @@ function __doPostBack(eventTarget, eventArgument) {
                     </li>
                     <li>
                     	<a class="all" href="/Verwalter/order/list/${statusId!''}/5"><span>百人团</span></a>
+                    </li>
+                    <li style="">
+                    	 <select name="timeId" onchange="javascript:setTimeout(__doPostBack('btnTime',''), 0)">
+                                <option value="0" <#if !time_id?? || time_id==0>selected="selected"</#if>>所有订单</option>
+                                <option value="1" <#if time_id==1>selected="selected"</#if>>今天</option>
+                                <option value="2" <#if time_id==2>selected="selected"</#if>>最近一周</option>
+                                <option value="3" <#if time_id==3>selected="selected"</#if>>最近一个月</option>
+                                <option value="4" <#if time_id==4>selected="selected"</#if>>最近三个月</option>
+                                <option value="6" <#if time_id==6>selected="selected"</#if>>最近半年</option>
+                                <option value="12" <#if time_id==12>selected="selected"</#if>>最近一年</option>                              
+                         </select>
+                    </li>
+                    <li>
+                    	<a class="all" href="javascript:__doPostBack('export','')"><span>导出本页</span></a>
+                    
                     </li>
                 </ul>
                 

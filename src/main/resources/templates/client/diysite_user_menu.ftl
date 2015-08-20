@@ -1,6 +1,6 @@
 <div class="mymember_menu">
     <div class="mymember_menu_part">
-        <a class="mymember_menu_tit" href="/user/order/list/0"><img src="/client/images/mymember/menu01.png" />订单中心</a>
+        <a class="mymember_menu_tit" href="/user/diysite/order/list/0"><img src="/client/images/mymember/menu01.png" />订单中心</a>
         <div>
             <a href="/user/diysite/order/list/0">全部订单</a>
             <#--
@@ -15,9 +15,11 @@
         </div>
     </div>
     <div class="mymember_menu_part">
-        <a class="mymember_menu_tit" href="/user/point/list"><img src="/client/images/mymember/menu03.png" />资产中心</a>
+        <a class="mymember_menu_tit" href="javascript:;"><img src="/client/images/mymember/menu03.png" />资产中心</a>
         <div>
             <a href="/user/diysite/member">会员列表</a>
+            <a href="/diysite/order/orderincome">订单收入</a>
+            <a href="/diysite/order/rebateincome">返利收入</a>
         </div>
     </div>
     <div class="mymember_menu_part"> 
