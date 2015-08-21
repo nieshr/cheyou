@@ -57,7 +57,7 @@
 </div>
 <input name="menuId" type="text" value='${mid!""}' style="display:none;">
 <input name="channelId" type="text" value='${cid!""}' style="display:none">
-<input name="id" type="text" value='<#if cat??>${cat.id!""}</#if>' style="display:none">
+<input name="id" type="text" value='<#if cat??>${cat.id?c!""}</#if>' style="display:none">
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
   <a href="/Verwalter/product/category/list" class="back"><i></i><span>返回列表页</span></a>
@@ -90,7 +90,7 @@
             <option value="" <#if cat?? && cat.parentId?? && cat.parentId==0>selected="selected"</#if>>无父级分类</option>
         	<#if category_list??>
         	   <#list category_list as c>
-        	       <option value="${c.id!""}" <#if cat?? && cat.parentId?? && cat.parentId==c.id || fatherCat?? && fatherCat.id==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+        	       <option value="${c.id?c!""}" <#if cat?? && cat.parentId?? && cat.parentId==c.id || fatherCat?? && fatherCat.id==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
         	   </#list>
         	</#if>
         </select>
@@ -126,7 +126,7 @@
             <option value="0">无关联参数</option>
             <#if param_category_list??>
                 <#list param_category_list as c>
-                    <option value="${c.id!""}" <#if cat?? && cat.paramCategoryId?? && cat.paramCategoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                    <option value="${c.id?c!""}" <#if cat?? && cat.paramCategoryId?? && cat.paramCategoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
                 </#list>
             </#if>
         </select>

@@ -16,7 +16,7 @@
     </#if>
 </#if>
 <span class="paymethod" title="<#if pay_type.adTitle?? && pay_type.adContents??>${pay_type.adContents!''}<#else>${pay_type.title!''}</#if>">
-    <input class="pay_type_chk" name="payTypeId" type="radio" datatype="n" value="${pay_type.id!''}" fee="${pay_type.fee!'0'}" nullmsg="请选择支付方式!" />
+    <input class="pay_type_chk" name="payTypeId" type="radio" datatype="n" value="${pay_type.id?c!''}" fee="${pay_type.fee!'0'}" nullmsg="请选择支付方式!" />
     <#if pay_type.coverImageUri??>
         <img class="banklogo" src="${pay_type.coverImageUri!''}" title="${pay_type.title!''}"/>
     <#else>

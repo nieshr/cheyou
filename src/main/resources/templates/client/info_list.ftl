@@ -89,7 +89,7 @@ $(function(){
             <h5 class="tit">浏览记录</h5>
             <#if recent_page??>
                 <#list recent_page.content as item>
-                    <a class="scan" href="/goods/${item.goodsId}">
+                    <a class="scan" href="/goods/${item.goodsId?c}">
                         <img src="${item.goodsCoverImageUri!''}" title="${item.goodsTitle!''}"/>
                         <p>${item.goodsTitle!''}</p>
                         <p class="red">￥<#if item.goodsSalePrice??>￥${item.goodsSalePrice?string("0.00")}</#if></p>

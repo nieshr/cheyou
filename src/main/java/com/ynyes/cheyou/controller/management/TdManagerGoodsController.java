@@ -788,7 +788,7 @@ public class TdManagerGoodsController {
             
             newGoods.setAfterMarketService(tdGoods.getAfterMarketService());
             newGoods.setAveragePoints(tdGoods.getAveragePoints());
-            newGoods.setBrandId(tdGoods.getBrandId());
+ //           newGoods.setBrandId(tdGoods.getBrandId());
             newGoods.setBrandTitle(tdGoods.getBrandTitle());
             newGoods.setCategoryId(tdGoods.getCategoryId());
             newGoods.setCategoryIdTree(tdGoods.getCategoryIdTree());
@@ -840,36 +840,36 @@ public class TdManagerGoodsController {
             
             List<TdGoodsParameter> paramList = tdGoods.getParamList();
             
-            if (null != paramList && paramList.size() > 0)
-            {
-                List<TdGoodsParameter> newParamList = new ArrayList<TdGoodsParameter>();
-                
-                for (TdGoodsParameter tgp : paramList)
-                {
-                    if (null != tgp)
-                    {
-                        TdGoodsParameter newTgp = new TdGoodsParameter();
-                        
-                        newTgp.setParamCategory(tgp.getParamCategory());
-                        newTgp.setParamId(tgp.getParamId());
-                        newTgp.setParamName(tgp.getParamName());
-                        newTgp.setValue(tgp.getValue());
-                        
-                        newParamList.add(newTgp);
-                    }
-                }
-                
-                newGoods.setParamList(newParamList);
-                
-                tdGoodsParameterService.save(newParamList);
-            }
+//            if (null != paramList && paramList.size() > 0)
+//            {
+//                List<TdGoodsParameter> newParamList = new ArrayList<TdGoodsParameter>();
+//                
+//                for (TdGoodsParameter tgp : paramList)
+//                {
+//                    if (null != tgp)
+//                    {
+//                        TdGoodsParameter newTgp = new TdGoodsParameter();
+//                        
+//                        newTgp.setParamCategory(tgp.getParamCategory());
+//                        newTgp.setParamId(tgp.getParamId());
+//                        newTgp.setParamName(tgp.getParamName());
+//                        newTgp.setValue(tgp.getValue());
+//                        
+//                        newParamList.add(newTgp);
+//                    }
+//                }
+//                
+//                newGoods.setParamList(newParamList);
+//                
+//                tdGoodsParameterService.save(newParamList);
+//            }
             
             
             newGoods.setParamValueCollect(tdGoods.getParamValueCollect());
             newGoods.setPlatformServiceReturnRation(tdGoods.getPlatformServiceReturnRation());
             newGoods.setPointLimited(tdGoods.getPointLimited());
             newGoods.setPriceUnit(tdGoods.getPriceUnit());
-            newGoods.setProductId(tdGoods.getProductId());
+//            newGoods.setProductId(tdGoods.getProductId());
             newGoods.setPromotion(tdGoods.getPromotion());
             newGoods.setProviderId(tdGoods.getProviderId());
             newGoods.setProviderTitle(tdGoods.getProviderTitle());
@@ -911,6 +911,7 @@ public class TdManagerGoodsController {
     public String save(TdGoods tdGoods, String[] hid_photo_name_show360,
             String __EVENTTARGET, String __EVENTARGUMENT, String __VIEWSTATE,
             String menuId, String channelId, ModelMap map,
+            Boolean isRecommendIndex,Boolean isRecommendType,Boolean isHot,Boolean isNew,Boolean isSpecialPrice,
             HttpServletRequest req) {
         String username = (String) req.getSession().getAttribute("manager");
         if (null == username) {
@@ -928,7 +929,35 @@ public class TdManagerGoodsController {
         } else {
             type = "edit";
         }
-
+        /**
+		 * @author lc
+		 * @注释：推荐类型修改
+		 */
+        if (null != isRecommendIndex && isRecommendIndex) {
+			tdGoods.setIsRecommendIndex(true);
+		}else{
+			tdGoods.setIsRecommendIndex(false);
+		}
+        if (null != isRecommendType && isRecommendType) {
+			tdGoods.setIsRecommendType(true);
+		}else{
+			tdGoods.setIsRecommendType(false);
+		}
+        if (null != isHot && isHot) {
+			tdGoods.setIsHot(true);
+		}else{
+			tdGoods.setIsHot(false);
+		}
+        if (null != isNew && isNew) {
+			tdGoods.setIsNew(true);
+		}else{
+			tdGoods.setIsNew(false);
+		}
+        if (null != isSpecialPrice && isSpecialPrice) {
+			tdGoods.setIsSpecialPrice(true);
+		}else{
+			tdGoods.setIsSpecialPrice(false);
+		}
         tdGoodsService.save(tdGoods, username);
 
         tdManagerLogService.addLog(type, "用户修改商品", req);

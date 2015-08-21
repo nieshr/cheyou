@@ -74,7 +74,7 @@ $(document).ready(function(){
                     <img src="/client/images/mymember/delete.png">
                   </a>
                   -->
-                  <a href="/goods/${rg.goodsId!''}">
+                  <a href="/goods/${rg.goodsId?c!''}">
                     <img src="${rg.goodsCoverImageUri!''}" width="220" height="220">
                   </a>
                   <p>￥${rg.goodsSalePrice?string("#.##")}</p>

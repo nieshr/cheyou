@@ -99,7 +99,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <option <#if !categoryId??>selected="selected"</#if> value="">所有类别</option>
                 <#if parameter_category_list??>
                     <#list parameter_category_list as c>
-                        <option value="${c.id!""}" <#if categoryId?? && c.id==categoryId>selected="selected"</#if> ><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                        <option value="${c.id?c!""}" <#if categoryId?? && c.id==categoryId>selected="selected"</#if> ><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
                     </#list>
                 </#if>
             </select>
@@ -130,9 +130,9 @@ function __doPostBack(eventTarget, eventArgument) {
                 <span class="checkall" style="vertical-align:middle;">
                     <input id="listChkId" type="checkbox" name="listChkId" value="${content_index}" >
                 </span>
-                <input type="hidden" name="listId" id="listId" value="${content.id}">
+                <input type="hidden" name="listId" id="listId" value="${content.id?c}">
             </td>
-            <td><a href="/Verwalter/parameter/edit?id=${content.id!""}">${content.title!""}</a></td>
+            <td><a href="/Verwalter/parameter/edit?id=${content.id?c!""}">${content.title!""}</a></td>
             <td>
                 <#if parameter_category_list?? && content.categoryId??>
                     <#list parameter_category_list as cat>
@@ -147,7 +147,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <input name="listSortId" type="text" value="${content.sortId!""}" id="listSortId" class="sort" onkeydown="return checkNumber(event);">
             </td>
             <td align="center">
-                <a href="/Verwalter/parameter/edit?id=${content.id!""}">修改</a>
+                <a href="/Verwalter/parameter/edit?id=${content.id?c!""}">修改</a>
             </td>
         </tr>
     </#list>

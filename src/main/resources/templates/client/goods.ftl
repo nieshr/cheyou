@@ -363,7 +363,7 @@ function checkTime(i)
                 <p class="p">
                     <span style="color:#666;" class="red">赠品</span>
                     <#list goods.giftList as gitem>
-                        <a class="red ml20" title="点击查看详情" href="/goods/${gitem.goodsId!''}">${gitem.goodsTitle!''}</a>
+                        <a class="red ml20" title="点击查看详情" href="/goods/${gitem.goodsId?c!''}">${gitem.goodsTitle!''}</a>
                     </#list>
                 </p>
             </#if>
@@ -536,7 +536,7 @@ function checkTime(i)
       <ul id="assort_sum">
       <li>
         <div class="part">
-          <a href="/goods/${goods.id?c}"><img src="${goods.coverImageUri!''}" width="114" height="114" /></a>
+          <a href="/goods/${goods.id?c!''}"><img src="${goods.coverImageUri!''}" width="114" height="114" /></a>
           <p style="height: 33px; overflow: hidden;">${goods.title!''}</p>
           <p class="p1"><span>￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></span></p>
         </div>
@@ -549,7 +549,7 @@ function checkTime(i)
             <#if goods.combList?? && goods.combList?size gt 0>
                 <#list goods.combList as item>
                     <div class="part">
-                        <a href="/goods/${item.goodsId}"><img src="${item.coverImageUri!''}" width="114" height="114"/></a>
+                        <a href="/goods/${item.goodsId?c}"><img src="${item.coverImageUri!''}" width="114" height="114"/></a>
                         <p style="height: 35px; overflow: hidden;">${item.goodsTitle!''}</p>
                         <p class="p1">
                             <input type="checkbox" class="comboCheckBox" zhid="${item.id?c}" onclick="javascript:combSelect(this, ${item.currentPrice?string("0.00")}, ${item.goodsPrice?string("0.00")});"/>
@@ -645,7 +645,7 @@ function checkTime(i)
         <h5 class="tit">浏览记录</h5>
         <#if recent_page??>
             <#list recent_page.content as item>
-                <a class="scan" href="/goods/${item.goodsId}">
+                <a class="scan" href="/goods/${item.goodsId?c}">
                     <img src="${item.goodsCoverImageUri!''}" title="${item.goodsTitle!''}"/>
                     <p style="overflow: hidden; height: 61px;">${item.goodsTitle!''}</p>
                     <p class="red">￥<#if item.goodsSalePrice??>${item.goodsSalePrice?string("0.00")}</#if></p>

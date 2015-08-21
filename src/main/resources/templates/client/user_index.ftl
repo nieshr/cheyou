@@ -139,7 +139,7 @@ $(function () {
                         <td align="left"  colspan="2">
                             <#if order.orderGoodsList??>
                                 <#list order.orderGoodsList as og>
-                                    <a href="/goods/${og.goodsId}"><img src="${og.goodsCoverImageUri!''}" alt="${og.goodsTitle!''}" width="50" height="50" align="left" /></a>
+                                    <a href="/goods/${og.goodsId?c}"><img src="${og.goodsCoverImageUri!''}" alt="${og.goodsTitle!''}" width="50" height="50" align="left" /></a>
                                 </#list>
                             </#if>
                         </td>
@@ -182,7 +182,7 @@ $(function () {
                  <li>
                     <#if collect_page??>
                         <#list collect_page.content as cgoods>
-                        <a class="mymember_gzlist" href="/goods/${cgoods.goodsId!''}">
+                        <a class="mymember_gzlist" href="/goods/${cgoods.goodsId?c!''}">
                             <img src="${cgoods.goodsCoverImageUri!''}" alt="${cgoods.goodsTitle!''}" width="180" height="180"/>
                             <p>${cgoods.goodsTitle!''}</p>
                             <h6>￥${cgoods.goodsSalePrice?string("#.##")}</h6>
@@ -224,7 +224,7 @@ $(function () {
                 <li>
                 <#if recent_page??>
                     <#list recent_page.content as rgoods>
-                        <a class="mymember_hot_story" href="/goods/${rgoods.goodsId}">
+                        <a class="mymember_hot_story" href="/goods/${rgoods.goodsId?c}">
                             <img src="${rgoods.goodsCoverImageUri!''}" width="65" height="65"/>
                             <p>￥${rgoods.goodsSalePrice?string("#.##")}</p>
                         </a>

@@ -35,18 +35,23 @@
 $(document).ready(function(){
     //searchTextClear(".text01","用户名/邮箱/手机号","#999","#555");  
 });
-function otherlogin(){
-    window.location.href ="/login/alipay_accredit/${qq!''}?useralipay_username=${alipay_user_id!''}";
+function otherlogin(){    
+    window.location.href = "/login/alipay_accredit/<#if qq??>${qq}<#else>zfb</#if>?useralipay_username=${alipay_user_id!''}";
 } 
    
 function cliLogin(){
         var username = $("#txtUser").val();
-        var password = $("#Userpwd").val();
-
+        var password = $("#Userpwd").val();      
+        <#if qq??>
+             var type = "qq";
+        <#else>
+             var type = "zfb";
+        </#if>
+        var alipayuser_id = $("#alipayuser_id").val();
         $.ajax({
                 type: "post",
-                url: "/login",
-                data: { "username": username, "password": password , "alipayuser_id":${alipay_user_id!''} , type : <#if qq??>qq<#else>zfb</#if>},
+                url: "/login",               
+                data: {"username": username, "password": password, "alipayuser_id": alipayuser_id, "type": type},
                 dataType: "json",
                 success: function (data) { 
                 <!-- 修改 -->
@@ -83,6 +88,7 @@ function cliLogin(){
 <div class="main">
     <!--QQ登录显示用户在Qzone的昵称-->
     <#if nickName??><p style=" width: 360px;text-align: right;">车有同盟欢迎您：${nickName}</p></#if>
+    <input type="hidden" name="mouseposY" id="alipayuser_id" value="${alipay_user_id!''}">
 <div class="contenta">
             <div class="lefta">
                 <h3><i></i>绑定已有账号</h3>
@@ -108,7 +114,7 @@ function cliLogin(){
     <nav>
         <#if help_level0_cat_list??>
             <#list help_level0_cat_list as item>
-                <a href="/info/list/${item.id!''}">${item.title!''}</a>
+                <a href="/info/list/${item.id?c!''}">${item.title!''}</a>
             </#list>
         </#if>
     </nav>

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ynyes.cheyou.entity.TdOrder;
+import com.ynyes.cheyou.entity.TdUser;
 
 /**
  * TdOrder 实体数据库操作接口
@@ -66,12 +67,21 @@ public interface TdOrderRepo extends
 	 * @author lc
 	 * @注释：同盟店订单收入查询
 	 */
-    List<TdOrder> findByStatusIdOrStatusIdAndShopTitle(Long statusId, Long statusId1, String diystiename);
-    Page<TdOrder> findByStatusIdOrStatusIdAndShopTitleOrderByIdDesc(Long statusId, Long statusId1, String diystiename, Pageable page);
+    List<TdOrder> findByStatusIdAndShopTitleOrStatusIdAndShopTitle(Long statusId, String diystiename, Long statusId1, String diystiename1);
+    Page<TdOrder> findByStatusIdAndShopTitleOrStatusIdAndShopTitleOrderByIdDesc(Long statusId, String diystiename,  Long statusId1, String diystiename1, Pageable page);
     
-    List<TdOrder> findByStatusIdOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(Long statusId, Long statusId1, String diystiename, Date time);
-    Page<TdOrder> findByStatusIdOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(Long statusId, Long statusId1, String diystiename, Date time, Pageable page);
+    List<TdOrder> findByStatusIdAndShopTitleAndOrderTimeAfterOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(Long statusId, String diystiename, Date time, Long statusId1, String diystiename1, Date time1);
+    Page<TdOrder> findByStatusIdAndShopTitleAndOrderTimeAfterOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(Long statusId, String diystiename, Date time, Long statusId1, String diystiename1, Date time1, Pageable page);
     
+    /**
+	 * @author lc
+	 * @注释：同盟店返利收入
+	 */
+    List<TdOrder> findByUsernameIn(List<String> tdUsers);
+    Page<TdOrder> findByUsernameInOrderByIdDesc(List<String> tdUsers , Pageable page);
+    
+    List<TdOrder> findByUsernameInAndOrderTimeAfterOrderByIdDesc(List<String> tdUsers,  Date time);
+    Page<TdOrder> findByUsernameInAndOrderTimeAfterOrderByIdDesc(List<String> tdUsers,  Date time, Pageable page);
     /**
 	 * @author lc
 	 * @注释：按订单类型和状态查询

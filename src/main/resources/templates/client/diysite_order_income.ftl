@@ -75,9 +75,9 @@ DD_belatedPNG.fix('.,img,background');
                 <table>
                     <tr class="mymember_infotab_tit01">
                         <th>订单编号</th>
-                        <th width="70">收货人</th>
-                        <th width="80">订单金额</th>
-                        <th width="80">
+                        <th width="80">收货人</th>
+                        <th width="90">订单金额</th>
+                        <th width="90">
                             <select name="timeId" onchange="javascript:setTimeout(__doPostBack('statusId',''), 0)">
                                 <option value="0" <#if !time_id?? || time_id==0>selected="selected"</#if>>所有订单</option>
                                 <option value="1" <#if time_id==1>selected="selected"</#if>>今天</option>
@@ -87,15 +87,11 @@ DD_belatedPNG.fix('.,img,background');
                                 <option value="6" <#if time_id==6>selected="selected"</#if>>最近半年</option>
                                 <option value="12" <#if time_id==12>selected="selected"</#if>>最近一年</option>                              
                             </select>
-                        </th>
-                        <th width="80">总额：</th>
-                        
+                        </th>                        
+                        <th width="160">总额：￥${sales?string("0.00")}</th>                       
                     </tr>    
                     <#if order_page??>
-                        <#list order_page.content as order>
-                            <tr>
-                              <th colspan="7">订单编号：<a href="/diysite/order?id=${order.id?c}" id="spanOrderNumber">${order.orderNumber!''}</a></th>
-                            </tr>
+                        <#list order_page.content as order>                            
                             <tr>
                               <td>
                                                                                                                  订单编号：<a href="/diysite/order?id=${order.id?c}" id="spanOrderNumber">${order.orderNumber!''}</a>

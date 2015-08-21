@@ -53,7 +53,7 @@ function __doPostBack(eventTarget, eventArgument) {
         <#if price_log_page??>
             <#list price_log_page.content as item>
                 <tr>
-                    <td align="center">${item.id!""}</td>
+                    <td align="center">${item.id?c!""}</td>
                     <td>${item.goodsTitle!""}</td>
                     <td align="center">${item.price?string("0.00")}
                         <#if item.originPrice?? && item.price gt item.originPrice>

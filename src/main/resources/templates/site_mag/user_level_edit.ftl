@@ -46,14 +46,14 @@ $(function () {
     <dl>
         <dt>用户等级</dt>
         <dd>
-            <input name="levelId" type="text" value="<#if user_level??>${user_level.levelId!""}</#if>" ajaxurl="/Verwalter/user/level/check/levelId<#if user_level??>?id=${user_level.id}</#if>" class="input txt100" datatype="n1-2" sucmsg=" ">
+            <input name="levelId" type="text" value="<#if user_level??>${user_level.levelId!""}</#if>" ajaxurl="/Verwalter/user/level/check/levelId<#if user_level??>?id=${user_level.id?c}</#if>" class="input txt100" datatype="n1-2" sucmsg=" ">
             <span class="Validform_checktip">*数字表示的用户等级，从1开始，熟悉越高等级越高</span>
         </dd>
     </dl>
     <dl>
         <dt>等级名称</dt>
         <dd>
-            <input name="title" type="text" value="<#if user_level??>${user_level.title!""}</#if>" ajaxurl="/Verwalter/user/level/check/title<#if user_level??>?id=${user_level.id}</#if>" class="input txt100" datatype="s" sucmsg=" ">
+            <input name="title" type="text" value="<#if user_level??>${user_level.title!""}</#if>" ajaxurl="/Verwalter/user/level/check/title<#if user_level??>?id=${user_level.id?c}</#if>" class="input txt100" datatype="s" sucmsg=" ">
             <span class="Validform_checktip">*等级名称，将在前台显示</span>
         </dd>
     </dl>

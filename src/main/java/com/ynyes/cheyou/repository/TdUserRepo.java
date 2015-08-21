@@ -1,5 +1,7 @@
 package com.ynyes.cheyou.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -54,4 +56,5 @@ public interface TdUserRepo extends
 	 */
     Page<TdUser> findByUpperDiySiteIdContainingOrderByIdDesc(Long shopId, String keyword, Pageable page);
     Page<TdUser> findByUpperDiySiteIdOrderByIdDesc(Long shopId, Pageable page);
+    List<TdUser> findByUpperDiySiteIdOrderByIdDesc(Long shopId);
 }

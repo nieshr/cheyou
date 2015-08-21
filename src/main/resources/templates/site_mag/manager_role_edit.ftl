@@ -30,7 +30,7 @@ $(function () {
 <form name="form1" method="post" action="/Verwalter/manager/role/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="">
-<input type="hidden" name="roleId" id="__VIEWSTATE" value="<#if tdRole??>${tdRole.id!''}</#if>">
+<input type="hidden" name="roleId" id="__VIEWSTATE" value="<#if tdRole??>${tdRole.id?c!''}</#if>">
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">

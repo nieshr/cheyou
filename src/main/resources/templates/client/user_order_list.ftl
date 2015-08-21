@@ -110,7 +110,7 @@ DD_belatedPNG.fix('.,img,background');
                             <tr>
                               <td class="td001">
                                 <#list order.orderGoodsList as og>
-                                    <a href="/goods/${og.goodsId}"><img src="${og.goodsCoverImageUri}"></a>
+                                    <a href="/goods/${og.goodsId?c}"><img src="${og.goodsCoverImageUri}"></a>
                                 </#list>
                               </td>
                               <td>${order.shippingName!''}</td>

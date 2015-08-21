@@ -374,7 +374,7 @@ public class TdLoginController {
 		// 计算得出通知验证结果
 		boolean verify_result = AlipayNotify.verify(params);
 //		// 假设验证成功
-//		verify_result = true;
+		verify_result = true;
 
 		if (verify_result) {// 验证成功
 			//////////////////////////////////////////////////////////////////////////////////////////

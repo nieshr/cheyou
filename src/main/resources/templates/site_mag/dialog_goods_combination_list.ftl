@@ -191,7 +191,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <option <#if !categoryId??>selected="selected"</#if> value="">所有类别</option>
                 <#if category_list??>
                     <#list category_list as cat>
-                        <option value="${cat.id}" <#if categoryId?? && categoryId==cat.id>selected="selected"</#if> >${cat.title!""}</option>
+                        <option value="${cat.id?c}" <#if categoryId?? && categoryId==cat.id>selected="selected"</#if> >${cat.title!""}</option>
                     </#list>
                 </#if>
             </select>
@@ -221,7 +221,7 @@ function __doPostBack(eventTarget, eventArgument) {
             <#list goods_page.content as goods>
                 <tr>
                     <td>
-                        <a class="itemzengpin_select" style="cursor:pointer;" itemzengpin_title="${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""} ${goods.saleType!""}" itemzengpin_id="${goods.id!""}" itemzengpin_price="${goods.salePrice?string("#.##")}" itemzengpin_image="${goods.coverImageUri!''}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""} ${goods.saleType!""}</a></td>
+                        <a class="itemzengpin_select" style="cursor:pointer;" itemzengpin_title="${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""} ${goods.saleType!""}" itemzengpin_id="${goods.id?c!""}" itemzengpin_price="${goods.salePrice?string("#.##")}" itemzengpin_image="${goods.coverImageUri!''}">${goods.title!""} ${goods.version!""} ${goods.color!""} ${goods.capacity!""} ${goods.saleType!""}</a></td>
                     <td>${goods.categoryTitle!""}</td>
                     <td>${goods.salePrice?string("#.##")}</td>
                     <td>${goods.onSaleTime!""}</td>

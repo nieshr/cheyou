@@ -305,6 +305,10 @@ public class TdUserService {
         
         return repository.findByUpperDiySiteIdAndStatusIdOrderByIdDesc(upperDiySiteId, 1L, pageRequest);
     }
+    
+    public List<TdUser> findByUpperDiySiteIdAndIsEnabled(Long upperDiySiteId){
+    	return repository.findByUpperDiySiteIdOrderByIdDesc(upperDiySiteId);
+    }
    /**
     *  手机号查找
     * @author libiao

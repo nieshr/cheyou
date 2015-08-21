@@ -365,7 +365,7 @@ function del_goods_comb(obj) {
                     <select name="siteId" datatype="*0-100" sucmsg=" ">
                         <option value="" <#if !site_list??>selected="selected"</#if>>请选择...</option>
                         <#list site_list as w>
-                            <option value="${w.id!""}" <#if goods?? && goods.siteId?? && goods.siteId==w.id>selected="selected"</#if>>${w.title!""}</option>
+                            <option value="${w.id?c!""}" <#if goods?? && goods.siteId?? && goods.siteId==w.id>selected="selected"</#if>>${w.title!""}</option>
                         </#list>
                     </select>
                 </div>
@@ -529,7 +529,7 @@ function del_goods_comb(obj) {
                     <select name="providerId" datatype="*0-100" sucmsg=" ">
                         <option value="" <#if !provider_list??>selected="selected"</#if>>请选择类别...</option>
                         <#list provider_list as w>
-                            <option value="${w.id!""}" <#if goods?? && goods.providerId?? && goods.providerId==w.id>selected="selected"</#if>>${w.title!""}</option>
+                            <option value="${w.id?c!""}" <#if goods?? && goods.providerId?? && goods.providerId==w.id>selected="selected"</#if>>${w.title!""}</option>
                         </#list>
                     </select>
                 </div>
@@ -584,21 +584,21 @@ function del_goods_comb(obj) {
             <dt>同盟店返利比例</dt>
             <dd>
                 <input name="shopReturnRation" type="text" value="<#if goods?? && goods.shopReturnRation??>${goods.shopReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
-                <span class="Validform_checktip">同盟店返利 = 销售价 * 同盟店返利比例</span>
+                <span class="Validform_checktip">同盟店返利 = 成本价 * 同盟店返利比例</span>
             </dd>
         </dl>
         <dl>
             <dt>平台服务费比例</dt>
             <dd>
                 <input name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.00")}<#else>0.06</#if>" class="input normal" sucmsg="">
-                <span class="Validform_checktip">平台服务费 = 销售价 * 平台服务费比例</span>
+                <span class="Validform_checktip">平台服务费 = 成本价  * 平台服务费比例</span>
             </dd>
         </dl>
         <dl>
             <dt>培训服务费比例</dt>
             <dd>
                 <input name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.00")}<#else>0.02</#if>" class="input normal" sucmsg="">
-                <span class="Validform_checktip">培训服务费 = 销售价 * 培训服务费比例</span>
+                <span class="Validform_checktip">培训服务费 = 成本价 * 培训服务费比例</span>
             </dd>
         </dl>
         <#--
@@ -625,7 +625,7 @@ function del_goods_comb(obj) {
                     <select name="warehouseId" datatype="*0-100" sucmsg=" ">
                         <option value="" <#if !warehouse_list??>selected="selected"</#if>>请选择类别...</option>
                         <#list warehouse_list as w>
-                            <option value="${w.id!""}" <#if goods?? && goods.warehouseId?? && goods.warehouseId==w.id>selected="selected"</#if>>${w.title!""}</option>
+                            <option value="${w.id?c!""}" <#if goods?? && goods.warehouseId?? && goods.warehouseId==w.id>selected="selected"</#if>>${w.title!""}</option>
                         </#list>
                     </select>
                 </div>

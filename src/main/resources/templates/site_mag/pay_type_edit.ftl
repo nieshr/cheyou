@@ -30,7 +30,7 @@
 <form name="form1" method="post" action="/Verwalter/order/setting/pay/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}">
-<input name="payTypeId" type="text" value='<#if pay_type??>${pay_type.id}</#if>' style="display:none">
+<input name="payTypeId" type="text" value='<#if pay_type??>${pay_type.id?c}</#if>' style="display:none">
 </div>
 
 <!--导航栏-->

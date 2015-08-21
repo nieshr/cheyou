@@ -79,13 +79,13 @@ var theForm = document.forms['form1'];
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${level_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${level.id}">
+                    <input type="hidden" name="listId" id="listId" value="${level.id?c}">
                 </td>
                 <td align="center">
                     ${level.levelId!""}
                 </td>
                 <td align="center">
-                  <a href="/Verwalter/user/level/edit?id=${level.id}">${level.title!""}</a>
+                  <a href="/Verwalter/user/level/edit?id=${level.id?c}">${level.title!""}</a>
                 </td>
                 <td align="center"><#if level.requiredConsumption??>${level.requiredConsumption?string("#.##")}</#if> 元</td>
                 <td align="center"><#if level.discountRatio??>${level.discountRatio?string("#.##")}</#if></td>
@@ -94,7 +94,7 @@ var theForm = document.forms['form1'];
                     <input name="listSortId" type="text" value="${level.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
                 </td>
                 <td align="center">
-                    <a href="/Verwalter/user/level/edit?id=${level.id}">修改</a>
+                    <a href="/Verwalter/user/level/edit?id=${level.id?c}">修改</a>
               </tr>
         </#list>
     </#if>

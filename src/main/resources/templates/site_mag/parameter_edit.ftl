@@ -70,7 +70,7 @@ $(function () {
     
     // 选择类型后修改ajaxurl
     $("#paramCatId").change(function(){
-        var url = "/Verwalter/parameter/check?categoryId=" + $(this).val() + "<#if parameter??>&id=${parameter.id}</#if>";
+        var url = "/Verwalter/parameter/check?categoryId=" + $(this).val() + "<#if parameter??>&id=${parameter.id?c}</#if>";
         $("#idParamTitle").attr("ajaxurl", url);
     });
 });
@@ -83,7 +83,7 @@ $(function () {
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" />
 </div>
-<input name="id" type="text" value='<#if parameter??>${parameter.id!""}</#if>' style="display:none">
+<input name="id" type="text" value='<#if parameter??>${parameter.id?c!""}</#if>' style="display:none">
 <!--导航栏-->
 <div class="location">
     <a href="/Verwalter/parameter/list" class="back"><i></i><span>
@@ -120,7 +120,7 @@ $(function () {
                     	</#if>
                         <#if category_list??>
                             <#list category_list as c>
-                                <option value="${c.id!""}" <#if parameter?? && parameter.categoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                                <option value="${c.id?c!""}" <#if parameter?? && parameter.categoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
                             </#list>
                         </#if>
                     </select>
@@ -135,7 +135,7 @@ $(function () {
         <dl>
             <dt>参数名称</dt>
             <dd>
-                <input id="idParamTitle" name="title" type="text" ajaxurl="/Verwalter/parameter/check<#if parameter??>?id=${parameter.id!''}&categoryId=${parameter.categoryId!''}</#if>" value="<#if parameter??>${parameter.title!''}</#if>" class="input normal" datatype="*2-100" sucmsg=" ">
+                <input id="idParamTitle" name="title" type="text" ajaxurl="/Verwalter/parameter/check<#if parameter??>?id=${parameter.id?c!''}&categoryId=${parameter.categoryId!''}</#if>" value="<#if parameter??>${parameter.title!''}</#if>" class="input normal" datatype="*2-100" sucmsg=" ">
                 <span class="Validform_checktip">*名称最多100个字符</span>
             </dd>
         </dl>

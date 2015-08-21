@@ -153,7 +153,7 @@ function tip()
     <nav>
         <#if help_level0_cat_list??>
             <#list help_level0_cat_list as item>
-                <a href="/info/list/${item.id!''}">${item.title!''}</a>
+                <a href="/info/list/${item.id?c!''}">${item.title!''}</a>
             </#list>
         </#if>
     </nav>

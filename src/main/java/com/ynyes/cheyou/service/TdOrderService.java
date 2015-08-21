@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.cheyou.entity.TdOrder;
+import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.repository.TdOrderRepo;
+
+import scala.xml.dtd.PublicID;
 
 /**
  * TdOrder 服务类
@@ -262,20 +265,39 @@ public class TdOrderService {
 	 * @注释：订单收入查询
 	 */
     public List<TdOrder> findAllVerifyBelongShopTitle(String diysitename){
-    	return repository.findByStatusIdOrStatusIdAndShopTitle(5L, 6L, diysitename);
+    	return repository.findByStatusIdAndShopTitleOrStatusIdAndShopTitle(5L, diysitename, 6L, diysitename);
     }
     public Page<TdOrder> findAllVerifyBelongShopTitleOrderByIdDesc(String diysitename, int page, int size){
     	PageRequest pageRequest = new PageRequest(page, size);
-    	return repository.findByStatusIdOrStatusIdAndShopTitleOrderByIdDesc(5L, 6L, diysitename, pageRequest);
+    	return repository.findByStatusIdAndShopTitleOrStatusIdAndShopTitleOrderByIdDesc(5L, diysitename, 6L, diysitename, pageRequest);
     }
     public List<TdOrder> findAllVerifyBelongShopTitleAndTimeAfter(String diysitename, Date time){
-    	return repository.findByStatusIdOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(5L, 6L, diysitename, time);
+    	return repository.findByStatusIdAndShopTitleAndOrderTimeAfterOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(5L, diysitename, time, 6L, diysitename, time);
     }
     public Page<TdOrder> findAllVerifyBelongShopTitleTimeAfterOrderByIdDesc(String diysitename, Date time,  int page, int size){
     	PageRequest pageRequest = new PageRequest(page, size);
-    	return repository.findByStatusIdOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(5L, 6L, diysitename, time, pageRequest);
+    	return repository.findByStatusIdAndShopTitleAndOrderTimeAfterOrStatusIdAndShopTitleAndOrderTimeAfterOrderByIdDesc(5L, diysitename, time, 6L, diysitename, time, pageRequest);
     }
     
+    /**
+	 * @author lc
+	 * @注释：订单返利查询
+	 */
+    public List<TdOrder> findByUsernameIn(List<String> tdUsers){
+    	return repository.findByUsernameIn(tdUsers);
+    }
+    public Page<TdOrder> findByUsernameIn(List<String> tdUsers, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByUsernameInOrderByIdDesc(tdUsers, pageRequest);
+    }
+    
+    public List<TdOrder> findByUsernameInAndOrderTimeAfter(List<String> tdUsers, Date time){
+    	return repository.findByUsernameInAndOrderTimeAfterOrderByIdDesc(tdUsers, time);
+    }
+    public Page<TdOrder> findByUsernameInAndOrderTimeAfter(List<String> tdUsers, Date time, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByUsernameInAndOrderTimeAfterOrderByIdDesc(tdUsers, time, pageRequest);
+    }
     /**
 	 * @author lc
 	 * @注释：根据订单类型和订单状态进行查询

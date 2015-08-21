@@ -41,7 +41,7 @@ $(function () {
     
     // 选择类型后修改ajaxurl
     $("#proCatId").change(function(){
-        var url = "/Verwalter/parameter/category/check?parentId=" + $(this).val() + "<#if cat??>&id=${cat.id}</#if>";
+        var url = "/Verwalter/parameter/category/check?parentId=" + $(this).val() + "<#if cat??>&id=${cat.id?c}</#if>";
         $("#idCatTitle").attr("ajaxurl", url);
     });
     
@@ -60,7 +60,7 @@ function change2cn(en, cninput) {
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" />
 </div>
-<input name="id" type="text" value='<#if cat??>${cat.id!""}</#if>' style="display:none">
+<input name="id" type="text" value='<#if cat??>${cat.id?c!""}</#if>' style="display:none">
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
   <a href="/Verwalter/parameter/category/list" class="back"><i></i><span>返回列表页</span></a>
@@ -91,7 +91,7 @@ function change2cn(en, cninput) {
             <option value="" <#if cat?? && cat.parentId?? && cat.parentId==0>selected="selected"</#if>>无父级分类</option>
         	<#if category_list??>
         	   <#list category_list as c>
-        	       <option value="${c.id!""}" <#if cat?? && cat.parentId?? && cat.parentId==c.id || fatherCat?? && fatherCat.id==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+        	       <option value="${c.id?c!""}" <#if cat?? && cat.parentId?? && cat.parentId==c.id || fatherCat?? && fatherCat.id==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
         	   </#list>
         	</#if>
         </select>
@@ -108,7 +108,7 @@ function change2cn(en, cninput) {
   <dl>
     <dt>类别名称</dt>
     <dd>
-        <input id="idCatTitle" name="title" type="text" value="<#if cat??>${cat.title!""}</#if>" class="input normal" datatype="*1-100" sucmsg=" " ajaxurl="/Verwalter/parameter/category/check<#if cat??>?id=${cat.id}<#elseif fatherCat??>?parentId=${fatherCat.id}</#if>" >
+        <input id="idCatTitle" name="title" type="text" value="<#if cat??>${cat.title!""}</#if>" class="input normal" datatype="*1-100" sucmsg=" " ajaxurl="/Verwalter/parameter/category/check<#if cat??>?id=${cat.id?c}<#elseif fatherCat??>?parentId=${fatherCat.id?c}</#if>" >
         <span class="Validform_checktip">*类别中文名称，100字符内</span>
     </dd>
   </dl>

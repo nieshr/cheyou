@@ -74,10 +74,10 @@ DD_belatedPNG.fix('.,img,background');
                     <#list consult_page.content as consult>
                     <tr>
                         <td>
-                           <a href="/goods/${consult.goodsId}">
+                           <a href="/goods/${consult.goodsId?c}">
                                 <img src="${consult.goodsCoverImageUri!''}" width="50" height="50" title="${consult.goodsTitle!''}">                                             </a>                                        </td>
                         <td>
-                           <a target="_blank" href="/goods/${consult.goodsId}">${consult.goodsTitle!''}</a>
+                           <a target="_blank" href="/goods/${consult.goodsId?c}">${consult.goodsTitle!''}</a>
                         </td>
                         <td>
                             我的咨询：${consult.content!''}

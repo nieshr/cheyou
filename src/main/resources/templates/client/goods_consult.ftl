@@ -19,7 +19,7 @@
         <#if consult_page.number+1 == 1>
             <a href="javascript:;" class="disabled">上一页</a>
         <#else>
-            <a href="javascript:getConsult(${goodsId}, ${consult_page.number-1});">上一页</a>
+            <a href="javascript:getConsult(${goodsId?c}, ${consult_page.number-1});">上一页</a>
         </#if>
         
         <#if consult_page.totalPages gt 0>
@@ -28,7 +28,7 @@
                     <#if page == consult_page.number+1>
                         <a class="sel" href="javascript:;"">${page}</a>
                     <#else>
-                        <a href="javascript:getConsult(${goodsId}, ${page-1});">${page}</a>
+                        <a href="javascript:getConsult(${goodsId?c}, ${page-1});">${page}</a>
                     </#if>
                     <#assign continueEnter=false>
                 <#else>
@@ -43,14 +43,14 @@
         <#if consult_page.number+1 == consult_page.totalPages || consult_page.totalPages==0>
             <a class="pn-next" href="javascript:;">下一页</a>
         <#else>
-            <a class="pn-next" href="javascript:getConsult(${goodsId}, ${consult_page.number+1});">下一页</a>
+            <a class="pn-next" href="javascript:getConsult(${goodsId?c}, ${consult_page.number+1});">下一页</a>
         </#if>
                 
         <div>
             <span class="fl mr5">到第</span>
             <input id="consultPageIndex" type="text" value="1" class="text" />
             <span class="fl mr5 ml5">页</span>
-            <input type="submit" class="sub" onclick="javascript:getConsult(${goodsId!''}, parseInt($('#consultPageIndex').val())-1);" value="确定" />
+            <input type="submit" class="sub" onclick="javascript:getConsult(${goodsId?c!''}, parseInt($('#consultPageIndex').val())-1);" value="确定" />
             <p class="clear"></p>
         </div>
     </div>

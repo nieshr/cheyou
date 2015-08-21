@@ -18,7 +18,7 @@
         <ul style="height:30px;">
             <#if help_level0_cat_list??>
                 <#list help_level0_cat_list as item>
-                    <li><a href="/info/list/${help_id!'0'}?catId=${item.id!''}">${item.title!''}</a></li>
+                    <li><a href="/info/list/${help_id!'0'}?catId=${item.id?c!''}">${item.title!''}</a></li>
                 </#list>
             </#if>
         </ul>

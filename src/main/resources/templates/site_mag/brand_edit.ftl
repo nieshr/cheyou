@@ -59,7 +59,7 @@ $(function () {
     
     // 选择类型后修改ajaxurl
     $("#proCatId").change(function(){
-        var url = "/Verwalter/brand/check?catId=" + $(this).val() + "<#if brand??>&id=${brand.id}</#if>";
+        var url = "/Verwalter/brand/check?catId=" + $(this).val() + "<#if brand??>&id=${brand.id?c}</#if>";
         $("#idBrandTitle").attr("ajaxurl", url);
     });
 });
@@ -74,7 +74,7 @@ $(function () {
 </div>
 <input name="menuId" type="text" value='${mid!""}' style="display:none;">
 <input name="channelId" type="text" value='${cid!""}' style="display:none">
-<input name="id" type="text" value='<#if brand??>${brand.id!""}</#if>' style="display:none">
+<input name="id" type="text" value='<#if brand??>${brand.id?c!""}</#if>' style="display:none">
     <!--导航栏-->
     <div class="location">
         <a href="/Verwalter/brand/list" class="back"><i></i><span>
@@ -109,7 +109,7 @@ $(function () {
                     	</#if>
                         <#if category_list??>
                             <#list category_list as c>
-                                <option value="${c.id!""}" <#if brand?? && brand.productCategoryId?? && brand.productCategoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                                <option value="${c.id?c!""}" <#if brand?? && brand.productCategoryId?? && brand.productCategoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
                             </#list>
                         </#if>
                     </select>
@@ -130,7 +130,7 @@ $(function () {
         <dl>
             <dt>品牌名称</dt>
             <dd>
-                <input id="idBrandTitle" name="title" type="text" datatype="*" value="<#if brand??>${brand.title!''}</#if>" ajaxurl="/Verwalter/brand/check<#if brand??>?id=${brand.id}</#if>" class="input normal" sucmsg=" " />
+                <input id="idBrandTitle" name="title" type="text" datatype="*" value="<#if brand??>${brand.title!''}</#if>" ajaxurl="/Verwalter/brand/check<#if brand??>?id=${brand.id?c}</#if>" class="input normal" sucmsg=" " />
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>

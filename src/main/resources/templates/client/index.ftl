@@ -475,8 +475,8 @@ function delItem(id)
                 <#list cart_goods_list as item>
                     <div class="shopping_list">
                         <div class="clear"></div>
-                        <a class="a2" href="/goods/${item.goodsId}"><img src="${item.goodsCoverImageUri!''}" /></a>
-                        <a class="a3" href="/goods/${item.goodsId}">${item.goodsTitle!''}</a>
+                        <a class="a2" href="/goods/${item.goodsId?c}"><img src="${item.goodsCoverImageUri!''}" /></a>
+                        <a class="a3" href="/goods/${item.goodsId?c}">${item.goodsTitle!''}</a>
                         <p>￥<#if item.price??>${item.price?string("0.00")} x ${item.quantity!''}</#if><a href="javascript:delItem(${item.id?c});">删除</a></p>
                         <div class="clear"></div>
                     </div>

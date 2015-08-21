@@ -70,7 +70,7 @@ $(function () {
     
     // 选择类型后修改ajaxurl
     $("#proCatId").change(function(){
-        var url = "/Verwalter/product/check?catId=" + $(this).val() + "<#if product??>&id=${product.id}</#if>";
+        var url = "/Verwalter/product/check?catId=" + $(this).val() + "<#if product??>&id=${product.id?c}</#if>";
         $("#idProductTitle").attr("ajaxurl", url);
     });
     
@@ -116,7 +116,7 @@ $(function () {
 <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="${__EVENTARGUMENT!""}" />
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" />
 </div>
-<input name="id" type="text" value='<#if product??>${product.id!""}</#if>' style="display:none">
+<input name="id" type="text" value='<#if product??>${product.id?c!""}</#if>' style="display:none">
     <!--导航栏-->
     <div class="location">
         <a href="/Verwalter/product/list" class="back"><i></i><span>
@@ -150,7 +150,7 @@ $(function () {
                     	</#if>
                         <#if category_list??>
                             <#list category_list as c>
-                                <option value="${c.id!""}" <#if product?? && product.productCategoryId?? && product.productCategoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                                <option value="${c.id?c!""}" <#if product?? && product.productCategoryId?? && product.productCategoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
                             </#list>
                         </#if>
                     </select>
@@ -165,7 +165,7 @@ $(function () {
         <dl>
             <dt>产品名称</dt>
             <dd>
-                <input id="idProductTitle" name="title" type="text" value="<#if product??>${product.title!""}</#if>" ajaxurl="/Verwalter/product/check<#if product??>?id=${product.id}</#if>" class="input normal" datatype="*1-1000" sucmsg=" ">
+                <input id="idProductTitle" name="title" type="text" value="<#if product??>${product.title!""}</#if>" ajaxurl="/Verwalter/product/check<#if product??>?id=${product.id?c}</#if>" class="input normal" datatype="*1-1000" sucmsg=" ">
                 <span class="Validform_checktip">*标题最多100个字符</span>
             </dd>
         </dl>

@@ -40,7 +40,7 @@ $(function () {
 <form method="post" action="/Verwalter/view/navi/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
-<input type="hidden" name="id" value="<#if navi_bar_item??>${navi_bar_item.id!""}</#if>" >
+<input type="hidden" name="id" value="<#if navi_bar_item??>${navi_bar_item.id?c!""}</#if>" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">

@@ -22,14 +22,14 @@
                     <a href="/goods/${cg.goodsId?c}"><img src="${cg.goodsCoverImageUri!''}" width="100" /></a>
                 </td>
                 <td width="400" style="text-align:left;">
-                    <a style=" display:block; float:left; width:400px; overflow:hidden;margin-top:10px;" href="/goods/${cg.goodsId}">${cg.goodsTitle!''}</a>
+                    <a style=" display:block; float:left; width:400px; overflow:hidden;margin-top:10px;" href="/goods/${cg.goodsId?c}">${cg.goodsTitle!''}</a>
                     <span style=" display:block; float:left; overflow:hidden;margin-top:10px;">
                     <#if goods_list?? && goods_list?size gt 0>
                         <#list goods_list as gl>
                             <#if gl.id == cg.goodsId>
                                 <label style="float:left; margin-right:10px;">赠品:</label>
                                 <#list gl.giftList as gl>
-                                    <a href="/goods/${gl.goodsId}" title="${gl.goodsTitle}" style="display:block; float:left; width:50px; height:33px; overflow:hidden; float:left;">
+                                    <a href="/goods/${gl.goodsId?c}" title="${gl.goodsTitle}" style="display:block; float:left; width:50px; height:33px; overflow:hidden; float:left;">
                                     <img src="${gl.coverImageUri}" width="50" />
                                     </a>
                                 </#list>

@@ -19,7 +19,7 @@ $(function () {
 <form method="post" action="/Verwalter/warehouse/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
-<input type="hidden" name="id" value="<#if warehouse??>${warehouse.id!""}</#if>" >
+<input type="hidden" name="id" value="<#if warehouse??>${warehouse.id?c!""}</#if>" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
@@ -46,7 +46,7 @@ $(function () {
     <dl>
         <dt>仓库名称</dt>
         <dd>
-            <input name="title" type="text" value="<#if warehouse??>${warehouse.title!""}</#if>" class="input normal" ajaxurl="/Verwalter/warehouse/check<#if warehouse??>?id=${warehouse.id}</#if>" datatype="s" sucmsg=" ">
+            <input name="title" type="text" value="<#if warehouse??>${warehouse.title!""}</#if>" class="input normal" ajaxurl="/Verwalter/warehouse/check<#if warehouse??>?id=${warehouse.id?c}</#if>" datatype="s" sucmsg=" ">
             <span class="Validform_checktip">*仓库名称</span>
         </dd>
     </dl>

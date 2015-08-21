@@ -78,7 +78,7 @@ function getType()
 <form name="form1" method="post" action="/Verwalter/coupon/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}">
-<input name="couponId" type="text" value='<#if coupon??>${coupon.id}</#if>' style="display:none">
+<input name="couponId" type="text" value='<#if coupon??>${coupon.id?c}</#if>' style="display:none">
 </div>
 
 <!--导航栏-->
@@ -115,7 +115,7 @@ function getType()
                 </#if>             
                 <#if coupon_type_list??>
                     <#list coupon_type_list as c>
-                        <option value="${c.id!""}" <#if coupon?? && coupon.typeId==c.id>selected="selected"</#if>>${c.title!""}</option>                                                                  
+                        <option value="${c.id?c!""}" <#if coupon?? && coupon.typeId==c.id>selected="selected"</#if>>${c.title!""}</option>                                                                  
                     </#list>                                                                                
                 </#if>
                 <input type="hidden" name="typetitle" id="typetitle" value="">
@@ -152,7 +152,7 @@ function getType()
             <select name="diySiteId" datatype="*" sucmsg=" " disabled="disabled">
                 <#if diy_site_list??>
                     <#list diy_site_list as item>
-                        <option value="${item.id!""}" <#if coupon?? && coupon.diySiteId?? && coupon.diySiteId==item.id>selected="selected"</#if>>${item.title!""}</option>
+                        <option value="${item.id?c!""}" <#if coupon?? && coupon.diySiteId?? && coupon.diySiteId==item.id>selected="selected"</#if>>${item.title!""}</option>
                     </#list>
                 </#if>
             </select>

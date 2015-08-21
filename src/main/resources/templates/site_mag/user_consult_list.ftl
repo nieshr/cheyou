@@ -83,14 +83,14 @@ var theForm = document.forms['form1'];
                         <i>${consult.username!""}</i>
                         <i>${consult.consultTime!""}</i>
                         <i class="reply">
-                            <a href="/Verwalter/user/consult/edit?id=${consult.id}&statusId=${statusId!""}">回复</a>
+                            <a href="/Verwalter/user/consult/edit?id=${consult.id?c}&statusId=${statusId!""}">回复</a>
                         </i>
                     </span>
                     <b>
                         <span class="checkall" style="vertical-align:middle;">
                             <input id="listChkId" type="checkbox" name="listChkId" value="${consult_index}" >
                         </span>
-                        <input type="hidden" name="listId" id="listId" value="${consult.id}">
+                        <input type="hidden" name="listId" id="listId" value="${consult.id?c}">
                     </b>
                     ${consult.goodsTitle!""}
                   </div>

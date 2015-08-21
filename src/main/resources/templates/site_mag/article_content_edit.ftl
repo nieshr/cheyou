@@ -79,7 +79,7 @@
 </div>
 <input name="menuId" type="text" value='${mid!""}' style="display:none;">
 <input name="channelId" type="text" value='${cid!""}' style="display:none">
-<input name="id" type="text" value='<#if article??>${article.id!""}</#if>' style="display:none">
+<input name="id" type="text" value='<#if article??>${article.id?c!""}</#if>' style="display:none">
     <!--导航栏-->
     <div class="location">
         <a href="/Verwalter/content/list?cid=${cid!""}&mid=${mid!""}" class="back"><i></i><span>
@@ -116,7 +116,7 @@
                     	</#if>
                         <#if category_list??>
                             <#list category_list as c>
-                                <option value="${c.id!""}" <#if article?? && article.categoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                                <option value="${c.id?c!""}" <#if article?? && article.categoryId==c.id>selected="selected"</#if>><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
                             </#list>
                         </#if>
                     </select>

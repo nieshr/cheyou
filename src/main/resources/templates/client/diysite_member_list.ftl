@@ -75,10 +75,13 @@ function __doPostBack(eventTarget, eventArgument) {
             <table>
                 <tr class="mymember_infotab_tit01">
                     <th width="100">用户名</th>
-                    <th width="80">用户组</th>
+                    <th width="80">真实姓名</th>
+                    <th width="80">性别</th>
+                    <th width="80">生日</th>
                     <th width="90">邮箱</th>
                     <th width="90">qq</th>
                     <th width="90">手机号</th>
+                    <th width="80">车牌号</th>
                 
                 </tr>
                 <#if member_page??>
@@ -88,16 +91,25 @@ function __doPostBack(eventTarget, eventArgument) {
                                 <p>${item.username!''}</p>
                             </td>
                             <td class="tb01">
-                                <p>${item.userLevelTitle!''}</p>
+                                <p>${item.realName!''}</p>
                             </td>
                             <td class="tb02">
+                                <p>${item.sex!''}</p>
+                            </td>
+                            <td>
+                                <p>${item.birthday!''}</p>
+                            </td>
+                            <td>
                                 <p>${item.email!''}</p>
                             </td>
                             <td>
                                 <p>${item.qq!''}</p>
                             </td>
                             <td>
-                                <p>${item.mobile!''}</p>
+                                <p>${item.mobile!''}</p>                              
+                            </td>
+                            <td>
+                                <p>${item.carCode!''}</p>
                             </td>
                           </tr>
                     </#list>

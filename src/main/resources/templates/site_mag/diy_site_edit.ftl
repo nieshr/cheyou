@@ -56,7 +56,7 @@ $(function () {
 <form name="form1" method="post" action="/Verwalter/order/setting/diysite/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}">
-<input name="diySiteId" type="text" value='<#if diy_site??>${diy_site.id}</#if>' style="display:none">
+<input name="diySiteId" type="text" value='<#if diy_site??>${diy_site.id?c}</#if>' style="display:none">
 </div>
 
 <!--导航栏-->
@@ -93,7 +93,7 @@ $(function () {
   <dl>
     <dt>登录名</dt>
     <dd>
-        <input name="username" type="text" value="<#if diy_site??>${diy_site.username!""}</#if>" class="input normal" ajaxurl="/Verwalter/order/setting/diysite/check<#if diy_site??>?id=${diy_site.id}</#if>" datatype="*6-100" sucmsg=" "> 
+        <input name="username" type="text" value="<#if diy_site??>${diy_site.username!""}</#if>" class="input normal" ajaxurl="/Verwalter/order/setting/diysite/check<#if diy_site??>?id=${diy_site.id?c}</#if>" datatype="*6-100" sucmsg=" "> 
         <span class="Validform_checktip">*登录账号</span>
     </dd>
   </dl>

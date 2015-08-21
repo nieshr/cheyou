@@ -28,7 +28,7 @@
 <form name="form1" method="post" action="/Verwalter/order/setting/delivery/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}">
-<input name="deliveryTypeId" type="text" value='<#if delivery_type??>${delivery_type.id}</#if>' style="display:none">
+<input name="deliveryTypeId" type="text" value='<#if delivery_type??>${delivery_type.id?c}</#if>' style="display:none">
 </div>
 
 <!--导航栏-->

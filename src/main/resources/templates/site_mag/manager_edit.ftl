@@ -24,7 +24,7 @@ $(function () {
 <form method="post" action="/Verwalter/manager/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
-<input type="hidden" name="id" value="<#if tdManager??>${tdManager.id}</#if>" >
+<input type="hidden" name="id" value="<#if tdManager??>${tdManager.id?c}</#if>" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
@@ -92,7 +92,7 @@ $(function () {
                         </#if>
                         <#if role_list??>
                             <#list role_list as c>
-                                <option value="${c.id!""}" <#if tdManager?? && tdManager.roleId?? && tdManager.roleId==c.id>selected="selected"</#if>>${c.title!""}</option>
+                                <option value="${c.id?c!""}" <#if tdManager?? && tdManager.roleId?? && tdManager.roleId==c.id>selected="selected"</#if>>${c.title!""}</option>
                             </#list>
                         </#if>
                     </select>

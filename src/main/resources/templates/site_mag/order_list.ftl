@@ -164,10 +164,10 @@ function __doPostBack(eventTarget, eventArgument) {
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${order_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${order.id}">
+                    <input type="hidden" name="listId" id="listId" value="${order.id?c}">
                 </td>
                 <td>
-                    <a href="/Verwalter/order/edit?id=${order.id}&statusId=${statusId!'0'}">${order.orderNumber!""}</a></td>
+                    <a href="/Verwalter/order/edit?id=${order.id?c}&statusId=${statusId!'0'}">${order.orderNumber!""}</a></td>
                 <td>${order.username!""}</td>
                 <td>${order.payTypeTitle!""}</td>
                 <td>${order.deliverTypeTitle!""}</td>
@@ -193,7 +193,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <td align="center" width="10%">￥<font color="#C30000">${order.totalPrice?string("#.00")}</font></td>
                 <td>${order.orderTime?string("yyyy-MM-dd HH:mm:ss")}</td>
                 <td align="center">
-                    <a href="/Verwalter/order/edit?id=${order.id}&statusId=${statusId!"0"}">详细</a>
+                    <a href="/Verwalter/order/edit?id=${order.id?c}&statusId=${statusId!"0"}">详细</a>
                 </td>
             </tr>
         </#list>

@@ -67,7 +67,7 @@
                         <option value="">请选择配送方式</option>
                         <#if delivery_type_list??>
                             <#list delivery_type_list as item>
-                                <option <#if order?? && order.deliverTypeId?? && order.deliverTypeId==item.id>selected="selected"</#if> value="${item.id}">${item.title!''}</option>
+                                <option <#if order?? && order.deliverTypeId?? && order.deliverTypeId==item.id>selected="selected"</#if> value="${item.id?c}">${item.title!''}</option>
                             </#list>
                         </#if>
                     </select>

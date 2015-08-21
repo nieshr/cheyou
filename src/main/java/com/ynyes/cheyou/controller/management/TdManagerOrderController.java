@@ -1268,6 +1268,84 @@ public class TdManagerOrderController {
                     else
                     {
                         order.setStatusId(4L);
+                        /**
+    					 * @author lc
+    					 * @注释：添加同盟店所获返利
+    					 */
+                        // 用户
+                        TdUser tdUser = tdUserService.findByUsername(order.getUsername());
+
+                        // 同盟店
+                        TdDiySite tdShop = null;
+                        if (null != tdUser.getUpperDiySiteId()) {
+                        	// 同盟店
+                            tdShop = tdDiySiteService.findOne(tdUser.getUpperDiySiteId());
+                		}else{
+                			// 同盟店
+                	        tdShop = tdDiySiteService.findOne(order.getShopId());
+                		}
+                        List<TdOrderGoods> tdOrderGoodsList = order.getOrderGoodsList();
+
+                        Long totalPoints = 0L;
+                        Double totalCash = 0.0;
+                        Double platformService = 0.0;
+                        Double trainService = 0.0;
+                        // 返利总额
+                        if (null != tdOrderGoodsList) {
+                            for (TdOrderGoods tog : tdOrderGoodsList) {
+                                if (0 == tog.getGoodsSaleType()) // 正常销售
+                                {
+                                    TdGoods tdGoods = tdGoodsService.findOne(tog.getGoodsId());
+
+                                    if (null != tdGoods && null != tdGoods.getReturnPoints()) {
+                                        totalPoints += tdGoods.getReturnPoints();
+
+                                        if (null != tdGoods.getShopReturnRation()) {
+                                            totalCash += tdGoods.getCostPrice()
+                                                    * tdGoods.getShopReturnRation();
+                                        }
+                                    }
+                                    if (null != tdGoods && null != tdGoods.getPlatformServiceReturnRation()) {
+                                    	platformService += tdGoods.getCostPrice() * tdGoods.getPlatformServiceReturnRation();
+                					}
+                                    if (null != tdGoods && null != tdGoods.getTrainServiceReturnRation()) {
+                                    	trainService += tdGoods.getCostPrice() * tdGoods.getTrainServiceReturnRation(); 
+                					}
+                                }
+                            }
+
+                            // 用户返利
+                            if (null != tdUser) {
+                                TdUserPoint userPoint = new TdUserPoint();
+
+                                userPoint.setDetail("购买商品赠送粮草");
+                                userPoint.setOrderNumber(order.getOrderNumber());
+                                userPoint.setPoint(totalPoints);
+                                userPoint.setPointTime(new Date());
+                                userPoint.setTotalPoint(tdUser.getTotalPoints() + totalPoints);
+                                userPoint.setUsername(tdUser.getUsername());
+
+                                userPoint = tdUserPointService.save(userPoint);
+
+                                tdUser.setTotalPoints(userPoint.getTotalPoint());
+
+                                tdUserService.save(tdUser);
+                            }
+                        }
+
+                        // 同盟店返利
+                        if (null != tdShop) {
+                            if (null == tdShop.getTotalCash()) {
+                                tdShop.setTotalCash(totalCash);
+                            } else {
+                                tdShop.setTotalCash(tdShop.getTotalCash() + totalCash);
+                            }
+                            order.setRebate(totalCash);//设置订单同盟店所获返利
+                            order.setPlatformService(platformService);//设置订单平台服务费
+                            order.setTrainService(trainService);//设置订单培训服务费
+                            order = tdOrderService.save(order);
+                            tdDiySiteService.save(tdShop);
+                        }
                     }
 
                     order.setPayTime(new Date());
@@ -1300,7 +1378,8 @@ public class TdManagerOrderController {
 
                     Long totalPoints = 0L;
                     Double totalCash = 0.0;
-
+                    Double platformService = 0.0;
+                    Double trainService = 0.0;
                     // 返利总额
                     if (null != tdOrderGoodsList) {
                         for (TdOrderGoods tog : tdOrderGoodsList) {
@@ -1312,10 +1391,16 @@ public class TdManagerOrderController {
                                     totalPoints += tdGoods.getReturnPoints();
 
                                     if (null != tdGoods.getShopReturnRation()) {
-                                        totalCash = tdGoods.getSalePrice()
+                                        totalCash = tdGoods.getCostPrice()
                                                 * tdGoods.getShopReturnRation();
                                     }
                                 }
+                                if (null != tdGoods && null != tdGoods.getPlatformServiceReturnRation()) {
+                                	platformService += tdGoods.getCostPrice() * tdGoods.getPlatformServiceReturnRation();
+            					}
+                                if (null != tdGoods && null != tdGoods.getTrainServiceReturnRation()) {
+                                	trainService += tdGoods.getCostPrice() * tdGoods.getTrainServiceReturnRation(); 
+            					}
                             }
                         }
 
@@ -1346,6 +1431,8 @@ public class TdManagerOrderController {
                             tdShop.setTotalCash(tdShop.getTotalCash() + totalCash);
                         }
                         order.setRebate(totalCash);//设置订单同盟店所获返利
+                        order.setPlatformService(platformService);//设置订单平台服务费
+                        order.setTrainService(trainService);//设置订单培训服务费
                         order = tdOrderService.save(order);
                         tdDiySiteService.save(tdShop);
                     }

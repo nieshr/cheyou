@@ -166,8 +166,7 @@ public class TdManagerCouponController {
             tdManagerLogService.addLog("edit", "用户修改优惠券类型", req);
         }
 
-        tdCouponTypeService.save(tdCouponType);
-
+        tdCouponTypeService.save(tdCouponType);       
         return "redirect:/Verwalter/coupon/type/list";
     }
     

@@ -208,9 +208,9 @@ DD_belatedPNG.fix('.,img,background');
             <#list order.orderGoodsList as og>
                 <tr>
                   <td width="60" class="td001">
-                    <a href="/goods/${og.goodsId}"><img src="${og.goodsCoverImageUri}"></a>
+                    <a href="/goods/${og.goodsId?c}"><img src="${og.goodsCoverImageUri}"></a>
                   </td>
-                  <td><a href="/goods/${og.goodsId}">${og.goodsTitle}</a></td>
+                  <td><a href="/goods/${og.goodsId?c}">${og.goodsTitle}</a></td>
                   <td>${og.price?string("#.##")}</td>
                   <td>${og.quantity!''}</td>
                 </tr>

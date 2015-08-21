@@ -74,10 +74,10 @@ DD_belatedPNG.fix('.,img,background');
                 <#list return_page.content as return>
                     <tr>
                       <td class="td001" width="70">
-                        <a href="/goods/${return.goodsId!''}"><img src="${return.goodsCoverImageUri!''}" width="60" height="60"></a>
+                        <a href="/goods/${return.goodsId?c!''}"><img src="${return.goodsCoverImageUri!''}" width="60" height="60"></a>
                       </td>
                       <td class="td002">
-                        <a href="/goods/${return.goodsId!''}">${return.goodsTitle!''}</a>
+                        <a href="/goods/${return.goodsId?c!''}">${return.goodsTitle!''}</a>
                       </td>
                       <td>${return.returnNumber!''}</td>
                       <td>${return.orderNumber!''}</td>

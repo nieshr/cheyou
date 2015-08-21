@@ -263,10 +263,10 @@ function commentJump()
                         <#list order.orderGoodsList as item>
                             <tr>
                                 <td>
-                                   <a href="/goods/${item.goodsId}">
+                                   <a href="/goods/${item.goodsId?c}">
                                         <img src="${item.goodsCoverImageUri!''}" width="50" height="50" title="${item.goodsTitle!''}">                                             </a>                                        </td>
                                 <td>
-                                   <a target="_blank" href="/goods/${item.goodsId}">${item.goodsTitle!''}</a>
+                                   <a target="_blank" href="/goods/${item.goodsId?c}">${item.goodsTitle!''}</a>
                                 </td>
                                 <td>
                                     ${order.orderTime?string("yyyy-MM-dd")}  
@@ -280,8 +280,8 @@ function commentJump()
                                 </td>
                             </tr>
                             <#if item.isCommented?? && item.isCommented>
-                                <#if ("comment_" + order.id + "_" + item.id)?eval??>
-                                    <#assign comt=("comment_" + order.id + "_" + item.id)?eval>
+                                <#if ("comment_" + order.id?c + "_" + item.id?c)?eval??>
+                                    <#assign comt=("comment_" + order.id?c + "_" + item.id?c)?eval>
                                     <tr id="comment-tr${order_index}${item_index}" class="hide">
                                         <td class="td004" colspan="4">
                                             <div class="pb20 lh25">
@@ -334,7 +334,7 @@ function commentJump()
                                     <form class="commentForm" action="/user/comment/add" method="post">
                                         <input type="hidden" name="orderId" value=${order.id?c} />
                                         <input type="hidden" name="ogId" value=${item.id?c} />
-                                        <input type="hidden" name="goodsId" value=${item.goodsId} />
+                                        <input type="hidden" name="goodsId" value=${item.goodsId?c} />
                                         <td class="td004" colspan="4">
                                             <div class="pb20 lh25">
                                                 <input class="ml20" type="radio" name="stars" value="3" datatype="n" nullmsg="请点击进行评价"/><span class="mr20"> 好评</span>
@@ -396,10 +396,10 @@ function commentJump()
                 <#list comment_page.content as comment>
                 <tr>
                     <td>
-                       <a href="/goods/${comment.goodsId}">
+                       <a href="/goods/${comment.goodsId?c}">
                             <img src="${comment.goodsCoverImageUri!''}" width="50" height="50" title="${comment.goodsTitle!''}">                                             </a>                                        </td>
                     <td>
-                       <a target="_blank" href="/goods/${comment.goodsId}">${comment.goodsTitle!''}</a>
+                       <a target="_blank" href="/goods/${comment.goodsId?c}">${comment.goodsTitle!''}</a>
                     </td>
                     <td>
                         我的评论：${comment.content!''}

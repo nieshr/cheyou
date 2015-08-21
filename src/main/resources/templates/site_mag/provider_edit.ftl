@@ -19,7 +19,7 @@ $(function () {
 <form method="post" action="/Verwalter/provider/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
-<input type="hidden" name="id" value="<#if provider??>${provider.id!""}</#if>" >
+<input type="hidden" name="id" value="<#if provider??>${provider.id?c!""}</#if>" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
@@ -46,7 +46,7 @@ $(function () {
     <dl>
         <dt>供应商名称</dt>
         <dd>
-            <input name="title" type="text" value="<#if provider??>${provider.title!""}</#if>" class="input normal" ajaxurl="/Verwalter/provider/check<#if provider??>?id=${provider.id}</#if>" datatype="s" sucmsg=" ">
+            <input name="title" type="text" value="<#if provider??>${provider.title!""}</#if>" class="input normal" ajaxurl="/Verwalter/provider/check<#if provider??>?id=${provider.id?c}</#if>" datatype="s" sucmsg=" ">
             <span class="Validform_checktip">*供应商名称</span>
         </dd>
     </dl>

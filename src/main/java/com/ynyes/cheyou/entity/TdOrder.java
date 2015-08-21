@@ -247,8 +247,31 @@ public class TdOrder {
     // 是否在线付款
     @Column
     private Boolean isOnlinePay;
-        
-    public Long getId() {
+    
+    @Column
+    private Double platformService;
+    
+    @Column
+    private Double trainService;
+    
+    
+    public Double getPlatformService() {
+		return platformService;
+	}
+
+	public void setPlatformService(Double platformService) {
+		this.platformService = platformService;
+	}
+
+	public Double getTrainService() {
+		return trainService;
+	}
+
+	public void setTrainService(Double trainService) {
+		this.trainService = trainService;
+	}
+
+	public Long getId() {
         return id;
     }
          

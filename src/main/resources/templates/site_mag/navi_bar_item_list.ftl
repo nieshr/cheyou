@@ -78,9 +78,9 @@ var theForm = document.forms['form1'];
                 <span class="checkall" style="vertical-align:middle;">
                     <input type="checkbox" name="listChkId" value="${item_index}" >
                 </span>
-                <input type="hidden" name="listId" value="${item.id}">
+                <input type="hidden" name="listId" value="${item.id?c}">
             </td>
-            <td align="center"><a href="/Verwalter/view/navi/edit?id=${item.id}">${item.title!""}</a></td>
+            <td align="center"><a href="/Verwalter/view/navi/edit?id=${item.id?c}">${item.title!""}</a></td>
             <td align="center"><img src="${item.iconUri!''}" width="25 height="25"/></td>
             <td align="center">${item.linkUri!""}</td>
             <td align="center"><#if item.isEnable?? && item.isEnable>是<#else>否</#if></td>
@@ -89,7 +89,7 @@ var theForm = document.forms['form1'];
                 <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
             </td>
             <td align="center">
-                <a href="/Verwalter/view/navi/edit?id=${item.id}">修改</a>
+                <a href="/Verwalter/view/navi/edit?id=${item.id?c}">修改</a>
             </td>
         </tr>
     </#list>

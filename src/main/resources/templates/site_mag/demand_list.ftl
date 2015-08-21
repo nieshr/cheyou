@@ -100,7 +100,7 @@ var theForm = document.forms['form1'];
                         <span class="checkall" style="vertical-align:middle;">
                             <input id="listChkId" type="checkbox" name="listChkId" value="${demand_index}" >
                         </span>
-                        <input type="hidden" name="listId" id="listId" value="${demand.id}">
+                        <input type="hidden" name="listId" id="listId" value="${demand.id?c}">
                     </b>
                     <span>
                         <i>${demand.name!""}</i>

@@ -42,7 +42,7 @@ $(function () {
 <form name="form1" method="post" action="/Verwalter/setting/service/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}">
-<input name="serviceItemId" type="text" value='<#if service_item??>${service_item.id}</#if>' style="display:none">
+<input name="serviceItemId" type="text" value='<#if service_item??>${service_item.id?c}</#if>' style="display:none">
 </div>
 
 <!--导航栏-->

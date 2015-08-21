@@ -95,7 +95,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <span class="checkall">
                     <input type="checkbox" name="listChkId" value="${content_index}">
                 </span>
-                <input type="hidden" name="listId" id="listId" value="${content.id}">
+                <input type="hidden" name="listId" id="listId" value="${content.id?c}">
             </div>
             <#if content.imgUrl??>
             <div class="pic">
@@ -103,7 +103,7 @@ function __doPostBack(eventTarget, eventArgument) {
             </div>
             <i class="absbg"></i>
             </#if>
-            <h1><span><a href="/Verwalter/article/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></span></h1>
+            <h1><span><a href="/Verwalter/article/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id?c!""}&__VIEWSTATE=${__VIEWSTATE!""}">${content.title!""}</a></span></h1>
             <div class="remark">${content.brief!""}</div>
             <div class="tools">
                 <#--
@@ -117,7 +117,7 @@ function __doPostBack(eventTarget, eventArgument) {
             </div>
             <div class="foot">
               <p class="time">${content.createTime!""}</p>
-              <a href="/Verwalter/article/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id!""}&__VIEWSTATE=${__VIEWSTATE!""}" title="编辑" class="edit">编辑</a>
+              <a href="/Verwalter/article/edit?cid=${cid!""}&mid=${mid!""}&id=${content.id?c!""}&__VIEWSTATE=${__VIEWSTATE!""}" title="编辑" class="edit">编辑</a>
             </div>
         </div>
     </li>

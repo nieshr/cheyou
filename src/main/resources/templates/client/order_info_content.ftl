@@ -78,7 +78,7 @@
                         <#if pay_type_list??>
                             <#list pay_type_list as pay_type>
                                 <li>
-                                    <input name="payTypeId" class="input-pay-type" type="radio" datatype="n" value="${pay_type.id!''}" nullmsg="请选择支付方式!">
+                                    <input name="payTypeId" class="input-pay-type" type="radio" datatype="n" value="${pay_type.id?c!''}" nullmsg="请选择支付方式!">
                                     <#--img src="${pay_type.coverImageUri!''}" width="91" height="30"-->
                                     <span>${pay_type.title!''}</span>
                                 </li>
@@ -97,7 +97,7 @@
                         <option value="" price="0">请选择</option>
                         <#if delivery_type_list??>
                             <#list delivery_type_list as delivery_type>
-                                <option value="${delivery_type.id!''}" price="${delivery_type.fee?string("#.##")}">${delivery_type.title!''}</option>
+                                <option value="${delivery_type.id?c!''}" price="${delivery_type.fee?string("#.##")}">${delivery_type.title!''}</option>
                             </#list>
                         </#if>
                     </select>

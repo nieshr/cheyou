@@ -50,7 +50,7 @@
         
         $.ajax({
             type:"post",
-            url:"/Verwalter/goods/price/set?goodsId=${goods.id}&outPrice=" + price,
+            url:"/Verwalter/goods/price/set?goodsId=${goods.id?c}&outPrice=" + price,
             success:function(res){
                 // 成功
                 if (res.code==0)

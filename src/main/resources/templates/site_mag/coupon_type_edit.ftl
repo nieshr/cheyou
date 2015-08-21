@@ -42,7 +42,7 @@ $(function () {
 <form name="form1" method="post" action="/Verwalter/coupon/type/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}">
-<input name="couponTypeId" type="text" value='<#if coupon_type??>${coupon_type.id}</#if>' style="display:none">
+<input name="couponTypeId" type="text" value='<#if coupon_type??>${coupon_type.id?c}</#if>' style="display:none">
 </div>
 
 <!--导航栏-->
@@ -104,7 +104,7 @@ $(function () {
                 <option <#if coupon_type?? && coupon_type.productTypeId??><#else>selected="selected"</#if> value="">请选择</option>
                 <#if category_list??>
                     <#list category_list as c>
-                        <option value="${c.id!""}" <#if categoryId?? && c.id==categoryId>selected="selected"</#if> ><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
+                        <option value="${c.id?c}" <#if coupon_type?? && coupon_type.productTypeId?? && c.id==coupon_type.productTypeId>selected="selected"</#if> ><#if c.layerCount?? && c.layerCount gt 1><#list 1..(c.layerCount-1) as a>　</#list>├ </#if>${c.title!""}</option>
                     </#list>
                 </#if>
             </select>

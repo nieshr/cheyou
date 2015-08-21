@@ -82,17 +82,17 @@ function __doPostBack(eventTarget, eventArgument) {
                     <#list collect_page.content as cg>
                         <tr id="tr_1424195166">
                             <td>
-                                <a href="/goods/${cg.goodsId}" target="_blank">
+                                <a href="/goods/${cg.goodsId?c}" target="_blank">
                                     <strong><img width="100" height="100" src="${cg.goodsCoverImageUri!''}"></strong>
                                 </a>
                             </td>
                             <td class="tb01">
-                                <a href="/goods/${cg.goodsId}" target="_blank">${cg.goodsTitle!''}</a>
+                                <a href="/goods/${cg.goodsId?c}" target="_blank">${cg.goodsTitle!''}</a>
                             </td>
                             <td class="tb02">￥${cg.goodsSalePrice?string("#.##")}</td>
                             <td>
-                                <p><a href="/cart/init?id=${cg.goodsId!''}" target="_blank">加入购物车</a></p>
-                                <p><a href="/user/collect/del?id=${cg.goodsId!''}">取消关注</a></p>
+                                <p><a href="/cart/init?id=${cg.goodsId?c!''}" target="_blank">加入购物车</a></p>
+                                <p><a href="/user/collect/del?id=${cg.goodsId?c!''}">取消关注</a></p>
                             </td>
                           </tr>
                     </#list>

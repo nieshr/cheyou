@@ -42,7 +42,7 @@ $(function () {
 <form method="post" action="/Verwalter/ad/save" id="form1">
 <div>
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="${__VIEWSTATE!""}" >
-<input type="hidden" name="id" value="<#if ad??>${ad.id!""}</#if>" >
+<input type="hidden" name="id" value="<#if ad??>${ad.id?c!""}</#if>" >
 </div>
 <!--导航栏-->
 <div class="location" style="position: static; top: 0px;">
@@ -74,7 +74,7 @@ $(function () {
                 <option value="" <#if !ad??>selected="selected"</#if>>请选择</option>
                 <#if ad_type_list??>
                     <#list ad_type_list as type>
-                        <option value="${type.id}" <#if ad?? && ad.typeId == type.id>selected="selected"</#if>>${type.title}</option>
+                        <option value="${type.id?c}" <#if ad?? && ad.typeId == type.id>selected="selected"</#if>>${type.title}</option>
                     </#list>
                 </#if>
             </select>

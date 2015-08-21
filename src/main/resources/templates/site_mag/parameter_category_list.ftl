@@ -76,22 +76,22 @@ function __doPostBack(eventTarget, eventArgument) {
                 <span class="checkall" style="vertical-align:middle;">
                     <input id="rptList_ctl01_chkId" type="checkbox" name="listChkId" value="${cat_index}">
                 </span>
-                <input type="hidden" name="listId" id="listId" value="${cat.id}">
+                <input type="hidden" name="listId" id="listId" value="${cat.id?c}">
             </td>
-            <td>${cat.id}</td>
+            <td>${cat.id?c}</td>
             <td>
                 <#if cat?? && cat.layerCount gt 1>
                     <span style="display:inline-block;width:${(cat.layerCount-2)*24}px;"></span>
                     <span class="folder-line"></span>
                 </#if>
                 <span class="folder-open"></span>
-                <a href="/Verwalter/parameter/category/edit?id=${cat.id!""}">${cat.title!""}</a>
+                <a href="/Verwalter/parameter/category/edit?id=${cat.id?c!""}">${cat.title!""}</a>
             </td>
             <td>${cat.callIndex!""}</td>
             <td><input name="listSortId" type="text" value="${cat.sortId!""}" class="sort" onkeydown="return checkNumber(event);"></td>
             <td align="center">
-                <a href="/Verwalter/parameter/category/edit?id=${cat.id!""}&sub=1">添加子类</a>
-                <a href="/Verwalter/parameter/category/edit?id=${cat.id!""}">修改</a>
+                <a href="/Verwalter/parameter/category/edit?id=${cat.id?c!""}&sub=1">添加子类</a>
+                <a href="/Verwalter/parameter/category/edit?id=${cat.id?c!""}">修改</a>
             </td>
         </tr>
     </#list>

@@ -116,7 +116,7 @@ function hideDialog()
                             <#assign couponCount=0>
                             <#if ("coupon_" + item.id + "_list")?eval?? >
                                 <#list ("coupon_" + item.id + "_list")?eval as coupon>
-                                    <option value="${coupon.diySiteId}" cid="${coupon.id?c}" tn="${coupon.leftNumber?c!'0'}">${coupon.diySiteTitle!''}</option>
+                                    <option value="${coupon.diySiteId?c}" cid="${coupon.id?c}" tn="${coupon.leftNumber?c!'0'}">${coupon.diySiteTitle!''}</option>
                                     <#assign couponCount=couponCount+coupon.leftNumber>
                                 </#list>
                             </#if>

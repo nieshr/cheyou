@@ -81,7 +81,7 @@ function __doPostBack(eventTarget, eventArgument) {
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${item_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${item.id}">
+                    <input type="hidden" name="listId" id="listId" value="${item.id?c}">
                 </td>
                 <td>${item.typeTitle!""}</td>
                 <td>${item.diySiteTitle!""}</td>

@@ -83,14 +83,14 @@ var theForm = document.forms['form1'];
                         <i>${comment.username!""}</i>
                         <i>${comment.commentTime!""}</i>
                         <i class="reply">
-                            <a href="/Verwalter/user/comment/edit?id=${comment.id}&statusId=${statusId!""}">回复</a>
+                            <a href="/Verwalter/user/comment/edit?id=${comment.id?c}&statusId=${statusId!""}">回复</a>
                         </i>
                     </span>
                     <b>
                         <span class="checkall" style="vertical-align:middle;">
                             <input id="listChkId" type="checkbox" name="listChkId" value="${comment_index}" >
                         </span>
-                        <input type="hidden" name="listId" id="listId" value="${comment.id}">
+                        <input type="hidden" name="listId" id="listId" value="${comment.id?c}">
                     </b>
                     ${comment.goodsTitle!""}
                   </div>

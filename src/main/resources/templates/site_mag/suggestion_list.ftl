@@ -96,7 +96,7 @@ var theForm = document.forms['form1'];
                      <i>邮箱：  ${comment.mail!'' }  </i>    <i>&nbsp;&nbsp;&nbsp;&nbsp;</i> 
                      <i> ${comment.time!""}   </i>                 
                <#-   <i class="reply">   
-                        <p><a href="/suggestion/delete?id=${comment.id}">删除</a></p> 
+                        <p><a href="/suggestion/delete?id=${comment.id?c}">删除</a></p> 
                      </i>           
               -->
                     </span>
@@ -104,7 +104,7 @@ var theForm = document.forms['form1'];
                         <span class="checkall" style="vertical-align:middle;">
                             <input id="listChkId" type="checkbox" name="listChkId" value="${comment_index!''}" >
                         </span>
-                        <input type="hidden" name="listId" id="listId" value="${comment.id!''}">
+                        <input type="hidden" name="listId" id="listId" value="${comment.id?c!''}">
                     </b>
                     <span >                   
                         <i>${comment.name!""}</i>        <i>&nbsp;&nbsp;&nbsp;&nbsp;</i>                   

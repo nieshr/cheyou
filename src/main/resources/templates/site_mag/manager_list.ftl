@@ -80,9 +80,9 @@ var theForm = document.forms['form1'];
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${item_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${item.id}">
+                    <input type="hidden" name="listId" id="listId" value="${item.id?c}">
                 </td>
-                <td align="center"><a href="/Verwalter/manager/edit?id=${item.id}">${item.username!""}</a></td>
+                <td align="center"><a href="/Verwalter/manager/edit?id=${item.id?c}">${item.username!""}</a></td>
                 <td align="center">${item.realName!""}</td>
                 <td align="center">${item.telephone!""}</td>
                 <td align="center">${item.email!""}</td>
@@ -92,7 +92,7 @@ var theForm = document.forms['form1'];
                     <input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
                 </td>
                 <td align="center">
-                    <a href="/Verwalter/manager/edit?id=${item.id}">修改</a>
+                    <a href="/Verwalter/manager/edit?id=${item.id?c}">修改</a>
                 </td>
             </tr>
         </#list>

@@ -78,14 +78,14 @@ var theForm = document.forms['form1'];
                     <span class="checkall" style="vertical-align:middle;">
                         <input id="listChkId" type="checkbox" name="listChkId" value="${provider_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${provider.id}">
+                    <input type="hidden" name="listId" id="listId" value="${provider.id?c}">
                 </td>
-                <td align="center"><a href="/Verwalter/provider/edit?id=${provider.id}">${provider.title!""}</a></td>
+                <td align="center"><a href="/Verwalter/provider/edit?id=${provider.id?c}">${provider.title!""}</a></td>
                 <td align="center">
                     <input name="listSortId" type="text" value="${provider.sortId!""}" class="sort" onkeydown="return checkNumber(event);">
                 </td>
                 <td align="center">
-                    <a href="/Verwalter/provider/edit?id=${provider.id}">修改</a>
+                    <a href="/Verwalter/provider/edit?id=${provider.id?c}">修改</a>
                 </td>
             </tr>
         </#list>

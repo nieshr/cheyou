@@ -1953,7 +1953,8 @@ public class TdOrderController extends AbstractPaytypeController {
 
         Long totalPoints = 0L;
         Double totalCash = 0.0;
-
+        Double platformService = 0.0;
+        Double trainService = 0.0;
         // 返利总额
         if (null != tdOrderGoodsList) {
             for (TdOrderGoods tog : tdOrderGoodsList) {
@@ -1965,10 +1966,16 @@ public class TdOrderController extends AbstractPaytypeController {
                         totalPoints += tdGoods.getReturnPoints();
 
                         if (null != tdGoods.getShopReturnRation()) {
-                            totalCash = tdGoods.getSalePrice()
+                            totalCash += tdGoods.getCostPrice()
                                     * tdGoods.getShopReturnRation();
                         }
                     }
+                    if (null != tdGoods && null != tdGoods.getPlatformServiceReturnRation()) {
+                    	platformService += tdGoods.getCostPrice() * tdGoods.getPlatformServiceReturnRation();
+					}
+                    if (null != tdGoods && null != tdGoods.getTrainServiceReturnRation()) {
+                    	trainService += tdGoods.getCostPrice() * tdGoods.getTrainServiceReturnRation(); 
+					}
                 }
             }
 
@@ -1990,7 +1997,7 @@ public class TdOrderController extends AbstractPaytypeController {
                 tdUserService.save(tdUser);
             }
         }
-
+             
         // 同盟店返利
         if (null != tdShop) {
             if (null == tdShop.getTotalCash()) {
@@ -1999,6 +2006,8 @@ public class TdOrderController extends AbstractPaytypeController {
                 tdShop.setTotalCash(tdShop.getTotalCash() + totalCash);
             }
             tdOrder.setRebate(totalCash);//设置订单同盟店所获返利
+            tdOrder.setPlatformService(platformService);//设置订单平台服务费
+            tdOrder.setTrainService(trainService);//设置订单培训服务费
             tdOrder = tdOrderService.save(tdOrder);
             tdDiySiteService.save(tdShop);
         }

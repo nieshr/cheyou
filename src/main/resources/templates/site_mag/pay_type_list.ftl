@@ -84,9 +84,9 @@ function __doPostBack(eventTarget, eventArgument) {
                     <span class="checkall" style="vertical-align:middle;">
                         <input type="checkbox" name="listChkId" value="${item_index}" >
                     </span>
-                    <input type="hidden" name="listId" id="listId" value="${item.id}">
+                    <input type="hidden" name="listId" id="listId" value="${item.id?c}">
                 </td>
-                <td><a href="/Verwalter/order/setting/pay/edit?id=${item.id}">${item.title!""}</a></td>
+                <td><a href="/Verwalter/order/setting/pay/edit?id=${item.id?c}">${item.title!""}</a></td>
                 <#if item.coverImageUri?? && item.coverImageUri!="">
                 <td><img width="120" src="${item.coverImageUri!""}"></td>
                 <#else>
@@ -99,7 +99,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <td>${item.adTitle!""}</td>
                 <td>${item.adContents!""}</td>
                 <td align="center">
-                    <a href="/Verwalter/order/setting/pay/edit?id=${item.id}">修改</a>
+                    <a href="/Verwalter/order/setting/pay/edit?id=${item.id?c}">修改</a>
                 </td>
             </tr>
         </#list>
