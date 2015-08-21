@@ -1374,6 +1374,7 @@ public class TdManagerOrderController {
             			// 同盟店
             	        tdShop = tdDiySiteService.findOne(order.getShopId());
             		}
+
                     List<TdOrderGoods> tdOrderGoodsList = order.getOrderGoodsList();
 
                     Long totalPoints = 0L;
