@@ -40,7 +40,7 @@ $(function () {
         <div class="rule-multi-radio">
             <span id="field_control_brand">
                 <#list brand_list as brand>
-                    <input type="radio" name="brandId" value="${brand.id?c!""}" datatype="*" <#if goods?? && goods.brandId?? && goods.brandId==brand.id>checked="checked"</#if>>
+                    <input type="radio" name="brandId" value="${brand.id?c!""}"  <#if goods?? && goods.brandId?? && goods.brandId==brand.id>checked="checked"</#if>>
                     <label>${brand.title!""}</label>
                 </#list>
             </span>

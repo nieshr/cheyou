@@ -3,7 +3,7 @@
         <#if consult_page??>
             <#list consult_page.content as item>
             <li>
-                <a class="a1" href="javascript:;"><img src="${item.userHeadImageUri!''}" /><p>${item.username!''}</p></a>
+                <a class="a1" href="javascript:;"><img src="${item.userHeadImageUri!''}" /><p class="userName">${item.username!''}</p></a>
                 <p class="pb10">${item.content!''}</p>
                 <#if item.isReplied?? && item.isReplied>
                     <p class="red">商家回复：${item.reply!''}</p>

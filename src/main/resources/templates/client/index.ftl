@@ -71,6 +71,15 @@ textarea.input { width: 98%; height:50px; color:#666;}
     checkBoxShow("topcheck","a","topsum","li","sel");
     checkBoxShow("teamadmenu","a","teamadsum","a","sel");
     
+    <#if miao_10_leftnumber?? && miao_14_leftnumber?? && miao_20_leftnumber??>
+        <#if miao_10_leftnumber==0 && miao_14_leftnumber!=0 && miao_20_leftnumber!=0>
+            miaoClockChang(1);
+        <#elseif  miao_10_leftnumber==0 && miao_14_leftnumber==0 && miao_20_leftnumber!=0>
+            miaoClockChang(2);
+        <#elseif  miao_10_leftnumber==0 && miao_14_leftnumber==0 && miao_20_leftnumber==0>
+            miaoClockChang(0);
+        </#if>
+    </#if>    
     //左右单张滚动
     var the_one = {
       "boxid":"onebox",         //最外层id
@@ -404,7 +413,7 @@ $(document).ready(function(){
     
         <div class="wdbgg">
             <#if username??>
-                <a href="/user">${username}<i></i></a>
+                <a href="/user">${usermobile!''}<i></i></a>
                 <a href="/logout">退出<i></i></a>
             <#else>
                 <a href="/login" target="_blank">登录<i></i></a>

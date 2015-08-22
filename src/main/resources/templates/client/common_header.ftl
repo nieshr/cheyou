@@ -126,11 +126,11 @@ function move()
     
         <div class="wdbgg">
             <#if username??>
-                <a href="/user">${username}<i></i></a>
+                <a href="/user">${usermobile!''}<i></i></a>
                 <a href="/logout">退出<i></i></a>
             <!-- lichong -->
             <#elseif diysiteUsername??>
-                <a href="/user/diysite/order/list/0">${diysiteUsername}<i></i></a>
+                <a href="/user/diysite/order/list/0">${diysiteUsername!''}<i></i></a>
                 <a href="/logout">退出<i></i></a>
             <#else>
                 <a href="/login" target="_blank">登录<i></i></a>

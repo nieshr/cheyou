@@ -75,7 +75,7 @@ $(document).ready(function(){
   <#assign totalPrice = 0>
   <#if order?? && order.orderGoodsList??>
     <#list order.orderGoodsList as og>
-        <a href="/touch/goods/${og.goodsId}">
+        <a href="/touch/goods/${og.goodsId?c}">
             <b><img src="${og.goodsCoverImageUri}" width="64" height="64"/></b>
             <p>${og.goodsTitle}<span class="sp1">￥${og.price?string("#.##")}</p>
             <p class="p1">${og.goodsSubTitle}<span class="sp2">X${og.quantity!''}</p>

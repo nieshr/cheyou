@@ -46,7 +46,7 @@ $(document).ready(function(){
     <#list order_page.content as order>
         <h4>订单号：<a href="/touch/user/order?id=${order.id?c}">${order.orderNumber!''}</a><span>共<b class="red">${order.orderGoodsList?size}</b>件商品，总计<b class="red">￥${order.totalPrice?string("0.00")}</b>元</span></h4>
         <#list order.orderGoodsList as og>
-            <a href="/touch/goods/${og.goodsId}">
+            <a href="/touch/goods/${og.goodsId?c}">
                 <b><img src="${og.goodsCoverImageUri}" /></b>
                 <p>${og.goodsTitle!''}<span class="sp1">￥${og.price?string("0.00")}</span></p>
                 <p class="p1">${og.goodsSubTitle!''}<span class="sp2">X${og.quantity!''}</span></p>

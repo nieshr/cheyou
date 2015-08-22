@@ -598,7 +598,9 @@ public class TdGoodsService {
                 .findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(
                         startTime, pageRequest);
     }
-
+    public List<TdGoods> findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(Date startTime){
+    	return repository.findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(startTime);
+    }
     /**
      * 正在秒杀商品，限定开始时间
      * 

@@ -1274,7 +1274,7 @@ public class TdManagerOrderController {
     					 */
                         // 用户
                         TdUser tdUser = tdUserService.findByUsername(order.getUsername());
-
+                        
                         // 同盟店
                         TdDiySite tdShop = null;
                         if (null != tdUser.getUpperDiySiteId()) {
@@ -1285,7 +1285,23 @@ public class TdManagerOrderController {
                 	        tdShop = tdDiySiteService.findOne(order.getShopId());
                 		}
                         List<TdOrderGoods> tdOrderGoodsList = order.getOrderGoodsList();
-
+                        
+                        //手机短信发送
+                        SMSUtil.send(
+                        		order.getShippingPhone(),
+                                "29040",
+                                new String[] {
+                                        tdUser.getUsername(),
+                                        order.getOrderGoodsList().get(0).getGoodsTitle(),
+                                        order.getOrderNumber().substring(order.getOrderNumber().length() - 4)});
+                        
+                        SMSUtil.send(tdShop.getMobile(), 
+                                "29039",
+                                new String[] { tdShop.getTitle(), tdUser.getUsername(),
+                                		order.getOrderGoodsList().get(0).getGoodsTitle(),
+                                		order.getAppointmentTime().toString() });
+                        System.out.println("---Sharon---: 向同盟店"+tdShop.getMobile()+"发送短信");
+                        
                         Long totalPoints = 0L;
                         Double totalCash = 0.0;
                         Double platformService = 0.0;
@@ -1423,7 +1439,21 @@ public class TdManagerOrderController {
                             tdUserService.save(tdUser);
                         }
                     }
-
+                    //手机短信发送
+                    SMSUtil.send(
+                    		order.getShippingPhone(),
+                            "29040",
+                            new String[] {
+                                    tdUser.getUsername(),
+                                    order.getOrderGoodsList().get(0).getGoodsTitle(),
+                                    order.getOrderNumber().substring(order.getOrderNumber().length() - 4)});
+                    
+                    SMSUtil.send(tdShop.getMobile(), 
+                            "29039",
+                            new String[] { tdShop.getTitle(), tdUser.getUsername(),
+                            		order.getOrderGoodsList().get(0).getGoodsTitle(),
+                            		order.getAppointmentTime().toString() });
+                    System.out.println("---Sharon---: 向同盟店"+tdShop.getMobile()+"发送短信");
                     // 同盟店返利
                     if (null != tdShop) {
                         if (null == tdShop.getTotalCash()) {

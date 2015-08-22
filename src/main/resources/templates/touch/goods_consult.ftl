@@ -55,7 +55,7 @@ function submitConsult()
 
 <div class="mainbox myassess pt20">
     <form id="consultForm" action="javascript:submitConsult();">
-        <input type="hidden" name="goodsId" value=${goodsId} />
+        <input type="hidden" name="goodsId" value=${goodsId?c} />
         <textarea name="content" datatype="*5-255" nullmsg="请输入咨询内容"></textarea>
         <div class="clear"></div>
         <input type="submit" value="提交" class="sub" />
@@ -90,8 +90,8 @@ function submitConsult()
   <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
 </section>
 <footer class="comfoot main">
-    <a href="/goods/${goodsId}">电脑版</a>
-    <a href="/touch/goods/${goodsId}">触屏版</a>
+    <a href="/goods/${goodsId?c}">电脑版</a>
+    <a href="/touch/goods/${goodsId?c}">触屏版</a>
 </footer>
 <p class="bottext mainbox">${site.copyright!''}</p>
 <p class="bottext mainbox">${site.icpNumber!''}</p>

@@ -133,34 +133,6 @@ DD_belatedPNG.fix('.,img,background');
       </div>
     </div><!--mymember_info END-->
     
-    <#--
-    <div class="mymember_info mymember_info04">
-      <h3>发货追踪<a id="mymember_order02" href="javascript:myOrderShow('mymember_order02','mymember_ordersum02');">展开</a></h3>
-      
-      <table id="mymember_ordersum02">
-        <tbody><tr>
-          <th width="150">处理时间</th>
-          <th>处理信息</th>
-          <th width="100">操作人</th>
-        </tr>
-        <tr>
-          <td>2015-02-22 18:22</td>
-          <td>您的货物已发出</td>
-          <td>系统</td>
-        </tr>
-        <tr>
-          <td>2015-02-22 18:22</td>
-          <td>到北京中转站</td>
-          <td>客户</td>
-        </tr>
-        <tr>
-          <td>2015-02-22 18:22</td>
-          <td>您的申请已取消！</td>
-          <td>客户</td>
-        </tr>
-      </tbody></table>
-    </div>
-    -->
     <div class="mymember_info mymember_info04">
       <h3>订单详细信息<a id="mymember_order01" href="javascript:myOrderShow('mymember_order01','mymember_ordersum01');">展开</a></h3>
       

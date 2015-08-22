@@ -8,7 +8,7 @@
         <#list cart_goods_list as cg>
             <li>
               <a class="a1 <#if cg.isSelected>sel<#else><#assign allChecked=false></#if>" href="javascript:toggleSelect(${cg.id?c});">&nbsp;</a>
-              <a class="a2" href="/touch/goods/${cg.goodsId}<#if cg.qiang??>?qiang=${cg.qiang!''}</#if>" style="background-image:url(${cg.goodsCoverImageUri!''}); height:64px;">
+              <a class="a2" href="/touch/goods/${cg.goodsId?c}<#if cg.qiang??>?qiang=${cg.qiang!''}</#if>" style="background-image:url(${cg.goodsCoverImageUri!''}); height:64px;">
                 <p>${cg.goodsTitle!''}</p>
               </a>
               <div class="car_num">

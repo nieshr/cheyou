@@ -286,8 +286,8 @@ function starChange(type, stars)
   <a class="a1" href="javascript:$('html,body').animate({scrollTop:0},500);">TOP</a>
 </section>
 <footer class="comfoot main">
-    <a href="/goods/${goodsId!''}">电脑版</a>
-    <a href="/touch/goods/${goodsId!''}">触屏版</a>
+    <a href="/goods/${goodsId?c!''}">电脑版</a>
+    <a href="/touch/goods/${goodsId?c!''}">触屏版</a>
 </footer>
 <p class="bottext mainbox">${site.copyright!''}</p>
 <p class="bottext mainbox">${site.icpNumber!''}</p>

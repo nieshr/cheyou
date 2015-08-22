@@ -37,7 +37,7 @@ $(document).ready(function(){
 <menu class="whitebg mymenu_list">
 <#if collect_page??>
     <#list collect_page.content as cg>
-        <a href="/touch/goods/${cg.goodsId}">
+        <a href="/touch/goods/${cg.goodsId?c}">
             <b><img src="${cg.goodsCoverImageUri}" /></b>
             <p>${cg.goodsTitle!''}<span class="sp1">￥${cg.goodsSalePrice?string("0.00")}</span></p>
             <p class="p1">${cg.goodsSubTitle!''}</p>

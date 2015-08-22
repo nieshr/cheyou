@@ -41,22 +41,9 @@ DD_belatedPNG.fix('.,img,background');
     checkNowHover("shopping_down","shopping_sel");   
 });
 
-   $(function () {
-        $("#btnService").click(function () { OrderService(); });   //确认到店消费
-   });
    
-    //确认到店消费
-        function OrderService() {
-            var dialog = $.dialog.confirm('操作提示信息：<br />确认已到店消费？', function () {
-                var orderNumber = $.trim($("#spanOrderNumber").text());
-                var postData = { "orderNumber": orderNumber, "type": "orderService" };
-                //发送AJAX请求
-                sendAjaxUrl(dialog, postData, "/diysite/order/param/edit");
-                return false;
-            });
-        }
      //发送AJAX请求
-        function sendAjaxUrl(winObj, postData, sendUrl) {
+        function sendAjaxUrl(winObj, postData, sendUrl, orderId) {
             $.ajax({
                 type: "post",
                 url: sendUrl,
@@ -68,7 +55,7 @@ DD_belatedPNG.fix('.,img,background');
                 success: function (data) {
                     if (data.code == 0) {
                         winObj.close();
-                        $.dialog.tips(data.msg, 2, '32X32/succ.png', function () { location.reload(); }); //刷新页面
+                        $.dialog.tips(data.msg, 2, '32X32/succ.png', function () { window.location.href="/diysite/order?id="+orderId; }); //刷新页面
                     } else {
                         $.dialog.alert('错误提示：' + data.message, function () { }, winObj);
                     }
@@ -146,13 +133,43 @@ DD_belatedPNG.fix('.,img,background');
                     </tr>    
                     <#if order_page??>
                         <#list order_page.content as order>
+                        <script>
+                            $(function () {
+                                $("#btnService${order.id?c}").click(function () { OrderService${order.id?c}(); });   //确认到店消费
+                           });
+                           
+                            //确认消费
+                                function OrderService${order.id?c}() {
+                                    var dialog = $.dialog({
+                                        title: '请输入消费密码',
+                                        content: '<textarea id="pointRemark" name="txtPointRemark" rows="2" cols="15" class="input"></textarea>',
+                                        min: false,
+                                        max: false,
+                                        lock: true,
+                                        ok: function () {
+                                            var password = $("#pointRemark", parent.document).val();                   
+                                            if (password == "") {
+                                                $.dialog.alert('对不起，请输入消费密码！', function () { }, dialog);
+                                                return false;
+                                            }
+                                            var orderNumber = $.trim($("#spanOrderNumber${order.id?c}").text());
+                                            var orderId = ${order.id?c!''};
+                                            var postData = { "orderNumber": orderNumber, "password": password, "type":"orderService" };
+                                            //发送AJAX请求
+                                            sendAjaxUrl(dialog, postData, "/diysite/order/param/edit", orderId);
+                                            return false;
+                                        },
+                                        cancel: true
+                                    });
+                                }
+                        </script>
                             <tr>
-                              <th colspan="7">订单编号：<a href="/diysite/order?id=${order.id?c}" id="spanOrderNumber">${order.orderNumber!''}</a></th>
-                            </tr>
+                              <th colspan="7">订单编号：<a href="/diysite/order?id=${order.id?c}" id="spanOrderNumber${order.id?c}">${order.orderNumber!''}</a></th>
+                            </tr>                           
                             <tr>
                               <td class="td001">
                                 <#list order.orderGoodsList as og>
-                                    <a href="javascript:;"><img src="${og.goodsCoverImageUri}" title="${og.goodsTitle}"></a>
+                                    <a href="/goods/${og.goodsId?c}"><img src="${og.goodsCoverImageUri}" title="${og.goodsTitle}"></a>
                                 </#list>
                               </td>
                               <td>${order.shippingName!''}</td>
@@ -178,7 +195,7 @@ DD_belatedPNG.fix('.,img,background');
                               <!--          <a href="/user/dopayleft/${order.id}">付尾款</a> -->
                                     <#elseif order.statusId==4>
                                         <p>待服务</p>
-                                        <input type="button" id="btnService" value="确认核销" class="btn green">
+                                        <input type="button" id="btnService${order.id?c}" value="确认核销" class="btn green">
                                     <#elseif order.statusId==5>
                                         <p>待评价</p>
                                 <!--        <a href="/user/comment/list">发表评论</a>  -->

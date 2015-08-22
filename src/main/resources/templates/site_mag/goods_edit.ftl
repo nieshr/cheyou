@@ -285,6 +285,7 @@ function del_goods_comb(obj) {
     $("#totalComb").val(parseInt($("#totalComb").val())-1);
 }
 
+  
 </script>
 </head>
 <body class="mainbody">

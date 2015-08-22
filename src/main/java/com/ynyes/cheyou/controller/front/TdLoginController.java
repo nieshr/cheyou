@@ -151,6 +151,7 @@ public class TdLoginController {
 				return res;
 			}
 			request.getSession().setAttribute("username", user.getUsername());
+			request.getSession().setAttribute("usermobile", user.getMobile());
 			return res;
 		}
 		/**
@@ -200,6 +201,7 @@ public class TdLoginController {
 				return res;
 			}
 			request.getSession().setAttribute("username", user.getUsername());
+			request.getSession().setAttribute("usermobile", user.getMobile());
 			return res;
 		} else { // 账号-手机都未通过验证，则用户不存在
 			res.put("msg", "不存在该用户");
@@ -293,6 +295,7 @@ public class TdLoginController {
 			tdUserService.save(user);
 			tdCommonService.setHeader(map, req);
 			req.getSession().setAttribute("username", user.getUsername());
+			req.getSession().setAttribute("usermobile", user.getMobile());
 			return "/client/user_retrieve_ok";
 		}
 		return "/client/error_404";
@@ -393,6 +396,7 @@ public class TdLoginController {
 				user.setLastLoginTime(new Date());
 				user = tdUserService.save(user);
 				request.getSession().setAttribute("username", user.getUsername());
+				request.getSession().setAttribute("usermobile", user.getMobile());
 				return "redirect:/";
 			} else {
 				return "/client/accredit_login";
@@ -405,7 +409,7 @@ public class TdLoginController {
 			// 该页面可做页面美工编辑
 			// System.out.println("验证失败");
 
-			return "/client/accredit_login";
+			return "/client/error_404";
 			// 调试 假设验证成功
 		}
 	}
@@ -416,37 +420,61 @@ public class TdLoginController {
 	 */
 	@RequestMapping(value = "/login/alipay_accredit/{type}", method = RequestMethod.GET)
 	public String alipaylogin(@PathVariable String type, String useralipay_username, HttpServletRequest request, ModelMap map) {
-
 		TdUser user = tdUserService.findByalipayname(useralipay_username);
-
+		if ("qq".equals(type)) {
+			user = tdUserService.findByQqUserId(useralipay_username);
+		}		
+        
 		String alipayusername = randomUsername();
-
+        
 		if (null != user) {
 			user.setLastLoginTime(new Date());
 			user = tdUserService.save(user);
 			request.getSession().setAttribute("username", user.getUsername());
+			request.getSession().setAttribute("usermobile", user.getMobile());
 
 			return "redirect:/";
 		} else {
-			user = tdUserService.addNewUser(alipayusername, "123456", null, null, null);
-			/**
-			 * @author libiao
-			 * 判断新建账号为QQ还是支付宝
-			 */
-			if("qq".equals(type)){
-				//QQ登录新建账号
-				user.setQqUserId(useralipay_username);
-			}else{
-				//支付宝登录新建账号
-				user.setAlipayUserId(useralipay_username);
-			}
-			tdUserService.save(user);
-			request.getSession().setAttribute("username", alipayusername);
-
-			return "redirect:/";
+		
+			map.put("username1", useralipay_username);
+			map.put("type", type);
+			map.put("typeId", useralipay_username);
+			tdCommonService.setHeader(map, request);
+			return "client/login_verification";
 		}
 	}
-
+    /**
+	 * @author lc
+	 * @注释：登录手机验证
+	 */
+	@RequestMapping(value = "/login/mobile_accredit", method = RequestMethod.POST)
+	public String mobileVerification(String username, String mobile, String type, String typeId,
+									HttpServletRequest request, ModelMap map){
+		if (null == username) {
+			return "client/error_404";
+		}
+		if (null == mobile) {
+			return "client/error_404";
+		}
+		TdUser user = tdUserService.addNewUser(username, "123456", null, null, null);
+		if (null != user) {
+			if("qq".equals(type)){
+				//QQ登录新建账号
+				user.setQqUserId(typeId);
+			}else{
+				//支付宝登录新建账号
+				user.setAlipayUserId(typeId);
+			}
+			user.setMobile(mobile);
+			user.setLastLoginTime(new Date());
+			tdUserService.save(user);
+			request.getSession().setAttribute("username", user.getUsername());
+			request.getSession().setAttribute("usermobile", user.getMobile());
+			return "redirect:/";
+		}
+		return "client/error_404";
+	}
+	
 	/**
 	 * @author lc
 	 * @注释：随机生成支付宝绑定用户名
@@ -539,6 +567,7 @@ public class TdLoginController {
 					user.setLastLoginTime(new Date());
 					tdUserService.save(user);
 					request.getSession().setAttribute("username", user.getUsername());
+					request.getSession().setAttribute("usermobile", user.getMobile());
 					return "redirect:/";
 				}
 			}

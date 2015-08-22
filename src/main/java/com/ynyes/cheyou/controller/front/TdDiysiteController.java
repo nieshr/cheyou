@@ -334,7 +334,7 @@ public class TdDiysiteController {
 	
 	@RequestMapping(value="/param/edit", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> paramEdit(String orderNumber,
+    public Map<String, Object> paramEdit(String orderNumber, String password,
                         String type,
                         String data,
                         String name,
@@ -357,7 +357,7 @@ public class TdDiysiteController {
             return res;
         }
         
-        if (null != orderNumber && !orderNumber.isEmpty() && null != type && !type.isEmpty())
+        if (null != orderNumber && !orderNumber.isEmpty() && null != type && !type.isEmpty() && null != password)
         {
             TdOrder order = tdOrderService.findByOrderNumber(orderNumber);
             TdUser tdUser = tdUserService.findByUsername(order.getUsername());
@@ -375,8 +375,14 @@ public class TdDiysiteController {
 						tdUser.setUpperDiySiteId(order.getShopId());
 						tdUserService.save(tdUser);
 					}
-                    order.setStatusId(5L);
-                    order.setServiceTime(new Date());
+                	if (order.getOrderNumber().substring(order.getOrderNumber().length() - 4).equals(password)) {
+                		order.setStatusId(5L);
+                        order.setServiceTime(new Date());
+					}else{
+						res.put("message", "消费密码错误!");
+						return res;
+					}
+                    
                 }
             }
           

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ynyes.cheyou.entity.TdAdType;
 import com.ynyes.cheyou.entity.TdArticleCategory;
+import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.service.TdAdService;
 import com.ynyes.cheyou.service.TdAdTypeService;
@@ -267,16 +268,19 @@ public class TdIndexController {
         
         map.addAttribute("miao_cur_8_page", tdGoodsService
                 .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+        map.addAttribute("miao_10_leftnumber", countleft(tdGoodsService.findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime())));
         
         cal.set(Calendar.HOUR_OF_DAY, 14);
         
         map.addAttribute("miao_cur_15_page", tdGoodsService
                 .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+        map.addAttribute("miao_14_leftnumber", countleft(tdGoodsService.findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime())));
         
         cal.set(Calendar.HOUR_OF_DAY, 20);
         
         map.addAttribute("miao_cur_23_page", tdGoodsService
                 .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+        map.addAttribute("miao_20_leftnumber", countleft(tdGoodsService.findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime())));
         
         cal.add(Calendar.DATE, 1);
         cal.set(Calendar.HOUR_OF_DAY, 10);
@@ -328,6 +332,19 @@ public class TdIndexController {
         }
 
         return "/client/index";
+    }
+    /**
+	 * @author lc
+	 * @注释：计算秒杀商品剩余数量
+	 */
+    public int countleft(List<TdGoods> tdGoods){
+    	int totals = 0;
+    	for(int i = 0; i < tdGoods.size(); i++){
+    		if (null != tdGoods.get(i).getFlashSaleLeftNumber()) {
+				totals += tdGoods.get(i).getFlashSaleLeftNumber();
+			}
+    	}
+    	return totals;
     }
     
     @RequestMapping("/index")

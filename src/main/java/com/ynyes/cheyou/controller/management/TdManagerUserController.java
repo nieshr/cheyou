@@ -205,6 +205,7 @@ public class TdManagerUserController {
         return "/site_mag/user_list";
     }
     
+   
     @RequestMapping(value="/edit")
     public String orderEdit(Long id,
                         Long roleId,
@@ -227,6 +228,53 @@ public class TdManagerUserController {
         return "/site_mag/user_edit";
     }
     
+    /**
+	 * @author lc
+	 * @注释：手动修改粮草
+	 */
+    @RequestMapping(value="/param/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> paramEdit(Long userId,
+                        Long totalPoints,
+                        String data, 
+                        String type,
+                        ModelMap map,
+                        HttpServletRequest req){
+        
+        Map<String, Object> res = new HashMap<String, Object>();
+        
+        res.put("code", 1);
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            res.put("message", "请重新登录");
+            return res;
+        }
+        if (null != userId && null != type && !type.isEmpty()) {
+        	TdUser tdUser = tdUserService.findOne(userId);
+        	
+        	if (type.equalsIgnoreCase("editPoint")) {
+        		if (null != totalPoints) {
+        			tdUser.setTotalPoints(totalPoints);
+        			TdUserPoint userPoint = new TdUserPoint();
+        	        
+        	        userPoint.setTotalPoint(totalPoints);
+        	        userPoint.setUsername(tdUser.getUsername());
+        	        userPoint.setPoint(totalPoints);
+        			if (null != data) {	
+        		        userPoint.setDetail(data);   
+        			}
+        			userPoint = tdUserPointService.save(userPoint);
+        			
+        			res.put("code", 0);
+        			return res;
+        		}
+    		}
+		}
+        
+        
+        return res;
+    }
     @RequestMapping(value="/save")
     public String orderEdit(TdUser tdUser,Long totalPoints, String totalPointsRemarks,
                         String __VIEWSTATE,

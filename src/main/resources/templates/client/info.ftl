@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><#if info??>${info.seoTitle!''}-</#if>车有同盟</title>
-<meta name="keywords" content="${info.seoKeywords!''}">
-<meta name="description" content="${info.seoDescription!''}">
-<meta name="copyright" content="${site.copyright!''}" />
+<meta name="keywords" content="<#if info??>${info.seoKeywords!''}</#if>">
+<meta name="description" content="<#if info??>${info.seoDescription!''}</#if>">
+<meta name="copyright" content="<#if info??>${site.copyright!''}</#if>" />
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -51,6 +51,7 @@ $(document).ready(function(){
     </section>
   
     <article class="essayamin">
+    <#if info??>
         <h3 class="ta-c fw400 fs20 lh25 pb20">${info.title!''}</h3>
         <p class="essaytime">时间：${info.createTime?string("yyyy-MM-dd")}&nbsp;&nbsp;作者：${info.source!''}</p>
         <div class="essaycon">${info.content!''}</div>
@@ -62,7 +63,7 @@ $(document).ready(function(){
             <p>下一篇：<a href="/info/content/${next_info.id?c}?mid=${mid}">${next_info.title!''}</a></p>
         </#if>
         <div class="clear h20"></div>
-        
+    </#if>   
         <#--
         <section class="pro_mytext" id="pro_mytext">
             <div class="pb20 lh25">
