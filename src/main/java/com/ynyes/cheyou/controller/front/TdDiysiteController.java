@@ -332,6 +332,28 @@ public class TdDiysiteController {
     	return sales;
     }
 	
+    /**
+	 * @author lc
+	 * @注释：通过id获取地址
+	 */
+    @RequestMapping(value="/getaddress", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> getaddress(Long id){
+    	 Map<String, Object> res = new HashMap<String, Object>();         
+         res.put("code", 1);
+         
+         if (null != id) {
+			TdDiySite tdDiySite = tdDiySiteService.findOne(id);
+			res.put("address", tdDiySite.getAddress());
+			res.put("code", 0);
+		}else{
+			res.put("address", " ");
+			res.put("code", 0);
+		}
+         
+         return res;
+    }
+    
 	@RequestMapping(value="/param/edit", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> paramEdit(String orderNumber, String password,

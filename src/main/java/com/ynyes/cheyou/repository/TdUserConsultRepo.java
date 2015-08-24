@@ -9,6 +9,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ynyes.cheyou.entity.TdUserConsult;
 
+import javassist.bytecode.LineNumberAttribute;
+
 /**
  * TdUserConsult 实体数据库操作接口
  * 
@@ -51,4 +53,5 @@ public interface TdUserConsultRepo extends
     Page<TdUserConsult> findByUsernameAndGoodsTitleContainingOrderByIdDesc(String username, String keywords, Pageable page);
     
     Page<TdUserConsult> findByGoodsIdAndStatusIdOrderByIdDesc(Long goodsId, Long statusId, Pageable page);
+    
 }

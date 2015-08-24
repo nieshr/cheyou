@@ -494,7 +494,7 @@ function checkTime(i)
         </tr>
         <tr>
           <td colspan="2">
-            <#if qiang??>
+            <#if qiang?? && goods.flashSaleLeftNumber?? && goods.groupSaleLeftNumber??>
                 <#if qiang==1 && goods.flashSaleLeftNumber gt 0>
                      <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id?c}" class="sub sub01">立即购买</a>
                 <#elseif qiang!=1 && goods.groupSaleLeftNumber gt 0>
