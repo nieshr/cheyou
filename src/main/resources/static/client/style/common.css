@@ -359,14 +359,15 @@ a.white:hover { color:#ff7d43;}
   background: #b41e1e;
 }
 .navlist a.a2 {
-	z-index:5;
-	display:block;
-	width:100%;
-	text-indent:55px;
-	font-size:16px;
-	color:#fff;
-	line-height:37px;
-	background:#2b3243 url(../images/arrow04.png) no-repeat 170px center;}
+  z-index: 5;
+  display: block;
+  width: 100%;
+  text-indent: 55px;
+  font-size: 16px;
+  color: #fff;
+  line-height: 37px;
+  background: #b41e1e url(../images/arrow04.png) no-repeat 170px center;
+}
 .navlistout {
   display: block;
   position: absolute;
