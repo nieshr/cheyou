@@ -458,18 +458,6 @@ public class TdGoodsController {
             map.addAttribute("comment_page", tdUserCommentService
                     .findByGoodsIdAndIsShowable(goodsId, page,
                             ClientConstant.pageSize));
-            // add mdj start
-            // Page<TdUserComment> comment_page = tdUserCommentService
-            // .findByGoodsIdAndIsShowable(goodsId, page,
-            // ClientConstant.pageSize);
-            // List<TdUserComment> tdcomment_list =comment_page.getContent();
-            // for(int i = 0;i<tdcomment_list.size();i++)
-            // {
-            // TdUserComment tdcomment = tdcomment_list.get(i);
-            // tdcomment.getUsername();
-            // System.out.println("---------------------"+tdcomment.getUsername()+"=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-            // }
-            // add mdj end
         } else {
             map.addAttribute("comment_page", tdUserCommentService
                     .findByGoodsIdAndStarsAndIsShowable(goodsId, stars, page,
