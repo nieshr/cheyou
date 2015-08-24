@@ -74,7 +74,7 @@
             parentObj.find("input[id='image']").val($("#txtItemZengPin_CoverImageUri").val());
         } else {
             var trHtml = '<tr class="td_c">'
-            + '<td><input name="giftList[${total!'0'}].id" type="hidden" value="" />'
+            + '<td><input name="giftList[${total!'0'}].id?c" type="hidden" value="" />'
             + '<input name="giftList[${total!'0'}].coverImageUri" type="hidden" value="' + $("#txtItemZengPin_CoverImageUri").val() + '" />'
             + '<input type="text" name="giftList[${total!'0'}].sortId" class="td-input" value="99" style="width:90%;" /></td>'
             + '<td><input type="text" id="id" name="giftList[${total!'0'}].goodsId" class="td-input" value="' + $("#txtItemZengPin_Id").val() + '" style="width:90%;" /></td>'

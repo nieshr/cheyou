@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +15,12 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -48,17 +53,6 @@ import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.util.SMSUtil;
 import com.ynyes.cheyou.util.SiteMagConstant;
-
-import scala.xml.dtd.PublicID;
-
-import org.apache.activemq.blob.DefaultBlobDownloadStrategy;
-import org.apache.commons.io.FileUtils;
-import org.apache.jasper.tagplugins.jstl.core.Import;
-import org.apache.poi.hssf.usermodel.HSSFCell;  
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;  
-import org.apache.poi.hssf.usermodel.HSSFRow;  
-import org.apache.poi.hssf.usermodel.HSSFSheet;  
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 /**
  * 后台首页控制器
  * 
@@ -997,7 +991,7 @@ public class TdManagerOrderController {
     	 try  
          {  
 	          FileOutputStream fout = new FileOutputStream(exportUrl+"order.xls");  
-	          OutputStreamWriter writer = new OutputStreamWriter(fout, "utf8");	                       	     
+//	          OutputStreamWriter writer = new OutputStreamWriter(fout, "utf8");	                       	     
 	          wb.write(fout);  
 	          fout.close();
          }catch (Exception e)  
@@ -1188,6 +1182,7 @@ public class TdManagerOrderController {
     public Map<String, Object> paramEdit(String orderNumber,
                         String type,
                         String data,
+                        String info,
                         String name,
                         String address,
                         String postal,
@@ -1217,12 +1212,25 @@ public class TdManagerOrderController {
             {
                 order.setRemarkInfo(data);
             }
+            
+            if (null == order.getDeliverTypeFee())
+            {
+                order.setDeliverTypeFee(0.0);
+            }
+            
+            if (null == order.getPayTypeFee())
+            {
+                order.setPayTypeFee(0.0);
+            }
+            
             // 修改商品总金额
             else if (type.equalsIgnoreCase("editTotalGoodsPrice"))
             {
                 double goodsPrice = Double.parseDouble(data);
                 order.setTotalGoodsPrice(goodsPrice);
+                
                 order.setTotalPrice(goodsPrice + order.getPayTypeFee() + order.getDeliverTypeFee());
+                order.setTotalPriceChangeInfo(info);
             }
             // 修改配送费用
             else if (type.equalsIgnoreCase("editDeliveryPrice"))
@@ -1230,6 +1238,7 @@ public class TdManagerOrderController {
                 double deliveryPrice = Double.parseDouble(data);
                 order.setDeliverTypeFee(deliveryPrice);
                 order.setTotalPrice(deliveryPrice + order.getPayTypeFee() + order.getTotalGoodsPrice());
+                order.setDeliverTypePriceChangeInfo(info);
             }
             // 修改支付手续费
             else if (type.equalsIgnoreCase("editPayPrice"))
@@ -1237,6 +1246,7 @@ public class TdManagerOrderController {
                 double payPrice = Double.parseDouble(data);
                 order.setPayTypeFee(payPrice);
                 order.setTotalPrice(payPrice + order.getTotalGoodsPrice() + order.getDeliverTypeFee());
+                order.setPayTypePriceChangeInfo(info);
             }
             // 修改联系方式
             else if (type.equalsIgnoreCase("editContact"))

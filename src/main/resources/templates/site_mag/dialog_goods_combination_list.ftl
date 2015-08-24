@@ -82,7 +82,7 @@
             parentObj.find("input[id='currentPrice']").val($("#txtItemZengPin_CurrentPrice").val());
         } else {
             var trHtml = '<tr class="td_c">'
-            + '<td><input name="combList[${total!'0'}].id" type="hidden" value="" />'
+            + '<td><input name="combList[${total!'0'}].id?c" type="hidden" value="" />'
             + '<input name="combList[${total!'0'}].coverImageUri" type="hidden" value="' + $("#txtItemZengPin_CoverImageUri").val() + '" />'
             + '<input type="text" name="combList[${total!'0'}].sortId" class="td-input" value="99" style="width:90%;" /></td>'
             + '<td><input type="text" id="id" name="combList[${total!'0'}].goodsId" class="td-input" value="' + $("#txtItemZengPin_Id").val() + '" style="width:90%;" /></td>'

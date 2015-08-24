@@ -238,16 +238,22 @@
                 cancel: true
             });
         }
-        //修改商品总金额
+        // 修改总金额
         function EditRealAmount() {
-            var pop = $.dialog.prompt('请修改商品总金额',
-            function (val) {
+            var pop = $.dialog.prompt2('请修改商品总金额', '备注',
+            function (val, info) {
                 if (!checkIsMoney(val)) {
                     $.dialog.alert('对不起，请输入正确的配送金额！', function () { }, pop);
                     return false;
                 }
+                
+                if (undefined == info || "" == info){
+                    $.dialog.alert('请输入备注信息！', function () { }, pop);
+                    return false;
+                }
+                
                 var orderNumber = $.trim($("#spanOrderNumber").text());
-                var postData = { "orderNumber": orderNumber, "type": "editTotalGoodsPrice", "data": val };
+                var postData = { "orderNumber": orderNumber, "type": "editTotalGoodsPrice", "data": val, "info": info };
                 //发送AJAX请求
                 sendAjaxUrl(pop, postData, "/Verwalter/order/param/edit");
                 return false;
@@ -257,14 +263,20 @@
         }
         //修改配送费用
         function EditExpressFee() {
-            var pop = $.dialog.prompt('请修改配送费用',
+            var pop = $.dialog.prompt2('请修改配送费用', '备注',
             function (val) {
                 if (!checkIsMoney(val)) {
                     $.dialog.alert('对不起，请输入正确的配送金额！', function () { }, pop);
                     return false;
                 }
+                
+                if (undefined == info || "" == info){
+                    $.dialog.alert('请输入备注信息！', function () { }, pop);
+                    return false;
+                }
+                
                 var orderNumber = $.trim($("#spanOrderNumber").text());
-                var postData = { "orderNumber": orderNumber, "type": "editDeliveryPrice", "data": val };
+                var postData = { "orderNumber": orderNumber, "type": "editDeliveryPrice", "data": val, "info": info };
                 //发送AJAX请求
                 sendAjaxUrl(pop, postData, "/Verwalter/order/param/edit");
                 return false;
@@ -274,14 +286,20 @@
         }
         //修改手续费用
         function EditPaymentFee() {
-            var pop = $.dialog.prompt('请修改支付手续费用',
+            var pop = $.dialog.prompt2('请修改支付手续费用', '备注',
             function (val) {
                 if (!checkIsMoney(val)) {
                     $.dialog.alert('对不起，请输入正确的手续费用！', function () { }, pop);
                     return false;
                 }
+                
+                if (undefined == info || "" == info){
+                    $.dialog.alert('请输入备注信息！', function () { }, pop);
+                    return false;
+                }
+                
                 var orderNumber = $.trim($("#spanOrderNumber").text());
-                var postData = { "orderNumber": orderNumber, "type": "editPayPrice", "data": val };
+                var postData = { "orderNumber": orderNumber, "type": "editPayPrice", "data": val, "info": info };
                 //发送AJAX请求
                 sendAjaxUrl(pop, postData, "/Verwalter/order/param/edit");
                 return false;

@@ -81,7 +81,7 @@ $(function () {
         $("#thumb_ImgUrl_show3").hide();
     }
     else {
-        $("#thumb_ImgUrl_show3").html("<ul><li><div class='img-box1'><img src='" + groupPic + "' bigsrc='" + groupPic + "' /></div></li></ul>");
+        $("#thumb_ImgUrl_show3").html("<ul><li><div class='img-box1'><img src='" + flashPic + "' bigsrc='" + flashPic + "' /></div></li></ul>");
         $("#thumb_ImgUrl_show3").show();
     }
 
@@ -91,7 +91,7 @@ $(function () {
             $("#thumb_ImgUrl_show3").hide();
         }
         else {
-            $("#thumb_ImgUrl_show3").html("<ul><li><div class='img-box1'><img src='" + groupPic + "' bigsrc='" + groupPic + "' /></div></li></ul>");
+            $("#thumb_ImgUrl_show3").html("<ul><li><div class='img-box1'><img src='" + flashPic + "' bigsrc='" + flashPic + "' /></div></li></ul>");
             $("#thumb_ImgUrl_show3").show();
         }
     });
@@ -899,7 +899,7 @@ function del_goods_comb(obj) {
                             <#list goods.giftList as gift>
                                 <tr class="td_c">
                                     <td>
-                                        <input name="giftList[${gift_index}].id" type="hidden" value="${gift.id?c}">
+                                        <input name="giftList[${gift_index}].id?c" type="hidden" value="${gift.id?c}">
                                         <input name="giftList[${gift_index}].coverImageUri" type="hidden" value="${gift.coverImageUri!''}">
                                         <input type="text" name="giftList[${gift_index}].sortId" class="td-input" value="${gift.sortId!''}" style="width:90%;">
                                     </td>
@@ -964,7 +964,7 @@ function del_goods_comb(obj) {
                             <#list goods.combList as item>
                                 <tr class="td_c">
                                     <td>
-                                        <input name="combList[${item_index}].id" type="hidden" value="${item.id?c}">
+                                        <input name="combList[${item_index}].id?c" type="hidden" value="${item.id?c}">
                                         <input name="combList[${item_index}].coverImageUri" type="hidden" value="${item.coverImageUri!''}">
                                         <input type="text" name="combList[${item_index}].sortId" class="td-input" value="${item.sortId!''}" style="width:90%;">
                                     </td>

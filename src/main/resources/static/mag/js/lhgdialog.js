@@ -1688,6 +1688,57 @@ lhgdialog.prompt = function( content, yes, value, parent )
 };
 
 /**
+ * 提问
+ * @param   {String}    提问内容
+ * @param   {Function}  回调函数. 接收参数：输入值
+ * @param   {String}    默认值
+ */
+lhgdialog.prompt2 = function( content, info, yes, value, infoValue, parent )
+{
+    value = value || '';
+    infoValue = infoValue || '';
+    var input;
+    
+    return lhgdialog({
+        title: '提问',
+        id: 'Prompt',
+        zIndex: _zIndex(),
+        icon: 'prompt.gif',
+        fixed: true,
+        lock: true,
+        parent: parent || null,
+        content: [
+            '<div style="margin-bottom:5px;font-size:12px">',
+                content,
+            '</div>',
+            '<div>',
+                '<input value="',
+                    value,
+                '" style="width:18em;padding:6px 4px" />',
+            '</div>',
+            '<div style="margin-bottom:5px;font-size:12px">',
+                info,
+            '</div>',
+            '<div>',
+                '<input value="',
+                infoValue,
+                '" style="width:18em;padding:6px 4px" />',
+            '</div>'
+            ].join(''),
+        init: function(){
+            input = this.DOM.content[0].getElementsByTagName('input')[0];
+            input1 = this.DOM.content[0].getElementsByTagName('input')[1];
+            input.select();
+            input.focus();
+        },
+        ok: function(here){
+            return yes && yes.call(this, input.value, input1.value, here);
+        },
+        cancel: true
+    });
+};
+
+/**
  * 短暂提示
  * @param	{String}	提示内容
  * @param   {Number}    显示时间 (默认1.5秒)

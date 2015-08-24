@@ -232,6 +232,18 @@ public class TdOrder {
     @Column(scale=2)
     private Double totalPrice;
     
+    // 修改总金额备注
+    @Column
+    private String totalPriceChangeInfo;
+    
+    // 修改支付手续费备注
+    @Column
+    private String payTypePriceChangeInfo;
+    
+    // 修改配送手续费备注
+    @Column
+    private String deliverTypePriceChangeInfo;
+    
     // 订单尾款总金额，有些订单需付尾款
     @Column(scale=2)
     private Double totalLeftPrice;
@@ -704,5 +716,29 @@ public class TdOrder {
 
     public void setServiceTime(Date serviceTime) {
         this.serviceTime = serviceTime;
+    }
+
+    public String getTotalPriceChangeInfo() {
+        return totalPriceChangeInfo;
+    }
+
+    public void setTotalPriceChangeInfo(String totalPriceChangeInfo) {
+        this.totalPriceChangeInfo = totalPriceChangeInfo;
+    }
+
+    public String getPayTypePriceChangeInfo() {
+        return payTypePriceChangeInfo;
+    }
+
+    public void setPayTypePriceChangeInfo(String payTypePriceChangeInfo) {
+        this.payTypePriceChangeInfo = payTypePriceChangeInfo;
+    }
+
+    public String getDeliverTypePriceChangeInfo() {
+        return deliverTypePriceChangeInfo;
+    }
+
+    public void setDeliverTypePriceChangeInfo(String deliverTypePriceChangeInfo) {
+        this.deliverTypePriceChangeInfo = deliverTypePriceChangeInfo;
     }
 }
