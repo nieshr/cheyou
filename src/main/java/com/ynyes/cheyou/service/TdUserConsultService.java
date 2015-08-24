@@ -87,6 +87,13 @@ public class TdUserConsultService {
     {
         return (List<TdUserConsult>) repository.findAll(ids);
     }
+    /**
+	 * @author lc
+	 * @注释：
+	 */
+    public List<TdUserConsult> findAll(){
+    	return (List<TdUserConsult>) repository.findAll();
+    }
     
     public List<TdUserConsult> findByUsername(String username)
     {

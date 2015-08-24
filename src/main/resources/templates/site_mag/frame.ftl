@@ -10,6 +10,7 @@
 <script type="text/javascript" src="/mag/js/lhgdialog.js"></script>
 <script type="text/javascript" src="/mag/js/layout.js"></script>
 <script type="text/javascript">
+    
     //页面加载完成时
     $(function () {
         //检测IE
@@ -18,7 +19,8 @@
             window.location.href = 'ie6update.html';
         }
         
-        $("#sidebar-nav").niceScroll({ touchbehavior: false, cursorcolor: "#7C7C7C", cursoropacitymax: 0.6, cursorwidth: 5 });       
+        $("#sidebar-nav").niceScroll({ touchbehavior: false, cursorcolor: "#7C7C7C", cursoropacitymax: 0.6, cursorwidth: 5 });
+                               
     });
 
     //页面尺寸改变时
@@ -101,7 +103,61 @@
         });
 
     });
-
+    
+  var ordernumber = 0;
+  var ordernumberpay = 0;
+  var consultsnumber = 0;
+  var commentsnumber = 0;
+  var suggestionsnumber = 0;
+  var demandsnumber = 0;
+  $(document).ready(function () {
+        setInterval("remind()",30000);
+  });
+  //下单自动提醒
+    function remind(){    
+         $.ajax({
+                type: "post",
+                url: "/Verwalter/automaticRemind",
+                data: {},
+                dataType: "json",
+                success: function (data) {   
+                     if (data.code == 0) {
+                        if(data.ordernumber>ordernumber && ordernumber !=0){
+                            alert("有新订单");
+                        }
+                        ordernumber = data.ordernumber;
+                        
+                        if(data.ordernumberpay>ordernumberpay && ordernumberpay !=0){
+                            alert("有新支付订单！");
+                        }
+                        ordernumberpay = data.ordernumberpay;
+                        
+                        if(data.consults>consultsnumber && consultsnumber !=0){
+                            alert("有新咨询！");
+                        }
+                        consultsnumber = data.consults;
+                        
+                        if(data.comments>commentsnumber && commentsnumber !=0){
+                            alert("有新的评论！");
+                        }
+                        commentsnumber = data.comments;
+                        
+                        if(data.suggestions>suggestionsnumber && suggestionsnumber !=0){
+                            alert("有新的投诉！");
+                        }
+                        suggestionsnumber = data.suggestions;
+                        
+                        if(data.demands>demandsnumber && demandsnumber !=0){
+                            alert("有新的还想团购！");
+                        }
+                        demandsnumber = data.demands;
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            }); 
+    }
+    
 </script>
 </head>
 

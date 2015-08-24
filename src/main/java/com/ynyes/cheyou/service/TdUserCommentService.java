@@ -88,6 +88,10 @@ public class TdUserCommentService {
         return (List<TdUserComment>) repository.findAll(ids);
     }
     
+    public List<TdUserComment> findAll(){
+    	return (List<TdUserComment>) repository.findAll();
+    }
+    
     public List<TdUserComment> findByUsername(String username)
     {
         return repository.findByUsernameOrderByIdDesc(username);

@@ -51,6 +51,23 @@
 </script>
 <script type="text/javascript">
     var forPaymentFllow = true;
+    
+    function showaddress(){
+        var shopid = $('#formselect option:selected') .val();
+         $.ajax({
+                type: "post",
+                url: "/diysite/order/getaddress",
+                data: { "id": shopid,},
+                dataType: "json",
+                success: function (data) { 
+                 if (data.code == 0) {
+                        $("#shopaddress").text(data.address);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });      
+    }
 </script>
 
 
@@ -165,8 +182,8 @@
          <h3>选择线下同盟店</h3>
           
              
-            <select name="shopId" id="formselect" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
-                <option>请选择</option>
+            <select name="shopId" id="formselect" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店" onchange="showaddress()">
+                <option value="">请选择</option>
                 <#if shop_list??>
                     <#list shop_list as item>
                         <option value="${item.id?c}">${item.title!''}</option>
@@ -174,6 +191,9 @@
                     </#list>                  
                 </#if>
             </select>
+            
+            <span id="shopaddress"></span>
+            
        <#--
                  <#if shop_list??>
                      <#list shop_list as item>
@@ -187,6 +207,7 @@
                  </#if>
         -->          
         </section>
+
         <section class="order_check fr" style="width:40%;">
             <h3>选择预约安装时间</h3>
             <input name="appointmentTime" type="text" value="" datatype="*" class="text input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" errormsg="请选择预约安装时间" nullmsg="请选择预约安装时间">
