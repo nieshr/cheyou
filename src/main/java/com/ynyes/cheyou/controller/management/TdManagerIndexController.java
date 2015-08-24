@@ -212,7 +212,7 @@ public class TdManagerIndexController {
 
             map.addAttribute("root_menu_list", rootMenuList);
         }
-        
+                            
         return "/site_mag/frame";
     }
     
