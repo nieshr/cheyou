@@ -70,16 +70,8 @@ textarea.input { width: 98%; height:50px; color:#666;}
     checkNowHover("shopping_down","shopping_sel");
     checkBoxShow("topcheck","a","topsum","li","sel");
     checkBoxShow("teamadmenu","a","teamadsum","a","sel");
-    
-    <#if miao_10_leftnumber?? && miao_14_leftnumber?? && miao_20_leftnumber??>
-        <#if miao_10_leftnumber==0 && miao_14_leftnumber!=0 && miao_20_leftnumber!=0>
-            miaoClockChang(1);
-        <#elseif  miao_10_leftnumber==0 && miao_14_leftnumber==0 && miao_20_leftnumber!=0>
-            miaoClockChang(2);
-        <#elseif  miao_10_leftnumber==0 && miao_14_leftnumber==0 && miao_20_leftnumber==0>
-            miaoClockChang(0);
-        </#if>
-    </#if>    
+    autochange();
+      
     //左右单张滚动
     var the_one = {
       "boxid":"onebox",         //最外层id
@@ -157,6 +149,33 @@ function miaoClockChang(i)
     
     $("#miaoClockDiv a").removeClass("sel");
     $("#miaoClockDiv a").eq(i).addClass("sel"); 
+}
+
+function autochange(){
+    var nowDate=new Date();
+    var fourteenDate=new Date();
+    fourteenDate.setHours(14);
+    fourteenDate.setMinutes(0);
+    fourteenDate.setSeconds(0);
+    var twentyDate=new Date();
+    twentyDate.setHours(20);
+    twentyDate.setMinutes(0);
+    twentyDate.setSeconds(0);
+    if(nowDate>fourteenDate){
+        miaoClockChang(1);
+    }
+    else if(nowDate>twentyDate){
+        miaoClockChang(2);
+    }
+     <#if miao_10_leftnumber?? && miao_14_leftnumber?? && miao_20_leftnumber??>
+        <#if miao_10_leftnumber==0 && miao_14_leftnumber!=0 && miao_20_leftnumber!=0>
+            miaoClockChang(1);
+        <#elseif  miao_10_leftnumber==0 && miao_14_leftnumber==0 && miao_20_leftnumber!=0>
+            miaoClockChang(2);
+        <#elseif  miao_10_leftnumber==0 && miao_14_leftnumber==0 && miao_20_leftnumber==0>
+            miaoClockChang(0);
+        </#if>
+    </#if> 
 }
 
 function miaoClockNextChange(i)

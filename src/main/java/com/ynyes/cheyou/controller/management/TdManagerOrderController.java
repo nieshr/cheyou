@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -1286,6 +1287,8 @@ public class TdManagerOrderController {
                 		}
                         List<TdOrderGoods> tdOrderGoodsList = order.getOrderGoodsList();
                         
+                        Random random = new Random();
+                        String smscode = String.format("%04d", random.nextInt(9999));
                         //手机短信发送
                         SMSUtil.send(
                         		order.getShippingPhone(),
@@ -1293,8 +1296,9 @@ public class TdManagerOrderController {
                                 new String[] {
                                         tdUser.getUsername(),
                                         order.getOrderGoodsList().get(0).getGoodsTitle(),
-                                        order.getOrderNumber().substring(order.getOrderNumber().length() - 4)});
-                        
+                                        smscode});
+                        order.setSmscode(smscode);
+                        order = tdOrderService.save(order);
                         SMSUtil.send(tdShop.getMobile(), 
                                 "29039",
                                 new String[] { tdShop.getTitle(), tdUser.getUsername(),

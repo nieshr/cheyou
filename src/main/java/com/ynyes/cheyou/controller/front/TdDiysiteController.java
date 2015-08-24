@@ -375,7 +375,7 @@ public class TdDiysiteController {
 						tdUser.setUpperDiySiteId(order.getShopId());
 						tdUserService.save(tdUser);
 					}
-                	if (order.getOrderNumber().substring(order.getOrderNumber().length() - 4).equals(password)) {
+                	if (order.getSmscode().equals(password)) {
                 		order.setStatusId(5L);
                         order.setServiceTime(new Date());
 					}else{

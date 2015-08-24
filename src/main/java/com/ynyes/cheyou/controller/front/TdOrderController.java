@@ -1926,16 +1926,20 @@ public class TdOrderController extends AbstractPaytypeController {
             tdOrder.setStatusId(4L);
             tdOrder = tdOrderService.save(tdOrder);
         }
-
+        
         // 给用户发送短信
         if (null != tdUser) {
+        	Random random = new Random();
+            String smscode = String.format("%04d", random.nextInt(9999));
             SMSUtil.send(
                     tdOrder.getShippingPhone(),
                     "29040",
                     new String[] {
                             tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
-                            tdOrder.getOrderNumber().substring(tdOrder.getOrderNumber().length() - 4)});
+                            smscode});
+            tdOrder.setSmscode(smscode);
+            tdOrder = tdOrderService.save(tdOrder);
             System.out.println("---Sharon---: 向用户"+tdOrder.getShippingPhone()+"发送短信");
         }
 

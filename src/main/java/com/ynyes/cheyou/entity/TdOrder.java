@@ -220,6 +220,10 @@ public class TdOrder {
     @Column
     private String moneyReceivePerson;
     
+    //验证码
+    @Column
+    private String smscode;
+    
     // 商品总金额
     @Column(scale=2)
     private Double totalGoodsPrice;
@@ -255,7 +259,15 @@ public class TdOrder {
     private Double trainService;
     
     
-    public Double getPlatformService() {
+    public String getSmscode() {
+		return smscode;
+	}
+
+	public void setSmscode(String smscode) {
+		this.smscode = smscode;
+	}
+
+	public Double getPlatformService() {
 		return platformService;
 	}
 
