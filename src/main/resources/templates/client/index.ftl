@@ -870,7 +870,7 @@ function priceSearch${item_index}(priceid,boxid,x,y){
                                 <dt>
 
                                     <a class="pro" href="/goods/${item.id?c}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
-                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
+                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;" href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft8${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1050,7 +1050,7 @@ function priceSearch1${item_index}(priceid,boxid,x,y){
                                 <dt>
 
                                     <a class="pro" href="/goods/${item.id?c}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
-                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
+                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft15${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1226,7 +1226,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                             <#if item_index==0>
                                 <dt>
                                     <a class="pro" href="/goods/${item.id?c}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
-                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
+                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft23${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1274,7 +1274,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                 <dt>
 
                                     <a class="pro" href="/goods/${item.id?c}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
-                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
+                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1309,7 +1309,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                             <#if item_index==0>
                                 <dt>
                                     <a class="pro" href="/goods/${item.id?c}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
-                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
+                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1344,7 +1344,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                             <#if item_index==0>
                                 <dt>
                                     <a class="pro" href="/goods/${item.id?c}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
-                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
+                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">尚未开始</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1392,7 +1392,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                             <#if item_index==0>
                                 <dt>
                                     <a class="pro" href="/goods/${item.id?c}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
-                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
+                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;" href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1428,7 +1428,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                 <dt>
 
                                     <a class="pro" href="/goods/${item.id?c}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
-                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
+                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;" href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
@@ -1463,7 +1463,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                             <#if item_index==0>
                                 <dt>
                                     <a class="pro" href="/goods/${item.id?c}?qiang=1"><img class="pro" src="${item.coverImageUri!''}" width="200" height="200"/></a>
-                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;"  href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
+                                    <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;" href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span class="sc fw-b fs20">已经结束</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
