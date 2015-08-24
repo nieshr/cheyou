@@ -338,10 +338,11 @@ a.white:hover { color:#ff7d43;}
 	background:#e4393c;}
 .shopping_price a:hover { background:#222222;}
 .navbox {
-	z-index:20;
-	margin:0 auto;
-	border-bottom:solid 3px #2b3243;
-	height:37px;}
+  z-index: 20;
+  margin: 0 auto;
+  border-bottom: solid 3px #b41e1e;
+  height: 37px;
+}
 .navbox a.a1 {
 	float:left;
 	display:inline-block;
@@ -353,9 +354,10 @@ a.white:hover { color:#ff7d43;}
 	}
 .navbox a.a1:hover { color:#ff3535;}
 .navlist {
-	width:200px;
-	float:left;
-	background:#2b3243;}
+  width: 200px;
+  float: left;
+  background: #b41e1e;
+}
 .navlist a.a2 {
 	z-index:5;
 	display:block;
@@ -366,15 +368,14 @@ a.white:hover { color:#ff7d43;}
 	line-height:37px;
 	background:#2b3243 url(../images/arrow04.png) no-repeat 170px center;}
 .navlistout {
-	display:block;
-	position:absolute;
-	background:#fff;
-	padding:20px;
-	width:160px;
-	height:419px;
-	background:#2b3243;
-	top:30px;
-	}
+  display: block;
+  position: absolute;
+  padding: 20px;
+  width: 160px;
+  height: 419px;
+  background: #b41e1e;
+  top: 30px;
+}
 .navlistout li { width:100%; padding-bottom:14px;}
 .navlistout h3 {
 	font-size:16px;
@@ -385,8 +386,8 @@ a.white:hover { color:#ff7d43;}
 	margin-bottom:5px;
 	display:block;
 	}
-	.navlistout h3 a{color:#FFF;}
-	.navlistout h3 a:hover{color:#e8323d;}
+.navlistout h3 a{color:#FFF;}
+.navlistout h3 a:hover{color:#1c2b38;}
 .navlistout .p_box {
 	width:100%;
 	padding-bottom:6px;
@@ -398,18 +399,18 @@ a.white:hover { color:#ff7d43;}
 	line-height:20px;
 	font-size:12px;}
 .nav_showbox {
-	display:none;
-	position:absolute;
-	left:180px;
-	top:13px;
-	width:700px;
-	padding:15px;
-	min-height:85px;
-/*	border:1px solid #e8323d;
-*/	background:#2b3243;
-	color:#FFF;}
-	.nav_showbox a{color:#FFF;}
-	.nav_showbox a:hover{color:#e8323d;}
+  display: none;
+  position: absolute;
+  left: 180px;
+  top: 13px;
+  width: 700px;
+  padding: 15px;
+  min-height: 85px;
+  background: #b41e1e;
+  color: #FFF;
+}
+.nav_showbox a{color:#FFF;}
+.nav_showbox a:hover{color:#1c2b38;}
 .nav_showbox .bg {
 	display:block;
 	position:absolute;
