@@ -172,6 +172,14 @@ public class TdDiySiteService {
     
     /**
 	 * @author lc
+	 * @注释：通过地区查询同盟店
+	 */
+    public List<TdDiySite> findBydisctrict(String disctrict){
+    	return repository.findByDisctrictAndIsEnableTrue(disctrict);
+    }
+    
+    /**
+	 * @author lc
 	 * @注释：同盟店评价信息
 	 */
     public int ContdiysiteComment(Long diysiteId) {

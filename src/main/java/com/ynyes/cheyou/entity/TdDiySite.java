@@ -43,9 +43,17 @@ public class TdDiySite {
     @Column
     private String complainTele;
     
+    // 自提点省份
+    @Column
+    private String province;
+    
     // 自提点城市
     @Column
     private String city;
+    
+    // 自提点城市地区
+    @Column
+    private String disctrict;
     
     // 是否启用
     @Column
@@ -99,7 +107,23 @@ public class TdDiySite {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getDisctrict() {
+		return disctrict;
+	}
+
+	public void setDisctrict(String disctrict) {
+		this.disctrict = disctrict;
+	}
+
+	public String getTitle() {
         return title;
     }
 

@@ -52,9 +52,9 @@ $(function () {
     
     $("#address").citySelect({
         nodata:"none",
-        <#if address?? && address.province??>prov: "${address.province!''}",</#if>
-        <#if address?? && address.city??>city: "${address.city!''}",</#if>
-        <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
+        <#if diy_site?? && diy_site.province??>prov: "${diy_site.province!''}",</#if>
+        <#if diy_site?? && diy_site.city??>city: "${diy_site.city!''}",</#if>
+        <#if diy_site?? && diy_site.disctrict??>dist: "${diy_site.disctrict!''}",</#if>
         required:false
     }); 
 });
@@ -187,9 +187,9 @@ $(function () {
        <dt>*地区：</dt>
        <dd>
              <div id="address">
-             <select id="prov" class="prov" style="width: 100px;"></select>
-             <select id="city" class="city" style="width: 100px;"></select>
-             <select id="dist" class="dist" style="width: 100px;"></select>
+             <select id="prov" name="province" class="prov" style="width: 100px;"></select>
+             <select id="city" name="city" class="city" style="width: 100px;"></select>
+             <select id="dist" name="disctrict" class="dist" style="width: 100px;"></select>
              </div>
        </dd>
   </dl>

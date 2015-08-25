@@ -62,7 +62,7 @@ $(function () {
         function EditOrderRemark() {
             var dialog = $.dialog({
                 title: '修改粮草备注',
-                content: '<input type="checkbox" name="showtype" id="showtype" /><label> 仅后台显示</label> </br><textarea id="pointRemark" name="txtPointRemark" rows="2" cols="20" class="input"></textarea>',
+                content: '<input type="checkbox" name="showtype" id="showtype" checked="checked"/><label> 仅后台显示</label> </br><textarea id="pointRemark" name="txtPointRemark" rows="2" cols="20" class="input"></textarea>',
                 min: false,
                 max: false,
                 lock: true,

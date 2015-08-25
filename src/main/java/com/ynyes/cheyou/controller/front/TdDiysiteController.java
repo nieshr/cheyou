@@ -354,6 +354,26 @@ public class TdDiysiteController {
          return res;
     }
     
+    /**
+   	 * @author lc
+   	 * @注释：通过地区获取同盟店列表
+   	 */
+     @RequestMapping(value="/getdiysites", method = RequestMethod.POST)
+     @ResponseBody
+     public Map<String, Object> getdiysites(String disctrict){
+       Map<String, Object> res = new HashMap<String, Object>();         
+       res.put("code", 1);
+            
+       if (null != disctrict) {
+   			List<TdDiySite> tdDiySites = tdDiySiteService.findBydisctrict(disctrict);
+   			
+   			res.put("tdDiySites", tdDiySites);
+   			res.put("code", 0);
+       }
+            
+       return res;
+    }
+    
 	@RequestMapping(value="/param/edit", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> paramEdit(String orderNumber, String password,

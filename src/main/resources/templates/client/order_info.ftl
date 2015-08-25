@@ -15,7 +15,9 @@
 <script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/cart.js"></script>
 <script src="/client/js/order_info.js"></script>
-<script src="/client/js/jquery.cityselect.js"></script>
+
+<!--<script src="/client/js/jquery.cityselect.js"></script>-->
+<script src="/client/js/jquery.diysiteselect.js"></script>
 <script src="/client/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
 
@@ -124,7 +126,7 @@
                   <tr>
               <#--    <th>姓名</th>  -->
                   </tr>
-               <#--   
+              <#--   
                   <tr>
                     <th>*地区：</th>
                     <td>
@@ -132,10 +134,11 @@
                       <select id="prov" class="prov" style="width: 100px;"></select>
                       <select id="city" class="city" style="width: 100px;"></select>
                       <select id="dist" class="dist" style="width: 100px;"></select>
+                      <select id="diys" class="diys" style="width: 100px;"></select>
                       </div>
                     </td>
                   </tr>
-                  
+                   
                   <tr>
                     <th>*详细地址：</th>
                     <td>
@@ -182,7 +185,7 @@
        <section class="order_check fl">
          <h3>选择线下同盟店</h3>
           
-             
+ <!--            
             <select name="shopId" id="formselect" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店" onchange="showaddress()">
                 <option value="">请选择</option>
                 <#if shop_list??>
@@ -191,8 +194,18 @@
                         <p>${item.address}</p>
                     </#list>                  
                 </#if>
-            </select>
-            
+            </select>  -->
+           <dl>         
+ <!--              <dt>*地区：</dt> -->
+                  <dd>
+                      <div id="address">
+                      <select id="prov" class="prov" style="width: 100px;"></select>
+                      <select id="city" class="city" style="width: 100px;"></select>
+                      <select id="dist" class="dist" style="width: 100px;"></select>
+                      <select id="diys" class="diys" style="width: 100px;"></select>
+                      </div>
+                  </dd>
+          </dl>        
             <span id="shopaddress"></span>
             
        <#--

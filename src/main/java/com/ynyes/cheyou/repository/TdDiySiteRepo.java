@@ -31,4 +31,5 @@ public interface TdDiySiteRepo extends
 	 * @注释：
 	 */
     TdDiySite findByUsernameAndIsEnableTrue(String username);
+    List<TdDiySite> findByDisctrictAndIsEnableTrue(String disctrict);
 }
