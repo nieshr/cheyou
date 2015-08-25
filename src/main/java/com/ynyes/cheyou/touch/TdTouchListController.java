@@ -4,6 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -156,7 +159,6 @@ public class TdTouchListController {
         }
         
         map.addAttribute("pageId", pageId);
-
         
         // 查找商品
         Page<TdGoods> goodsPage = null;
@@ -167,14 +169,16 @@ public class TdTouchListController {
         {
             if (0 == soldId.intValue())
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySoldNumberDesc(
-                            categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                            categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                    Direction.DESC, "soldNumber")));
         
             }
             else
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySoldNumberAsc(
-                        categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.ASC, "soldNumber")));
     
             }
         }
@@ -183,14 +187,16 @@ public class TdTouchListController {
         {
             if (0 == priceId.intValue())
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySalePriceDesc(
-                            categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.DESC, "salePrice")));
         
             }
             else
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySalePriceAsc(
-                        categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.ASC, "salePrice")));
     
             }
         }
@@ -199,14 +205,15 @@ public class TdTouchListController {
         {
             if (0 == timeId.intValue())
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderByOnSaleTimeDesc(
-                            categoryId, pageId, ClientConstant.pageSize, null);
-        
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.DESC, "id")));
             }
             else
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderByOnSaleTimeAsc(
-                        categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.ASC, "id")));
     
             }
         }
@@ -326,19 +333,21 @@ public class TdTouchListController {
         Page<TdGoods> goodsPage = null;
         
 
-        // 按销量排序
+     // 按销量排序
         if (0 == orderId.intValue())
         {
             if (0 == soldId.intValue())
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySoldNumberDesc(
-                            categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                            categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                    Direction.DESC, "soldNumber")));
         
             }
             else
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySoldNumberAsc(
-                        categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.ASC, "soldNumber")));
     
             }
         }
@@ -347,14 +356,16 @@ public class TdTouchListController {
         {
             if (0 == priceId.intValue())
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySalePriceDesc(
-                            categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.DESC, "salePrice")));
         
             }
             else
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderBySalePriceAsc(
-                        categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.ASC, "salePrice")));
     
             }
         }
@@ -363,14 +374,15 @@ public class TdTouchListController {
         {
             if (0 == timeId.intValue())
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderByOnSaleTimeDesc(
-                            categoryId, pageId, ClientConstant.pageSize, null);
-        
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.DESC, "id")));
             }
             else
             {
-                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrueOrderByOnSaleTimeAsc(
-                        categoryId, pageId, ClientConstant.pageSize, null);
+                goodsPage = tdGoodsService.findByCategoryIdAndParamsLikeAndIsOnSaleTrue(
+                        categoryId, null, new PageRequest(pageId, ClientConstant.pageSize, new Sort(
+                                Direction.ASC, "id")));
     
             }
         }
