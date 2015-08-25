@@ -267,52 +267,52 @@ public class TdIndexController {
         cal.set(Calendar.MILLISECOND, 0);
         
         map.addAttribute("miao_cur_8_page", tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(cal.getTime(), 0, 5));
         map.addAttribute("miao_10_leftnumber", countleft(tdGoodsService.findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime())));
         
         cal.set(Calendar.HOUR_OF_DAY, 14);
         
         map.addAttribute("miao_cur_15_page", tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(cal.getTime(), 0, 5));
         map.addAttribute("miao_14_leftnumber", countleft(tdGoodsService.findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime())));
         
         cal.set(Calendar.HOUR_OF_DAY, 20);
         
         map.addAttribute("miao_cur_23_page", tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(cal.getTime(), 0, 5));
         map.addAttribute("miao_20_leftnumber", countleft(tdGoodsService.findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime())));
         
         cal.add(Calendar.DATE, 1);
         cal.set(Calendar.HOUR_OF_DAY, 10);
         
         map.addAttribute("miao_next_8_page", tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(cal.getTime(), 0, 5));
         
         cal.set(Calendar.HOUR_OF_DAY, 14);
         
         map.addAttribute("miao_next_15_page", tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(cal.getTime(), 0, 5));
         
         cal.set(Calendar.HOUR_OF_DAY, 20);
         
         map.addAttribute("miao_next_23_page", tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(cal.getTime(), 0, 5));
         
         cal.add(Calendar.DATE, -2);
         cal.set(Calendar.HOUR_OF_DAY, 10);
         
         map.addAttribute("miao_prev_8_page", tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(cal.getTime(), 0, 5));
         
         cal.set(Calendar.HOUR_OF_DAY, 14);
        
         map.addAttribute("miao_prev_15_page", tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(cal.getTime(), 0, 5));
         
         cal.set(Calendar.HOUR_OF_DAY, 20);
         
         map.addAttribute("miao_prev_23_page", tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(cal.getTime(), 0, 5));
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(cal.getTime(), 0, 5));
         
         // 首页推荐商品
         map.addAttribute("index_recommend_goods_page", tdGoodsService

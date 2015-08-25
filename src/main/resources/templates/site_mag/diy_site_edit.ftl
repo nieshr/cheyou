@@ -10,6 +10,7 @@
 <script type="text/javascript" src="/mag/js/swfupload.js"></script>
 <script type="text/javascript" src="/mag/js/swfupload.queue.js"></script>
 <script type="text/javascript" src="/mag/js/swfupload.handlers.js"></script>
+<script src="/client/js/jquery.cityselect.js"></script>
 <script type="text/javascript" src="/mag/js/layout.js"></script>
 <link href="/mag/style/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
@@ -48,6 +49,14 @@ $(function () {
             filetypes: "*.jpg;*.jpge;*.png;*.gif;" 
         });
     });
+    
+    $("#address").citySelect({
+        nodata:"none",
+        <#if address?? && address.province??>prov: "${address.province!''}",</#if>
+        <#if address?? && address.city??>city: "${address.city!''}",</#if>
+        <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
+        required:false
+    }); 
 });
 </script>
 </head>
@@ -158,9 +167,9 @@ $(function () {
         </div>
     </dd>
   </dl>
-  
+<#-->  
   <dl>
-    <dt>城市</dt>
+    <dt>*地区：</dt>
     <dd>
         <div class="rule-single-select">
             <select name="city" datatype="*" sucmsg=" ">
@@ -173,8 +182,17 @@ $(function () {
             </select>
         </div>
     </dd>
+  </dl>  -->
+  <dl>
+       <dt>*地区：</dt>
+       <dd>
+             <div id="address">
+             <select id="prov" class="prov" style="width: 100px;"></select>
+             <select id="city" class="city" style="width: 100px;"></select>
+             <select id="dist" class="dist" style="width: 100px;"></select>
+             </div>
+       </dd>
   </dl>
-  
   <dl>
     <dt>同盟店详细位置</dt>
     <dd>

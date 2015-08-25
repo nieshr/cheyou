@@ -22,6 +22,8 @@ public interface TdUserPointRepo extends
 {
     Page<TdUserPoint> findByUsernameOrderByIdDesc(String username, Pageable page);
     
+    Page<TdUserPoint> findByUsernameAndIsBackgroundShowFalseOrUsernameAndIsBackgroundShowNullOrderByIdDesc(String username, String username1, Pageable page);
+    
     List<TdUserPoint> findByUsername(String username);
     
     

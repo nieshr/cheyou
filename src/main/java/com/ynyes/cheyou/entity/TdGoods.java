@@ -223,6 +223,12 @@ public class TdGoods {
     @Temporal(TemporalType.TIMESTAMP)
     private Date onSaleTime;
     
+    // 最近修改改时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modifiedTime;
+    
     // 创建日期
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -434,7 +440,15 @@ public class TdGoods {
         this.productId = productId;
     }
 
-    public String getName() {
+    public Date getModifiedTime() {
+		return modifiedTime;
+	}
+
+	public void setModifiedTime(Date modifiedTime) {
+		this.modifiedTime = modifiedTime;
+	}
+
+	public String getName() {
         return name;
     }
 

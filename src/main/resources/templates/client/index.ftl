@@ -692,7 +692,7 @@ function delItem(id)
   
     <section class="indextit">
         <h3>1元抢拍</h3>
-        <a class="a1" href="/info/content/39?mid=12">抢拍细则</a>
+        <a class="a1" href="/info/content/94?mid=12">抢拍细则</a>
         <menu id="miao-menu">
             <a class="sel" href="javascript:;" onmouseenter="javascript:miaoPageChang(0);">今日抢拍</a>
             <a href="javascript:;" onmouseenter="javascript:miaoPageChang(1);">明日抢拍</a>

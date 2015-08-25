@@ -62,11 +62,12 @@ $(function () {
         function EditOrderRemark() {
             var dialog = $.dialog({
                 title: '修改粮草备注',
-                content: '<textarea id="pointRemark" name="txtPointRemark" rows="2" cols="20" class="input"></textarea>',
+                content: '<input type="checkbox" name="showtype" id="showtype" /><label> 仅后台显示</label> </br><textarea id="pointRemark" name="txtPointRemark" rows="2" cols="20" class="input"></textarea>',
                 min: false,
                 max: false,
                 lock: true,
                 ok: function () {
+                    var showtype = $("#showtype", parent.document).is(':checked');                    
                     var remark = $("#pointRemark", parent.document).val();                   
                     if (remark == "") {
                         $.dialog.alert('对不起，请输入备注内容！', function () { }, dialog);
@@ -74,7 +75,7 @@ $(function () {
                     }
                     var userId = eval(document.getElementById("userId")).value;
                     var point = eval(document.getElementById("totalPoints")).value;
-                    var postData = { "userId": userId, "totalPoints": point, "data": remark, "type":"editPoint" };
+                    var postData = { "userId": userId, "totalPoints": point, "data": remark, "type":"editPoint", "isBackgroundShow": showtype};
                     //发送AJAX请求
                     sendAjaxUrl(dialog, postData, "/Verwalter/user/param/edit");
                     return false;
@@ -191,7 +192,7 @@ $(function () {
   <dl>
     <dt>修改用户粮草</dt>
     <dd>
-        <input name="totalPoints1" id="totalPoints" type="text" class="input" value="${user.totalPoints!"0"}">
+        <input name="totalPoints1" id="totalPoints" type="text" class="input" value="${user.totalPoints?c!"0"}">
         <input name="btnEditRemark" type="button" id="btnEditRemark" class="ibtn" value="确认修改" style="margin-top: -3px;">
     </dd>
   </dl> 
