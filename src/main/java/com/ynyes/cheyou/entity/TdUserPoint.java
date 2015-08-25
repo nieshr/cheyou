@@ -54,6 +54,10 @@ public class TdUserPoint {
     @Column
     private Long sortId;
 
+    // 是否仅后台显示
+    @Column
+    private Boolean isBackgroundShow;
+    
     public Long getId() {
         return id;
     }
@@ -66,7 +70,15 @@ public class TdUserPoint {
         return username;
     }
 
-    public void setUsername(String username) {
+    public Boolean getIsBackgroundShow() {
+		return isBackgroundShow;
+	}
+
+	public void setIsBackgroundShow(Boolean isBackgroundShow) {
+		this.isBackgroundShow = isBackgroundShow;
+	}
+
+	public void setUsername(String username) {
         this.username = username;
     }
 

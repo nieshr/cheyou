@@ -238,6 +238,7 @@ public class TdManagerUserController {
                         Long totalPoints,
                         String data, 
                         String type,
+                        Boolean isBackgroundShow,
                         ModelMap map,
                         HttpServletRequest req){
         
@@ -250,7 +251,7 @@ public class TdManagerUserController {
             res.put("message", "请重新登录");
             return res;
         }
-        if (null != userId && null != type && !type.isEmpty()) {
+        if (null != userId && null != type && !type.isEmpty() && null != isBackgroundShow) {
         	TdUser tdUser = tdUserService.findOne(userId);
         	
         	if (type.equalsIgnoreCase("editPoint")) {
@@ -258,6 +259,7 @@ public class TdManagerUserController {
         			tdUser.setTotalPoints(totalPoints);
         			TdUserPoint userPoint = new TdUserPoint();
         	        
+        			userPoint.setIsBackgroundShow(isBackgroundShow);
         	        userPoint.setTotalPoint(totalPoints);
         	        userPoint.setUsername(tdUser.getUsername());
         	        userPoint.setPoint(totalPoints);

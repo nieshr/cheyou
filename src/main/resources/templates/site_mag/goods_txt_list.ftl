@@ -167,7 +167,7 @@ function __doPostBack(eventTarget, eventArgument) {
         <th align="left">序号</th>
         <th align="left">标题</th>
         <th align="left" width="12%">所属类别</th>
-        <th align="left" width="16%">上架时间</th>
+        <th align="left" width="16%">最后修改时间</th>
         <th align="left" width="65">排序</th>
         <th align="left" width="110">属性</th>
         <th width="8%">操作</th>
@@ -194,7 +194,7 @@ function __doPostBack(eventTarget, eventArgument) {
                     </#list>
                 </#if>
             </td>
-            <td><#if content.onSaleTime??>${content.onSaleTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
+            <td><#if content.modifiedTime??>${content.modifiedTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
             <td>
                 <input name="listSortId" type="text" value="${content.sortId!""}" id="listSortId" class="sort" onkeydown="return checkNumber(event);">
             </td>

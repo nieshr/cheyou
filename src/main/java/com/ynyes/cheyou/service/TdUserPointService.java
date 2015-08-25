@@ -108,6 +108,11 @@ public class TdUserPointService {
         return repository.findByUsernameOrderByIdDesc(username, pageRequest);
     }
     
+    public Page<TdUserPoint> findByUsernameAndisBackgroundShowfalse(String username, int page, int size)
+    {
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.ASC, "sortId"));
+    	return repository.findByUsernameAndIsBackgroundShowFalseOrUsernameAndIsBackgroundShowNullOrderByIdDesc(username, username, pageRequest);
+    }
     /**
      * 保存
      * 

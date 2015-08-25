@@ -181,11 +181,13 @@ public class TdCartController {
         for (TdCartGoods tdCartGoods : resList) 
         { 
 			TdGoods tdGoods = tdGoodService.findById(tdCartGoods.getGoodsId());
-			List<TdGoodsGift> tdGoodGiftUserList = tdGoods.getGiftList();
-			if (tdGoodGiftUserList != null && tdGoodGiftUserList.size()>=1)
-			{
-				tdGoodsList.add(tdGoods);
-			}
+			if (null != tdGoods) {
+				List<TdGoodsGift> tdGoodGiftUserList = tdGoods.getGiftList();
+				if (tdGoodGiftUserList != null && tdGoodGiftUserList.size()>=1)
+				{
+					tdGoodsList.add(tdGoods);
+				}
+			}			
 		}
         
         if (tdGoodsList != null && tdGoodsList.size()>=1)

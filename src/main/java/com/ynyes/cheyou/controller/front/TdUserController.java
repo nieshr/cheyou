@@ -860,7 +860,7 @@ public class TdUserController extends AbstractPaytypeController {
 
         Page<TdUserPoint> pointPage = null;
 
-        pointPage = tdUserPointService.findByUsername(username, page,
+        pointPage = tdUserPointService.findByUsernameAndisBackgroundShowfalse(username, page,
                 ClientConstant.pageSize);
 
         map.addAttribute("point_page", pointPage);

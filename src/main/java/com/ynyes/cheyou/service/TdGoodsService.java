@@ -599,6 +599,17 @@ public class TdGoodsService {
                 .findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(
                         startTime, pageRequest);
     }
+    public Page<TdGoods> findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(
+            Date startTime, int page, int size) 
+    {
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(
+                Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
+
+        return repository
+                .findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(
+                        startTime, pageRequest);
+    }
+    
     public List<TdGoods> findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(Date startTime){
     	return repository.findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(startTime);
     }

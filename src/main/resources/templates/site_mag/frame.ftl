@@ -152,7 +152,7 @@
                         }
                         demandsnumber = data.demands;
                     } else {
-                        alert(data.msg);
+                       // alert(data.msg);
                     }
                 }
             }); 

@@ -958,6 +958,9 @@ public class TdManagerGoodsController {
 		}else{
 			tdGoods.setIsSpecialPrice(false);
 		}
+        
+        tdGoods.setModifiedTime(new Date());
+        
         tdGoodsService.save(tdGoods, username);
 
         tdManagerLogService.addLog(type, "用户修改商品", req);
