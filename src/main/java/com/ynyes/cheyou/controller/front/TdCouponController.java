@@ -143,13 +143,14 @@ public class TdCouponController {
 	    getCoupon.setGetNumber(1L);
 	    getCoupon.setGetTime(new Date());
 	    
+	    
 	    if (null != ctype && null != ctype.getTotalDays())
 	    {
     	    Calendar ca = Calendar.getInstance();
     	    ca.add(Calendar.DATE, ctype.getTotalDays().intValue());
     	    getCoupon.setExpireTime(ca.getTime());
 	    }
-	    
+	    getCoupon.setPrice(ctype.getPrice());
 	    getCoupon.setIsDistributted(true);
 	    getCoupon.setIsUsed(false);
 	    getCoupon.setMobile(mobile);

@@ -260,6 +260,10 @@ public class TdOrder {
     @Column
     private Long points;
     
+    // 使用优惠券
+    @Column
+    private Double couponUse;
+    
     // 是否在线付款
     @Column
     private Boolean isOnlinePay;
@@ -302,6 +306,14 @@ public class TdOrder {
 	public void setId(Long id) {
         this.id = id;
     }
+
+	public Double getCouponUse() {
+		return couponUse;
+	}
+
+	public void setCouponUse(Double couponUse) {
+		this.couponUse = couponUse;
+	}
 
 	public Long getTypeId() {
 			return typeId;

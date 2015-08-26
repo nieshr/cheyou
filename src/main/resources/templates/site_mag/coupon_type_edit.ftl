@@ -113,10 +113,10 @@ $(function () {
     </dl>
     
   <dl>
-    <dt>普通券定价</dt>
+    <dt>优惠券抵用额度</dt>
     <dd>
       <input name="price" type="text" value="<#if coupon_type??>${coupon_type.price!""}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-      <span class="Validform_checktip">免费券定价为0</span>
+      <span class="Validform_checktip">免费券抵用额度为0</span>
     </dd>
   </dl>
   <dl>

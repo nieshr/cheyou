@@ -752,7 +752,7 @@
                             订单总金额
                         </th>
                         <td>
-                            ${order.totalPrice?string("0.00")}元</td>
+                            ${order.totalPrice?string("0.00")}元（粮草：${order.pointUse!'0'}&nbsp;&nbsp;优惠券：${order.couponUse!'0'}）</td>
                     </tr>
                     <tr>
                         <th>

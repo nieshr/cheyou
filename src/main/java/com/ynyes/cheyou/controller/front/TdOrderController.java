@@ -928,88 +928,125 @@ public class TdOrderController extends AbstractPaytypeController {
                 }
             }
         }
-
-        // 优惠券
-        // TODO: 满减券， 单品类券，普通券查找
-        // List<TdCoupon> userCoupons =
-        // tdCouponService.findByUsernameAndIsUseable(username);//根据账号查询所有优惠券
-        //
-        // /**
-        // * 判断能使用的优惠券
-        // * 1，满购券金额是否达到要求
-        // * 2，单品类券是否包含有订单商品能使用的
-        // * 3，普通券
-        // * @author libiao
-        // */
-        // List<TdCoupon> userCouponList =null;
-        // if(null != userCoupons)
-        // {
-        // if(userCoupons.size()>0)
-        // {
-        // for (int i = 0; i < userCoupons.size(); i++)
-        // {
-        // //查看优惠券
-        // TdCouponType couponType =
-        // tdCouponTypeService.findOne(userCoupons.get(i).getTypeId());
-        // //判断为满购券
-        // if(couponType.getCategoryId().equals(1L))
-        // {
-        // //判断购物总价>满购券使用金额
-        // if(totalPrice>couponType.getCanUsePrice())
-        // {
-        // userCouponList.add(userCoupons.get(i));
-        // }
-        // }
-        // //判断为普通券
-        // if(couponType.getCategoryId().equals(0L))
-        // {
-        // userCouponList.add(userCoupons.get(i));
-        // }
-        // //判断为单品类券
-        // if(couponType.getCategoryId().equals(2L))
-        // {
-        //
-        // }
-        // /**
-        // * 取出购物车所有商品Id
-        // * @author libiao
-        // */
-        // List<Long> goodIds =new ArrayList<>();
-        // for (int j = 0; j < selectedGoodsList.size(); i++)
-        // {
-        // Long goodsId = selectedGoodsList.get(j).getGoodsId();
-        // goodIds.add(goodsId);
-        // }
-        // /**
-        // * 根据取出商品Id查找其所属分类Id
-        // * @author libiao
-        // */
-        // List<Long> productIds =new ArrayList<>();
-        //
-        //
-        // for (int y = 0; i < goodIds.size(); i++) {
-        // Long productId =
-        // tdGoodsService.findProductIdById(goodIds.get(y)).getProductId();
-        // if(!productIds.contains(productId)){
-        // productIds.add(productId);
-        // }
-        // }
-        // // /**
-        // // * 查找所有能用的单品类券
-        // // */
-        // // for (int i = 0; i < productIds.size(); i++) {
-        // // List<TdCouponType> counponTypes =
-        // tdCouponTypeService.findByCategoryId(productIds.get(i));
-        // // }
-        //
-        // }
-        //
-        // }
-        // }
-
-        map.addAttribute("coupon_list",
-                tdCouponService.findByUsernameAndIsUseable(username));
-
+        //查询购物车的所有种类
+        List<Long> productIds = new ArrayList<>();
+        for (TdCartGoods cg : selectedGoodsList){
+        	TdGoods goods = tdGoodsService.findOne(cg.getGoodsId());
+        	if (productIds.isEmpty()) {
+				productIds.add(goods.getCategoryId());
+			}else{
+				if (!productIds.contains(goods.getCategoryId())) {
+					productIds.add(goods.getCategoryId());
+				}
+			}
+        }
+        /**
+		 * @author lc
+		 * @注释：优惠券 TODO: 满减券， 单品类券，普通券查找
+		 */
+        List<TdCoupon> userCoupons = null;
+        if (null != user.getMobile()) {
+        	userCoupons = tdCouponService.findByMobileAndIsUseable(user.getMobile());//根据账号查询所有优惠券
+		}
+         
+        if (null != userCoupons) {
+        	List<TdCoupon> userCouponList = new ArrayList<>(); //可用券
+        	TdCouponType couponType = null;
+        	for(int i = 0; i < userCoupons.size(); i++){
+        		couponType = tdCouponTypeService.findOne(userCoupons.get(i).getTypeId());
+        		if (null != couponType && !couponType.getTitle().equals("免费洗车券") && !couponType.getTitle().equals("免费打蜡券")) {
+					if (couponType.getCategoryId().equals(1L)) {
+						 //判断购物总价>满购券使用金额
+				        if (totalPrice > couponType.getCanUsePrice()) {
+				        	userCouponList.add(userCoupons.get(i));
+				        }
+					}
+					else if (couponType.getCategoryId().equals(0L)) {
+						userCouponList.add(userCoupons.get(i));
+					}
+					else if (couponType.getCategoryId().equals(2L)) {
+						if (productIds.contains(couponType.getProductTypeId())) {
+							userCouponList.add(userCoupons.get(i));
+						}
+					}
+				}
+        	}
+        	 map.addAttribute("coupon_list",userCouponList);
+		}
+                  
+//         /**
+//         * 判断能使用的优惠券
+//         * 1，满购券金额是否达到要求
+//         * 2，单品类券是否包含有订单商品能使用的
+//         * 3，普通券
+//         * @author libiao
+//         */
+//         List<TdCoupon> userCouponList =null;
+//         if(null != userCoupons)
+//         {
+//         if(userCoupons.size()>0)
+//         {
+//         for (int i = 0; i < userCoupons.size(); i++)
+//         {
+//         //查看优惠券
+//         TdCouponType couponType =
+//         tdCouponTypeService.findOne(userCoupons.get(i).getTypeId());
+//         //判断为满购券
+//         if(couponType.getCategoryId().equals(1L))
+//         {
+//         //判断购物总价>满购券使用金额
+//         if(totalPrice>couponType.getCanUsePrice())
+//         {
+//         userCouponList.add(userCoupons.get(i));
+//         }
+//         }
+//         //判断为普通券
+//         if(couponType.getCategoryId().equals(0L))
+//         {
+//         userCouponList.add(userCoupons.get(i));
+//         }
+//         //判断为单品类券
+//         if(couponType.getCategoryId().equals(2L))
+//         {
+//        
+//         }
+//         /**
+//         * 取出购物车所有商品Id
+//         * @author libiao
+//         */
+//         List<Long> goodIds =new ArrayList<>();
+//         for (int j = 0; j < selectedGoodsList.size(); i++)
+//         {
+//         Long goodsId = selectedGoodsList.get(j).getGoodsId();
+//         goodIds.add(goodsId);
+//         }
+//         /**
+//         * 根据取出商品Id查找其所属分类Id
+//         * @author libiao
+//         */
+//         List<Long> productIds =new ArrayList<>();
+//        
+//        
+//         for (int y = 0; i < goodIds.size(); i++) {
+//         Long productId =
+//         tdGoodsService.findProductIdById(goodIds.get(y)).getProductId();
+//         if(!productIds.contains(productId)){
+//         productIds.add(productId);
+//         }
+//         }
+//          /**
+//          * 查找所有能用的单品类券
+//          */
+//          for (int j = 0; j < productIds.size(); j++) {
+//          List<TdCouponType> counponTypes =
+//         tdCouponTypeService.findByCategoryId(productIds.get(j));
+//          }
+//        
+//         }
+//        
+//         }
+//         }
+        
         // 积分限额
         map.addAttribute("total_point_limit", totalPointLimited);
 
@@ -1341,11 +1378,12 @@ public class TdOrderController extends AbstractPaytypeController {
 
             if (null != coupon) {
                 TdCouponType couponType = tdCouponTypeService.findOne(coupon
-                        .getId());
+                        .getTypeId());
 
                 couponFee = couponType.getPrice();
                 coupon.setIsUsed(true);
                 tdCouponService.save(coupon);
+                tdOrder.setCouponUse( couponFee);
             }
         }
 

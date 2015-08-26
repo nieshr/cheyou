@@ -152,6 +152,7 @@ DD_belatedPNG.fix('.,img,background');
             &nbsp;&nbsp;+&nbsp;&nbsp;配送费用:￥${order.deliverTypeFee?string("0.00")}
             </#if>
             &nbsp;&nbsp;-&nbsp;&nbsp;粮草抵扣:￥${order.pointUse!'0'}
+            &nbsp;&nbsp;-&nbsp;&nbsp;优惠券抵扣:￥${order.couponUse!'0'}
             &nbsp;&nbsp;&nbsp;&nbsp;支付方式：${order.payTypeTitle!''}
           </td>
         </tr>

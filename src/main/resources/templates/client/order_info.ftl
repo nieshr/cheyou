@@ -55,7 +55,7 @@
     var forPaymentFllow = true;
     
     function showaddress(){
-        var shopid = $('#formselect option:selected') .val();
+        var shopid = $('#diys option:selected') .val();
          $.ajax({
                 type: "post",
                 url: "/diysite/order/getaddress",
@@ -70,6 +70,7 @@
                 }
             });      
     }
+    
 </script>
 
 
@@ -202,11 +203,13 @@
                       <select id="prov" class="prov" style="width: 100px;"></select>
                       <select id="city" class="city" style="width: 100px;"></select>
                       <select id="dist" class="dist" style="width: 100px;"></select>
-                      <select id="diys" class="diys" style="width: 100px;"></select>
+                      <select id="diys" class="diys" style="width: 100px;" name="shopId" onchange="showaddress()" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店"></select>
+                      <span id="shopaddress"></span>
                       </div>
                   </dd>
+                  
           </dl>        
-            <span id="shopaddress"></span>
+            
             
        <#--
                  <#if shop_list??>
@@ -233,16 +236,16 @@
         <#include "/client/paybox_common.ftl" />
         <div class="clear h10"></div>
         <div class="car_pay">
-            <span class="mr10 inblock" style="width:100px;">优惠券</span>
+            <span class="mr10 inblock" style="width:100px;">优惠券</span>           
             <select id="couponSelect" name="couponId" onchange="couponChange();">
                 <#if coupon_list??>
                     <option value="" fee="0">不使用优惠券</option>
                     <#list coupon_list as item>
-                        <option value="${item.id?c}">${item.typeTitle!''}</option>
+                        <option value="${item.id?c}" fee="${item.price!''}">${item.typeTitle!''}</option>
                     </#list>
                 </#if>
             </select>&nbsp;&nbsp;
-            <span class="red">抵用金额：￥0.00</span>
+            <span class="red">抵用金额：￥<b id="couponFeee">0.00</b></span>
         </div>
         
         <div class="clear h20"></div>
@@ -250,7 +253,7 @@
         <div class="car_pay">
             <span class="mr10 inblock" style="width:100px;">使用粮草</span>
             <input type="text" name="pointUse" value="0" onchange="pointChange(this, $(this).val(), ${total_point_limit!'0'});" style="width:94px; text-align:right;"/>&nbsp;&nbsp;
-            <span class="red">可用粮草：${total_point_limit!'0'}</span>
+            <span class="red">最高可用粮草：${total_point_limit!'0'}</span>
         </div>
         
         <div class="clear h20"></div>

@@ -29,7 +29,7 @@ public class TdCoupon {
 	@Column
 	private Long typeId;
 	
-	// 优惠券分类类型ID
+	// 优惠券限用分类类型ID
     @Column
     private Long typeCategoryId;
 	
@@ -44,6 +44,10 @@ public class TdCoupon {
     // 优惠券图片
     @Column
     private String typePicUri;
+    
+    // 金额
+    @Column(scale=2)
+    private Double price;
     
     // 所属同盟店
     @Column
@@ -111,7 +115,15 @@ public class TdCoupon {
         this.typeId = typeId;
     }
 
-    public String getTypeTitle() {
+    public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getTypeTitle() {
         return typeTitle;
     }
 

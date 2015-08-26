@@ -1,6 +1,6 @@
 /*
-Ajax 三级省市联动
-日期：2012-7-18
+Ajax 四级省市联动
+日期：2015-8-25
 
 settings 参数说明
 -----
@@ -132,8 +132,6 @@ required:必选项
                 dataType: "json",
                 success: function (data) { 
                 	if (data.code == 0) {
- //               		alert(data.tdDiySites[0].title);
-                		alert(data.tdDiySites.length);
                 		for(var i = 0; i <data.tdDiySites.length; i++)
                 		{
                 			temp_html+="<option value='"+data.tdDiySites[i].id+"'>"+data.tdDiySites[i].title+"</option>";

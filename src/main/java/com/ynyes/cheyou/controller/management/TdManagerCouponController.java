@@ -375,6 +375,7 @@ public class TdManagerCouponController {
                                  coupon.setLeftNumber(leftNumbers[i]);
                                  coupon.setTypeId(typeId);
                                  coupon.setSortId(99L);
+                                 coupon.setPrice(tdCouponType.getPrice());
                              }
                              else
                              {
@@ -393,6 +394,7 @@ public class TdManagerCouponController {
                         coupon.setLeftNumber(leftNumbers[0]);
                         coupon.setTypeId(typeId);
                         coupon.setSortId(99L);
+                        coupon.setPrice(tdCouponType.getPrice());
                     }
                     else
                     {

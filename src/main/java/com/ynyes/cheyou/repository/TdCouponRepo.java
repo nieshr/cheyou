@@ -23,6 +23,8 @@ public interface TdCouponRepo extends
 {
     List<TdCoupon> findByUsernameAndExpireTimeAfterAndIsDistributtedTrueAndIsUsedFalse(String username, Date current);
     
+    List<TdCoupon> findByMobileAndExpireTimeAfterAndIsDistributtedTrueAndIsUsedFalse(String mobile, Date current);
+    
     List<TdCoupon> findByUsernameAndIsDistributtedTrue(String username);
     
     List<TdCoupon> findByTypeIdAndIsDistributtedFalse(Long typeId);
