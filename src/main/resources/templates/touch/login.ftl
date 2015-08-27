@@ -16,7 +16,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-    searchTextClear(".logintext01","手机号/邮箱","#999","#333");
+    searchTextClear(".logintext01","用户名/手机号/邮箱/车牌号","#999","#333");
     searchTextClear(".logintext02","输入密码","#999","#333");
     
     $("#btn_login").click(function(){

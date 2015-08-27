@@ -260,17 +260,25 @@ public class TdOrder {
     @Column
     private Long points;
     
-    // 使用优惠券
+    // 使用优惠券抵用额度
     @Column
     private Double couponUse;
+    
+    @Column
+    private String couponTitle;
     
     // 是否在线付款
     @Column
     private Boolean isOnlinePay;
     
+    // 是否申请售后
+    @Column
+    private Boolean isReturn;
+    //商城收入
     @Column
     private Double platformService;
     
+    //培训费
     @Column
     private Double trainService;
     
@@ -281,6 +289,22 @@ public class TdOrder {
 
 	public void setSmscode(String smscode) {
 		this.smscode = smscode;
+	}
+
+	public String getCouponTitle() {
+		return couponTitle;
+	}
+
+	public void setCouponTitle(String couponTitle) {
+		this.couponTitle = couponTitle;
+	}
+
+	public Boolean getIsReturn() {
+		return isReturn;
+	}
+
+	public void setIsReturn(Boolean isReturn) {
+		this.isReturn = isReturn;
 	}
 
 	public Double getPlatformService() {

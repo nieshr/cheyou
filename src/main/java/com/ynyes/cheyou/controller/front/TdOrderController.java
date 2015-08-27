@@ -1384,6 +1384,7 @@ public class TdOrderController extends AbstractPaytypeController {
                 coupon.setIsUsed(true);
                 tdCouponService.save(coupon);
                 tdOrder.setCouponUse( couponFee);
+                tdOrder.setCouponTitle(coupon.getTypeTitle());
             }
         }
 

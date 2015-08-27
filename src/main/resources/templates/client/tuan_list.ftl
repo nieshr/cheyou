@@ -73,7 +73,7 @@ $(document).ready(function(){
     </section>
     -->
     <section class="team_tit">
-        <a href="/promotion/baituan"><img class="tit" src="/client/images/tg_tit.png"></a>
+        <a href="/promotion/baituan"><img class="tit" src="/client/images/tg_tit1.png"></a>
         <div class="time <#if type??>outtime</#if>">
           <a href="/promotion/tuan">本期团购</a>
         </div>

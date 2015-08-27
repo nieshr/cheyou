@@ -21,6 +21,7 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -450,27 +451,77 @@ public class TdManagerOrderController {
           style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
           
           HSSFCell cell = row.createCell((short) 0);  
-          cell.setCellValue("订单号");  
+          cell.setCellValue("用户名");  
           cell.setCellStyle(style);  
           cell = row.createCell((short) 1);  
-          cell.setCellValue("会员账号");  
+          cell.setCellValue("用户等级");  
           cell.setCellStyle(style);  
           cell = row.createCell((short) 2);  
-          cell.setCellValue("支付方式");  
+          cell.setCellValue("订单编号");  
           cell.setCellStyle(style);  
           cell = row.createCell((short) 3);  
-          cell.setCellValue("配送方式");  
+          cell.setCellValue("同盟店");  
           cell.setCellStyle(style);
           cell = row.createCell((short) 4);  
-          cell.setCellValue("订单状态");  
-          cell.setCellStyle(style);
-          cell = row.createCell((short) 5);  
-          cell.setCellValue("总金额");  
-          cell.setCellStyle(style);
-          cell = row.createCell((short) 6);  
           cell.setCellValue("下单时间");  
           cell.setCellStyle(style);
-        
+          cell = row.createCell((short) 5);  
+          cell.setCellValue("支付时间");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 6);  
+          cell.setCellValue("预约时间");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 7);  
+          cell.setCellValue("服务时间");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 8);  
+          cell.setCellValue("支付金额");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 9);  
+          cell.setCellValue("支付方式");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 10);  
+          cell.setCellValue("订单状态");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 11);  
+          cell.setCellValue("使用购物券");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 12);  
+          cell.setCellValue("使用粮草");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 13);  
+          cell.setCellValue("赠送粮草");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 14);  
+          cell.setCellValue("手动发放粮草");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 15);  
+          cell.setCellValue("售后");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 16);  
+          cell.setCellValue("退款");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 17);  
+          cell.setCellValue("成本价");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 18);  
+          cell.setCellValue("销售价");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 19);  
+          cell.setCellValue("培训费");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 20);  
+          cell.setCellValue("同盟店收入");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 21);  
+          cell.setCellValue("商城收入");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 22);  
+          cell.setCellValue("毛利率");  
+          cell.setCellStyle(style);
+          cell = row.createCell((short) 23);  
+          cell.setCellValue("时间");  
+          cell.setCellStyle(style);
         /**
 		 * @author lc
 		 * @注释：时间删选
@@ -488,7 +539,7 @@ public class TdManagerOrderController {
                     	if (null != exportUrl) {
                     		Page<TdOrder> tdOrderPage = tdOrderService.findAllOrderByIdDesc(page, size);
                           	
-                          	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                           		download(wb, username, resp);
 							}                          	                          
 						}
@@ -501,7 +552,7 @@ public class TdManagerOrderController {
                 		if (null != exportUrl) {
                     		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdOrderByIdDesc(type, page, size);
                           	
-                          	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                           		download(wb, username, resp);
 							}                         	                           
 						}
@@ -515,7 +566,7 @@ public class TdManagerOrderController {
     					if (null != exportUrl) {
                     		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusOrderByIdDesc(statusId, page, size);
                           	
-                          	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                           		download(wb, username, resp);
 							}                         	                           
 						}
@@ -528,7 +579,7 @@ public class TdManagerOrderController {
     	        		if (null != exportUrl) {
                     		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTypeOrderByIdDesc(statusId, type, page, size);
                           	
-                          	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                           		download(wb, username, resp);
 							}                         	                           
 						}
@@ -555,7 +606,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -568,7 +619,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -583,7 +634,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -596,7 +647,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -619,7 +670,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -632,7 +683,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -647,7 +698,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -660,7 +711,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -683,7 +734,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -696,7 +747,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -711,7 +762,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -724,7 +775,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -747,7 +798,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -760,7 +811,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -775,7 +826,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -788,7 +839,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -811,7 +862,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -824,7 +875,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -839,7 +890,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -852,7 +903,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -875,7 +926,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByTimeAfterOrderByIdDesc(time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -888,7 +939,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdAndTimeAfterOrderByIdDesc(type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -903,7 +954,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusAndTimeAfterOrderByIdDesc(statusId, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -916,7 +967,7 @@ public class TdManagerOrderController {
 	        		if (null != exportUrl) {
                 		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(statusId, type, time, page, size);
                       	
-                      	if (ImportData(tdOrderPage, row, cell, sheet)) {
+                      	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
                       		download(wb, username, resp);
 						}                         	                           
 					}
@@ -948,38 +999,123 @@ public class TdManagerOrderController {
 	 * @注释：将page中的订单数据存入excel表格中
 	 */
     @SuppressWarnings("deprecation")
-	public boolean ImportData(Page<TdOrder> tdOrderPage, HSSFRow row, HSSFCell cell, HSSFSheet sheet){
+	public boolean ImportData(Page<TdOrder> tdOrderPage, HSSFRow row, HSSFCell cell, HSSFSheet sheet, int timeid){
+    	
     	for (int i = 0; i < tdOrderPage.getContent().size(); i++)  
         {  
+    	 				
             row = sheet.createRow((int) i + 1);  
             TdOrder tdOrder = tdOrderPage.getContent().get(i);  
+            //获取用户信息
+            TdUser tdUser = tdUserService.findByUsername(tdOrder.getUsername());
             // 第四步，创建单元格，并设置值  
-            row.createCell((short) 0).setCellValue(tdOrder.getOrderNumber());  
-            row.createCell((short) 1).setCellValue(tdOrder.getUsername());  
-            row.createCell((short) 2).setCellValue(tdOrder.getPayTypeTitle());
-            row.createCell((short) 3).setCellValue(tdOrder.getDeliverTypeTitle());
-            if (tdOrder.getStatusId().equals(2L)) {
-            	row.createCell((short) 4).setCellValue("待付款");
-			}else if (tdOrder.getStatusId().equals(3L)) {
-				row.createCell((short) 4).setCellValue("待付尾款");
-			}else if (tdOrder.getStatusId().equals(4L)) {
-				row.createCell((short) 4).setCellValue("待服务");
-			}else if (tdOrder.getStatusId().equals(5L)) {
-				row.createCell((short) 4).setCellValue("待评价 ");
-			}else if (tdOrder.getStatusId().equals(6L)) {
-				row.createCell((short) 4).setCellValue("已完成");
-			}else if (tdOrder.getStatusId().equals(7L)) {
-				row.createCell((short) 4).setCellValue("已取消");
-			}else if (tdOrder.getStatusId().equals(8L)) {
-				row.createCell((short) 4).setCellValue("支付取消(失败)");
-			}else if (tdOrder.getStatusId().equals(9L)) {
-				row.createCell((short) 4).setCellValue("已删除");
+            row.createCell((short) 0).setCellValue(tdOrder.getUsername());
+            if (null != tdUser) {
+            	row.createCell((short) 1).setCellValue(tdUser.getUserLevelTitle()); 
+			}          
+            row.createCell((short) 2).setCellValue(tdOrder.getOrderNumber());
+            if (null != tdOrder.getShopTitle()) {
+            	row.createCell((short) 3).setCellValue(tdOrder.getShopTitle());
 			}
+            if (null != tdOrder.getOrderTime()) {
+            	cell = row.createCell((short) 4);  
+                cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getOrderTime()));
+			}           
+            if (null != tdOrder.getPayTime()) {
+            	cell = row.createCell((short) 5);  
+                cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getPayTime()));
+			} 
+            if (null != tdOrder.getAppointmentTime()) {
+            	cell = row.createCell((short) 6);  
+                cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getAppointmentTime()));
+			} 
+            if (null != tdOrder.getServiceTime()) {
+            	cell = row.createCell((short) 7);  
+                cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getServiceTime()));
+			} 
+            if (null != tdOrder.getTotalPrice()) {
+            	row.createCell((short) 8).setCellValue(tdOrder.getTotalPrice());
+            } 
+            if (null != tdOrder.getPayTypeTitle()) {
+            	row.createCell((short) 9).setCellValue(tdOrder.getPayTypeTitle());
+            }    
+            if (tdOrder.getStatusId().equals(2L)) {
+            	row.createCell((short) 10).setCellValue("待付款");
+			}else if (tdOrder.getStatusId().equals(3L)) {
+				row.createCell((short) 10).setCellValue("待付尾款");
+			}else if (tdOrder.getStatusId().equals(4L)) {
+				row.createCell((short) 10).setCellValue("待服务");
+			}else if (tdOrder.getStatusId().equals(5L)) {
+				row.createCell((short) 10).setCellValue("待评价 ");
+			}else if (tdOrder.getStatusId().equals(6L)) {
+				row.createCell((short) 10).setCellValue("已完成");
+			}else if (tdOrder.getStatusId().equals(7L)) {
+				row.createCell((short) 10).setCellValue("已取消");
+			}else if (tdOrder.getStatusId().equals(8L)) {
+				row.createCell((short) 10).setCellValue("支付取消(失败)");
+			}else if (tdOrder.getStatusId().equals(9L)) {
+				row.createCell((short) 10).setCellValue("已删除");
+			} 
+            if (null != tdOrder.getCouponTitle()) {
+            	row.createCell((short) 11).setCellValue(tdOrder.getCouponTitle());
+			}
+            if (null != tdOrder.getPointUse()) {
+            	row.createCell((short) 12).setCellValue(tdOrder.getPointUse());
+			}
+			if (null != tdOrder.getPoints()) {
+				row.createCell((short) 13).setCellValue(tdOrder.getPoints());
+			}
+			row.createCell((short) 14).setCellValue("");
+			if (null != tdOrder.getIsReturn()) {
+				 if (tdOrder.getIsReturn()) {
+		            	row.createCell((short) 15).setCellValue("已申请售后");
+					}else{
+						row.createCell((short) 15).setCellValue("无");
+				}
+			}    
+            row.createCell((short) 16).setCellValue("");
             
-            row.createCell((short) 5).setCellValue(tdOrder.getTotalPrice());
-            cell = row.createCell((short) 6);  
-            cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getOrderTime()));                                
-      
+            Double totalprice = 0.0;
+            for(TdOrderGoods tdOrderGoods : tdOrder.getOrderGoodsList()){
+            	TdGoods tdGoods = tdGoodsService.findOne(tdOrderGoods.getGoodsId());
+            	if (null != tdGoods && null != tdGoods.getCostPrice()) {
+					totalprice += tdGoods.getCostPrice();
+				}
+            }
+            row.createCell((short) 17).setCellValue(totalprice); //成本价
+            if (null != tdOrder.getTotalGoodsPrice()) {
+            	row.createCell((short) 18).setCellValue(tdOrder.getTotalGoodsPrice());
+			}
+            if (null != tdOrder.getTrainService()) {
+            	row.createCell((short) 19).setCellValue(tdOrder.getTrainService());
+			}
+			if (null != tdOrder.getRebate()) {
+				row.createCell((short) 20).setCellValue(tdOrder.getRebate());
+			}
+           
+            if (null != tdOrder.getPlatformService()) {
+            	row.createCell((short) 21).setCellValue(tdOrder.getPlatformService());
+			}
+            if (null != tdOrder.getPlatformService()) {
+            	double temp = tdOrder.getPlatformService()/tdOrder.getTotalGoodsPrice();
+                row.createCell((short) 22).setCellValue(temp);
+			}
+            if (timeid==0) {
+            	row.createCell((short) 23).setCellValue("所有");
+			}else if (timeid==1) {
+				row.createCell((short) 23).setCellValue("今天");
+			}else if (timeid==2) {
+				row.createCell((short) 23).setCellValue("最近一周");
+			}else if (timeid==3) {
+				row.createCell((short) 23).setCellValue("最近一个月");
+			}else if (timeid==4) {
+				row.createCell((short) 23).setCellValue("最近三个月");
+			}else if (timeid==6) {
+				row.createCell((short) 23).setCellValue("最近半年");
+			}else if (timeid==12) {
+				row.createCell((short) 23).setCellValue("近一年");
+			}
+         
         } 
     	return true;
     }

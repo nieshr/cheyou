@@ -47,8 +47,9 @@ function submitConsult()
         url:"/user/consult/add?" + $("#consultForm").serialize(),
         success:function(res){
             if (0 == res.code)
-            {
+            {            	
                 alert("提交咨询成功，请耐心等待审核~~");
+                $("#content").val('');
             }
             else
             {

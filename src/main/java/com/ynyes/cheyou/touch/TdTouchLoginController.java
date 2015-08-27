@@ -191,27 +191,43 @@ public class TdTouchLoginController {
         
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
         
-        if (null == user)
+        if (null != user)
         {
-            res.put("msg", "不存在该用户");
+        	if (!user.getPassword().equals(password))
+            {
+                res.put("msg", "密码错误");
+                return res;
+            }
+        	user.setLastLoginTime(new Date());
+             
+            tdUserService.save(user);
+             
+            request.getSession().setAttribute("username", username);
+             
+            res.put("code", 0);
             return res;
         }
         
-        if (!user.getPassword().equals(password))
-        {
-            res.put("msg", "密码错误");
+        user = tdUserService.findByMobileAndIsEnabled(username);
+        if (null != user) {
+        	if (!user.getPassword().equals(password))
+            {
+                res.put("msg", "密码错误");
+                return res;
+            }
+        	user.setLastLoginTime(new Date());
+             
+            tdUserService.save(user);
+             
+            request.getSession().setAttribute("username", user.getUsername());
+             
+            res.put("code", 0);
             return res;
-        }
+		}else{
+			res.put("msg", "不存在该用户");
+			return res;
+		}
         
-        user.setLastLoginTime(new Date());
-        
-        tdUserService.save(user);
-        
-        request.getSession().setAttribute("username", username);
-        
-        res.put("code", 0);
-        
-        return res;
     }
     
     /**

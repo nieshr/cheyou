@@ -24,6 +24,7 @@ hideMap();
 
 function loadMap(x, y)
 {
+    scroll(0,0);
     showMap();
     // 百度地图API功能
     /*
@@ -138,7 +139,7 @@ function hideSerivceStars()
             <p class="p2">详细地址：${item.address}</p>
             <p class="p2">
               <a href="javascript:loadMap(<#if item.longitude??>${item.longitude?string("0.000000")}<#else>110</#if>, <#if item.latitude??>${item.latitude?string("0.000000")}<#else>39</#if>);">查看地图</a>
-            <a class="a2" href="tel://${item.complainTele}">拨打电话</a>
+            <a class="a2" href="tel://${item.serviceTele}">拨打电话</a>
             </p>
             <div class="clear"></div>
           </li>

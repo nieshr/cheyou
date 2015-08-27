@@ -30,7 +30,7 @@
                                 <label style="float:left; margin-right:10px;">赠品:</label>
                                 <#list gl.giftList as gl>
                                     <a href="/goods/${gl.goodsId?c}" title="${gl.goodsTitle}" style="display:block; float:left; width:50px; height:33px; overflow:hidden; float:left;">
-                                    <img src="${gl.coverImageUri}" width="50" />
+                                    <img src="${gl.coverImageUri}" width="30" height="30" />
                                     </a>
                                 </#list>
                             </#if>

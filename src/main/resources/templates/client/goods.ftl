@@ -714,7 +714,7 @@ function checkTime(i)
                     <input type="hidden" name="goodsId" value=${goods.id?c} />
                     <h3 class="lh30 fs18 fw400 pb10"><span class="circle_tit">我要咨询</span></h3>
                     <menu>
-                        <textarea name="content" datatype="*5-255" nullmsg="请输入咨询内容"></textarea>
+                        <textarea id="content" name="content" datatype="*5-255" nullmsg="请输入咨询内容"></textarea>
                     </menu>
                     <p>温馨提示：我们将尽快回复您的咨询。</p>
                     <div class="clear"></div>

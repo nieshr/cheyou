@@ -174,6 +174,7 @@ DD_belatedPNG.fix('.,img,background');
         <tbody>
         <tr class="mymember_infotab_tit01">
           <th colspan="2">商品信息</th>
+          <th>赠品</th>
           <th>单价</th>
           <th>数量</th>
         </tr>   
@@ -183,7 +184,26 @@ DD_belatedPNG.fix('.,img,background');
                   <td width="60" class="td001">
                     <a href="/goods/${og.goodsId?c}"><img src="${og.goodsCoverImageUri}"></a>
                   </td>
-                  <td><a href="/goods/${og.goodsId?c}">${og.goodsTitle}</a></td>
+                  <td>
+                    <a href="/goods/${og.goodsId?c}">${og.goodsTitle}</a>                 
+                  </td>
+                  <td width="260">
+                  <#if goods_list??>
+                    <#list goods_list as goodslist>
+                        <#if goodslist.id == og.goodsId>
+                            <#if goodslist.giftList??>
+                              <#list goodslist.giftList as gl>
+                                <#if gl_index < 5>
+                                    <a href="/goods/${gl.goodsId?c}" title="${gl.goodsTitle}" style="display:block; float:left; width:50px; height:33px; overflow:hidden; float:left;">
+                                        <img src="${gl.coverImageUri}" width="30" height="30" />
+                                    </a>
+                                </#if>
+                              </#list>
+                            </#if>
+                        </#if>
+                    </#list>
+                  </#if>
+                  </td>
                   <td>${og.price?string("#.##")}</td>
                   <td>${og.quantity!''}</td>
                 </tr>

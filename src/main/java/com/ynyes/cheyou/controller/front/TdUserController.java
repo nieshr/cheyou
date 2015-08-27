@@ -1,5 +1,6 @@
 package com.ynyes.cheyou.controller.front;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -350,7 +351,20 @@ public class TdUserController extends AbstractPaytypeController {
         if (null != id) {
             map.addAttribute("order", tdOrderService.findOne(id));
         }
-
+        
+        TdOrder tdOrder = tdOrderService.findOne(id);
+        if (null != tdOrder) {
+        	List<TdGoods> tdGoodslist = new ArrayList<>();
+            for(TdOrderGoods tdOrderGood : tdOrder.getOrderGoodsList()){
+             	TdGoods tdGoods = tdGoodsService.findOne(tdOrderGood.getGoodsId());
+             	if (null != tdGoods) {
+					tdGoodslist.add(tdGoods);
+				}
+            }
+            map.addAttribute("goods_list", tdGoodslist);
+		}
+       
+        
         // 支付方式列表
         setPayTypes(map, false, true, req);
 
@@ -625,7 +639,18 @@ public class TdUserController extends AbstractPaytypeController {
         if (null != id) {
             map.addAttribute("order", tdOrderService.findOne(id));
         }
-
+        TdOrder tdOrder = tdOrderService.findOne(id);
+        if (null != tdOrder) {
+        	List<TdGoods> tdGoodslist = new ArrayList<>();
+            for(TdOrderGoods tdOrderGood : tdOrder.getOrderGoodsList()){
+             	TdGoods tdGoods = tdGoodsService.findOne(tdOrderGood.getGoodsId());
+             	if (null != tdGoods) {
+					tdGoodslist.add(tdGoods);
+				}
+            }
+            map.addAttribute("goods_list", tdGoodslist);
+		}
+        
         // 支付方式列表
         setPayTypes(map, false, true, req);
 
@@ -955,6 +980,8 @@ public class TdUserController extends AbstractPaytypeController {
                         // 该商品已经退换货
                         tog.setIsReturnApplied(true);
                         tdOrderGoodsService.save(tog);
+                        order.setIsReturn(true);
+                        tdOrderService.save(order);
                         break;
                     }
                 }

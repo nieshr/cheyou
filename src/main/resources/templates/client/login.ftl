@@ -81,7 +81,7 @@
 </header>
 <div class="logingbg">
     <section class="loginbox">
-        <p>请输入用户名/邮箱/车牌号码/手机号</p>
+        <p>请输入用户名/手机号/邮箱/车牌号码/</p>
         <input id="txt_loginId" class="text" type="text" />
         <p>请输入密码</p>
         <input id="txt_loginPwd" class="text" type="password" />

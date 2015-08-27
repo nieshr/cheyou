@@ -164,7 +164,7 @@ function autochange(){
     if(nowDate>fourteenDate){
         miaoClockChang(1);
     }
-    else if(nowDate>twentyDate){
+    if(nowDate>twentyDate){
         miaoClockChang(2);
     }
      <#if miao_10_leftnumber?? && miao_14_leftnumber?? && miao_20_leftnumber??>
