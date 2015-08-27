@@ -173,7 +173,7 @@ function move()
             <#if keywords_list??>
                 <#list keywords_list as item>
                     <#if item_index gt 0>
-                    <a href="${item.linkUri!''}">${item.title}</a>
+                    <a href="${item.linkUri!''}">${item.title}</a>&nbsp;
                     </#if>
                 </#list>
             </#if>

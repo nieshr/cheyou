@@ -65,8 +65,10 @@ function __doPostBack(eventTarget, eventArgument) {
     <th width="8%">选择</th>
     <th align="left">优惠券类型</th>
     <th align="left">同盟店</th>
-    <th align="left" width="17%">姓名</th>
-    <th align="left" width="17%">领用时间</th>
+    <th align="left" width="11%">姓名</th>
+    <th align="left" width="11%">电话</th>
+    <th align="left" width="11%">车牌</th>
+    <th align="left" width="11%">领用时间</th>
     <th align="left" width="17%">有效截止时间</th>
     <#--
     <th align="left" width="12%">排序</th>
@@ -86,6 +88,8 @@ function __doPostBack(eventTarget, eventArgument) {
                 <td>${item.typeTitle!""}</td>
                 <td>${item.diySiteTitle!""}</td>
                 <td>${item.username!""}</td>
+                <td>${item.mobile!""}</td>
+                <td>${item.carCode!""}</td>
                 <td><#if item.getTime??>${item.getTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
                 <td><#if item.expireTime??>${item.expireTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
                 <#--

@@ -46,7 +46,7 @@ function checkTime(i)
 
 <div class="main">
     <section class="team_tit">
-        <img class="tit" src="/client/images/tg_tit.png">
+        <img class="tit" src="/client/images/miao.png">
         <div class="time <#if type??>outtime</#if>">
           <a href="/promotion/miao">正在抢拍</a>
         </div>
