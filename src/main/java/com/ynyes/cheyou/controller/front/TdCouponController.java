@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdCoupon;
 import com.ynyes.cheyou.entity.TdCouponType;
+import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdCouponService;
 import com.ynyes.cheyou.service.TdCouponTypeService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdUserRecentVisitService;
+import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.util.SMSUtil;
 
 /**
@@ -43,6 +45,9 @@ public class TdCouponController {
 	
 	@Autowired
     private TdCommonService tdCommonService;
+	
+	@Autowired
+	private TdUserService tdUserService;
 	
 	@Autowired
     private TdUserRecentVisitService tdUserRecentVisitService;
@@ -77,7 +82,12 @@ public class TdCouponController {
                 map.addAttribute("distributed_coupon_" + ct.getId() + "_list", disCouponList);
             }
         }
-        
+        //传入用户信息
+        String username = (String) req.getSession().getAttribute("username");
+        TdUser tdUser = tdUserService.findByUsername(username);
+        if (null != tdUser) {
+        	 map.addAttribute("user", tdUser);
+		}
         return "/client/coupon_list";
     }
 	

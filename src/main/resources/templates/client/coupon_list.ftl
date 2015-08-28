@@ -86,11 +86,11 @@ function hideDialog()
                 <span class="Validform_checktip">请填写领取信息</span>
                 <input id="couponId" name="couponId" class="text" type="hidden" value="" datatype="n"/>
                 <p><b style="color: #FF0000;">*</b> 请输入姓名</p>
-                <input class="text" name="username" type="text" datatype="*"  nullmsg="请输入姓名"/>
+                <input class="text" name="username" value="<#if user??>${user.realName!''}</#if>" type="text" datatype="*"  nullmsg="请输入姓名"/>
                 <p>请输入车牌</p>
-                <input class="text" name="carCode" type="text" />
+                <input class="text" name="carCode" value="<#if user??>${user.carCode!''}</#if>" type="text" />
                 <p><b style="color: #FF0000;">*</b> 请输入手机</p>
-                <input class="text" name="mobile" type="text" datatype="m" nullmsg="请输入手机号" errormsg="请输入正确的手机号"/>
+                <input class="text" name="mobile" value="<#if user??>${user.mobile!''}</#if>" type="text" datatype="m" nullmsg="请输入手机号" errormsg="请输入正确的手机号"/>
                 <p><b style="color: #FF0000;">*</b> 请输入验证码</p>
                 <div class="clear"></div>
                 <input class="text fl" name="code" type="text" style="width:35%;" datatype="*4-4" nullmsg="请输入验证码" errormsg="验证码为4位字符"/>
