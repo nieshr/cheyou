@@ -727,9 +727,11 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	}
 #indexadpre,#indexadnext,#indexadnum { display:none;}
 .index_topcheck {
-	width:100%;
-	height:34px;
-	background:#727071;}
+  width: 100%;
+  height: 34px;
+  background: url(../images/images/darkbg.png) repeat;
+  margin-top: -33px;
+} 
 .index_topcheck a {
 	display:block;
 	_display: inline;
@@ -741,9 +743,10 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	color:#fff;
 	text-align:center;
 	overflow:hidden;}
-.index_topcheck a:hover,.index_topcheck a.sel {
-	color:#fff;
-	background:url(../images/images/index_check.png) no-repeat;}
+.index_topcheck a:hover, .index_topcheck a.sel {
+  color: #fff;
+  background: #ff4454;
+}
 .index_topsum {
 	width:100%;
 	height:200px;
@@ -775,15 +778,18 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	overflow:hidden;
 	padding-top:455px;}
 .indextit {
-	height:40px;
-	width:100%;
-	border-bottom:1px solid #363543;}
+  height: 40px;
+  width: 100%;
+  border-bottom: 2px solid #ff4454;
+}
 .indextit h3 {
   display: inline-block;
   float: left;
   line-height: 38px;
   font-size: 16px;
-  padding: 0 5px 0 20px;}
+  color: #ff4454;
+  padding: 0 5px 0 20px;
+}
 .indextit a.a1 {
 	display:inline-block;
 	padding:10px 0 0;
@@ -802,7 +808,9 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	height:30px;
 	}
 .indextit menu a.sel {
-	background:url(../images/images/index_ico06.png) no-repeat center bottom;}
+  background: url(../images/images/index_ico06.png) no-repeat center bottom;
+  color: #ff4454;
+}
 .index_knock {
 	width:100%;
 	margin-top:15px;
@@ -817,13 +825,14 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	float:left;
 	}
 .index_knock menu a {
-	display:block;
-	background:#727071;
-	width:100%;
-	color:#fff;
-	text-align:center;
-	line-height:85px;
-	margin-bottom:3px;}
+  display: block;
+  background: #ff4454;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  line-height: 85px;
+  margin-bottom: 3px;
+}
 .index_knock menu a:hover,.index_knock menu a.sel {
 	background:#e50112;}
 .index_knock menu a.sel i {
@@ -952,18 +961,22 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	left:0;
 	top:0;}
 #teamadmenu {
-	width:100%;
-	height:38px;
-	overflow:hidden;
-	line-height:38px;
-	background:#010101;}
+  width: 100%;
+  height: 38px;
+  overflow: hidden;
+  line-height: 38px;
+  background: url(../images/images/darkbg.png) repeat;
+  margin-top: -38px;
+}
 #teamadmenu a {
 	display:block;
 	float:left;
 	color:#fff;
 	text-align:center;
 	width:14.2%;}
-#teamadmenu a.sel { background:#9e1737;}
+#teamadmenu a.sel {
+  background: #ff4454;
+}
 .index_gz {
 	width:320px;
 	padding:0 20px;
@@ -972,7 +985,9 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
   font-size: 16px;
   line-height: 40px;
   text-indent: 15px;
-  border-bottom: 1px solid #010101; } 
+  border-bottom: 2px solid #ff4454;
+  color: #ff4454;
+} 
 .index_gz p {
 	width:100%;
 	/*margin-top:10px;*/

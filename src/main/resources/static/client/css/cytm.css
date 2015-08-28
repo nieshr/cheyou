@@ -6,8 +6,16 @@
 .top2{height:100px; position:relative; z-index:99;}
 .logo{width:200px; height:100px; float:left;}
 .ssbox{ float: left;margin-top:28px;margin-left:55px;}
-.ss_txt{width:532px;height:42px;border: 2px solid #222222;float:left;padding-left:10px;font-size:14px;line-height: 38px; display:block;}
-.ss_btn{width:97px;height:46px;float:left;font-size: 16px;text-align: center;line-height: 42px;color: #fff; cursor: pointer;background:url(../images/sousuo_03.png) no-repeat ; display:block; border:none;}
+.ss_txt {
+  width: 532px;
+  height: 42px;
+  border: 2px solid #ff4454;
+  float: left;
+  padding-left: 10px;
+  font-size: 14px;
+  line-height: 38px;
+  display: block;
+}.ss_btn{width:97px;height:46px;float:left;font-size: 16px;text-align: center;line-height: 42px;color: #fff; cursor: pointer;background:url(../images/sousuo_03.png) no-repeat ; display:block; border:none;}
 .ss_btn:hover{width:97px;height:46px;float:left;font-size: 16px;text-align: center;line-height: 42px;color: #fff; cursor: pointer;background:url(../images/sousuohover_03.png) ; display:block; border:none;}
 .tpgg{float:left; width:70px; height:38px; float:left; margin-top:33px;}
 
@@ -43,14 +51,15 @@
 .down{height:113px;}
 .down2 {
   height: auto;
-  background: #b41e1e;
+  background: #fff;
   text-align: center;
-  color: #FFF;
+  color: #333;
   line-height: 30px;
+  border-top: solid 3px #ff4454;
 }
 .youqin{margin-left:25px;}
 .down2 li{width:133px; float:left;}
-.down2 a{color:#FFF;}
+.down2 a{color:#333;}
 .down2 a:hover{color:#1c2b38;}
 
 .sousuohuise a{color:#ccc;}
