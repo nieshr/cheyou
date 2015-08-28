@@ -1622,7 +1622,11 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </ul>
         
     <div class="clear h30"></div> 
-    
+    <section class="indextit">
+        <h3>百人团购 </h3>
+        <div class="clear"></div>
+    <section>
+    <div class="clear h10"></div>
   <#-- 车友还想团购 -->
   <div id="demand-div" class="mianfeilingqutanchu2" style="display:none;">
     <div class="mianfeilingqutanchu_dl2"> 
@@ -1693,9 +1697,9 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </section>
     
     <section class="index_gz">
-        <h3>百人团购
+  <!--      <h3>百人团购
             <a class="a1" style="font-size:14px; margin-left:12px;" href="/info/content/57?mid=12">团购细则</a>    
-        </h3>
+        </h3>  -->
             <#if baituan_cur_page??>
                 <#list baituan_cur_page.content as item>
                     <p>
@@ -1709,7 +1713,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </section>
     
     <section class="index_mt">
-        <h3>车友还想团购</h3>
+  <!--      <h3>车友还想团购</h3> -->
         <#if demand_list??>
 
            <#assign n = 0>

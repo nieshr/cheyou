@@ -76,6 +76,7 @@ DD_belatedPNG.fix('.,img,background');
                     <tr class="mymember_infotab_tit01">
                         <th>订单编号</th>
                         <th width="80">收货人</th>
+                        <th width="80">收货电话</th>
                         <th width="90">订单金额</th>
                         <th width="90">
                             <select name="timeId" onchange="javascript:setTimeout(__doPostBack('statusId',''), 0)">
@@ -97,6 +98,7 @@ DD_belatedPNG.fix('.,img,background');
                                                                                                                  订单编号：<a href="/diysite/order?id=${order.id?c}" id="spanOrderNumber">${order.orderNumber!''}</a>
                               </td>
                               <td>${order.shippingName!''}</td>
+                              <td>${order.shippingPhone!''}</td>
                               <td>
                                 <p>￥${order.totalPrice?string("#.##")}</p>
                                 <p>${order.payTypeTitle!''}</p>

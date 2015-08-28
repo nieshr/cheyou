@@ -975,8 +975,8 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
   border-bottom: 1px solid #010101; } 
 .index_gz p {
 	width:100%;
-	margin-top:10px;
-	line-height:30px;}
+	/*margin-top:10px;*/
+	line-height:24px;}
 .index_gz p a {
   margin-right: 10px;
   font-size: 15px; }
