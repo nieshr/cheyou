@@ -81,7 +81,7 @@ public class TdIndexController {
                 if (null != tdCat.getTitle() && tdCat.getTitle().equals("商城快报"))
                 {
                     map.addAttribute("news_page", tdArticleService
-                            .findByMenuIdAndCategoryIdAndIsEnableOrderByIdDesc(10L,
+                            .findByMenuIdAndCategoryIdAndIsEnableOrderBySortIdAsc(10L,
                                     tdCat.getId(), 0, ClientConstant.pageSize));
                     break;
                 }

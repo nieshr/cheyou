@@ -74,6 +74,7 @@ DD_belatedPNG.fix('.,img,background');
                 </div>
                 <table>
                     <tr class="mymember_infotab_tit01">
+                        <th>序号</th>
                         <th>订单编号</th>
                         <th width="80">用户</th>
                         <th width="80">收货电话</th>
@@ -95,6 +96,7 @@ DD_belatedPNG.fix('.,img,background');
                     <#if order_page??>
                         <#list order_page.content as order>                            
                             <tr>
+                              <td>${order_index+1}</td>
                               <td>
                                                                                                                  订单编号：<a href="/diysite/order?id=${order.id?c}" id="spanOrderNumber">${order.orderNumber!''}</a>
                               </td>

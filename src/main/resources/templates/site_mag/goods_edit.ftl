@@ -585,14 +585,14 @@ function del_goods_comb(obj) {
             <dt>同盟店返利比例</dt>
             <dd>
                 <input name="shopReturnRation" type="text" value="<#if goods?? && goods.shopReturnRation??>${goods.shopReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
-                <span class="Validform_checktip">同盟店返利 = 成本价 * 同盟店返利比例</span>
+                <span class="Validform_checktip">同盟店返利 = 销售价 * 同盟店返利比例</span>
             </dd>
         </dl>
         <dl>
             <dt>平台服务费比例</dt>
             <dd>
                 <input name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.00")}<#else>0.06</#if>" class="input normal" sucmsg="">
-                <span class="Validform_checktip">平台服务费 = 成本价  * 平台服务费比例</span>
+                <span class="Validform_checktip">平台服务费 = 销售价 * 平台服务费比例</span>
             </dd>
         </dl>
         <dl>

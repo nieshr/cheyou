@@ -326,7 +326,9 @@ public class TdDiysiteController {
     			
 			}
     		else{
-    			sales += list.get(i).getTotalPrice();
+    			if (null != list.get(i).getOrderIncome()) {
+    				sales += list.get(i).getOrderIncome();
+				}			
     		}
     	}
     	return sales;

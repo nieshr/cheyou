@@ -16,8 +16,8 @@
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 
 
-<link href="/client/css/style.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+<link href="/client/css/style.css" rel="stylesheet" type="text/css" /> 
+<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" /> 
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
 
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
@@ -615,7 +615,7 @@ function delItem(id)
         </p>
         <a class="index_free" href="/coupon/list">免费洗车券</a>
         <a class="index_free" href="/coupon/list">免费打蜡券</a>
-        <a class="index_free" href="/coupon/list">200元优惠券</a>
+        <a class="index_free" href="/coupon/list">999元优惠券</a>
         <div class="index_ask">          
             <a class="fl" href="javascript:;">免费询价</a>
             <a class="fr" href="javascript:;">免费安装</a>
@@ -1622,11 +1622,22 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </ul>
         
     <div class="clear h30"></div> 
-    <section class="indextit">
+<!--     <section class="indextit">
         <h3>百人团购 </h3>
         <div class="clear"></div>
     <section>
-    <div class="clear h10"></div>
+    <div class="clear h10"></div>  -->
+    <section class="indextit" style="width: 80%;float: left;">
+        <h3 style="width: 200px;float: left;">百人团购  
+            <a href="/info/content/57?mid=12" style="font-size: 14px;margin-left: 10px;color:#777;">团购细则</a>
+        </h3>
+    </section>
+
+    <section class="indextit" style=" width: 19%;float: right;">  
+        <h3 style="width: 200px;float: left;">车友还想团              
+        </h3>
+    </section> 
+    <div class="clear"></div>  
   <#-- 车友还想团购 -->
   <div id="demand-div" class="mianfeilingqutanchu2" style="display:none;">
     <div class="mianfeilingqutanchu_dl2"> 
@@ -1697,7 +1708,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </section>
     
     <section class="index_gz">
-  <!--      <h3>百人团购
+ <!--     <h3>百人团购
             <a class="a1" style="font-size:14px; margin-left:12px;" href="/info/content/57?mid=12">团购细则</a>    
         </h3>  -->
             <#if baituan_cur_page??>
@@ -1713,7 +1724,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </section>
     
     <section class="index_mt">
-  <!--      <h3>车友还想团购</h3> -->
+ <!--   <h3>车友还想团购</h3> -->
         <#if demand_list??>
 
            <#assign n = 0>

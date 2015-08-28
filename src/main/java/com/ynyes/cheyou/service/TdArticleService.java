@@ -103,6 +103,22 @@ public class TdArticleService {
         return repository.findByMenuIdAndCategoryIdAndStatusIdOrderByIdDesc(menuId, catId, 0L, pageRequest);
     }
     
+    /**
+	 * @author lc
+	 * @注释：按sortid 排序
+	 */
+    public Page<TdArticle> findByMenuIdAndCategoryIdAndIsEnableOrderBySortIdAsc(Long menuId, Long catId, int page, int size)
+    {
+        if (null == menuId && null == catId)
+        {
+            return null;
+        }
+        
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByMenuIdAndCategoryIdAndStatusIdOrderBySortIdAsc(menuId, catId, 0L, pageRequest);
+    }
+    
     public Page<TdArticle> findByChannelIdAndCategoryId(Long channelId, Long catId, int page, int size)
     {
         if (null == channelId && null == catId)

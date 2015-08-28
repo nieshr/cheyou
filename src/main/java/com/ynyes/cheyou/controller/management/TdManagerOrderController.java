@@ -1089,8 +1089,8 @@ public class TdManagerOrderController {
             if (null != tdOrder.getTrainService()) {
             	row.createCell((short) 19).setCellValue(tdOrder.getTrainService());
 			}
-			if (null != tdOrder.getRebate()) {
-				row.createCell((short) 20).setCellValue(tdOrder.getRebate());
+			if (null != tdOrder.getOrderIncome()) {
+				row.createCell((short) 20).setCellValue(tdOrder.getOrderIncome());
 			}
            
             if (null != tdOrder.getPlatformService()) {
@@ -1456,6 +1456,9 @@ public class TdManagerOrderController {
                         Double totalCash = 0.0;
                         Double platformService = 0.0;
                         Double trainService = 0.0;
+                        Double shopOrderincome = 0.0;
+                        Double totalSaleprice = 0.0; //订单商品总销售价
+                        Double totalCostprice = 0.0; //订单商品总成本价
                         // 返利总额
                         if (null != tdOrderGoodsList) {
                             for (TdOrderGoods tog : tdOrderGoodsList) {
@@ -1464,22 +1467,26 @@ public class TdManagerOrderController {
                                     TdGoods tdGoods = tdGoodsService.findOne(tog.getGoodsId());
 
                                     if (null != tdGoods && null != tdGoods.getReturnPoints()) {
-                                        totalPoints += tdGoods.getReturnPoints();
+                                        totalPoints += tdGoods.getReturnPoints()* tog.getQuantity();
 
                                         if (null != tdGoods.getShopReturnRation()) {
-                                            totalCash += tdGoods.getCostPrice()
-                                                    * tdGoods.getShopReturnRation();
+                                            totalCash += tdGoods.getSalePrice()
+                                                    * tdGoods.getShopReturnRation()* tog.getQuantity();
                                         }
                                     }
                                     if (null != tdGoods && null != tdGoods.getPlatformServiceReturnRation()) {
-                                    	platformService += tdGoods.getCostPrice() * tdGoods.getPlatformServiceReturnRation();
+                                    	platformService += tdGoods.getSalePrice() * tdGoods.getPlatformServiceReturnRation()* tog.getQuantity();
                 					}
                                     if (null != tdGoods && null != tdGoods.getTrainServiceReturnRation()) {
-                                    	trainService += tdGoods.getCostPrice() * tdGoods.getTrainServiceReturnRation(); 
+                                    	trainService += tdGoods.getCostPrice() * tdGoods.getTrainServiceReturnRation()* tog.getQuantity(); 
                 					}
+                                    totalSaleprice += tdGoods.getSalePrice()* tog.getQuantity();
+                                    totalCostprice += tdGoods.getCostPrice()* tog.getQuantity();
                                 }
                             }
-
+                            if (order.getTypeId().equals(1L)) {
+                            	shopOrderincome = totalSaleprice - totalCostprice - totalPoints - platformService - trainService - totalCash;
+                			} 
                             // 用户返利
                             if (null != tdUser) {
                                 TdUserPoint userPoint = new TdUserPoint();
@@ -1509,6 +1516,7 @@ public class TdManagerOrderController {
                             order.setRebate(totalCash);//设置订单同盟店所获返利
                             order.setPlatformService(platformService);//设置订单平台服务费
                             order.setTrainService(trainService);//设置订单培训服务费
+                            order.setOrderIncome(shopOrderincome);//设置同盟店订单收入
                             order = tdOrderService.save(order);
                             tdDiySiteService.save(tdShop);
                         }
@@ -1547,6 +1555,7 @@ public class TdManagerOrderController {
                     Double totalCash = 0.0;
                     Double platformService = 0.0;
                     Double trainService = 0.0;
+                    Double shopOrderincome = 0.0;
                     // 返利总额
                     if (null != tdOrderGoodsList) {
                         for (TdOrderGoods tog : tdOrderGoodsList) {
@@ -1558,12 +1567,12 @@ public class TdManagerOrderController {
                                     totalPoints += tdGoods.getReturnPoints();
 
                                     if (null != tdGoods.getShopReturnRation()) {
-                                        totalCash = tdGoods.getCostPrice()
+                                        totalCash = tdGoods.getSalePrice()
                                                 * tdGoods.getShopReturnRation();
                                     }
                                 }
                                 if (null != tdGoods && null != tdGoods.getPlatformServiceReturnRation()) {
-                                	platformService += tdGoods.getCostPrice() * tdGoods.getPlatformServiceReturnRation();
+                                	platformService += tdGoods.getSalePrice() * tdGoods.getPlatformServiceReturnRation();
             					}
                                 if (null != tdGoods && null != tdGoods.getTrainServiceReturnRation()) {
                                 	trainService += tdGoods.getCostPrice() * tdGoods.getTrainServiceReturnRation(); 
@@ -1614,6 +1623,7 @@ public class TdManagerOrderController {
                         order.setRebate(totalCash);//设置订单同盟店所获返利
                         order.setPlatformService(platformService);//设置订单平台服务费
                         order.setTrainService(trainService);//设置订单培训服务费
+                        order.setOrderIncome(shopOrderincome);//设置同盟店订单收入
                         order = tdOrderService.save(order);
                         tdDiySiteService.save(tdShop);
                     }

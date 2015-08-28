@@ -211,7 +211,7 @@ input.orange_btn { color: #fff; font-size: 0.8em; background: #f4b93a; width: 10
 .mymenu_list h4 span { position:absolute; right:3%; top:0; }
 .paystyle { display:block; width:94%; margin:0 auto; max-width:600px; top:-5px;}
 .paystyle li { display:inline-block; margin:0 1% 5px;}
-.paystyle li span { border:1px solid #ddd; display:inline-block;top:8px;}
+.paystyle li span {/* border:1px solid #ddd; display:inline-block; */display: inline-block; top:8px;}
 .memberhead { background:url(../images/mybg.png) no-repeat; background-size:100%; text-align:center; padding:10px 0;}
 .memberhead a { display:inline-block; width:50px; height:50px; border-radius:50%; overflow:hidden; background:#fff;}
 .membertop { display:table; table-layout:fixed;}

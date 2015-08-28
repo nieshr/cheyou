@@ -72,6 +72,9 @@ public class TdOrder {
     // 同盟店所获返利
     private Double rebate;
     
+    // 同盟店订单收入
+    private Double orderIncome;
+    
     // 支付方式
     @Column
     private Long payTypeId;
@@ -274,6 +277,7 @@ public class TdOrder {
     // 是否申请售后
     @Column
     private Boolean isReturn;
+    
     //商城收入
     @Column
     private Double platformService;
@@ -337,6 +341,14 @@ public class TdOrder {
 
 	public void setCouponUse(Double couponUse) {
 		this.couponUse = couponUse;
+	}
+
+	public Double getOrderIncome() {
+		return orderIncome;
+	}
+
+	public void setOrderIncome(Double orderIncome) {
+		this.orderIncome = orderIncome;
 	}
 
 	public Long getTypeId() {

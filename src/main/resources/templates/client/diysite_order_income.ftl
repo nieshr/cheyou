@@ -74,10 +74,12 @@ DD_belatedPNG.fix('.,img,background');
                 </div>
                 <table>
                     <tr class="mymember_infotab_tit01">
+                        <th>序号</th>
                         <th>订单编号</th>
                         <th width="80">收货人</th>
                         <th width="80">收货电话</th>
                         <th width="90">订单金额</th>
+                        <th width="90">订单收入</th>
                         <th width="90">
                             <select name="timeId" onchange="javascript:setTimeout(__doPostBack('statusId',''), 0)">
                                 <option value="0" <#if !time_id?? || time_id==0>selected="selected"</#if>>所有订单</option>
@@ -89,11 +91,12 @@ DD_belatedPNG.fix('.,img,background');
                                 <option value="12" <#if time_id==12>selected="selected"</#if>>最近一年</option>                              
                             </select>
                         </th>                        
-                        <th width="160">总额：￥${sales?string("0.00")}</th>                       
+                        <th width="160">总收入：￥${sales?string("0.00")}</th>                       
                     </tr>    
                     <#if order_page??>
                         <#list order_page.content as order>                            
                             <tr>
+                              <td>${order_index+1}</td>
                               <td>
                                                                                                                  订单编号：<a href="/diysite/order?id=${order.id?c}" id="spanOrderNumber">${order.orderNumber!''}</a>
                               </td>
@@ -103,6 +106,7 @@ DD_belatedPNG.fix('.,img,background');
                                 <p>￥${order.totalPrice?string("#.##")}</p>
                                 <p>${order.payTypeTitle!''}</p>
                               </td>
+                              <td><#if order.orderIncome??>￥${order.orderIncome?string("#.##")}</#if></td>
                               <td class="td003">
                                 ${order.orderTime!''}
                               </td>

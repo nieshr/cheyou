@@ -15,6 +15,7 @@
         <div class="bankSelect">
     </#if>
 </#if>
+<li>
 <span class="paymethod" title="<#if pay_type.adTitle?? && pay_type.adContents??>${pay_type.adContents!''}<#else>${pay_type.title!''}</#if>">
     <input class="pay_type_chk" name="payTypeId" type="radio" datatype="n" value="${pay_type.id?c!''}" fee="${pay_type.fee!'0'}" nullmsg="请选择支付方式!" />
     <#if pay_type.coverImageUri??>
@@ -28,6 +29,7 @@
         <span class="payment_ad">&nbsp;</span>
     </#if>
 </span>
+</li>
 <#if (pay_type_index % maxMethodCount == (maxMethodCount - 1))>
 </div>
     <#if (pay_type_index == (maxMethodCount - 1))>
