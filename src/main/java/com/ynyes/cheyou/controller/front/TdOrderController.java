@@ -928,6 +928,7 @@ public class TdOrderController extends AbstractPaytypeController {
                 }
             }
         }
+        
         //查询购物车的所有种类
         List<Long> productIds = new ArrayList<>();
         for (TdCartGoods cg : selectedGoodsList){
