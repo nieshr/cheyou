@@ -44,8 +44,8 @@
     
     $("#address").citySelect({
         nodata:"none",
-        <#if address?? && address.province??>prov: "${address.province!''}",</#if>
-        <#if address?? && address.city??>city: "${address.city!''}",</#if>
+        prov: "云南",
+        city: "昆明",
         <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
         required:false
     }); 
@@ -128,32 +128,7 @@
                   <tr>
               <#--    <th>姓名</th>  -->
                   </tr>
-              <#--   
-                  <tr>
-                    <th>*地区：</th>
-                    <td>
-                      <div id="address">
-                      <select id="prov" class="prov" style="width: 100px;"></select>
-                      <select id="city" class="city" style="width: 100px;"></select>
-                      <select id="dist" class="dist" style="width: 100px;"></select>
-                      <select id="diys" class="diys" style="width: 100px;"></select>
-                      </div>
-                    </td>
-                  </tr>
-                   
-                  <tr>
-                    <th>*详细地址：</th>
-                    <td>
-                        <input class="mytext" id="detailAdd" value="" type="text">
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>*邮政编码：</th>
-                    <td>
-                        <input class="mytext" id="postcode" value="" type="text">
-                    </td>
-                  </tr>
-                  -->
+            
                   <tr>
                     <th>*手机：</th>
                     <td>

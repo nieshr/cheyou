@@ -89,7 +89,7 @@ function timer${item_index}()
             <a href="/touch/goods/${item.id?c!''}?qiang=1">
                 <b><img src="${item.flashSaleImage!''}" /></b>
                 <p class="p1">${item.title!''}</p>
-                <p class="p2">抢拍：<span class="red">${item.flashSaleSoldNumber!'0'}</span>人</p>
+                <p class="p2">参与抢拍：<span class="red">${item.totalclicks!'0'}</span>人</p>
                 <p class="red p3">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}<#else>0.00</#if><span class="unl-lt c9">￥<#if item.salePrice??>${item.salePrice?string("0.00")}<#else>0.00</#if></span></p>
                 <p class="p4"  id="timeLeft${item_index}"></p>
                 <div class="clear"></div>

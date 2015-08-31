@@ -14,6 +14,7 @@ th , td { text-align:left;}
 input {font-family:"微软雅黑";}
 input:focus {outline:none;}
 input.sub {cursor:pointer; background:none; border:none;-webkit-appearance:none;font-size:0.9em;}
+input.sublong {cursor:pointer; background:none; border:none;-webkit-appearance:none;font-size:0.9em;}
 input.text {background:none; border:none;font-size:0.9em;}
 /* common main */
 .red, a.red { color:#ff4544;}

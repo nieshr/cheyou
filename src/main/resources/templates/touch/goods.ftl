@@ -94,7 +94,7 @@ function addCollect(goodsId)
     <#if goods.showPictures??>
         <#list goods.showPictures?split(",") as uri>
             <#if ""!=uri>
-                <li><img src="${uri!''}"/></li>
+                <li><img src="${uri!''}" height="260"/></li>
             </#if>
         </#list>
     </#if>

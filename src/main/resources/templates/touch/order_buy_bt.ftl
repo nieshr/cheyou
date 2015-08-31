@@ -9,12 +9,14 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/jquery.cookie.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 <script src="/touch/js/common.js"></script>
 <script src="/touch/js/order_info.js"></script>
 
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/bankLogo.css" rel="stylesheet" type="text/css" />
 <!-- add link 2015-7-31 11:24:56 mdj -->
 <script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
@@ -145,10 +147,10 @@ $(document).ready(function(){
                 <#assign totalQuantity=totalQuantity+sg.quantity>
                 <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
                 <tr>
-                    <td width="110"><a href="/goods/${sg.goodsId?c}?qiang=1"><img src="${sg.goodsCoverImageUri!''}" width="100" height="100"/></a></td>
-                    <td width="800" style="text-align:left;"><a href="/goods/${sg.goodsId?c}">${sg.goodsTitle!''}</a></td>
-                    <td width="150" style="text-align:center;"><#if sg.price??>${sg.price?string("0.00")}</#if></td>
-                    <td width="150" style="text-align:center;">×${sg.quantity!''}</td>
+                    <td width="110"><a href="/touch/goods/${sg.goodsId?c}?qiang=100"><img src="${sg.goodsCoverImageUri!''}" width="100" height="100"/></a></td>
+                    <td width="300" style="text-align:left;"><a href="/touch/goods/${sg.goodsId?c}?qiang=100">${sg.goodsTitle!''}</a></td>
+                    <td width="110" style="text-align:center;"><#if sg.price??>${sg.price?string("0.00")}</#if></td>
+                    <td width="100" style="text-align:center;">×${sg.quantity!''}</td>
                     <td class="red ml100">￥<#if sg.price?? && sg.quantity??>${(sg.price * sg.quantity)?string("0.00")}</#if></td>
                 </tr>
             </#list>

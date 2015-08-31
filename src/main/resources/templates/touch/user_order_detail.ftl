@@ -37,7 +37,7 @@ $(document).ready(function(){
     <p><span class="c7">下单日期：</span>${order.orderTime!''}</p>
     <p><span class="c7">订单总价：</span><span class="red fs11">￥<#if order??><#if order.statusId==3>${order.totalLeftPrice?string("0.00")}<#else>${order.totalPrice?string("0.00")}</#if></#if></span></p>
     <p><span class="c7">订单编号：</span>${order.orderNumber!''}<span class="fc"><#if order.statusId==7>（已取消）</#if></span></p>
-    <p><span class="c7">支付方式：</span>货到付款<span class="red"><#if order??>
+    <p><span class="c7">支付方式：</span><#if order??>${order.payTypeTitle!''}</#if><span class="red"><#if order??>
                 <#if order.statusId==1>
                     (待确认)
                 <#elseif order.statusId==2>

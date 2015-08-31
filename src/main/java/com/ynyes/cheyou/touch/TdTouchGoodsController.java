@@ -124,7 +124,16 @@ public class TdTouchGoodsController {
         {
             return "error_404";
         }
-
+        /**
+		 * @author lc
+		 * @注释：添加点击数
+		 */
+        if (null != goods.getTotalclicks()) {
+        	goods.setTotalclicks(goods.getTotalclicks()+1L);
+		}else{
+			goods.setTotalclicks(1L);
+		}
+        
         Page<TdUserConsult> consultPage = tdUserConsultService
                 .findByGoodsIdAndIsShowable(goodsId, 0, ClientConstant.pageSize);
 

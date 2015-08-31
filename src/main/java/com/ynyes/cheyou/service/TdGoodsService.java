@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 import com.ynyes.cheyou.entity.TdBrand;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdGoodsCombination;
@@ -599,6 +600,17 @@ public class TdGoodsService {
                 .findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(
                         startTime, pageRequest);
     }
+    public Page<TdGoods> findByIsFlashSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
+            Date startTime, int page, int size) 
+    {
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(
+                Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
+
+        return repository
+                .findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
+                        startTime, new Date(), pageRequest);
+    }
+    
     public Page<TdGoods> findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(
             Date startTime, int page, int size) 
     {

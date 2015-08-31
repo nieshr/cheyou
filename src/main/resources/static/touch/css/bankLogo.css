@@ -1,0 +1,65 @@
+@charset "UTF-8";
+.ui-icon {
+    width:18px;
+    height:18px;
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    background-image:url('images/ui-icons_cd0a0a_256x240.png');
+}
+
+.bankOpera {
+    min-height:28px;
+    margin-left:28px;
+    font-size:1.0em;
+}
+
+#expandBank {
+    padding-top:5px;
+    margin-bottom:5px;
+    cursor:pointer;
+    color:#fc3f3b;
+}
+
+.morebank {
+    display:none;
+}
+
+.paymethod {
+    width:215px;
+    _height:60px;
+    min-height:60px;
+    padding:0;
+    margin:5px 0px 5px 10px;
+    float:left;
+    position:relative;
+    border:1px solid #DADADA;
+}
+
+.pay_type_chk {
+    position:absolute;
+    top:40px;
+    left:2px;
+}
+
+.banklogo {
+    width:133px;
+    height:45px;
+    margin:20px 0px 0px 18px;
+}
+
+#hideBank{
+    padding-top:5px;
+    margin-bottom:5px;
+    cursor:pointer;
+    color:#fc3f3b;
+    display:none;
+}
+
+.ui-icon-circle-triangle-s {
+    background-position: -64px -192px;
+}
+
+.ui-icon-circle-triangle-n {
+    background-position: -96px -192px;
+}

@@ -9,12 +9,15 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
+<script src="/client/js/jquery.cookie.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 <script src="/touch/js/common.js"></script>
 <script src="/touch/js/order_info.js"></script>
 
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/touch/css/bankLogo.css" rel="stylesheet" type="text/css" />
+
 <!-- add link 2015-7-31 11:24:56 mdj -->
 <script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
@@ -154,15 +157,22 @@ $(document).ready(function(){
         </#list>
     </#if>
         
-  <p class="address ta-r">共<#if totalQuantity??>${totalQuantity!'0'}</#if>件商品，合计￥<span id="totalFee" class="red">${totalPrice?string('0.00')}</span></p>
+  <!--<p class="address ta-r">共<#if totalQuantity??>${totalQuantity!'0'}</#if>件商品，合计￥<span id="totalFee" class="red">${totalPrice?string('0.00')}</span></p>-->
+  <p class="address ta-r">合计￥<span  class="red">${totalPrice?string('0.00')}</span> </p>
 </div>
 
 <div class="carfoot_bg"></div>
 <footer class="carfoot">
   <div class="mainbox">
     
-    <p>共<span class="red"><#if totalQuantity??>${totalQuantity!'0'}</#if></span>件，<span class="red">￥${totalPrice?string('0.00')}</span></p>
-    <input class="sub" type="submit" value="提交订单（<#if totalQuantity??>${totalQuantity!'0'}</#if>）" />
+   <!-- <p>共<span class="red"><#if totalQuantity??>${totalQuantity!'0'}</#if></span>件，<span class="red">￥${totalPrice?string('0.00')}</span></p> -->
+   <p>共<span class="red"><#if totalQuantity??>${totalQuantity!'0'}</#if></span>件， 
+       <span>应付总额：商品价格（¥<b id="goodsFee">${totalPrice?string("0.00")}</b>）
+                + 支付手续费（¥<b id="payTypeFee">0.00</b>）
+                - 粮草抵扣（￥<b id="pointFee">0.00</b>）
+                - 优惠券（￥<b id="couponFee">0.00</b>）
+                = ￥<b class="red fs18" id="totalFee">${totalPrice?string('0.00')}</b></span></p>
+    <input class="sublong" type="submit" value="提交订单（<#if totalQuantity??>${totalQuantity!'0'}</#if>）" />
   </div>
 </footer>
 </form>

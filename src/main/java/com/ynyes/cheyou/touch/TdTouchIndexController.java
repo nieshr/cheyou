@@ -132,19 +132,19 @@ public class TdTouchIndexController {
         cal.set(Calendar.MILLISECOND, 0);
 
         Page<TdGoods> goodsPage1 = tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
                         cal.getTime(), 0, 6);
 
         cal.set(Calendar.HOUR_OF_DAY, 14);
 
         Page<TdGoods> goodsPage2 = tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
                         cal.getTime(), 0, 6);
 
         cal.set(Calendar.HOUR_OF_DAY, 20);
 
         Page<TdGoods> goodsPage3 = tdGoodsService
-                .findByIsFlashSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(
+                .findByIsFlashSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
                         cal.getTime(), 0, 6);
 
         List<TdGoods> flashGoodsList = new ArrayList<TdGoods>();
