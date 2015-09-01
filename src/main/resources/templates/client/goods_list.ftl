@@ -12,6 +12,7 @@
 <script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/html5.js"></script>
 <script src="/client/js/list.js"></script>
+<script src="/client/js/goods.js"></script>
 
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
@@ -271,7 +272,7 @@ $(document).ready(function(){
                     
                     <div class="goumai">
                         <a class="a8" href="/cart/init?id=${goods.id?c}" target="_blank"><img src="/client/images/liebiao_31.png" />加入购物车</a>
-                        <a class="a7" href="javascript:addCollect(${goods.id?c});"><img src="/client/images/liebiao_34.png" />关注</a>
+                        <a class="a7" href="javascript:addCollect1(${goods.id?c});"><img id="addCollect${goods.id?c}" src="/client/images/content/liebiao_34.png" />关注</a>
                         <p class="clear"></p>
                     </div>
                 </li>

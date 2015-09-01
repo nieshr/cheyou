@@ -78,7 +78,7 @@ DD_belatedPNG.fix('.,img,background');
             </#if>
         </dt>
         <dt>
-                     支付方式：<#if order??>${order.payTypeTitle!''}</#if>&nbsp;&nbsp;&nbsp;&nbsp;支付总额：<span>￥<#if order??><#if order.statusId==3>${order.totalLeftPrice?string("0.00")}<#else>${order.totalPrice?string("0.00")}</#if></#if></span>
+                     支付方式：<#if order??>${order.payTypeTitle!''}</#if>&nbsp;&nbsp;&nbsp;&nbsp;支付总额：<span>￥<#if order??><#if order.statusId==3>${order.totalLeftPrice?string("0.00")}(团购尾款)<#else>${order.totalPrice?string("0.00")}</#if></#if></span>
         </dt>
         <dd>
             <#if order??>

@@ -60,7 +60,11 @@ function addCollect(goodsId)
         data:{"goodsId": goodsId},
         dataType: "json",
         success:function(res){
-            
+            if(res.code==0){
+            	$("#addCollect").removeClass("buy_share_a");
+                $("#addCollect").addClass("buy_share_a1");
+                
+            }
             alert(res.message);
             
             // 需登录
@@ -74,4 +78,33 @@ function addCollect(goodsId)
     });
 }
 
+function addCollect1(goodsId)
+{
+    if (undefined == goodsId)
+    {
+        return;
+    }
+    var add = "addCollect"+goodsId;
+
+    $.ajax({
+        type:"post",
+        url:"/user/collect/add",
+        data:{"goodsId": goodsId},
+        dataType: "json",
+        success:function(res){
+            if(res.code==0){
+            	$("#"+add).attr('src',"/client/images/content/liebiao_342.png");
+            }
+            alert(res.message);
+            
+            // 需登录
+            if (res.code==1)
+            {
+                setTimeout(function(){
+                    window.location.href = "/login";
+                }, 1000); 
+            }
+        }
+    });
+}
  

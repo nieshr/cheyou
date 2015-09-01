@@ -140,6 +140,7 @@
 .pro_choose .sub01:hover {background:#fff url(../images/content/buy.png) no-repeat 15px center; color:#333;}
 .buy_share { float:left;width:300px; text-align:center; padding-top:13px;}
 .pro_choose td a.buy_share_a { display:inline-block; background:url(../images/content/share.png) no-repeat left center; padding:0 0 0 25px; margin:0; border:none;}
+.pro_choose td a.buy_share_a1 { display:inline-block; background:url(../images/content/share2.png) no-repeat left center; padding:0 0 0 25px; margin:0; border:none;}
 .proinfo_right .sys {position:absolute;right:0;bottom:0; background:#fbedca; width:90px; padding:15px; line-height:16px;}
 .proinfo_right .sys i { position:absolute;left:-12px;top:50px;}
 #proshowimg { width:396px;height:396px; border-left:1px solid #eee;border-bottom:1px solid #eee;}
@@ -241,9 +242,23 @@ transform: skew(40deg);}
 .car_list .text { width:70px;border:1px solid #ddd; line-height:30px; text-align:center;float:left; margin:0 5px;_margin:0 2px; display:block; height:30px;}
 .car_list td.num a { display:inline-block; border:1px solid #eee; padding:0 10px; line-height:30px; font-size:14px; float:left; _margin-top:23px;}
 .car_list td.num a:hover { border:1px solid #999;}
-.car_list a.del { display:inline-block;_display:inline; width:130px; height:30px; background:#2b3243; color:#fff; line-height:30px; text-align:center;}
+/*.car_list a.del { display:inline-block;_display:inline; width:130px; height:30px; background:#2b3243; color:#fff; line-height:30px; text-align:center;}*/
+.car_list a.del {
+  display: inline-block;
+  _display: inline;
+  width: 130px;
+  height: 30px;
+  color: #333;
+  line-height: 30px;
+  text-align: center;
+} 
 .car_list a.del:hover { background:#fd3e3e;}
-.car_btn { width:100%; background:#eee; line-height:40px;height:40px;}
+/*.car_btn { width:100%; background:#eee; line-height:40px;height:40px;}*/
+.car_btn {
+  width: 100%;
+  line-height: 40px;
+  height: 40px;
+} 
 .car_btn .sub { position:absolute;right:0;top:0;width:150px; height:40px; font-size:18px; color:#fff; background:#e83928; line-height:40px;}
 .car_btn .sub:hover { background:#ff8800;}
 .car_btn span { position:absolute;top:0;right:170px;}

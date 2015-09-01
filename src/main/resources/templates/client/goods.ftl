@@ -318,7 +318,7 @@ function checkTime(i)
               <span class="red fs24 lh30 mr20">￥：<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></span>
               <span class="unl-th c9">￥：<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span>
             </p>
-            <p class="p1">
+          <!--  <p class="p1">
               <span class="mr10">三人团价</span>
               <span class="lh30 mr20">￥：<#if goods.groupSaleThreePrice??>${goods.groupSaleThreePrice?string("0.00")}</#if></span>
             </p>
@@ -329,7 +329,30 @@ function checkTime(i)
             <p class="p1">
               <span class="mr10">十人团价</span>
               <span class="lh30 mr20">￥：<#if goods.groupSaleTenPrice??>${goods.groupSaleTenPrice?string("0.00")}</#if></span>
-            </p>
+            </p> -->
+            <div class="team_men">
+                            <dl>
+                                <dt style="width: <#if goods.groupSaleSoldNumber??><#if goods.groupSaleSoldNumber/10 gt 1>100<#else>${goods.groupSaleSoldNumber * 10}</#if><#else>0</#if>%;"></dt>
+                                <dd style="left:33%;background:#ff6700;"></dd>
+                                <dd style="left:66%;background:#ff6700;"></dd>
+                            </dl>
+                            
+                            <p>
+                                <span><#if goods.groupSaleThreePrice??>￥${goods.groupSaleThreePrice?string(0.00)}</#if></span>
+                                三人团
+                            </p>
+                            <p>
+                                <span><#if goods.groupSaleSevenPrice??>￥${goods.groupSaleSevenPrice?string(0.00)}</#if></span>
+                                五人团
+                            </p>
+                            <p>
+                                <span><#if goods.groupSaleTenPrice??>￥${goods.groupSaleTenPrice?string(0.00)}</#if></span>
+                                十人团
+                            </p>
+                            <div class="clear"></div>
+                            
+                        </div>
+            
       <#elseif qiang?? && qiang == 100 && goods.groupSaleHundredStartTime?? && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime?? && goods.groupSaleHundredStopTime gt .now>
             <p class="p1">
               <span class="mr10">预付价</span>
@@ -510,7 +533,7 @@ function checkTime(i)
                 </#if>
             </#if>
             <div class="buy_share">
-              <a class="buy_share_a" href="javascript:addCollect(${goods.id?c});">收藏商品</a>
+              <a id="addCollect" class="buy_share_a" href="javascript:addCollect(${goods.id?c});">收藏商品</a>
               <p>关注人数：<span class="red">${goods.totalclicks!'0'}</span>人</p>
             </div>
             <div class="clear"></div>
