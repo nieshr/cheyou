@@ -129,7 +129,8 @@ menu.protext a.a2 span { background: url(../images/zx.png) no-repeat left center
 .carfoot a.sel i {background: #ff4544;}
 .carfoot p { font-size: 0.8em; }
 .carfoot .sub { position: absolute; background: #ff4544; height: 40px; line-height: 40px; width: 100px; font-size: 0.8em; color: #fff; right:0; top: -10px; }
-.carfoot_bg { width: 100%; height: 60px; }
+.carfoot .sublong { background: #ff4544; height: 40px; line-height: 40px; width: 100px; font-size: 0.8em; color: #fff; float:left;margin-left:30%;}
+.carfoot_bg { width: 100%; height:100px; }
 .non_payment { padding-top: 20px; padding-bottom: 20px; font-size: 0.8em; }
 .non_payment p { padding: 3px 0; }
 .non_payment a.a1 { z-index:2; position: absolute; right: 3%; top: 20px; width: 80px; line-height: 35px; height: 35px; border-radius: 5px; color: #4fbba1; border: 1px solid #4fbba1; text-align: center; }
@@ -150,11 +151,11 @@ section.order_info a.a1 { display: block; padding-left: 25px; background: url(..
 section.order_info .text { width: 100%; height: 35px; text-indent: 1em; line-height: 35px; border: 1px solid #ccc; }
 section.order_info a.a2 { display: block; line-height: 35px; color: #fff; padding-left: 25px; background: #4fbba1 url(../images/enter02.png) no-repeat 90% center; background-size: 20px; }
 p.order_info { font-size: 0.9em; text-align: right; width: 90%; max-width: 600px; margin-left: auto; margin-right: auto; }
-.address { display: block; width: 90%; max-width: 600px; margin-left: auto; margin-right: auto; }
+.address { display: block; width: 90%; max-width: 600px; margin-left: auto; margin-right: auto;}
 p.address { font-size: 0.8em; padding: 10px 0 5px; }
 p.address a { display:inline-block; border:1px solid #ccc; padding:0 15px; line-height:30px; border-radius:3px; background:#fff;}
 p.address a.sel {border:1px solid #fc7c26; background:#fff url(../images/screening.png) no-repeat right bottom; background-size:15px;}
-input.address { height: 35px; line-height: 35px; text-indent: 1em; background:#f1f1f1; border:none;}
+input.address { height: 35px; line-height: 35px; text-indent: 1em; border:none;background:#efefef;}
 .address select { width: 48%; border: 1px solid #ddd; height: 30px;}
 .address textarea { width: 94%; padding: 10px 3%; height: 100px; border: 1px solid #ddd; }
 .white_text { width: 80%; padding: 5px 0 5px 20%; background: #fff; border-radius: 3px; }

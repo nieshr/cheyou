@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 import com.ynyes.cheyou.entity.TdBrand;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdGoodsCombination;
@@ -104,12 +105,12 @@ public class TdGoodsService {
         return repository.findByIsFlashSaleTrue(pageRequest);
     }
 
-    public Page<TdGoods> findByIsGroupSaleTrueOrderBySortIdAsc(int page,
+    public Page<TdGoods> findByIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(int page,
             int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
 
-        return repository.findByIsGroupSaleTrue(pageRequest);
+        return repository.findByIsGroupSaleTrueOrIsGroupSaleHundredTrue(pageRequest);
     }
 
     public Page<TdGoods> findByIsOnSaleTrueOrderBySortIdAsc(int page, int size) {
@@ -127,12 +128,12 @@ public class TdGoodsService {
         return repository.findByIsOnSaleTrueAndIsFlashSaleTrue(pageRequest);
     }
 
-    public Page<TdGoods> findByIsOnSaleTrueAndGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> findByIsOnSaleTrueAndGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
 
-        return repository.findByIsOnSaleTrueAndIsGroupSaleTrue(pageRequest);
+        return repository.findByIsOnSaleTrueAndIsGroupSaleTrueOrIsOnSaleTrueAndIsGroupSaleHundredTrue(pageRequest);
     }
 
     public Page<TdGoods> findByIsOnSaleFalseOrderBySortIdAsc(int page, int size) {
@@ -150,12 +151,12 @@ public class TdGoodsService {
         return repository.findByIsOnSaleFalseAndIsFlashSaleTrue(pageRequest);
     }
 
-    public Page<TdGoods> findByIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> findByIsOnSaleFalseAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
 
-        return repository.findByIsOnSaleFalseAndIsGroupSaleTrue(pageRequest);
+        return repository.findByIsOnSaleFalseAndIsGroupSaleTrueOrIsOnSaleFalseAndIsGroupSaleHundredTrue(pageRequest);
     }
 
     public Page<TdGoods> findAllAndIsOnSaleTrue(int page, int size) {
@@ -189,14 +190,14 @@ public class TdGoodsService {
                         keywords, keywords, keywords, pageRequest);
     }
 
-    public Page<TdGoods> searchAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> searchAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             String keywords, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
 
         return repository
-                .findByTitleContainingAndIsGroupSaleTrueOrSubTitleContainingAndIsGroupSaleTrueOrDetailContainingAndIsGroupSaleTrue(
-                        keywords, keywords, keywords, pageRequest);
+                .findByTitleContainingAndIsGroupSaleTrueOrTitleContainingAndIsGroupSaleHundredTrueOrSubTitleContainingAndIsGroupSaleTrueOrSubTitleContainingAndIsGroupSaleHundredTrueOrDetailContainingAndIsGroupSaleTrueOrDetailContainingAndIsGroupSaleHundredTrue(
+                        keywords, keywords, keywords, keywords, keywords, keywords, pageRequest);
     }
 
     public Page<TdGoods> searchAndIsOnSaleTrueOrderBySortIdAsc(String keywords,
@@ -209,14 +210,14 @@ public class TdGoodsService {
                         keywords, keywords, keywords, pageRequest);
     }
 
-    public Page<TdGoods> searchAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> searchAndIsOnSaleTrueAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             String keywords, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
 
         return repository
-                .findByTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrue(
-                        keywords, keywords, keywords, pageRequest);
+                .findByTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrTitleContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrDetailContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrue(
+                        keywords, keywords, keywords, keywords, keywords, keywords, pageRequest);
     }
 
     public Page<TdGoods> searchAndIsOnSaleTrueAndIsFlashSaleTrueOrderBySortIdAsc(
@@ -249,14 +250,14 @@ public class TdGoodsService {
                         keywords, keywords, keywords, pageRequest);
     }
 
-    public Page<TdGoods> searchAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> searchAndIsOnSaleFalseAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             String keywords, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
 
         return repository
-                .findByTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrSubTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrDetailContainingAndIsOnSaleFalseAndIsGroupSaleTrue(
-                        keywords, keywords, keywords, pageRequest);
+                .findByTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrTitleContainingAndIsOnSaleFalseAndIsGroupSaleHundredTrueOrSubTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrSubTitleContainingAndIsOnSaleFalseAndIsGroupSaleHundredTrueOrDetailContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrDetailContainingAndIsOnSaleFalseAndIsGroupSaleHundredTrue(
+                        keywords, keywords, keywords, keywords, keywords, keywords,pageRequest);
     }
 
     public Page<TdGoods> searchAndFindByCategoryIdOrderBySortIdAsc(
@@ -272,7 +273,7 @@ public class TdGoodsService {
                         keywords, pageRequest);
     }
 
-    public Page<TdGoods> searchAndFindByCategoryIdAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> searchAndFindByCategoryIdAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
@@ -280,8 +281,9 @@ public class TdGoodsService {
         String catIdStr = "[" + categoryId + "]";
 
         return repository
-                .findByCategoryIdTreeContainingAndTitleContainingAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsGroupSaleTrue(
+                .findByCategoryIdTreeContainingAndTitleContainingAndIsGroupSaleTrueOrCategoryIdTreeContainingAndTitleContainingAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndDetailContainingAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsGroupSaleHundredTrue(
                         catIdStr, keywords, catIdStr, keywords, catIdStr,
+                        keywords,catIdStr, keywords, catIdStr, keywords, catIdStr,
                         keywords, pageRequest);
     }
 
@@ -311,7 +313,7 @@ public class TdGoodsService {
                         keywords, pageRequest);
     }
 
-    public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleTrueAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
@@ -319,8 +321,8 @@ public class TdGoodsService {
         String catIdStr = "[" + categoryId + "]";
 
         return repository
-                .findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrue(
-                        catIdStr, keywords, catIdStr, keywords, catIdStr,
+                .findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndTitleContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrue(
+                        catIdStr, keywords, catIdStr, keywords, catIdStr,catIdStr, keywords,catIdStr, keywords,catIdStr, keywords,
                         keywords, pageRequest);
     }
 
@@ -363,7 +365,7 @@ public class TdGoodsService {
                         keywords, pageRequest);
     }
 
-    public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> searchAndFindByCategoryIdAndIsOnSaleFalseAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             String keywords, Long categoryId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
@@ -371,8 +373,8 @@ public class TdGoodsService {
         String catIdStr = "[" + categoryId + "]";
 
         return repository
-                .findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrue(
-                        catIdStr, keywords, catIdStr, keywords, catIdStr,
+                .findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrue(
+                        catIdStr, keywords, catIdStr, keywords, catIdStr,catIdStr, keywords,catIdStr, keywords,catIdStr, keywords,
                         keywords, pageRequest);
     }
 
@@ -384,8 +386,8 @@ public class TdGoodsService {
         String catIdStr = "[" + categoryId + "]";
 
         return repository
-                .findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrue(
-                        catIdStr, keywords, catIdStr, keywords, catIdStr,
+                .findByCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrCategoryIdTreeContainingAndTitleContainingAndIsOnSaleFalseAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrue(
+                        catIdStr, keywords, catIdStr, keywords, catIdStr,catIdStr, keywords,catIdStr, keywords,catIdStr, keywords,
                         keywords, pageRequest);
     }
 
@@ -452,7 +454,7 @@ public class TdGoodsService {
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
 
         return repository
-                .findByIsGroupSaleHundredTrueAndIsOnSaleTrueAndGroupSaleHundredStopTimeAfterAndGroupSaleHundredStartTimeBeforeOrderByGroupSaleHundredStartTimeAsc(
+                .findByIsGroupSaleHundredTrueAndIsOnSaleTrueAndGroupSaleHundredStopTimeAfterAndGroupSaleHundredStartTimeBeforeOrderBySortIdAsc(
                         new Date(), new Date(), pageRequest);
     }
 
@@ -599,6 +601,17 @@ public class TdGoodsService {
                 .findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStartTimeOrderByFlashSaleStartTimeAsc(
                         startTime, pageRequest);
     }
+    public Page<TdGoods> findByIsFlashSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
+            Date startTime, int page, int size) 
+    {
+        PageRequest pageRequest = new PageRequest(page, size, new Sort(
+                Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
+
+        return repository
+                .findByIsFlashSaleTrueAndIsOnSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
+                        startTime, new Date(), pageRequest);
+    }
+    
     public Page<TdGoods> findByIsFlashSaleTrueAndFlashSaleStartTimeOrderBySortIdAsc(
             Date startTime, int page, int size) 
     {
@@ -737,7 +750,7 @@ public class TdGoodsService {
                         catIdStr, pageRequest);
     }
 
-    public Page<TdGoods> findByCategoryIdTreeContainingAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> findByCategoryIdTreeContainingAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
@@ -745,7 +758,7 @@ public class TdGoodsService {
         String catIdStr = "[" + catId + "]";
 
         return repository
-                .findByCategoryIdTreeContainingAndIsGroupSaleTrue(
+                .findByCategoryIdTreeContainingAndIsGroupSaleTrueOrCategoryIdTreeContainingAndIsGroupSaleHundredTrue(catIdStr,
                         catIdStr, pageRequest);
     }
 
@@ -761,7 +774,7 @@ public class TdGoodsService {
                         catIdStr, pageRequest);
     }
 
-    public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
@@ -769,8 +782,8 @@ public class TdGoodsService {
         String catIdStr = "[" + catId + "]";
 
         return repository
-                .findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrue(
-                        catIdStr, pageRequest);
+                .findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleHundredTrue(
+                        catIdStr, catIdStr, pageRequest);
     }
 
     public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsFlashSaleTrueOrderBySortIdAsc(
@@ -809,7 +822,7 @@ public class TdGoodsService {
                         catIdStr, pageRequest);
     }
 
-    public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
+    public Page<TdGoods> findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
             Long catId, int page, int size) {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(
                 Direction.ASC, "sortId").and(new Sort(Direction.DESC, "id")));
@@ -817,8 +830,8 @@ public class TdGoodsService {
         String catIdStr = "[" + catId + "]";
 
         return repository
-                .findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleTrue(
-                        catIdStr, pageRequest);
+                .findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleHundredTrue(
+                        catIdStr, catIdStr, pageRequest);
     }
 
     public Page<TdGoods> findByCategoryIdAndIsOnSaleTrue(Long catId, int page,

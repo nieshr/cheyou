@@ -15,7 +15,7 @@
 <script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/cart.js"></script>
 <script src="/client/js/order_info.js"></script>
-<script src="/client/js/jquery.cityselect.js"></script>
+<script src="/client/js/jquery.diysiteselect.js"></script>
 <script src="/client/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
 
@@ -40,10 +40,10 @@
         tiptype: 1
     });
     
-    $("#address").citySelect({
+   $("#address").citySelect({
         nodata:"none",
-        <#if address?? && address.province??>prov: "${address.province!''}",</#if>
-        <#if address?? && address.city??>city: "${address.city!''}",</#if>
+        prov: "云南",
+        city: "昆明",
         <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
         required:false
     }); 
@@ -51,6 +51,22 @@
 </script>
 <script type="text/javascript">
     var forPaymentFllow = true;
+      function showaddress(){
+        var shopid = $('#diys option:selected') .val();
+         $.ajax({
+                type: "post",
+                url: "/diysite/order/getaddress",
+                data: { "id": shopid,},
+                dataType: "json",
+                success: function (data) { 
+                 if (data.code == 0) {
+                        $("#shopaddress").text(data.address);
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });      
+    }
 </script>
 
 
@@ -107,30 +123,7 @@
                   <tr>
               <#--    <th>姓名</th>  -->
                   </tr>
-              <#--    
-                  <tr>
-                    <th>*地区：</th>
-                    <td>
-                      <div id="address">
-                      <select id="prov" class="prov" style="width: 100px;"></select>
-                      <select id="city" class="city" style="width: 100px;"></select>
-                      <select id="dist" class="dist" style="width: 100px;"></select>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>*详细地址：</th>
-                    <td>
-                        <input class="mytext" id="detailAdd" value="" type="text">
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>*邮政编码：</th>
-                    <td>
-                        <input class="mytext" id="postcode" value="" type="text">
-                    </td>
-                  </tr>
-                  -->
+            
                   <tr>
                     <th>*手机：</th>
                     <td>
@@ -165,15 +158,19 @@
          <h3>选择线下同盟店</h3>
           
              
-            <select name="shopId" id="formselect" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
-                <option>请选择</option>
-                <#if shop_list??>
-                    <#list shop_list as item>
-                        <option value="${item.id?c}">${item.title!''}</option>
-                        <p>${item.address}</p>
-                    </#list>                  
-                </#if>
-            </select>
+            <dl>         
+ <!--              <dt>*地区：</dt> -->
+                  <dd>
+                      <div id="address">
+                      <select id="prov" class="prov" style="width: 100px;"></select>
+                      <select id="city" class="city" style="width: 100px;"></select>
+                      <select id="dist" class="dist" style="width: 100px;"></select>
+                      <select id="diys" class="diys" style="width: 100px;" name="shopId" onchange="showaddress()" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店"></select>
+                      <p id="shopaddress"></p>
+                      </div>
+                  </dd>
+                  
+          </dl> 
        <#--
                  <#if shop_list??>
                      <#list shop_list as item>

@@ -796,6 +796,15 @@
                             <span><#if order.appointmentTime??>${order.appointmentTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            短信验证码
+                        </th>
+                        <td>
+                            <span></span> 
+                            <span><#if order.smscode??>${order.smscode!''}</#if></span>
+                        </td>
+                    </tr>
                 </tbody>
                 </table>
             </dd>

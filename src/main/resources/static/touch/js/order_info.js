@@ -31,6 +31,7 @@ function couponChange()
     var pointFee = parseFloat($("#pointFee").html());
     
     $("#couponFee").html(couponFee);
+    $("#couponFeee").html(couponFee);
     $("#totalFee").html(goodsFee + payTypeFee - couponFee - couponFee);
 }
 
@@ -48,6 +49,7 @@ function couponChange()
     var pointFee = parseFloat($("#pointFee").html());
     
     $("#couponFee").html(couponFee);
+    $("#couponFeee").html(couponFee);
     $("#totalFee").html(goodsFee + payTypeFee - couponFee - couponFee);
 }
 

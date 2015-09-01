@@ -143,7 +143,7 @@ function move()
                 <a href="/user">会员中心</a>
             </#if>
             
-            <a href="#">在线咨询</a>
+            
       
             服务热线：<#if site??>${site.telephone!''}
           

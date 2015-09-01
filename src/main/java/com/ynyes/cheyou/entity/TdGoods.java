@@ -412,6 +412,10 @@ public class TdGoods {
     @Column
     private Long totalCollects;
     
+    //点击数
+    @Column 
+    private Long totalclicks;
+    
     // 同盟店返利比例
     @Column(scale=2)
     private Double shopReturnRation;
@@ -432,7 +436,15 @@ public class TdGoods {
         this.id = id;
     }
 
-    public Long getProductId() {
+    public Long getTotalclicks() {
+		return totalclicks;
+	}
+
+	public void setTotalclicks(Long totalclicks) {
+		this.totalclicks = totalclicks;
+	}
+
+	public Long getProductId() {
         return productId;
     }
 

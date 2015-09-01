@@ -440,7 +440,7 @@ $(document).ready(function(){
             </#if>
             <a href="/user/order/list/0">我的订单</a>
             <a href="/user">会员中心</a>
-            <a href="javascript:;">在线咨询</a>
+            
             服务热线：<#if site??>${site.telephone!''}</#if>
         </div>
     </div>
@@ -667,7 +667,7 @@ function delItem(id)
                                       <p class="lh30 fs16" style="overflow: hidden; width: 230px; height: 30px;">${item.title!''}</p>
                                       <p class="ta-r c9" style="overflow: hidden; width: 228px; height: 21px; text-align: left;">${item.subTitle!''}</p>
                                       <p class="ta-r sc">￥：<#if item.salePrice??>${item.salePrice?string("0.00")}<#else>0.00</#if></p>
-                                      <img src="${item.coverImageUri!''}" height="100" />
+                                      <img src="${item.coverImageUri!''}" height="130" width="130"/>
                                 </a>
                             </#list>
                         </#if>
@@ -873,9 +873,10 @@ function priceSearch${item_index}(priceid,boxid,x,y){
                                     <a class="fs18 lh25 fw-b" style="display: block; width: 500px; height: 27px; overflow: hidden;font-size: 16px;" href="/goods/${item.id?c}?qiang=1">${item.title!''}</a>
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
-                                    <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft8${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
-                                    <a class="a1" href="/goods/${item.id?c}?qiang=1">￥<b id="flashPrice8${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
-                                        <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
+                                    <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft8${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.totalclicks!'0'}</span>人参与</p>
+                                   <!-- <a class="a1" href="/goods/${item.id?c}?qiang=1">￥<b id="flashPrice8${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
+                                        <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>  -->
+                                    <a class="a1" href="/goods/${item.id?c}?qiang=1"><b>立即抢购</b></a> 
                                     <div class="qgtime" id="search${item_index}">
                                         <a>实时查询</a>
                                         <i></i> 
@@ -892,7 +893,7 @@ function priceSearch${item_index}(priceid,boxid,x,y){
                                         <p class="fs18 lh25 fw-b" style="display: block; width: 250px; height: 27px; overflow: hidden;" >${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 240px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
-                                        <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                        <p><span class="rd3">${item.totalclicks!'0'}</span>人参与</p>
                                     </a>
                                 </dd>
                             </#if>
@@ -1054,8 +1055,9 @@ function priceSearch1${item_index}(priceid,boxid,x,y){
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft15${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
-                                    <a class="a1" href="/goods/${item.id?c}?qiang=1">￥<b id="flashPrice15${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
-                                        <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
+                                 <!--   <a class="a1" href="/goods/${item.id?c}?qiang=1">￥<b id="flashPrice15${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
+                                        <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a> -->
+                                    <a class="a1" href="/goods/${item.id?c}?qiang=1"><b>立即抢购</b></a>
                                     <div class="qgtime" id="search1${item_index}">
                                         <a>实时查询</a>
                                         <i></i> 
@@ -1071,7 +1073,7 @@ function priceSearch1${item_index}(priceid,boxid,x,y){
                                         <p class="fs18 lh25 fw-b" style="display: block; width: 250px; height: 27px; overflow: hidden;" >${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 240px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
-                                        <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                        <p><span class="rd3">${item.totalclicks!'0'}</span>人参与</p>
                                     </a>
                                 </dd>
                             </#if>
@@ -1230,8 +1232,9 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                     <p class="c9 pt10 pb20" style="width: 490px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
 
                                     <p class="c9 pt20 lh30">剩余时间：<span id="timeLeft23${item_index}" class="sc fw-b fs20">00:00:00</span><span class="rd3 ml20">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
-                                    <a class="a1" href="/goods/${item.id?c}?qiang=1">￥<b id="flashPrice23${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
-                                        <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>
+                                <!--    <a class="a1" href="/goods/${item.id?c}?qiang=1">￥<b id="flashPrice23${item_index}"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></b>
+                                        <span>￥：<#if item.salePrice??>${item.salePrice?string("0.00")}</#if></span></a>  -->
+                                    <a class="a1" href="/goods/${item.id?c}?qiang=1"><b>立即抢购</b></a>
                                     <div class="qgtime" id="search2${item_index}">
                                         <a>实时查询</a>
                                         <i></i> 
@@ -1247,7 +1250,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <p class="fs18 lh25 fw-b" style="display: block; width: 250px; height: 27px; overflow: hidden;" >${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 240px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
-                                        <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                        <p><span class="rd3">${item.totalclicks!'0'}</span>人参与</p>
                                     </a>
                                 </dd>
                             </#if>
@@ -1296,7 +1299,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <p class="fs18 lh25 fw-b" style="display: block; width: 250px; height: 27px; overflow: hidden;" >${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 240px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
-                                        <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                        <p><span class="rd3">${item.totalclicks!'0'}</span>人参与</p>
                                     </a>
                                 </dd>
                             </#if>
@@ -1331,7 +1334,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <p class="fs18 lh25 fw-b" style="display: block; width: 250px; height: 27px; overflow: hidden;" >${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 240px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
-                                        <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                        <p><span class="rd3">${item.totalclicks!'0'}</span>人参与</p>
                                     </a>
                                 </dd>
                             </#if>
@@ -1366,7 +1369,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <p class="fs18 lh25 fw-b" style="display: block; width: 250px; height: 27px; overflow: hidden;" >${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 240px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
-                                        <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                        <p><span class="rd3">${item.totalclicks!'0'}</span>人参与</p>
                                     </a>
                                 </dd>
                             </#if>
@@ -1414,7 +1417,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <p class="fs18 lh25 fw-b" style="display: block; width: 250px; height: 27px; overflow: hidden;" >${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 240px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
-                                        <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                        <p><span class="rd3">${item.totalclicks!'0'}</span>人参与</p>
                                     </a>
                                 </dd>
                             </#if>
@@ -1450,7 +1453,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <p class="fs18 lh25 fw-b" style="display: block; width: 250px; height: 27px; overflow: hidden;" >${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 240px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
-                                        <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                        <p><span class="rd3">${item.totalclicks!'0'}</span>人参与</p>
                                     </a>
                                 </dd>
                             </#if>
@@ -1485,7 +1488,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                                         <p class="fs18 lh25 fw-b" style="display: block; width: 250px; height: 27px; overflow: hidden;"  style="display: block; width: 500px; height: 27px; overflow: hidden;">${item.title!''}</p>
                                         <p class="c9 pb20" style="width: 240px; height: 3px; overflow: hidden;">${item.subTitle!''}</p>
                                         <p class="sc pt20 lh30">￥<span class="fw-b fs20"><#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></span></p>
-                                        <p><span class="rd3">${item.flashSaleSoldNumber!'0'}</span>人参与</p>
+                                        <p><span class="rd3">${item.totalclicks!'0'}</span>人参与</p>
                                     </a>
                                 </dd>
                             </#if>
@@ -1716,7 +1719,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                     <p>
                         <a href="/goods/${item.id?c}?qiang=100" style="width: 320px; overflow: hidden; display: block; height: 25px; ">${item.title!''}</a>
                         <span class="c9">低于市场价${((item.salePrice - item.groupSaleHundredPrice)/item.salePrice*100)?string("0")}%</span>
-                        <span class="sp1">${item.totalCollects!'0'}人关注</span>
+                        <span class="sp1">${item.totalclicks!'0'}人关注</span>
                     </p>
                     <b><i></i></b>
                 </#list>
@@ -1724,7 +1727,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </section>
     
     <section class="index_mt">
- <!--   <h3>车友还想团购</h3> -->
+ <!--   <h3>车友还想团购</h3> -->  
         <#if demand_list??>
 
            <#assign n = 0>
@@ -1737,7 +1740,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                    </#if>
                </#list>
               
-        </#if>        
+        </#if>  
+
        <#--
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>
@@ -1796,29 +1800,36 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </div>
     <table class="propart">
         <tr>
+            <#assign temp = 0>
             <#if top_category_list??>
                 <#list top_category_list as item>
                     <#if item_index < 5>
-                        <#-- 增加id @by zhangji -->
-                        <td class="shadow_add">    
+                        <#-- 增加id @by zhangji -->   
                          <#--  @by zhangji -->
+                         <#assign temp= temp+1>
+                    <#-- <td class="shadow_add">
                             <a href="/list/${item.id?c}"><img src="${item.imgUrl!''}" width="68" height="68"/>
                                 <p>${item.title!''}</p>
                             </a>
-                        </td>
+                         </td>  -->
+                        <td><span class="propart0${temp}"><a href="/list/${item.id?c}"></a></span>
+                            <p><a href="/list/${item.id?c}">${item.title!''}</a> </p></td>
                     </#if>
                 </#list>
             </#if>
         </tr>
-        <tr>
+        <tr><#assign temp1 = 5>
             <#if top_category_list??>
                 <#list top_category_list as item>
                     <#if item_index gt 4 && item_index < 9>
-                        <td class="shadow_add2">
+                     <!--   <td class="shadow_add2">
                             <a href="/list/${item.id?c}"><img src="${item.imgUrl!''}" width="68" height="68"/>
                                 <p>${item.title!''}</p>
                             </a>
-                        </td>
+                        </td>  -->
+                        <#assign temp= temp+1>
+                        <td><span class="propart0${temp1}"><a href="/list/${item.id?c}"></a></span>
+                            <p><a href="/list/${item.id?c}">${item.title!''}</a> </p></td>
                     </#if>
                 </#list>
             </#if>

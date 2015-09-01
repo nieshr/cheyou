@@ -372,7 +372,7 @@ function checkTime(i)
       <table class="pro_choose">
         <#if diy_site_list?? && diy_site_list?size gt 0>
             <tr>
-              <td colspan="2"><span>线下同盟店查看</span>
+              <td colspan="2"><span>选择线下同盟店</span>
                 <select>
                     <option value="">请选择...</option>
                     <#list diy_site_list as item>
@@ -511,7 +511,7 @@ function checkTime(i)
             </#if>
             <div class="buy_share">
               <a class="buy_share_a" href="javascript:addCollect(${goods.id?c});">收藏商品</a>
-              <p>关注人数：<span class="red">${goods.totalCollects!'0'}</span>人</p>
+              <p>关注人数：<span class="red">${goods.totalclicks!'0'}</span>人</p>
             </div>
             <div class="clear"></div>
           </td>
@@ -645,11 +645,13 @@ function checkTime(i)
         <h5 class="tit">浏览记录</h5>
         <#if recent_page??>
             <#list recent_page.content as item>
+                <#if item_index <10>
                 <a class="scan" href="/goods/${item.goodsId?c}">
                     <img src="${item.goodsCoverImageUri!''}" title="${item.goodsTitle!''}"/>
                     <p style="overflow: hidden; height: 61px;">${item.goodsTitle!''}</p>
                     <p class="red">￥<#if item.goodsSalePrice??>${item.goodsSalePrice?string("0.00")}</#if></p>
                 </a>
+                </#if>
             </#list>
         </#if>
         <div class="ta-r" style="border-top:1px dotted #ddd;"><a class="blue fs12 lh30" href="#">清空浏览记录</a></div>
