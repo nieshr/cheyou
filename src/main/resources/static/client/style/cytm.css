@@ -43,7 +43,20 @@
 
 .jgqj_txt { width: 48px; height: 20px; border: 1px solid #ccc; background: #fff; margin-top: 9px; text-align: center;}
 .sxtj span { float: left; display: inline; margin: 0 5px; }
-.jgqj_btn { width: 50px; height: 22px; line-height: 22px; text-align: center; cursor: pointer; background: #2b3243; color: #fff; text-align: center; margin-top: 9px; margin-left: 10px; border:none; }
+/*.jgqj_btn { width: 50px; height: 22px; line-height: 22px; text-align: center; cursor: pointer; background: #2b3243; color: #fff; text-align: center; margin-top: 9px; margin-left: 10px; border:none; }*/
+.jgqj_btn {
+  width: 50px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  cursor: pointer;
+  background: #ff4454;
+  color: #fff;
+  text-align: center;
+  margin-top: 9px;
+  margin-left: 10px;
+  border: none;
+}
 .jgqj_btn:hover{ background:#ff3535;}
 .sxtjBox { overflow: hidden; padding-left: 15px; float:left;}
 .sxtjBox span{ font-family:"微软雅黑", "宋体"; font-size:12px; color:#444444; margin-right:10px; line-height:39px;}
@@ -207,3 +220,23 @@ textarea.input { width: 98%; height:50px; color:#666;}
     -moz-box-shadow:0px 0px 4px #333112; -webkit-box-shadow:0px 0px 4px #333112; box-shadow:0px 0px 4px #333112; background:#1c2b38;}
 }
 .bgff{background:#FFF;}
+
+/*首页分类模板 */
+.propart01 a{background:url(../images/images/ico_nav01.png) no-repeat center; width:68px; height:68px; margin-left:50px; }
+.propart01 a:hover{background:url(../images/images/ico_nav01hover.png) no-repeat center; width:68px; height:68px;}
+.propart02 a{background:url(../images/images/ico_nav02.png) no-repeat center; width:68px; height:68px; margin-left:50px; }
+.propart02 a:hover{background:url(../images/images/ico_nav02hover.png) no-repeat center; width:68px; height:68px;}
+.propart03 a{background:url(../images/images/ico_nav03.png) no-repeat center; width:68px; height:68px; margin-left:50px; }
+.propart03 a:hover{background:url(../images/images/ico_nav03hover.png) no-repeat center; width:68px; height:68px;}
+.propart04 a{background:url(../images/images/ico_nav04.png) no-repeat center; width:68px; height:68px; margin-left:50px; }
+.propart04 a:hover{background:url(../images/images/ico_nav04hover.png) no-repeat center; width:68px; height:68px;}
+.propart05 a{background:url(../images/images/ico_nav05.png) no-repeat center; width:68px; height:68px; margin-left:50px; }
+.propart05 a:hover{background:url(../images/images/ico_nav05hover.png) no-repeat center; width:68px; height:68px;}
+.propart06 a{background:url(../images/images/ico_nav06.png) no-repeat center; width:68px; height:68px; margin-left:50px; }
+.propart06 a:hover{background:url(../images/images/ico_nav06hover.png) no-repeat center; width:68px; height:68px;}
+.propart07 a{background:url(../images/images/ico_nav07.png) no-repeat center; width:68px; height:68px; margin-left:50px; }
+.propart07 a:hover{background:url(../images/images/ico_nav07hover.png) no-repeat center; width:68px; height:68px;}
+.propart08 a{background:url(../images/images/ico_nav08.png) no-repeat center; width:68px; height:68px; margin-left:50px; }
+.propart08 a:hover{background:url(../images/images/ico_nav08hover.png) no-repeat center; width:68px; height:68px;}
+.propart09 a{background:url(../images/images/ico_nav09.png) no-repeat center; width:68px; height:68px; margin-left:50px; }
+.propart09 a:hover{background:url(../images/images/ico_nav09hover.png) no-repeat center; width:68px; height:68px;}

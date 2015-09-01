@@ -67,7 +67,7 @@
 .column_px { width:100%; border:1px solid #e3e3e3; height:40px; line-height:40px;}
 .column_px menu { float:left; width:700px;}
 .column_px menu a { display:inline-block; line-height:40px; border-right:1px solid #e3e3e3; padding:0 25px; float:left;}
-.column_px menu a:hover,.column_px menu a.sel01,.column_px menu a.sel02 { color:#fff; background:#2b3243;}
+.column_px menu a:hover,.column_px menu a.sel01,.column_px menu a.sel02 { color:#fff; background:#ff4454;}
 .column_px menu a.sel01 span { display:inline-block; }
 .column_px menu a.sel02 span { display:inline-block;}
 .column_px .fr { width:250px; padding-right:10px;}
@@ -78,9 +78,16 @@
 .column_sum li { float:left; width:207px; border:1px solid #eeeeee; padding:12px; text-align:left; margin:28px 3px 0;_display:inline;_margin:28px 2px 0;}
 .column_sum li i { z-index:1; position:absolute; right:20px; top:20px;}
 .column_sum li a.a1 { width:210px; height:210px; display:block; overflow:hidden; margin-bottom:10px;}
-.goumai { background:#2b3243;height:34px; width:100%; text-align:left; margin-top:5px;}
+.goumai { /*background:#2b3243;*/height:34px; width:100%; text-align:left; margin-top:5px;}
 .column_sum li:hover { border:1px solid #ccc; box-shadow:0px 2px 0px #ccc;}
-.goumai .a8{color:#FFF;text-align:center;display:inline-block; line-height:34px; width:104px;}
+/*.goumai .a8{color:#FFF;text-align:center;display:inline-block; line-height:34px; width:104px;}*/
+.goumai .a8 {
+  color: #333;
+  text-align: center;
+  display: inline-block;
+  line-height: 34px;
+  width: 104px;
+}
 .goumai .a8:hover{color:#e8323d; text-align:center;display:inline-block; line-height:34px; width:104px;}
 .goumai .a8 img{margin-top:7px; margin-right:5px;}
 .goumai .a7{color:#2b3243;text-align:center;display:inline-block; line-height:36px; width:99px; background:#FFF; position:absolute; right:0;}
@@ -784,8 +791,7 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 }
 .indextit h3 {
   display: inline-block;
-  float: left;
-  line-height: 38px;
+  float: left;    
   font-size: 16px;
   color: #ff4454;
   padding: 0 5px 0 20px;
@@ -867,16 +873,16 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	right:20px;
 	bottom:20px;}
 .knockbox a.a1 {
-	display:block;
-	width:240px;
-	height:40px;
-	padding-left:40px;
-	line-height:40px;
-	background:#32b3ec;
-	margin-top:40px;
-	color:#fff600;
-	border-radius:20px;}
-.knockbox a.a1 b {font-size:24px;}
+	 display: block;
+	 width: 170px;
+	 height: 40px;
+	 padding-left: 70px;
+	 line-height: 40px;
+	 background: #ff4454;
+	 margin-top: 40px;
+	 color: #fff;
+	 border-radius: 20px;}
+.knockbox a.a1 b {font-size:23px;}
 .knockbox a.a1 span {
 	color:#fff;
 	margin-left:20px;}

@@ -172,10 +172,12 @@ public class TdCouponController {
 	    
 	    tdCouponService.save(getCoupon);
 	    
-	    // 发送短信
-	    SMSUtil.send(mobile, "28745", new String[] { username,
+	    // 发送短信 如果是免费洗车券和免费打蜡券
+	    if (getCoupon.getTypeTitle().equals("免费洗车券") || getCoupon.getTypeTitle().equals("免费打蜡券")) {
+	    	 SMSUtil.send(mobile, "28745", new String[] { username,
 	                    mobile.substring(mobile.length() - 4)});
-	    
+		}
+ 
 	    res.put("code", 0);
 	    
 	    return res;

@@ -433,11 +433,11 @@ public class TdManagerGoodsController {
                 } else if ("groupSale".equalsIgnoreCase(saleType)) {
                     if (null == keywords || "".equalsIgnoreCase(keywords)) {
                         goodsPage = tdGoodsService
-                                .findByIsOnSaleTrueAndGroupSaleTrueOrderBySortIdAsc(page,
+                                .findByIsOnSaleTrueAndGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(page,
                                         size);
                     } else {
                         goodsPage = tdGoodsService
-                                .searchAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
+                                .searchAndIsOnSaleTrueAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
                                         keywords, page, size);
                     }
                 } else {
@@ -465,11 +465,11 @@ public class TdManagerGoodsController {
                 } else if ("groupSale".equalsIgnoreCase(saleType)) {
                     if (null == keywords || "".equalsIgnoreCase(keywords)) {
                         goodsPage = tdGoodsService
-                                .findByIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(page,
+                                .findByIsOnSaleFalseAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(page,
                                         size);
                     } else {
                         goodsPage = tdGoodsService
-                                .searchAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
+                                .searchAndIsOnSaleFalseAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
                                         keywords, page, size);
                     }
                 } else {
@@ -499,11 +499,11 @@ public class TdManagerGoodsController {
                 } else if ("groupSale".equalsIgnoreCase(saleType)) {
                     if (null == keywords || "".equalsIgnoreCase(keywords)) {
                         goodsPage = tdGoodsService
-                                .findByIsGroupSaleTrueOrderBySortIdAsc(page,
+                                .findByIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(page,
                                         size);
                     } else {
                         goodsPage = tdGoodsService
-                                .searchAndIsGroupSaleTrueOrderBySortIdAsc(
+                                .searchAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
                                         keywords, page, size);
                     }
                 } else {
@@ -531,11 +531,11 @@ public class TdManagerGoodsController {
                 } else if ("groupSale".equalsIgnoreCase(saleType)) {
                     if (null == keywords || "".equalsIgnoreCase(keywords)) {
                         goodsPage = tdGoodsService
-                                .findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
+                                .findByCategoryIdTreeContainingAndIsOnSaleTrueAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
                                         categoryId, page, size);
                     } else {
                         goodsPage = tdGoodsService
-                                .searchAndFindByCategoryIdAndIsOnSaleTrueAndIsGroupSaleTrueOrderBySortIdAsc(
+                                .searchAndFindByCategoryIdAndIsOnSaleTrueAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
                                         keywords, categoryId, page, size);
                     }
                 } else {
@@ -563,11 +563,11 @@ public class TdManagerGoodsController {
                 } else if ("groupSale".equalsIgnoreCase(saleType)) {
                     if (null == keywords || "".equalsIgnoreCase(keywords)) {
                         goodsPage = tdGoodsService
-                                .findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
+                                .findByCategoryIdTreeContainingAndIsOnSaleFalseAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
                                         categoryId, page, size);
                     } else {
                         goodsPage = tdGoodsService
-                                .searchAndFindByCategoryIdAndIsOnSaleFalseAndIsGroupSaleTrueOrderBySortIdAsc(
+                                .searchAndFindByCategoryIdAndIsOnSaleFalseAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
                                         keywords, categoryId, page, size);
                     }
                 } else {
@@ -597,11 +597,11 @@ public class TdManagerGoodsController {
                 } else if ("groupSale".equalsIgnoreCase(saleType)) {
                     if (null == keywords || "".equalsIgnoreCase(keywords)) {
                         goodsPage = tdGoodsService
-                                .findByCategoryIdTreeContainingAndIsGroupSaleTrueOrderBySortIdAsc(
+                                .findByCategoryIdTreeContainingAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
                                         categoryId, page, size);
                     } else {
                         goodsPage = tdGoodsService
-                                .searchAndFindByCategoryIdAndIsGroupSaleTrueOrderBySortIdAsc(
+                                .searchAndFindByCategoryIdAndIsGroupSaleTrueAndGroupSaleHundredTrueOrderBySortIdAsc(
                                         keywords, categoryId, page, size);
                     }
                 } else {

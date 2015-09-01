@@ -372,7 +372,7 @@ function checkTime(i)
       <table class="pro_choose">
         <#if diy_site_list?? && diy_site_list?size gt 0>
             <tr>
-              <td colspan="2"><span>线下同盟店查看</span>
+              <td colspan="2"><span>选择线下同盟店</span>
                 <select>
                     <option value="">请选择...</option>
                     <#list diy_site_list as item>
