@@ -29,29 +29,12 @@ function couponChange()
     var goodsFee = parseFloat($("#goodsFee").html());
     var payTypeFee = parseFloat($("#payTypeFee").html());
     var pointFee = parseFloat($("#pointFee").html());
-    
+
     $("#couponFeee").html(couponFee);
     $("#couponFee").html(couponFee);
-    $("#totalFee").html(goodsFee + payTypeFee - couponFee - couponFee);
+    $("#totalFee").html(goodsFee + payTypeFee - pointFee - couponFee);
 }
 
-function couponChange()
-{
-    var couponFee = parseFloat($("#couponSelect option:selected").attr("fee"));
-    
-    if (undefined == couponFee)
-    {
-        couponFee = 0;
-    }
-    
-    var goodsFee = parseFloat($("#goodsFee").html());
-    var payTypeFee = parseFloat($("#payTypeFee").html());
-    var pointFee = parseFloat($("#pointFee").html());
-    
-    $("#couponFeee").html(couponFee);
-    $("#couponFee").html(couponFee);
-    $("#totalFee").html(goodsFee + payTypeFee - couponFee - couponFee);
-}
 
 function pointChange(self, point, total)
 {
@@ -73,7 +56,7 @@ function pointChange(self, point, total)
         self.value = 0;
         
         $("#pointFee").html(0);
-        $("#totalFee").html(goodsFee + payTypeFee - 0 - payTypeFee);
+        $("#totalFee").html(goodsFee + payTypeFee - 0 - couponFee);
         
         return;
     }
@@ -81,7 +64,7 @@ function pointChange(self, point, total)
     self.value = point;
     
     $("#pointFee").html(point);
-    $("#totalFee").html(goodsFee + payTypeFee - point - payTypeFee);
+    $("#totalFee").html(goodsFee + payTypeFee - point - couponFee);
 }
 
 // 选择收货地址

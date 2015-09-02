@@ -218,7 +218,7 @@
                 <#assign totalPrice=totalPrice+(sg.price*sg.quantity)>
                 <tr>
                     <td width="110"><a href="/goods/${sg.goodsId?c}?qiang=100"><img src="${sg.goodsCoverImageUri!''}" width="100" height="100"/></a></td>
-                    <td width="800" style="text-align:left;"><a href="/goods/${sg.goodsId?c}">${sg.goodsTitle!''}</a></td>
+                    <td width="700" style="text-align:left;"><a href="/goods/${sg.goodsId?c}">${sg.goodsTitle!''}</a></td>
                     <td width="150" style="text-align:center;"><#if sg.price??>${sg.price?string("0.00")}</#if></td>
                     <td width="150" style="text-align:center;">×${sg.quantity!''}</td>
                     <td class="red ml100">￥<#if sg.price?? && sg.quantity??>${(sg.price * sg.quantity)?string("0.00")}</#if></td>

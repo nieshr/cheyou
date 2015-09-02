@@ -60,7 +60,9 @@ $(document).ready(function(){
         <ul>
             <#if news_page??>
                 <#list news_page.content as item>
+                  <#if item_index < 4>
                     <li><a href="/info/content/${item.id?c}?mid=12" style="margin-left: 12px;">${item.title!''}</a></li>
+                  </#if>
                 </#list>
             </#if>
         </ul>

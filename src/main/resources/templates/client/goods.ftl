@@ -313,10 +313,105 @@ function checkTime(i)
             </p>
           </div>
       <#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
+            <script>
+$(document).ready(function(){
+    setInterval("timer()",1000);
+});
+
+function timer()
+{
+    var ts = (new Date(${goods.groupSaleStopTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleStopTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleStopTime?string("dd")}, 
+                ${goods.groupSaleStopTime?string("HH")}, 
+                ${goods.groupSaleStopTime?string("mm")}, 
+                ${goods.groupSaleStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+                
+    var allts = (new Date(${goods.groupSaleStopTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleStopTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleStopTime?string("dd")}, 
+                ${goods.groupSaleStopTime?string("HH")}, 
+                ${goods.groupSaleStopTime?string("mm")}, 
+                ${goods.groupSaleStopTime?string("ss")}))
+               - (new Date(${goods.groupSaleStartTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleStartTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleStartTime?string("dd")}, 
+                ${goods.groupSaleStartTime?string("HH")}, 
+                ${goods.groupSaleStartTime?string("mm")}, 
+                ${goods.groupSaleStartTime?string("ss")}));//总共的毫秒数
+                
+    if (0 == ts)
+    {
+        window.location.reload();
+    }
+    
+    var date = new Date();
+    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+    if(ss < 0){
+        ss = 0;
+    }
+    if(mm < 0){
+        mm = 0;
+    }
+    if(hh < 0){
+        hh = 0;
+    }
+    if(dd < 0){
+        dd = 0;
+    }
+    dd = checkTime(dd);
+    hh = checkTime(hh);
+    mm = checkTime(mm);
+    ss = checkTime(ss);
+    
+    $("#lday").html(dd);
+    $("#lhour").html(hh);
+    $("#lmin").html(mm);
+    $("#lsec").html(ss);
+                    
+    var price = ${goods.flashSalePrice?string("0.00")} * ts / allts;
+    if(price < 1){
+        price = 1;
+    }
+    // var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    //$("#currPrice").html("￥：" + s_x);
+}
+
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
+</script>
             <p class="p1">
               <span class="mr10">预付价</span>
               <span class="red fs24 lh30 mr20">￥：<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></span>
               <span class="unl-th c9">￥：<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span>
+            </p>
+            <p class="p1">
+              <span class="mr10">已参团人数</span>
+              <span class="red"><#if goods.groupSaleSoldNumber??>${goods.groupSaleSoldNumber!'0'}</#if></span>
+              <span>&nbsp人</span>
+            </p>
+            <p class="p1">
+              <span class="mr10">剩余时间</span>
+              <span class="red mr10 ml10" id="lday">0</span>天<span class="red mr10 ml10" id="lhour">0</span>时<span class="red ml10 mr10" id="lmin">0</span>分<span class="red ml10 mr10" id="lsec">0</span>秒
             </p>
           <!--  <p class="p1">
               <span class="mr10">三人团价</span>
@@ -354,6 +449,92 @@ function checkTime(i)
                         </div>
             
       <#elseif qiang?? && qiang == 100 && goods.groupSaleHundredStartTime?? && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime?? && goods.groupSaleHundredStopTime gt .now>
+           <script>
+$(document).ready(function(){
+    setInterval("timer()",1000);
+});
+
+function timer()
+{
+    var ts = (new Date(${goods.groupSaleHundredStopTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleHundredStopTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleHundredStopTime?string("dd")}, 
+                ${goods.groupSaleHundredStopTime?string("HH")}, 
+                ${goods.groupSaleHundredStopTime?string("mm")}, 
+                ${goods.groupSaleHundredStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+                
+    var allts = (new Date(${goods.groupSaleHundredStopTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleHundredStopTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleHundredStopTime?string("dd")}, 
+                ${goods.groupSaleHundredStopTime?string("HH")}, 
+                ${goods.groupSaleHundredStopTime?string("mm")}, 
+                ${goods.groupSaleHundredStopTime?string("ss")}))
+               - (new Date(${goods.groupSaleHundredStartTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleHundredStartTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleHundredStartTime?string("dd")}, 
+                ${goods.groupSaleHundredStartTime?string("HH")}, 
+                ${goods.groupSaleHundredStartTime?string("mm")}, 
+                ${goods.groupSaleHundredStartTime?string("ss")}));//总共的毫秒数
+                
+    if (0 == ts)
+    {
+        window.location.reload();
+    }
+    
+    var date = new Date();
+    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+    if(ss < 0){
+        ss = 0;
+    }
+    if(mm < 0){
+        mm = 0;
+    }
+    if(hh < 0){
+        hh = 0;
+    }
+    if(dd < 0){
+        dd = 0;
+    }
+    dd = checkTime(dd);
+    hh = checkTime(hh);
+    mm = checkTime(mm);
+    ss = checkTime(ss);
+    
+    $("#lday").html(dd);
+    $("#lhour").html(hh);
+    $("#lmin").html(mm);
+    $("#lsec").html(ss);
+                    
+    var price = ${goods.flashSalePrice?string("0.00")} * ts / allts;
+    if(price < 1){
+        price = 1;
+    }
+    // var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    //$("#currPrice").html("￥：" + s_x);
+}
+
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
+</script>
             <p class="p1">
               <span class="mr10">预付价</span>
               <span class="red fs24 lh30 mr20">￥：<#if goods.groupSalePrePayPrice??>${goods.groupSalePrePayPrice?string("0.00")}</#if></span>
@@ -362,6 +543,15 @@ function checkTime(i)
             <p class="p1">
               <span class="mr10">百人团价格</span>
               <span class="lh30 mr20">￥：<#if goods.groupSaleHundredPrice??>${goods.groupSaleHundredPrice?string("0.00")}</#if></span>
+            </p>
+            <p class="p1">
+              <span class="mr10">已参团人数</span>
+              <span class="red"><#if goods.groupSaleHundredSoldNumber??>${goods.groupSaleHundredSoldNumber!'0'}</#if></span>
+              <span>&nbsp人</span>
+            </p>
+            <p class="p1">
+              <span class="mr10">剩余时间</span>
+              <span class="red mr10 ml10" id="lday">0</span>天<span class="red mr10 ml10" id="lhour">0</span>时<span class="red ml10 mr10" id="lmin">0</span>分<span class="red ml10 mr10" id="lsec">0</span>秒
             </p>
       <#else>
           <div class="pro_price">
@@ -375,8 +565,9 @@ function checkTime(i)
               <span class="unl-th c9">￥：<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span>
             </p>
             <#if goods.returnPoints?? && goods.returnPoints != 0>
-            <p class="p1 red">
-              可获得粮草 ${goods.returnPoints!'0'} 担
+            <p style="padding:5px 0;">
+             <span class="red"> 可获得粮草 ${goods.returnPoints!'0'} 担   </span>
+             <span ><a class=" ml20" title="点击查看详情" href="/info/content/41?mid=12">粮草规则</a> </span>
             </p>
             </#if>
             <p class="p1">

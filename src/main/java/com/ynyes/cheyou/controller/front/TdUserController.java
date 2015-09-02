@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.cheyou.entity.TdCoupon;
 import com.ynyes.cheyou.entity.TdDemand;
 import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdGoods;
@@ -36,6 +37,7 @@ import com.ynyes.cheyou.entity.TdUserRecentVisit;
 import com.ynyes.cheyou.entity.TdUserReturn;
 import com.ynyes.cheyou.entity.TdUserSuggestion;
 import com.ynyes.cheyou.service.TdCommonService;
+import com.ynyes.cheyou.service.TdCouponService;
 import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdGoodsService;
@@ -77,6 +79,9 @@ public class TdUserController extends AbstractPaytypeController {
     @Autowired
     private TdUserPointService tdUserPointService;
 
+    @Autowired
+    private TdCouponService tdCouponService;
+    
     @Autowired
     private TdUserCollectService tdUserCollectService;
 
@@ -155,7 +160,37 @@ public class TdUserController extends AbstractPaytypeController {
 
         return "/client/user_index";
     }
-
+    
+    @RequestMapping(value = "/user/coupon/list")
+    public String couponList(HttpServletRequest req, Integer page,
+                        ModelMap map){
+        String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            return "redirect:/login";
+        }
+        
+        tdCommonService.setHeader(map, req);
+        
+        if (null == page)
+        {
+            page = 0;
+        }
+        
+        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
+        
+        map.addAttribute("user", tdUser);
+        
+        List<TdCoupon> coupanList = null;
+        
+        coupanList =tdCouponService.findByMoblie(tdUser.getMobile());
+        
+        map.addAttribute("coupan_list", coupanList);
+        
+        return "/client/user_coupon_list";
+    }
+    
     @RequestMapping(value = "/user/order/list/{statusId}")
     public String orderList(@PathVariable Integer statusId, Integer page,
             String keywords, Integer timeId, HttpServletRequest req,

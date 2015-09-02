@@ -124,6 +124,15 @@ public class TdCouponService {
         return repository.findByUsernameAndIsDistributtedTrue(username);
     }
     
+    public List<TdCoupon> findByMoblie(String mobile)
+    {
+        if (null == mobile)
+        {
+            return null;
+        }
+        return repository.findByMobileAndIsDistributtedTrue(mobile);
+    } 
+    
     public Page<TdCoupon> findAllOrderBySortIdAsc(int page, int size)
     {
         PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.ASC, "sortId"));

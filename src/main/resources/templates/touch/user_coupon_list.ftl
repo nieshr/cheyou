@@ -38,7 +38,14 @@ $(document).ready(function(){
 <#if coupan_list??>
     <#list coupan_list as cg>
             <b><img src="${cg.typePicUri}" /></b>
-            <p>有效期至：${cg.expireTime!''}<span class="sp1">${cg.isUsed?string("未用", "已使用")}</span></p>
+          <!--  <p>有效期至：${cg.expireTime!''}<span class="sp1">${cg.isUsed?string("未用", "已使用")}</span></p> -->
+            <p>有效期至：${cg.expireTime!''}
+                 <span class="sp1"> <#if cg.isUsed?? && cg.isUsed>
+                               已使用
+                               <#else>
+                               未使用
+                               </#if></span>
+            </p>
             <div class="clear"></div>
             <hr/>
     </#list>

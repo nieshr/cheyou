@@ -27,6 +27,8 @@ public interface TdCouponRepo extends
     
     List<TdCoupon> findByUsernameAndIsDistributtedTrue(String username);
     
+    List<TdCoupon> findByMobileAndIsDistributtedTrue(String mobile);
+    
     List<TdCoupon> findByTypeIdAndIsDistributtedFalse(Long typeId);
     
     TdCoupon findTopByTypeIdAndDiySiteIdAndIsDistributtedFalse(Long typeId, Long diySiteId);

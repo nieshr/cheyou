@@ -39,8 +39,8 @@ $(document).ready(function(){
 <section class="main membertop mt10 mb10">
   <menu>
     <a href="/touch/user/order/list/2"><img src="images/order01.png" height="30" /><p>待付款（${total_unpayed!0}）</p></a>
-    <a href="/touch/user/order/list/3"><img src="images/order02.png" height="30" /><p>待发货（${total_undelivered!0}）</p></a>
-    <a href="/touch/user/order/list/4"><img src="images/order03.png" height="30" /><p>待收货（${total_unreceived!'0'}）</p></a>
+    <a href="/touch/user/order/list/3"><img src="images/order02.png" height="30" /><p>付尾款（${total_undelivered!0}）</p></a>
+    <a href="/touch/user/order/list/4"><img src="images/order03.png" height="30" /><p>待服务（${total_unreceived!'0'}）</p></a>
     <a href="/touch/user/order/list/6"><img src="images/order04.png" height="30" /><p>已完成（${total_finished!'0'}）</p></a>
   </menu>
 </section>

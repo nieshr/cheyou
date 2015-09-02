@@ -203,7 +203,7 @@ public class TdTouchLoginController {
             tdUserService.save(user);
              
             request.getSession().setAttribute("username", username);
-             
+            request.getSession().setAttribute("usermobile", user.getMobile());
             res.put("code", 0);
             return res;
         }
@@ -220,7 +220,7 @@ public class TdTouchLoginController {
             tdUserService.save(user);
              
             request.getSession().setAttribute("username", user.getUsername());
-             
+            request.getSession().setAttribute("usermobile", user.getMobile());
             res.put("code", 0);
             return res;
 		}else{

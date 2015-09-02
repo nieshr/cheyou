@@ -567,7 +567,7 @@ public class TdTouchUserController {
         
         if (null == username)
         {
-            return "redirect:/login";
+            return "redirect:/touch/login";
         }
         
         tdCommonService.setHeader(map, req);
@@ -583,7 +583,7 @@ public class TdTouchUserController {
         
         List<TdCoupon> coupanList = null;
         
-        coupanList =tdCoupanService.findByUsername(username);
+        coupanList =tdCoupanService.findByMoblie(tdUser.getMobile());
         
         map.addAttribute("coupan_list", coupanList);
         

@@ -204,7 +204,7 @@ function timer${item_index}()
                           <p class="fs07 c9">${item.subTitle!''}</p>
                           <p id="timeLeft${item_index}"><b>00</b>天<b>00</b>时<b>00</b>分<b>00</b>秒</p>
                           <p class="fs07 red" id="flashPrice${item_index}">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                          <img src="${item.coverImageUri!''}" width="185px"/>
+                          <img src="${item.coverImageUri!''}" width="185" />
                         </a>
                     </td>
                 </#if>
@@ -221,7 +221,7 @@ function timer${item_index}()
                           <p class="fs07 c9">${item.subTitle!''}</p>
                            <p id="timeLeft${item_index}"><b>00</b>天<b>00</b>时<b>00</b>分<b>00</b>秒</p>
                           <p class="fs07 red" id="flashPrice${item_index}">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
-                          <img src="${item.coverImageUri!''}" width="185px"/>
+                          <img src="${item.coverImageUri!''}" width="185"/>
                         </a>
                     </td>
                 </#if>
@@ -243,7 +243,7 @@ function timer${item_index}()
                       <p class="fs08">${item.title!''}</p>
                       <p class="fs07 c9">${item.subTitle!''}</p>
                       <p class="fs07 red">￥<#if item.groupSalePrice??>${item.groupSalePrice?string("0.00")}</#if></p>
-                      <img src="${item.coverImageUri!''}" width="188px"/>
+                      <img src="${item.coverImageUri!''}" width="185" />
                     </a>
                 </td>
             </#if>
@@ -259,7 +259,7 @@ function timer${item_index}()
                           <p class="fs08">${item.title!''}</p>
                           <p class="fs07 c9">${item.subTitle!''}</p>
                           <p class="fs07 red">￥<#if item.groupSalePrice??>${item.groupSalePrice?string("0.00")}</#if></p>
-                          <img src="${item.coverImageUri!''}" width="188px"/>
+                          <img src="${item.coverImageUri!''}" width="185" />
                         </a>
                     </td>
                 </#if>
@@ -282,7 +282,7 @@ function timer${item_index}()
                             <p class="fs08">${item.title!''}</p>
                             <p class="fs07 c9">${item.subTitle!''}</p>
                             <p class="fs07 red">￥<#if item.groupSalePrePayPrice??>${item.groupSalePrePayPrice?string("0.00")}</#if></p>
-                            <img src="${item.coverImageUri!''}" width="188px"/>
+                            <img src="${item.coverImageUri!''}" width="185" />
                         </a>
                     </td>
                 </#if>
@@ -298,7 +298,7 @@ function timer${item_index}()
                             <p class="fs08">${item.title!''}</p>
                             <p class="fs07 c9">${item.subTitle!''}</p>
                             <p class="fs07 red">￥<#if item.groupSalePrePayPrice??>${item.groupSalePrePayPrice?string("0.00")}</#if></p>
-                            <img src="${item.coverImageUri!''}" width="188px"/>
+                            <img src="${item.coverImageUri!''}"width="185"/>
                         </a>
                     </td>
                 </#if>

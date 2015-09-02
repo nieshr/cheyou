@@ -62,7 +62,11 @@ function addCollect(goodsId)
         data:{"goodsId": goodsId},
         dataType: "json",
         success:function(res){
-            
+             if(res.code==0){
+                $("#addCollect").removeClass("pro_share");
+                $("#addCollect").addClass("pro_share1");
+                
+            }
             alert(res.message);
             
             // 需登录
@@ -258,18 +262,106 @@ function checkTime(i)
     return i;  
 }
 </script>
+<#elseif qiang?? && qiang == 100 && goods.groupSaleHundredStartTime?? && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime?? && goods.groupSaleHundredStopTime gt .now>
+<p class="mainbox timebox">剩余时间：<b id="lday">0</b>天<b id="lhour">0</b>时<b id="lmin">0</b>分<b id="lsec">0</b>秒</p>
+ <script>
+$(document).ready(function(){
+    setInterval("timer()",1000);
+});
+
+function timer()
+{
+    var ts = (new Date(${goods.groupSaleHundredStopTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleHundredStopTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleHundredStopTime?string("dd")}, 
+                ${goods.groupSaleHundredStopTime?string("HH")}, 
+                ${goods.groupSaleHundredStopTime?string("mm")}, 
+                ${goods.groupSaleHundredStopTime?string("ss")})) - (new Date());//计算剩余的毫秒数
+                
+    var allts = (new Date(${goods.groupSaleHundredStopTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleHundredStopTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleHundredStopTime?string("dd")}, 
+                ${goods.groupSaleHundredStopTime?string("HH")}, 
+                ${goods.groupSaleHundredStopTime?string("mm")}, 
+                ${goods.groupSaleHundredStopTime?string("ss")}))
+               - (new Date(${goods.groupSaleHundredStartTime?string("yyyy")}, 
+                parseInt(${goods.groupSaleHundredStartTime?string("MM")}, 10)-1, 
+                ${goods.groupSaleHundredStartTime?string("dd")}, 
+                ${goods.groupSaleHundredStartTime?string("HH")}, 
+                ${goods.groupSaleHundredStartTime?string("mm")}, 
+                ${goods.groupSaleHundredStartTime?string("ss")}));//总共的毫秒数
+                
+    if (0 == ts)
+    {
+        window.location.reload();
+    }
+    
+    var date = new Date();
+    var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数
+    var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数
+    var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数
+    var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数
+    if(ss < 0){
+        ss = 0;
+    }
+    if(mm < 0){
+        mm = 0;
+    }
+    if(hh < 0){
+        hh = 0;
+    }
+    if(dd < 0){
+        dd = 0;
+    }
+    dd = checkTime(dd);
+    hh = checkTime(hh);
+    mm = checkTime(mm);
+    ss = checkTime(ss);
+    
+    $("#lday").html(dd);
+    $("#lhour").html(hh);
+    $("#lmin").html(mm);
+    $("#lsec").html(ss);
+                    
+    var price = ${goods.flashSalePrice?string("0.00")} * ts / allts;
+    if(price < 1){
+        price = 1;
+    }
+    // var s_x = Math.round(price).toString();
+    var s_x = price.toFixed(2).toString();
+    
+    var pos_decimal = s_x.indexOf('.');
+    if (pos_decimal < 0) {
+        pos_decimal = s_x.length;
+        s_x += '.';
+    }
+    while (s_x.length <= pos_decimal + 2) {
+        s_x += '0';
+    }
+    
+    //$("#currPrice").html("￥：" + s_x);
+}
+
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
+</script>
 </#if>
 <div class="main" style="z-index:10;">
-  <a class="pro_share" href="javascript:addCollect(${goods.id?c});">关注</a>
+  <a class="pro_share" id="addCollect" href="javascript:addCollect(${goods.id?c});">关注</a>
   <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
     <h3 class="protext red"><b id="currPrice">￥<#if goods.flashSalePrice??>${goods.flashSalePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.salePrice?string("0.00")}</#if></span></h3>
   <#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
-    <h3 class="protext red"><b>￥<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></b></h3>
+    <h3 class="protext red"><b>预付价格：￥<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></b></h3>
     <h3 class="protext">三人团价格: ￥：<#if goods.groupSaleThreePrice??>${goods.groupSaleThreePrice?string("0.00")}</#if></h3>
     <h3 class="protext">五人团价格: ￥：<#if goods.groupSaleSevenPrice??>${goods.groupSaleSevenPrice?string("0.00")}</#if></h3>
     <h3 class="protext">十人团价格: ￥：<#if goods.groupSaleTenPrice??>${goods.groupSaleTenPrice?string("0.00")}</#if></h3>
   <#elseif qiang?? && qiang == 100 && goods.groupSaleHundredStartTime?? && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime?? && goods.groupSaleHundredStopTime gt .now>
-    <h3 class="protext red"><b>￥<#if goods.groupSalePrePayPrice??>${goods.groupSalePrePayPrice?string("0.00")}</#if></b></h3>
+    <h3 class="protext red"><b>预付价格：￥<#if goods.groupSalePrePayPrice??>${goods.groupSalePrePayPrice?string("0.00")}</#if></b></h3>
     <h3 class="protext">百人团价格: ￥：<#if goods.groupSaleHundredPrice??>${goods.groupSaleHundredPrice?string("0.00")}</#if></h3>
   <#else>
     <h3 class="protext red"><b>￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span></h3>

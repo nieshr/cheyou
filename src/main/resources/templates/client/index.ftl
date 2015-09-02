@@ -1562,6 +1562,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                         <div class="team_men">
                             <dl>
                                 <dt style="width: 0%"></dt>
+                                <dd style="left:33%;"></dd>
                                 <dd style="left:66%;"></dd>
                             </dl>
                             <p>
@@ -1598,7 +1599,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                         <div class="team_men">
                             <dl>
                                 <dt style="width: 100%"></dt>
-                                <dd style="left:66%;"></dd>
+                                <dd style="left:33%;background:#ff6700;"></dd>
+                                <dd style="left:66%;background:#ff6700;"></dd>
                             </dl>
                             <p>
                                 <span><#if item.groupSaleThreePrice??>￥${item.groupSaleThreePrice?string(0.00)}</#if></span>
@@ -1822,12 +1824,12 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
             <#if top_category_list??>
                 <#list top_category_list as item>
                     <#if item_index gt 4 && item_index < 9>
-                     <!--   <td class="shadow_add2">
+                     <#--   <td class="shadow_add2">
                             <a href="/list/${item.id?c}"><img src="${item.imgUrl!''}" width="68" height="68"/>
                                 <p>${item.title!''}</p>
                             </a>
                         </td>  -->
-                        <#assign temp= temp+1>
+                        <#assign temp1= temp1+1>
                         <td><span class="propart0${temp1}"><a href="/list/${item.id?c}"></a></span>
                             <p><a href="/list/${item.id?c}">${item.title!''}</a> </p></td>
                     </#if>

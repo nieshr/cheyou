@@ -77,16 +77,26 @@ function timer${item_index}()
                     + ss + "</span>秒");
 </#if>
 }
+function checkTime(i)  
+{  
+    if (i < 10) {  
+        i = "0" + i;  
+    }  
+    return i;  
+}
 </script>
     <a href="/touch/goods/${item.id?c}?qiang=100">
-        <b><img src="${item.groupSaleImage!''}" /></b>
+        <b><img src="${item.groupSaleImage!''}" width="100" height="100"/></b>
         <p class="p1">${item.title!''}</p>
         <p>
             预付价<span  class="red p3">￥<#if item.groupSalePrePayPrice??>${item.groupSalePrePayPrice?string("0.00")}</#if></span>
-            
+         
         </p>
-        <p class="p2">已售：<span class="red">${item.groupSaleHundredSoldNumber!'0'}</span>份</p>
+        <p>百人团价格   <span  class="red p3">￥<#if item.groupSaleHundredPrice??>${item.groupSaleHundredPrice?string("0.00")}</#if></span></p>
+        <p class="p2">参团人数：<span class="red">${item.groupSaleHundredSoldNumber!'0'}</span>人</p>
+        <p class="p2">关注人数：<span class="red">${item.totalclicks!'0'}</span>人</p>
         <p>
+
      <!--       三人团<span  class=" p3">￥<#if item.groupSaleThreePrice??>${item.groupSaleThreePrice?string("0.00")}</#if></span>
             
         </p>

@@ -114,13 +114,13 @@ $(function () {
                         <div style="margin-left:25px;margin-top:10px;" class="upload-box upload-img"></div>
                     </th>
                     <td><a href="/user/order/list/2"><img src="/client/images/mymember/buy01.png" />待付款：<span>${total_unpayed!0}</span></a></td>
-                    <td><a href="/user/order/list/3"><img src="/client/images/mymember/buy02.png" />待发货：<span>${total_undelivered!0}</span></a></td>
+                    <td><a href="/user/order/list/3"><img src="/client/images/mymember/buy02.png" />付尾款：<span>${total_undelivered!0}</span></a></td>
                     <th rowspan="2" class="mymember_fen">
                         <a href="/user/point/list"><img src="/client/images/mymember/buy05.png" /><p>积分：<span>${user.totalPoints!0}</span></p></a>
                     </th>
                 </tr>
                 <tr>
-                    <td><a href="/user/order/list/4"><img src="/client/images/mymember/buy03.png" />待收货：<span>${total_unreceived!'0'}</span></a></td>
+                    <td><a href="/user/order/list/4"><img src="/client/images/mymember/buy03.png" />待服务：<span>${total_unreceived!'0'}</span></a></td>
                     <td><a href="/user/order/list/6"><img src="/client/images/mymember/buy04.png" />已完成：<span>${total_finished!'0'}</span></a></td>
                 </tr>
             </table>
@@ -157,9 +157,9 @@ $(function () {
                                 <#if order.statusId==2>
                                     待付款
                                 <#elseif order.statusId==3>
-                                    待发货
+                                    待付尾款
                                 <#elseif order.statusId==4>
-                                    待收货
+                                    待服务
                                 <#elseif order.statusId==6>
                                     已完成
                                 </#if>

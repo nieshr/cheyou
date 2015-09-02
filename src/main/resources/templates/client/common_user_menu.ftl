@@ -26,7 +26,7 @@
     <div class="mymember_menu_part">
         <a class="mymember_menu_tit" href="/user/point/list"><img src="/client/images/mymember/menu03.png" />资产中心</a>
         <div>
-            <a href="#">优惠券</a>
+            <a href="/user/coupon/list">优惠券</a>
             <a href="/user/point/list">粮草</a>
         </div>
     </div>

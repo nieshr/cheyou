@@ -186,19 +186,7 @@
                   
           </dl>        
             
-            
-       <#--
-                 <#if shop_list??>
-                     <#list shop_list as item>
-                        <table id="${item.id}" style="display:">
-                             <tr>
-                             
-                               <td>${item.address}</td>
-                             </tr>
-                         </table>
-                       </#list>
-                 </#if>
-        -->          
+              
         </section>
 
         <section class="order_check fr" style="width:40%;">
