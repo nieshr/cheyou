@@ -17,6 +17,7 @@ import com.ynyes.cheyou.service.TdArticleService;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdOrderService;
+import com.ynyes.cheyou.service.TdUserCommentService;
 import com.ynyes.cheyou.service.TdUserRecentVisitService;
 import com.ynyes.cheyou.util.ClientConstant;
 
@@ -39,7 +40,10 @@ public class TdShopController {
 	
 	@Autowired 
     private TdOrderService tdOrderService;
-		
+	
+    @Autowired
+    private TdUserCommentService tdUserCommentService;
+	
 	@Autowired
     private TdCommonService tdCommonService;
 	
@@ -135,11 +139,92 @@ public class TdShopController {
     }
 	
 	@RequestMapping("/{id}")
-    public String shop(@PathVariable Long id, ModelMap map, HttpServletRequest req){
+    public String shop(@PathVariable Long id, Long stars, Integer page,
+    		ModelMap map, HttpServletRequest req){
 	    tdCommonService.setHeader(map, req);
+	    
+	    if (null == page) {
+            page = 0;
+        }
+
+        if (null == stars) {
+            stars = 0L;
+        }
 	    
 	    map.addAttribute("shop", tdDiySiteService.findOne(id));
 	    
+	    // 全部评论数
+        map.addAttribute("comment_count",
+                tdUserCommentService.countByDiysiteIdAndIsShowable(id));
+
+        // 好评数
+        map.addAttribute("three_star_comment_count", tdUserCommentService
+                .countByDiysiteIdAndStarsAndIsShowable(id, 3L));
+
+        // 中评数
+        map.addAttribute("two_star_comment_count", tdUserCommentService
+                .countByDiysiteIdAndStarsAndIsShowable(id, 2L));
+
+        // 差评数
+        map.addAttribute("one_star_comment_count", tdUserCommentService
+                .countByDiysiteIdAndStarsAndIsShowable(id, 1L));
+        
+        // 全部评论
+        map.addAttribute("comment_page",
+                tdUserCommentService.findByDiysiteIdAndIsShowable(id, 0,
+                        ClientConstant.pageSize));
+        
+        map.addAttribute("diysiteId", id);
         return "/client/shop_detail";
     }
+	
+	 @RequestMapping("/comment/{diysiteId}")
+	    public String comments(@PathVariable Long diysiteId, Integer page,
+	            Long stars, ModelMap map, HttpServletRequest req) {
+
+	        if (null == diysiteId) {
+	            return "error_404";
+	        }
+
+	        if (null == page) {
+	            page = 0;
+	        }
+
+	        if (null == stars) {
+	            stars = 0L;
+	        }
+
+	        // 全部评论数
+	        map.addAttribute("comment_count",
+	                tdUserCommentService.countByDiysiteIdAndIsShowable(diysiteId));
+
+	        // 好评数
+	        map.addAttribute("three_star_comment_count", tdUserCommentService
+	                .countByDiysiteIdAndStarsAndIsShowable(diysiteId, 3L));
+
+	        // 中评数
+	        map.addAttribute("two_star_comment_count", tdUserCommentService
+	                .countByDiysiteIdAndStarsAndIsShowable(diysiteId, 2L));
+
+	        // 差评数
+	        map.addAttribute("one_star_comment_count", tdUserCommentService
+	                .countByDiysiteIdAndStarsAndIsShowable(diysiteId, 1L));
+
+	        if (stars.equals(0L)) {
+	            map.addAttribute("comment_page", tdUserCommentService
+	                    .findByDiysiteIdAndIsShowable(diysiteId, page,
+	                            ClientConstant.pageSize));
+	        } else {
+	            map.addAttribute("comment_page", tdUserCommentService
+	                    .findByDiysiteIdAndStarsAndIsShowable(diysiteId, stars, page,
+	                            ClientConstant.pageSize));
+	        }
+
+	        // 评论
+	        map.addAttribute("page", page);
+	        map.addAttribute("stars", stars);
+	        map.addAttribute("diysiteId", diysiteId);
+
+	        return "/client/diysite_comment";
+	    }
 }

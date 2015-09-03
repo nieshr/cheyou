@@ -117,6 +117,20 @@ function loadMap(x, y)
                                 <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 2 >start01.png<#else>start03.png</#if>" /></a>
                                 <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 3 >start01.png<#else>start03.png</#if>" /></a>
                                 <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 4 >start02.png<#else>start03.png</#if>" /></a>
+                             <!--    <#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 0>
+                                    <#list 1..("shop_serviceStars"++item.id)?eval as starCount>
+                                        <a class="fl" href="javascript:;"><img src="/client/images/content/start01.png" /></a>
+                                    </#list>
+                                    <#if 5-("shop_serviceStars"++item.id)?eval gt 0>
+                                        <#list 1..(5-("shop_serviceStars"++item.id)?eval) as whiteCount>
+                                            <a class="fl" href="javascript:;"><img src="/client/images/content/start03.png" /></a>
+                                        </#list>
+                                    </#if>
+                                <#else>
+                                    <#list 1..5 as noUseCount>
+                                        <a class="fl" href="javascript:;"><img src="/client/images/content/start03.png" /></a>
+                                    </#list>
+                                </#if> -->
                             </p>
                             <p class="dianouweizhi">
                                 <a href="javascript:;" onclick="loadMap(<#if item.longitude??>${item.longitude?string("0.000000")}<#else>110</#if>, <#if item.latitude??>${item.latitude?string("0.000000")}<#else>39</#if>);">店铺位置</a>

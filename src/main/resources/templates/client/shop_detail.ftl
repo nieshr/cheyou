@@ -12,6 +12,7 @@
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/diysite_comment.js"></script>
 
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
@@ -35,6 +36,24 @@ $(document).ready(function(){
 	productBoxWidth(".partside");
 	topTitFloat("detail_tit",1100,"detail_tit_sel");
 });
+
+function sendAddress(){
+    var address = <#if shop??>"${shop.address!''}"</#if>;
+    $.ajax({
+                type: "post",
+                url: "/diysite/order/sendAddress",
+                data: { "address": address},
+                dataType: "json",
+                success: function (data) { 
+                    if (data.code == 0) {
+                       alert("发送成功！");
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+}
+
 </script>
 </head>
 <body>
@@ -87,7 +106,7 @@ $(document).ready(function(){
             <tr>
                 <td colspan="2">
                     <!--<input type="submit" class="sub" value="立即购买" />-->
-                    <a href="javascript:;" class="sub" style="text-align:center;">地址发送到手机</a>
+                    <a href="javascript:sendAddress();" class="sub" style="text-align:center;">地址发送到手机</a>
                     <div class="clear"></div>
                 </td>
             </tr>
@@ -98,11 +117,9 @@ $(document).ready(function(){
 </div>
 <div class="clear"></div>
 
+<#include "/client/diysite_comment.ftl" />
   
-  
-  
-  
-  <div class="clear"></div> 
+<div class="clear"></div> 
 </div><!--main END-->
 
 <div class="clear h50"></div>

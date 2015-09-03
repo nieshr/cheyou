@@ -357,6 +357,32 @@ public class TdDiysiteController {
     }
     
     /**
+	 * @author lc
+	 * @注释：发送地址到用户手机
+	 */
+    @RequestMapping(value="/sendAddress", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> sendaddress(String address, HttpServletRequest req){
+    	 Map<String, Object> res = new HashMap<String, Object>();         
+        res.put("code", 1);
+        String username = (String) req.getSession().getAttribute("username");
+        if (null == username) {
+			res.put("msg", "请登录");
+			return res;
+		}
+         
+        if (null == address) {
+        	res.put("msg", "发送失败！");
+			return res;
+		}
+        
+        //发送地址到手机
+        
+         
+        return res;
+    }
+    
+    /**
    	 * @author lc
    	 * @注释：通过地区获取同盟店列表
    	 */

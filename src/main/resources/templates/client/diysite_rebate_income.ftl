@@ -106,7 +106,7 @@ DD_belatedPNG.fix('.,img,background');
                                 <p>￥${order.totalPrice?string("#.##")}</p>
                                 <p>${order.payTypeTitle!''}</p>
                               </td>
-                              <td>${order.rebate!''}</td>
+                              <td><#if order.rebate??>${order.rebate?string("0.00")}</#if></td>
                               <td class="td003">
                                 ${order.orderTime!''}
                               </td>

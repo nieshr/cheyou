@@ -103,10 +103,10 @@ DD_belatedPNG.fix('.,img,background');
                               <td>${order.shippingName!''}</td>
                               <td>${order.shippingPhone!''}</td>
                               <td>
-                                <p>￥${order.totalPrice?string("#.##")}</p>
+                                <p>￥${order.totalPrice?string("0.00")}</p>
                                 <p>${order.payTypeTitle!''}</p>
                               </td>
-                              <td><#if order.orderIncome??>￥${order.orderIncome?string("#.##")}</#if></td>
+                              <td><#if order.orderIncome??>￥${order.orderIncome?string("0.00")}</#if></td>
                               <td class="td003">
                                 ${order.orderTime!''}
                               </td>

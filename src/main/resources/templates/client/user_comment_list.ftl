@@ -36,188 +36,14 @@ DD_belatedPNG.fix('.,img,background');
     menuDownList("mainnavdown","#navdown",".a2","sel");
     checkNowHover("shopping_down","shopping_sel");
     
-    //初始化表单验证
-    $(".commentForm").Validform({
-        tiptype: 3,
-        ajaxPost:true,
-        callback: function(data) {
-            if (data.code==0)
-            {
-                alert("提交评论成功");
-                window.location.reload();
-            }
-            else
-            {
-                alert(data.message);
-            }
-        }
-    });
+   
 });
 
 function showCommentTr(i, j)
 {
     $("#comment-tr" + i + j).toggleClass("hide");
 }
-// 改变星级
-function starChange(type, stars)
-{
-    if (null == type || null == stars)
-    {
-        return;
-    }
-    
-    var starCount = parseInt(stars);
-    
-    // 商品满意度
-    if ("goodsStar" == type)
-    {
-        $("#goodsStar").val(starCount);
-        switch(starCount)
-        {
-        case 1:
-            $("a.goodsStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(1).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(2).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 2:
-            $("a.goodsStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(2).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 3:
-            $("a.goodsStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(2).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 4:
-            $("a.goodsStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(2).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(3).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 5:
-            $("a.goodsStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(2).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(3).html('<img src="/client/images/content/start01.png" />');
-            $("a.goodsStar").eq(4).html('<img src="/client/images/content/start01.png" />');
-            break;
-        default:
-            $("a.goodsStar").eq(0).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(1).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(2).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.goodsStar").eq(4).html('<img src="/client/images/content/start03.png" />');    
-        }
-    }
-    // 专业技能满意度
-    else if ("skillStar" == type)
-    {
-        $("#skillStar").val(starCount);
-        switch(starCount)
-        {
-        case 1:
-            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(1).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(2).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 2:
-            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(2).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 3:
-            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(2).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 4:
-            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(2).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(3).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 5:
-            $("a.skillStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(2).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(3).html('<img src="/client/images/content/start01.png" />');
-            $("a.skillStar").eq(4).html('<img src="/client/images/content/start01.png" />');
-            break;
-        default:
-            $("a.skillStar").eq(0).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(1).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(2).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.skillStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-                
-        }
-    }
-    // 服务满意度
-    else if ("serviceStar" == type)
-    {
-        $("#serviceStar").val(starCount);
-        switch(starCount)
-        {
-        case 1:
-            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 2:
-            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 3:
-            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 4:
-            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-            break;
-        case 5:
-            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start01.png" />');
-            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start01.png" />');
-            break;
-        default:
-            $("a.serviceStar").eq(0).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(1).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(2).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(3).html('<img src="/client/images/content/start03.png" />');
-            $("a.serviceStar").eq(4).html('<img src="/client/images/content/start03.png" />');
-                
-        }
-    }
-}
+
 
 function commentJump()
 {
@@ -246,8 +72,8 @@ function commentJump()
         <a class="a001" href="/user/comment/list">全部评论</a>
         
         <select id="commentTypeSelect" onchange="javascript:commentJump();">
-            <option value="0" <#if statusId==0>selected="selected"</#if>>待评价</option>
-            <option value="1" <#if statusId==1>selected="selected"</#if>>已评价</option>                          
+            <option value="0" <#if statusId==0>selected="selected"</#if>>待评价订单</option>
+            <option value="1" <#if statusId==1>selected="selected"</#if>>已评价订单</option>                          
         </select>
       </div>
       
@@ -280,8 +106,8 @@ function commentJump()
                                 </td>
                             </tr>
                             <#if item.isCommented?? && item.isCommented>
-                                <#if ("comment_" + order.id?c + "_" + item.id?c)?eval??>
-                                    <#assign comt=("comment_" + order.id?c + "_" + item.id?c)?eval>
+                                <#if ("comment_" + order.id + "_" + item.id)?eval??>
+                                    <#assign comt=("comment_" + order.id + "_" + item.id)?eval>
                                     <tr id="comment-tr${order_index}${item_index}" class="hide">
                                         <td class="td004" colspan="4">
                                             <div class="pb20 lh25">
@@ -293,7 +119,7 @@ function commentJump()
                                                 <img src="/client/images/mymember/arrow06.gif">
                                             </span>
                                             <div class="mymember_eva_div">
-                                              <b><font>* </font>商品质量：</b>
+                                              <b><font>* </font>同盟商品满意度：</b>
                                               <div class="myclear"></div>
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.goodsStar?? && comt.goodsStar gt 0>start01.png<#else>start03.png</#if>"></a>
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.goodsStar?? && comt.goodsStar gt 1>start01.png<#else>start03.png</#if>"></a>
@@ -303,7 +129,7 @@ function commentJump()
                                               <div class="myclear"></div>
                                             </div>
                                             <div class="mymember_eva_div">
-                                              <b><font>* </font>同盟店：</b>
+                                              <b><font>* </font>同盟店专业技能：</b>
                                               <div class="myclear"></div>
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.skillStar?? && comt.skillStar gt 0>start01.png<#else>start03.png</#if>"></a>
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.skillStar?? && comt.skillStar gt 1>start01.png<#else>start03.png</#if>"></a>
@@ -313,13 +139,23 @@ function commentJump()
                                               <div class="myclear"></div>
                                             </div>
                                             <div class="mymember_eva_div">
-                                              <b><font>* </font>服务态度：</b>
+                                              <b><font>* </font>同盟店服务态度：</b>
                                               <div class="myclear"></div>
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.serviceStar?? && comt.serviceStar gt 0>start01.png<#else>start03.png</#if>"></a>
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.serviceStar?? && comt.serviceStar gt 1>start01.png<#else>start03.png</#if>"></a>
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.serviceStar?? && comt.serviceStar gt 2>start01.png<#else>start03.png</#if>"></a>
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.serviceStar?? && comt.serviceStar gt 3>start01.png<#else>start03.png</#if>"></a>
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.serviceStar?? && comt.serviceStar gt 4>start01.png<#else>start03.png</#if>"></a>
+                                              <div class="myclear"></div>
+                                            </div>
+                                             <div class="mymember_eva_div">
+                                              <b><font>* </font>同盟店综合印象：</b>
+                                              <div class="myclear"></div>
+                                              <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.compositeStar?? && comt.compositeStar gt 0>start01.png<#else>start03.png</#if>"></a>
+                                              <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.compositeStar?? && comt.compositeStar gt 1>start01.png<#else>start03.png</#if>"></a>
+                                              <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.compositeStar?? && comt.compositeStar gt 2>start01.png<#else>start03.png</#if>"></a>
+                                              <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.compositeStar?? && comt.compositeStar gt 3>start01.png<#else>start03.png</#if>"></a>
+                                              <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.compositeStar?? && comt.compositeStar gt 4>start01.png<#else>start03.png</#if>"></a>
                                               <div class="myclear"></div>
                                             </div>
                                             <div class="mymember_eva_div">
@@ -331,7 +167,7 @@ function commentJump()
                                 </#if>
                             <#else>
                                 <tr id="comment-tr${order_index}${item_index}" class="hide">
-                                    <form class="commentForm" action="/user/comment/add" method="post">
+                                    <form class="commentForm${order_index}${item_index}" action="/user/comment/add" method="post">
                                         <input type="hidden" name="orderId" value=${order.id?c} />
                                         <input type="hidden" name="ogId" value=${item.id?c} />
                                         <input type="hidden" name="goodsId" value=${item.goodsId?c} />
@@ -345,36 +181,47 @@ function commentJump()
                                                 <img src="/client/images/mymember/arrow06.gif">
                                             </span>
                                             <div class="mymember_eva_div">
-                                              <b><font>* </font>商品质量：</b>
+                                              <b><font>* </font>同盟商品满意度：</b>
                                               <div class="myclear"></div>
-                                              <input id="goodsStar" name="goodsStar" type="hidden" value="1" />
-                                              <a class="goodsStar a001" href="javascript:starChange('goodsStar', 1);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="goodsStar a001" href="javascript:starChange('goodsStar', 2);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="goodsStar a001" href="javascript:starChange('goodsStar', 3);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="goodsStar a001" href="javascript:starChange('goodsStar', 4);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="goodsStar a001" href="javascript:starChange('goodsStar', 5);"><img src="/client/images/content/start03.png"></a>
-                                              <div class="myclear"></div>
-                                            </div>
-                                            <div class="mymember_eva_div">
-                                              <b><font>* </font>同盟店：</b>
-                                              <div class="myclear"></div>
-                                              <input id="skillStar" name="skillStar" type="hidden" value="1" />
-                                              <a class="skillStar a001" href="javascript:starChange('skillStar', 1);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="skillStar a001" href="javascript:starChange('skillStar', 2);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="skillStar a001" href="javascript:starChange('skillStar', 3);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="skillStar a001" href="javascript:starChange('skillStar', 4);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="skillStar a001" href="javascript:starChange('skillStar', 5);"><img src="/client/images/content/start03.png"></a>
+                                              <input id="goodsStar${order_index}${item_index}" name="goodsStar" type="hidden" value="1" datatype="n" nullmsg="请点击进行评价"/>
+                                              <a class="goodsStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('goodsStar', 1);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="goodsStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('goodsStar', 2);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="goodsStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('goodsStar', 3);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="goodsStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('goodsStar', 4);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="goodsStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('goodsStar', 5);"><img src="/client/images/content/start03.png"></a>
                                               <div class="myclear"></div>
                                             </div>
                                             <div class="mymember_eva_div">
-                                              <b><font>* </font>服务态度：</b>
+                                              <b><font>* </font>同盟店专业技能：</b>
                                               <div class="myclear"></div>
-                                              <input id="serviceStar" name="serviceStar" type="hidden" value="1" />
-                                              <a class="serviceStar a001" href="javascript:starChange('serviceStar', 1);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="serviceStar a001" href="javascript:starChange('serviceStar', 2);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="serviceStar a001" href="javascript:starChange('serviceStar', 3);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="serviceStar a001" href="javascript:starChange('serviceStar', 4);"><img src="/client/images/content/start03.png"></a>
-                                              <a class="serviceStar a001" href="javascript:starChange('serviceStar', 5);"><img src="/client/images/content/start03.png"></a>
+                                              <input id="skillStar${order_index}${item_index}" name="skillStar" type="hidden" value="1" datatype="n" nullmsg="请点击进行评价"/>
+                                              <a class="skillStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('skillStar', 1);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="skillStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('skillStar', 2);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="skillStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('skillStar', 3);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="skillStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('skillStar', 4);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="skillStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('skillStar', 5);"><img src="/client/images/content/start03.png"></a>
+                                              <div class="myclear"></div>
+                                            </div>
+                                            <div class="mymember_eva_div">
+                                              <b><font>* </font>同盟店服务态度：</b>
+                                              <div class="myclear"></div>
+                                              <input id="serviceStar${order_index}${item_index}" name="serviceStar" type="hidden" value="1" datatype="n" nullmsg="请点击进行评价"/>
+                                              <a class="serviceStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('serviceStar', 1);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="serviceStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('serviceStar', 2);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="serviceStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('serviceStar', 3);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="serviceStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('serviceStar', 4);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="serviceStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('serviceStar', 5);"><img src="/client/images/content/start03.png"></a>
+                                              <div class="myclear"></div>
+                                            </div>
+                                             <div class="mymember_eva_div">
+                                              <b><font>* </font>同盟店综合印象：</b>
+                                              <div class="myclear"></div>
+                                              <input id="compositeStar${order_index}${item_index}" name="compositeStar" type="hidden" value="1" datatype="n" nullmsg="请点击进行评价"/>
+                                              <a class="compositeStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('compositeStar', 1);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="compositeStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('compositeStar', 2);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="compositeStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('compositeStar', 3);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="compositeStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('compositeStar', 4);"><img src="/client/images/content/start03.png"></a>
+                                              <a class="compositeStar${order_index}${item_index} a001" href="javascript:starChange${order_index}${item_index}('compositeStar', 5);"><img src="/client/images/content/start03.png"></a>
                                               <div class="myclear"></div>
                                             </div>
                                             <div class="mymember_eva_div">
@@ -387,7 +234,236 @@ function commentJump()
                                         </td>
                                     </form>
                                 </tr>
-                            </#if>
+<script>  
+$(document).ready(function(){  
+     //初始化表单验证
+    $(".commentForm${order_index}${item_index}").Validform({
+        tiptype: 4,
+        ajaxPost:true,
+        callback: function(data) {
+            if (data.code==0)
+            {
+                alert("提交评论成功");
+                window.location.reload();
+            }
+            else
+            {
+                alert(data.message);
+            }
+        }
+    });
+});                            
+// 改变星级
+function starChange${order_index}${item_index}(type, stars)
+{
+    if (null == type || null == stars)
+    {
+        return;
+    }
+    
+    var starCount = parseInt(stars);
+    
+    // 商品满意度
+    if ("goodsStar" == type)
+    {
+        $("#goodsStar${order_index}${item_index}").val(starCount);
+        switch(starCount)
+        {
+        case 1:
+            $("a.goodsStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 2:
+            $("a.goodsStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 3:
+            $("a.goodsStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 4:
+            $("a.goodsStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 5:
+            $("a.goodsStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start01.png" />');
+            break;
+        default:
+            $("a.goodsStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.goodsStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');    
+        }
+    }
+    // 同盟店专业技能
+     else if ("skillStar" == type)
+    {
+        $("#skillStar${order_index}${item_index}").val(starCount);
+        switch(starCount)
+        {
+        case 1:
+            $("a.skillStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 2:
+            $("a.skillStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 3:
+            $("a.skillStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 4:
+            $("a.skillStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 5:
+            $("a.skillStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start01.png" />');
+            break;
+        default:
+            $("a.skillStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.skillStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+                
+        }
+    }
+    // 同盟店服务态度
+    else if ("serviceStar" == type)
+    {
+        $("#serviceStar${order_index}${item_index}").val(starCount);
+        switch(starCount)
+        {
+        case 1:
+            $("a.serviceStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 2:
+            $("a.serviceStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 3:
+            $("a.serviceStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 4:
+            $("a.serviceStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 5:
+            $("a.serviceStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start01.png" />');
+            break;
+        default:
+            $("a.serviceStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.serviceStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+                
+        }
+    }
+     else if ("compositeStar" == type)
+    {
+        $("#compositeStar${order_index}${item_index}").val(starCount);
+        switch(starCount)
+        {
+        case 1:
+            $("a.compositeStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 2:
+            $("a.compositeStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 3:
+            $("a.compositeStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 4:
+            $("a.compositeStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+            break;
+        case 5:
+            $("a.compositeStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start01.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start01.png" />');
+            break;
+        default:
+            $("a.compositeStar${order_index}${item_index}").eq(0).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(1).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(2).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(3).html('<img src="/client/images/content/start03.png" />');
+            $("a.compositeStar${order_index}${item_index}").eq(4).html('<img src="/client/images/content/start03.png" />');
+                
+        }
+    }
+}
+</script>
+                            </#if>                           
                         </#list>
                     </#if>
                 </#list>

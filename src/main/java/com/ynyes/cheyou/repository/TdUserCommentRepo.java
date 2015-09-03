@@ -53,11 +53,19 @@ public interface TdUserCommentRepo extends
     
     Page<TdUserComment> findByGoodsIdAndStatusIdOrderByIdDesc(Long goodsId, Long statusId, Pageable page);
     
+    Page<TdUserComment> findByDiysiteIdAndStatusIdOrderByIdDesc(Long goodsId, Long statusId, Pageable page);
+    
     Long countByGoodsIdAndStatusId(Long goodsId, Long statusId);
+    
+    Long countByDiysiteIdAndStatusId(Long diysiteId, Long statusId);    
     
     Page<TdUserComment> findByGoodsIdAndStatusIdAndStarsOrderByIdDesc(Long goodsId, Long statusId, Long stars, Pageable page);
     
+    Page<TdUserComment> findByDiysiteIdAndStatusIdAndStarsOrderByIdDesc(Long diysiteId, Long statusId, Long stars, Pageable page);
+    
     Long countByGoodsIdAndStatusIdAndStars(Long goodsId, Long statusId, Long stars);
+    
+    Long countByDiysiteIdAndStatusIdAndStars(Long diysiteId, Long statusId, Long stars);
     
     /**
 	 * @author lc

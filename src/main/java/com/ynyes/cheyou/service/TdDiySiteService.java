@@ -196,8 +196,9 @@ public class TdDiySiteService {
         	if (tdUserComment_list.size()==0) {
 				return (float) 0.0;
 			}
-        	for(int i = 0; i < 20; i++){
-        		result[i] = tdUserComment_list.get(Math.abs(new Random().nextInt())%tdUserComment_list.size()).getServiceStar();
+        	//取20个综合服务star求平均值
+        	for(int i = 0; i < 20; i++){       		
+        		result[i] = tdUserComment_list.get(Math.abs(new Random().nextInt())%tdUserComment_list.size()).getCompositeStar();
         		temp = (int) (temp + result[i]);
         	}
         	return temp/20;

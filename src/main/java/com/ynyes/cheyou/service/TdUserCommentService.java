@@ -2,6 +2,7 @@ package com.ynyes.cheyou.service;
 
 import java.util.List;
 
+import org.neo4j.cypher.internal.compiler.v2_1.ast.rewriters.literalReplacement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -115,6 +116,21 @@ public class TdUserCommentService {
         
         return repository.findByGoodsIdAndStatusIdOrderByIdDesc(goodsId, 1L, pageRequest);
     }
+    /**
+	 * @author lc
+	 * @注释：
+	 */
+    public Page<TdUserComment> findByDiysiteIdAndIsShowable(Long diysiteId, int page, int size)
+    {
+        if (null == diysiteId)
+        {
+            return null;
+        }
+        
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByDiysiteIdAndStatusIdOrderByIdDesc(diysiteId, 1L, pageRequest);
+    }
     
     public Long countByGoodsIdAndIsShowable(Long goodsId)
     {
@@ -124,6 +140,20 @@ public class TdUserCommentService {
         }
         
         return repository.countByGoodsIdAndStatusId(goodsId, 1L);
+    }
+    
+    /**
+	 * @author lc
+	 * @注释：根据同盟店id
+	 */
+    public Long countByDiysiteIdAndIsShowable(Long diysiteId)
+    {
+        if (null == diysiteId)
+        {
+            return null;
+        }
+        
+        return repository.countByDiysiteIdAndStatusId(diysiteId, 1L);
     }
     
     public Page<TdUserComment> findByGoodsIdAndStarsAndIsShowable(Long goodsId, Long stars, int page, int size)
@@ -137,6 +167,21 @@ public class TdUserCommentService {
         
         return repository.findByGoodsIdAndStatusIdAndStarsOrderByIdDesc(goodsId, 1L, stars, pageRequest);
     }
+    /**
+	 * @author lc
+	 * @注释：根据同盟店id
+	 */
+    public Page<TdUserComment> findByDiysiteIdAndStarsAndIsShowable(Long diysiteId, Long stars, int page, int size)
+    {
+        if (null == diysiteId || null == stars)
+        {
+            return null;
+        }
+        
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByDiysiteIdAndStatusIdAndStarsOrderByIdDesc(diysiteId, 1L, stars, pageRequest);
+    }
     
     public Long countByGoodsIdAndStarsAndIsShowable(Long goodsId, Long stars)
     {
@@ -146,6 +191,19 @@ public class TdUserCommentService {
         }
         
         return repository.countByGoodsIdAndStatusIdAndStars(goodsId, 1L, stars);
+    }
+    /**
+	 * @author lc
+	 * @注释：根据同盟店id
+	 */
+    public Long countByDiysiteIdAndStarsAndIsShowable(Long diysiteId, Long stars)
+    {
+        if (null == diysiteId || null == stars)
+        {
+            return null;
+        }
+        
+        return repository.countByDiysiteIdAndStatusIdAndStars(diysiteId, 1L, stars);
     }
     
     public Page<TdUserComment> findByUsernameAndSearch(String username, String keywords, int page, int size)

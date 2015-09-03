@@ -428,8 +428,8 @@ function checkTime(i)
             <div class="team_men">
                             <dl>
                                 <dt style="width: <#if goods.groupSaleSoldNumber??><#if goods.groupSaleSoldNumber/10 gt 1>100<#else>${goods.groupSaleSoldNumber * 10}</#if><#else>0</#if>%;"></dt>
-                                <dd style="left:33%;background:#ff6700;"></dd>
-                                <dd style="left:66%;background:#ff6700;"></dd>
+                                <dd style="left:33%;<#if item.groupSaleSoldNumber??><#if item.groupSaleSoldNumber gt 3>background:#ff6700;</#if></#if>"></dd>
+                                <dd style="left:66%;<#if item.groupSaleSoldNumber??><#if item.groupSaleSoldNumber gt 6>background:#ff6700;</#if></#if>"></dd>
                             </dl>
                             
                             <p>

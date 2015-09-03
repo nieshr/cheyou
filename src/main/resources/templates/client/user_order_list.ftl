@@ -88,6 +88,8 @@ DD_belatedPNG.fix('.,img,background');
                 <table>
                     <tr class="mymember_infotab_tit01">
                         <th>订单信息</th>
+                        <th width="100">预约时间</th>
+                        <th width="120">预约门店</th>
                         <th width="70">收货人</th>
                         <th width="80">订单金额</th>
                         <th width="80">
@@ -105,7 +107,7 @@ DD_belatedPNG.fix('.,img,background');
                     <#if order_page??>
                         <#list order_page.content as order>
                             <tr>
-                              <th colspan="7">订单编号：<a href="/user/order?id=${order.id?c}">${order.orderNumber!''}</a></th>
+                              <th colspan="8">订单编号：<a href="/user/order?id=${order.id?c}">${order.orderNumber!''}</a></th>
                             </tr>
                             <tr>
                               <td class="td001">
@@ -113,6 +115,10 @@ DD_belatedPNG.fix('.,img,background');
                                     <a href="/goods/${og.goodsId?c}"><img src="${og.goodsCoverImageUri}"></a>
                                 </#list>
                               </td>
+                              <td>
+                                 ${order.appointmentTime!''}
+                              </td>
+                              <td>${order.shopTitle!''}</td>
                               <td>${order.shippingName!''}</td>
                               <td>
                                 <p>￥${order.totalPrice?string("#.##")}</p>
@@ -150,7 +156,7 @@ DD_belatedPNG.fix('.,img,background');
                                 </p>
                               </td>
                               <td class="td003"> 
-                                <p><a href="/user/order?id=${order.id?c}">查看</a></p>
+                                <p><a href="/user/order?id=${order.id?c}">删除</a></p>
                                 <#if order.statusId==5>
                                     <p><a href="/user/comment/list">评价</a></p>
                                 <#elseif order.statusId==6>

@@ -53,7 +53,10 @@ public class TdUserComment {
     @Column
     private Long serviceStar;
     
-    // 评论被点击“有用”的数量
+    @Column
+    private Long compositeStar;
+     
+	// 评论被点击“有用”的数量
     @Column
     private Long positiveNumber;
     
@@ -139,7 +142,15 @@ public class TdUserComment {
     public void setTitle(String title) {
         this.title = title;
     }
+    
+    public Long getCompositeStar() {
+		return compositeStar;
+	}
 
+	public void setCompositeStar(Long compositeStar) {
+		this.compositeStar = compositeStar;
+	}
+	
     public String getContent() {
         return content;
     }

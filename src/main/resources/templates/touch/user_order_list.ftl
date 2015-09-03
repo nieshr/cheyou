@@ -35,8 +35,8 @@ $(document).ready(function(){
   <nav>
     <a <#if !status_id?? || status_id==0>class="sel"</#if> href="/touch/user/order/list/0"><p>全部订单</p></a>
     <a <#if status_id?? && status_id==2>class="sel"</#if> href="/touch/user/order/list/2"><p>待付款</p></a>
-    <a <#if status_id?? && status_id==3>class="sel"</#if> href="/touch/user/order/list/3"><p>待发货</p></a>
-    <a <#if status_id?? && status_id==4>class="sel"</#if> href="/touch/user/order/list/4"><p>待收货</p></a>
+    <a <#if status_id?? && status_id==3>class="sel"</#if> href="/touch/user/order/list/3"><p>待付尾款</p></a>
+    <a <#if status_id?? && status_id==5>class="sel"</#if> href="/touch/user/order/list/5"><p>待评价</p></a>
     <a <#if status_id?? && status_id==6>class="sel"</#if> href="/touch/user/order/list/6"><p>已完成</p></a>
   </nav>
 </div><!--comcheck END-->

@@ -210,7 +210,7 @@ DD_belatedPNG.fix('.,img,background');
                                 </p>
                               </td>
                               <td class="td003"> 
-                                   ${order.rebate!''}
+                                   <#if order.rebate??>${order.rebate?string("0.00")}</#if>
                               </td>
                             </tr>
                         </#list>

@@ -1190,7 +1190,13 @@ public class TdUserController extends AbstractPaytypeController {
             res.put("message", "评论的商品不存在！");
             return res;
         }
-
+        
+        if (null == tdComment.getStars()) {
+        	res.put("message", "请评价！");
+        	tdUserCommentService.delete(tdComment);
+        	return res;
+		}
+        
         tdComment.setCommentTime(new Date());
         tdComment.setGoodsCoverImageUri(goods.getCoverImageUri());
         tdComment.setGoodsTitle(goods.getTitle());
@@ -1294,11 +1300,29 @@ public class TdUserController extends AbstractPaytypeController {
         if (null != tdUser) {
             if (0 == statusId) {
                 // 查找该用户的未评价订单
-                map.addAttribute("order_page", tdOrderService
+            	Page<TdOrder> orderPage = tdOrderService
                         .findByUsernameAndStatusId(username, 5L, page,
-                                ClientConstant.pageSize));
+                                ClientConstant.pageSize);
+                map.addAttribute("order_page", orderPage);
+                if (null != orderPage) {
+                    for (TdOrder tdOrder : orderPage.getContent()) {
+                        if (null != tdOrder) {
+                            for (TdOrderGoods og : tdOrder.getOrderGoodsList()) {
+                                if (null != og && null != og.getCommentId()) {
+                                    TdUserComment uc = tdUserCommentService
+                                            .findOne(og.getCommentId());
+                                    map.addAttribute("comment_"+tdOrder.getId()+"_"+og.getId(), uc);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+//                map.addAttribute("order_page", tdOrderService
+//                        .findByUsernameAndStatusId(username, 5L, page,
+//                                ClientConstant.pageSize));
             } else {
-                // 查找该用户的未评价订单
+                // 查找该用户的已评价订单
                 Page<TdOrder> orderPage = tdOrderService
                         .findByUsernameAndStatusId(username, 6L, page,
                                 ClientConstant.pageSize);
