@@ -15,6 +15,7 @@ import com.ynyes.cheyou.entity.TdAdType;
 import com.ynyes.cheyou.entity.TdArticleCategory;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdProductCategory;
+import com.ynyes.cheyou.repository.TdOrderRepo;
 import com.ynyes.cheyou.service.TdAdService;
 import com.ynyes.cheyou.service.TdAdTypeService;
 import com.ynyes.cheyou.service.TdArticleCategoryService;
@@ -63,7 +64,7 @@ public class TdIndexController {
 
     @RequestMapping
     public String index(HttpServletRequest req, Device device, ModelMap map) {
-        
+       
         // 触屏
         if (device.isMobile() || device.isTablet()) {
             return "redirect:/touch/";

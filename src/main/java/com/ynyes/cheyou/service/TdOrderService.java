@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ynyes.cheyou.entity.TdOrder;
-import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.repository.TdOrderRepo;
-
-import scala.xml.dtd.PublicID;
 
 /**
  * TdOrder 服务类
@@ -29,6 +26,16 @@ import scala.xml.dtd.PublicID;
 public class TdOrderService {
     @Autowired
     TdOrderRepo repository;
+    
+    public List<TdOrder> findByUsernameAndGoodsId(String username, Long goodsId)
+    {
+        if (null == username || null == goodsId)
+        {
+            return null;
+        }
+        
+        return repository.findByUsernameAndGoodsId(username, goodsId);
+    }
     
     /**
      * 删除

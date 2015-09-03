@@ -46,27 +46,26 @@
         <div class="clear"></div>
     </menu>
     <div class="clear h30"></div>
-  
- <!--   <div class="car_success">
-        <p class="fc fs30 lh40 pb10">加入购物车成功</p>
-        <p class="fc fs18 pb10"> <a href="/cart">去购物车结算</a></p>
-        <p>您还可以 <a class="blue" href="/">继续购物</a></p>       
-    </div>  -->
+
     <div class="car_success">
-        <p class="fc fs30 lh40 pb10 pt20" style="
-            /* padding-top: 30px; */
-        ">加入购物车成功</p>
-                <p class="fc fs18 pb10"> <a href="/cart" style="
-            height: 30px;
-            background: #ff4454;
-            color: #fff;
-            width: 200px;
-            float: left;
-            text-align: center;
-            line-height: 30px;
-        ">去购物车结算</a>
-        <div class="clear"></div></p>
-                <p>您还可以 <a class="blue" href="/">继续购物</a></p>       
+        <#if res??>
+            <p class="fc fs30 lh40 pb10 pt20">该商品仅限购买一次，您已购买过该商品！</p>
+        <#else>
+            <p class="fc fs30 lh40 pb10 pt20">加入购物车成功</p>
+            <p class="fc fs18 pb10"> 
+                <a href="/cart" style="
+                    height: 30px;
+                    background: #ff4454;
+                    color: #fff;
+                    width: 200px;
+                    float: left;
+                    text-align: center;
+                    line-height: 30px;
+                ">去购物车结算</a>
+                <div class="clear"></div>
+            </p>
+        </#if>
+        <p>您还可以 <a class="blue" href="/">继续购物</a></p>       
     </div>
     <div class="clear"></div> 
 </div>

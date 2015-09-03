@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ynyes.cheyou.entity.TdCartGoods;
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdGoodsGift;
+import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.service.TdCartGoodsService;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdGoodsCombinationService;
 import com.ynyes.cheyou.service.TdGoodsService;
+import com.ynyes.cheyou.service.TdOrderService;
 
 /**
  * 购物车
@@ -40,6 +42,9 @@ public class TdCartController {
     
     @Autowired
     private TdGoodsService tdGoodService;
+    
+    @Autowired
+    private TdOrderService tdOrderService;
 
     /**
      * 加入购物车
@@ -74,6 +79,27 @@ public class TdCartController {
         }
         
         if (null != id) {
+         // 这两种商品一个ID号只能购买一次
+            if (id.equals(226L) || id.equals(1644L))
+            {
+                List<TdOrder> orderList = tdOrderService.findByUsernameAndGoodsId(username, 226L);
+                
+                // 已经购买了该商品
+                if (null != orderList && orderList.size() > 0)
+                {
+                    return "redirect:/cart/add?id=" + id + "&m=" + m + "&r=1";
+                }
+                
+                orderList = tdOrderService.findByUsernameAndGoodsId(username, 1644L);
+                
+                // 已经购买了该商品
+                if (null != orderList && orderList.size() > 0)
+                {
+                    return "redirect:/cart/add?id=" + id + "&m=" + m + "&r=1";
+                }
+            }
+            
+            
             TdGoods goods = tdGoodsService.findOne(id);
 
             if (null != goods) {
@@ -118,8 +144,13 @@ public class TdCartController {
     }
 
     @RequestMapping(value = "/cart/add")
-    public String cartInit(Long id, Integer m, HttpServletRequest req, ModelMap map) {
+    public String cartInit(Long id, Integer m, Integer r, HttpServletRequest req, ModelMap map) {
         tdCommonService.setHeader(map, req);
+        
+        if (null != r && 1 == r)
+        {
+            map.addAttribute("res", "该商品仅限购买一次");
+        }
         
         if (null == m)
         {

@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.ynyes.cheyou.entity.TdOrder;
-import com.ynyes.cheyou.entity.TdUser;
 
 /**
  * TdOrder 实体数据库操作接口
@@ -22,6 +22,9 @@ public interface TdOrderRepo extends
 		PagingAndSortingRepository<TdOrder, Long>,
 		JpaSpecificationExecutor<TdOrder> 
 {
+    @Query("select o from TdOrder o join o.orderGoodsList g where o.username=?1 and g.goodsId=?2")
+    List<TdOrder> findByUsernameAndGoodsId(String username, Long goodsId);
+    
     Page<TdOrder> findByStatusIdOrderByIdDesc(Long statusId, Pageable page);
     
     Page<TdOrder> findByUsernameOrderByIdDesc(String username, Pageable page);
