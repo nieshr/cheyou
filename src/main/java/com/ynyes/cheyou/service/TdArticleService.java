@@ -105,6 +105,21 @@ public class TdArticleService {
     
     /**
 	 * @author lc
+	 * @注释：养车宝典
+	 */
+    public Page<TdArticle> findByMenuIdAndIsEnableOrderBySortIdAsc(Long menuId, int page, int size){
+    	if (null == menuId )
+        {
+            return null;
+        }
+        
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByMenuIdAndStatusIdOrderBySortIdAsc(menuId, 0L, pageRequest);
+    }
+    
+    /**
+	 * @author lc
 	 * @注释：按sortid 排序
 	 */
     public Page<TdArticle> findByMenuIdAndCategoryIdAndIsEnableOrderBySortIdAsc(Long menuId, Long catId, int page, int size)

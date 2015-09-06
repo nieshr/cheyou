@@ -45,13 +45,49 @@ public class TdDemand {
     @Column
     private Long statusId;
     	
-	
+    // 是否已回复
+    @Column
+    private Boolean isReplied;
+    
+    // 回复
+    @Column
+    private String reply;
+    
+    // 回复时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date replyTime;
+    
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+
+	public Boolean getIsReplied() {
+		return isReplied;
+	}
+
+	public void setIsReplied(Boolean isReplied) {
+		this.isReplied = isReplied;
+	}
+
+	public Date getReplyTime() {
+		return replyTime;
+	}
+
+	public void setReplyTime(Date replyTime) {
+		this.replyTime = replyTime;
 	}
 
 	public String getContent() {

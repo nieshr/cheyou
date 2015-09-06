@@ -53,15 +53,17 @@ $(function(){
 <#include "/client/common_header.ftl" />
 
 <div class="main">
-    <#--
+
     <a id="essayadpre" href="javascript:void(0);">上一页</a>
     <a id="essayadnext" href="javascript:void(0);">下一页</a>
     <div id="essayadbox">
         <ul id="essayadsum">
             <li id="threeli01">
-                <a class="essayadpart" href="#"><img src="/client/images/photo/banner04.jpg" width="660" height="320" /><p>我是标题文字之类的东西哦</p></a>
-                <a class="essayadpart" href="#"><img src="/client/images/photo/banner03.png" width="660" height="320" /><p>我是标题文字之类的东西哦</p></a>
-                <a class="essayadpart" href="#"><img src="/client/images/photo/banner02.png" width="660" height="320" /><p>我是标题文字之类的东西哦</p></a>
+                <#if Article_scroll_ad_list??>
+                    <#list Article_scroll_ad_list as item>
+                        <a class="essayadpart" href="${item.linkUri!''}"><img src="${item.fileUri!''}" width="660" height="320" /><p>${item.title!''}</p></a>                     
+                    </#list>
+                </#if>
             </li>
             <li id="threeli02"></li>
         </ul>
@@ -70,19 +72,19 @@ $(function(){
   
     <section class="essay_ico">
         <h3 class="sc lh30 fs24 pb10">热门标签</h3>
-        <a href="#"><img src="/client/images/content/essay01.png" /><p>贴膜</p></a>
-        <a href="#"><img src="/client/images/content/essay02.png" /><p>美容</p></a>
-        <a href="#"><img src="/client/images/content/essay03.png" /><p>坐垫</p></a>
-        <a href="#"><img src="/client/images/content/essay04.png" /><p>脚垫</p></a>
-        <a href="#"><img src="/client/images/content/essay05.png" /><p>真皮</p></a>
-        <a href="#"><img src="/client/images/content/essay06.png" /><p>电器</p></a>
-        <a href="#"><img src="/client/images/content/essay07.png" /><p>改装</p></a>
-        <a href="#"><img src="/client/images/content/essay08.png" /><p>自驾</p></a>
+        <a href="/info/list/11?catId=10"><img src="/client/images/content/essay01.png" /><p>贴膜</p></a>
+        <a href="/info/list/11?catId=11"><img src="/client/images/content/essay02.png" /><p>美容</p></a>
+        <a href="/info/list/11?catId=12"><img src="/client/images/content/essay03.png" /><p>坐垫</p></a>
+        <a href="/info/list/11?catId=13"><img src="/client/images/content/essay04.png" /><p>脚垫</p></a>
+        <a href="/info/list/11?catId=14"><img src="/client/images/content/essay05.png" /><p>真皮</p></a>
+        <a href="/info/list/11?catId=15"><img src="/client/images/content/essay06.png" /><p>电器</p></a>
+        <a href="/info/list/11?catId=17"><img src="/client/images/content/essay07.png" /><p>改装</p></a>
+        <a href="/info/list/11?catId=16"><img src="/client/images/content/essay08.png" /><p>自驾</p></a>
         <div class="clear"></div>
     </section>
   
     <div class="clear h40"></div>
-    -->
+    
     
     <section class="column_left" style="float:right;">
         <menu class="hot_list mt20">

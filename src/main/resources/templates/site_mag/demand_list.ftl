@@ -90,11 +90,11 @@ var theForm = document.forms['form1'];
                         <i>邮箱：${demand.mail!''}</i>
                         <i>&nbsp;</i>
                         <i>${demand.time!""}</i>
-                        <#-- 
+                         
                         <i class="reply">
-                            <a href="/Verwalter/user/comment/edit?id=${comment.id}&statusId=${statusId!""}">回复</a>
+                            <a href="/Verwalter/setting/demand/edit?id=${demand.id?c}&statusId=${statusId!""}">回复</a>
                         </i>
-                        -->
+                        
                     </span>                
                     <b>
                         <span class="checkall" style="vertical-align:middle;">
@@ -112,7 +112,13 @@ var theForm = document.forms['form1'];
                         <b class="audit" title="待审核"></b>
                     </#if>
                     ${demand.content!""}
-                    <i>&nbsp;</i>
+                   <!-- <i>&nbsp;</i> -->
+                   <#if demand.isReplied?? && demand.isReplied>
+                        <div class="answer">
+                            <b>管理员回复：</b>${demand.reply!""}
+                            <span class="time">${demand.replyTime!""}</span>
+                        </div>
+                    </#if>
                   </div>            
                   <div>&nbsp;</div>
                 </td>

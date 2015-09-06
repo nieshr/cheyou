@@ -218,7 +218,7 @@ function chooseMoreDown(){
 	var _arr = $(".choose_box menu");
 	var _length = _arr.length;
 	if(_length > 4){
-		var _str = "<a href='javascript:chooseMoreUp();'>收起选项<img src='client/images/content/arrow01.png' /></a>";
+		var _str = "<a href='javascript:chooseMoreUp();'>收起选项<img src='images/content/arrow01.png' /></a>";
 		$(".choose_more").html(_str);
 		var _time = 200;
 		for(var i=4;i<_length;i++){
@@ -231,7 +231,7 @@ function chooseMoreUp(){
 	var _arr = $(".choose_box menu");
 	var _length = _arr.length;
 	if(_length > 4){
-		var _str = "<a href='javascript:chooseMoreDown();'>下拉，更多选项<img src='client/images/content/arrow01.png' /></a>";
+		var _str = "<a href='javascript:chooseMoreDown();'>下拉，更多选项<img src='images/content/arrow01.png' /></a>";
 		$(".choose_more").html(_str);
 		var _time = 200;
 		for(var i=4;i<_length;i++){
@@ -258,11 +258,11 @@ function productImgShow(boxid,_name,_menuid,_hover,_width,_height){
 	_arr.find("img").css({"width":_width+"px","height":_height+"px"});
 	
 	//加入放大框
-	var _showwidth = 500;
-	var _showheight = 500;
+	var _showwidth = 400;
+	var _showheight = 400;
 	var _boxshowstr = "<div class='myboxshowstr' style='position:absolute;top:0;left:"+_width+"px;width:"+_showwidth+"px;height:"+_showheight+"px;border:1px solid #ddd;background:#fff;display:none;overflow:hidden;margin-left:20px;transition-duration:0;'></div>";
 	_box.append(_boxshowstr);
-	var _cha = 100;
+	var _cha = 150;
 	var _showmovestr = "<div class='myboxmovestr' style='position:absolute;top:0;left:0;width:"+_cha+"px;height:"+_cha+"px;border:1px solid #ccc;background:#fff;z-index:10;opacity:0.5;filter:alpha(Opacity=50);-moz-opacity:0.5;display:none;transition: all 0s ease-in-out 0s;'></div>";
 	_box.append(_showmovestr);
 	var _showout = _box.find(".myboxshowstr");//放大镜盒子
@@ -467,6 +467,42 @@ function productBoxWidth(_name){
 	}	
 }
 
+function menuNextPage(boxid,_name,_li,_width,_height,lastid,nextid,_move,_num){
+	var _box = $(boxid);
+	var _menu = _box.find(_name);
+	var _last = $(lastid);
+	var _next = $(nextid);
+	var _length = _menu.find(_li).length;
+	var _index = 0;
+	var _max = _length - _num;
+	
+	_box.css({"width":_width+"px","height":_height+"px","overflow":"hidden","":"","":""});
+	_menu.css("width","99999px");
+	
+	var _nextpage = function(){
+		_index++;
+		if(_index > _max){_index=_max;}
+		var _mm = -_move*_index;
+		_menu.animate({left:_mm+"px"},200);
+		};//fun end
+	
+	var _lastpage = function(){
+		_index--;
+		if(_index < 0){_index=0;}
+		var _mm = -_move*_index;
+		_menu.animate({left:_mm+"px"},200);
+		};//fun end
+		
+	if(_length > _num){
+		_next.click(function(){
+			_nextpage();
+			});
+		_last.click(function(){
+			_lastpage();
+			});
+		}//大于才有效
+}
+
 function floatBoxQQ(){
 	var _box = $("#floatbox");
 	var _obj = $("#floatqq");
@@ -481,4 +517,3 @@ function floatBoxQQ(){
 		_menu.fadeOut(200);
 		});
 }
-

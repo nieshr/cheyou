@@ -266,6 +266,49 @@ y:ev.clientY + document.body.scrollTop - document.body.clientTop
 }; 
 } 
 document.onmousemove = mouseMove;
+
+$(document).ready(function(){
+    getElement();
+});
+/**
+ * 获取要隐藏用户名的元素
+ * @author mdj
+ */
+function getElement(){
+    var pElement = $(".userName").toArray();
+    for(var i = 0;i < pElement.length;i++)
+    {
+       var originName = pElement[i].innerHTML;
+       var name =  changeName(originName);
+       pElement[i].innerText=name;
+    }
+}
+/**
+ * 隐藏用户名
+ * @author mdj
+ */
+function changeName(p)
+{
+    var temp = p;
+    if(temp.length == 11)
+    {
+        var changeStr = temp.substring(3, 7);
+        temp = temp.replace(changeStr,"****");
+    }
+    else
+    {
+        var startStr = "";
+        var strLength = temp.length;
+        for (var i = 0; i < strLength - 4; i++)
+        {
+            startStr += "*";
+        }
+        var changeStr = temp.substring(2, strLength - 2)
+
+        temp = temp.replace(changeStr, startStr);
+    }
+    return temp;
+}
 </script>
 <meta property="qc:admins" content="274143415163145116375" />
 </head>
@@ -1729,21 +1772,20 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </section>
     
     <section class="index_mt">
- <!--   <h3>车友还想团购</h3> -->  
+ <!--   <h3>车友还想团购</h3> -->
+    <div style="width:100%; height:220px; overflow-y:auto;">  
         <#if demand_list??>
-
-           <#assign n = 0>
-               
-               <#list demand_list?sort_by(["time"])?reverse as show>  
-                   <#if show_index < 4>                    
-                          <p class="pt15">网友<span style="color:red;">${show.name!''}</span>留言：</p>
+           <#assign n = 0>             
+               <#list demand_list?sort_by(["time"])?reverse as show>            
+                          <p class="pt15">网友<span class="userName" style="color:red;">${show.name!''}</span>留言：</p>
                           <p style="text-indent:2em;">${show.content!''}</p>
+                          <#if show.isReplied?? && show.isReplied>
+                            <p class="red">商家回复：${show.reply!''}</p>
+                          </#if>
                           <#assign n = n + 1>    
-                   </#if>
-               </#list>
-              
+               </#list>              
         </#if>  
-
+    </div>
        <#--
         <p class="pt15">网友123*****34留言：</p>
         <p>别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。别问我，我是内容文字。</p>

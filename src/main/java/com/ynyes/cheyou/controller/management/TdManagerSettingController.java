@@ -1,5 +1,7 @@
 package com.ynyes.cheyou.controller.management;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ynyes.cheyou.entity.TdDemand;
 import com.ynyes.cheyou.entity.TdServiceItem;
 import com.ynyes.cheyou.entity.TdSetting;
+import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.entity.TdUserSuggestion;
 import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdManagerLogService;
@@ -279,6 +282,60 @@ public class TdManagerSettingController {
         return "/site_mag/demand_list";
     }
     
+    /**
+	 * @author lc
+	 * @注释：
+	 */
+    @RequestMapping(value="/demand/edit")
+    public String demandEdit(Long id,
+                        String __VIEWSTATE,
+                        ModelMap map,
+                        HttpServletRequest req) {
+        String username = (String) req.getSession().getAttribute("manager");
+        
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        if (null != id)
+        {
+            map.addAttribute("demand_item", tdDemandService.findOne(id));
+        }
+        
+        return "/site_mag/demand_edit";
+    }
+    
+    @RequestMapping(value="/demand/save")
+    public String demandSave(TdDemand tdDemand,
+                        String __VIEWSTATE,
+                        ModelMap map,
+                        HttpServletRequest req){
+        String username = (String) req.getSession().getAttribute("manager");
+        if (null == username)
+        {
+            return "redirect:/Verwalter/login";
+        }
+        
+        map.addAttribute("__VIEWSTATE", __VIEWSTATE);
+        
+        if (null == tdDemand.getIsReplied() || !tdDemand.getIsReplied())
+        {
+        	tdDemand.setIsReplied(true);
+        	tdDemand.setReplyTime(new Date());
+        }
+               
+        tdManagerLogService.addLog("edit", "回复用户还想团", req);
+        
+        
+        
+        tdDemandService.save(tdDemand);
+        
+        return "redirect:/Verwalter/setting/demand/list?statusId=" + __VIEWSTATE;
+    }
+    
     @RequestMapping(value="/service/edit")
     public String edit(Long id,
                         String __VIEWSTATE,
@@ -295,7 +352,7 @@ public class TdManagerSettingController {
         
         if (null != id)
         {
-            map.addAttribute("service_item", tdServiceItemService.findOne(id));
+            map.addAttribute("service_item", tdServiceItemService.findOne(id));           
         }
         
         return "/site_mag/service_item_edit";
@@ -324,9 +381,14 @@ public class TdManagerSettingController {
     @ModelAttribute
     public void getModel(@RequestParam(value = "id", required = false) Long id,
                             @RequestParam(value = "serviceItemId", required = false) Long serviceItemId,
+                            @RequestParam(value = "demandId", required = false) Long demandId,
                             ModelMap map) {
         if (null != id) {
             map.addAttribute("tdSetting", tdSettingService.findOne(id));
+        }
+        
+        if (null != demandId) {
+            map.addAttribute("tdDemand", tdDemandService.findOne(demandId));
         }
         
         if (null != serviceItemId) {
