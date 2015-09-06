@@ -190,6 +190,7 @@ function timer${item_index}()
 </section>
 
 <h3 class="indextit mainbox mt10"><span>1元抢拍</span>
+<a style="margin-right:57%;float:left;font-size:0.6em;color:red;" href="/touch/info/content/94?mid=12">抢拍细则</a>
 <a href="/touch/promotion/miao">+更多</a></h3>
 
 <section class="indexlist">
@@ -231,7 +232,9 @@ function timer${item_index}()
   </table>
 </section>
 
-<h3 class="indextit mainbox"><span>十人团购</span><a href="/touch/promotion/tuan">+更多</a></h3>
+<h3 class="indextit mainbox"><span>十人团购</span>
+<a style="margin-right:57%;float:left;font-size:0.6em;color:red;" href="/touch/info/content/40?mid=12">团购细则</a>
+<a href="/touch/promotion/tuan">+更多</a></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">
     <tr>  
@@ -270,7 +273,9 @@ function timer${item_index}()
 </section>
 
 
-<h3 class="indextit mainbox"><span>百人团购</span><a href="/touch/promotion/baituan">+更多</a></h3>
+<h3 class="indextit mainbox"><span>百人团购</span>
+<a style="margin-right:57%;float:left;font-size:0.6em;color:red;" href="/touch/info/content/57?mid=12">团购细则</a>
+<a href="/touch/promotion/baituan">+更多</a></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">
     <tr>

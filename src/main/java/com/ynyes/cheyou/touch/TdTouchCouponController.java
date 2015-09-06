@@ -121,9 +121,97 @@ public class TdTouchCouponController {
 	    
 	    TdCoupon leftCoupon = tdCouponService.findOne(couponId);
 	    
+	    //获取另一个优惠券 zhangji
+	    String couponName=leftCoupon.getTypeTitle();
+	    if (couponName.equals("免费洗车券"))
+	    {
+	    	TdCoupon otherCoupon = tdCouponService.findByDiySiteIdAndTypeTitle(leftCoupon.getDiySiteId(), "免费打蜡券");
+	    	if (null != otherCoupon && otherCoupon.getLeftNumber().compareTo(1L) >= 0)
+	    	{
+		        TdCoupon coupon = tdCouponService.findByTypeIdAndMobileAndIsDistributtedTrue(otherCoupon.getTypeId(), mobile);
+	            if (null == coupon)
+	            {
+				    otherCoupon.setLeftNumber(otherCoupon.getLeftNumber() - 1L);
+				    
+				    tdCouponService.save(otherCoupon);
+				    
+				    TdCouponType ctype = tdCouponTypeService.findOne(leftCoupon.getTypeId());
+				    
+				    TdCoupon getCoupon = new TdCoupon();
+				    
+				    getCoupon.setCarCode(carCode);
+				    getCoupon.setDiySiteId(otherCoupon.getDiySiteId());
+				    getCoupon.setDiySiteTitle(otherCoupon.getDiySiteTitle());
+				    getCoupon.setGetNumber(1L);
+				    getCoupon.setGetTime(new Date());
+				    
+				    if (null != ctype && null != ctype.getTotalDays())
+				    {
+			    	    Calendar ca = Calendar.getInstance();
+			    	    ca.add(Calendar.DATE, ctype.getTotalDays().intValue());
+			    	    getCoupon.setExpireTime(ca.getTime());
+				    }
+				    
+				    getCoupon.setIsDistributted(true);
+				    getCoupon.setIsUsed(false);
+				    getCoupon.setMobile(mobile);
+				    getCoupon.setTypeDescription(otherCoupon.getTypeDescription());
+				    getCoupon.setTypeId(otherCoupon.getTypeId());
+				    getCoupon.setTypePicUri(otherCoupon.getTypePicUri());
+				    getCoupon.setTypeTitle(otherCoupon.getTypeTitle());
+				    getCoupon.setUsername(username);
+				    
+				    tdCouponService.save(getCoupon);
+	            }
+	    	}
+	    }
+	    if(couponName.equals("免费打蜡券"))
+	    {
+	    	TdCoupon otherCoupon = tdCouponService.findByDiySiteIdAndTypeTitle(leftCoupon.getDiySiteId(), "免费洗车券");
+	    	if (null != otherCoupon && otherCoupon.getLeftNumber().compareTo(1L) >= 0)
+	    	{
+		        TdCoupon coupon = tdCouponService.findByTypeIdAndMobileAndIsDistributtedTrue(otherCoupon.getTypeId(), mobile);
+	            if (null == coupon)
+	            {
+				    otherCoupon.setLeftNumber(otherCoupon.getLeftNumber() - 1L);
+				    
+				    tdCouponService.save(otherCoupon);
+				    
+				    TdCouponType ctype = tdCouponTypeService.findOne(leftCoupon.getTypeId());
+				    
+				    TdCoupon getCoupon = new TdCoupon();
+				    
+				    getCoupon.setCarCode(carCode);
+				    getCoupon.setDiySiteId(otherCoupon.getDiySiteId());
+				    getCoupon.setDiySiteTitle(otherCoupon.getDiySiteTitle());
+				    getCoupon.setGetNumber(1L);
+				    getCoupon.setGetTime(new Date());
+				    
+				    if (null != ctype && null != ctype.getTotalDays())
+				    {
+			    	    Calendar ca = Calendar.getInstance();
+			    	    ca.add(Calendar.DATE, ctype.getTotalDays().intValue());
+			    	    getCoupon.setExpireTime(ca.getTime());
+				    }
+				    
+				    getCoupon.setIsDistributted(true);
+				    getCoupon.setIsUsed(false);
+				    getCoupon.setMobile(mobile);
+				    getCoupon.setTypeDescription(otherCoupon.getTypeDescription());
+				    getCoupon.setTypeId(otherCoupon.getTypeId());
+				    getCoupon.setTypePicUri(otherCoupon.getTypePicUri());
+				    getCoupon.setTypeTitle(otherCoupon.getTypeTitle());
+				    getCoupon.setUsername(username);
+				    
+				    tdCouponService.save(getCoupon);
+	            }
+	    	}
+	    }	    
+	    
+	    
 	    if (null == leftCoupon || leftCoupon.getLeftNumber().compareTo(1L) < 0)
 	    {
-	        res.put("message", "该优惠券已被领完");
+	        res.put("message", couponName+"已被领完");
             return res;
 	    }
 	    
@@ -167,10 +255,11 @@ public class TdTouchCouponController {
 	    
 	    tdCouponService.save(getCoupon);
 	    
-	    // 发送短信
-	    SMSUtil.send(mobile, "28745", new String[] { username,
-	                    mobile.substring(mobile.length() - 4)});
-	    
+	    // 发送短信 如果是免费洗车券和免费打蜡券
+//	    if (getCoupon.getTypeTitle().equals("免费洗车券") || getCoupon.getTypeTitle().equals("免费打蜡券")) {
+//	    SMSUtil.send(mobile, "28745", new String[] { username,
+//	                    mobile.substring(mobile.length() - 4)});
+//	    }
 	    res.put("code", 0);
 	    
 	    return res;
