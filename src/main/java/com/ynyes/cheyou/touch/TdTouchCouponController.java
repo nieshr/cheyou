@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -162,6 +163,13 @@ public class TdTouchCouponController {
 				    getCoupon.setUsername(username);
 				    
 				    tdCouponService.save(getCoupon);
+				    
+				    if (getCoupon.getTypeTitle().equals("免费洗车券") || getCoupon.getTypeTitle().equals("免费打蜡券")) {
+				    	 Random random = new Random();
+			             String smscode = String.format("%04d", random.nextInt(9999));
+				    	 SMSUtil.send(mobile, "28745", new String[] { username,
+				    			    "【免费打蜡券】"+smscode  });
+					}
 	            }
 	    	}
 	    }
@@ -204,6 +212,13 @@ public class TdTouchCouponController {
 				    getCoupon.setUsername(username);
 				    
 				    tdCouponService.save(getCoupon);
+				    
+				    if (getCoupon.getTypeTitle().equals("免费洗车券") || getCoupon.getTypeTitle().equals("免费打蜡券")) {
+				    	 Random random = new Random();
+			             String smscode = String.format("%04d", random.nextInt(9999));
+				    	 SMSUtil.send(mobile, "28745", new String[] { username,
+				    			    "【免费洗车券】"+smscode  });
+					}
 	            }
 	    	}
 	    }	    
@@ -257,9 +272,11 @@ public class TdTouchCouponController {
 	    
 	    // 发送短信 如果是免费洗车券和免费打蜡券
 	    if (getCoupon.getTypeTitle().equals("免费洗车券") || getCoupon.getTypeTitle().equals("免费打蜡券")) {
-	    SMSUtil.send(mobile, "28745", new String[] { username,
-	                    mobile.substring(mobile.length() - 4)});
-	    }
+	    	 Random random = new Random();
+            String smscode = String.format("%04d", random.nextInt(9999));
+	    	 SMSUtil.send(mobile, "28745", new String[] { username,
+	    			    "【"+couponName+"】"+smscode  });
+		}
 	    res.put("code", 0);
 	    
 	    return res;
