@@ -31,7 +31,7 @@ function checkTime(i)
 <body>
 <header class="comhead">
   <div class="main">
-    <p>一元抢拍</p>
+    <p>一元抢拍<a style="font-size:0.6em;color:red;" href="/touch/info/content/94?mid=12">&nbsp;抢拍细则</a></p>
     <a class="a1" href="javascript:history.go(-1);">返回</a>
     <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
   </div>

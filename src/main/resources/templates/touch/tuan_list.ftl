@@ -24,7 +24,7 @@ $(document).ready(function(){
 <body>
 <header class="comhead">
   <div class="main">
-    <p>十人团购</p>
+    <p>十人团购<a style="font-size:0.6em;color:red;" href="/touch/info/content/40?mid=12">&nbsp;团购细则</a></p>
     <a class="a1" href="javascript:history.go(-1);">返回</a>
     <a class="a2" href="/touch"><img src="/touch/images/home.png" height="25" /></a>
   </div>

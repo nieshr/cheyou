@@ -21,6 +21,7 @@ public interface TdCouponRepo extends
 		PagingAndSortingRepository<TdCoupon, Long>,
 		JpaSpecificationExecutor<TdCoupon> 
 {
+	TdCoupon findByDiySiteIdAndTypeTitleAndIsDistributtedFalse(Long diySiteId,String typeTitle);  //zhangji
     List<TdCoupon> findByUsernameAndExpireTimeAfterAndIsDistributtedTrueAndIsUsedFalse(String username, Date current);
     
     List<TdCoupon> findByMobileAndExpireTimeAfterAndIsDistributtedTrueAndIsUsedFalse(String mobile, Date current);

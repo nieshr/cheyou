@@ -1,4 +1,4 @@
-package com.ynyes.cheyou.controller.front;
+package com.ynyes.cheyou.touch;
 
 import java.util.List;
 
@@ -29,8 +29,8 @@ import com.ynyes.cheyou.util.ClientConstant;
  *
  */
 @Controller
-@RequestMapping("/info")
-public class TdInfoController {
+@RequestMapping("/touch/info")
+public class TdTouchInfoController {
 	@Autowired 
 	private TdArticleService tdArticleService;
 	
@@ -52,74 +52,16 @@ public class TdInfoController {
 	@Autowired
     private TdUserRecentVisitService tdUserRecentVisitService;
     
-	@RequestMapping("/list/{mid}")
-    public String infoList(@PathVariable Long mid, 
-                            Long catId, 
-                            Integer page, 
-                            ModelMap map,
-                            HttpServletRequest req){
-	    
-	    tdCommonService.setHeader(map, req);
-        
-        String username = (String) req.getSession().getAttribute("username");
-        
-        // 读取浏览记录
-        if (null == username)
-        {
-            map.addAttribute("recent_page", tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(req.getSession().getId(), 0, ClientConstant.pageSize));
-        }
-        else
-        {
-            map.addAttribute("recent_page", tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(username, 0, ClientConstant.pageSize));
-        }
-        
-	    if (null == mid)
-	    {
-	        return "/client/error_404";
-	    }
-	    
-	    if (null == page)
-	    {
-	        page = 0;
-	    }
-	    
-	    TdNavigationMenu menu = tdNavigationMenuService.findOne(mid);
-	    
-	    map.addAttribute("menu_name", menu.getTitle());
-	    
-	    List<TdArticleCategory> catList = tdArticleCategoryService.findByMenuId(mid);
-	    
-	    if (null !=catList && catList.size() > 0)
-	    {
-	        if (null == catId)
-	        {
-	            catId = catList.get(0).getId();
-	        }
-	        
-	        map.addAttribute("info_page", tdArticleService.findByMenuIdAndCategoryIdAndIsEnableOrderBySortIdAsc(mid, catId, page, ClientConstant.pageSize));
-	    }
-        
-	    
-	    /**
-		* @author lc
-	    * @注释：
-		*/
-		// 文章列表页面广告
-	    TdAdType adType = tdAdTypeService.findByTitle("文章列表页面广告");
-
-	    if (null != adType) {
-	            map.addAttribute("Article_scroll_ad_list", tdAdService
-	                    .findByTypeIdAndIsValidTrueOrderBySortIdAsc(adType.getId()));
-	    }    
-        
-	    map.addAttribute("catId", catId);
-	    map.addAttribute("mid", mid);
-	    map.addAttribute("info_category_list", catList);
-	    map.addAttribute("latest_info_page", tdArticleService.findByMenuIdAndIsEnableOrderByIdDesc(mid, page, ClientConstant.pageSize));
-	    
-        return "/client/info_list";
-    }
 	
+	/**
+	 * @author Zhangji
+	 * touch端活动细则
+	 * @param id
+	 * @param mid
+	 * @param map
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping("/content/{id}")
     public String content(@PathVariable Long id, Long mid, ModelMap map, HttpServletRequest req){
         
@@ -131,17 +73,7 @@ public class TdInfoController {
         }
         
         String username = (String) req.getSession().getAttribute("username");
-        
-        // 读取浏览记录
-        if (null == username)
-        {
-            map.addAttribute("recent_page", tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(req.getSession().getId(), 0, ClientConstant.pageSize));
-        }
-        else
-        {
-            map.addAttribute("recent_page", tdUserRecentVisitService.findByUsernameOrderByVisitTimeDesc(username, 0, ClientConstant.pageSize));
-        }
-        
+              
         TdNavigationMenu menu = tdNavigationMenuService.findOne(mid);
         
         map.addAttribute("menu_name", menu.getTitle());
@@ -163,7 +95,6 @@ public class TdInfoController {
         // 最近添加
         map.addAttribute("latest_info_page", tdArticleService.findByMenuIdAndIsEnableOrderByIdDesc(mid, 0, ClientConstant.pageSize));
         
-        return "/client/info";
+        return "/touch/activity_detail";
     }
-
 }

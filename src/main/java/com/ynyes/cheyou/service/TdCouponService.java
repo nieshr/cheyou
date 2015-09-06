@@ -88,6 +88,15 @@ public class TdCouponService {
     }
     
     /**
+     * 免费打蜡券
+     * @author Zhangji
+     */
+    public TdCoupon findByDiySiteIdAndTypeTitle(Long diySiteId,String typeTitle)
+    {
+    	return repository.findByDiySiteIdAndTypeTitleAndIsDistributtedFalse(diySiteId,typeTitle);
+    }
+    
+    /**
      * 查找
      * 
      * @param ids
