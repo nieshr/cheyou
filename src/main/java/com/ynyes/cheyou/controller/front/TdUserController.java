@@ -161,6 +161,54 @@ public class TdUserController extends AbstractPaytypeController {
         return "/client/user_index";
     }
     
+    @RequestMapping(value = "/user/order/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public  Map<String, Object> orderedit(String orderNumber, Long type,
+    		                              HttpServletRequest request) {
+		Map<String, Object> res = new HashMap<String, Object>();
+
+		res.put("code", 1);
+		
+		String username = (String) request.getSession().getAttribute("username");
+        
+        if (null == username) {
+        	res.put("msg", "请登录！");
+            return res;
+        }
+        
+        if (null == orderNumber || null == type) {
+        	res.put("msg", "操作失败！");
+            return res;
+		}
+        
+        if (type.equals(1L)) {
+			TdOrder tdOrder = tdOrderService.findByOrderNumber(orderNumber);
+			if (null == tdOrder || !tdOrder.getStatusId().equals(2L)) {
+				res.put("msg", "操作失败！");
+	            return res;
+			}
+			
+			tdOrder.setStatusId(7L);
+			tdOrderService.save(tdOrder);
+			res.put("code", 0);
+			return res;
+		}
+        else if (type.equals(2L)) {
+        	TdOrder tdOrder = tdOrderService.findByOrderNumber(orderNumber);
+			if (null == tdOrder || !tdOrder.getStatusId().equals(6L)) {
+				res.put("msg", "操作失败！");
+	            return res;
+			}
+			
+			tdOrder.setStatusId(9L);
+			tdOrderService.save(tdOrder);
+			res.put("code", 0);
+			return res;
+		}
+        
+		return res;
+    }
+    
     @RequestMapping(value = "/user/coupon/list")
     public String couponList(HttpServletRequest req, Integer page,
                         ModelMap map){

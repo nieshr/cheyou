@@ -38,15 +38,15 @@ $(document).ready(function(){
 });
 
 function sendAddress(){
-    var address = <#if shop??>"${shop.address!''}"</#if>;
+    var id = <#if shop??>"${shop.id?c}"</#if>;
     $.ajax({
                 type: "post",
                 url: "/diysite/order/sendAddress",
-                data: { "address": address},
+                data: { "id": id},
                 dataType: "json",
                 success: function (data) { 
                     if (data.code == 0) {
-                       alert("发送成功！");
+                       alert("发送成功！请注意查收");
                     } else {
                         alert(data.msg);
                     }

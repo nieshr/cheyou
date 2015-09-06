@@ -10,14 +10,36 @@
 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
 <script src="/touch/js/common.js"></script>
+<script type="text/javascript" src="/mag/js/lhgdialog.js"></script>
 
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/mag/style/idialog.css" rel="stylesheet" id="lhgdialoglink">
 
 <script type="text/javascript">
 $(document).ready(function(){
   
 });
+ //发送AJAX请求
+        function sendAjaxUrl(winObj, postData, sendUrl) {
+            $.ajax({
+                type: "post",
+                url: sendUrl,
+                data: postData,
+                dataType: "json",
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.dialog.alert('尝试发送失败，错误信息：' + errorThrown, function () { }, winObj);
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        winObj.close();
+                        $.dialog.tips(data.msg, 2, '32X32/succ.png', function () { location.reload(); }); //刷新页面
+                    } else {
+                        $.dialog.alert('错误提示：' + data.msg, function () { }, winObj);
+                    }
+                }
+            });
+        }
 </script>
 </head>
 
@@ -44,7 +66,63 @@ $(document).ready(function(){
 <menu class="whitebg mymenu_list">
 <#if order_page??>
     <#list order_page.content as order>
-        <h4>订单号：<a href="/touch/user/order?id=${order.id?c}">${order.orderNumber!''}</a><span>共<b class="red">${order.orderGoodsList?size}</b>件商品，总计<b class="red">￥${order.totalPrice?string("0.00")}</b>元</span></h4>
+     <script>
+                         //取消订单
+                    function OrderCancel${order.id?c}() {
+                        var dialog = $.dialog({
+                            title: '取消订单',
+                            content: '操作提示信息：<br />1、取消的订单，将不在购买流程中显示，您可以到取消的订单中查阅；<br />2、请单击相应按钮继续下一步操作！',
+                            min: false,
+                            max: false,
+                            lock: true,
+                            icon: 'confirm.gif',
+                            button: [{
+                                name: '直接取消',
+                                callback: function () {
+                                    var orderNumber = $.trim($("#spanOrderNumber${order.id?c}").text());
+                                    var postData = { "orderNumber": orderNumber, "type": 1 };
+                                    //发送AJAX请求
+                                    sendAjaxUrl(dialog, postData, "/touch/user/order/edit");
+                                    return false;
+                                },
+                                focus: true
+                        }, {
+                            name: '关闭'
+                        }]
+                    });
+        
+                }
+                //作废订单
+                    function OrderInvalid${order.id?c}() {
+                        var dialog = $.dialog({
+                            title: '取消订单',
+                            content: '操作提示信息：<br />确定删除订单？',
+                            min: false,
+                            max: false,
+                            lock: true,
+                            icon: 'confirm.gif',
+                            button: [{
+                                name: '确定删除',
+                                callback: function () {
+                                    var order_no = $.trim($("#spanOrderNumber${order.id?c}").text());
+                                    var postData = { "orderNumber": order_no, "type": 2 };
+                                    //发送AJAX请求
+                                    sendAjaxUrl(dialog, postData, "/touch/user/order/edit");
+                                    return false;
+                                }
+                            }, {
+                                name: '关闭'
+                            }]
+                        });
+                    }
+                        </script>
+        <h4>订单号：<a href="/touch/user/order?id=${order.id?c}" id="spanOrderNumber${order.id?c}">${order.orderNumber!''}</a>        
+        <span>共<b class="red">${order.orderGoodsList?size}</b>件商品，总计<b class="red">￥${order.totalPrice?string("0.00")}</b>元</span></h4>
+        <#if order.statusId==2>
+            <input type="button" value="取消订单" onclick=" OrderCancel${order.id?c}();" style="margin-left:auto;margin-right:2px; display:block"></input>
+        <#elseif order.statusId==6> 
+            <input type="button" value="删除订单" onclick="OrderInvalid${order.id?c}()" style="margin-left:auto;margin-right:2px; display:block"></input>
+        </#if>
         <#list order.orderGoodsList as og>
             <a href="/touch/goods/${og.goodsId?c}">
                 <b><img src="${og.goodsCoverImageUri}" /></b>

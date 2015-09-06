@@ -11,12 +11,13 @@
 <link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
+<link href="/mag/style/idialog.css" rel="stylesheet" id="lhgdialoglink">
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/mymember.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
-
+<script type="text/javascript" src="/mag/js/lhgdialog.js"></script>
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
@@ -35,6 +36,28 @@ DD_belatedPNG.fix('.,img,background');
     menuDownList("mainnavdown","#navdown",".a2","sel");
     checkNowHover("shopping_down","shopping_sel");
 });
+
+   
+ //发送AJAX请求
+        function sendAjaxUrl(winObj, postData, sendUrl) {
+            $.ajax({
+                type: "post",
+                url: sendUrl,
+                data: postData,
+                dataType: "json",
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $.dialog.alert('尝试发送失败，错误信息：' + errorThrown, function () { }, winObj);
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        winObj.close();
+                        $.dialog.tips(data.msg, 2, '32X32/succ.png', function () { location.reload(); }); //刷新页面
+                    } else {
+                        $.dialog.alert('错误提示：' + data.msg, function () { }, winObj);
+                    }
+                }
+            });
+        }
 </script>
 
 </head>
@@ -106,8 +129,58 @@ DD_belatedPNG.fix('.,img,background');
                     </tr>    
                     <#if order_page??>
                         <#list order_page.content as order>
+                        <script>
+                         //取消订单
+                    function OrderCancel${order.id?c}() {
+                        var dialog = $.dialog({
+                            title: '取消订单',
+                            content: '操作提示信息：<br />1、取消的订单，将不在购买流程中显示，您可以到取消的订单中查阅；<br />2、请单击相应按钮继续下一步操作！',
+                            min: false,
+                            max: false,
+                            lock: true,
+                            icon: 'confirm.gif',
+                            button: [{
+                                name: '直接取消',
+                                callback: function () {
+                                    var orderNumber = $.trim($("#spanOrderNumber${order.id?c}").text());
+                                    var postData = { "orderNumber": orderNumber, "type": 1 };
+                                    //发送AJAX请求
+                                    sendAjaxUrl(dialog, postData, "/user/order/edit");
+                                    return false;
+                                },
+                                focus: true
+                        }, {
+                            name: '关闭'
+                        }]
+                    });
+        
+                }
+                //作废订单
+                    function OrderInvalid${order.id?c}() {
+                        var dialog = $.dialog({
+                            title: '取消订单',
+                            content: '操作提示信息：<br />确定删除订单？',
+                            min: false,
+                            max: false,
+                            lock: true,
+                            icon: 'confirm.gif',
+                            button: [{
+                                name: '确定删除',
+                                callback: function () {
+                                    var order_no = $.trim($("#spanOrderNumber${order.id?c}").text());
+                                    var postData = { "orderNumber": order_no, "type": 2 };
+                                    //发送AJAX请求
+                                    sendAjaxUrl(dialog, postData, "/user/order/edit");
+                                    return false;
+                                }
+                            }, {
+                                name: '关闭'
+                            }]
+                        });
+                    }
+                        </script>
                             <tr>
-                              <th colspan="8">订单编号：<a href="/user/order?id=${order.id?c}">${order.orderNumber!''}</a></th>
+                              <th colspan="8">订单编号：<a href="/user/order?id=${order.id?c}" id="spanOrderNumber${order.id?c}">${order.orderNumber!''}</a></th>
                             </tr>
                             <tr>
                               <td class="td001">
@@ -156,7 +229,13 @@ DD_belatedPNG.fix('.,img,background');
                                 </p>
                               </td>
                               <td class="td003"> 
-                                <p><a href="/user/order?id=${order.id?c}">删除</a></p>
+                                <#if order.statusId==2 >
+                                    <p><a href="javascript:OrderCancel${order.id?c}()">取消</a></p>
+                                <#elseif order.statusId==6>
+                                    <p><a href="javascript:OrderInvalid${order.id?c}()">删除</a></p>
+                                <#else>
+                                    <p><a href="/user/order?id=${order.id?c}">查看</a></p>
+                                </#if>
                                 <#if order.statusId==5>
                                     <p><a href="/user/comment/list">评价</a></p>
                                 <#elseif order.statusId==6>
@@ -164,6 +243,7 @@ DD_belatedPNG.fix('.,img,background');
                                 </#if>
                               </td>
                             </tr>
+                            
                         </#list>
                     </#if>
                 </table>

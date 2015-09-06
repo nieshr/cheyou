@@ -25,6 +25,7 @@ import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.util.SMSUtil;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
 
@@ -362,7 +363,7 @@ public class TdDiysiteController {
 	 */
     @RequestMapping(value="/sendAddress", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> sendaddress(String address, HttpServletRequest req){
+    public Map<String, Object> sendaddress(Long id, HttpServletRequest req){
     	 Map<String, Object> res = new HashMap<String, Object>();         
         res.put("code", 1);
         String username = (String) req.getSession().getAttribute("username");
@@ -371,14 +372,24 @@ public class TdDiysiteController {
 			return res;
 		}
          
-        if (null == address) {
+        if (null == id) {
         	res.put("msg", "发送失败！");
 			return res;
 		}
         
+        TdUser tdUser = tdUserService.findByUsername(username);
+        TdDiySite tdDiySite = tdDiySiteService.findOne(id);
+        if (null == tdDiySite) {
+        	res.put("msg", "发送失败！");
+			return res;
+		}
+        if (null == tdDiySite.getTitle() || null == tdDiySite.getAddress() || null == tdDiySite.getMobile()) {
+        	res.put("msg", "发送失败！");
+			return res;
+		}
         //发送地址到手机
-        
-         
+        SMSUtil.send(tdUser.getMobile(), "33442" ,new String[]{tdDiySite.getTitle(), tdDiySite.getAddress(), tdDiySite.getMobile(),"http://www.cytm99.com/shop/list"});
+        res.put("code", 0);
         return res;
     }
     

@@ -278,7 +278,7 @@ transform: skew(40deg);}
 .car_pay { width:100%;}
 .car_pay a {display:inline-block; padding:0 20px; border:1px solid #eee; _width:120px; margin:0 5px 5px 0; line-height:30px;}
 .car_pay a.sel {border:1px solid #e83928; background:url(../images/content/pro_ico04.png) no-repeat right bottom;}
-.car_pay .text { width:100%; border:1px solid #eee; color:#999; line-height:30px; height:30px; text-indent:1em; margin-top:10px;}
+.car_pay .text { width:100%; border:1px solid #ccc; color:#999; line-height:30px; height:30px; text-indent:1em; margin-top:10px;}
 #new_fp { border:none;}
 .car_success { background:url(../images/content/zq.png) no-repeat left center; width:350px; padding:0 200px 0 100px; margin:30px auto; min-height:150px;_height:150px;}
 .car_success .img { position:absolute;right:0px;top:0;}
