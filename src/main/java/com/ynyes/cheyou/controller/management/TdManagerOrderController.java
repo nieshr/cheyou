@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -1487,22 +1489,37 @@ public class TdManagerOrderController {
                             if (order.getTypeId().equals(1L)) {
                             	shopOrderincome = totalSaleprice - totalCostprice - totalPoints - platformService - trainService - totalCash;
                 			} 
+                            
+                            final Long totalPointsDely = totalPoints;
+                            final TdUser tdUserDely = tdUser;
+                            final TdOrder tdOrderDely = order;
                             // 用户返利
                             if (null != tdUser) {
-                                TdUserPoint userPoint = new TdUserPoint();
+                            	Timer timer = new Timer();  
+                                timer.schedule(new TimerTask() {  
+                                    public void run() {  
+                                       // System.out.println("-------设定要指定任务--------");  
+                                        TdUserPoint userPoint = new TdUserPoint();
+                                        TdOrder tdOrder = tdOrderService.findByOrderNumber(tdOrderDely.getOrderNumber());
+                                        
+                                        userPoint.setDetail("购买商品赠送粮草");
+                                        userPoint.setOrderNumber(tdOrderDely.getOrderNumber());
+                                        userPoint.setPoint(totalPointsDely);
+                                        userPoint.setPointTime(new Date());
+                                        userPoint.setTotalPoint(tdUserDely.getTotalPoints() + totalPointsDely);
+                                        userPoint.setUsername(tdUserDely.getUsername());
 
-                                userPoint.setDetail("购买商品赠送粮草");
-                                userPoint.setOrderNumber(order.getOrderNumber());
-                                userPoint.setPoint(totalPoints);
-                                userPoint.setPointTime(new Date());
-                                userPoint.setTotalPoint(tdUser.getTotalPoints() + totalPoints);
-                                userPoint.setUsername(tdUser.getUsername());
+                                        userPoint = tdUserPointService.save(userPoint);
 
-                                userPoint = tdUserPointService.save(userPoint);
-
-                                tdUser.setTotalPoints(userPoint.getTotalPoint());
-
-                                tdUserService.save(tdUser);
+                                        tdUserDely.setTotalPoints(userPoint.getTotalPoint());
+                                        
+                                        tdOrder.setIsReturnPoints(true);
+                                        tdOrderService.save(tdOrder);
+                                        tdUserService.save(tdUserDely);
+                                    }  
+                                }, 1000*3600*24*7);// 设定指定的时间time,
+                            	
+                                
                             }
                         }
 
@@ -1580,22 +1597,36 @@ public class TdManagerOrderController {
                             }
                         }
 
+                        final Long totalPointsDely = totalPoints;
+                        final TdUser tdUserDely = tdUser;
+                        final TdOrder tdOrderDely = order;
                         // 用户返利
                         if (null != tdUser) {
-                            TdUserPoint userPoint = new TdUserPoint();
+                        	Timer timer = new Timer();  
+                            timer.schedule(new TimerTask() {  
+                                public void run() {  
+                                   // System.out.println("-------设定要指定任务--------");  
+                                    TdUserPoint userPoint = new TdUserPoint();
+                                    TdOrder tdOrder = tdOrderService.findByOrderNumber(tdOrderDely.getOrderNumber());
+                                    
+                                    userPoint.setDetail("购买商品赠送粮草");
+                                    userPoint.setOrderNumber(tdOrderDely.getOrderNumber());
+                                    userPoint.setPoint(totalPointsDely);
+                                    userPoint.setPointTime(new Date());
+                                    userPoint.setTotalPoint(tdUserDely.getTotalPoints() + totalPointsDely);
+                                    userPoint.setUsername(tdUserDely.getUsername());
 
-                            userPoint.setDetail("购买商品赠送粮草");
-                            userPoint.setOrderNumber(order.getOrderNumber());
-                            userPoint.setPoint(totalPoints);
-                            userPoint.setPointTime(new Date());
-                            userPoint.setTotalPoint(tdUser.getTotalPoints() + totalPoints);
-                            userPoint.setUsername(tdUser.getUsername());
+                                    userPoint = tdUserPointService.save(userPoint);
 
-                            userPoint = tdUserPointService.save(userPoint);
-
-                            tdUser.setTotalPoints(userPoint.getTotalPoint());
-
-                            tdUserService.save(tdUser);
+                                    tdUserDely.setTotalPoints(userPoint.getTotalPoint());
+                                    
+                                    tdOrder.setIsReturnPoints(true);
+                                    tdOrderService.save(tdOrder);
+                                    tdUserService.save(tdUserDely);
+                                }  
+                            }, 1000*3600*24*7);// 设定指定的时间time,
+                        	
+                            
                         }
                     }
                     //手机短信发送
@@ -1718,22 +1749,7 @@ public class TdManagerOrderController {
     	return "/";
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
     @ModelAttribute
     public void getModel(@RequestParam(value = "payTypeId", required = false) Long payTypeId,
                     @RequestParam(value = "deliveryTypeId", required = false) Long deliveryTypeId,

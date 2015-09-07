@@ -259,6 +259,9 @@ public class TdOrder {
     @Column
     private Long pointUse;
     
+    //是否已返粮草
+    private Boolean isReturnPoints;
+    
     // 可获取积分
     @Column
     private Long points;
@@ -301,6 +304,14 @@ public class TdOrder {
 
 	public void setCouponTitle(String couponTitle) {
 		this.couponTitle = couponTitle;
+	}
+
+	public Boolean getIsReturnPoints() {
+		return isReturnPoints;
+	}
+
+	public void setIsReturnPoints(Boolean isReturnPoints) {
+		this.isReturnPoints = isReturnPoints;
 	}
 
 	public Boolean getIsReturn() {

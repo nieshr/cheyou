@@ -994,8 +994,17 @@ public class TdUserController extends AbstractPaytypeController {
 
         if (null != orderId) {
             TdOrder tdOrder = tdOrderService.findOne(orderId);
+            
+            if (null != tdOrder && null != tdOrder.getServiceTime()) { //时间判断
+            	Date cur = new Date();
+             	long temp = cur.getTime() - tdOrder.getServiceTime().getTime();
+                if(temp > 1000*3600*24*14){
+                 	return "/client/returnovertime";
+                }  
+			}
+            
             map.addAttribute("order", tdOrder);
-
+            
             if (null != tdOrder && null != id) {
                 for (TdOrderGoods tog : tdOrder.getOrderGoodsList()) {
                     if (tog.getId().equals(id)) {

@@ -6,12 +6,15 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -1529,13 +1532,37 @@ public class TdOrderController extends AbstractPaytypeController {
         if (null == orderId) {
             return "/client/error_404";
         }
-
+        
         TdOrder order = tdOrderService.findOne(orderId);
-
+        
         if (null == order) {
             return "/client/error_404";
         }
-
+        
+        //根据订单类型来判断支付时间是否过期
+        if (order.getTypeId().equals(3L)) { // 抢拍  订单提交后20分钟内
+            Date cur = new Date();
+        	long temp = cur.getTime() - order.getOrderTime().getTime();
+//        	System.out.println(temp);
+            if(temp > 1000*60*20){
+            	 return "/client/overtime";
+            }   
+		}
+        else if (order.getTypeId().equals(4L) || order.getTypeId().equals(5L)) { //团购  预付是订单提交后12小时内，尾款支付也是12小时
+        	Date cur = new Date();
+        	long temp = cur.getTime() - order.getOrderTime().getTime();
+            if(temp > 1000*3600*12){
+            	 return "/client/overtime";
+            }   
+		}
+        else { //普通  订单提交后24小时内
+        	Date cur = new Date();
+        	long temp = cur.getTime() - order.getOrderTime().getTime();
+            if(temp > 1000*3600*24){
+            	 return "/client/overtime";
+            }   
+		}            
+        
         // 待付款
         if (!order.getStatusId().equals(2L)) {
             return "/client/error_404";
@@ -1622,7 +1649,30 @@ public class TdOrderController extends AbstractPaytypeController {
         if (null == order) {
             return "/client/error_404";
         }
-
+        //根据订单类型来判断支付时间是否过期
+        if (order.getTypeId().equals(3L)) { // 抢拍  订单提交后20分钟内
+            Date cur = new Date();
+        	long temp = cur.getTime() - order.getOrderTime().getTime();
+  //      	System.out.println(temp);
+            if(temp > 1000*60*20){
+            	 return "/client/overtime";
+            }   
+		}
+        else if (order.getTypeId().equals(4L) || order.getTypeId().equals(5L)) { //团购  预付是订单提交后12小时内，尾款支付也是12小时
+        	Date cur = new Date();
+        	long temp = cur.getTime() - order.getOrderTime().getTime();
+            if(temp > 1000*3600*12){
+            	 return "/client/overtime";
+            }   
+		}
+        else { //普通  订单提交后24小时内
+        	Date cur = new Date();
+        	long temp = cur.getTime() - order.getOrderTime().getTime();
+            if(temp > 1000*3600*24){
+            	 return "/client/overtime";
+            }   
+		}
+        
         // 待付尾款
         if (!order.getStatusId().equals(3L)) {
             return "/client/error_404";
@@ -2031,22 +2081,36 @@ public class TdOrderController extends AbstractPaytypeController {
             	shopOrderincome = totalSaleprice - totalCostprice - totalPoints - platformService - trainService - totalCash;
 			}         
             
+            final Long totalPointsDely = totalPoints;
+            final TdUser tdUserDely = tdUser;
+            final TdOrder tdOrderDely = tdOrder;
             // 用户返利
             if (null != tdUser) {
-                TdUserPoint userPoint = new TdUserPoint();
+            	Timer timer = new Timer();  
+                timer.schedule(new TimerTask() {  
+                    public void run() {  
+                       // System.out.println("-------设定要指定任务--------");  
+                        TdUserPoint userPoint = new TdUserPoint();
+                        TdOrder tdOrder1 = tdOrderService.findByOrderNumber(tdOrderDely.getOrderNumber());
+                        
+                        userPoint.setDetail("购买商品赠送粮草");
+                        userPoint.setOrderNumber(tdOrderDely.getOrderNumber());
+                        userPoint.setPoint(totalPointsDely);
+                        userPoint.setPointTime(new Date());
+                        userPoint.setTotalPoint(tdUserDely.getTotalPoints() + totalPointsDely);
+                        userPoint.setUsername(tdUserDely.getUsername());
 
-                userPoint.setDetail("购买商品赠送粮草");
-                userPoint.setOrderNumber(tdOrder.getOrderNumber());
-                userPoint.setPoint(totalPoints);
-                userPoint.setPointTime(new Date());
-                userPoint.setTotalPoint(tdUser.getTotalPoints() + totalPoints);
-                userPoint.setUsername(tdUser.getUsername());
+                        userPoint = tdUserPointService.save(userPoint);
 
-                userPoint = tdUserPointService.save(userPoint);
-
-                tdUser.setTotalPoints(userPoint.getTotalPoint());
-
-                tdUserService.save(tdUser);
+                        tdUserDely.setTotalPoints(userPoint.getTotalPoint());
+                        
+                        tdOrder1.setIsReturnPoints(true);
+                        tdOrderService.save(tdOrder1);
+                        tdUserService.save(tdUserDely);
+                    }  
+                }, 1000*3600*24*7);// 设定指定的时间time,
+            	
+                
             }
         }
              
