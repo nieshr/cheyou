@@ -39,6 +39,7 @@
 	//productBoxShow("assort_menu","a","assort_ol","li","assort_sum","ul","sel");
 	productBoxWidth(".partside");
 	topTitFloat("detail_tit",1100,"detail_tit_sel");
+	menuNextPage("#proshowmenubox","menu","li",340,80,"#proshowlast","#proshownext",85,4);//zhangji
 	
 	$("#id-minus").click(function(){
         var q = parseInt($("#quantity").val());
@@ -186,7 +187,7 @@ function clearSelect()
         <menu id="proshowimg">
             <#if goods.showPictures??>
                 <#list goods.showPictures?split(",") as uri>
-                    <#if ""!=uri && uri_index < 4>
+                    <#if ""!=uri>
                         <li><img src="${uri!''}" /></li>
                     </#if>
                 </#list>
@@ -197,7 +198,16 @@ function clearSelect()
         <p class="pro_num">商品编码：${goods.code!''}<#--<a href="#">点击分享</a>--></p>
         </#if>
         <div class="clear h15"></div>
-        <menu id="proshowmenu"></menu>
+        <#-- 图片切换  zhangji-->
+        <div class="clear h15"></div>
+        <div style=" width:100%;z-index:50; position: relative;">
+            <a id="proshowlast" href="javascript:void(0);"> < </a>
+            <a id="proshownext" href="javascript:void(0);"> > </a>
+        </div>
+        <#-- 图片切换 end -->
+        <div id="proshowmenubox" class="mga" style="position:relative;">
+        	<menu id="proshowmenu"></menu>
+        </div>
         <div class="clear"></div>
 
     </section>
