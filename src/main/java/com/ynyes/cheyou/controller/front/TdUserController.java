@@ -1224,7 +1224,7 @@ public class TdUserController extends AbstractPaytypeController {
     @RequestMapping(value = "/user/comment/add", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> commentAdd(HttpServletRequest req,
-            TdUserComment tdComment, Long orderId, Long ogId, String code,
+            TdUserComment tdComment,String[] hid_photo_name_show360, Long orderId, Long ogId, String code,
             ModelMap map) {
         Map<String, Object> res = new HashMap<String, Object>();
         res.put("code", 1);
@@ -1235,6 +1235,7 @@ public class TdUserController extends AbstractPaytypeController {
             res.put("message", "请先登录！");
             return res;
         }
+        
 
         if (null == tdComment.getGoodsId()) {
             res.put("message", "商品ID不能为空！");
@@ -1253,6 +1254,10 @@ public class TdUserController extends AbstractPaytypeController {
         	tdUserCommentService.delete(tdComment);
         	return res;
 		}
+        //zhangji 图片uri
+        String uris = parsePicUris(hid_photo_name_show360);
+
+        tdComment.setShowPictures(uris);
         
         tdComment.setCommentTime(new Date());
         tdComment.setGoodsCoverImageUri(goods.getCoverImageUri());
@@ -1823,5 +1828,30 @@ public class TdUserController extends AbstractPaytypeController {
             model.addAttribute("tdShippingAddress",
                     tdShippingAddressService.findOne(addressId));
         }
+    }
+    /**
+     * 图片地址字符串整理，多张图片用,隔开
+     * 
+     * @param params
+     * @return
+     */
+    private String parsePicUris(String[] uris) {
+        if (null == uris || 0 == uris.length) {
+            return null;
+        }
+
+        String res = "";
+
+        for (String item : uris) {
+            String uri = item.substring(item.indexOf("|") + 1,
+                    item.indexOf("|", 2));
+
+            if (null != uri) {
+                res += uri;
+                res += ",";
+            }
+        }
+
+        return res;
     }
 }

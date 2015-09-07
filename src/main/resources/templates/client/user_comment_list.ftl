@@ -17,6 +17,34 @@
 <script src="/client/js/mymember.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
+<#--上传图片 -->
+<script type="text/javascript" src="/mag/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/mag/js/swfupload.js"></script>
+<script type="text/javascript" src="/mag/js/swfupload.queue.js"></script>
+<script type="text/javascript" src="/mag/js/swfupload.handlers.js"></script>
+
+<style>
+/*上传样式*/
+.upload-box{ position:relative; display:inline-block; height:32px; line-height:32px;vertical-align:middle; *display:inline;overflow: hidden;}
+.upload-box .upload-btn{ width: 105px;
+height:32px; 
+line-height:32px; 
+background-color: #e6e6e6;
+cursor: pointer;
+font-size: 14px;
+font-weight:bold;
+background: url(skin_icons.png) 0px -834px no-repeat;
+text-align:center;
+position:relative;
+padding-top:8px;
+}
+	.upload-box .upload-progress{ position:absolute; top:0; left:0; padding:2px 5px; width:115px; height:26px; border:1px solid #d7d7d7; background:#fff; overflow:hidden; }
+	.upload-box .upload-progress .txt{ display:block; padding-right:10px; font-weight:normal; font-style:normal; font-size:11px; line-height:18px; height:18px; text-overflow:ellipsis; overflow:hidden; }
+	.upload-box .upload-progress .bar{ position:relative; display:block; width:112px; height:4px; border:1px solid #1da76b; }
+	.upload-box .upload-progress .bar b{ display:block; width:0%; height:4px; font-weight:normal; text-indent:-99em; background:#28B779; overflow:hidden; }
+	.upload-box .upload-progress .close{ position:absolute; display:block; top:1px; right:1px; width:14px; height:14px; text-indent:-99em; background:url(skin_icons.png) -112px -168px no-repeat; cursor:pointer; overflow:hidden; }
+	
+</style>
 
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
@@ -36,7 +64,20 @@ DD_belatedPNG.fix('.,img,background');
     menuDownList("mainnavdown","#navdown",".a2","sel");
     checkNowHover("shopping_down","shopping_sel");
     
-   
+  //初始化上传控件
+    $(".upload-show360").each(function () {
+        $(this).InitSWFUpload_show360({ 
+            btntext: "上传图片", 
+            btnwidth: 66, 
+            single: false, 
+            water: true, 
+            thumbnail: true, 
+            filesize: "5120", 
+            sendurl: "/user/upload", 
+            flashurl: "/mag/js/swfupload.swf", 
+            filetypes: "*.jpg;*.jpge;*.png;*.gif;" 
+        });
+    });
 });
 
 function showCommentTr(i, j)
@@ -161,17 +202,32 @@ function commentJump()
                                             <div class="mymember_eva_div">
                                               <b><font>* </font>评价：</b>
                                               <textarea disabled="disabled">${comt.content!''}</textarea>
+                                              <#if comt?? && comt.showPictures??>
+					                            <#list comt.showPictures?split(",") as uri>
+					                                <#if uri != "">
+					                                <li>
+					                                    <input type="hidden" name="hid_photo_name_show360" value="0|${uri!""}|${uri!""}">
+					                                    <div class="img-box">
+					                                        <img width="300px" height="300px" src="${uri!""}" bigsrc="${uri!""}">
+					                                    </div>
+					                                </li>
+					                                </#if>
+					                            </#list>
+					                        </#if>
                                             </div>
                                         </td>
                                     </tr>
                                 </#if>
                             <#else>
-                                <tr id="comment-tr${order_index}${item_index}" class="hide">
-                                    <form class="commentForm${order_index}${item_index}" action="/user/comment/add" method="post">
-                                        <input type="hidden" name="orderId" value=${order.id?c} />
-                                        <input type="hidden" name="ogId" value=${item.id?c} />
-                                        <input type="hidden" name="goodsId" value=${item.goodsId?c} />
+                            <tr id="comment-tr${order_index}${item_index}" class="hide">
+                            <td>
+                               <form class="commentForm${order_index}${item_index}" action="/user/comment/add" method="post">
+                                    <table class="mymember_evaluate">
+                                    <tr>
                                         <td class="td004" colspan="4">
+                                          <input type="hidden" name="orderId" value=${order.id?c} />
+                                          <input type="hidden" name="ogId" value=${item.id?c} />
+                                          <input type="hidden" name="goodsId" value=${item.goodsId?c} />
                                             <div class="pb20 lh25">
                                                 <input class="ml20" type="radio" name="stars" value="3" datatype="n" nullmsg="请点击进行评价"/><span class="mr20"> 好评</span>
                                                 <input type="radio" name="stars" value="2" datatype="n" nullmsg="请点击进行评价"/><span class="mr20"> 中评</span>
@@ -225,14 +281,42 @@ function commentJump()
                                               <div class="myclear"></div>
                                             </div>
                                             <div class="mymember_eva_div">
-                                              <b><font>* </font>心得：</b>
+                                              <b><font>* </font>车友口碑：</b>
+                                              <b style="margin-top:30px;font-weight:100;text-align:left;font-size:0.2em;line-height:11px;">
+                                              	  (为了提高服务品质,也让更多车主了解商城，我们需要您真实、客观的评价，有图有真相的评价将获得最高100担粮草哦，亲！商城有您更精彩)
+                                              </b>
                                               <textarea name="content" datatype="*5-255" nullmsg="请输入评价内容"></textarea>
                                             </div>
                                             <div class="mymember_eva_div">
-                                              <input class="mysub" type="submit" value="发表评论">
+                                                <#-- 上传图片 zhangji -->
+                                                <div class="upload-box upload-show360"></div>
+								                <div class="photo-list_show360">
+								                    <ul>
+								                      <#if ("comment_" + order.id + "_" + item.id)?eval??>
+                                  					  <#assign comt=("comment_" + order.id + "_" + item.id)?eval>
+								                        <#if comt?? && comt.showPictures??>
+								                            <#list comt.showPictures?split(",") as uri>
+								                                <#if uri != "">
+								                                <li>
+								                                    <input type="hidden" name="hid_photo_name_show360" value="0|${uri!""}|${uri!""}">
+								                                    <div class="img-box">
+								                                        <img src="${uri!""}" bigsrc="${uri!""}">
+								                                    </div>
+								                                    <a href="javascript:;" onclick="delImg(this);">删除</a>
+								                                </li>
+								                                </#if>
+								                            </#list>
+								                        </#if>
+								                       </#if> 
+								                    </ul>
+								                </div>
+                                            	<#-- 上传图片 end -->
+                                                <input style="float:right;margin-right:20%;" class="mysub" type="submit" value="发表口碑">
                                             </div>
                                         </td>
-                                    </form>
+                                  </tr></table>
+                                </form>
+                                </td>
                                 </tr>
 <script>  
 $(document).ready(function(){  

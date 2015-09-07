@@ -118,6 +118,9 @@ public class TdUserComment {
     @Column
     private Long diysiteId;
     
+    // 轮播展示图片，多张图片以,隔开 zhangji
+    @Column
+    private String showPictures;
     
     public Long getDiysiteId() {
 		return diysiteId;
@@ -310,4 +313,13 @@ public class TdUserComment {
     public void setServiceStar(Long serviceStar) {
         this.serviceStar = serviceStar;
     }
+
+	public String getShowPictures() {
+		return showPictures;
+	}
+
+	public void setShowPictures(String showPictures) {
+		this.showPictures = showPictures;
+	}
+    
 }
