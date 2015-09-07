@@ -6,7 +6,6 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -64,7 +63,9 @@ import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayRecordService;
 import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.util.QRCodeUtils;
 import com.ynyes.cheyou.util.SMSUtil;
+import com.ynyes.cheyou.util.VerifServlet;
 
 /**
  * 订单
@@ -75,6 +76,7 @@ import com.ynyes.cheyou.util.SMSUtil;
 public class TdOrderController extends AbstractPaytypeController {
 
     private static final String PAYMENT_ALI = "ALI";
+    private static final String PAYMENT_WX = "WX";
 
     @Autowired
     private TdCartGoodsService tdCartGoodsService;
@@ -1599,7 +1601,14 @@ public class TdOrderController extends AbstractPaytypeController {
             if (PAYMENT_ALI.equals(payCode)) {
                 payForm = payChannelAlipay.getPayFormData(req);
                 map.addAttribute("charset", AlipayConfig.CHARSET);
-            } else if (CEBPayConfig.INTER_B2C_BANK_CONFIG.keySet().contains(
+            } else if (PAYMENT_WX.equals(payCode)) {
+                map.addAttribute("order_number", order.getOrderNumber());
+                map.addAttribute("total_price", order.getTotalPrice());
+                req.getSession().setAttribute("WXPAYURLSESSEION", 
+                        "weixin://wxpay/bizpayurl?appid=wx2421b1c4370ec43b&mch_id=10000100&nonce_str=f6808210402125e30663234f94c87a8c&product_id=1&time_stamp=1415949957&sign=512F68131DD251DA4A45DA79CC7EFE9D");
+                return "/client/order_pay_wx";
+            }
+            else if (CEBPayConfig.INTER_B2C_BANK_CONFIG.keySet().contains(
                     payCode)) {
                 req.setAttribute("payMethod", payCode);
                 payForm = payChannelCEB.getPayFormData(req);
@@ -1619,6 +1628,18 @@ public class TdOrderController extends AbstractPaytypeController {
         map.addAttribute("payForm", payForm);
 
         return "/client/order_pay_form";
+    }
+    
+    @RequestMapping(value = "/payqrcode",method = RequestMethod.GET)
+    public void verify(HttpServletResponse response, HttpServletRequest request) {
+        response.setContentType("image/jpeg");
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expire", 0);
+        
+        QRCodeUtils qr = new QRCodeUtils();
+        String url = (String)request.getSession().getAttribute("WXPAYURLSESSEION");
+        qr.getQRCode(url, 300, response);
     }
 
     /**
@@ -1828,6 +1849,73 @@ public class TdOrderController extends AbstractPaytypeController {
             return "/client/order_pay_failed";
         }
         map.put("order", order);
+        if (verify_result) {// 验证成功
+            if ("WAIT_SELLER_SEND_GOODS".equals(trade_status)) {
+
+                // 订单支付成功
+                afterPaySuccess(order);
+
+                return "/client/order_pay_success";
+            }
+        }
+
+        // 验证失败或者支付失败
+        return "/client/order_pay_failed";
+    }
+    
+    @RequestMapping(value = "/pay/result_wxpay")
+    public String payResultWxpay(ModelMap map, HttpServletRequest req,
+            HttpServletResponse resp) {
+        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String[]> requestParams = req.getParameterMap();
+        for (Iterator<String> iter = requestParams.keySet().iterator(); iter
+                .hasNext();) {
+            String name = iter.next();
+            String[] values = requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i]
+                        : valueStr + values[i] + ",";
+            }
+            // 乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
+            try {
+                valueStr = new String(valueStr.getBytes("ISO-8859-1"),
+                        AlipayConfig.CHARSET);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            params.put(name, valueStr);
+        }
+
+        // 获取支付宝的返回参数
+        String orderNo = "";
+        String trade_status = "";
+        try {
+            // 商户订单号
+            orderNo = new String(req.getParameter(Constants.KEY_OUT_TRADE_NO)
+                    .getBytes("ISO-8859-1"), AlipayConfig.CHARSET);
+            // 交易状态
+            trade_status = new String(req.getParameter("trade_status")
+                    .getBytes("ISO-8859-1"), AlipayConfig.CHARSET);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        // 计算得出通知验证结果
+        boolean verify_result = AlipayNotify.verify(params);
+
+        tdCommonService.setHeader(map, req);
+        
+        orderNo = (orderNo == null) ? "" : (orderNo.length() < 6) ? orderNo
+                : orderNo.substring(0, orderNo.length() - 6);
+        TdOrder order = tdOrderService.findByOrderNumber(orderNo);
+        if (order == null) {
+            // 订单不存在
+            return "/client/order_pay_failed";
+        }
+        
+        map.put("order", order);
+        
         if (verify_result) {// 验证成功
             if ("WAIT_SELLER_SEND_GOODS".equals(trade_status)) {
 
