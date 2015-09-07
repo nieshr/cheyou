@@ -2,6 +2,7 @@ package com.ynyes.cheyou.touch;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -130,28 +131,41 @@ public class TdTouchIndexController {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-
+        
+        Date now = new Date(); //zhangji
+        List<TdGoods> flashGoodsList = new ArrayList<TdGoods>();
+        if (now.after(cal.getTime()))
+        {
         Page<TdGoods> goodsPage1 = tdGoodsService
                 .findByIsFlashSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
                         cal.getTime(), 0, 6);
-
+        flashGoodsList.addAll(goodsPage1.getContent());
+        }
+        
         cal.set(Calendar.HOUR_OF_DAY, 14);
-
+        if (now.after(cal.getTime()))
+        {
         Page<TdGoods> goodsPage2 = tdGoodsService
                 .findByIsFlashSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
                         cal.getTime(), 0, 6);
-
+        flashGoodsList.addAll(goodsPage2.getContent());
+        }
+        
         cal.set(Calendar.HOUR_OF_DAY, 20);
-
+        if (now.after(cal.getTime()))
+        {
         Page<TdGoods> goodsPage3 = tdGoodsService
                 .findByIsFlashSaleTrueAndFlashSaleStartTimeAndFlashSaleStopTimeAfterOrderBySortIdAsc(
                         cal.getTime(), 0, 6);
-
-        List<TdGoods> flashGoodsList = new ArrayList<TdGoods>();
-
-        flashGoodsList.addAll(goodsPage1.getContent());
-        flashGoodsList.addAll(goodsPage2.getContent());
         flashGoodsList.addAll(goodsPage3.getContent());
+        }
+        
+        
+
+       
+        
+        
+       
 
         map.addAttribute("flash_goods_list", flashGoodsList);
 

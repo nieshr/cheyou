@@ -189,8 +189,11 @@ function timer${item_index}()
   </menu>
 </section>
 
-<h3 class="indextit mainbox mt10"><span>1元抢拍</span>
-<a style="margin-right:57%;float:left;font-size:0.6em;color:red;" href="/touch/info/content/94?mid=12">抢拍细则</a>
+<h3 class="indextit mainbox mt10">
+
+<span style="float:left;margin-bottom:1%;">1元抢拍</span>
+<span style="display:block;position:relative;"><a style="margin-left:2%;float:left;right:initial;top:2px;font-size:0.7em;color:red;" href="/touch/info/content/94?mid=12">抢拍细则</a></span>
+<#--<a style="margin-right:57%;float:left;font-size:0.6em;color:red;" href="/touch/info/content/94?mid=12">抢拍细则</a>-->
 <a href="/touch/promotion/miao">+更多</a></h3>
 
 <section class="indexlist">
@@ -199,10 +202,10 @@ function timer${item_index}()
         <#if flash_goods_list??>
             <#list flash_goods_list as item>
                 <#if item_index < 3>
-                    <td>
+                    <td style="width:30%;">
                         <a href="/touch/goods/${item.id?c}?qiang=1">
-                          <p class="fs08" >${item.title!''}</p>
-                          <p class="fs07 c9">${item.subTitle!''}</p>
+                          <p class="fs08"  style="height:15px;">${item.title!''}</p>
+                          <p class="fs07 c9" style="height:30px;">${item.subTitle!''}</p>
                           <p id="timeLeft${item_index}"><b>00</b>天<b>00</b>时<b>00</b>分<b>00</b>秒</p>
                           <p class="fs07 red" id="flashPrice${item_index}">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
                           <img src="${item.coverImageUri!''}" width="185" />
@@ -216,11 +219,11 @@ function timer${item_index}()
         <#if flash_goods_list??>
             <#list flash_goods_list as item>
                 <#if item_index gt 2 && item_index < 6>
-                    <td>
+                    <td style="width:30%;">
                         <a href="/touch/goods/${item.id?c}?qiang=1">
-                          <p class="fs08" >${item.title!''}</p>
-                          <p class="fs07 c9">${item.subTitle!''}</p>
-                           <p id="timeLeft${item_index}"><b>00</b>天<b>00</b>时<b>00</b>分<b>00</b>秒</p>
+                          <p class="fs08"  style="height:15px;">${item.title!''}</p>
+                          <p class="fs07 c9"  style="height:30px;">${item.subTitle!''}</p>
+                          <p id="timeLeft${item_index}"><b>00</b>天<b>00</b>时<b>00</b>分<b>00</b>秒</p>
                           <p class="fs07 red" id="flashPrice${item_index}">￥<#if item.flashSalePrice??>${item.flashSalePrice?string("0.00")}</#if></p>
                           <img src="${item.coverImageUri!''}" width="185"/>
                         </a>
@@ -232,8 +235,9 @@ function timer${item_index}()
   </table>
 </section>
 
-<h3 class="indextit mainbox"><span>十人团购</span>
-<a style="margin-right:57%;float:left;font-size:0.6em;color:red;" href="/touch/info/content/40?mid=12">团购细则</a>
+<h3 class="indextit mainbox">
+<span style="float:left;margin-bottom:1%;">十人团购</span>
+<span style="display:block;position:relative;"><a style="margin-left:2%;float:left;right:initial;top:2px;font-size:0.7em;color:red;" href="/touch/info/content/40?mid=12">团购细则</a></span>
 <a href="/touch/promotion/tuan">+更多</a></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">
@@ -273,8 +277,9 @@ function timer${item_index}()
 </section>
 
 
-<h3 class="indextit mainbox"><span>百人团购</span>
-<a style="margin-right:57%;float:left;font-size:0.6em;color:red;" href="/touch/info/content/57?mid=12">团购细则</a>
+<h3 class="indextit mainbox">
+<span  style="float:left;margin-bottom:1%;">百人团购</span>
+<span style="display:block;position:relative;"><a style="margin-left:2%;float:left;right:initial;top:2px;font-size:0.7em;color:red;" href="/touch/info/content/57?mid=12">团购细则</a></span>
 <a href="/touch/promotion/baituan">+更多</a></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">

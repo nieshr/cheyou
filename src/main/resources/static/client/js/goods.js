@@ -107,38 +107,3 @@ function addCollect1(goodsId)
         }
     });
 }
-function menuNextPage(boxid,_name,_li,_width,_height,lastid,nextid,_move,_num){
-	var _box = $(boxid);
-	var _menu = _box.find(_name);
-	var _last = $(lastid);
-	var _next = $(nextid);
-	var _length = _menu.find(_li).length;
-	var _index = 0;
-	var _max = _length - _num;
-	
-	_box.css({"width":_width+"px","height":_height+"px","overflow":"hidden","":"","":""});
-	_menu.css("width","99999px");
-	
-	var _nextpage = function(){
-		_index++;
-		if(_index > _max){_index=_max;}
-		var _mm = -_move*_index;
-		_menu.animate({left:_mm+"px"},200);
-		};//fun end
-	
-	var _lastpage = function(){
-		_index--;
-		if(_index < 0){_index=0;}
-		var _mm = -_move*_index;
-		_menu.animate({left:_mm+"px"},200);
-		};//fun end
-		
-	if(_length > _num){
-		_next.click(function(){
-			_nextpage();
-			});
-		_last.click(function(){
-			_lastpage();
-			});
-		}//大于才有效
-}
