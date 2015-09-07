@@ -20,6 +20,7 @@
             <a href="/user/diysite/member">会员列表</a>
             <a href="/diysite/order/orderincome">订单收入</a>
             <a href="/diysite/order/rebateincome">返利收入</a>
+            <a href="/diysite/order/couponconfirm">免费券核销</a>
         </div>
     </div>
     <div class="mymember_menu_part"> 

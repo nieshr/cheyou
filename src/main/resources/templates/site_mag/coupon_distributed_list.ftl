@@ -70,6 +70,7 @@ function __doPostBack(eventTarget, eventArgument) {
     <th align="left" width="11%">车牌</th>
     <th align="left" width="11%">领用时间</th>
     <th align="left" width="17%">有效截止时间</th>
+    <th align="left" width="8%">消费密码</th>
     <#--
     <th align="left" width="12%">排序</th>
     <th width="10%">操作</th>
@@ -92,6 +93,7 @@ function __doPostBack(eventTarget, eventArgument) {
                 <td>${item.carCode!""}</td>
                 <td><#if item.getTime??>${item.getTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
                 <td><#if item.expireTime??>${item.expireTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
+                <td><#if item.consumerPassword??>${item.consumerPassword!''}</#if></td>
                 <#--
                 <td><input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);"></td>
                 <td align="center">

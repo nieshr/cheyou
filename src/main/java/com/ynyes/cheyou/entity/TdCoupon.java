@@ -95,6 +95,10 @@ public class TdCoupon {
     @Column
     private String carCode;
     
+    //消费密码
+    @Column
+    private String consumerPassword;
+    
     // 排序号
     @Column
     private Long sortId;
@@ -115,7 +119,15 @@ public class TdCoupon {
         this.typeId = typeId;
     }
 
-    public Double getPrice() {
+	public String getConsumerPassword() {
+		return consumerPassword;
+	}
+
+	public void setConsumerPassword(String consumerPassword) {
+		this.consumerPassword = consumerPassword;
+	}
+
+	public Double getPrice() {
 		return price;
 	}
 

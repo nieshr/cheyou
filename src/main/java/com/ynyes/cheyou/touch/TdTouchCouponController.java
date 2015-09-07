@@ -167,6 +167,11 @@ public class TdTouchCouponController {
 				    if (getCoupon.getTypeTitle().equals("免费洗车券") || getCoupon.getTypeTitle().equals("免费打蜡券")) {
 				    	 Random random = new Random();
 			             String smscode = String.format("%04d", random.nextInt(9999));
+			             while(null != tdCouponService.findByMoblieAndConsumerPassword(mobile,smscode)){
+			            	 smscode = String.format("%04d", random.nextInt(9999));
+			             }
+			             getCoupon.setConsumerPassword(smscode);
+			             tdCouponService.save(getCoupon);
 				    	 SMSUtil.send(mobile, "28745", new String[] { username,
 				    			    "【免费打蜡券】"+smscode  });
 					}
@@ -216,6 +221,11 @@ public class TdTouchCouponController {
 				    if (getCoupon.getTypeTitle().equals("免费洗车券") || getCoupon.getTypeTitle().equals("免费打蜡券")) {
 				    	 Random random = new Random();
 			             String smscode = String.format("%04d", random.nextInt(9999));
+			             while(null != tdCouponService.findByMoblieAndConsumerPassword(mobile,smscode)){
+			            	 smscode = String.format("%04d", random.nextInt(9999));
+			             }
+			             getCoupon.setConsumerPassword(smscode);
+			             tdCouponService.save(getCoupon);
 				    	 SMSUtil.send(mobile, "28745", new String[] { username,
 				    			    "【免费洗车券】"+smscode  });
 					}
@@ -274,6 +284,11 @@ public class TdTouchCouponController {
 	    if (getCoupon.getTypeTitle().equals("免费洗车券") || getCoupon.getTypeTitle().equals("免费打蜡券")) {
 	    	 Random random = new Random();
             String smscode = String.format("%04d", random.nextInt(9999));
+            while(null != tdCouponService.findByMoblieAndConsumerPassword(mobile,smscode)){
+           	 smscode = String.format("%04d", random.nextInt(9999));
+            }
+            getCoupon.setConsumerPassword(smscode);
+            tdCouponService.save(getCoupon);
 	    	 SMSUtil.send(mobile, "28745", new String[] { username,
 	    			    "【"+couponName+"】"+smscode  });
 		}

@@ -169,6 +169,7 @@ public class TdDiySiteService {
 		
     	return (repository.findByUsernameAndIsEnableTrue(username)); 	
     }
+     
     
     /**
 	 * @author lc

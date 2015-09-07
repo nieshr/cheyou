@@ -791,7 +791,7 @@ public class TdTouchUserController {
     @RequestMapping(value = "/user/comment/add", method=RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> commentAdd(HttpServletRequest req, 
-                        TdUserComment tdComment,
+                        TdUserComment tdComment, Long orderId, Long ogId,
                         String code,
                         ModelMap map){
         Map<String, Object> res = new HashMap<String, Object>();
@@ -836,6 +836,45 @@ public class TdTouchUserController {
         tdComment.setPositiveNumber(0L);
         tdComment.setUsername(username);
         
+        // 设置订单信息
+        if (null != orderId) {
+            TdOrder tdOrder = tdOrderService.findOne(orderId);
+
+            if (null != tdOrder) {
+                tdComment.setOrderNumber(tdOrder.getOrderNumber());
+                /**
+				 * @author lc
+				 * @注释：添加同盟店评价
+				 */
+                tdComment.setDiysiteId(tdOrder.getShopId());
+                
+                List<TdOrderGoods> ogList = tdOrder.getOrderGoodsList();
+
+                for (TdOrderGoods og : ogList) {
+                    if (og.getId().equals(ogId)) {
+                        og.setIsCommented(true);
+                        og.setCommentId(tdComment.getId());
+                        tdOrder = tdOrderService.save(tdOrder);
+                        break;
+                    }
+                }
+
+                // 判断订单是否完成
+                boolean allIsCommented = true;
+                for (TdOrderGoods og : tdOrder.getOrderGoodsList()) {
+                    if (null == og.getIsCommented() || !og.getIsCommented()) {
+                        allIsCommented = false;
+                        break;
+                    }
+                }
+
+                if (allIsCommented) {
+                    tdOrder.setStatusId(6L);
+                    tdOrder = tdOrderService.save(tdOrder);
+                }
+            }
+        }
+        
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
         
         if (null != user)
@@ -862,8 +901,39 @@ public class TdTouchUserController {
         return res;
     }
     
+    @RequestMapping(value = "/user/comment/edit")
+    public String commentedit(Long goodsId, Long orderId,
+    		                  HttpServletRequest req, ModelMap map){
+    	String username = (String) req.getSession().getAttribute("username");
+        
+        if (null == username)
+        {
+            return "redirect:/touch/login";
+        }
+        
+        if (null == goodsId || null == orderId) {
+        	return "/client/error_404";
+		}
+        tdCommonService.setHeader(map, req);
+        
+        TdOrderGoods tdOrderGoods = tdOrderGoodsService.findOne(goodsId);
+        if (null == tdOrderGoods) {
+			return "/client/error_404";
+		}
+        map.addAttribute("tdOrderGoods", tdOrderGoods);
+        map.addAttribute("orderId", orderId);
+        
+        if (null != tdOrderGoods && null != tdOrderGoods.getCommentId()) {
+            TdUserComment uc = tdUserCommentService
+                    .findOne(tdOrderGoods.getCommentId());
+            map.addAttribute("comment", uc);
+        }
+        
+        return "/touch/user_comment_edit";
+    }
+    
     @RequestMapping(value = "/user/comment/list")
-    public String commentList(HttpServletRequest req, 
+    public String commentList(HttpServletRequest req, Integer statusId, // 0表示未评价, 1表示已评价
                         Integer page,
                         String keywords,
                         ModelMap map){
@@ -871,7 +941,7 @@ public class TdTouchUserController {
         
         if (null == username)
         {
-            return "redirect:/login";
+            return "redirect:/touch/login";
         }
         
         tdCommonService.setHeader(map, req);
@@ -881,25 +951,76 @@ public class TdTouchUserController {
             page = 0;
         }
         
+        if (null == statusId) {
+            statusId = 0;
+        }
+
         TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
         
         map.addAttribute("user", tdUser);
         
-        Page<TdUserComment> commentPage = null;
-        
-        if (null == keywords || keywords.isEmpty())
-        {
-            commentPage = tdUserCommentService.findByUsername(username, page, ClientConstant.pageSize);
+        if (null != tdUser) {
+            if (0 == statusId) {
+                // 查找该用户的未评价订单
+            	Page<TdOrder> orderPage = tdOrderService
+                        .findByUsernameAndStatusId(username, 5L, page,
+                                ClientConstant.pageSize);
+                map.addAttribute("order_page", orderPage);
+                if (null != orderPage) {
+                    for (TdOrder tdOrder : orderPage.getContent()) {
+                        if (null != tdOrder) {
+                            for (TdOrderGoods og : tdOrder.getOrderGoodsList()) {
+                                if (null != og && null != og.getCommentId()) {
+                                    TdUserComment uc = tdUserCommentService
+                                            .findOne(og.getCommentId());
+                                    map.addAttribute("comment_"+tdOrder.getId()+"_"+og.getId(), uc);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+//                map.addAttribute("order_page", tdOrderService
+//                        .findByUsernameAndStatusId(username, 5L, page,
+//                                ClientConstant.pageSize));
+            } else {
+                // 查找该用户的已评价订单
+                Page<TdOrder> orderPage = tdOrderService
+                        .findByUsernameAndStatusId(username, 6L, page,
+                                ClientConstant.pageSize);
+                map.addAttribute("order_page", orderPage);
+
+                if (null != orderPage) {
+                    for (TdOrder tdOrder : orderPage.getContent()) {
+                        if (null != tdOrder) {
+                            for (TdOrderGoods og : tdOrder.getOrderGoodsList()) {
+                                if (null != og && null != og.getCommentId()) {
+                                    TdUserComment uc = tdUserCommentService
+                                            .findOne(og.getCommentId());
+                                    map.addAttribute("comment_"+tdOrder.getId()+"_"+og.getId(), uc);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-        else
-        {
-            commentPage = tdUserCommentService.findByUsernameAndSearch(username, keywords, page, ClientConstant.pageSize);
-        }
+        map.addAttribute("status_id", statusId);
+//        Page<TdUserComment> commentPage = null;
+//        
+//        if (null == keywords || keywords.isEmpty())
+//        {
+//            commentPage = tdUserCommentService.findByUsername(username, page, ClientConstant.pageSize);
+//        }
+//        else
+//        {
+//            commentPage = tdUserCommentService.findByUsernameAndSearch(username, keywords, page, ClientConstant.pageSize);
+//        }
+//        
+//        map.addAttribute("comment_page", commentPage);
+//        map.addAttribute("keywords", keywords);
         
-        map.addAttribute("comment_page", commentPage);
-        map.addAttribute("keywords", keywords);
-        
-        return "/client/user_comment_list";
+        return "/touch/user_comment_list";
     }
     
     @RequestMapping(value = "/user/consult/add", method=RequestMethod.POST)
