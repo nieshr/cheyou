@@ -17,6 +17,7 @@
 <script src="/client/js/goods.js"></script>
 <script src="/client/js/goods_comment_consult.js"></script>
 
+<link rel="shortcut icon" href="/client/images/cheyou.ico" />
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
@@ -41,6 +42,7 @@
 	topTitFloat("detail_tit",1100,"detail_tit_sel");
 	menuNextPage("#proshowmenubox","menu","li",340,80,"#proshowlast","#proshownext",85,4);//zhangji
 	
+	productImgShow("commentphoto","li","commentmenu","sel",300,300); //zhangji
 	$("#id-minus").click(function(){
         var q = parseInt($("#quantity").val());
         

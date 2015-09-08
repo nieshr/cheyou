@@ -7,7 +7,7 @@
 <meta name="description" content="">
 <meta name="copyright" content="" />
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-
+<link rel="shortcut icon" href="/client/images/cheyou.ico" />
 <style>
 *{padding:0;margin:0;}
 body {margin: 0px;padding: 0px;color: #666;font-family:"微软雅黑", Arial, Helvetica, sans-serif;font-size: 18px;background:#fff;text-align:left;position:relative; line-height:20px;}

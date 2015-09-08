@@ -108,7 +108,7 @@ $(function () {
             button_width: p.btnwidth, //上传按钮的宽度
             button_height: p.btnheight, //上传按钮的高度
             button_text: '<span class="btnText">' + p.btntext + '</span>', //上传按钮的文字
-            button_text_style: ".btnText{font-family:Microsoft YaHei;font-size:12px;line-height:28px;color:#ffffff;text-align:center;}", //按钮样式
+            button_text_style: p.btnstyle, //按钮样式
             button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT, //背景透明
             button_action: btnAction, //单文件或多文件上传
             button_cursor: SWFUpload.CURSOR.HAND, //指针手形

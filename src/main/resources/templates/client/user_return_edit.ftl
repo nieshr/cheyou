@@ -6,6 +6,7 @@
 <meta name="keywords" content="${site.seoKeywords!''}" />
 <meta name="description" content="${site.seoDescription!''}" />
 <meta name="copyright" content="云南车有同盟商贸有限公司" />
+<link rel="shortcut icon" href="/client/images/cheyou.ico" />
 <link href="/client/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/cartoon.css" rel="stylesheet" type="text/css" />

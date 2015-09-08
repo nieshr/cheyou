@@ -15,7 +15,7 @@
 <script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 
-
+<link rel="shortcut icon" href="/client/images/cheyou.ico" />
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" /> 
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" /> 
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
