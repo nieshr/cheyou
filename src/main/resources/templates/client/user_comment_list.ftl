@@ -165,6 +165,12 @@ function commentJump()
                                             <span style="position:absolute;right:88px;top:-13px;">
                                                 <img src="/client/images/mymember/arrow06.gif">
                                             </span>
+                                            <#if comt.reply?? && comt.reply != "">
+                                            	<div class="mymember_eva_div">
+						                       	  	<b><font>* </font>商家回复：</b>
+						                       	  	<textarea disabled="disabled">${comt.reply!''}</textarea>
+						                       	</div>  	
+					                       	</#if>	
                                             <div class="mymember_eva_div">
                                               <b><font>* </font>同盟商品满意度：</b>
                                               <div class="myclear"></div>
@@ -205,12 +211,6 @@ function commentJump()
                                               <a class="a001" href="javascript:;"><img src="/client/images/content/<#if comt.compositeStar?? && comt.compositeStar gt 4>start01.png<#else>start03.png</#if>"></a>
                                               <div class="myclear"></div>
                                             </div>
-                                            <#if comt.reply?? && comt.reply != "">
-                                            	<div class="mymember_eva_div">
-						                       	  	<b><font>* </font>商家回复：</b>
-						                       	  	<textarea disabled="disabled">${comt.reply!''}</textarea>
-						                       	</div>  	
-					                       	</#if>	
                                             <div class="mymember_eva_div">
                                               <b><font>* </font>评价：</b>
                                               <textarea disabled="disabled">${comt.content!''}</textarea>
