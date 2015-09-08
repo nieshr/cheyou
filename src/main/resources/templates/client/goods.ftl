@@ -42,7 +42,6 @@
 	topTitFloat("detail_tit",1100,"detail_tit_sel");
 	menuNextPage("#proshowmenubox","menu","li",340,80,"#proshowlast","#proshownext",85,4);//zhangji
 	
-	productImgShow("commentphoto","li","commentmenu","sel",300,300); //zhangji
 	$("#id-minus").click(function(){
         var q = parseInt($("#quantity").val());
         
