@@ -453,12 +453,12 @@ public class TdDiysiteController {
         	res.put("msg", "发送失败！");
 			return res;
 		}
-        if (null == tdDiySite.getTitle() || null == tdDiySite.getAddress() || null == tdDiySite.getMobile()) {
+        if (null == tdDiySite.getTitle() || null == tdDiySite.getAddress() || null == tdDiySite.getServiceTele()) {
         	res.put("msg", "发送失败！");
 			return res;
 		}
         //发送地址到手机
-        SMSUtil.send(tdUser.getMobile(), "33442" ,new String[]{tdDiySite.getTitle(), tdDiySite.getAddress(), tdDiySite.getMobile(),"http://www.cytm99.com/shop/list"});
+        SMSUtil.send(tdUser.getMobile(), "33442" ,new String[]{tdDiySite.getTitle(), tdDiySite.getAddress(), tdDiySite.getServiceTele(),"http://www.cytm99.com/touch/shop/list"});
         res.put("code", 0);
         return res;
     }

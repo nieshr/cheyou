@@ -72,14 +72,14 @@ $(function(){
   
     <section class="essay_ico">
         <h3 class="sc lh30 fs24 pb10">热门标签</h3>
-        <a href="/info/list/11?catId=10"><img src="/client/images/content/essay01.png" /><p>贴膜</p></a>
-        <a href="/info/list/11?catId=11"><img src="/client/images/content/essay02.png" /><p>美容</p></a>
-        <a href="/info/list/11?catId=12"><img src="/client/images/content/essay03.png" /><p>坐垫</p></a>
-        <a href="/info/list/11?catId=13"><img src="/client/images/content/essay04.png" /><p>脚垫</p></a>
-        <a href="/info/list/11?catId=14"><img src="/client/images/content/essay05.png" /><p>真皮</p></a>
-        <a href="/info/list/11?catId=15"><img src="/client/images/content/essay06.png" /><p>电器</p></a>
-        <a href="/info/list/11?catId=17"><img src="/client/images/content/essay07.png" /><p>改装</p></a>
-        <a href="/info/list/11?catId=16"><img src="/client/images/content/essay08.png" /><p>自驾</p></a>
+        <a href="/info/list/11?catId=10"><img src="/client/images/content/essay1.jpg"  width="65" height="65"/><p>贴膜</p></a>
+        <a href="/info/list/11?catId=11"><img src="/client/images/content/essay2.jpg"  width="65" height="65"/><p>美容</p></a>
+        <a href="/info/list/11?catId=12"><img src="/client/images/content/essay3.jpg"  width="65" height="65"/><p>坐垫</p></a>
+        <a href="/info/list/11?catId=13"><img src="/client/images/content/essay4.jpg"  width="65" height="65"/><p>脚垫</p></a>
+        <a href="/info/list/11?catId=14"><img src="/client/images/content/essay5.jpg"  width="65" height="65"/><p>真皮</p></a>
+        <a href="/info/list/11?catId=15"><img src="/client/images/content/essay6.jpg"  width="65" height="65"/><p>电器</p></a>
+        <a href="/info/list/11?catId=17"><img src="/client/images/content/essay7.jpg"  width="65" height="65"/><p>改装</p></a>
+        <a href="/info/list/11?catId=16"><img src="/client/images/content/essay8.jpg"  width="65" height="65"/><p>自驾</p></a>
         <div class="clear"></div>
     </section>
   

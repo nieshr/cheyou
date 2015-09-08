@@ -102,8 +102,8 @@ function timer${item_index}()
     hh = checkTime(hh);
     mm = checkTime(mm);
     ss = checkTime(ss);
-    $("#timeLeft${item_index}").html("<span>"+dd+"</span><span>"+hh+"</span><span>"+mm+"</span><span>"+ss+"</span>");
-    
+   // $("#timeLeft${item_index}").html("<span>"+dd+"</span><span>"+hh+"</span><span>"+mm+"</span><span>"+ss+"</span>");
+    $("#timeLeft${item_index}").html(dd+"天"+hh+":"+mm+":"+ss);
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
     
     //var s_x = Math.round(price).toString();

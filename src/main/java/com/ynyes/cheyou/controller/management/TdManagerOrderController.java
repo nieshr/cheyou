@@ -1369,6 +1369,7 @@ public class TdManagerOrderController {
                 
                 order.setTotalPrice(goodsPrice + order.getPayTypeFee() + order.getDeliverTypeFee());
                 order.setTotalPriceChangeInfo(info);
+                tdManagerLogService.addLog("edit", info, req);
             }
             // 修改配送费用
             else if (type.equalsIgnoreCase("editDeliveryPrice"))
@@ -1377,6 +1378,7 @@ public class TdManagerOrderController {
                 order.setDeliverTypeFee(deliveryPrice);
                 order.setTotalPrice(deliveryPrice + order.getPayTypeFee() + order.getTotalGoodsPrice());
                 order.setDeliverTypePriceChangeInfo(info);
+                tdManagerLogService.addLog("edit", info, req);
             }
             // 修改支付手续费
             else if (type.equalsIgnoreCase("editPayPrice"))
@@ -1385,6 +1387,7 @@ public class TdManagerOrderController {
                 order.setPayTypeFee(payPrice);
                 order.setTotalPrice(payPrice + order.getTotalGoodsPrice() + order.getDeliverTypeFee());
                 order.setPayTypePriceChangeInfo(info);
+                tdManagerLogService.addLog("edit", info, req);
             }
             // 修改联系方式
             else if (type.equalsIgnoreCase("editContact"))

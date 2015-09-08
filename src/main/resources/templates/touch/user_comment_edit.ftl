@@ -368,8 +368,8 @@ function starChange(type, stars)
     <a href="/">电脑版</a>
     <a href="#">触屏版</a>
 </footer>
-<p class="bottext mainbox">Copyright©2015 www.cytm99.com 保留所有版权</p>
-<p class="bottext mainbox">滇ICP备0932488号</p>
+<p class="bottext mainbox">${site.copyright!''}</p>
+<p class="bottext mainbox">${site.icpNumber!''}</p>
 
 </body>
 </html>

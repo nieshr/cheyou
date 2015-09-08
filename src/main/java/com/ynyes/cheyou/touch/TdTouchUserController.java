@@ -835,7 +835,7 @@ public class TdTouchUserController {
         tdComment.setNegativeNumber(0L);
         tdComment.setPositiveNumber(0L);
         tdComment.setUsername(username);
-        
+        tdUserCommentService.save(tdComment);
         // 设置订单信息
         if (null != orderId) {
             TdOrder tdOrder = tdOrderService.findOne(orderId);

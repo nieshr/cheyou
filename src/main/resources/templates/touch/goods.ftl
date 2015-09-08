@@ -356,12 +356,12 @@ function checkTime(i)
   <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
     <h3 class="protext red"><b id="currPrice">￥<#if goods.flashSalePrice??>${goods.flashSalePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.salePrice?string("0.00")}</#if></span></h3>
   <#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
-    <h3 class="protext red"><b>预付价格：￥<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></b></h3>
-    <h3 class="protext">三人团价格: ￥：<#if goods.groupSaleThreePrice??>${goods.groupSaleThreePrice?string("0.00")}</#if></h3>
-    <h3 class="protext">五人团价格: ￥：<#if goods.groupSaleSevenPrice??>${goods.groupSaleSevenPrice?string("0.00")}</#if></h3>
-    <h3 class="protext">十人团价格: ￥：<#if goods.groupSaleTenPrice??>${goods.groupSaleTenPrice?string("0.00")}</#if></h3>
+    <h3 class="protext red"><b>预付价格：￥<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.salePrice?string("0.00")}</#if></span></h3>
+    <h3 class="protext1">三人团价格: ￥：<#if goods.groupSaleThreePrice??>${goods.groupSaleThreePrice?string("0.00")}</#if></h3>
+    <h3 class="protext1">五人团价格: ￥：<#if goods.groupSaleSevenPrice??>${goods.groupSaleSevenPrice?string("0.00")}</#if></h3>
+    <h3 class="protext1">十人团价格: ￥：<#if goods.groupSaleTenPrice??>${goods.groupSaleTenPrice?string("0.00")}</#if></h3>
   <#elseif qiang?? && qiang == 100 && goods.groupSaleHundredStartTime?? && goods.groupSaleHundredStartTime < .now && goods.groupSaleHundredStopTime?? && goods.groupSaleHundredStopTime gt .now>
-    <h3 class="protext red"><b>预付价格：￥<#if goods.groupSalePrePayPrice??>${goods.groupSalePrePayPrice?string("0.00")}</#if></b></h3>
+    <h3 class="protext red"><b>预付价格：￥<#if goods.groupSalePrePayPrice??>${goods.groupSalePrePayPrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.salePrice?string("0.00")}</#if></span></h3>
     <h3 class="protext">百人团价格: ￥：<#if goods.groupSaleHundredPrice??>${goods.groupSaleHundredPrice?string("0.00")}</#if></h3>
   <#else>
     <h3 class="protext red"><b>￥<#if goods.salePrice??>${goods.salePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.marketPrice?string("0.00")}</#if></span></h3>

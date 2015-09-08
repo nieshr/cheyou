@@ -888,7 +888,7 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	right:20px;
 	bottom:20px;}
 .knockbox a.a1 {
-	 display: block;
+	/* display: block;
 	 width: 170px;
 	 height: 40px;
 	 padding-left: 70px;
@@ -896,7 +896,16 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 	 background: #ff4454;
 	 margin-top: 40px;
 	 color: #fff;
-	 border-radius: 20px;}
+	 border-radius: 20px;*/ 
+	 display: block;
+	 width: 170px;
+	 height: 40px;
+	 padding-left: 70px;
+	 line-height: 40px;
+	 background: #ff4454;
+     margin-top: 13px;
+     color: #fff;
+     border-radius: 20px; }
 .knockbox a.a1 b {font-size:23px;}
 .knockbox a.a1 span {
 	color:#fff;

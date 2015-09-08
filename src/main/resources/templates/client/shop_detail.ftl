@@ -48,6 +48,7 @@ function sendAddress(){
                 success: function (data) { 
                     if (data.code == 0) {
                        alert("发送成功！请注意查收");
+                       $("#sendAddress").removeAttr("href");
                     } else {
                         alert(data.msg);
                     }
@@ -115,7 +116,7 @@ function sendAddress(){
             <tr>
                 <td colspan="2">
                     <!--<input type="submit" class="sub" value="立即购买" />-->
-                    <a href="javascript:sendAddress();" class="sub" style="text-align:center;">地址发送到手机</a>
+                    <a id="sendAddress" href="javascript:sendAddress();" class="sub" style="text-align:center;">地址发送到手机</a>
                     <div class="clear"></div>
                 </td>
             </tr>
