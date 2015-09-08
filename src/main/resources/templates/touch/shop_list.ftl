@@ -22,7 +22,7 @@ $(document).ready(function(){
 hideMap();
 });
 
-function loadMap(x, y)
+function loadMap(x, y , z)
 {
     scroll(0,0);
     showMap();
@@ -43,14 +43,13 @@ function loadMap(x, y)
     map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
     var marker = new BMap.Marker(new BMap.Point(x, y)); // 创建点
     map.addOverlay(marker);
-    map.addControl(new BMap.ZoomControl());//添加缩放控件
-    
+   // map.addControl(new BMap.ZoomControl());//添加缩放控件
     
     
     var opts = {
         width : 400,    // 信息窗口宽度
         height: 70,     // 信息窗口高度
-        title : "海底捞王府井店"  // 信息窗口标题
+        title : z  // 信息窗口标题
     }
     var infoWindow = new BMap.InfoWindow("点击marker将进入路线查询，并直接跳转到webapp主站", opts);  // 创建信息窗口对象
     map.openInfoWindow(infoWindow,point); //开启信息窗口
@@ -62,7 +61,9 @@ function loadMap(x, y)
         BMAP_MODE_TRANSIT、BMAP_MODE_DRIVING、
         BMAP_MODE_WALKING、BMAP_MODE_NAVIGATION
         分别表示公交、驾车、步行和导航，（必选）
-        region：城市名或县名  当给定region时，认为起点和终点都在同一城市，除非单独给定起点或终点的城市
+        region：城市名或县名  当给定region时，认为起点和终点都在同一城市，除非单独给定起点
+
+或终点的城市
         origin_region/destination_region：同上
         */
         var start = {
@@ -95,8 +96,6 @@ function hideSerivceStars()
 {
     $("#serviceStars").hide();
 }
-
-
 </script>
 </head>
 
@@ -138,7 +137,7 @@ function hideSerivceStars()
             </p>
             <p class="p2">详细地址：${item.address}</p>
             <p class="p2">
-              <a href="javascript:loadMap(<#if item.longitude??>${item.longitude?string("0.000000")}<#else>110</#if>, <#if item.latitude??>${item.latitude?string("0.000000")}<#else>39</#if>);">查看地图</a>
+              <a href="javascript:loadMap(<#if item.longitude??>${item.longitude?string("0.000000")}<#else>110</#if>, <#if item.latitude??>${item.latitude?string("0.000000")}<#else>39</#if>,'${item.title!''}');">查看地图</a>
             <a class="a2" href="tel://${item.serviceTele}">拨打电话</a>
             </p>
             <div class="clear"></div>
