@@ -7,6 +7,7 @@
 <meta name="description" content="">
 <meta name="copyright" content="" />
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<link rel="shortcut icon" href="/client/images/cheyou.ico" />
 <link href="/client/style/layout.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/master.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cart.css" rel="stylesheet" type="text/css" />

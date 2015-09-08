@@ -19,6 +19,7 @@
 <script src="/client/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/mag/js/WdatePicker.js"></script>
 
+<link rel="shortcut icon" href="/client/images/cheyou.ico" />
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />

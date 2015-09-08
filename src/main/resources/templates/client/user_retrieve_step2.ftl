@@ -15,6 +15,7 @@
 <script src="/client/js/html5.js"></script>
 <script src="/client/js/list.js"></script>
 
+<link rel="shortcut icon" href="/client/images/cheyou.ico" />
 <link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />

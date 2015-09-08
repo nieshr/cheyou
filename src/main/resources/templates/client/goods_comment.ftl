@@ -13,8 +13,20 @@
             <li>
                 <a class="a1" href="javascript:;"><img src="${item.userHeadUri!''}" width="85" height="85"/><p class="userName">${item.username!''}</p></a>
                 <p class="pb10">${item.content!''}</p>
+         		<p>&nbsp;</p>
+	                <#if item.showPictures??>
+	                    <#list item.showPictures?split(",") as uri>
+						    <#if uri != "">
+						    	<span>
+									<img alt="" src="${uri!'' }"  />
+								</span>
+							</#if>
+						</#list>
+					</#if>			
+			
+				  
                 <#if item.isReplied?? && item.isReplied>
-                    <p class="red">商家回复：${item.reply!''}</p>
+                    <p class="red" style="margin-top:30px;">商家回复：${item.reply!''}</p>
                 </#if>
                 <span class="time">${item.commentTime?string("yyyy-MM-dd")}</span>
                 <div>
