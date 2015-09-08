@@ -85,9 +85,9 @@ public class PaymentChannelAlipay implements PaymentChannel {
         // 此字段要修改
         //requestParameters.put(Constants.KEY_BODY, "支付测试");
         requestParameters.put(Constants.KEY_TOTAL_FEE, orderAmount);
-                // requestParameters.put(Constants.KEY_TBREC_POST,
-                // AlipayConfig.RECORD_POST);
-                // requestParameters.put(Constants.KEY_ITB_PAY, AlipayConfig.PAY_POST);
+//                 requestParameters.put(Constants.KEY_TBREC_POST,
+//                 AlipayConfig.RECORD_POST);
+//                 requestParameters.put(Constants.KEY_ITB_PAY, AlipayConfig.PAY_POST);
         return AlipaySubmit.buildRequestForm(requestParameters,
                 Constants.METHOD_POST, Constants.PAY_BUTTON_NAME);
     }

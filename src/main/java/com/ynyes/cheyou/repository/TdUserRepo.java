@@ -56,5 +56,7 @@ public interface TdUserRepo extends
 	 */
     Page<TdUser> findByUpperDiySiteIdContainingOrderByIdDesc(Long shopId, String keyword, Pageable page);
     Page<TdUser> findByUpperDiySiteIdOrderByIdDesc(Long shopId, Pageable page);
+    Page<TdUser> findByMobileInOrderByIdDesc(List<String> moblielist, Pageable page);
+    
     List<TdUser> findByUpperDiySiteIdOrderByIdDesc(Long shopId);
 }

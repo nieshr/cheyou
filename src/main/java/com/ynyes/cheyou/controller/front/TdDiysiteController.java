@@ -18,15 +18,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.cheyou.entity.TdCoupon;
 import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.service.TdCommonService;
+import com.ynyes.cheyou.service.TdCouponService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.util.SMSUtil;
 import com.ynyes.cheyou.util.SiteMagConstant;
+
+import scala.reflect.macros.internal.macroImpl;
 
 
 @Controller
@@ -44,6 +48,72 @@ public class TdDiysiteController {
 	
 	@Autowired
 	TdDiySiteService tdDiySiteService;
+	
+	@Autowired
+	TdCouponService tdCouponService;
+	
+	/**
+	 * @author lc
+	 * @注释：优惠券核销
+	 */
+	@RequestMapping(value = "/couponconfirm")
+	public String couponconfirm(Integer page,
+	                        HttpServletRequest req,
+	                        ModelMap map) {
+		String username = (String) req.getSession().getAttribute("diysiteUsername");
+		if (null == username) {
+            return "redirect:/login";
+        }
+		tdCommonService.setHeader(map, req);
+		if (null == page) {
+            page = 0;
+        }
+		
+		TdDiySite tdDiySite = tdDiySiteService.findbyUsername(username);
+		
+		List<TdCoupon> tdCouponlist = tdCouponService.findByDiySiteIdAndIsUsedTrue(tdDiySite.getId());
+		
+		List<String> mobilelist = new ArrayList<>();
+		
+		for(TdCoupon tdCoupon : tdCouponlist){
+			if (tdCoupon.getTypeTitle().equals("免费洗车券") || tdCoupon.getTypeTitle().equals("免费打蜡券")) {
+				if (mobilelist.contains(tdCoupon.getMobile())) {
+					
+				}else{
+					mobilelist.add(tdCoupon.getMobile());
+				}
+				
+			}
+		}
+		
+		map.addAttribute("member_page", tdUserService.findByMoblieIn(mobilelist, page, SiteMagConstant.pageSize));
+		
+		return "/client/diysite_couponconfirm";
+		
+	}
+	
+	@RequestMapping(value="/couponconfirm", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> couponConf(String mobile, String password){
+    	 Map<String, Object> res = new HashMap<String, Object>();         
+        res.put("code", 1);
+        
+        TdCoupon tdCoupon = tdCouponService.findByMoblieAndConsumerPassword(mobile, password);
+        if (null == tdCoupon) {
+		    res.put("msg", "优惠券不存在！");
+		    return res;
+		}
+        if (tdCoupon.getIsUsed()) {
+			res.put("msg", "优惠券已使用");
+		}
+        if (null != tdCoupon ) {
+			tdCoupon.setIsUsed(true);
+			tdCouponService.save(tdCoupon);
+		}
+        res.put("code", 0);
+        
+        return res;
+    }
 	
 	/**
 	 * @author lc

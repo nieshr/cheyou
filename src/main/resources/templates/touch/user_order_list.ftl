@@ -40,6 +40,8 @@ $(document).ready(function(){
                 }
             });
         }
+        
+   
 </script>
 </head>
 
@@ -122,6 +124,8 @@ $(document).ready(function(){
             <input type="button" value="取消订单" onclick=" OrderCancel${order.id?c}();" style="margin-left:auto;margin-right:2px; display:block"></input>
         <#elseif order.statusId==6> 
             <input type="button" value="删除订单" onclick="OrderInvalid${order.id?c}()" style="margin-left:auto;margin-right:2px; display:block"></input>
+        <#elseif order.statusId==5> 
+            <input type="button" value="评价订单" onclick="javascript:window.location.href='/touch/user/comment/list';" style="margin-left:auto;margin-right:2px; display:block"></input>
         </#if>
         <#list order.orderGoodsList as og>
             <a href="/touch/goods/${og.goodsId?c}">

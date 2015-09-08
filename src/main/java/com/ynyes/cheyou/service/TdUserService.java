@@ -373,6 +373,19 @@ public class TdUserService {
     	PageRequest pageRequest = new PageRequest(page, size);
     	return repository.findByUpperDiySiteIdOrderByIdDesc(shopId, pageRequest);
     }
+    
+    /**
+	 * @author lc
+	 * @注释：查找同盟店优惠券核销用户
+	 */
+    public Page<TdUser> findByMoblieIn(List<String> moblielist, int page, int size) {
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	if (moblielist.size()==0) {
+			return null;
+		}
+    	return repository.findByMobileInOrderByIdDesc(moblielist, pageRequest);
+	}
+    
     /**
      * 查找
      * 

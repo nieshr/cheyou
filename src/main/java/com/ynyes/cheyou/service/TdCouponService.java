@@ -213,6 +213,30 @@ public class TdCouponService {
          }
     	 return repository.findByTypeId(typeId);
     }
+    
+    /**
+	 * @author lc
+	 * @注释：查询特定同盟店已使用的优惠券
+	 */
+    public List<TdCoupon> findByDiySiteIdAndIsUsedTrue(Long diySiteId){
+    	if (null == diySiteId) {
+			return null;
+		}
+    	return repository.findByDiySiteIdAndIsUsedTrue(diySiteId);
+    }
+    
+    /**
+	 * @author lc
+     * @return 
+	 * @注释：根据手机号和消费密码查询优惠券
+	 */
+    public TdCoupon findByMoblieAndConsumerPassword(String mobile, String password){
+    	if (null == mobile || null == password) {
+			return null;
+		}
+    	return repository.findByMobileAndConsumerPassword(mobile, password);
+    }
+    
     /**
      * 保存
      * 

@@ -44,5 +44,9 @@ public interface TdCouponRepo extends
     
     List<TdCoupon> findTypeIdDistinctByIsDistributtedFalse();
     
+    List<TdCoupon> findByDiySiteIdAndIsUsedTrue(Long diysiteId);
+    
+    TdCoupon findByMobileAndConsumerPassword(String mobile, String password);
+    
     TdCoupon findByTypeId(Long typeId);
 }
