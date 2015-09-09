@@ -82,7 +82,7 @@ textarea.input { width: 98%; height:50px; color:#666;}
       "objwidth":570,           //单个个体宽度
       "objheight":375,          //单个个体高度
       "autogo":true,            //是否开启自动滚动
-      "gospeed":2000,           //滚动速度
+      "gospeed":5000,           //滚动速度
       "speed":600,              // 滚动间隔速度
       "leftid":"oneboxLeft",    //左箭头id
       "rightid":"oneboxRight"   //右箭头id
@@ -99,7 +99,7 @@ textarea.input { width: 98%; height:50px; color:#666;}
       "objwidth":280,//单个个体宽度
       "objheight":375,//单个个体高度
       "autogo":true,//是否开启自动滚动
-      "gospeed":2000,//滚动速度
+      "gospeed":5000,//滚动速度
       "speed":1500,             // 滚动间隔速度
       "leftid":"onebox2Left",   //左箭头id
       "rightid":"onebox2Right"  //右箭头id
@@ -117,7 +117,7 @@ textarea.input { width: 98%; height:50px; color:#666;}
       "objwidth":335,//单个个体宽度
       "objheight":323,//单个个体高度
       "autogo":true,//是否开启自动滚动
-      "gospeed":2000,//滚动速度
+      "gospeed":5000,//滚动速度
       "speed":300, // 滚动间隔速度
       "leftid":"onebox3Left",//左箭头id
       "rightid":"onebox3Right"//右箭头id
@@ -1868,11 +1868,9 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                     <div id="onesum3">
                 <#if type_scroll_ad_list??>
                     <#list type_scroll_ad_list as item>
-                        <#if item_index < 3>
                             <a class="onepart3" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
                                 <img src="${item.fileUri!''}" width="335" height="323"/>
                             </a>
-                        </#if>
                     </#list>
                 </#if>
                     </div>
