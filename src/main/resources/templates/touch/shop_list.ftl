@@ -22,7 +22,7 @@ $(document).ready(function(){
 hideMap();
 });
 
-function loadMap(x, y , z)
+function loadMap(x, y, z, address)
 {
     scroll(0,0);
     showMap();
@@ -47,11 +47,11 @@ function loadMap(x, y , z)
     
     
     var opts = {
-        width : 400,    // 信息窗口宽度
+        width : 200,    // 信息窗口宽度
         height: 70,     // 信息窗口高度
         title : z  // 信息窗口标题
     }
-    var infoWindow = new BMap.InfoWindow("点击marker将进入路线查询，并直接跳转到webapp主站", opts);  // 创建信息窗口对象
+    var infoWindow = new BMap.InfoWindow("点击将进入路线查询，并直接跳转到webapp主站", opts);  // 创建信息窗口对象
     map.openInfoWindow(infoWindow,point); //开启信息窗口
     marker.addEventListener("click", function(){
         /*start|end：（必选）
@@ -67,10 +67,10 @@ function loadMap(x, y , z)
         origin_region/destination_region：同上
         */
         var start = {
-             name:"王府井"
+             name:""
         }
         var end = {
-            name:"西单"
+            name:address
         }
         var opts = {
             mode:BMAP_MODE_DRIVING,
@@ -137,7 +137,7 @@ function hideSerivceStars()
             </p>
             <p class="p2">详细地址：${item.address}</p>
             <p class="p2">
-              <a href="javascript:loadMap(<#if item.longitude??>${item.longitude?string("0.000000")}<#else>110</#if>, <#if item.latitude??>${item.latitude?string("0.000000")}<#else>39</#if>,'${item.title!''}');">查看地图</a>
+              <a href="javascript:loadMap(<#if item.longitude??>${item.longitude?string("0.000000")}<#else>110</#if>, <#if item.latitude??>${item.latitude?string("0.000000")}<#else>39</#if>,'${item.title!''}','${item.address!''}');">查看地图</a>
             <a class="a2" href="tel://${item.serviceTele}">拨打电话</a>
             </p>
             <div class="clear"></div>

@@ -9,15 +9,20 @@
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
 <![endif]-->
+<link rel="shortcut icon" href="/client/images/cheyou.ico" />
+
+<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
+
+<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
-<link rel="shortcut icon" href="/client/images/cheyou.ico" />
-<link href="/client/style/common.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cytm.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/cartoon.css" rel="stylesheet" type="text/css" />
-<link href="/client/style/style.css" rel="stylesheet" type="text/css" />
+
+
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -114,6 +119,7 @@ function hideDialog()
     
     <#if coupon_type_list??>
         <#list coupon_type_list as item>
+            <#if item_index < 2>
             <div class="mianfeilingqu">
                 <div class="mianfeilingqu_left">
                     <img src="${item.picUri!''}" width="874" height="350">
@@ -153,11 +159,86 @@ function hideDialog()
                     </ul>
                 </div>
             </div>
+            </#if>
         </#list>
     </#if>
     
     <div class="clear"></div>
-
+    <div class="mianfeilingqu2">
+        <div class="mianfeilingqu2_left">
+        <table style="width:882px; float:left;">
+            <tbody>
+                <tr>
+                    <td>
+                         <a href="#"><img src="/client/images/youhuiquan.png" /></a>
+                    </td>
+                    <td>
+                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
+                    </td>
+                    <td>
+                         <a href="#"><img src="/client/images/youhuiquan.png" /></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
+                    </td>
+                    <td>
+                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
+                    </td>
+                    <td>
+                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
+                    </td>
+                    </tr>
+                <tr>
+                    <td>
+                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
+                    </td>
+                    <td>
+                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
+                    </td>
+                    <td>
+                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mianfeilingqu_right">
+        <h3>领取车友</h3>
+        <ul>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
+        </ul>
+        
+        </div>
+        </div>  
+  
+  
+  
+  
+  
+  <div class="clear"></div> 
+</div>
+    
 </div>
 
 <div class="clear h50"></div>
