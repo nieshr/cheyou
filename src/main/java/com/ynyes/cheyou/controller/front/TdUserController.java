@@ -1780,12 +1780,17 @@ public class TdUserController extends AbstractPaytypeController {
     }
 
     @RequestMapping(value = "/user/password", method = RequestMethod.POST)
-    public String userPassword(HttpServletRequest req, String oldPassword,
+    @ResponseBody
+    public Map<String, Object> userPassword(HttpServletRequest req, String oldPassword,
             String newPassword, ModelMap map) {
+    	Map<String, Object> res = new HashMap<String, Object>();
+        res.put("code", 1);
+        
         String username = (String) req.getSession().getAttribute("username");
 
         if (null == username) {
-            return "redirect:/login";
+        	res.put("msg", "请先登录！");
+            return res;
         }
 
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
@@ -1796,7 +1801,8 @@ public class TdUserController extends AbstractPaytypeController {
 
         map.addAttribute("user", tdUserService.save(user));
 
-        return "redirect:/user/password";
+        res.put("code", 0);
+        return res;
     }
     
     /**

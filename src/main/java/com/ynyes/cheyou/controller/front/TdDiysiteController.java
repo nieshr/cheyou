@@ -548,4 +548,47 @@ public class TdDiysiteController {
         res.put("message", "参数错误!");
         return res;
     }
+	
+    @RequestMapping(value = "/password", method = RequestMethod.GET)
+    public String userPassword(HttpServletRequest req, ModelMap map) {
+        String diysiteUsername = (String) req.getSession().getAttribute("diysiteUsername");
+
+        if (null == diysiteUsername) {
+            return "redirect:/login";
+        }
+
+        tdCommonService.setHeader(map, req);
+
+        TdDiySite DiySiteUser = tdDiySiteService.findbyUsername(diysiteUsername);
+
+        map.addAttribute("user", DiySiteUser);
+
+        return "/client/diysite_change_password";
+    }
+
+    @RequestMapping(value = "/password", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> userPassword(HttpServletRequest req, String oldPassword,
+            String newPassword, ModelMap map) {
+        Map<String, Object> res = new HashMap<String, Object>();
+        res.put("code", 1);
+        
+        String diysiteUsername = (String) req.getSession().getAttribute("diysiteUsername");
+
+        if (null == diysiteUsername) {
+        	res.put("msg", "请先登录！");
+            return res;
+        }
+
+        TdDiySite DiySiteUser = tdDiySiteService.findbyUsername(diysiteUsername);
+
+        if (DiySiteUser.getPassword().equals(oldPassword)) {
+        	DiySiteUser.setPassword(newPassword);
+        }
+
+        map.addAttribute("user", tdDiySiteService.save(DiySiteUser));
+
+        res.put("code", 0);
+        return res;
+    }
 }

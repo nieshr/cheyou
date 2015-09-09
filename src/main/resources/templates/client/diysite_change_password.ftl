@@ -13,11 +13,14 @@
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/client/css/mymember.css" rel="stylesheet" type="text/css" />
 <!--<link href="/client/css/member.css" rel="stylesheet" type="text/css" />-->
+<link href="/client/style/bankLogo.css" rel="stylesheet" type="text/css" />
+<link href="/client/style/change_paymethod.css" rel="stylesheet" type="text/css" />
 <script src="/client/js/jquery-1.9.1.min.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
 <script src="/client/js/mymember.js"></script>
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
+<script src="/client/js/jquery.cookie.js"></script>
 
 <!--[if IE]>
    <script src="/client/js/html5.js"></script>
@@ -29,7 +32,7 @@ DD_belatedPNG.fix('.,img,background');
 </script>
 <![endif]-->
 <script type="text/javascript">
-$(document).ready(function(){
+  $(document).ready(function(){
     menuDownList("top_phone","#top_phonelist",".a1","sel");
     phoneListMore();//单独下拉
     menuDownList("top_order","#top_orderlist",".a4","sel");//顶部下拉
@@ -44,7 +47,7 @@ $(document).ready(function(){
         callback: function(data) {
             if (data.code==0)
             {
-                alert("修改成功");
+                alert("修改成功！");
                 window.location.reload();
             }
             else
@@ -56,19 +59,23 @@ $(document).ready(function(){
     });
 });
 </script>
-
+<script type="text/javascript">
+    var forPaymentFllow = false;
+</script>
 </head>
 <body>
 <!-- header开始 -->
 <#include "/client/common_header.ftl" />
-<!-- header结束 -->
+<!--header结束-->
 <div class="mymember_out">
-  <div class="mymember_main">
-    <div class="myclear" style="height:20px;"></div>
-    <#include "/client/common_user_menu.ftl" />
-    <#-- 左侧菜单结束 -->
-    <div class="mymember_mainbox">
-      <div class="mymember_info mymember_info02">
+<div class="mymember_main">
+  <div class="myclear" style="height:20px;"></div>
+  <#-- 左侧菜单 -->
+  <#include "/client/diysite_user_menu.ftl" />
+  <#-- 左侧菜单结束 -->
+  
+  <div class="mymember_mainbox">
+    <div class="mymember_info mymember_info02">
             <div class="usermain04">
                 <div class="separationInfo sepBasic">
                  <h5>
@@ -76,7 +83,7 @@ $(document).ready(function(){
                      <span id="TellToUser"></span>
                  </h5>
                 </div>
-                <form id="form1" action="/user/password" method="post">
+                <form id="form1" action="/diysite/order/password" method="post">
                     <input name="__STATE" type="hidden" value="${user.password}"/>
                     <div class="zhanghao_dlxx main2">
                         <ul>
@@ -105,13 +112,11 @@ $(document).ready(function(){
           </div>
       </div>
       <!--mymember_info END-->
-      
-    </div>
-    <!--mymember_center END-->
-    <div class="myclear"></div>
-  </div>
-  <!--mymember_main END-->
-  <div class="myclear"></div>
+    </div><!--mymember_mainbox END-->
+
+  <div class="myclear"></div>  
+</div><!--mymember_main END-->
+<div class="myclear"></div>
 </div>
 <!--主体结束-->
 <#include "/client/common_footer.ftl" />
