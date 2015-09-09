@@ -68,8 +68,10 @@
 .column_px menu { float:left; width:700px;}
 .column_px menu a { display:inline-block; line-height:40px; border-right:1px solid #e3e3e3; padding:0 25px; float:left;}
 .column_px menu a:hover,.column_px menu a.sel01,.column_px menu a.sel02 { color:#fff; background:#ff4454;}
-.column_px menu a.sel01 span { display:inline-block; }
-.column_px menu a.sel02 span { display:inline-block;}
+.column_px menu a.sel01 span  { display:inline-block;background: url(../images/px023.png) no-repeat right center; padding-right: 15px;}
+.column_px menu a.sel01 {padding:0 10px 0 25px;}/*zhangji*/
+.column_px menu a.sel02 span  { display:inline-block;background: url(../images/px02.png) no-repeat right center; padding-right: 15px;}
+.column_px menu a.sel02 {padding:0 10px 0 25px;}
 .column_px .fr { width:250px; padding-right:10px;}
 .column_px .fr span { float:right; margin-right:10px;}
 .column_px .fr a { float:right; display:inline-block;width:30px; text-align:center;border:1px solid #e3e3e3; margin-top:6px; padding:7px 0; background:#f1f1f1; opacity:0.8;}
