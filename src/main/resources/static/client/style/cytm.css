@@ -249,5 +249,5 @@ textarea.input { width: 98%; height:50px; color:#666;}
 
 
 /*优惠券*/
-.mianfeilingqu2{border-bottom:2px dashed #333; width:1200px; height:350px; margin-top:15px;}
-.mianfeilingqu2_left img{ z-index:1;width:290px; height:50px; float:left; padding:2px;}
+.mianfeilingqu2{border-bottom:2px dashed #333; width:1200px; height:450px; margin-top:15px;}
+.mianfeilingqu2_left img{ z-index:1;width:290px; height:100px; float:left; padding:2px;}

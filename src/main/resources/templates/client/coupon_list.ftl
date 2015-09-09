@@ -37,16 +37,16 @@ $(document).ready(function(){
     $(".couponSel").change(function(){
         $(this).siblings(".mt5").eq(0).children(".red").eq(0).html($(this).find("option:selected").attr("tn"));
          if($(this).find("option:selected").attr("tn")!=0)
-        {
-           $("#tomorrow").text(" ");
+        {           
+           $(this).siblings(".mt5").eq(0).children(".tomorrow").eq(0).text(" ");
         }else{
-           $("#tomorrow").text("明天再来");
+           $(this).siblings(".mt5").eq(0).children(".tomorrow").eq(0).text("明天再来");
         }
     });
     
     //初始化表单验证
     $("#form1").Validform({
-        tiptype: 3,
+        tiptype: 4,
         ajaxPost:true,
         callback: function(data) {
             if (data.code==0)
@@ -76,6 +76,7 @@ function showDialog(id)
     
     $("#checkDialog").css("display", "block");
 }
+
 
 function hideDialog()
 {
@@ -128,14 +129,16 @@ function hideDialog()
                         <select class="couponSel">
                             <#assign couponCount=0>
                             <#if ("coupon_" + item.id + "_list")?eval?? >
-                                <#list ("coupon_" + item.id + "_list")?eval as coupon>
+                                <option value="" selected="selected">请选择同盟店</option>
+                                <#list ("coupon_" + item.id + "_list")?eval as coupon>                                 
                                     <option value="${coupon.diySiteId!''}" cid="${coupon.id?c}" tn="${coupon.leftNumber?c!'0'}">${coupon.diySiteTitle!''}</option>
                                     <#assign couponCount=couponCount+coupon.leftNumber>
                                 </#list>
                             </#if>
                         </select>
                         <div class="clear"></div>
-                        <p class="mt5">剩余：<span class="red"><#if ("coupon_" + item.id + "_list")?eval[0]??>${("coupon_" + item.id + "_list")?eval[0].leftNumber?c!'0'}</#if></span>张  <#if ("coupon_" + item.id + "_list")?eval[0].leftNumber==0><span id="tomorrow">明天再来</span></#if></p>
+                       <!-- <p class="mt5">剩余：<span class="red"><#if ("coupon_" + item.id + "_list")?eval[0]??>${("coupon_" + item.id + "_list")?eval[0].leftNumber?c!'0'}</#if></span>张  <#if ("coupon_" + item.id + "_list")?eval[0].leftNumber==0><span id="tomorrow">明天再来</span></#if></p>-->
+                       <p class="mt5">剩余：<span class="red"></span>张 <span class="tomorrow"></span></p>
                     </div>
                     <div class="clear"></div>
                     <div class="zongshushengyu">
@@ -164,74 +167,76 @@ function hideDialog()
     </#if>
     
     <div class="clear"></div>
-    <div class="mianfeilingqu2">
-        <div class="mianfeilingqu2_left">
-        <table style="width:882px; float:left;">
-            <tbody>
-                <tr>
-                    <td>
-                         <a href="#"><img src="/client/images/youhuiquan.png" /></a>
-                    </td>
-                    <td>
-                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
-                    </td>
-                    <td>
-                         <a href="#"><img src="/client/images/youhuiquan.png" /></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
-                    </td>
-                    <td>
-                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
-                    </td>
-                    <td>
-                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
-                    </td>
-                    </tr>
-                <tr>
-                    <td>
-                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
-                    </td>
-                    <td>
-                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
-                    </td>
-                    <td>
-                        <a href="#"><img src="/client/images/youhuiquan.png" /></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="mianfeilingqu_right">
-        <h3>领取车友</h3>
-        <ul>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        <li><span class="red">135****2922</span><span class="fr">2015.03.21</span></li>
-        </ul>
-        
-        </div>
-        </div>  
-  
+    <#if coupon_type_list?? && coupon_type_list?size gt 3>       
+            <div class="mianfeilingqu2">
+                <div class="mianfeilingqu2_left">
+                <table style="width:882px; float:left;">
+                    <tbody>                                       
+                    <#list coupon_type_list as item>
+                    <script>
+                    function showDialog${item_index}()
+                    {
+                        var cid = $("#couponId${item_index}").val();
+                          
+                       
+                        $("#couponId").val(cid);
+                        
+                        $("#checkDialog").css("display", "block");
+                    }
+                    </script>
+                        <#if item_index gt 1 && item_index < 14>
+                            <#if item_index%3 == 2>
+                                <tr>
+                                    <td>
+                                         <a href="javascript:showDialog${item_index}();"><img src="${item.picUri!''}" /></a>
+                                         <#if ("coupon_" + item.id + "_list")?eval?? >
+                                            <#list ("coupon_" + item.id + "_list")?eval as coupon>
+                                                <input id="couponId${item_index}"  class="text" type="hidden" value="${coupon.id?c}" />
+                                            </#list>
+                                         </#if>
+                                    </td>
+                                   
+                                    
+                            <#elseif item_index%3 ==0 >
+                                 <td>
+                                        <a href="javascript:showDialog${item_index}();"><img src="${item.picUri!''}" /></a>
+                                        <#if ("coupon_" + item.id + "_list")?eval?? >
+                                            <#list ("coupon_" + item.id + "_list")?eval as coupon>
+                                                <input id="couponId${item_index}"  class="text" type="hidden" value="${coupon.id?c}" />
+                                            </#list>
+                                         </#if>
+                                 </td>
+                            <#elseif item_index%3 ==1 >
+                                    <td>
+                                          <a href="javascript:showDialog${item_index}();"><img src="${item.picUri!''}" /></a>  
+                                          <#if ("coupon_" + item.id + "_list")?eval?? >
+                                            <#list ("coupon_" + item.id + "_list")?eval as coupon>
+                                                <input id="couponId${item_index}"  class="text" type="hidden" value="${coupon.id?c}" />
+                                            </#list>
+                                         </#if>  
+                                    </td>
+                                </tr>
+                            </#if>
+                        </#if>
+                     </#list>                        
+                    </tbody>
+                </table>
+                <div class="mianfeilingqu_right">
+                <h3>领取车友</h3>
+                <ul>
+                     <#if distributed_list?? >
+                           <#list distributed_list as distributedCoupon>
+                                <#if distributedCoupon_index < 14>
+                                <li><span class="red"><#if distributedCoupon.mobile??>${distributedCoupon.mobile?substring(0, 7)}****</#if></span><span class="fr"><#if distributedCoupon.getTime??>${distributedCoupon.getTime?string("yyyy.MM.dd")}</#if></span></li>
+                                </#if>
+                           </#list>
+                     </#if> 
+                </ul>
+                
+                </div>
+           </div>  
+       
+   </#if>
   
   
   

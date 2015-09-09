@@ -83,6 +83,20 @@ public class TdCouponController {
                 map.addAttribute("distributed_coupon_" + ct.getId() + "_list", disCouponList);
             }
         }
+        
+        //普通优惠券领取人
+        List<TdCoupon> disCouponList1 = tdCouponService.findByIsDistributtedTrueOrderByIdDesc();
+        if (null != disCouponList1) {
+        	for(int i = 0; i < disCouponList1.size(); i++){
+            	if (disCouponList1.get(i).getTypeTitle().equals("免费洗车券") || disCouponList1.get(i).getTypeTitle().equals("免费打蜡券")) {
+    				disCouponList1.remove(i);
+    				i--;
+    			}
+            }
+        	map.addAttribute("distributed_list", disCouponList1);
+		}
+            
+        
         //传入用户信息
         String username = (String) req.getSession().getAttribute("username");
         TdUser tdUser = tdUserService.findByUsername(username);

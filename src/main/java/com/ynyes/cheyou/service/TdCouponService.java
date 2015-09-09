@@ -214,6 +214,10 @@ public class TdCouponService {
     	 return repository.findByTypeId(typeId);
     }
     
+    public List<TdCoupon> findByIsDistributtedTrueOrderByIdDesc(){
+    	return repository.findByIsDistributtedTrueOrderByIdDesc();
+    }
+    
     /**
 	 * @author lc
 	 * @注释：查询特定同盟店已使用的优惠券

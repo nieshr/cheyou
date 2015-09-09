@@ -42,6 +42,8 @@ public interface TdCouponRepo extends
     
     Page<TdCoupon> findByIsDistributtedTrueOrderBySortIdAsc(Pageable page);
     
+    List<TdCoupon> findByIsDistributtedTrueOrderByIdDesc();
+    
     List<TdCoupon> findTypeIdDistinctByIsDistributtedFalse();
     
     List<TdCoupon> findByDiySiteIdAndIsUsedTrue(Long diysiteId);
