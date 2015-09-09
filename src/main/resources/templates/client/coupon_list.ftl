@@ -167,7 +167,7 @@ function hideDialog()
     </#if>
     
     <div class="clear"></div>
-    <#if coupon_type_list?? && coupon_type_list?size gt 3>       
+    <#if coupon_type_list?? && coupon_type_list?size gt 2>       
             <div class="mianfeilingqu2">
                 <div class="mianfeilingqu2_left">
                 <table style="width:882px; float:left;">
