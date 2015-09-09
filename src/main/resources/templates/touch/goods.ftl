@@ -354,7 +354,11 @@ function checkTime(i)
 <div class="main" style="z-index:10;">
   <a class="pro_share" id="addCollect" href="javascript:addCollect(${goods.id?c});">关注</a>
   <#if qiang?? && qiang==1 && goods.flashSaleStartTime < .now && goods.flashSaleStopTime gt .now>
-    <h3 class="protext red"><b id="currPrice">￥<#if goods.flashSalePrice??>${goods.flashSalePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.salePrice?string("0.00")}</#if></span></h3>
+    <#if goods.flashSaleTransactionPrice??>
+        <h3 class="protext red"><b>成交价￥${goods.flashSaleTransactionPrice?string("0.00")}</b></h3>
+    <#else>
+        <h3 class="protext red"><b id="currPrice">￥<#if goods.flashSalePrice??>${goods.flashSalePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.salePrice?string("0.00")}</#if></span></h3>
+    </#if>    
   <#elseif qiang?? && qiang == 3 && goods.groupSaleStartTime?? && goods.groupSaleStartTime < .now && goods.groupSaleStopTime?? && goods.groupSaleStopTime gt .now>
     <h3 class="protext red"><b>预付价格：￥<#if goods.groupSalePrice??>${goods.groupSalePrice?string("0.00")}</#if></b><span class="unl-lt c9 fs07 ml10">￥<#if goods.marketPrice??>${goods.salePrice?string("0.00")}</#if></span></h3>
     <h3 class="protext1">三人团价格: ￥：<#if goods.groupSaleThreePrice??>${goods.groupSaleThreePrice?string("0.00")}</#if></h3>

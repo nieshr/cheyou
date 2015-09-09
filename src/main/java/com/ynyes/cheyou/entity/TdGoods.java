@@ -280,6 +280,10 @@ public class TdGoods {
     @Column(scale=2)
     private Double flashSalePrice;
     
+    // 限时抢购成交价格
+    @Column(scale=2)
+    private Double flashSaleTransactionPrice;
+    
     // 团购展示图
     @Column
     private String flashSaleImage;
@@ -291,7 +295,7 @@ public class TdGoods {
     // 限时抢购已售数量
     @Column
     private Long flashSaleSoldNumber;
-    
+ 
     // 是否支持团购
     @Column
     private Boolean isGroupSale;
@@ -452,7 +456,15 @@ public class TdGoods {
         this.productId = productId;
     }
 
-    public Date getModifiedTime() {
+    public Double getFlashSaleTransactionPrice() {
+		return flashSaleTransactionPrice;
+	}
+
+	public void setFlashSaleTransactionPrice(Double flashSaleTransactionPrice) {
+		this.flashSaleTransactionPrice = flashSaleTransactionPrice;
+	}
+
+	public Date getModifiedTime() {
 		return modifiedTime;
 	}
 

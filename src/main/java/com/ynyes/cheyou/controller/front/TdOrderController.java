@@ -531,7 +531,9 @@ public class TdOrderController extends AbstractPaytypeController {
                     flashSoldNumber += 1L;
                     goods.setFlashSaleSoldNumber(flashSoldNumber);
                     goods.setFlashSaleLeftNumber(flashLeftNumber - 1);
-
+                    
+                    //保存成交价
+                    goods.setFlashSaleTransactionPrice(flashSalePrice);
                     // 保存商品
                     tdGoodsService.save(goods, username);
                 }

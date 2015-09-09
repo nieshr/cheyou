@@ -709,6 +709,13 @@ function del_goods_comb(obj) {
             </dd>
         </dl>
         <dl>
+            <dt>一元抢拍成交价</dt>
+            <dd>
+                <input name="flashSaleTransactionPrice" type="text" value="${goods.flashSaleTransactionPrice!''}" class="input normal" >
+                <span class="Validform_checktip">抢拍成交价</span>
+            </dd>
+        </dl>
+        <dl>
             <dt>一元抢拍销量</dt>
             <dd>
                 <input name="flashSaleSoldNumber" type="text" value="<#if goods??>${goods.flashSaleSoldNumber!''}<#else>0</#if>" class="input normal" datatype="n0-10" sucmsg=" ">

@@ -317,6 +317,9 @@ function checkTime(i)
             <p class="p1">
               <span class="mr10">实时价格</span>
               <span class="red fs24 lh30 mr20" id="currPrice">￥：0.00</span>
+              <#if goods.flashSaleTransactionPrice??>
+                <span class="red fs20 lh30 mr20">成交价：￥${goods.flashSaleTransactionPrice?string("0.00")}</span>
+              </#if>
             </p>
             <p class="p1">
               <span class="mr10">剩余时间</span>
