@@ -56,6 +56,10 @@ function __doPostBack(eventTarget, eventArgument) {
         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>      
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
       </ul>
+      <div class="r-list">
+                <input name="keywords" type="text" class="keyword">
+                <a id="lbtnSearch" class="btn-search" href="javascript:__doPostBack('btnSearch','')">查询</a>
+      </div>
     </div>
   </div>
 </div>
@@ -68,13 +72,31 @@ function __doPostBack(eventTarget, eventArgument) {
   <tr class="odd_bg">
     <th width="8%">选择</th>
     <th align="left">优惠券类型</th>
-    <th align="left">同盟店</th>
+    <th align="left" width="10%"><div class="rule-single-select">
+                        <select name="diysiteId" onchange="javascript:setTimeout(__doPostBack('changeDiysite',''), 0)">
+                            <option value="0" <#if !diysiteId?? || diysiteId==0>selected="selected"</#if>>所有同盟店</option>
+                            <#if tdDiySite_list??>
+                                <#list tdDiySite_list as diysite>
+                                    <option value="${diysite.id?c}" <#if diysiteId?? && diysiteId==diysite.id>selected="selected"</#if>>${diysite.title!''}</option>
+                                </#list>
+                            </#if>                             
+                        </select>
+                    </div>
+                    </th>
     <th align="left" width="11%">姓名</th>
     <th align="left" width="11%">电话</th>
     <th align="left" width="11%">车牌</th>
     <th align="left" width="11%">领用时间</th>
     <th align="left" width="17%">有效截止时间</th>
     <th align="left" width="8%">消费密码</th>
+    <th align="left" width="8%"><div class="rule-single-select">
+                        <select name="isUsed" onchange="javascript:setTimeout(__doPostBack('',''), 0)">
+                            <option value="0" <#if !isUsed?? || isUsed==0>selected="selected"</#if>>是否核销</option>                           
+                            <option value="1" >已核销</option>
+                            <option value="2" >未核销</option>                             
+                        </select>
+                    </div>
+                    </th>
     <#--
     <th align="left" width="12%">排序</th>
     <th width="10%">操作</th>
@@ -98,6 +120,15 @@ function __doPostBack(eventTarget, eventArgument) {
                 <td><#if item.getTime??>${item.getTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
                 <td><#if item.expireTime??>${item.expireTime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
                 <td><#if item.consumerPassword??>${item.consumerPassword!''}</#if></td>
+                <td>
+                    <#if item.isUsed??>
+                        <#if item.isUsed>
+                            已核销
+                        <#else>
+                           未核销 
+                        </#if>
+                    </#if>
+                </td>
                 <#--
                 <td><input name="listSortId" type="text" value="${item.sortId!""}" class="sort" onkeydown="return checkNumber(event);"></td>
                 <td align="center">

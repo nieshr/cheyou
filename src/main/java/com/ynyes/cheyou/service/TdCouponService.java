@@ -193,6 +193,91 @@ public class TdCouponService {
         return repository.findByIsDistributtedTrueOrderBySortIdAsc(pageRequest);
     }
     
+    //根据核销状态查找
+    public Page<TdCoupon> findByIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(pageRequest);
+    }
+    public Page<TdCoupon> findByIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(pageRequest);
+    }
+    
+    //根据同盟店id核销状态查找
+    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdOrderBySortIdAsc(Long diysiteId, int page, int size)
+    {
+    	if (null == diysiteId) {
+			return  null;
+		}
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByIsDistributtedTrueAndDiySiteIdOrderByIdDesc(diysiteId, pageRequest);
+    }
+    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderBySortIdAsc(Long diysiteId, int page, int size)
+    {
+    	if (null == diysiteId) {
+			return  null;
+		}
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderByIdDesc(diysiteId, pageRequest);
+    }
+    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderBySortIdAsc(Long diysiteId, int page, int size)
+    {
+    	if (null == diysiteId) {
+			return  null;
+		}
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderByIdDesc(diysiteId, pageRequest);
+    }
+    
+    //根据搜索关键字和同盟店id和核销状态查找
+    public Page<TdCoupon> findByIsDistributtedTrueAndContainingKeywords(String keywords, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	
+    	return repository.findByIsDistributtedTrueAndUsernameContainingOrIsDistributtedTrueAndMobileContainingOrIsDistributtedTrueAndCarCodeContaining(keywords,keywords,keywords,pageRequest);
+    }
+    public Page<TdCoupon> findByIsDistributtedTrueAndIsUsedTrueAndContainingKeywords(String keywords, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	
+    	return repository.findByIsDistributtedTrueAndIsUsedTrueAndUsernameContainingOrIsDistributtedTrueAndIsUsedTrueAndMobileContainingOrIsDistributtedTrueAndIsUsedTrueAndCarCodeContaining(keywords,keywords,keywords,pageRequest);
+    }
+    public Page<TdCoupon> findByIsDistributtedTrueAndIsUsedFalseAndContainingKeywords(String keywords, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	
+    	return repository.findByIsDistributtedTrueAndIsUsedFalseAndUsernameContainingOrIsDistributtedTrueAndIsUsedFalseAndMobileContainingOrIsDistributtedTrueAndIsUsedFalseAndCarCodeContaining(keywords,keywords,keywords,pageRequest);
+    }
+    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndContainingKeywordsOrderBySortIdAsc(Long diysiteId, String keywords, int page, int size)
+    {
+    	if (null == diysiteId) {
+			return  null;
+		}
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByIsDistributtedTrueAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndDiySiteIdAndCarCodeContaining(diysiteId, keywords, diysiteId, keywords, diysiteId, keywords, pageRequest);
+    }
+    public Page<TdCoupon> findByIsDistributtedTrueAndAndIsUsedTrueAndDiySiteIdAndContainingKeywordsOrderBySortIdAsc(Long diysiteId, String keywords, int page, int size)
+    {
+    	if (null == diysiteId) {
+			return  null;
+		}
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndCarCodeContaining(diysiteId, keywords, diysiteId, keywords, diysiteId, keywords, pageRequest);
+    }
+    public Page<TdCoupon> findByIsDistributtedTrueAndAndIsUsedFalseAndDiySiteIdAndContainingKeywordsOrderBySortIdAsc(Long diysiteId, String keywords, int page, int size)
+    {
+    	if (null == diysiteId) {
+			return  null;
+		}
+        PageRequest pageRequest = new PageRequest(page, size);
+        
+        return repository.findByIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndCarCodeContaining(diysiteId, keywords, diysiteId, keywords, diysiteId, keywords, pageRequest);
+    }
+    
+    
+    
     public TdCoupon findByTypeIdAndMobileAndIsDistributtedTrue(Long typeId, String mobile)
     {
         if (null == typeId || null == mobile)

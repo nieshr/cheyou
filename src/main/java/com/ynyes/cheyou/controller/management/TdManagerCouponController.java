@@ -274,6 +274,9 @@ public class TdManagerCouponController {
                           Integer[] listChkId,
                           Long[] listSortId,
                           ModelMap map,
+                          Long diysiteId,
+                          String keywords,
+                          Long isUsed,
                           HttpServletRequest req){
         
         String username = (String) req.getSession().getAttribute("manager");
@@ -301,6 +304,9 @@ public class TdManagerCouponController {
                 btnSave(listId, listSortId);
                 tdManagerLogService.addLog("edit", "修改优惠券", req);
             }
+            else if (__EVENTTARGET.equalsIgnoreCase("changeDiysite")) {
+		   
+			}
         }
         
         if (null == page || page < 0)
@@ -313,17 +319,97 @@ public class TdManagerCouponController {
             size = SiteMagConstant.pageSize;;
         }
         
+        if (null == diysiteId) 
+        {
+			diysiteId = 0L;
+		}
+        
+        if (null == isUsed) 
+        {
+        	isUsed = 0L;
+		}
+        
+        Page<TdCoupon> couponPage = null;
+        
+        if (null == keywords) {//无搜索
+			if (diysiteId.equals(0L)) {//全部同盟店
+				if (isUsed.equals(0L)) {//两种核销状态								        
+			        couponPage = tdCouponService.findByIsDistributtedTrueOrderBySortIdAsc(page, size);			        
+			        map.addAttribute("coupon_page", couponPage);
+				}
+				else{
+					if (isUsed.equals(1L)) {//已核销
+						couponPage = tdCouponService.findByIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(page, size);
+						map.addAttribute("coupon_page", couponPage);
+					}
+					if (isUsed.equals(2L)) {
+						couponPage = tdCouponService.findByIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(page, size);
+						map.addAttribute("coupon_page", couponPage);
+					}
+				}
+			}
+			else{
+				if (isUsed.equals(0L)) {//两种核销状态								        
+			        couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdOrderBySortIdAsc(diysiteId, page, size);			        
+			        map.addAttribute("coupon_page", couponPage);
+				}
+				else{
+					if (isUsed.equals(1L)) {//已核销
+						couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderBySortIdAsc(diysiteId, page, size);
+						map.addAttribute("coupon_page", couponPage);
+					}
+					if (isUsed.equals(2L)) {
+						couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderBySortIdAsc(diysiteId, page, size);
+						map.addAttribute("coupon_page", couponPage);
+					}
+				}
+			}
+		}
+        else{
+        	if (diysiteId.equals(0L)) {//全部同盟店
+				if (isUsed.equals(0L)) {
+					couponPage = tdCouponService.findByIsDistributtedTrueAndContainingKeywords(keywords, page, size);			        
+			        map.addAttribute("coupon_page", couponPage);
+				}
+				else{
+					if (isUsed.equals(1L)) {//已核销
+						couponPage = tdCouponService.findByIsDistributtedTrueAndIsUsedTrueAndContainingKeywords(keywords, page, size);
+						map.addAttribute("coupon_page", couponPage);
+					}
+					if (isUsed.equals(2L)) {
+						couponPage = tdCouponService.findByIsDistributtedTrueAndIsUsedFalseAndContainingKeywords(keywords, page, size);
+						map.addAttribute("coupon_page", couponPage);
+					}
+				}
+			}
+			else{
+				if (isUsed.equals(0L)) {//两种核销状态								        
+			        couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdAndContainingKeywordsOrderBySortIdAsc(diysiteId,keywords, page, size);			        
+			        map.addAttribute("coupon_page", couponPage);
+				}
+				else{
+					if (isUsed.equals(1L)) {//已核销
+						couponPage = tdCouponService.findByIsDistributtedTrueAndAndIsUsedTrueAndDiySiteIdAndContainingKeywordsOrderBySortIdAsc(diysiteId,keywords, page, size);
+						map.addAttribute("coupon_page", couponPage);
+					}
+					if (isUsed.equals(2L)) {
+						couponPage = tdCouponService.findByIsDistributtedTrueAndAndIsUsedFalseAndDiySiteIdAndContainingKeywordsOrderBySortIdAsc(diysiteId,keywords, page, size);
+						map.addAttribute("coupon_page", couponPage);
+					}
+				}
+			}
+        }
         map.addAttribute("page", page);
         map.addAttribute("size", size);
+        map.addAttribute("diysiteId", diysiteId);
+        map.addAttribute("isUsed", isUsed);
+        map.addAttribute("keywords", keywords);
         map.addAttribute("__EVENTTARGET", __EVENTTARGET);
         map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
         map.addAttribute("__VIEWSTATE", __VIEWSTATE);
-
-        Page<TdCoupon> couponPage = null;
-        
-        couponPage = tdCouponService.findByIsDistributtedTrueOrderBySortIdAsc(page, size);
-        
-        map.addAttribute("coupon_page", couponPage);
+        //查询同盟店
+        List<TdDiySite> tdDiySitelist = tdDiySiteService.findByIsEnableTrue();
+        map.addAttribute("tdDiySite_list", tdDiySitelist);
         
         return "/site_mag/coupon_distributed_list";
     }
