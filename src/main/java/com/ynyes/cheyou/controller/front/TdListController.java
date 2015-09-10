@@ -73,7 +73,7 @@ public class TdListController {
         int totalSorts = 4;
         
         // 4个排序字段
-        String[] sortName = {"id", "totalCollects", "salePrice", "totalComments"};
+        String[] sortName = {"id", "totalclicks", "salePrice", "totalComments"};
         
         // 商城资讯
         List<TdArticleCategory> articleCatList = tdArticleCategoryService

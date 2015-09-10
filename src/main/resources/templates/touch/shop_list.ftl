@@ -47,11 +47,12 @@ function loadMap(x, y, z, address)
     
     
     var opts = {
-        width : 200,    // 信息窗口宽度
-        height: 70,     // 信息窗口高度
+        width : 30,    // 信息窗口宽度
+        height: 50,     // 信息窗口高度
         title : z  // 信息窗口标题
     }
-    var infoWindow = new BMap.InfoWindow("点击将进入路线查询，并直接跳转到webapp主站", opts);  // 创建信息窗口对象
+   // var infoWindow = new BMap.InfoWindow("点击将进入路线查询", opts);  // 创建信息窗口对象
+    var infoWindow = new BMap.InfoWindow("<h4 style='margin:0 0 5px 0;padding:0.2em 0'>"+z+"</h4><p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>点击将进入路线查询</p>")
     map.openInfoWindow(infoWindow,point); //开启信息窗口
     marker.addEventListener("click", function(){
         /*start|end：（必选）
@@ -74,7 +75,7 @@ function loadMap(x, y, z, address)
         }
         var opts = {
             mode:BMAP_MODE_DRIVING,
-            region:"北京"
+            region:"昆明"
         }
         var ss = new BMap.RouteSearch();
         ss.routeCall(start,end,opts);

@@ -3,9 +3,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>支付宝快捷登录接口</title>
+
+
 	</head>
      
 	<body>
-	<#if code??>${code}</#if>
+	<#if code??>${code}</#if> 
+	
 	</body>
 </html>
