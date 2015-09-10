@@ -74,7 +74,8 @@ function __doPostBack(eventTarget, eventArgument) {
             <table>
                 <tr class="mymember_infotab_tit01">
                     <th colspan="2">优惠券</th>
-                    
+                    <th width="100">领用时间</th>
+                    <th width="100">到期时间</th>
                     <th width="100">抵用金额</th>
                     <th width="80">使用状态</th>
                 </tr>
@@ -82,11 +83,13 @@ function __doPostBack(eventTarget, eventArgument) {
                     <#list coupan_list as item>
                         <tr id="tr_1424195166">
                             <td>                         
-                                <strong><img width="300" height="200" src="${item.typePicUri!''}"></strong>
+                                <strong><img width="230" height="150" src="${item.typePicUri!''}"></strong>
                             </td>
                             <td class="tb02">
                                 ${item.typeTitle!''}
                             </td>
+                            <td>${item.getTime!''}</td>
+                            <td>${item.expireTime!''}</td>
                             <td>
                                 ${item.price!'0'}
                             </td>

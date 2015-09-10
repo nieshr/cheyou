@@ -11,6 +11,7 @@
 <script type="text/javascript" src="/mag/js/swfupload.js"></script>
 <script type="text/javascript" src="/mag/js/swfupload.queue.js"></script>
 <script type="text/javascript" src="/mag/js/swfupload.handlers.js"></script>
+<script type="text/javascript" src="/mag/js/goods.js"></script>
 <script type="text/javascript" charset="utf-8" src="/mag/js/kindeditor-min.js"></script>
 <script type="text/javascript" charset="utf-8" src="/mag/js/zh_CN.js"></script>
 <script type="text/javascript" src="/mag/js/layout.js"></script>
@@ -207,18 +208,7 @@ $(function () {
         
         $("#idComputeSalePrice").val((parseFloat(p1) + parseFloat(p2)));
     });
-    */
-    
-    /*
-    $("#returnPrice").change(function(){
-        var p1 = $.trim($('#outFactoryPrice').val());
-        var p2 = $.trim($('#returnPrice').val())
-        if (isNaN(p1) || p1=="") { p1 = 0 }
-        if (isNaN(p2) || p2== "") { p2 = 0 }
-        
-        $("#idComputeSalePrice").val((parseFloat(p1) + parseFloat(p2)));
-    });
-    */
+    */     
     
     // 判断粮草购买限额不能大于最高返现额
     $("#pointLimited").change(function(){
@@ -540,14 +530,14 @@ function del_goods_comb(obj) {
         <dl>
             <dt>成本价</dt>
             <dd>
-                <input name="costPrice" type="text" value="<#if goods?? && goods.costPrice??>${goods.costPrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <input id="costPrice" name="costPrice" type="text" value="<#if goods?? && goods.costPrice??>${goods.costPrice?string("#.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
                 <span class="Validform_checktip">成本价，不在前台显示</span>
             </dd>
         </dl>
         <dl>
             <dt>市场价</dt>
             <dd>
-                <input name="marketPrice" type="text" value="<#if goods?? && goods.marketPrice??>${goods.marketPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
+                <input id="marketPrice" name="marketPrice" type="text" value="<#if goods?? && goods.marketPrice??>${goods.marketPrice?string("0.00")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
                 <span class="Validform_checktip">市场价格</span>
             </dd>
         </dl>
@@ -564,7 +554,7 @@ function del_goods_comb(obj) {
             <dt>供货价</dt>
             <dd>
                 <input id="outFactoryPrice" name="outFactoryPrice" type="text" value="<#if goods?? && goods.outFactoryPrice??>${goods.outFactoryPrice?string("0.##")}<#else>0</#if>" class="input normal" datatype="/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/" sucmsg=" ">
-                <span class="Validform_checktip">*商品供货价</span>
+                <span class="Validform_checktip">*商品供货价即批发价</span>
             </dd>
         </dl>
         <dl>
@@ -577,29 +567,50 @@ function del_goods_comb(obj) {
         <dl>
             <dt>赠送粮草</dt>
             <dd>
-                <input name="returnPoints" type="text" value="<#if goods?? && goods.returnPoints??>${goods.returnPoints?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <input id="returnPoints" name="returnPoints" type="text" value="<#if goods?? && goods.returnPoints??>${goods.returnPoints?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">购买该商品赠送的粮草</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>好评粮草</dt>
+            <dd>
+                <input id="commentReturnPoints" name="commentReturnPoints" type="text" value="<#if goods?? && goods.commentReturnPoints??>${goods.commentReturnPoints?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">订单评价后最高赠送值</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>工时费</dt>
+            <dd>
+                <input id="installationPrice" name="installationPrice" type="text" value="<#if goods?? && goods.installationPrice??>${goods.installationPrice?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">商品施工费用</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>其他</dt>
+            <dd>
+                <input id="otherPrice" name="otherPrice" type="text" value="<#if goods?? && goods.otherPrice??>${goods.otherPrice?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">其他费用</span>
             </dd>
         </dl>
         <dl>
             <dt>同盟店返利比例</dt>
             <dd>
-                <input name="shopReturnRation" type="text" value="<#if goods?? && goods.shopReturnRation??>${goods.shopReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <input id="shopReturnRation" name="shopReturnRation" type="text" value="<#if goods?? && goods.shopReturnRation??>${goods.shopReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">同盟店返利 = 销售价 * 同盟店返利比例</span>
             </dd>
         </dl>
         <dl>
             <dt>平台服务费比例</dt>
             <dd>
-                <input name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.00")}<#else>0.06</#if>" class="input normal" sucmsg="">
+                <input id="platformServiceReturnRation" name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.00")}<#else>0.06</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">平台服务费 = 销售价 * 平台服务费比例</span>
             </dd>
         </dl>
         <dl>
             <dt>培训服务费比例</dt>
             <dd>
-                <input name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.00")}<#else>0.02</#if>" class="input normal" sucmsg="">
-                <span class="Validform_checktip">培训服务费 = 成本价 * 培训服务费比例</span>
+                <input id="trainServiceReturnRation" name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.00")}<#else>0.02</#if>" class="input normal" sucmsg="">
+                <span class="Validform_checktip">培训服务费 = 供货价* 培训服务费比例</span>
             </dd>
         </dl>
         <#--
@@ -645,6 +656,34 @@ function del_goods_comb(obj) {
             <dd>
                 <input name="soldNumber" type="text" value="<#if goods?? && goods.soldNumber??>${goods.soldNumber?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">商品已销售数量</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>同盟店利润</dt>
+            <dd>
+                <input disabled="disabled" id="shopReturnProfit" name="shopReturnProfit" type="text" value="<#if goods?? && goods.shopReturnProfit??>${goods.shopReturnProfit?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">销售价-成本价-批发价(同盟店返利比+平台服务比)</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>同盟返利</dt>
+            <dd>
+                <input disabled="disabled" id="shopReturn" name="shopReturn" type="text" value="<#if goods?? && goods.shopReturn??>${goods.shopReturn?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">销售价*同盟店返利比</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>培训费用</dt>
+            <dd>
+                <input disabled="disabled" id="trainServiceReturnProfit" name="trainServiceReturnProfit" type="text" value="<#if goods?? && goods.trainServiceReturnProfit??>${goods.trainServiceReturnProfit?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">批发价*平台培训服务费比</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>商城毛利</dt>
+            <dd>
+                <input disabled="disabled" id="platformServiceReturnProfit" name="platformServiceReturnProfit" type="text" value="<#if goods?? && goods.platformServiceReturnProfit??>${goods.platformServiceReturnProfit?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <span class="Validform_checktip">平台服务费-好评粮草</span>
             </dd>
         </dl>
     </div>
@@ -711,7 +750,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>一元抢拍成交价</dt>
             <dd>
-                <input name="flashSaleTransactionPrice" type="text" value="${goods.flashSaleTransactionPrice!''}" class="input normal" >
+                <input name="flashSaleTransactionPrice" type="text" value="<#if goods??>${goods.flashSaleTransactionPrice!''}<#else>0</#if>" class="input normal" >
                 <span class="Validform_checktip">抢拍成交价</span>
             </dd>
         </dl>

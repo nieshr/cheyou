@@ -42,6 +42,20 @@ public interface TdCouponRepo extends
     
     Page<TdCoupon> findByIsDistributtedTrueOrderBySortIdAsc(Pageable page);
     
+    Page<TdCoupon> findByIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(Pageable page);
+    Page<TdCoupon> findByIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(Pageable page);
+    
+    Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdOrderByIdDesc(Long diysiteId, Pageable page);
+    Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderByIdDesc(Long diysiteId, Pageable page);
+    Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderByIdDesc(Long diysiteId, Pageable page);
+    
+    Page<TdCoupon> findByIsDistributtedTrueAndUsernameContainingOrIsDistributtedTrueAndMobileContainingOrIsDistributtedTrueAndCarCodeContaining(String keywords,String keywords1,String keywords2, Pageable page);
+    Page<TdCoupon> findByIsDistributtedTrueAndIsUsedTrueAndUsernameContainingOrIsDistributtedTrueAndIsUsedTrueAndMobileContainingOrIsDistributtedTrueAndIsUsedTrueAndCarCodeContaining(String keywords,String keywords1,String keywords2, Pageable page);
+    Page<TdCoupon> findByIsDistributtedTrueAndIsUsedFalseAndUsernameContainingOrIsDistributtedTrueAndIsUsedFalseAndMobileContainingOrIsDistributtedTrueAndIsUsedFalseAndCarCodeContaining(String keywords,String keywords1,String keywords2, Pageable page);
+    Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndDiySiteIdAndCarCodeContaining(Long diysiteId, String keywords, Long diysiteId1, String keywords1, Long diysiteId2, String keywords2, Pageable page);
+    Page<TdCoupon> findByIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndCarCodeContaining(Long diysiteId, String keywords, Long diysiteId1, String keywords1, Long diysiteId2, String keywords2,Pageable page);
+    Page<TdCoupon> findByIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndCarCodeContaining(Long diysiteId, String keywords, Long diysiteId1, String keywords1, Long diysiteId2, String keywords2, Pageable page);
+    
     List<TdCoupon> findByIsDistributtedTrueOrderByIdDesc();
     
     List<TdCoupon> findTypeIdDistinctByIsDistributtedFalse();

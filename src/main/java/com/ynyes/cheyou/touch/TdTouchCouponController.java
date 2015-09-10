@@ -72,9 +72,11 @@ public class TdTouchCouponController {
                 
                 List<TdCoupon> disCouponList = tdCouponService.findByTypeIdAndIsDistributtedTrueOrderByIdDesc(ct.getId());
                 
-                // 未领取优惠券
-                map.addAttribute("coupon_" + ct.getId() + "_list", couponList);
-                
+                if (null != couponList) {
+                	// 未领取优惠券
+                    map.addAttribute("coupon_" + ct.getId() + "_list", couponList);
+				}
+
                 // 已领取优惠券
                 map.addAttribute("distributed_coupon_" + ct.getId() + "_list", disCouponList);
             }
