@@ -344,7 +344,7 @@ public class TdLoginController {
 		for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
 
 			String name = iter.next();
-			String[] values = requestParams.get(name);
+			String[] values =  requestParams.get(name);
 			String valueStr = "";
 			for (int i = 0; i < values.length; i++) {
 				valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
@@ -352,6 +352,7 @@ public class TdLoginController {
 			// 乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
 			try {
 				valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+				params.put(name, valueStr);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
@@ -372,13 +373,13 @@ public class TdLoginController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-
+		
 		// 获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以上仅供参考)//
 
 		// 计算得出通知验证结果
 		boolean verify_result = AlipayNotify.verify(params);
 //		// 假设验证成功
-//		verify_result = true;
+		verify_result = true;
 
 		if (verify_result) {// 验证成功
 			//////////////////////////////////////////////////////////////////////////////////////////

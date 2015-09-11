@@ -21,11 +21,11 @@ $(document).ready(function(){
       // 优惠券切换店铺
     $(".couponSel").change(function(){
         $(this).siblings(".mt5").eq(0).children(".red").eq(0).html($(this).find("option:selected").attr("tn"));
-         if($(this).find("option:selected").attr("tn")!=0)
-        {
-           $("#tomorrow").text(" ");
+          if($(this).find("option:selected").attr("tn")!=0)
+        {           
+           $(this).siblings(".mt5").eq(0).children(".tomorrow").eq(0).text(" ");
         }else{
-           $("#tomorrow").text("明天再来");
+           $(this).siblings(".mt5").eq(0).children(".tomorrow").eq(0).text("明天再来");
         }
     });
     
@@ -134,7 +134,7 @@ function hideDialog()
                             </#if>
                         </select>
                         <div class="clear"></div>
-                        <p class="mt5">剩余：<span class="red"><#if ("coupon_" + item.id + "_list")?eval[0]??>${("coupon_" + item.id + "_list")?eval[0].leftNumber?c!'0'}</#if></span>张    <#if ("coupon_" + item.id + "_list")?eval[0].leftNumber==0><span id="tomorrow">明天再来</span></#if></p>
+                        <p class="mt5">剩余：<span class="red"><#if ("coupon_" + item.id + "_list")?eval[0]?? && ("coupon_" + item.id + "_list")?eval[0].leftNumber??>${("coupon_" + item.id + "_list")?eval[0].leftNumber?c!'0'}</#if></span>张    <#if ("coupon_" + item.id + "_list")?eval[0].leftNumber?? && ("coupon_" + item.id + "_list")?eval[0].leftNumber==0><span class="tomorrow">明天再来</span></#if></p>
                         
                     </div>
                     <div class="clear"></div>

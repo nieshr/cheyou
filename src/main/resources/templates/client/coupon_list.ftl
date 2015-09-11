@@ -95,7 +95,7 @@ function hideDialog()
                 <p><b style="color: #FF0000;">*</b> 请输入姓名</p>
                 <input class="text" name="username" value="<#if user??>${user.realName!''}</#if>" type="text" datatype="*"  nullmsg="请输入姓名"/>
                 <p>请输入车牌</p>
-                <input class="text" name="carCode" value="<#if user??>${user.carCode!''}</#if>" type="text" />
+                <input class="text" name="carCode" value="<#if user??>${user.carCode!''}</#if>" type="text" datatype="*" nullmsg="请输入车牌号"/>
                 <p><b style="color: #FF0000;">*</b> 请输入手机</p>
                 <input class="text" name="mobile" value="<#if user??>${user.mobile!''}</#if>" type="text" datatype="m" nullmsg="请输入手机号" errormsg="请输入正确的手机号"/>
                 <p><b style="color: #FF0000;">*</b> 请输入验证码</p>

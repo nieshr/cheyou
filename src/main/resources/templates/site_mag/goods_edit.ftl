@@ -614,7 +614,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>粮草购买限额</dt>
             <dd>
-                <input id="pointLimited" name="pointLimited" type="text" value="<#if goods?? && goods.pointLimited??>${goods.pointLimited?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <input id="pointLimited" name="pointLimited" type="text" value="<#if goods?? && goods.pointLimited??>${goods.pointLimited?c!"0"}<#else>999</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">购买时可使用的粮草限额</span>
             </dd>
         </dl>
