@@ -35,6 +35,12 @@ import com.cytm.payment.alipay.PaymentChannelAlipay;
 import com.cytm.payment.alipay.core.AlipayNotify;
 import com.cytm.payment.ceb.CEBPayConfig;
 import com.cytm.payment.ceb.PaymentChannelCEB;
+import com.ibm.icu.util.Calendar;
+import com.tencent.common.Configure;
+import com.tencent.common.MD5;
+import com.tencent.common.RandomStringGenerator;
+import com.tencent.protocol.pay_protocol.UnifiedOrderReqData;
+import com.tencent.service.UnifiedOrderService;
 import com.ynyes.cheyou.entity.TdCartGoods;
 import com.ynyes.cheyou.entity.TdCoupon;
 import com.ynyes.cheyou.entity.TdCouponType;
@@ -63,9 +69,9 @@ import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayRecordService;
 import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.util.CommonService;
 import com.ynyes.cheyou.util.QRCodeUtils;
 import com.ynyes.cheyou.util.SMSUtil;
-import com.ynyes.cheyou.util.VerifServlet;
 
 /**
  * 订单
@@ -1606,8 +1612,21 @@ public class TdOrderController extends AbstractPaytypeController {
             } else if (PAYMENT_WX.equals(payCode)) {
                 map.addAttribute("order_number", order.getOrderNumber());
                 map.addAttribute("total_price", order.getTotalPrice());
+                
+                String sa = "appid=" + Configure.getAppid() 
+                        + "&mch_id=" + Configure.getMchid()
+                        + "&nonce_str=" + RandomStringGenerator.getRandomStringByLength(32)
+                        + "&product_id=" + order.getId()
+                        + "&time_stamp=" + System.currentTimeMillis() / 1000;
+                
+                String sign = MD5.MD5Encode(sa + "&key=192006250b4c09247ec02edce69f6acy").toUpperCase();
+                
+                System.out.print("Sharon: weixin://wxpay/bizpayurl?" + sa + "&sign=" + sign + "\n");
+                
                 req.getSession().setAttribute("WXPAYURLSESSEION", 
-                        "weixin://wxpay/bizpayurl?appid=wx2421b1c4370ec43b&mch_id=10000100&nonce_str=f6808210402125e30663234f94c87a8c&product_id=1&time_stamp=1415949957&sign=512F68131DD251DA4A45DA79CC7EFE9D");
+                        "weixin://wxpay/bizpayurl?" + sa
+                      + "&sign=" + sign);
+                        // "weixin://wxpay/bizpayurl?appid=wx2421b1c4370ec43b&mch_id=10000100&nonce_str=f6808210402125e30663234f94c87a8c&product_id=1&time_stamp=1415949957&sign=512F68131DD251DA4A45DA79CC7EFE9D");
                 return "/client/order_pay_wx";
             }
             else if (CEBPayConfig.INTER_B2C_BANK_CONFIG.keySet().contains(
@@ -1630,6 +1649,74 @@ public class TdOrderController extends AbstractPaytypeController {
         map.addAttribute("payForm", payForm);
 
         return "/client/order_pay_form";
+    }
+    
+    @RequestMapping(value = "/wx_return",method = RequestMethod.GET)
+    public void wx_return(String openid, String productid, 
+            HttpServletResponse response, HttpServletRequest request) throws Exception {
+        System.out.print("Sharon: openid=" + openid + ";   productid=" + productid + "\n");
+        
+        System.out.print("Sharon: session openid=" + request.getSession().getAttribute("openid") 
+                + ";   session productid=" + request.getSession().getAttribute("productid") 
+                + "\n");
+        
+        if (null == productid)
+        {
+            return;
+        }
+        
+        Long orderId = Long.parseLong(productid);
+        
+        TdOrder order = tdOrderService.findOne(orderId);
+        
+        if (null == order)
+        {
+            return;
+        }
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        Calendar calExpire = Calendar.getInstance();
+        calExpire.setTime(order.getOrderTime());
+        
+        //根据订单类型来判断支付时间是否过期
+        if (order.getTypeId().equals(3L)) { // 抢拍  订单提交后20分钟内
+            calExpire.add(Calendar.MINUTE, 20);
+        }
+        else if (order.getTypeId().equals(4L) || order.getTypeId().equals(5L)) { //团购  预付是订单提交后12小时内，尾款支付也是12小时
+            calExpire.add(Calendar.HOUR, 12);
+        }
+        else { //普通  订单提交后24小时内
+            calExpire.add(Calendar.DATE, 1); 
+        }
+        
+        UnifiedOrderService service = new UnifiedOrderService();
+        UnifiedOrderReqData data = new UnifiedOrderReqData("支付订单"+order.getOrderNumber(),
+                "",
+                "",
+                order.getOrderNumber(),
+                "CNY",
+                (int)(order.getTotalPrice() * 100),
+                "",
+                CommonService.getIp(request),
+                sdf.format(order.getOrderTime()),
+                sdf.format(calExpire.getTime()),
+                "http://www.cytm99.com/order/wx_notify",
+                "NATIVE",
+                productid,
+                "",
+                openid,
+                "");
+        
+        String res = service.request(data);
+        
+        System.out.print("Sharon: res=" + res + "\n");
+        res.trim();
+    }
+    
+    @RequestMapping(value = "/wx_notify",method = RequestMethod.GET)
+    public void wx_notify(String prepay_id, 
+            HttpServletResponse response, HttpServletRequest request){
+        System.out.print("Sharon: prepay_id=" + prepay_id + "\n");
     }
     
     @RequestMapping(value = "/payqrcode",method = RequestMethod.GET)
@@ -1866,8 +1953,9 @@ public class TdOrderController extends AbstractPaytypeController {
     }
     
     @RequestMapping(value = "/pay/result_wxpay")
-    public String payResultWxpay(ModelMap map, HttpServletRequest req,
+    public String payResultWxpay(String productid, String openid, ModelMap map, HttpServletRequest req,
             HttpServletResponse resp) {
+        
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = req.getParameterMap();
         for (Iterator<String> iter = requestParams.keySet().iterator(); iter
@@ -2120,7 +2208,6 @@ public class TdOrderController extends AbstractPaytypeController {
                             smscode});
             tdOrder.setSmscode(smscode);
             tdOrder = tdOrderService.save(tdOrder);
-            System.out.println("---Sharon---: 向用户"+tdOrder.getShippingPhone()+"发送短信");
         }
 
         // 给商户发短信
@@ -2130,7 +2217,6 @@ public class TdOrderController extends AbstractPaytypeController {
                     new String[] { tdShop.getTitle(), tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
                             tdOrder.getAppointmentTime().toString() });
-            System.out.println("---Sharon---: 向同盟店"+tdShop.getMobile()+"发送短信");
         }
         
         List<TdOrderGoods> tdOrderGoodsList = tdOrder.getOrderGoodsList();
