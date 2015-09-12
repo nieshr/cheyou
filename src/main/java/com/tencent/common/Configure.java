@@ -15,7 +15,7 @@ public class Configure {
 	// 每次自己Post数据给API的时候都要用这个key来对所有字段进行签名，生成的签名会放在Sign这个字段，API收到Post数据的时候也会用同样的签名算法对Post过来的数据进行签名和验证
 	// 收到API的返回的时候也要用这个key来对返回的数据算下签名，跟API的Sign数据进行比较，如果值不一致，有可能数据被第三方给篡改
 
-	private static String key = "";
+	private static String key = "422ebb6c35fd75f4c4b717c331f9bcbf";
 
 	//微信分配的公众号ID（开通公众号之后可以获取到）
 	private static String appID = "wx24ca6020b7040665";
@@ -59,6 +59,9 @@ public class Configure {
 
 	//7) 统计上报API
 	public static String REPORT_API = "https://api.mch.weixin.qq.com/payitil/report";
+	
+	//8) 统一支付API
+	public static String UNIFIED_ORDER_API = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
 	public static boolean isUseThreadToDoReport() {
 		return useThreadToDoReport;
