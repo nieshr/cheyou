@@ -1,9 +1,6 @@
 package com.tencent;
 
-import com.tencent.common.Signature;
 import com.tencent.common.Util;
-
-import java.util.Date;
 
 public class Main {
 
