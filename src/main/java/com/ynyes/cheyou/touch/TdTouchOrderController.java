@@ -159,11 +159,21 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             }
 
             // 优惠券
-            map.addAttribute("coupon_list",
-                    tdCouponService.findByUsernameAndIsUseable(username));
+//            map.addAttribute("coupon_list",
+//                    tdCouponService.findByUsernameAndIsUseable(username));
 
             // 积分限额
-            map.addAttribute("total_point_limit", goods.getPointLimited());
+            TdUser tdUser = tdUserService.findByUsername(username);
+            if (null != tdUser ) {
+				if (null != tdUser.getTotalPoints() ) {
+					if (goods.getPointLimited() > tdUser.getTotalPoints()) {
+						map.addAttribute("total_point_limit", tdUser.getTotalPoints());
+					}
+					else{
+						map.addAttribute("total_point_limit", goods.getPointLimited());
+					}
+				}
+			}
 
             TdGoodsDto buyGoods = new TdGoodsDto();
 
@@ -1011,41 +1021,48 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 		 * @author lc
 		 * @注释：优惠券 TODO: 满减券， 单品类券，普通券查找
 		 */
-        List<TdCoupon> userCoupons = null;
-        if (null != user.getMobile()) {
-        	userCoupons = tdCouponService.findByMobileAndIsUseable(user.getMobile());//根据账号查询所有优惠券
+        //如果有不同种类的商品则不能使用优惠券
+        if (productIds.size() < 2) {
+        	List<TdCoupon> userCoupons = null;
+            if (null != user.getMobile()) {
+            	userCoupons = tdCouponService.findByMobileAndIsUseable(user.getMobile());//根据账号查询所有优惠券
+    		}
+             
+            if (null != userCoupons) {
+            	List<TdCoupon> userCouponList = new ArrayList<>(); //可用券
+            	TdCouponType couponType = null;
+            	for(int i = 0; i < userCoupons.size(); i++){
+            		couponType = tdCouponTypeService.findOne(userCoupons.get(i).getTypeId());
+            		if (null != couponType && !couponType.getTitle().equals("免费洗车券") && !couponType.getTitle().equals("免费打蜡券")) {
+    					if (couponType.getCategoryId().equals(1L)) {
+    						 //判断购物总价>满购券使用金额
+    				        if (totalPrice > couponType.getCanUsePrice() && productIds.contains(couponType.getProductTypeId())) {
+    				        	userCouponList.add(userCoupons.get(i));
+    				        }
+    					}
+    					else if (couponType.getCategoryId().equals(0L)) {
+    						userCouponList.add(userCoupons.get(i));
+    					}
+    					else if (couponType.getCategoryId().equals(2L)) {
+    						if (totalPrice > couponType.getCanUsePrice()) {
+    							userCouponList.add(userCoupons.get(i));
+    						}
+    					}
+    				}
+            	}
+            	 map.addAttribute("coupon_list",userCouponList);
+    		}
 		}
-         
-        if (null != userCoupons) {
-        	List<TdCoupon> userCouponList = new ArrayList<>(); //可用券
-        	TdCouponType couponType = null;
-        	for(int i = 0; i < userCoupons.size(); i++){
-        		couponType = tdCouponTypeService.findOne(userCoupons.get(i).getTypeId());
-        		if (null != couponType && !couponType.getTitle().equals("免费洗车券") && !couponType.getTitle().equals("免费打蜡券")) {
-					if (couponType.getCategoryId().equals(1L)) {
-						 //判断购物总价>满购券使用金额
-				        if (totalPrice > couponType.getCanUsePrice()) {
-				        	userCouponList.add(userCoupons.get(i));
-				        }
-					}
-					else if (couponType.getCategoryId().equals(0L)) {
-						userCouponList.add(userCoupons.get(i));
-					}
-					else if (couponType.getCategoryId().equals(2L)) {
-						if (productIds.contains(couponType.getProductTypeId())) {
-							userCouponList.add(userCoupons.get(i));
-						}
-					}
-				}
-        	}
-        	 map.addAttribute("coupon_list",userCouponList);
-		}
-
-        map.addAttribute("coupon_list",
-                tdCouponService.findByUsernameAndIsUseable(username));
-
+      
         // 积分限额
-        map.addAttribute("total_point_limit", totalPointLimited);
+        if (null != user.getTotalPoints()) {
+			if (totalPointLimited > user.getTotalPoints()) {
+				map.addAttribute("total_point_limit", user.getTotalPoints());
+			}
+			else{
+				map.addAttribute("total_point_limit", totalPointLimited);
+			}
+		}
 
         // 线下同盟店
         map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());

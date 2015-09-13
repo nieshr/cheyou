@@ -661,28 +661,28 @@ function del_goods_comb(obj) {
         <dl>
             <dt>同盟店利润</dt>
             <dd>
-                <input disabled="disabled" id="shopReturnProfit" name="shopReturnProfit" type="text" value="<#if goods?? && goods.shopReturnProfit??>${goods.shopReturnProfit?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <input disabled="disabled" id="shopReturnProfit" name="shopReturnProfit" type="text" value="<#if goods?? && goods.shopReturnProfit??>${goods.shopReturnProfit?c!"0"}<#else>0</#if>" class="input normal" >
                 <span class="Validform_checktip">销售价-成本价-批发价(同盟店返利比+平台服务比)</span>
             </dd>
         </dl>
         <dl>
             <dt>同盟返利</dt>
             <dd>
-                <input disabled="disabled" id="shopReturn" name="shopReturn" type="text" value="<#if goods?? && goods.shopReturn??>${goods.shopReturn?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <input disabled="disabled" id="shopReturn" name="shopReturn" type="text" value="<#if goods?? && goods.shopReturn??>${goods.shopReturn?c!"0"}<#else>0</#if>" class="input normal" >
                 <span class="Validform_checktip">销售价*同盟店返利比</span>
             </dd>
         </dl>
         <dl>
             <dt>培训费用</dt>
             <dd>
-                <input disabled="disabled" id="trainServiceReturnProfit" name="trainServiceReturnProfit" type="text" value="<#if goods?? && goods.trainServiceReturnProfit??>${goods.trainServiceReturnProfit?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <input disabled="disabled" id="trainServiceReturnProfit" name="trainServiceReturnProfit" type="text" value="<#if goods?? && goods.trainServiceReturnProfit??>${goods.trainServiceReturnProfit?c!"0"}<#else>0</#if>" class="input normal" >
                 <span class="Validform_checktip">批发价*平台培训服务费比</span>
             </dd>
         </dl>
         <dl>
             <dt>商城毛利</dt>
             <dd>
-                <input disabled="disabled" id="platformServiceReturnProfit" name="platformServiceReturnProfit" type="text" value="<#if goods?? && goods.platformServiceReturnProfit??>${goods.platformServiceReturnProfit?c!"0"}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <input disabled="disabled" id="platformServiceReturnProfit" name="platformServiceReturnProfit" type="text" value="<#if goods?? && goods.platformServiceReturnProfit??>${goods.platformServiceReturnProfit?c!"0"}<#else>0</#if>" class="input normal" >
                 <span class="Validform_checktip">平台服务费-好评粮草</span>
             </dd>
         </dl>

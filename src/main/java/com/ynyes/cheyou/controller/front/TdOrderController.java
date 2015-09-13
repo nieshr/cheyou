@@ -167,11 +167,23 @@ public class TdOrderController extends AbstractPaytypeController {
             }
 
             // 优惠券
-            map.addAttribute("coupon_list",
-                    tdCouponService.findByUsernameAndIsUseable(username));
-
+//            map.addAttribute("coupon_list",
+//                    tdCouponService.findByUsernameAndIsUseable(username));
+            
+            
             // 积分限额
-            map.addAttribute("total_point_limit", goods.getPointLimited());
+            TdUser tdUser = tdUserService.findByUsername(username);
+            if (null != tdUser ) {
+				if (null != tdUser.getTotalPoints() ) {
+					if (goods.getPointLimited() > tdUser.getTotalPoints()) {
+						map.addAttribute("total_point_limit", tdUser.getTotalPoints());
+					}
+					else{
+						map.addAttribute("total_point_limit", goods.getPointLimited());
+					}
+				}
+			}
+            
 
             TdGoodsDto buyGoods = new TdGoodsDto();
 
@@ -958,35 +970,39 @@ public class TdOrderController extends AbstractPaytypeController {
 		 * @author lc
 		 * @注释：优惠券 TODO: 满减券， 单品类券，普通券查找
 		 */
-        List<TdCoupon> userCoupons = null;
-        if (null != user.getMobile()) {
-        	userCoupons = tdCouponService.findByMobileAndIsUseable(user.getMobile());//根据账号查询所有优惠券
+        //如果有不同种类的商品则不能使用优惠券
+        if (productIds.size() < 2) {
+        	List<TdCoupon> userCoupons = null;
+            if (null != user.getMobile()) {
+            	userCoupons = tdCouponService.findByMobileAndIsUseable(user.getMobile());//根据账号查询所有优惠券
+    		}
+             
+            if (null != userCoupons) {
+            	List<TdCoupon> userCouponList = new ArrayList<>(); //可用券
+            	TdCouponType couponType = null;
+            	for(int i = 0; i < userCoupons.size(); i++){
+            		couponType = tdCouponTypeService.findOne(userCoupons.get(i).getTypeId());
+            		if (null != couponType && !couponType.getTitle().equals("免费洗车券") && !couponType.getTitle().equals("免费打蜡券")) {
+    					if (couponType.getCategoryId().equals(1L)) {
+    						 //判断购物总价>满购券使用金额
+    				        if (totalPrice > couponType.getCanUsePrice() && productIds.contains(couponType.getProductTypeId())) {
+    				        	userCouponList.add(userCoupons.get(i));
+    				        }
+    					}
+    					else if (couponType.getCategoryId().equals(0L)) {
+    						userCouponList.add(userCoupons.get(i));
+    					}
+    					else if (couponType.getCategoryId().equals(2L)) {
+    						if (totalPrice > couponType.getCanUsePrice()) {
+    							userCouponList.add(userCoupons.get(i));
+    						}
+    					}
+    				}
+            	}
+            	 map.addAttribute("coupon_list",userCouponList);
+    		}
 		}
-         
-        if (null != userCoupons) {
-        	List<TdCoupon> userCouponList = new ArrayList<>(); //可用券
-        	TdCouponType couponType = null;
-        	for(int i = 0; i < userCoupons.size(); i++){
-        		couponType = tdCouponTypeService.findOne(userCoupons.get(i).getTypeId());
-        		if (null != couponType && !couponType.getTitle().equals("免费洗车券") && !couponType.getTitle().equals("免费打蜡券")) {
-					if (couponType.getCategoryId().equals(1L)) {
-						 //判断购物总价>满购券使用金额
-				        if (totalPrice > couponType.getCanUsePrice()) {
-				        	userCouponList.add(userCoupons.get(i));
-				        }
-					}
-					else if (couponType.getCategoryId().equals(0L)) {
-						userCouponList.add(userCoupons.get(i));
-					}
-					else if (couponType.getCategoryId().equals(2L)) {
-						if (productIds.contains(couponType.getProductTypeId())) {
-							userCouponList.add(userCoupons.get(i));
-						}
-					}
-				}
-        	}
-        	 map.addAttribute("coupon_list",userCouponList);
-		}
+               
                   
 //         /**
 //         * 判断能使用的优惠券
@@ -1062,8 +1078,15 @@ public class TdOrderController extends AbstractPaytypeController {
 //         }
         
         // 积分限额
-        map.addAttribute("total_point_limit", totalPointLimited);
-
+        if (null != user.getTotalPoints()) {
+			if (totalPointLimited > user.getTotalPoints()) {
+				map.addAttribute("total_point_limit", user.getTotalPoints());
+			}
+			else{
+				map.addAttribute("total_point_limit", totalPointLimited);
+			}
+		}
+        
         // 线下同盟店
         map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());
 
@@ -2221,11 +2244,11 @@ public class TdOrderController extends AbstractPaytypeController {
         
         List<TdOrderGoods> tdOrderGoodsList = tdOrder.getOrderGoodsList();
 
-        Long totalPoints = 0L;
-        Double totalCash = 0.0;
-        Double platformService = 0.0;
-        Double trainService = 0.0;
-        Double shopOrderincome = 0.0;
+        Long totalPoints = 0L;       //总用户返利
+        Double totalCash = 0.0;      //总同盟店返利
+        Double platformService = 0.0;//商城服务费
+        Double trainService = 0.0;   //培训费
+        Double shopOrderincome = 0.0;//同盟店收入
         Double totalSaleprice = 0.0; //订单商品总销售价
         Double totalCostprice = 0.0; //订单商品总成本价
         // 返利总额
@@ -2247,14 +2270,15 @@ public class TdOrderController extends AbstractPaytypeController {
                     	platformService += tdGoods.getSalePrice() * tdGoods.getPlatformServiceReturnRation() * tog.getQuantity();
 					}
                     if (null != tdGoods && null != tdGoods.getTrainServiceReturnRation()) {
-                    	trainService += tdGoods.getCostPrice() * tdGoods.getTrainServiceReturnRation()* tog.getQuantity(); 
+                    	trainService += tdGoods.getOutFactoryPrice() * tdGoods.getTrainServiceReturnRation()* tog.getQuantity(); 
 					}
                     totalSaleprice += tdGoods.getSalePrice()* tog.getQuantity();
                     totalCostprice += tdGoods.getCostPrice()* tog.getQuantity();
                 }
             }
             if (tdOrder.getTypeId().equals(1L)) {
-            	shopOrderincome = totalSaleprice - totalCostprice - totalPoints - platformService - trainService - totalCash;
+            	//shopOrderincome = totalSaleprice - totalCostprice - totalPoints - platformService - trainService - totalCash;
+            	shopOrderincome = totalSaleprice - totalCostprice - platformService - totalCash;
 			}         
             
             final Long totalPointsDely = totalPoints;

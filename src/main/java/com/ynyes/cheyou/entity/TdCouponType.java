@@ -26,6 +26,7 @@ public class TdCouponType {
 	private String title;
 	
 	// 种类 0:普通券 1:满减券 2:限制品类券
+	// 更新 0 全场通用券  1 分品类满减券  2 不分品类满减券
 	@Column
 	private Long categoryId;
 	

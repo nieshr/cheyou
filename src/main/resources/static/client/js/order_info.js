@@ -32,9 +32,14 @@ function couponChange()
 
     $("#couponFeee").html(couponFee);
     $("#couponFee").html(couponFee);
-    $("#totalFee").html(goodsFee + payTypeFee - pointFee - couponFee);
+    if(pointFee + couponFee > goodsFee + payTypeFee){
+    	$("#totalFee").html(0);
+    }
+    else{
+    	$("#totalFee").html(goodsFee + payTypeFee - pointFee - couponFee);
+    }
+    
 }
-
 
 function pointChange(self, point, total)
 {
@@ -61,10 +66,26 @@ function pointChange(self, point, total)
         return;
     }
     
-    self.value = point;
+    if(point + couponFee > goodsFee + payTypeFee){
+    	alert("使用粮草大于商品金额！");
+    	if(goodsFee + payTypeFee - couponFee > 0){
+    		self.value = 0;
+    		$("#pointFee").html(0);
+    		$("#totalFee").html(goodsFee + payTypeFee - 0 - couponFee);
+    	}
+    	else{
+    		self.value = 0;
+    		$("#pointFee").html(0);
+    	    $("#totalFee").html(0);
+    	}
+    }
+    else{
+    	self.value = point;
+        
+        $("#pointFee").html(point);
+        $("#totalFee").html(goodsFee + payTypeFee - point - couponFee);
+    }
     
-    $("#pointFee").html(point);
-    $("#totalFee").html(goodsFee + payTypeFee - point - couponFee);
 }
 
 // 选择收货地址

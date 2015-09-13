@@ -143,7 +143,7 @@ function getType()
                 <span class="Validform_checktip"></span>
             </dd> 
     </dl>
-    <input type="hidden" name="total" id="total" value="${diy_site_list?size}">
+    <input type="hidden" name="total" id="total" value="<#if diy_site_list??>${diy_site_list?size}</#if>">
 <#else>
   <dl>
     <dt>所属同盟店</dt>

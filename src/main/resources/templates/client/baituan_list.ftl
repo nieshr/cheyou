@@ -159,7 +159,7 @@ function timer${item_index}()
                     <p class="team_red">
                         <span>预付定金：￥<#if item.groupSalePrePayPrice??>${item.groupSalePrePayPrice?string("0.00")}</#if></span>
                         <#if !type??>
-                            <a href="/order/buy/baituan?id=${item.id?c}">立即参团</a>
+                            <a href="/order/buy/baituan?gid=${item.id?c}">立即参团</a>
                         </#if>
                     </p>
                 </div>
