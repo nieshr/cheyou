@@ -45,6 +45,7 @@ import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdOrderGoods;
 import com.ynyes.cheyou.entity.TdPayRecord;
 import com.ynyes.cheyou.entity.TdPayType;
+import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.entity.TdShippingAddress;
 import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.entity.TdUserPoint;
@@ -60,6 +61,7 @@ import com.ynyes.cheyou.service.TdOrderGoodsService;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayRecordService;
 import com.ynyes.cheyou.service.TdPayTypeService;
+import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.util.SMSUtil;
@@ -120,6 +122,9 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
     @Autowired
     private PaymentChannelAlipay payChannelAlipay;
+    
+    @Autowired
+    private TdProductCategoryService tdProductCategoryService;
 
     /**
      * 立即购买
@@ -1006,14 +1011,14 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             }
         }
       //查询购物车的所有种类
-        List<Long> productIds = new ArrayList<>();
+        List<String> productIds = new ArrayList<>();
         for (TdCartGoods cg : selectedGoodsList){
         	TdGoods goods = tdGoodsService.findOne(cg.getGoodsId());
-        	if (productIds.isEmpty()) {
-				productIds.add(goods.getCategoryId());
+        	if (productIds.isEmpty()) {        		
+				productIds.add(goods.getCategoryIdTree().split(",")[0]);//根类别
 			}else{
-				if (!productIds.contains(goods.getCategoryId())) {
-					productIds.add(goods.getCategoryId());
+				if (!productIds.contains(goods.getCategoryIdTree().split(",")[0])) {
+					productIds.add(goods.getCategoryIdTree().split(",")[0]);
 				}
 			}
         }
@@ -1035,8 +1040,13 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             		couponType = tdCouponTypeService.findOne(userCoupons.get(i).getTypeId());
             		if (null != couponType && !couponType.getTitle().equals("免费洗车券") && !couponType.getTitle().equals("免费打蜡券")) {
     					if (couponType.getCategoryId().equals(1L)) {
+    						TdProductCategory tpc = tdProductCategoryService.findOne(couponType.getProductTypeId());
+    						List<String> templist = new ArrayList<>();
+    						for(String cid : tpc.getParentTree().split(",")){
+    							templist.add(cid);
+    						}   								
     						 //判断购物总价>满购券使用金额
-    				        if (totalPrice > couponType.getCanUsePrice() && productIds.contains(couponType.getProductTypeId())) {
+    				        if (totalPrice > couponType.getCanUsePrice() && templist.contains(productIds.get(0))) {
     				        	userCouponList.add(userCoupons.get(i));
     				        }
     					}
