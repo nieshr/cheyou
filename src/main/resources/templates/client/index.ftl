@@ -654,7 +654,7 @@ function delItem(id)
             <a href="/shop/list"><img src="/client/images/images/index_ico01.png" /><p>省外同盟店</p></a>
         </menu>
         <p class="index_qd">
-            <a href="javascript:;"><img src="/client/images/images/index_ico04.png" /></a>
+            <a href="/list/195"><img src="/client/images/images/index_ico04.png" /></a>
             ${.now?string("yyyy.MM.dd EEEE")}
         </p>
         <a class="index_free" href="/coupon/list">999元购物券</a>
