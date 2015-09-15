@@ -186,11 +186,11 @@ public class TdCouponService {
         return repository.findByIsDistributtedFalseOrderBySortIdAsc(pageRequest);
     }
     
-    public Page<TdCoupon> findByIsDistributtedTrueOrderBySortIdAsc(int page, int size)
+    public Page<TdCoupon> findByIsDistributtedTrueOrderByIdDesc(int page, int size)
     {
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByIsDistributtedTrueOrderBySortIdAsc(pageRequest);
+        return repository.findByIsDistributtedTrueOrderByIdDesc(pageRequest);
     }
     
     //根据核销状态查找
@@ -204,7 +204,7 @@ public class TdCouponService {
     }
     
     //根据同盟店id核销状态查找
-    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdOrderBySortIdAsc(Long diysiteId, int page, int size)
+    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdOrderByIdDesc(Long diysiteId, int page, int size)
     {
     	if (null == diysiteId) {
 			return  null;
@@ -213,7 +213,7 @@ public class TdCouponService {
         
         return repository.findByIsDistributtedTrueAndDiySiteIdOrderByIdDesc(diysiteId, pageRequest);
     }
-    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderBySortIdAsc(Long diysiteId, int page, int size)
+    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderByIdDesc(Long diysiteId, int page, int size)
     {
     	if (null == diysiteId) {
 			return  null;
@@ -222,7 +222,7 @@ public class TdCouponService {
         
         return repository.findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderByIdDesc(diysiteId, pageRequest);
     }
-    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderBySortIdAsc(Long diysiteId, int page, int size)
+    public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderByIdDesc(Long diysiteId, int page, int size)
     {
     	if (null == diysiteId) {
 			return  null;
@@ -236,17 +236,17 @@ public class TdCouponService {
     public Page<TdCoupon> findByIsDistributtedTrueAndContainingKeywords(String keywords, int page, int size){
     	PageRequest pageRequest = new PageRequest(page, size);
     	
-    	return repository.findByIsDistributtedTrueAndUsernameContainingOrIsDistributtedTrueAndMobileContainingOrIsDistributtedTrueAndCarCodeContaining(keywords,keywords,keywords,pageRequest);
+    	return repository.findByIsDistributtedTrueAndUsernameContainingOrIsDistributtedTrueAndMobileContainingOrIsDistributtedTrueAndCarCodeContainingOrderByIdDesc(keywords,keywords,keywords,pageRequest);
     }
     public Page<TdCoupon> findByIsDistributtedTrueAndIsUsedTrueAndContainingKeywords(String keywords, int page, int size){
     	PageRequest pageRequest = new PageRequest(page, size);
     	
-    	return repository.findByIsDistributtedTrueAndIsUsedTrueAndUsernameContainingOrIsDistributtedTrueAndIsUsedTrueAndMobileContainingOrIsDistributtedTrueAndIsUsedTrueAndCarCodeContaining(keywords,keywords,keywords,pageRequest);
+    	return repository.findByIsDistributtedTrueAndIsUsedTrueAndUsernameContainingOrIsDistributtedTrueAndIsUsedTrueAndMobileContainingOrIsDistributtedTrueAndIsUsedTrueAndCarCodeContainingOrderByIdDesc(keywords,keywords,keywords,pageRequest);
     }
     public Page<TdCoupon> findByIsDistributtedTrueAndIsUsedFalseAndContainingKeywords(String keywords, int page, int size){
     	PageRequest pageRequest = new PageRequest(page, size);
     	
-    	return repository.findByIsDistributtedTrueAndIsUsedFalseAndUsernameContainingOrIsDistributtedTrueAndIsUsedFalseAndMobileContainingOrIsDistributtedTrueAndIsUsedFalseAndCarCodeContaining(keywords,keywords,keywords,pageRequest);
+    	return repository.findByIsDistributtedTrueAndIsUsedFalseAndUsernameContainingOrIsDistributtedTrueAndIsUsedFalseAndMobileContainingOrIsDistributtedTrueAndIsUsedFalseAndCarCodeContainingOrderByIdDesc(keywords,keywords,keywords,pageRequest);
     }
     public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndContainingKeywordsOrderBySortIdAsc(Long diysiteId, String keywords, int page, int size)
     {
@@ -255,7 +255,7 @@ public class TdCouponService {
 		}
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByIsDistributtedTrueAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndDiySiteIdAndCarCodeContaining(diysiteId, keywords, diysiteId, keywords, diysiteId, keywords, pageRequest);
+        return repository.findByIsDistributtedTrueAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndDiySiteIdAndCarCodeContainingOrderByIdDesc(diysiteId, keywords, diysiteId, keywords, diysiteId, keywords, pageRequest);
     }
     public Page<TdCoupon> findByIsDistributtedTrueAndAndIsUsedTrueAndDiySiteIdAndContainingKeywordsOrderBySortIdAsc(Long diysiteId, String keywords, int page, int size)
     {
@@ -264,7 +264,7 @@ public class TdCouponService {
 		}
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndCarCodeContaining(diysiteId, keywords, diysiteId, keywords, diysiteId, keywords, pageRequest);
+        return repository.findByIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndCarCodeContainingOrderByIdDesc(diysiteId, keywords, diysiteId, keywords, diysiteId, keywords, pageRequest);
     }
     public Page<TdCoupon> findByIsDistributtedTrueAndAndIsUsedFalseAndDiySiteIdAndContainingKeywordsOrderBySortIdAsc(Long diysiteId, String keywords, int page, int size)
     {
@@ -273,7 +273,7 @@ public class TdCouponService {
 		}
         PageRequest pageRequest = new PageRequest(page, size);
         
-        return repository.findByIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndCarCodeContaining(diysiteId, keywords, diysiteId, keywords, diysiteId, keywords, pageRequest);
+        return repository.findByIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndUsernameContainingOrIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndMobileContainingOrIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndCarCodeContainingOrderByIdDesc(diysiteId, keywords, diysiteId, keywords, diysiteId, keywords, pageRequest);
     }
     
     
@@ -291,12 +291,12 @@ public class TdCouponService {
 	 * @author lc
 	 * @注释：根据类型查找优惠券
 	 */
-    public TdCoupon findByTypeId(Long typeId){
+    public TdCoupon findTopByTypeIdAndIsDistributtedFalse(Long typeId){
     	 if (null == typeId )
          {
              return null;
          }
-    	 return repository.findByTypeId(typeId);
+    	 return repository.findTopByTypeIdAndIsDistributtedFalse(typeId);
     }
     
     public List<TdCoupon> findByIsDistributtedTrueOrderByIdDesc(){

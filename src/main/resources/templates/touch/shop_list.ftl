@@ -17,6 +17,8 @@ body, html,#myMap {width: 100%;height: 100%;margin:0;}
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lwRXRetipHPGz8y6lzUlUZfc"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
 <script type="text/javascript">
 $(document).ready(function(){
 hideMap();
@@ -47,39 +49,61 @@ function loadMap(x, y, z, address)
     
     
     var opts = {
-        width : 30,    // 信息窗口宽度
+        width : 10,    // 信息窗口宽度
         height: 50,     // 信息窗口高度
         title : z  // 信息窗口标题
     }
-   // var infoWindow = new BMap.InfoWindow("点击将进入路线查询", opts);  // 创建信息窗口对象
+   // var infoWindow = new BMap.InfoWindow("点击将进入路线导航", opts);  // 创建信息窗口对象
     var infoWindow = new BMap.InfoWindow("<h4 style='margin:0 0 5px 0;padding:0.2em 0'>"+z+"</h4><p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>点击将进入路线查询</p>")
-    map.openInfoWindow(infoWindow,point); //开启信息窗口
-    marker.addEventListener("click", function(){
-        /*start|end：（必选）
-        {name:string,latlng:Lnglat}
-        opts:
-        mode：导航模式，固定为
-        BMAP_MODE_TRANSIT、BMAP_MODE_DRIVING、
-        BMAP_MODE_WALKING、BMAP_MODE_NAVIGATION
-        分别表示公交、驾车、步行和导航，（必选）
-        region：城市名或县名  当给定region时，认为起点和终点都在同一城市，除非单独给定起点
+   
+    //添加      
+    var start1 = "";
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var map = new BMap.Map("newMap");
+            var point1 = new BMap.Point(r.point.lng,r.point.lat);
+            map.centerAndZoom(point,12);
+            var geoc = new BMap.Geocoder(); 
+            //alert('您的位置：'+r.point.lng+','+r.point.lat);
+            geoc.getLocation(point1, function(rs){
+            var addComp = rs.addressComponents;
+            //alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+            start1 = addComp.city + "" + addComp.district + "" + addComp.street + "" + addComp.streetNumber;
+            //alert(start);
+            marker.addEventListener("click", function(){
+                        /*start|end：（必选）
+                        {name:string,latlng:Lnglat}
+                        opts:
+                        mode：导航模式，固定为
+                        BMAP_MODE_TRANSIT、BMAP_MODE_DRIVING、
+                        BMAP_MODE_WALKING、BMAP_MODE_NAVIGATION
+                        分别表示公交、驾车、步行和导航，（必选）
+                        region：城市名或县名  当给定region时，认为起点和终点都在同一城市，除非单独给定起点
+                
+                或终点的城市
+                        origin_region/destination_region：同上
+                        */
+                        var start = {
+                             name:start1
+                        }
+                        var end = {
+                            name:address
+                        }
+                        var opts = {
+                            mode:BMAP_MODE_DRIVING,
+                            region:"昆明"
+                        }
+                        var ss = new BMap.RouteSearch();
+                        ss.routeCall(start,end,opts);
+                    });
+                         }); 
+                        }              
+    },{enableHighAccuracy: true})
+    
+    map.openInfoWindow(infoWindow,point); //开启信息窗口    
 
-或终点的城市
-        origin_region/destination_region：同上
-        */
-        var start = {
-             name:""
-        }
-        var end = {
-            name:address
-        }
-        var opts = {
-            mode:BMAP_MODE_DRIVING,
-            region:"昆明"
-        }
-        var ss = new BMap.RouteSearch();
-        ss.routeCall(start,end,opts);
-    });
+   
     
 }
 
@@ -111,7 +135,7 @@ function hideSerivceStars()
 <div class="comhead_bg"></div>
 <!--header END-->
 
-
+<div><div id="newMap"></div></div>
 <!--地图的添加 2015-8-12 19:49:37 mdj-->
 <div id="allMap" style="width:90%;margin-left:auto;margin-right:auto; height:80%;margin-bottom:auto;z-index:999999999;">
     <a class="fr" style="z-index:999999999; /* margin-top:50px; position: absolute;*/  margin-right: 10px;" href="javascript:hideMap();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="25" height="25"></a>

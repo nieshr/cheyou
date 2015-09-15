@@ -91,7 +91,7 @@ function hideDialog()
             <a class="fr" style="z-index:999999999; /* margin-top:50px; */ margin-left: 410px;position: absolute;" href="javascript:hideDialog();"><img src="/client/images/20150407114113116_easyicon_net_71.8756476684.png" width="25" height="25"></a>
             <form id="form1" action="/coupon/request" method="post">
                 <span class="Validform_checktip">请填写领取信息</span>
-                <input id="couponId" name="couponId" class="text" type="hidden" value="" datatype="n"/>
+                <input id="couponId" name="couponId" class="text" type="hidden" value="" datatype="n" nullmsg="优惠券已被领完"/>
                 <p><b style="color: #FF0000;">*</b> 请输入姓名</p>
                 <input class="text" name="username" value="<#if user??>${user.realName!''}</#if>" type="text" datatype="*"  nullmsg="请输入姓名"/>
                 <p>请输入车牌</p>
@@ -177,8 +177,7 @@ function hideDialog()
                     function showDialog${item_index}()
                     {
                         var cid = $("#couponId${item_index}").val();
-                          
-                       
+                        
                         $("#couponId").val(cid);
                         
                         $("#checkDialog").css("display", "block");

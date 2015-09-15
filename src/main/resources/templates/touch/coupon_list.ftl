@@ -52,6 +52,13 @@ function showDialog(id)
 {
     var cid = $(".mianfeilingqu").eq(id).find(".couponSel").eq(0).find("option:selected").attr("cid");
     
+    var diyid = $(".mianfeilingqu").eq(id).find(".couponSel").eq(0).find("option:selected").val();
+    
+    if(null == diyid){
+        alert("优惠券已领完");
+        return;
+    }
+    
     if (null == cid)
     {
         alert("请选择同盟店");
@@ -127,6 +134,9 @@ function hideDialog()
                         <select class="couponSel">
                             <#assign couponCount=0>
                             <#if ("coupon_" + item.id + "_list")?eval?? >
+                                <#if item_index < 2>
+                                    <option value="" selected="selected">请选择同盟店</option>
+                                </#if>
                                 <#list ("coupon_" + item.id + "_list")?eval as coupon>
                                     <option value="${coupon.diySiteId!''}" cid="${coupon.id?c}" tn="${coupon.leftNumber?c!'0'}">${coupon.diySiteTitle!''}</option>
                                     <#assign couponCount=couponCount+coupon.leftNumber>
@@ -134,8 +144,8 @@ function hideDialog()
                             </#if>
                         </select>
                         <div class="clear"></div>
-                        <p class="mt5">剩余：<span class="red"><#if ("coupon_" + item.id + "_list")?eval[0]?? && ("coupon_" + item.id + "_list")?eval[0].leftNumber??>${("coupon_" + item.id + "_list")?eval[0].leftNumber?c!'0'}</#if></span>张    <#if ("coupon_" + item.id + "_list")?eval[0].leftNumber?? && ("coupon_" + item.id + "_list")?eval[0].leftNumber==0><span class="tomorrow">明天再来</span></#if></p>
-                        
+                     <!--   <p class="mt5">剩余：<span class="red"><#if ("coupon_" + item.id + "_list")?eval[0]??><#if ("coupon_" + item.id + "_list")?eval[0]?? && ("coupon_" + item.id + "_list")?eval[0].leftNumber??>${("coupon_" + item.id + "_list")?eval[0].leftNumber?c!'0'}</#if></span>张    <#if ("coupon_" + item.id + "_list")?eval[0].leftNumber?? && ("coupon_" + item.id + "_list")?eval[0].leftNumber==0><span class="tomorrow">明天再来</span></#if></#if></p>-->
+                        <p class="mt5">剩余：<span class="red"></span>张 <span class="tomorrow"></span></p>
                     </div>
                     <div class="clear"></div>
                     <div class="zongshushengyu">

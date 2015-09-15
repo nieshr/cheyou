@@ -181,6 +181,13 @@ public class TdGoods {
     @Column(scale=2)
     private Double includePrice;
     
+    // 工时费
+    @Column
+    private Double installationPrice;
+    
+    @Column
+    private Double otherPrice;
+    
     // 站点ID
     @Column
     private Long siteId;
@@ -388,6 +395,10 @@ public class TdGoods {
     @Column
     private Long returnPoints;
     
+    // 好评赠送粮草限制
+    @Column
+    private Long commentReturnPoints;
+    
     // 购买积分限额
     @Column
     private Long pointLimited;
@@ -431,6 +442,22 @@ public class TdGoods {
     // 培训服务费比例
     @Column(scale=2)
     private Double trainServiceReturnRation;
+    
+    // 同盟店利润
+    @Column(scale=2)
+    private Double shopReturnProfit;
+    
+    // 同盟店返利
+    @Column(scale=2)
+    private Double shopReturn;
+    
+    // 平台毛利
+    @Column(scale=2)
+    private Double platformServiceReturnProfit;
+    
+    // 培训费用
+    @Column(scale=2)
+    private Double trainServiceReturnProfit;
     
     public Long getId() {
         return id;

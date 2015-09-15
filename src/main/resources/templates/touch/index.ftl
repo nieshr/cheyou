@@ -16,7 +16,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
     indexBanner("box","sum",300,5000,"num");
-    searchTextClear(".comserch_text","搜索关键字","#999","#333");
+    //searchTextClear(".comserch_text","搜索关键字","#999","#333");
 });
 
 function checkTime(i)  
@@ -192,7 +192,7 @@ function timer${item_index}()
 <h3 class="indextit mainbox mt10">
 
 <span style="float:left;margin-bottom:1%;">1元抢拍</span>
-<span style="display:block;position:relative;"><a style="margin-left:2%;float:left;right:initial;top:2px;font-size:0.7em;color:red;" href="/touch/info/content/94?mid=12">抢拍细则</a></span>
+<span style="display:block;position:relative;"><a style="margin-left:2%;float:left;right:initial;top:2px;font-size:0.9em;color:red;" href="/touch/info/content/94?mid=12">抢拍细则</a></span>
 <#--<a style="margin-right:57%;float:left;font-size:0.6em;color:red;" href="/touch/info/content/94?mid=12">抢拍细则</a>-->
 <a href="/touch/promotion/miao">+更多</a></h3>
 
@@ -237,7 +237,7 @@ function timer${item_index}()
 
 <h3 class="indextit mainbox">
 <span style="float:left;margin-bottom:1%;">十人团购</span>
-<span style="display:block;position:relative;"><a style="margin-left:2%;float:left;right:initial;top:2px;font-size:0.7em;color:red;" href="/touch/info/content/40?mid=12">团购细则</a></span>
+<span style="display:block;position:relative;"><a style="margin-left:2%;float:left;right:initial;top:2px;font-size:0.9em;color:red;" href="/touch/info/content/40?mid=12">团购细则</a></span>
 <a href="/touch/promotion/tuan">+更多</a></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">
@@ -279,7 +279,7 @@ function timer${item_index}()
 
 <h3 class="indextit mainbox">
 <span  style="float:left;margin-bottom:1%;">百人团购</span>
-<span style="display:block;position:relative;"><a style="margin-left:2%;float:left;right:initial;top:2px;font-size:0.7em;color:red;" href="/touch/info/content/57?mid=12">团购细则</a></span>
+<span style="display:block;position:relative;"><a style="margin-left:2%;float:left;right:initial;top:2px;font-size:0.9em;color:red;" href="/touch/info/content/57?mid=12">团购细则</a></span>
 <a href="/touch/promotion/baituan">+更多</a></h3>
 <section class="indexlist">
   <table style="border-collapse:separate; border-spacing:5px;">

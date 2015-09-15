@@ -260,10 +260,10 @@ function productImgShow(boxid,_name,_menuid,_hover,_width,_height){
 	//加入放大框
 	var _showwidth = 400;
 	var _showheight = 400;
-	var _boxshowstr = "<div class='myboxshowstr' style='position:absolute;top:0;left:"+_width+"px;width:"+_showwidth+"px;height:"+_showheight+"px;border:1px solid #ddd;background:#fff;display:none;overflow:hidden;margin-left:20px;transition-duration:0;'></div>";
+	var _boxshowstr = "<div class='myboxshowstr' style=' position:absolute; z-index:999;top:0;left:"+_width+"px;width:"+_showwidth+"px;height:"+_showheight+"px;border:1px solid #ddd;background:#fff;display:none;overflow:hidden;margin-left:20px;transition-duration:0;'></div>";
 	_box.append(_boxshowstr);
 	var _cha = 150;
-	var _showmovestr = "<div class='myboxmovestr' style='position:absolute;top:0;left:0;width:"+_cha+"px;height:"+_cha+"px;border:1px solid #ccc;background:#fff;z-index:10;opacity:0.5;filter:alpha(Opacity=50);-moz-opacity:0.5;display:none;transition: all 0s ease-in-out 0s;'></div>";
+	var _showmovestr = "<div class='myboxmovestr' style='position:absolute;top:0;left:0;width:"+_cha+"px;height:"+_cha+"px;border:1px solid #ccc;background:#fff;z-index:999;opacity:0.5;filter:alpha(Opacity=50);-moz-opacity:0.5;display:none;transition: all 0s ease-in-out 0s; '></div>";
 	_box.append(_showmovestr);
 	var _showout = _box.find(".myboxshowstr");//放大镜盒子
 	var _mouse = _box.find(".myboxmovestr");//鼠标移动100px框

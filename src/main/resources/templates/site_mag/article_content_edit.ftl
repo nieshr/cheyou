@@ -188,7 +188,7 @@
         <dl>
             <dt>浏览次数</dt>
             <dd>
-                <input name="viewCount" type="text" value="0" value="<#if article??>${article.viewCount!""}</#if>" id="txtClick" class="input txt100" datatype="n" sucmsg=" ">
+                <input name="viewCount" type="text"  value="<#if article??>${article.viewCount!"0"}</#if>" id="txtClick" class="input txt100" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">点击浏览该信息自动+1</span>
             </dd>
         </dl>
