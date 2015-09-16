@@ -171,7 +171,7 @@ public class TdManagerUserController {
 		map.addAttribute("__EVENTARGUMENT", __EVENTARGUMENT);
 		map.addAttribute("__VIEWSTATE", __VIEWSTATE);
 
-		if (null == roleId&&null == __EVENTTARGET) {
+		if (null == roleId&&!("btnLastLoginOrder".equalsIgnoreCase(__EVENTTARGET))) {
 			if (null == keywords || "".equalsIgnoreCase(keywords)) {
 				userPage = tdUserService.findAllOrderBySortIdAsc(page, size);
 			} else {

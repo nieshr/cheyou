@@ -2,7 +2,7 @@
 <div class="pagelist">
   <div class="l-btns">
     <span>显示</span><input name="size" id="size_by_dx" type="text" value="${size!""}" onchange="javascript:setTimeout(__doPostBack('btnSize',''), 0)" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" class="pagenum" onkeydown="return checkNumber(event);"><span>条/页</span>
-    <input name="page" type="hidden" value="${PAGE_DATA.number!'0'}" />
+    <input name="page" id="hiddenPage" type="hidden" value="${PAGE_DATA.number!'0'}" />
   </div>
   <div id="PageContent" class="default"><span>共<#if PAGE_DATA??>${PAGE_DATA.totalElements}</#if>数据,分<#if PAGE_DATA??>${PAGE_DATA.totalPages}</#if>页显示,当前为第<#if PAGE_DATA??>${PAGE_DATA.number+1}</#if>页</span>
         <#if PAGE_DATA??>
@@ -37,5 +37,27 @@
                 <a href="javascript:__doPostBack('btnPage','${PAGE_DATA.number+1}')">下一页&gt;&gt;</a>
             </#if>
         </#if>
+        <span>跳转到</span>
+        <input type="text" id="input_by_dx" onChange="changePage();" value="${page+1}">
+        <span>页</span>
+        <script type="text/javascript">
+            function changePage(){
+                var page = document.getElementById("input_by_dx").value;
+                var zz = /^\d+$/g;
+                if(!zz.test(page)){
+                    alert("请输入一个正确的数字！");
+                    return;
+                }
+                if(page == 0){
+                    alert("不能输入数字0");
+                    return;
+                }
+                if(page>${PAGE_DATA.totalPages}){
+                    alert("输入的页数不能够超过最大页数！");
+                    return;
+                }
+                __doPostBack('btnPage',(page-1))
+            }
+        </script>
   </div>
 </div>
