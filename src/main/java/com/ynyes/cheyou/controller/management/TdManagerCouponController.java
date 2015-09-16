@@ -334,7 +334,7 @@ public class TdManagerCouponController {
         if (null == keywords) {//无搜索
 			if (diysiteId.equals(0L)) {//全部同盟店
 				if (isUsed.equals(0L)) {//两种核销状态								        
-			        couponPage = tdCouponService.findByIsDistributtedTrueOrderBySortIdAsc(page, size);			        
+			        couponPage = tdCouponService.findByIsDistributtedTrueOrderByIdDesc(page, size);			        
 			        map.addAttribute("coupon_page", couponPage);
 				}
 				else{
@@ -350,16 +350,16 @@ public class TdManagerCouponController {
 			}
 			else{
 				if (isUsed.equals(0L)) {//两种核销状态								        
-			        couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdOrderBySortIdAsc(diysiteId, page, size);			        
+			        couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdOrderByIdDesc(diysiteId, page, size);			        
 			        map.addAttribute("coupon_page", couponPage);
 				}
 				else{
 					if (isUsed.equals(1L)) {//已核销
-						couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderBySortIdAsc(diysiteId, page, size);
+						couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderByIdDesc(diysiteId, page, size);
 						map.addAttribute("coupon_page", couponPage);
 					}
 					if (isUsed.equals(2L)) {
-						couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderBySortIdAsc(diysiteId, page, size);
+						couponPage = tdCouponService.findByIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderByIdDesc(diysiteId, page, size);
 						map.addAttribute("coupon_page", couponPage);
 					}
 				}
@@ -431,7 +431,7 @@ public class TdManagerCouponController {
         
         if (null == tdCoupon.getId())
         {
-            tdManagerLogService.addLog("add", "用户修改优惠券", req);
+            tdManagerLogService.addLog("add", "用户添加优惠券", req);
             
             List<TdDiySite> tdDiySiteList = tdDiySiteService.findByIsEnableTrue();
             
@@ -472,12 +472,12 @@ public class TdManagerCouponController {
                          }
                      }
 				}else{
-					TdCoupon coupon = tdCouponService.findByTypeId(typeId);
+					TdCoupon coupon = tdCouponService.findTopByTypeIdAndIsDistributtedFalse(typeId);
                     
                     if (null == coupon)
                     {
                         coupon = new TdCoupon();                        
-                        coupon.setLeftNumber(leftNumbers[0]);
+                        coupon.setLeftNumber(leftNumbers[tdDiySiteList.size()]);
                         coupon.setTypeId(typeId);
                         coupon.setSortId(99L);
                         coupon.setPrice(tdCouponType.getPrice());

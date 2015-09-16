@@ -132,7 +132,7 @@ $(document).ready(function(){
         <#if coupon_list??>
             <option value="" fee="0">不使用优惠券</option>
             <#list coupon_list as item>
-                <option value="${item.id?c}">${item.typeTitle!''}</option>
+                <option value="${item.id?c}" fee="${item.price!''}">${item.typeTitle!''}</option>
             </#list>
         </#if>
     </select>

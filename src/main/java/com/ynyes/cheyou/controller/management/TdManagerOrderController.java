@@ -1021,19 +1021,19 @@ public class TdManagerOrderController {
 			}
             if (null != tdOrder.getOrderTime()) {
             	cell = row.createCell((short) 4);  
-                cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getOrderTime()));
+                cell.setCellValue(new SimpleDateFormat("yyyy-MM-dd").format(tdOrder.getOrderTime()));
 			}           
             if (null != tdOrder.getPayTime()) {
             	cell = row.createCell((short) 5);  
-                cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getPayTime()));
+                cell.setCellValue(new SimpleDateFormat("yyyy-MM-dd").format(tdOrder.getPayTime()));
 			} 
             if (null != tdOrder.getAppointmentTime()) {
             	cell = row.createCell((short) 6);  
-                cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getAppointmentTime()));
+                cell.setCellValue(new SimpleDateFormat("yyyy-MM-dd").format(tdOrder.getAppointmentTime()));
 			} 
             if (null != tdOrder.getServiceTime()) {
             	cell = row.createCell((short) 7);  
-                cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(tdOrder.getServiceTime()));
+                cell.setCellValue(new SimpleDateFormat("yyyy-MM-dd").format(tdOrder.getServiceTime()));
 			} 
             if (null != tdOrder.getTotalPrice()) {
             	row.createCell((short) 8).setCellValue(tdOrder.getTotalPrice());
@@ -1483,14 +1483,14 @@ public class TdManagerOrderController {
                                     	platformService += tdGoods.getSalePrice() * tdGoods.getPlatformServiceReturnRation()* tog.getQuantity();
                 					}
                                     if (null != tdGoods && null != tdGoods.getTrainServiceReturnRation()) {
-                                    	trainService += tdGoods.getCostPrice() * tdGoods.getTrainServiceReturnRation()* tog.getQuantity(); 
+                                    	trainService += tdGoods.getOutFactoryPrice() * tdGoods.getTrainServiceReturnRation()* tog.getQuantity(); 
                 					}
                                     totalSaleprice += tdGoods.getSalePrice()* tog.getQuantity();
                                     totalCostprice += tdGoods.getCostPrice()* tog.getQuantity();
                                 }
                             }
                             if (order.getTypeId().equals(1L)) {
-                            	shopOrderincome = totalSaleprice - totalCostprice - totalPoints - platformService - trainService - totalCash;
+                            	shopOrderincome = totalSaleprice - totalCostprice - platformService - totalCash;
                 			} 
                             
                             final Long totalPointsDely = totalPoints;

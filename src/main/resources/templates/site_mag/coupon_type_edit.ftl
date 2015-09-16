@@ -82,9 +82,9 @@ $(function () {
             <div class="rule-single-select">
             <select name="categoryId" datatype="*" sucmsg=" ">
                 <option value="" <#if !coupon_type?? || !coupon_type.categoryId??>selected="selected"</#if>>请选择</option>
-                <option value="0" <#if coupon_type?? && coupon_type.categoryId == 0>selected="selected"</#if>>普通券</option>
-                <option value="1" <#if coupon_type?? && coupon_type.categoryId == 1>selected="selected"</#if>>满减券</option>
-                <option value="2" <#if coupon_type?? && coupon_type.categoryId == 2>selected="selected"</#if>>单品类券</option>
+                <option value="0" <#if coupon_type?? && coupon_type.categoryId == 0>selected="selected"</#if>>全场通用券 </option>
+                <option value="1" <#if coupon_type?? && coupon_type.categoryId == 1>selected="selected"</#if>>分品类满减券</option>
+                <option value="2" <#if coupon_type?? && coupon_type.categoryId == 2>selected="selected"</#if>>不分品类满减券</option>
             </select>
             </div>
         </dd>
@@ -97,7 +97,7 @@ $(function () {
         </dd>
     </dl>
     <dl>
-        <dt>单品类券限制使用品类</dt>
+        <dt>分品类满减券限制使用品类</dt>
         <dd>
             <div class="rule-single-select">
             <select name="productTypeId" datatype="n0-5">
@@ -123,7 +123,7 @@ $(function () {
     <dt>有效期</dt>
     <dd>
       <input name="totalDays" type="text" value="<#if coupon_type??>${coupon_type.totalDays!""}<#else>1</#if>" class="input small" datatype="*" sucmsg=" ">
-      <span class="Validform_checktip">天</span>
+      <span class="Validform_checktip">天</span> <span class="Validform_checktip">从领用时间开始计算</span>
     </dd>
   </dl>
   
