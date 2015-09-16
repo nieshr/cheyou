@@ -49,7 +49,8 @@
         city: "昆明",
         <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
         required:false
-    }); 
+    });
+     
 });
 </script>
 <script type="text/javascript">
@@ -100,10 +101,13 @@
                     <a class="red" href="javascript:toggleNewAddress();">新增安装信息</a>
                 </th>
                 <td>
-                    <input id="input-address-id" type="hidden" name="addressId" value="" datatype="n" nullmsg="请选择安装信息!"/>
                     <#if user.shippingAddressList?? && user.shippingAddressList?size gt 0>
                         <#list user.shippingAddressList as address>
-                            <a href="javascript:;" onclick="javascript:selectAddress(this, ${address.id?c});">
+                            <#if address.isDefaultAddress?? && address.isDefaultAddress>
+                                <input id="input-address-id" type="hidden" name="addressId" value="${address.id?c}" datatype="n" nullmsg="请选择安装信息!"/>        
+                            <#else>
+                            </#if>
+                            <a href="javascript:;" onclick="javascript:selectAddress(this, ${address.id?c});" <#if address.isDefaultAddress?? && address.isDefaultAddress>class="sel"</#if>>
                                 <p>姓名：${address.receiverName!''}</p>
                            <#--     <p class="p1">收货地址：${address.province!''}${address.city!''}${address.disctrict!''}${address.detailAddress!''}</p>  -->
                                 <p>手机：${address.receiverMobile!''}</p>                              
