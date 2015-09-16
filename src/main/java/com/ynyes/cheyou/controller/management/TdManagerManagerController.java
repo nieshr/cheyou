@@ -244,10 +244,10 @@ public class TdManagerManagerController {
 		}
                
         if (null != tdManagerPermissionList && null !=tdManagerPermissionList.getPermissionlist()  ) {
-        	if(null == tdManagerRole.getPermissionList()){
-        		tdManagerRole.setPermissionList(tdManagerPermissionList.getPermissionlist());
-        	}
-        	else if (tdManagerPermissionList.getPermissionlist().size() < tdManagerRole.getPermissionList().size()) {
+//        	if(null == tdManagerRole.getPermissionList()){
+//        		tdManagerRole.setPermissionList(tdManagerPermissionList.getPermissionlist());
+//        	}
+        	if (tdManagerPermissionList.getPermissionlist().size() < tdManagerRole.getPermissionList().size()) {
     			for(int i = 0; i < tdManagerPermissionList.getPermissionlist().size(); i++){
     				if (null != tdManagerPermissionList.getPermissionlist().get(i).getIsView() && tdManagerPermissionList.getPermissionlist().get(i).getIsView() ) {
     					tdManagerRole.getPermissionList().get(i).setIsView(true);
