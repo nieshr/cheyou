@@ -1525,7 +1525,13 @@ public class TdUserController extends AbstractPaytypeController {
             res.put("message", "该用户不存在");
             return res;
         }
-
+        List<TdShippingAddress> addressList = user.getShippingAddressList();
+        
+        for (TdShippingAddress address : addressList) {
+			address.setIsDefaultAddress(false);
+			tdShippingAddressService.save(address);
+		}
+        
         TdShippingAddress address = new TdShippingAddress();
 
         address.setReceiverName(receiverName);
@@ -1537,6 +1543,7 @@ public class TdUserController extends AbstractPaytypeController {
         address.setReceiverMobile(mobile);
         address.setReceiverCarcode(receiverCarcode); // 增加车牌 by zhangji
         address.setReceiverCartype(receiverCartype); // 车型
+        address.setIsDefaultAddress(true);
 
         user.getShippingAddressList().add(address);
 
@@ -1595,13 +1602,30 @@ public class TdUserController extends AbstractPaytypeController {
                     }
                     // 新增
                     else {
+                    	for (TdShippingAddress address : addressList) {
+								address.setIsDefaultAddress(false);
+								tdShippingAddressService.save(address);
+						}
+                    	tdShippingAddress.setIsDefaultAddress(true);
                         addressList.add(tdShippingAddressService
                                 .save(tdShippingAddress));
                         user.setShippingAddressList(addressList);
                         tdUserService.save(user);
                     }
-
                     return "redirect:/user/address/list";
+                }else if(method.equalsIgnoreCase("default")){
+                	if(null != id){
+                		for (TdShippingAddress address : addressList) {
+							if(address.getId().equals(id)){
+								address.setIsDefaultAddress(true);
+								tdShippingAddressService.save(address);
+							}else{
+								address.setIsDefaultAddress(false);
+								tdShippingAddressService.save(address);
+							}
+						}
+                	}
+                	return "redirect:/user/address/list";
                 }
             }
 

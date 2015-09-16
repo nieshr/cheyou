@@ -569,6 +569,12 @@ public class TdUser {
     public void setCarCode(String carCode) {
         this.carCode = carCode;
     }
+
+	@Override
+	public String toString() {
+		return "TdUser [id=" + id + ", lastLoginTime=" + lastLoginTime + "]";
+	}
+
     
     
 }

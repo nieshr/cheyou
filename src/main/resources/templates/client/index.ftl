@@ -15,8 +15,10 @@
 <script src="/client/js/common.js"></script>
 <script src="/client/js/ljs-v1.01.js"></script>
 <script src="/client/js/Validform_v5.3.2_min.js"></script>
+<script src="/client/js/jquery.SuperSlide.2.1.1.js"></script>
 
 <link rel="shortcut icon" href="/client/images/cheyou.ico" />
+<link href="/client/css/index_smallad_scroll.css" rel="stylesheet" type="text/css" /> 
 <link href="/client/css/style.css" rel="stylesheet" type="text/css" /> 
 <link href="/client/style/cytm.css" rel="stylesheet" type="text/css" /> 
 <link href="/client/style/common.css" rel="stylesheet" type="text/css" />
@@ -473,6 +475,7 @@ $(document).ready(function(){
     <div class="w1200 top1">
         <p class="huanyin">商城访问量：<span class="blue">${site.totalVisits!'0'}</span></p>
         <p class="huanyin">在线人数：<span class="blue">${site.totalOnlines!'1'}</span></p>
+        <p class="huanyin" style="color">&emsp;&emsp;&emsp;&emsp;分站切换：<span class="blue">昆明</span></p>
     
         <div class="wdbgg">
             <#if username??>
@@ -679,18 +682,26 @@ function delItem(id)
         <a id="indexadpre" href="javascript:void(0);">上一页</a>
         <a id="indexadnext" href="javascript:void(0);">下一页</a>
         <div id="indexadbox">
-            <ul id="indexadsum">
-                <li id="threeli01">
-                    <#if big_scroll_ad_list??>
-                        <#list big_scroll_ad_list as item>
-                            <a class="indexadpart" <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
-                                <img src="${item.fileUri!''}" width="758" height="282" />
-                            </a>
-                        </#list>
-                    </#if>
-                </li>
-                <li id="threeli02"></li>
-            </ul>
+            <#if big_scroll_ad_list??>
+                <div id="slideBox" class="slideBox">
+                    <div class="bd">
+                        <ul>
+                            <#list big_scroll_ad_list as item>
+                                <li>
+                                    <a <#if item.typeIsNewWindow?? && item.typeIsNewWindow>target="_blank"</#if> href="${item.linkUri!''}">
+                                        <img src="${item.fileUri!''}" width="758" height="282" />
+                                    </a>
+                                </li>
+                            </#list>
+                        </ul>
+                    </div>
+                    <a class="prev" href="javascript:void(0)"></a>
+                    <a class="next" href="javascript:void(0)"></a>
+                    <script type="text/javascript">
+                        jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true});
+                    </script>
+                </div>
+            </#if>
             <div style="clear:both;"></div>
         </div>
         <div class="index_topcheck" id="topcheck">

@@ -110,6 +110,11 @@ DD_belatedPNG.fix('.,img,background');
                     <td>${address.receiverCarcode!''}</td>          
                     <td>${address.receiverCartype!''}</td>
                     <td>
+                      <#if address.isDefaultAddress?? && address.isDefaultAddress>
+                        <p><a style="color:red;">默认地址</a></p>
+                      <#else>
+                        <p><a href="/user/address/default?id=${address.id?c}">设为默认</a></p>
+                      </#if>
                       <p><a href="/user/address/update?id=${address.id?c}">修改</a></p>
                       <p><a href="/user/address/delete?id=${address.id?c}">删除</a></p>
                     </td>

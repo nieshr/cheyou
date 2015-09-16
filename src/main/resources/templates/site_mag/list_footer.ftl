@@ -1,7 +1,7 @@
 <div class="line20"></div>
 <div class="pagelist">
   <div class="l-btns">
-    <span>显示</span><input name="size" type="text" value="${size!""}" onchange="javascript:setTimeout(__doPostBack('btnSize',''), 0)" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" class="pagenum" onkeydown="return checkNumber(event);"><span>条/页</span>
+    <span>显示</span><input name="size" id="size_by_dx" type="text" value="${size!""}" onchange="javascript:setTimeout(__doPostBack('btnSize',''), 0)" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" class="pagenum" onkeydown="return checkNumber(event);"><span>条/页</span>
     <input name="page" type="hidden" value="${PAGE_DATA.number!'0'}" />
   </div>
   <div id="PageContent" class="default"><span>共<#if PAGE_DATA??>${PAGE_DATA.totalElements}</#if>数据,分<#if PAGE_DATA??>${PAGE_DATA.totalPages}</#if>页显示,当前为第<#if PAGE_DATA??>${PAGE_DATA.number+1}</#if>页</span>
