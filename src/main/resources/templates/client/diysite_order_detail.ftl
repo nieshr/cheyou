@@ -158,6 +158,16 @@ DD_belatedPNG.fix('.,img,background');
           </td>
         </tr>
         <tr>
+            <th>同盟店收入</th>
+            <td>
+                所属同盟店：${order.shopTitle!""}
+                &nbsp;&nbsp;&nbsp;&nbsp;订单收入:￥<#if order.orderIncome??>${order.orderIncome?string('0.00')}<#else>0</#if>
+                &nbsp;&nbsp;&nbsp;&nbsp;商城收入:￥<#if order.platformService??>${order.platformService?string('0.00')}<#else>0</#if>
+                &nbsp;&nbsp;&nbsp;&nbsp;同盟店返利:￥<#if order.rebate??>${order.rebate?string('0.00')}<#else>0</#if>
+                &nbsp;&nbsp;&nbsp;&nbsp;培训费:￥<#if order.trainService??>${order.trainService?string('0.00')}<#else>0</#if>
+            </td>
+        </tr>
+        <tr>
           <th>安装信息</th>
           <td>同盟店：${order.shopTitle!''}&nbsp;&nbsp;&nbsp;&nbsp; 预约时间：<#if order.appointmentTime??>${order.appointmentTime?string("yyyy-MM-dd HH:mm:ss")}</#if>&nbsp;&nbsp;&nbsp;&nbsp;</td>
         </tr>

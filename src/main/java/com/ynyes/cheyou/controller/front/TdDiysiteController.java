@@ -71,23 +71,24 @@ public class TdDiysiteController {
 		
 		TdDiySite tdDiySite = tdDiySiteService.findbyUsername(username);
 		
-		List<TdCoupon> tdCouponlist = tdCouponService.findByDiySiteIdAndIsUsedTrue(tdDiySite.getId());
+//		List<TdCoupon> tdCouponlist = tdCouponService.findByDiySiteIdAndIsUsedTrue(tdDiySite.getId());
 		
-		List<String> mobilelist = new ArrayList<>();
-		
-		for(TdCoupon tdCoupon : tdCouponlist){
-			if (tdCoupon.getTypeTitle().equals("免费洗车券") || tdCoupon.getTypeTitle().equals("免费打蜡券")) {
-				if (mobilelist.contains(tdCoupon.getMobile())) {
-					
-				}else{
-					mobilelist.add(tdCoupon.getMobile());
-				}
-				
-			}
-		}
-		
-		map.addAttribute("member_page", tdUserService.findByMoblieIn(mobilelist, page, SiteMagConstant.pageSize));
-		
+//		List<String> mobilelist = new ArrayList<>();
+//		
+//		for(TdCoupon tdCoupon : tdCouponlist){
+//			if (tdCoupon.getTypeTitle().equals("免费洗车券") || tdCoupon.getTypeTitle().equals("免费打蜡券")) {
+//				if (mobilelist.contains(tdCoupon.getMobile())) {
+//					
+//				}else{
+//					mobilelist.add(tdCoupon.getMobile());
+//				}
+//				
+//			}
+//		}
+//		
+//		map.addAttribute("member_page", tdUserService.findByMoblieIn(mobilelist, page, SiteMagConstant.pageSize));
+		map.addAttribute("member_page", tdCouponService.findByDiySiteIdAndIsUsedTrue(tdDiySite.getId(), page, SiteMagConstant.pageSize));
+		map.addAttribute("diysite", tdDiySite);
 		return "/client/diysite_couponconfirm";
 		
 	}
@@ -107,6 +108,10 @@ public class TdDiysiteController {
 			res.put("msg", "优惠券已使用");
 		}
         if (null != tdCoupon ) {
+        	TdUser tdUser = tdUserService.findByMobileAndIsEnabled(tdCoupon.getMobile());
+        	if (null != tdUser) {
+				tdCoupon.setUserDiysiteId(tdUser.getUpperDiySiteId());
+			}
 			tdCoupon.setIsUsed(true);
 			tdCouponService.save(tdCoupon);
 		}
@@ -117,9 +122,41 @@ public class TdDiysiteController {
 	
 	/**
 	 * @author lc
+	 * @注释：体验订单查看
+	 */
+	@RequestMapping(value = "/experience")
+	public String rebateincome(Integer page,
+	                        Integer timeId,
+	                        String keywords,
+	                        HttpServletRequest req,
+	                        ModelMap map) {
+		String username = (String) req.getSession().getAttribute("diysiteUsername");
+		if (null == username) {
+            return "redirect:/login";
+        }
+        
+        tdCommonService.setHeader(map, req);
+        
+        if (null == page) {
+			page = 0;
+		}
+        
+        TdDiySite tdDiySite = tdDiySiteService.findbyUsername(username);
+        
+        if (null == keywords) {
+        	map.addAttribute("member_page", tdCouponService.findByDiySiteIdAndIsUsedTrue(tdDiySite.getId(), page, SiteMagConstant.pageSize));
+		}
+        else{
+        	map.addAttribute("member_page", tdCouponService.findByDiySiteIdAndIsUsedTrueContainsKeywords(tdDiySite.getId(), keywords, page, SiteMagConstant.pageSize));
+        }
+        map.addAttribute("diysite", tdDiySite);
+        return "/client/diysite_order_experience";
+	}
+	
+	/**
+	 * @author lc
 	 * @注释：返利收入
 	 */
-
 	@RequestMapping(value = "/rebateincome")
 	public String rebateincome(Integer page,
 	                        Integer timeId, 

@@ -87,6 +87,11 @@ public class TdCoupon {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date expireTime;
     
+    // 核销日期
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date confirmTime;
+    
     // 手机号
     @Column
     private String mobile;
@@ -94,6 +99,10 @@ public class TdCoupon {
     // 车牌号
     @Column
     private String carCode;
+    
+    //领取用户所属同盟店id
+    @Column
+    private Long userDiysiteId;
     
     //消费密码
     @Column
@@ -118,6 +127,22 @@ public class TdCoupon {
     public void setTypeId(Long typeId) {
         this.typeId = typeId;
     }
+
+	public Long getUserDiysiteId() {
+		return userDiysiteId;
+	}
+
+	public void setUserDiysiteId(Long userDiysiteId) {
+		this.userDiysiteId = userDiysiteId;
+	}
+
+	public Date getConfirmTime() {
+		return confirmTime;
+	}
+
+	public void setConfirmTime(Date confirmTime) {
+		this.confirmTime = confirmTime;
+	}
 
 	public String getConsumerPassword() {
 		return consumerPassword;

@@ -11,7 +11,7 @@
             <a href="/user/diysite/order/list/4">待服务订单</a>
             <a href="/user/diysite/order/list/5">待评价订单</a>
             <a href="/user/diysite/order/list/6">已完成订单</a>
-          <!--  <a href="/user/order/list/7">取消订单记录</a> -->
+            <a href="/diysite/order/experience">体验订单</a> 
         </div>
     </div>
     <div class="mymember_menu_part">

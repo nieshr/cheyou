@@ -16,6 +16,8 @@
 <link href="/touch/css/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
+var seed=60;    //60秒  
+var t1=null; 
 $(document).ready(function(){
   <!--  searchTextClear(".logintext01","手机号/邮箱","#999","#333");-->
    <!-- searchTextClear(".logintext02","输入验证码","#999","#333"); -->
@@ -24,7 +26,64 @@ $(document).ready(function(){
     $("#form1").Validform({
         tiptype: 3
     });
+    
+     $("#smsCodeBtn").bind("click", function() {  
+        
+        var mob = $('#mobileNumber').val();
+        
+        var re = /^1\d{10}$/;
+        
+        if (!re.test(mob)) {
+            alert("请输入正确的手机号");
+            return;
+        }
+        
+        $("#smsCodeBtn").attr("disabled","disabled"); 
+        
+        $.ajax({  
+            url : "/reg/smscode",  
+            async : true,  
+            type : 'GET',  
+            data : {"mobile": mob},  
+            success : function(data) {  
+                
+                if(data.statusCode == '000000')
+                {  
+                    t1 = setInterval(tip, 1000);  
+                }
+                else
+                {
+                    $("#smsCodeBtn").removeAttr("disabled");
+                }
+            },  
+            error : function(XMLHttpRequest, textStatus,  
+                    errorThrown) {  
+                alert("error");
+            }  
+  
+        });
+        
+    }); 
 });
+
+function enableBtn()
+{  
+    $("#smsCodeBtn").removeAttr("disabled");   
+} 
+
+function tip() 
+{  
+    seed--;  
+    if (seed < 1) 
+    {  
+        enableBtn();  
+        seed = 60;  
+        $("#smsCodeBtn").val('点击获取短信验证码');  
+        var t2 = clearInterval(t1);  
+    } else {  
+        $("#smsCodeBtn").val(seed + "秒后重新获取");  
+    }  
+} 
 </script>
 </head>
 
@@ -42,13 +101,25 @@ $(document).ready(function(){
     <form id="form1" method="post" action="/touch/reg">
         <p style="color: #F00">${error!''}</p>
         <div class="logintext">
-            <input class="logintext01" name="username" type="text" datatype="s6-20" placeholder="手机号/邮箱"/>
+            <input class="logintext01" name="username" type="text" datatype="s6-20" placeholder="/用户名/手机号/邮箱"/>
         </div>
         <div class="logintext">
             <input class="logintext02" name="password" type="password" placeholder="请输入密码" datatype="s6-20"/>
         </div>
         <div class="logintext">
             <input class="logintext02" type="password" placeholder="请输入密码" recheck="password"/>
+        </div>
+        <div style="padding-top:2px;">
+             <p><b style="color: #FF0000;">*</b> 手机验证 </p>
+             <input id="mobileNumber" style="width:90%; padding-left:10%; margin: 10px auto 0; 
+             background: #f5f5f5 url(/touch/images/login_z.png) no-repeat 3% center; background-size:15px;height: 35px;" 
+             placeholder="请输入手机号" name="mobile" type="text" datatype="m"  ajaxurl="/reg/check/mobile"/>
+        </div>
+        <div style="padding-top:2px;">
+             <p><b style="color: #FF0000;">*</b> 短信验证码</p>
+             <input placeholder="验证码" style="width:30%;padding-left:10%; margin: 10px auto 0; background: #f5f5f5 url(/touch/images/login_z.png) no-repeat 3% center; background-size:15px;height: 35px;" type="text" name="smsCode" datatype="s4-4" />
+             <input id="smsCodeBtn" onclick="javascript:;" readOnly="true" class="sub" style="text-align:center;width: 40%; border-radius: 3px; margin-left:45px; background: #1c2b38; color: #fff; line-height: 35px; height: 35px;" value="获取短信验证码" />
+             <div class="clear h15"></div>
         </div>
         <div class="logintext logintext_y">
             <input type="text" class="logintext02" name="code" datatype="s4-4"/>

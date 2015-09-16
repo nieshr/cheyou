@@ -156,7 +156,7 @@ function timer${item_index}()
           
                     <div class="yiyuqiangpailiebiao_rt_lanse">
                         <p>市场价：<del>¥${item.marketPrice?string("0.00")}</del></p>
-                        <p class="lh40"><span class="red">${item.flashSaleSoldNumber!'0'}</span>人抢拍</p>
+                        <p class="lh40"><span class="red">${item.totalclicks!'0'}</span>人抢拍</p>
                         <p class="lh40"><a href="/goods/${item.id?c}?qiang=1">查看详情</a></p>
                     </div>
                     

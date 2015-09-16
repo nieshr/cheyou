@@ -77,7 +77,7 @@ DD_belatedPNG.fix('.,img,background');
     <#include "/client/diysite_user_menu.ftl" />
     <#-- 左侧菜单结束 -->
     
-    <form name="form1" id="form1" action="/diysite/order/couponconfirm" method="POST">  
+    <form name="form1" id="form1" action="/diysite/order/experience" method="POST">  
 <script type="text/javascript">
 var theForm = document.forms['form1'];
 if (!theForm) {
@@ -93,18 +93,11 @@ function __doPostBack(eventTarget, eventArgument) {
         <div class="mymember_info mymember_info02">
             <div class="mymember_order_search"> 
                 <a class="a001" href="/user/diysite/member">优惠券核销</a>
-               
+                <input class="mysub" type="submit" value="查询">
+                <input class="mytext" type="text" name="keywords" onfocus="if(value=='用户名/手机号/车牌号') {value=''}" onblur="if (value=='') {value='用户名/手机号/车牌号'}" value="${keywords!'用户名/手机号/车牌号'}">
                 <div class="clear"></div>
             </div>
-             <section class="loginbox">
-                <p>请输入手机号</p>
-                <input id="mobile" class="text" type="text" datatype="m" errormsg="请填写正确手机号"/>
-                <p>请输入消费密码</p>
-                <input id="password" class="text" type="text" datatype="s4-4" errormsg="请填写4位数字"/>
-                <div class="clear h15"></div>
-                <input id="btn_login" type="button" onclick="couponConfirm();" class="sub" value="确认核销" />
-                <div class="clear h20"></div>
-            </section>
+                         
             <table>
                 <tr class="mymember_infotab_tit01">
                     <th width="60">序号</th>
@@ -164,7 +157,7 @@ function __doPostBack(eventTarget, eventArgument) {
                                 <#if page == member_page.number+1>
                                     <a class="mysel" href="javascript:;">${page}</a>
                                 <#else>
-                                    <a href="/diysite/order/couponconfirm?page=${page-1}">${page}</a>
+                                    <a href="/diysite/order/experience?page=${page-1}">${page}</a>
                                 </#if>
                                 <#assign continueEnter=false>
                             <#else>

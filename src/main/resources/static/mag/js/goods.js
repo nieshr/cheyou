@@ -65,9 +65,9 @@ $(function () {
 	     if (isNaN(p10) || p10=="") { p10 = 0 }
 	     if (isNaN(p11) || p11=="") { p11 = 0 }
 	        
-	     $("#costPrice").val((parseFloat(p3) + parseFloat(p5) + parseFloat(p7) + parseFloat(p8) + parseFloat(p3)*parseFloat(p11)));
-	     $("#shopReturnProfit").val((parseFloat(p4) - parseFloat(p3) - parseFloat(p5) - parseFloat(p7) - parseFloat(p8) - (parseFloat(p3)*parseFloat(p11)) - (parseFloat(p3) * ( parseFloat(p9) + parseFloat(p10)))));
-	     $("#shopReturn").val((parseFloat(p4) * parseFloat(p9)));
-	     $("#trainServiceReturnProfit").val((parseFloat(p3) * parseFloat(p11)));
-	     $("#platformServiceReturnProfit").val((parseFloat(p4) * parseFloat(p10) - parseFloat(p6)));
+	     $("#costPrice").val((parseFloat(p3) + parseFloat(p5) + parseFloat(p7) + parseFloat(p8) + parseFloat(p3)*parseFloat(p11)).toFixed(2));
+	     $("#shopReturnProfit").val((parseFloat(p4) - parseFloat(p3) - parseFloat(p5) - parseFloat(p7) - parseFloat(p8) - (parseFloat(p3)*parseFloat(p11)) - (parseFloat(p3) * ( parseFloat(p9) + parseFloat(p10)))).toFixed(2));
+	     $("#shopReturn").val((parseFloat(p4) * parseFloat(p9)).toFixed(2));
+	     $("#trainServiceReturnProfit").val((parseFloat(p3) * parseFloat(p11)).toFixed(2));
+	     $("#platformServiceReturnProfit").val((parseFloat(p4) * parseFloat(p10) - parseFloat(p6)).toFixed(2));
 	}

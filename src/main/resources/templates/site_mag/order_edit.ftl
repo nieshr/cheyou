@@ -760,14 +760,37 @@
                         </th>
                         <td>${order.payTypeTitle!""}</td>
                     </tr>
-                    <#--
                     <tr>
                         <th>
-                            配送方式
+                            商城收入
                         </th>
-                        <td>${order.deliverTypeTitle!""}</td>
+                        <td><#if order.platformService??>${order.platformService?string('0.00')}<#else>0</#if></td>
                     </tr>
-                    -->
+                    <tr>
+                        <th>
+                            所属同盟店
+                        </th>
+                        <td>${order.shopTitle!""}</td>
+                    </tr>
+                    <tr>
+                        <th>
+                            同盟店所获返利
+                        </th>
+                        <td><#if order.rebate??>${order.rebate?string('0.00')}<#else>0</#if></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            同盟店订单收入
+                        </th>
+                        <td><#if order.orderIncome??>${order.orderIncome?string('0.00')}<#else>0</#if></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            培训费
+                        </th>
+                        <td><#if order.trainService??>${order.trainService?string('0.00')}<#else>0</#if></td>
+                    </tr>
+                    
                 </tbody>
                 </table>
             </dd>
