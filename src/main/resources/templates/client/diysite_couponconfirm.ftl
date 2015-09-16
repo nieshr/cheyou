@@ -108,12 +108,13 @@ function __doPostBack(eventTarget, eventArgument) {
             <table>
                 <tr class="mymember_infotab_tit01">
                     <th width="60">序号</th>
+                    <th width="100">类型</th>
                     <th width="100">用户名</th>
                     <th width="80">手机号</th>
                     <th width="80">车牌号</th>
-                    <th width="80">生日</th>
-                    <th width="90">邮箱</th>
-                    <th width="90">qq</th>
+                    <th width="80">领取日期</th>
+                    <th width="90">核销日期</th>
+                    <th width="90">本店会员</th>
                                                       
                 </tr>
                 <#if member_page??>
@@ -123,22 +124,31 @@ function __doPostBack(eventTarget, eventArgument) {
                                 <p>${item_index+1}</p>
                             </td>  
                             <td>
-                                <p>${item.username!''}</p>
+                                <p>${item.typeTitle!''}</p>
                             </td>  
                             <td>
-                                <p>${item.mobile!''}</p>                              
+                                <p>${item.username!''}</p>                              
                             </td> 
                             <td>
-                                <p>${item.carCode!''}</p>
+                                <p>${item.mobile!''}</p>
                             </td>                                                   
                             <td>
-                                <p>${item.birthday!''}</p>
+                                <p>${item.carCode!''}</p>
                             </td>
                             <td>
-                                <p>${item.email!''}</p>
+                                <p>${item.getTime!''}</p>
                             </td>
                             <td>
-                                <p>${item.qq!''}</p>
+                                <p>${item.confirmTime!''}</p>
+                            </td>
+                            <td>
+                                <#if diysite?? && item.userDiysiteId??>
+                                    <#if item.userDiysiteId == diysite.id>
+                                        <p>是</p>
+                                    <#else>
+                                        <p>否</p>
+                                    </#if>
+                                </#if>                               
                             </td>
                           </tr>
                     </#list>

@@ -315,6 +315,30 @@ public class TdCouponService {
     }
     
     /**
+   	 * @author lc
+   	 * @注释：查询特定同盟店已使用的优惠券
+   	 */
+    public Page<TdCoupon> findByDiySiteIdAndIsUsedTrue(Long diySiteId, int page, int size){
+       	if (null == diySiteId) {
+   			return null;
+   		}
+       	PageRequest pageRequest = new PageRequest(page, size);
+       	return repository.findByDiySiteIdAndIsUsedTrue(diySiteId, pageRequest);
+     }
+    
+    /**
+	 * @author lc
+	 * @注释：包含搜索关键字
+	 */
+    public Page<TdCoupon> findByDiySiteIdAndIsUsedTrueContainsKeywords(Long diySiteId, String keywords, int page, int size){
+    	if (null == diySiteId) {
+   			return null;
+   		}
+    	PageRequest pageRequest = new PageRequest(page, size);
+       	return repository.findByDiySiteIdAndIsUsedTrueAndMobileContainingOrDiySiteIdAndIsUsedTrueAndUsernameContainingOrDiySiteIdAndIsUsedTrueAndCarCodeContaining(diySiteId,keywords,diySiteId,keywords,diySiteId,keywords, pageRequest);
+    }
+    
+    /**
 	 * @author lc
      * @return 
 	 * @注释：根据手机号和消费密码查询优惠券

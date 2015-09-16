@@ -62,6 +62,10 @@ public interface TdCouponRepo extends
     
     List<TdCoupon> findByDiySiteIdAndIsUsedTrue(Long diysiteId);
     
+    Page<TdCoupon> findByDiySiteIdAndIsUsedTrue(Long diysiteId, Pageable page);
+    
+    Page<TdCoupon> findByDiySiteIdAndIsUsedTrueAndMobileContainingOrDiySiteIdAndIsUsedTrueAndUsernameContainingOrDiySiteIdAndIsUsedTrueAndCarCodeContaining(Long diysiteId, String mobile, Long diysiteId1, String username, Long diysiteId2, String carcode, Pageable page);
+    
     TdCoupon findByMobileAndConsumerPassword(String mobile, String password);
     
     TdCoupon findByTypeId(Long typeId);

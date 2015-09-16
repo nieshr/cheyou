@@ -8,7 +8,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ynyes.cheyou.entity.TdSetting;
 import com.ynyes.cheyou.entity.TdUser;
+import com.ynyes.cheyou.entity.TdUserPoint;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserPointService;
@@ -57,7 +59,10 @@ public class TdTouchRegController {
                 {
                     map.addAttribute("error", "用户名已存在");
                 }
-                
+                else if (errCode.equals(3))
+                {
+                    map.addAttribute("error", "短信验证码错误");
+                }
                 map.addAttribute("errCode", errCode);
             }
             return "/touch/reg";
@@ -92,9 +97,9 @@ public class TdTouchRegController {
                       Long shareId,
                       HttpServletRequest request){
         String codeBack = (String) request.getSession().getAttribute("RANDOMVALIDATECODEKEY");
-/*        String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
+        String smsCodeSave = (String) request.getSession().getAttribute("SMSCODE");
         
-        if (null == codeBack || null == smsCodeSave)
+       /* if (null == codeBack || null == smsCodeSave)
         {
             if (null == shareId)
             {
@@ -144,7 +149,7 @@ public class TdTouchRegController {
             }
         }
         
-        user = tdUserService.addNewUser(null, username, password, mobile, email, carCode);
+        user = tdUserService.addNewUser( username, password, mobile, email, carCode);
         
         if (null == user)
         {
@@ -219,6 +224,10 @@ public class TdTouchRegController {
         	return "redirect:/touch/reg?errCode=1";
         }
         
+        if (!smsCodeSave.equalsIgnoreCase(smsCode)) {
+        	return "redirect:/touch/reg?errCode=3";
+		}
+        
         TdUser user = tdUserService.findByUsername(username);
         
         if (null != user)
@@ -226,7 +235,7 @@ public class TdTouchRegController {
             return "redirect:/touch/reg?errCode=2";
         }
         
-        user = tdUserService.addNewUser(username, password, null, null, null);
+        user = tdUserService.addNewUser(username, password, mobile, null, null);
         
         user = tdUserService.save(user);
         
