@@ -475,6 +475,7 @@ $(document).ready(function(){
     <div class="w1200 top1">
         <p class="huanyin">商城访问量：<span class="blue">${site.totalVisits!'0'}</span></p>
         <p class="huanyin">在线人数：<span class="blue">${site.totalOnlines!'1'}</span></p>
+        <p class="huanyin" style="color">&emsp;&emsp;&emsp;&emsp;分站切换：<span class="blue">昆明</span></p>
     
         <div class="wdbgg">
             <#if username??>

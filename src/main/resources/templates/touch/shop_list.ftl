@@ -11,6 +11,7 @@
 body, html,#myMap {width: 100%;height: 100%;margin:0;}  
 </style> 
 <script src="/touch/js/jquery-1.9.1.min.js"></script>
+<script src="/touch/js/ljs-v1.01.js"></script>
 <script src="/touch/js/common.js"></script>
 
 <link href="/touch/css/common.css" rel="stylesheet" type="text/css" />
@@ -22,8 +23,26 @@ body, html,#myMap {width: 100%;height: 100%;margin:0;}
 <script type="text/javascript">
 $(document).ready(function(){
 hideMap();
+<#list shop_list as item>
+    <#if item.showPictures??>
+    var the_one${item_index} = {
+          "boxid":"onebox${item_index}", //最外层id
+          "sumid":"onesum${item_index}", //包裹列表的id
+          "stylename":"onepart",//内部滚动的标签class
+          "boxwidth":60,//外层宽
+          "boxheight":60,//外层高
+          "objwidth":60,//单个个体宽度
+          "objheight":60,//单个个体高度
+          "autogo":true,//是否开启自动滚动
+          "gospeed":2000,//滚动速度
+          "speed":200, // 滚动间隔速度
+          "leftid":"oneleft",//左箭头id
+          "rightid":"oneright"//右箭头id
+        };//the_one END
+        $.ljs_gundong.oneLeft(the_one${item_index});
+        </#if>
+</#list>
 });
-
 function loadMap(x, y, z, address)
 {
     scroll(0,0);
@@ -152,7 +171,17 @@ function hideSerivceStars()
     <#if shop_list??>
         <#list shop_list as item>
         <li>
-            <a class="a1" href="#"><img src="${item.imageUri}" /></a>
+            <div id="onebox${item_index}" style="float:left;">
+                <div id="onesum${item_index}" style="float:left;">
+                    <#if item.showPictures??>
+                        <#list item.showPictures?split(",") as uri>
+                            <#if ""!=uri>
+                                <a class="onepart" href="#"><img src="${item.imageUri}" width="60px;" height="60px;"/></a>
+                            </#if>
+                        </#list>
+                    </#if>
+                </div>
+            </div>
             <p class="p1">${item.title}
               <span id="serviceStars">
                 <#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval lte 0 >
