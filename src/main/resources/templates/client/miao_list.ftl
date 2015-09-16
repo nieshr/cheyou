@@ -103,8 +103,8 @@ function timer${item_index}()
     hh = checkTime(hh);
     mm = checkTime(mm);
     ss = checkTime(ss);
-   // $("#timeLeft${item_index}").html("<span>"+dd+"</span><span>"+hh+"</span><span>"+mm+"</span><span>"+ss+"</span>");
-    $("#timeLeft${item_index}").html(dd+"天"+hh+":"+mm+":"+ss);
+    $("#timeLeft${item_index}").html("<span>"+dd+"</span><span>"+hh+"</span><span>"+mm+"</span><span>"+ss+"</span>");
+    //$("#timeLeft${item_index}").html(dd+"天"+hh+":"+mm+":"+ss);
     var price = ${item.flashSalePrice?string("0.00")} * ts / allts;
     
     //var s_x = Math.round(price).toString();
@@ -148,7 +148,7 @@ function timer${item_index}()
                         <#elseif type?? && type=="passed">
                         <a href="javascript:;">已经结束</a>
                         <#else>
-                        <a href="/order/buy/qiang?gid=${item.id?c}">立即购买</a>
+                        <a href="/order/buy/qiang?gid=${item.id?c}">立即抢拍</a>
                         </#if>
                     </div>
           

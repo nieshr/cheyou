@@ -38,12 +38,17 @@ function loadMap(x, y, z, address)
     map.addOverlay(new BMap.Marker(new BMap.Point(x, y)); // 创建点
     */
     
+    var myIcon = new BMap.Icon("/client/images/map.png", new BMap.Size(23, 25), {
+    offset: new BMap.Size(10, 25), // 指定定位位置
+    imageOffset: new BMap.Size(0, 0 - 0 * 25) // 设置图片偏移
+    });
+    
     var map = new BMap.Map("myMap");
     var point = new BMap.Point(x, y);
     map.centerAndZoom(point, 16);
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
     map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
-    var marker = new BMap.Marker(new BMap.Point(x, y)); // 创建点
+    var marker = new BMap.Marker(new BMap.Point(x, y),{icon: myIcon}); // 创建点
     map.addOverlay(marker);
    // map.addControl(new BMap.ZoomControl());//添加缩放控件
     
