@@ -1638,8 +1638,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                             <div class="clear"></div>
                         </div>
                         <p class="p1">
+                            <a href="/order/buy/tentuan?gid=${item.id?c}">立即参加</a>
                             预付定金:<#if item.groupSalePrice??>￥${item.groupSalePrice?string(0.00)}</#if>元
-                            <a href="/order/buy/tentuan?gid=${item.id?c}">立即参团</a>
                         </p>
                     </div>
                 </#list>
@@ -1936,7 +1936,8 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
         </tr>  
     </table> 
     <div class="clear h30"></div>
-  
+    
+    <#--
     <section class="indextit">
         <h3>自驾游</h3>
         <menu id="tour-menu">
@@ -2025,6 +2026,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     </ul>
     
     <div class="clear h30"></div>
+    -->
     
     <section class="index_botlist">
         <h3>养车宝典</h3>

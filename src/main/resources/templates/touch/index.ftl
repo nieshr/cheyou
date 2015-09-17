@@ -358,6 +358,7 @@ function timer${item_index}()
   </table>
 </section>
 
+<#--
 <h3 class="indextit mainbox mt10"><span>自驾游</span><#if self_drive_product_category??><a href="/touch/list/${self_drive_product_category.id?c}">+更多</a></#if></h3>
 
 <section class="indexlist">
@@ -378,7 +379,7 @@ function timer${item_index}()
     
   </table>
 </section>
-
+-->
 <h3 class="indextit mainbox"><span>特别推荐</span><#--<a href="#">+更多</a>--></h3>
 
 <section class="indexlist">
@@ -415,6 +416,8 @@ function timer${item_index}()
 <footer class="comfoot main">
     <a href="/index">电脑版</a>
     <a href="/touch">触屏版</a>
+    <a href="/touch/info/content/1?mid=12">关于我们</a>
+    <a href="/touch/info/content/1?mid=12">联系我们</a>
 </footer>
 <p class="bottext mainbox">${site.copyright!''}</p>
 <p class="bottext mainbox">${site.icpNumber!''}</p>

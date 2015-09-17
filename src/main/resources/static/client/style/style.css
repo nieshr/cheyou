@@ -1169,7 +1169,22 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
 .team_tit .outtime p {
 	display:none;}
 
-
+.index_team p.p1 {
+    width:94%;
+    padding:5px 3%;
+    color:#333;
+    line-height:25px;
+    background:#FFF;}
+.index_team p.p1 a {
+    display:block;
+    width:109px;
+    height:34px;
+    float:left;
+    background:url(../images/nima_03.png);
+    color:#FFF;
+    right:3%;
+    top:5px;
+    text-indent:-5px;}
 
 
 
