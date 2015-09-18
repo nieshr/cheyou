@@ -75,7 +75,7 @@ public class TdShopController {
             cid = 0;
         }
         
-        String[] cityArray = {"昆明", "曲靖", "大理"};
+        String[] cityArray = {"昆明"};
         
         map.addAttribute("city_list", cityArray);
         map.addAttribute("cid", cid);

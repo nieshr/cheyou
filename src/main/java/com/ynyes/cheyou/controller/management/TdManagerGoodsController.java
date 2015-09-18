@@ -921,6 +921,7 @@ public class TdManagerGoodsController {
         String uris = parsePicUris(hid_photo_name_show360);
 
         tdGoods.setShowPictures(uris);
+        
 
         String type = null;
 

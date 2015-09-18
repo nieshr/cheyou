@@ -44,8 +44,8 @@ $(document).ready(function(){
                   <#if item_index < 10 >
                     <a class="scan" href="/goods/${item.goodsId?c}">
                         <img src="${item.goodsCoverImageUri!''}" title="${item.goodsTitle!''}"/>
-                        <p>${item.goodsTitle!''}</p>
-                        <p class="red">￥<#if item.goodsSalePrice??>￥${item.goodsSalePrice?string("0.00")}</#if></p>
+                        <p class="title">${item.goodsTitle!''}</p>
+                        <p class="red"><#if item.goodsSalePrice??>￥${item.goodsSalePrice?string("0.00")}</#if></p>
                     </a>
                   </#if>
                 </#list>

@@ -36,7 +36,7 @@ a:active{ color:#EA5D0E; text-decoration:none; }
  padding: 0;
  box-shadow: 0 0 5px #333;}
 .logo{ display:block; float:left; width:180px; height:49px; background:url(logo.png) no-repeat center; text-indent:-9999px; overflow:hidden; }
-/*椤堕儴鑿滃崟*/
+/* 椤堕儴鑿滃崟 */
 .nav{ display:block; float:left; height:100%; border-right:2px solid #2A2B2D; }
 	.nav li{ display:block; float:left; margin:0; padding:0px 15px; border-left:2px solid #2A2B2D; color:#fff; cursor:pointer; font-size:16px; height:49px; line-height:42px; vertical-align:middle; }
 	.nav li:hover{ background:#FF0F00; }
@@ -52,7 +52,7 @@ a:active{ color:#EA5D0E; text-decoration:none; }
 	.nav .icon-6{ background-position:-198px -301px; }
 	.nav .icon-7{ background-position:-238px -301px; }
 	.nav li span{ padding-left:5px; line-height:49px; }
-/*椤堕儴鍙宠竟瀵艰埅*/
+/* 椤堕儴鍙宠竟瀵艰埅 */
 .nav-right{ float:right; }
 	.nav-right .icon-info{ float:left; padding:0 10px 0 34px; height:49px; line-height:49px; background:url(skin_icons.png) no-repeat 0 -425px; }
 	.nav-right .icon-info span{ display:block; padding-top:12px; color:#ebebeb; font-size:12px; line-height:1.2em; }
@@ -60,19 +60,19 @@ a:active{ color:#EA5D0E; text-decoration:none; }
 	.nav-right .icon-option i{ display:block; width:20px; height:49px; background:url(skin_icons.png) -242px -301px no-repeat; }
 	.nav-right .icon-option:hover{ background:#EA5D0E; }
 	.nav-right .icon-option:hover .drop-box{ display:block; }
-/*鍙宠竟瀵艰埅鑿滃崟椤�/
+/* 鍙宠竟瀵艰埅鑿滃崟椤 �/
 .drop-box{ display:none; position:absolute; top:49px; right:1px; }
 	.drop-box .arrow{ position:absolute; display:block; top:0; right:15px; width:21px; height:11px; text-indent:-999999px; background:url(skin_icons.png) no-repeat 0 -356px; }
 	.drop-box .drop-item{ margin-top:10px; padding:10px; border:1px solid #b1b1b1; background:#fff; box-shadow:0 0 4px 0 rgba(0, 0, 0, 0.2); }
 	.drop-box .drop-item li a{ display:block; padding:8px 15px; color:#222; font-size:12px; line-height:1em; text-align:center; white-space:nowrap; }
 	.drop-box .drop-item li a:hover{ color:#fff; text-decoration:none; background:#0075C8; }
-/*宸﹁竟瀵艰埅*/
+/* 宸﹁竟瀵艰埅 */
 .main-sidebar{ background: #F0F0F0 url(aside-right-shadow.png) right top repeat-y;}
 	.sidebar-nav .list-box{ margin:0; padding:0; font-size:12px; color:#fff; }
 	.sidebar-nav .list-box .list-group{ display:none; }
 	.sidebar-nav .list-box .list-group h2{ position:relative; display:block; padding:10px 0 10px 25px; font-size:15px; color:#222; line-height:20px; border-top:1px solid #f4f4f4; border-bottom:1px solid #ddd; cursor:pointer;background: #e9e9e9 url(aside-right-shadow.png) right top repeat-y; }
 		.sidebar-nav .list-box .list-group h2 i{ position:absolute; right:0; top:0; display:block; width:34px; height:40px; text-indent:-9999px; background:url(skin_icons.png) -46px -156px no-repeat;}
-	/*鏍戝瀷鑿滃崟*/
+	/* 鏍戝瀷鑿滃崟 */
 		.sidebar-nav .list-box .list-group ul li .item{ position:relative; display:block; padding:10px 0 10px 20px; line-height:20px; height:20px; border-bottom:1px solid #dbdbdb; background:#f6f7f7 url(aside-right-shadow.png) right top repeat-y; cursor:pointer; }
 		.sidebar-nav .list-box .list-group ul li .item:hover,.tree-menu li .item:active{ background:#f1f1f1; text-decoration:none; }
 		.sidebar-nav .list-box .list-group ul li .item:hover span{ display:inherit; color:#EA5D0E; }
@@ -87,9 +87,9 @@ a:active{ color:#EA5D0E; text-decoration:none; }
 		.sidebar-nav .list-box .list-group ul .folder{ display:block; float:left; width:25px; height:20px; background:url(skin_icons.png) 0 -196px no-repeat; }
 		.sidebar-nav .list-box .list-group ul .folder.open{ background:url(skin_icons.png) -40px -196px no-repeat; }
 		.sidebar-nav .list-box .list-group ul .item span{ display:inherit; color:#333; font-weight: 700;}
-/*鍙宠竟妗嗘灦*/
+/* 鍙宠竟妗嗘灦 */
 .main-container{ background: #FFFFFF url(top_pos_bg.png) repeat-x; }
-/*蹇嵎瀵艰埅*/
+/* 蹇嵎瀵艰埅 */
 .btn-paograms{ display:block; position:absolute; bottom:20px; right:20px; z-index:12; cursor:pointer; width:22px; height:22px; background:url(skin_icons.png) 1px -395px no-repeat; }
 	.btn-paograms:hover{ background-position:-39px -395px; }
 .pop-menu{ visibility:hidden; position:absolute; right:20px; bottom:45px; z-index:12; background:#09F; }
@@ -256,14 +256,14 @@ textarea.inputw400_h100{ width:445px; height:100px; }
 		.ltable td.comment .ask .answer b{ color:#090; }
 		.ltable td.comment .ask .answer .time{ display:block; float:right; color:#999; }
 
-/*鍒嗛〉鏍峰紡*/
+/* 鍒嗛〉鏍峰紡 */
 .pagelist{ clear:both; display:block; margin:0 0 20px 0; }
 	.pagelist:after{ clear:both; content:"."; display:block; height:0; visibility:hidden; }
 	.pagelist .l-btns{ display:block; float:left; margin:0 5px 0 0; padding:0 10px; border:1px solid #dbdbdb; height:28px; overflow:hidden; }
 	.pagelist .l-btns span{ font-size:12px; color:#333; line-height:28px; }
 	.pagelist .l-btns .pagenum{ display:inline-block; margin:0 5px; padding:0 5px; border:1px solid #dbdbdb; border-top:0; border-bottom:0; width:30px; height:28px; line-height:28px; font-size:12px; color:#333; text-align:center; vertical-align:top; overflow:hidden; }
 #input_by_dx{display:inline-block; margin:0 5px; padding:0 5px; border:1px solid #dbdbdb; width:30px; height:28px; line-height:28px; font-size:12px; color:#333; text-align:center; vertical-align:top; overflow:hidden; }}
-/*鍥炬枃鍒楄〃*/
+/* 鍥炬枃鍒楄〃 */
 .imglist{ width:100%; overflow:hidden; }
 	.imglist ul{ *padding-bottom:15px; }
 	.imglist ul:after{ clear:both; content:"."; display:block; height:0; visibility:hidden; }
@@ -301,7 +301,7 @@ textarea.inputw400_h100{ width:445px; height:100px; }
 		.imglist ul li .details.nopic h1 span{ color:#333; }
 	.imglist ul li .details.nopic .remark{ display:block; margin:10px 15px; padding:0; height:140px; color:#666; font-size:12px; line-height:20px; text-overflow:ellipsis; overflow:hidden; }
 
-/*鐢熸垚闈欐�鍒楄〃鏍峰紡*/
+/* 鐢熸垚闈欐�鍒楄〃鏍峰紡 */
 .build-box{ margin:0; padding:0; width:290px; height:140px; font-size:12px; text-align:left; overflow:auto; }
 	.build-box .xlist{ line-height:1.8em; }
 	.build-box .xlist span{ margin-right:5px; font-weight:bold; }
@@ -310,7 +310,7 @@ textarea.inputw400_h100{ width:445px; height:100px; }
 /* ==========================鍒楄〃椤垫牱寮�缁撴潫======================== */
 
 /* ==========================缂栬緫椤垫牱寮�寮�======================== */
-/*Tab閫夐」鍗�/
+/* Tab閫夐」鍗 */
 .content-tab-wrap{ height:42px; }
 .content-tab{ z-index:3; left:15px; right:15px; height:41px; background:#fff; border-bottom:1px solid #e2e2e5; }
 	.content-tab-ul-wrap{ position:relative;}
@@ -320,7 +320,7 @@ textarea.inputw400_h100{ width:445px; height:100px; }
 	.content-tab ul li a:hover{ color:#EA5D0E; text-decoration:none; }
 	.content-tab ul li a.selected{ color:#222; background: #FFFFFF url(content_menu_bg.png) repeat-x; height:31px;font-size: 14px;
 font-weight: bold;}
-/*Tab閫夐」鍗″唴瀹�/
+/* Tab閫夐」鍗″唴瀹�  */
 .div-content{ padding:10px 0; font-size:12px; color:#666; }
 	.div-content dl dt{ display:block; float:left; width:130px; text-align:right; color:#333; }
 	.div-content dl dd{ margin-left:150px; }
@@ -331,7 +331,7 @@ font-weight: bold;}
 	.tab-content dl dt{ display:block; float:left; width:150px; text-align:right; color:#333; }
 	.tab-content dl dd{ margin-left:170px; }
 	
-/*涓婁紶鏍峰紡*/
+/* 涓婁紶鏍峰紡 */
 .upload-box{ position:relative; display:inline-block; height:32px; line-height:32px;vertical-align:middle; *display:inline;overflow: hidden;}
 .upload-box .upload-btn{ width: 105px;
 height:32px; 
@@ -351,7 +351,7 @@ padding-top:8px;
 	.upload-box .upload-progress .bar b{ display:block; width:0%; height:4px; font-weight:normal; text-indent:-99em; background:#28B779; overflow:hidden; }
 	.upload-box .upload-progress .close{ position:absolute; display:block; top:1px; right:1px; width:14px; height:14px; text-indent:-99em; background:url(skin_icons.png) -112px -168px no-repeat; cursor:pointer; overflow:hidden; }
 	
-/*鍥剧墖鐩稿唽鏍峰紡*/
+/* 鍥剧墖鐩稿唽鏍峰紡 */
 .photo-list{ margin:0; padding:10px 0 0 0; }
 	.photo-list ul{ margin:0; list-style:none; *display:inline-block; }
 	.photo-list ul:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
@@ -372,7 +372,7 @@ padding-top:8px;
 	.photo-list ul li .img-box1 .remark:hover{ top:0px; }
 	.photo-list ul li .img-box1 .remark i{ color:#fff; font-style:normal; position:relative; line-height:18px; }
 
-/*360搴﹀浘鐗囧睍绀烘牱寮�/
+/* 360搴﹀浘鐗囧睍绀烘牱寮� */
 .photo-list_show360{ margin:0; padding:10px 0 0 0; }
 	.photo-list_show360 ul{ margin:0; list-style:none; *display:inline-block; }
 	.photo-list_show360 ul:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
@@ -393,7 +393,7 @@ padding-top:8px;
 	.photo-list_show360 ul li .img-box1 .remark:hover{ top:0px; }
 	.photo-list_show360 ul li .img-box1 .remark i{ color:#fff; font-style:normal; position:relative; line-height:18px; }
 	
-	/*寮�鍔ㄧ敾鏍峰紡*/
+	/* 寮�鍔ㄧ敾鏍峰紡 */
 .photo-list_open_flv{ margin:0; padding:10px 0 0 0; }
 	.photo-list_open_flv ul{ margin:0; list-style:none; *display:inline-block; }
 	.photo-list_open_flv ul:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
@@ -415,7 +415,7 @@ padding-top:8px;
 	.photo-list_open_flv ul li .img-box1 .remark i{ color:#fff; font-style:normal; position:relative; line-height:18px; }
 	
 	
-/*闄勪欢鍒楄〃鏍峰紡*/
+/* 闄勪欢鍒楄〃鏍峰紡 */
 .attach-list{ margin:0; padding:10px 0 0 0; }
 	.attach-list ul{ margin:0; list-style:none; *display:inline-block; }
 	.attach-list ul:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
@@ -427,7 +427,7 @@ padding-top:8px;
 	.attach-list ul li .info,.attach-list ul li .btns{ display:block; line-height:24px; }
 	.attach-list ul li .btns input{ display:inline-block; padding:0 3px; border:1px solid #d7d7d7; width:40px; height:20px; line-height:18px; color:#666; font-size:12px; background:#fff; vertical-align:middle; }
 	
-	/*瑙嗛鍒楄〃鏍峰紡*/
+	/* 瑙嗛鍒楄〃鏍峰紡 */
 .video-list{ margin:0; padding:10px 0 0 0; }
 	.video-list ul{ margin:0; list-style:none; *display:inline-block; }
 	.video-list ul:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
@@ -439,7 +439,7 @@ padding-top:8px;
 	.video-list ul li .info,.video-list ul li .btns{ display:block; line-height:24px; }
 	.video-list ul li .btns input{ display:inline-block; padding:0 3px; border:1px solid #d7d7d7; width:40px; height:20px; line-height:18px; color:#666; font-size:12px; background:#fff; vertical-align:middle; }
 	
-/*琛ㄦ牸鏍峰紡*/
+/* 琛ㄦ牸鏍峰紡 */
 .border-table{ border-width:1px; margin:0; background:#fff; }
 	.border-table th{ margin:0; padding:2px 10px; line-height:26px; height:28px; border:1px solid #e1e1e1; vertical-align:middle; white-space:nowrap; word-break:keep-all; }
 	.border-table td{ margin:0; padding:2px 10px; line-height:26px; height:28px; border:1px solid #e1e1e1; vertical-align:middle; white-space:nowrap; word-break:keep-all; }
@@ -455,7 +455,7 @@ padding-top:8px;
 	.border-table td .folder-open{ display:inline-block; margin-right:2px; width:20px; height:20px; background:url(skin_icons.png) -40px -196px no-repeat; vertical-align:middle; text-indent:-999em; }
 	.border-table td .folder-line{display:inline-block; margin-right:2px; width:20px; height:20px; background:url(skin_icons.png) -80px -196px no-repeat; vertical-align:middle; text-indent:-999em; }
 
-/*璁㈠崟鐘舵�鏍峰紡*/
+/* 璁㈠崟鐘舵�鏍峰紡 */
 .order-flow{ margin:0 auto; padding:0; font-size:12px; font-weight:normal; padding-bottom:4px; }
     .order-flow-left, .order-flow-arrive, .order-flow-wait, .order-flow-right-arrive, .order-flow-right-wait{ margin:0; padding:0; background: url(order_speed.gif) no-repeat scroll 0 0; float:left; font-family:Arial; line-height:16px; text-align:center; width:140px; }
     .order-flow div span{ margin:0; padding:0; background:none repeat scroll 0 0 #fff; display:block;}
@@ -467,7 +467,7 @@ padding-top:8px;
     .order-flow-right-wait{ background-position:0 -60px; color:#878787; }
     .order-flow-input{ display:block; margin:2px auto; padding:0; width:18px; height:18px; text-indent:-999px; cursor:inherit; overflow:hidden;}
 
-/*鎸夐挳鏍峰紡*/
+/* 鎸夐挳鏍峰紡 */
 .td-input{ display:inline-block; padding:0 3px; border:1px solid #d7d7d7; height:20px; line-height:18px; color:#666; font-size:12px; background:#fff; vertical-align:middle; }
 .btn{ background:#EA5D0E; border:none; color:#fff; cursor:pointer; display:inline-block; font-family:"Microsoft Yahei"; font-size:12px; height:32px; line-height:32px; margin:0 1px 0 0; padding:0 20px; }
 	.btn:hover{ background:#BE4A0C; }
@@ -485,7 +485,7 @@ padding-top:8px;
 .img-btn{ display:inline-block; margin:0 2px; width:14px; height:14px; text-indent:-99em; text-decoration:none; background:url(skin_icons.png) no-repeat; vertical-align:middle; cursor:pointer; overflow:hidden; }
 	.img-btn.edit{ background-position:-140px -112px; }
 	.img-btn.del{ background-position:-84px -28px; }
-/*澶氶」鍗曢�*/
+/* 澶氶」鍗曢� */
 .multi-radio{ display:inline-block; vertical-align:middle; *display:inline; }
 	.multi-radio:after{ clear:both; content:"."; display:block; height:0; visibility:hidden; }
 	.multi-radio .boxwrap{ display:inline-block; vertical-align:middle; *display:inline;}
@@ -493,7 +493,7 @@ padding-top:8px;
 	.multi-radio a:hover{ background:#d4d4d4; text-decoration:none; }
 	.multi-radio a:active{ text-decoration:none; }
 	.multi-radio a.selected{ background:#0075C8; border-color:#0075C8; color:#fff; }
-/*鍗曢」閫夋嫨*/
+/* 鍗曢」閫夋嫨 */
 .single-checkbox{ display:inline-block; vertical-align:middle; cursor:pointer; *display:inline; }
 	.single-checkbox a,.single-checkbox a:visited{ display:inline-block; border:1px solid #7C7C7C; background:#7C7C7C; width:80px; vertical-align:middle; text-decoration:none; }
 	.single-checkbox a i{ display:block; width:50%; height:28px; line-height:28px; font-style:normal; background:#fff; color:#333; text-align:center; }
@@ -502,7 +502,7 @@ padding-top:8px;
 	.single-checkbox a.selected{ border:1px solid #EA5D0E; background:#EA5D0E; }
 	.single-checkbox a.selected i.on{ display:block; }
 	.single-checkbox a.selected i.off{ display:none; }
-/*澶氶」閫夋嫨*/
+/* 澶氶」閫夋嫨 */
 .multi-checkbox{ display:inline-block; vertical-align:middle; }
 	.multi-checkbox:after{ clear:both; content:"."; display:block; height:0; visibility:hidden; }
 	.multi-checkbox .boxwrap{ display:inline-block; vertical-align:middle; }
@@ -511,7 +511,7 @@ padding-top:8px;
 	.multi-checkbox a:active{ text-decoration:none; }
 	.multi-checkbox a.selected{ background:#0075C8; border-color:#0075C8; color:#fff; }
 	.multi-checkbox a:last-child{ /*border-right:1px solid #d4d4d4;*/ }
-/*澶氶」閫夋嫨PORP*/
+/* 澶氶」閫夋嫨PORP */
 .multi-porp{ }
 	.multi-porp ul li{ float:left; position:relative; margin:0 8px 8px 0; padding:1px; line-height:20px; vertical-align:middle; }
 	.multi-porp ul li a{ display:block; padding:4px 10px; color:#666; min-width:10px; width:auto !important;  text-align:center; text-decoration:none; white-space:nowrap; border:1px solid #ccc; cursor:pointer; }
@@ -519,7 +519,7 @@ padding-top:8px;
 	.multi-porp ul li.sys{ background:#FFFFD0; }
 	.multi-porp ul li.selected a{ margin:-1px; color:#333; border:2px solid #0075C8; }
 	.multi-porp ul li.selected i{ display:block; background-position:-169px -113px; }
-/*涓嬫媺鑿滃崟*/
+/* 涓嬫媺鑿滃崟 */
 .single-select{ position:relative; display:inline-block; margin-right:5px; vertical-align:middle; cursor:pointer; *float:left; }
 	.single-select .boxwrap{ display:inline-block; vertical-align:middle; }
 	.single-select .select-tit{ position:relative; display:block; padding:5px 38px 5px 10px; min-width:40px; line-height:20px; height:20px; border:solid 1px #dbdbdb; text-decoration:none; background:#fff; white-space:nowrap; word-break:break-all; }
@@ -538,7 +538,7 @@ padding-top:8px;
 	/*.page-footer .btn-list .absbg{ position:absolute; left:0; top:0; width:100%; height:100%; background:#fff; filter:alpha(opacity=80); opacity:0.8; }*/
 /* ==========================缂栬緫椤垫牱寮�缁撴潫======================== */
 
-/*=====================浠ヤ笅閮ㄥ垎鏄疺alidform蹇呴』鐨�===================*/
+/* =====================浠ヤ笅閮ㄥ垎鏄疺alidform蹇呴』鐨�=================== */
 .Validform_checktip{ margin-left:8px; line-height:20px; height:20px; overflow:hidden; color:#999; font-size:12px; }
 .Validform_right{ color:#22A011; padding-left:20px; background:url(valid_icons.png) no-repeat -40px -20px; }
 .Validform_wrong{ color:#EA5D0E; padding-left:20px; white-space:nowrap; background:url(valid_icons.png) no-repeat -20px -40px; }
@@ -551,7 +551,7 @@ padding-top:8px;
 #Validform_msg a.Validform_close:link,#Validform_msg a.Validform_close:visited{ line-height:30px; position:absolute; right:10px; top:0px; color:#fff; text-decoration:none; }
 #Validform_msg a.Validform_close:hover{color:#ccc;}
 #Validform_msg .Validform_info{padding:10px;border:1px solid #bbb; border-top:none; text-align:left;}
-/*=====================浠ヤ笂閮ㄥ垎鏄疺alidform蹇呴』鐨�===================*/
+/* =====================浠ヤ笂閮ㄥ垎鏄疺alidform蹇呴』鐨�=================== */
 
 .picBox 
 {

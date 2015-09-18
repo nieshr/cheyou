@@ -130,7 +130,7 @@
 .mianfeilingqu_left img{ position: absolute; z-index: 1;width: 610px;  height: 350px; float: left;}
 
 /***************************/
-.mendian{ margin-top:10px; width:208px; height:46px; margin-left:630px; position:absolute; z-index:9999;}
+.mendian{ margin-top:10px; width:208px; height:46px; margin-left:630px; position:absolute; z-index:9;}
 .mendian p{float:right;}
 .linquanniu{ background:#ff4454;position:absolute; z-index:9999; height:40px; width:150px; font-size:16px;margin-top:265px; margin-left:700px; line-height:40px; text-align:center; border-radius:13px;}
 .linquanniu a{color:#FFF;}

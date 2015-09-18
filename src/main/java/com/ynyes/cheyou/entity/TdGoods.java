@@ -1235,8 +1235,17 @@ public class TdGoods {
     public void setTotalCollects(Long totalCollects) {
         this.totalCollects = totalCollects;
     }
+    
 
-    @Override
+    public Double getInstallationPrice() {
+		return installationPrice;
+	}
+
+	public void setInstallationPrice(Double installationPrice) {
+		this.installationPrice = installationPrice;
+	}
+
+	@Override
 	public String toString() {
 		return "TdGoods [id=" + id + ", productId=" + productId + ", name=" + name + "]";
 	}
