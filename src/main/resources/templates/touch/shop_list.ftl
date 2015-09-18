@@ -176,7 +176,7 @@ function hideSerivceStars()
                     <#if item.showPictures??>
                         <#list item.showPictures?split(",") as uri>
                             <#if ""!=uri>
-                                <a class="onepart" href="#"><img src="${item.imageUri}" width="60px;" height="60px;"/></a>
+                                <a class="onepart" href="#"><img src="${uri}" width="60px;" height="60px;"/></a>
                             </#if>
                         </#list>
                     </#if>
