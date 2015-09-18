@@ -52,8 +52,8 @@ function pointChange(self, point, total)
     var payTypeFee = parseFloat($("#payTypeFee").html());
     var couponFee = parseFloat($("#couponFee").html());
     
-    var p = parseInt(point);
-    var t = parseInt(total);
+    var p = parseFloat(point);
+    var t = parseFloat(total);
     
     if (p > t)
     {

@@ -86,6 +86,11 @@ public class TdUser {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date lastLoginTime;
 	
+	// 上次抢拍时间
+    @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date lastFlashBuyTime;
+	
 	// 身份证号码
 	@Column
 	private String identity;
@@ -570,7 +575,15 @@ public class TdUser {
         this.carCode = carCode;
     }
 
-	@Override
+	public Date getLastFlashBuyTime() {
+        return lastFlashBuyTime;
+    }
+
+    public void setLastFlashBuyTime(Date lastFlashBuyTime) {
+        this.lastFlashBuyTime = lastFlashBuyTime;
+    }
+
+    @Override
 	public String toString() {
 		return "TdUser [id=" + id + ", lastLoginTime=" + lastLoginTime + "]";
 	}

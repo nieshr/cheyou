@@ -161,8 +161,11 @@ public class TdOrderController extends AbstractPaytypeController {
         }
 
         if (null == type || null == gid) {
+            map.addAttribute("error", "商品或类型不能为空");
             return "/client/error_404";
         }
+        
+        TdUser tdUser = tdUserService.findByUsername(username);
 
         List<TdGoodsDto> tdGoodsList = new ArrayList<TdGoodsDto>();
 
@@ -180,7 +183,6 @@ public class TdOrderController extends AbstractPaytypeController {
             // tdCouponService.findByUsernameAndIsUseable(username));
 
             // 积分限额
-            TdUser tdUser = tdUserService.findByUsername(username);
             if (null != tdUser) {
                 if (null != tdUser.getTotalPoints()) {
                     if (goods.getPointLimited() > tdUser.getTotalPoints()) {
@@ -245,9 +247,13 @@ public class TdOrderController extends AbstractPaytypeController {
             TdGoods goods = tdGoodsService.findOne(gid);
 
             // 检查是否在秒杀
-            if (null == goods || null == goods.getIsOnSale()
+            if (null == goods 
+                    || null == goods.getIsOnSale()
                     || !goods.getIsOnSale()
-                    || !tdGoodsService.isFlashSaleTrue(goods)) {
+                    || !tdGoodsService.isFlashSaleTrue(goods)
+                    || null == tdUser
+                    || (null != tdUser.getLastFlashBuyTime() && tdUser.getLastFlashBuyTime().after(new Date()))) {
+                
                 return "/client/error_404";
             }
 
@@ -277,6 +283,7 @@ public class TdOrderController extends AbstractPaytypeController {
             if (null == goods || null == goods.getIsOnSale()
                     || !goods.getIsOnSale()
                     || !tdGoodsService.isGroupSaleTrue(goods)) {
+                map.addAttribute("error", "没有开启十人团或已结束");
                 return "/client/error_404";
             }
 
@@ -296,10 +303,11 @@ public class TdOrderController extends AbstractPaytypeController {
             // 购买商品
             TdGoods goods = tdGoodsService.findOne(gid);
 
-            // 检查是否在十人团
+            // 检查是否在百人团
             if (null == goods || null == goods.getIsOnSale()
                     || !goods.getIsOnSale()
                     || !tdGoodsService.isGroupSaleHundredTrue(goods)) {
+                map.addAttribute("error", "没有开启百人团或已结束");
                 return "/client/error_404";
             }
 
@@ -1881,7 +1889,6 @@ public class TdOrderController extends AbstractPaytypeController {
                 request.getInputStream()));
 
         String line = null;
-        String result = "";
         String return_code = null;
         String result_code = null;
         String noncestr = null;
@@ -1898,8 +1905,6 @@ public class TdOrderController extends AbstractPaytypeController {
                 } else if (line.contains("<result_code>")) {
                     result_code = line.replaceAll("<result_code><\\!\\[CDATA\\[", "").replaceAll("\\]\\]></result_code>", "");
                 }
-
-                result += line + "\r\n";
             }
             
             System.out.println("Sharon: notify return_code: " + return_code);
@@ -2403,24 +2408,46 @@ public class TdOrderController extends AbstractPaytypeController {
      *            订单
      */
     private void afterPaySuccess(TdOrder tdOrder) {
-        if (null == tdOrder) {
+        if (null == tdOrder) 
+        {
             return;
         }
 
         // 用户
         TdUser tdUser = tdUserService.findByUsername(tdOrder.getUsername());
+        
+        if (null == tdUser)
+        {
+            return;
+        }
 
         /**
          * @author lc
          * @注释：根据用户所属同盟店id查询同盟店
          */
         TdDiySite tdShop = null;
+        
         if (null != tdUser.getUpperDiySiteId()) {
             // 同盟店
             tdShop = tdDiySiteService.findOne(tdUser.getUpperDiySiteId());
         } else {
             // 同盟店
             tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
+        }
+        
+        // 设置抢购最后时间
+        if (null != tdOrder.getTypeId() && tdOrder.getTypeId().equals(3L))
+        {
+            Date nextTime = new Date();
+
+            Calendar calendar = Calendar.getInstance();
+
+            calendar.setTime(nextTime);
+
+            calendar.add(Calendar.DATE, 7); 
+            
+            tdUser.setLastFlashBuyTime(calendar.getTime());
+            tdUser = tdUserService.save(tdUser);
         }
 
         if (tdOrder.getStatusId().equals(2L)

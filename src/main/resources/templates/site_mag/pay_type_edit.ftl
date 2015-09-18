@@ -130,28 +130,28 @@
   <dl>
     <dt>描述说明</dt>
     <dd>
-      <textarea name="info" rows="2" cols="20" class="input normal"><#if pay_type??>${pay_type.info}</#if></textarea>
+      <textarea name="info" rows="2" cols="20" class="input normal"><#if pay_type??>${pay_type.info!''}</#if></textarea>
       <span class="Validform_checktip">支付方式的描述说明，支持HTML代码</span>
     </dd>
   </dl>
   <dl>
     <dt>代码(例如:CEB,CMBC)建议开发人员设置</dt>
     <dd>
-      <textarea name="code" rows="2" cols="20" class="input normal"><#if pay_type??>${pay_type.info}</#if></textarea>
+      <textarea name="code" rows="2" cols="20" class="input normal"><#if pay_type??>${pay_type.info!''}</#if></textarea>
       <span class="Validform_checktip">(例如:CEB、CMBC)建议开发人员设置</span>
     </dd>
   </dl>
   <dl>
     <dt>活动标题</dt>
     <dd>
-      <textarea name="tdTitle" rows="2" cols="20" class="input normal"><#if pay_type??>${pay_type.info}</#if></textarea>
+      <textarea name="tdTitle" rows="2" cols="20" class="input normal"><#if pay_type??>${pay_type.info!''}</#if></textarea>
       <span class="Validform_checktip">和支付渠道做活动时支付画面的引导标题(10个字以内,例如:满减10元、95折优惠、……)</span>
     </dd>
   </dl>
   <dl>
     <dt>活动内容</dt>
     <dd>
-      <textarea name="tdContents" rows="2" cols="20" class="input normal"><#if pay_type??>${pay_type.info}</#if></textarea>
+      <textarea name="tdContents" rows="2" cols="20" class="input normal"><#if pay_type??>${pay_type.info!''}</#if></textarea>
       <span class="Validform_checktip">和支付渠道做活动时支付画面的引导消息(100个字以内,例如:即日起使用XX支付满100元立减10元、使用XX支付享95折优惠、……)</span>
     </dd>
   </dl>

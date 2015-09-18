@@ -1599,7 +1599,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
     
     <section class="indextit">
         <h3>十人团购</h3>
-        <a class="a1" href="/info/content/40?mid=12">团购细则</a>
+        <a class="a1" href="/info/content/94?mid=12">团购细则</a>
         <menu id="tuan-menu">
             <a class="sel" href="javascript:;" onmouseenter="javascript:tuanPageChang(0);">本期团购</a>
             <a href="javascript:;" onmouseenter="javascript:tuanPageChang(1);">下期预告</a>

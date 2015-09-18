@@ -111,6 +111,7 @@
                 </td>
             </tr>
         </table>
+        <p class="red">请填写真实信息，以便到店核实，信息不符的，同盟店有权拒绝服务</p>
         <div id="addressForm" class="hide">
             <table class="mymember_address">
                   <tbody>

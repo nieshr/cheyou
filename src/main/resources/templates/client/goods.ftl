@@ -722,10 +722,10 @@ function checkTime(i)
         </tr>
         <tr>
           <td colspan="2">
-            <#if qiang?? && goods.flashSaleLeftNumber?? && goods.groupSaleLeftNumber??>
-                <#if qiang==1 && goods.flashSaleLeftNumber gt 0>
-                     <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id?c}" class="sub sub01">立即购买</a>
-                <#elseif qiang!=1 && goods.groupSaleLeftNumber gt 0>
+            <#if qiang?? && goods.flashSaleLeftNumber??>
+                <#if qiang==1 && goods.flashSaleLeftNumber gt 0 && (!user?? || !user.lastFlashBuyTime?? || user.lastFlashBuyTime < .now)>
+                     <a id="addCart" href="/order/buy/qiang?gid=${goods.id?c}" class="sub sub01">立即购买</a>
+                <#elseif qiang!=1>
                      <a id="addCart" href="/order/buy/<#if 1==qiang>qiang<#elseif 100==qiang>baituan<#else>tentuan</#if>?gid=${goods.id?c}" class="sub sub01">立即购买</a>
                 <#else>
                      <a id="addCart" href="#" class="sub sub01">库存不足</a>   
