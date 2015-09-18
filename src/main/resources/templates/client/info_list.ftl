@@ -80,7 +80,9 @@ $(function(){
         <a href="/info/list/11?catId=14"><img src="/client/images/content/essay5.jpg"  width="65" height="65"/><p>真皮</p></a>
         <a href="/info/list/11?catId=15"><img src="/client/images/content/essay6.jpg"  width="65" height="65"/><p>电器</p></a>
         <a href="/info/list/11?catId=17"><img src="/client/images/content/essay7.jpg"  width="65" height="65"/><p>改装</p></a>
+        <#--
         <a href="/info/list/11?catId=16"><img src="/client/images/content/essay8.jpg"  width="65" height="65"/><p>自驾</p></a>
+        -->
         <div class="clear"></div>
     </section>
   

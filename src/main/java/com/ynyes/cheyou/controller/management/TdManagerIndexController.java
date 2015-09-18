@@ -204,7 +204,7 @@ public class TdManagerIndexController {
 	                }    		
 				
 			}
-			change(rootMenuList, rootmenuList);
+			//change(rootMenuList, rootmenuList);
 			if (null != rootMenuList && rootMenuList.size() > 0){
 				map.addAttribute("root_menu_list", rootMenuList);
 		    }
