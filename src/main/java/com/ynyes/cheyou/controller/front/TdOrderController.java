@@ -383,6 +383,7 @@ public class TdOrderController extends AbstractPaytypeController {
         }
 
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+        
 
         if (null == user) {
             return "/client/error_404";
@@ -390,6 +391,7 @@ public class TdOrderController extends AbstractPaytypeController {
 
         String buyType = (String) req.getSession().getAttribute("buyType");
 
+        
         if (null == buyType) {
             return "/client/error_404";
         }
@@ -646,7 +648,7 @@ public class TdOrderController extends AbstractPaytypeController {
 
                     // 不存在该商品或已下架或已不在秒杀，则跳过
                     if (null == goods || !goods.getIsOnSale()
-                            || !tdGoodsService.isGroupSaleTrue(goods)) {
+                            || !tdGoodsService.isGroupSaleHundredTrue(goods)) {
                         return "/client/error_404";
                     }
 

@@ -581,7 +581,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>工时费</dt>
             <dd>
-                <input id="installationPrice" name="installationPrice" type="text" value="<#if goods?? && goods.installationPrice??>${goods.installationPrice!''}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <input id="installationPrice" name="installationPrice" type="text" value="<#if goods?? && goods.installationPrice??>${goods.installationPrice?c!'0'}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">商品施工费用</span>
             </dd>
         </dl>
