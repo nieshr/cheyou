@@ -60,7 +60,7 @@ a:active{ color:#EA5D0E; text-decoration:none; }
 	.nav-right .icon-option i{ display:block; width:20px; height:49px; background:url(skin_icons.png) -242px -301px no-repeat; }
 	.nav-right .icon-option:hover{ background:#EA5D0E; }
 	.nav-right .icon-option:hover .drop-box{ display:block; }
-/* 鍙宠竟瀵艰埅鑿滃崟椤 �/
+/*  鍙宠竟瀵艰埅鑿滃崟椤� */
 .drop-box{ display:none; position:absolute; top:49px; right:1px; }
 	.drop-box .arrow{ position:absolute; display:block; top:0; right:15px; width:21px; height:11px; text-indent:-999999px; background:url(skin_icons.png) no-repeat 0 -356px; }
 	.drop-box .drop-item{ margin-top:10px; padding:10px; border:1px solid #b1b1b1; background:#fff; box-shadow:0 0 4px 0 rgba(0, 0, 0, 0.2); }
