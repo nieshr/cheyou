@@ -1186,5 +1186,6 @@ menu.leftpart a { display:inline-block; white-space:nowrap; font-size:12px; marg
     top:5px;
     text-indent:-5px;}
 
-
+/* 文章页浏览记录*/
+.column_left .hot_list a .title{height: 60px;overflow: hidden;}
 
