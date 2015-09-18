@@ -507,7 +507,55 @@ public class TdGoods {
         this.name = name;
     }
 
-    public String getTitle() {
+    public Double getOtherPrice() {
+		return otherPrice;
+	}
+
+	public void setOtherPrice(Double otherPrice) {
+		this.otherPrice = otherPrice;
+	}
+
+	public Long getCommentReturnPoints() {
+		return commentReturnPoints;
+	}
+
+	public void setCommentReturnPoints(Long commentReturnPoints) {
+		this.commentReturnPoints = commentReturnPoints;
+	}
+
+	public Double getShopReturnProfit() {
+		return shopReturnProfit;
+	}
+
+	public void setShopReturnProfit(Double shopReturnProfit) {
+		this.shopReturnProfit = shopReturnProfit;
+	}
+
+	public Double getShopReturn() {
+		return shopReturn;
+	}
+
+	public void setShopReturn(Double shopReturn) {
+		this.shopReturn = shopReturn;
+	}
+
+	public Double getPlatformServiceReturnProfit() {
+		return platformServiceReturnProfit;
+	}
+
+	public void setPlatformServiceReturnProfit(Double platformServiceReturnProfit) {
+		this.platformServiceReturnProfit = platformServiceReturnProfit;
+	}
+
+	public Double getTrainServiceReturnProfit() {
+		return trainServiceReturnProfit;
+	}
+
+	public void setTrainServiceReturnProfit(Double trainServiceReturnProfit) {
+		this.trainServiceReturnProfit = trainServiceReturnProfit;
+	}
+
+	public String getTitle() {
         return title;
     }
 

@@ -581,7 +581,7 @@ function del_goods_comb(obj) {
         <dl>
             <dt>工时费</dt>
             <dd>
-                <input id="installationPrice" name="installationPrice" type="text" value="<#if goods?? && goods.installationPrice??>${goods.installationPrice?string('0.00')}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
+                <input id="installationPrice" name="installationPrice" type="text" value="<#if goods?? && goods.installationPrice??>${goods.installationPrice!''}<#else>0</#if>" class="input normal" datatype="n" sucmsg=" ">
                 <span class="Validform_checktip">商品施工费用</span>
             </dd>
         </dl>
@@ -661,28 +661,28 @@ function del_goods_comb(obj) {
         <dl>
             <dt>同盟店利润</dt>
             <dd>
-                <input disabled="disabled" id="shopReturnProfit" name="shopReturnProfit" type="text" value="<#if goods?? && goods.shopReturnProfit??>${goods.shopReturnProfit?string("0.00")}<#else>0</#if>" class="input normal" >
+                <input  readonly="true" id="shopReturnProfit" name="shopReturnProfit" type="text" value="<#if goods?? && goods.shopReturnProfit??>${goods.shopReturnProfit?string("0.00")}<#else>0</#if>" class="input normal" >
                 <span class="Validform_checktip">销售价-成本价-批发价(同盟店返利比+平台服务比)</span>
             </dd>
         </dl>
         <dl>
             <dt>同盟返利</dt>
             <dd>
-                <input disabled="disabled" id="shopReturn" name="shopReturn" type="text" value="<#if goods?? && goods.shopReturn??>${goods.shopReturn?string("0.00")}<#else>0</#if>" class="input normal" >
+                <input readonly="true" id="shopReturn" name="shopReturn" type="text" value="<#if goods?? && goods.shopReturn??>${goods.shopReturn?string("0.00")}<#else>0</#if>" class="input normal" >
                 <span class="Validform_checktip">销售价*同盟店返利比</span>
             </dd>
         </dl>
         <dl>
             <dt>培训费用</dt>
             <dd>
-                <input disabled="disabled" id="trainServiceReturnProfit" name="trainServiceReturnProfit" type="text" value="<#if goods?? && goods.trainServiceReturnProfit??>${goods.trainServiceReturnProfit?string("0.00")}<#else>0</#if>" class="input normal" >
+                <input readonly="true" id="trainServiceReturnProfit" name="trainServiceReturnProfit" type="text" value="<#if goods?? && goods.trainServiceReturnProfit??>${goods.trainServiceReturnProfit?string("0.00")}<#else>0</#if>" class="input normal" >
                 <span class="Validform_checktip">批发价*平台培训服务费比</span>
             </dd>
         </dl>
         <dl>
             <dt>商城毛利</dt>
             <dd>
-                <input disabled="disabled" id="platformServiceReturnProfit" name="platformServiceReturnProfit" type="text" value="<#if goods?? && goods.platformServiceReturnProfit??>${goods.platformServiceReturnProfit?string("0.00")}<#else>0</#if>" class="input normal" >
+                <input readonly="true" id="platformServiceReturnProfit" name="platformServiceReturnProfit" type="text" value="<#if goods?? && goods.platformServiceReturnProfit??>${goods.platformServiceReturnProfit?string("0.00")}<#else>0</#if>" class="input normal" >
                 <span class="Validform_checktip">平台服务费-好评粮草</span>
             </dd>
         </dl>
