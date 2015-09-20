@@ -157,7 +157,8 @@ public class TdTouchCartController {
             username = req.getSession().getId();
         }
 
-        if (null != id) {
+        // 226 和 1644商品仅限购买一次
+        if (null != id && !id.equals(226L) && !id.equals(1644L)) {
             TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
 
             if (cartGoods.getUsername().equalsIgnoreCase(username)) {
@@ -182,7 +183,8 @@ public class TdTouchCartController {
             username = req.getSession().getId();
         }
 
-        if (null != id) {
+        // 226 和 1644商品仅限购买一次
+        if (null != id && !id.equals(226L) && !id.equals(1644L)) {
             TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
 
             if (cartGoods.getUsername().equalsIgnoreCase(username)) {

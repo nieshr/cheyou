@@ -382,10 +382,10 @@ public class TdOrderController extends AbstractPaytypeController {
             return "redirect:/login";
         }
 
-        TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
+        TdUser tdUser = tdUserService.findByUsernameAndIsEnabled(username);
         
 
-        if (null == user) {
+        if (null == tdUser) {
             return "/client/error_404";
         }
 
@@ -492,9 +492,9 @@ public class TdOrderController extends AbstractPaytypeController {
             }
 
             // 使用粮草
-            if (null != user.getTotalPoints()) {
-                if (pointUse.compareTo(user.getTotalPoints()) >= 0) {
-                    pointUse = user.getTotalPoints();
+            if (null != tdUser.getTotalPoints()) {
+                if (pointUse.compareTo(tdUser.getTotalPoints()) >= 0) {
+                    pointUse = tdUser.getTotalPoints();
                 }
             }
         }
@@ -512,9 +512,22 @@ public class TdOrderController extends AbstractPaytypeController {
 
                     // 不存在该商品或已下架或已不在秒杀，则跳过
                     if (null == goods || !goods.getIsOnSale()
-                            || !tdGoodsService.isFlashSaleTrue(goods)) {
+                            || !tdGoodsService.isFlashSaleTrue(goods)
+                            || null == tdUser
+                            || (null != tdUser.getLastFlashBuyTime() && tdUser.getLastFlashBuyTime().after(new Date()))) {
                         return "/client/error_404";
                     }
+                    
+                    Date nextTime = new Date();
+
+                    Calendar calendar = Calendar.getInstance();
+
+                    calendar.setTime(nextTime);
+
+                    calendar.add(Calendar.DATE, 7); 
+                    
+                    tdUser.setLastFlashBuyTime(calendar.getTime());
+                    tdUser = tdUserService.save(tdUser);
 
                     TdOrderGoods orderGoods = new TdOrderGoods();
 
@@ -710,7 +723,7 @@ public class TdOrderController extends AbstractPaytypeController {
 
         if (null != addressId) {
 
-            List<TdShippingAddress> addressList = user.getShippingAddressList();
+            List<TdShippingAddress> addressList = tdUser.getShippingAddressList();
 
             for (TdShippingAddress add : addressList) {
                 if (add.getId().equals(addressId)) {
@@ -742,7 +755,7 @@ public class TdOrderController extends AbstractPaytypeController {
         }
 
         // 基本信息
-        tdOrder.setUsername(user.getUsername());
+        tdOrder.setUsername(tdUser.getUsername());
         tdOrder.setOrderTime(current);
 
         // 订单号
@@ -795,9 +808,9 @@ public class TdOrderController extends AbstractPaytypeController {
                 tdOrder.setShopTitle(shop.getTitle());
 
                 // 用户归属
-                if (null != user.getUpperDiySiteId()) {
-                    user.setUpperDiySiteId(shop.getId());
-                    user = tdUserService.save(user);
+                if (null != tdUser.getUpperDiySiteId()) {
+                    tdUser.setUpperDiySiteId(shop.getId());
+                    tdUser = tdUserService.save(tdUser);
                 }
             }
         }
@@ -833,27 +846,27 @@ public class TdOrderController extends AbstractPaytypeController {
                     + deliveryTypeFee - pointFee - couponFee);
 
             // 添加积分使用记录
-            if (null != user) {
-                if (null == user.getTotalPoints()) {
-                    user.setTotalPoints(0L);
+            if (null != tdUser) {
+                if (null == tdUser.getTotalPoints()) {
+                    tdUser.setTotalPoints(0L);
 
-                    user = tdUserService.save(user);
+                    tdUser = tdUserService.save(tdUser);
                 }
 
                 if (pointUse.compareTo(0L) >= 0
-                        && null != user.getTotalPoints()
-                        && user.getTotalPoints().compareTo(pointUse) >= 0) {
+                        && null != tdUser.getTotalPoints()
+                        && tdUser.getTotalPoints().compareTo(pointUse) >= 0) {
                     TdUserPoint userPoint = new TdUserPoint();
                     userPoint.setDetail("购买商品使用积分抵扣");
                     userPoint.setOrderNumber(tdOrder.getOrderNumber());
                     userPoint.setPoint(0 - pointUse);
                     userPoint.setPointTime(new Date());
                     userPoint.setUsername(username);
-                    userPoint.setTotalPoint(user.getTotalPoints() - pointUse);
+                    userPoint.setTotalPoint(tdUser.getTotalPoints() - pointUse);
                     tdUserPointService.save(userPoint);
 
-                    user.setTotalPoints(user.getTotalPoints() - pointUse);
-                    tdUserService.save(user);
+                    tdUser.setTotalPoints(tdUser.getTotalPoints() - pointUse);
+                    tdUserService.save(tdUser);
                 }
             }
         } else {

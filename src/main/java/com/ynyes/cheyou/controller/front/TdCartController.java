@@ -82,6 +82,22 @@ public class TdCartController {
          // 这两种商品一个ID号只能购买一次
             if (id.equals(226L) || id.equals(1644L))
             {
+                List<TdCartGoods> cartGoodsList = tdCartGoodsService.findByGoodsIdAndUsername(226L, username);
+             
+                // 已经添加了该商品
+                if (null != cartGoodsList && cartGoodsList.size() > 0)
+                {
+                    return "redirect:/cart/add?id=" + id + "&m=" + m + "&r=1";
+                }
+                
+                cartGoodsList = tdCartGoodsService.findByGoodsIdAndUsername(1644L, username);
+                
+                // 已经添加了该商品
+                if (null != cartGoodsList && cartGoodsList.size() > 0)
+                {
+                    return "redirect:/cart/add?id=" + id + "&m=" + m + "&r=1";
+                }
+                
                 List<TdOrder> orderList = tdOrderService.findByUsernameAndGoodsId(username, 226L);
                 
                 // 已经购买了该商品
@@ -99,12 +115,11 @@ public class TdCartController {
                 }
             }
             
-            
             TdGoods goods = tdGoodsService.findOne(id);
 
             if (null != goods) {
                 
-                // 计算抢拍价
+                // 购物车项目
                 List<TdCartGoods> oldCartGoodsList = null;
                 
                 // 购物车是否已有该商品
@@ -127,11 +142,6 @@ public class TdCartController {
     
                     cartGoods.setIsSelected(true);
                     cartGoods.setGoodsId(goods.getId());
-                    
-                    // 商品信息在读取购物车时再获取
-//                    cartGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
-//                    cartGoods.setGoodsTitle(goods.getTitle());
-//                    cartGoods.setPrice(goods.getSalePrice());
     
                     cartGoods.setQuantity(quantity);
                     
@@ -314,7 +324,8 @@ public class TdCartController {
             username = req.getSession().getId();
         }
 
-        if (null != id) {
+        // 226 和 1644商品仅限购买一次
+        if (null != id && !id.equals(226L) && !id.equals(1644L)) {
             TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
             
             if (cartGoods.getUsername().equalsIgnoreCase(username)) {
@@ -339,7 +350,8 @@ public class TdCartController {
             username = req.getSession().getId();
         }
 
-        if (null != id) {
+        // 226 和 1644商品仅限购买一次
+        if (null != id && !id.equals(226L) && !id.equals(1644L)) {
             TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
 
             if (cartGoods.getUsername().equalsIgnoreCase(username)) {

@@ -54,6 +54,10 @@
     });
     
     $("#id-plus").click(function(){
+        <#if goods.id == 226 || goods.id == 1644>
+            alert("该商品限制购买数量");
+            return;
+        </#if>
         var q = parseInt($("#quantity").val());
         
         <#if goods.leftNumber??>

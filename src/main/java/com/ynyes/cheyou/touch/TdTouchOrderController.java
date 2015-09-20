@@ -32,6 +32,10 @@ import com.cytm.payment.alipay.PaymentChannelAlipay;
 import com.cytm.payment.alipay.core.AlipayNotify;
 import com.cytm.payment.ceb.CEBPayConfig;
 import com.cytm.payment.ceb.PaymentChannelCEB;
+import com.ibm.icu.util.Calendar;
+import com.tencent.common.Configure;
+import com.tencent.common.MD5;
+import com.tencent.common.RandomStringGenerator;
 import com.ynyes.cheyou.controller.front.AbstractPaytypeController;
 import com.ynyes.cheyou.entity.TdCartGoods;
 import com.ynyes.cheyou.entity.TdCoupon;
@@ -72,8 +76,9 @@ import com.ynyes.cheyou.util.SMSUtil;
  */
 @Controller
 @RequestMapping("/touch/order")
-public class TdTouchOrderController extends AbstractPaytypeController{
+public class TdTouchOrderController extends AbstractPaytypeController {
     private static final String PAYMENT_ALI = "ALI";
+    private static final String PAYMENT_WX = "WX";
 
     @Autowired
     private TdCartGoodsService tdCartGoodsService;
@@ -101,28 +106,28 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
     @Autowired
     private TdUserPointService tdUserPointService;
-    
+
     @Autowired
     private TdCouponService tdCouponService;
-    
+
     @Autowired
     private TdCouponTypeService tdCouponTypeService;
-    
+
     @Autowired
     private TdDiySiteService tdDiySiteService;
-    
+
     @Autowired
     private TdGoodsCombinationService tdGoodsCombinationService;
-    
+
     @Autowired
     private TdPayRecordService payRecordService;
-    
+
     @Autowired
     private PaymentChannelCEB payChannelCEB;
 
     @Autowired
     private PaymentChannelAlipay payChannelAlipay;
-    
+
     @Autowired
     private TdProductCategoryService tdProductCategoryService;
 
@@ -151,6 +156,8 @@ public class TdTouchOrderController extends AbstractPaytypeController{
         if (null == type || null == gid) {
             return "/touch/error_404";
         }
+        
+        TdUser tdUser = tdUserService.findByUsername(username);
 
         List<TdGoodsDto> tdGoodsList = new ArrayList<TdGoodsDto>();
 
@@ -164,21 +171,21 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             }
 
             // 优惠券
-//            map.addAttribute("coupon_list",
-//                    tdCouponService.findByUsernameAndIsUseable(username));
+            // map.addAttribute("coupon_list",
+            // tdCouponService.findByUsernameAndIsUseable(username));
 
             // 积分限额
-            TdUser tdUser = tdUserService.findByUsername(username);
-            if (null != tdUser ) {
-				if (null != tdUser.getTotalPoints() ) {
-					if (goods.getPointLimited() > tdUser.getTotalPoints()) {
-						map.addAttribute("total_point_limit", tdUser.getTotalPoints());
-					}
-					else{
-						map.addAttribute("total_point_limit", goods.getPointLimited());
-					}
-				}
-			}
+            if (null != tdUser) {
+                if (null != tdUser.getTotalPoints()) {
+                    if (goods.getPointLimited() > tdUser.getTotalPoints()) {
+                        map.addAttribute("total_point_limit",
+                                tdUser.getTotalPoints());
+                    } else {
+                        map.addAttribute("total_point_limit",
+                                goods.getPointLimited());
+                    }
+                }
+            }
 
             TdGoodsDto buyGoods = new TdGoodsDto();
 
@@ -193,26 +200,26 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
             // 添加组合商品
             if (null != zhid && !zhid.isEmpty()) {
-              
+
                 String[] zhidArray = zhid.split(",");
 
                 for (String idStr : zhidArray) {
                     if (!idStr.isEmpty()) {
                         Long zid = Long.parseLong(idStr);
-    
+
                         if (null == zid) {
                             continue;
                         }
-    
+
                         TdGoodsCombination combGoods = tdGoodsCombinationService
                                 .findOne(zid);
-    
+
                         if (null == combGoods) {
                             continue;
                         }
-    
+
                         TdGoodsDto buyZhGoods = new TdGoodsDto();
-    
+
                         buyZhGoods.setGoodsId(combGoods.getGoodsId());
                         buyZhGoods.setGoodsTitle(combGoods.getGoodsTitle());
                         buyZhGoods.setGoodsCoverImageUri(combGoods
@@ -220,7 +227,7 @@ public class TdTouchOrderController extends AbstractPaytypeController{
                         buyZhGoods.setPrice(combGoods.getCurrentPrice());
                         buyZhGoods.setQuantity(1L);
                         buyZhGoods.setSaleId(1);
-    
+
                         tdGoodsList.add(buyZhGoods);
                     }
                 }
@@ -232,10 +239,14 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             TdGoods goods = tdGoodsService.findOne(gid);
 
             // 检查是否在秒杀
-            if (null == goods || null == goods.getIsOnSale()
+            if (null == goods 
+                    || null == goods.getIsOnSale()
                     || !goods.getIsOnSale()
-                    || !tdGoodsService.isFlashSaleTrue(goods)) {
-                return "/touch/error_404";
+                    || !tdGoodsService.isFlashSaleTrue(goods)
+                    || null == tdUser
+                    || (null != tdUser.getLastFlashBuyTime() && tdUser.getLastFlashBuyTime().after(new Date()))) {
+                
+                return "/client/error_404";
             }
 
             TdGoodsDto buyGoods = new TdGoodsDto();
@@ -244,12 +255,11 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             buyGoods.setGoodsTitle(goods.getTitle());
             buyGoods.setGoodsCoverImageUri(goods.getCoverImageUri());
             Double flashSalePrice = tdGoodsService.getFlashPrice(goods);
-            
-            if (null == flashSalePrice)
-            {
+
+            if (null == flashSalePrice) {
                 return "/touch/error_404";
             }
-            
+
             buyGoods.setPrice(flashSalePrice);
             buyGoods.setQuantity(1L);
             buyGoods.setSaleId(2);
@@ -322,24 +332,17 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
         tdCommonService.setHeader(map, req);
 
-        if (type.equalsIgnoreCase("comb"))
-        {
+        if (type.equalsIgnoreCase("comb")) {
             return "/touch/order_buy_zh";
-        }
-        else if (type.equalsIgnoreCase("qiang"))
-        {
+        } else if (type.equalsIgnoreCase("qiang")) {
             return "/touch/order_buy_qiang";
-        }
-        else if (type.equalsIgnoreCase("baituan"))
-        {
+        } else if (type.equalsIgnoreCase("baituan")) {
             return "/touch/order_buy_bt";
-        }
-        else
-        {
+        } else {
             return "/touch/order_buy_tt";
         }
     }
-    
+
     @RequestMapping(value = "/buysubmit", method = RequestMethod.POST)
     public String buySubmit(Long addressId, // 送货地址
             Long shopId, Long payTypeId, // 支付方式ID
@@ -483,9 +486,22 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
                     // 不存在该商品或已下架或已不在秒杀，则跳过
                     if (null == goods || !goods.getIsOnSale()
-                            || !tdGoodsService.isFlashSaleTrue(goods)) {
-                        return "/touch/error_404";
+                            || !tdGoodsService.isFlashSaleTrue(goods)
+                            || null == user
+                            || (null != user.getLastFlashBuyTime() && user.getLastFlashBuyTime().after(new Date()))) {
+                        return "/client/error_404";
                     }
+                    
+                    Date nextTime = new Date();
+
+                    Calendar calendar = Calendar.getInstance();
+
+                    calendar.setTime(nextTime);
+
+                    calendar.add(Calendar.DATE, 7); 
+                    
+                    user.setLastFlashBuyTime(calendar.getTime());
+                    user = tdUserService.save(user);
 
                     TdOrderGoods orderGoods = new TdOrderGoods();
 
@@ -500,12 +516,11 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
                     // 抢购销售
                     Double flashSalePrice = tdGoodsService.getFlashPrice(goods);
-                    
-                    if (null == flashSalePrice)
-                    {
+
+                    if (null == flashSalePrice) {
                         return "/touch/error_404";
                     }
-                    
+
                     orderGoods.setPrice(flashSalePrice);
 
                     // 抢购
@@ -577,7 +592,7 @@ public class TdTouchOrderController extends AbstractPaytypeController{
                     // 尾款
                     totalLeftPrice = goods.getGroupSaleTenPrice()
                             - goods.getGroupSalePrice();
-                    
+
                     if (totalLeftPrice < 0) {
                         totalLeftPrice = 0.0;
                     }
@@ -652,8 +667,10 @@ public class TdTouchOrderController extends AbstractPaytypeController{
                     orderGoodsList.add(orderGoods);
 
                     // 更新销量
-                    Long groupSoldNumber = goods.getGroupSaleHundredSoldNumber();
-                    Long groupLeftNumber = goods.getGroupSaleHundredLeftNumber();
+                    Long groupSoldNumber = goods
+                            .getGroupSaleHundredSoldNumber();
+                    Long groupLeftNumber = goods
+                            .getGroupSaleHundredLeftNumber();
 
                     if (null == groupSoldNumber) {
                         groupSoldNumber = 0L;
@@ -761,21 +778,19 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             if (null != shop) {
                 tdOrder.setShopId(shop.getId());
                 tdOrder.setShopTitle(shop.getTitle());
-                
+
                 // 用户归属
-                if (null != user.getUpperDiySiteId())
-                {
+                if (null != user.getUpperDiySiteId()) {
                     user.setUpperDiySiteId(shop.getId());
                     user = tdUserService.save(user);
                 }
             }
         }
-        
+
         // 用户留言
         tdOrder.setUserRemarkInfo(userMessage);
 
-        if (buyType.equalsIgnoreCase("comb"))
-        {
+        if (buyType.equalsIgnoreCase("comb")) {
             // 使用积分
             tdOrder.setPointUse(pointUse);
 
@@ -801,16 +816,15 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             // 总价
             tdOrder.setTotalPrice(totalGoodsPrice + payTypeFee
                     + deliveryTypeFee - pointFee - couponFee);
-            
+
             // 添加积分使用记录
             if (null != user) {
-                if (null == user.getTotalPoints())
-                {
+                if (null == user.getTotalPoints()) {
                     user.setTotalPoints(0L);
-                    
+
                     user = tdUserService.save(user);
                 }
-                
+
                 if (pointUse.compareTo(0L) >= 0
                         && null != user.getTotalPoints()
                         && user.getTotalPoints().compareTo(pointUse) >= 0) {
@@ -827,11 +841,10 @@ public class TdTouchOrderController extends AbstractPaytypeController{
                     tdUserService.save(user);
                 }
             }
-        }
-        else
-        {
-         // 总价
-            tdOrder.setTotalPrice(totalGoodsPrice + payTypeFee + deliveryTypeFee);
+        } else {
+            // 总价
+            tdOrder.setTotalPrice(totalGoodsPrice + payTypeFee
+                    + deliveryTypeFee);
         }
 
         // 待付款
@@ -855,26 +868,24 @@ public class TdTouchOrderController extends AbstractPaytypeController{
         // 保存订单商品及订单
         tdOrderGoodsService.save(orderGoodsList);
         /**
-		 * @author lc
-		 * @注释：订单类型设置 
-		 */
+         * @author lc
+         * @注释：订单类型设置
+         */
         tdOrder.setTypeId(0L);
-        for(TdOrderGoods tdOrderGoods : orderGoodsList){
-        	if (tdOrderGoods.getGoodsSaleType() == 1) {
-				tdOrder.setTypeId(2L);
-			}       	
+        for (TdOrderGoods tdOrderGoods : orderGoodsList) {
+            if (tdOrderGoods.getGoodsSaleType() == 1) {
+                tdOrder.setTypeId(2L);
+            }
         }
-        //抢购 团购 都只有一个商品
-        for(TdOrderGoods tdOrderGoods : orderGoodsList){
-        	if (tdOrderGoods.getGoodsSaleType() == 2) {
-				tdOrder.setTypeId(3L);
-			}
-        	else if (tdOrderGoods.getGoodsSaleType() == 3) {
-        		tdOrder.setTypeId(4L);
-			}
-        	else if (tdOrderGoods.getGoodsSaleType() == 4) {
-        		tdOrder.setTypeId(5L);
-			}
+        // 抢购 团购 都只有一个商品
+        for (TdOrderGoods tdOrderGoods : orderGoodsList) {
+            if (tdOrderGoods.getGoodsSaleType() == 2) {
+                tdOrder.setTypeId(3L);
+            } else if (tdOrderGoods.getGoodsSaleType() == 3) {
+                tdOrder.setTypeId(4L);
+            } else if (tdOrderGoods.getGoodsSaleType() == 4) {
+                tdOrder.setTypeId(5L);
+            }
         }
         tdOrder = tdOrderService.save(tdOrder);
 
@@ -904,6 +915,29 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
         if (null == order) {
             return "/touch/error_404";
+        }
+
+        // 根据订单类型来判断支付时间是否过期
+        if (order.getTypeId().equals(3L)) { // 抢拍 订单提交后20分钟内
+            Date cur = new Date();
+            long temp = cur.getTime() - order.getOrderTime().getTime();
+            // System.out.println(temp);
+            if (temp > 1000 * 60 * 20) {
+                return "/touch/overtime";
+            }
+        } else if (order.getTypeId().equals(4L) || order.getTypeId().equals(5L)) { // 团购
+                                                                                   // 预付是订单提交后12小时内，尾款支付也是12小时
+            Date cur = new Date();
+            long temp = cur.getTime() - order.getOrderTime().getTime();
+            if (temp > 1000 * 3600 * 12) {
+                return "/touch/overtime";
+            }
+        } else { // 普通 订单提交后24小时内
+            Date cur = new Date();
+            long temp = cur.getTime() - order.getOrderTime().getTime();
+            if (temp > 1000 * 3600 * 24) {
+                return "/touch/overtime";
+            }
         }
 
         // 待付款
@@ -942,6 +976,27 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             if (PAYMENT_ALI.equals(payCode)) {
                 payForm = payChannelAlipay.getPayFormData(req);
                 map.addAttribute("charset", AlipayConfig.CHARSET);
+            } else if (PAYMENT_WX.equals(payCode)) {
+                map.addAttribute("order_number", order.getOrderNumber());
+                map.addAttribute("total_price", order.getTotalPrice());
+
+                String sa = "appid=" + Configure.getAppid() + "&mch_id="
+                        + Configure.getMchid() + "&nonce_str="
+                        + RandomStringGenerator.getRandomStringByLength(32)
+                        + "&product_id=" + order.getId() + "&time_stamp="
+                        + System.currentTimeMillis() / 1000;
+
+                String sign = MD5.MD5Encode(
+                        sa + "&key=192006250b4c09247ec02edce69f6acy")
+                        .toUpperCase();
+
+                System.out.print("Sharon: weixin://wxpay/bizpayurl?" + sa
+                        + "&sign=" + sign + "\n");
+
+                req.getSession().setAttribute("WXPAYURLSESSEION",
+                        "weixin://wxpay/bizpayurl?" + sa + "&sign=" + sign);
+                // "weixin://wxpay/bizpayurl?appid=wx2421b1c4370ec43b&mch_id=10000100&nonce_str=f6808210402125e30663234f94c87a8c&product_id=1&time_stamp=1415949957&sign=512F68131DD251DA4A45DA79CC7EFE9D");
+                return "/touch/order_pay_wx";
             } else if (CEBPayConfig.INTER_B2C_BANK_CONFIG.keySet().contains(
                     payCode)) {
                 req.setAttribute("payMethod", payCode);
@@ -963,7 +1018,7 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
         return "/touch/order_pay_form";
     }
-    
+
     @RequestMapping(value = "/info")
     public String orderInfo(HttpServletRequest req, HttpServletResponse resp,
             ModelMap map) {
@@ -1010,69 +1065,73 @@ public class TdTouchOrderController extends AbstractPaytypeController{
                 }
             }
         }
-      //查询购物车的所有种类
+        // 查询购物车的所有种类
         List<String> productIds = new ArrayList<>();
-        for (TdCartGoods cg : selectedGoodsList){
-        	TdGoods goods = tdGoodsService.findOne(cg.getGoodsId());
-        	if (productIds.isEmpty()) {        		
-				productIds.add(goods.getCategoryIdTree().split(",")[0]);//根类别
-			}else{
-				if (!productIds.contains(goods.getCategoryIdTree().split(",")[0])) {
-					productIds.add(goods.getCategoryIdTree().split(",")[0]);
-				}
-			}
+        for (TdCartGoods cg : selectedGoodsList) {
+            TdGoods goods = tdGoodsService.findOne(cg.getGoodsId());
+            if (productIds.isEmpty()) {
+                productIds.add(goods.getCategoryIdTree().split(",")[0]);// 根类别
+            } else {
+                if (!productIds
+                        .contains(goods.getCategoryIdTree().split(",")[0])) {
+                    productIds.add(goods.getCategoryIdTree().split(",")[0]);
+                }
+            }
         }
         /**
-		 * @author lc
-		 * @注释：优惠券 TODO: 满减券， 单品类券，普通券查找
-		 */
-        //如果有不同种类的商品则不能使用优惠券
+         * @author lc
+         * @注释：优惠券 TODO: 满减券， 单品类券，普通券查找
+         */
+        // 如果有不同种类的商品则不能使用优惠券
         if (productIds.size() < 2) {
-        	List<TdCoupon> userCoupons = null;
+            List<TdCoupon> userCoupons = null;
             if (null != user.getMobile()) {
-            	userCoupons = tdCouponService.findByMobileAndIsUseable(user.getMobile());//根据账号查询所有优惠券
-    		}
-             
+                userCoupons = tdCouponService.findByMobileAndIsUseable(user
+                        .getMobile());// 根据账号查询所有优惠券
+            }
+
             if (null != userCoupons) {
-            	List<TdCoupon> userCouponList = new ArrayList<>(); //可用券
-            	TdCouponType couponType = null;
-            	for(int i = 0; i < userCoupons.size(); i++){
-            		couponType = tdCouponTypeService.findOne(userCoupons.get(i).getTypeId());
-            		if (null != couponType && !couponType.getTitle().equals("免费洗车券") && !couponType.getTitle().equals("免费打蜡券")) {
-    					if (couponType.getCategoryId().equals(1L)) {
-    						TdProductCategory tpc = tdProductCategoryService.findOne(couponType.getProductTypeId());
-    						List<String> templist = new ArrayList<>();
-    						for(String cid : tpc.getParentTree().split(",")){
-    							templist.add(cid);
-    						}   								
-    						 //判断购物总价>满购券使用金额
-    				        if (totalPrice > couponType.getCanUsePrice() && templist.contains(productIds.get(0))) {
-    				        	userCouponList.add(userCoupons.get(i));
-    				        }
-    					}
-    					else if (couponType.getCategoryId().equals(0L)) {
-    						userCouponList.add(userCoupons.get(i));
-    					}
-    					else if (couponType.getCategoryId().equals(2L)) {
-    						if (totalPrice > couponType.getCanUsePrice()) {
-    							userCouponList.add(userCoupons.get(i));
-    						}
-    					}
-    				}
-            	}
-            	 map.addAttribute("coupon_list",userCouponList);
-    		}
-		}
-      
+                List<TdCoupon> userCouponList = new ArrayList<>(); // 可用券
+                TdCouponType couponType = null;
+                for (int i = 0; i < userCoupons.size(); i++) {
+                    couponType = tdCouponTypeService.findOne(userCoupons.get(i)
+                            .getTypeId());
+                    if (null != couponType
+                            && !couponType.getTitle().equals("免费洗车券")
+                            && !couponType.getTitle().equals("免费打蜡券")) {
+                        if (couponType.getCategoryId().equals(1L)) {
+                            TdProductCategory tpc = tdProductCategoryService
+                                    .findOne(couponType.getProductTypeId());
+                            List<String> templist = new ArrayList<>();
+                            for (String cid : tpc.getParentTree().split(",")) {
+                                templist.add(cid);
+                            }
+                            // 判断购物总价>满购券使用金额
+                            if (totalPrice > couponType.getCanUsePrice()
+                                    && templist.contains(productIds.get(0))) {
+                                userCouponList.add(userCoupons.get(i));
+                            }
+                        } else if (couponType.getCategoryId().equals(0L)) {
+                            userCouponList.add(userCoupons.get(i));
+                        } else if (couponType.getCategoryId().equals(2L)) {
+                            if (totalPrice > couponType.getCanUsePrice()) {
+                                userCouponList.add(userCoupons.get(i));
+                            }
+                        }
+                    }
+                }
+                map.addAttribute("coupon_list", userCouponList);
+            }
+        }
+
         // 积分限额
         if (null != user.getTotalPoints()) {
-			if (totalPointLimited > user.getTotalPoints()) {
-				map.addAttribute("total_point_limit", user.getTotalPoints());
-			}
-			else{
-				map.addAttribute("total_point_limit", totalPointLimited);
-			}
-		}
+            if (totalPointLimited > user.getTotalPoints()) {
+                map.addAttribute("total_point_limit", user.getTotalPoints());
+            } else {
+                map.addAttribute("total_point_limit", totalPointLimited);
+            }
+        }
 
         // 线下同盟店
         map.addAttribute("shop_list", tdDiySiteService.findByIsEnableTrue());
@@ -1149,7 +1208,6 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
         return "redirect:/touch/order/info";
     }
-
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public String submit(Long addressId, // 送货地址
@@ -1275,17 +1333,17 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
                     soldNumber += quantity;
                     goods.setSoldNumber(soldNumber);
-                    
+
                     /**
-					 * @author lc
-					 * @注释：更新库存
-					 */
+                     * @author lc
+                     * @注释：更新库存
+                     */
                     Long leftNumber = goods.getLeftNumber();
                     if (leftNumber >= quantity) {
-                    	leftNumber = leftNumber - quantity;
-					}               
+                        leftNumber = leftNumber - quantity;
+                    }
                     goods.setLeftNumber(leftNumber);
-                    
+
                     // 保存商品
                     tdGoodsService.save(goods, username);
                 }
@@ -1369,10 +1427,9 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             if (null != shop) {
                 tdOrder.setShopId(shop.getId());
                 tdOrder.setShopTitle(shop.getTitle());
-                
+
                 // 用户归属
-                if (null != user.getUpperDiySiteId())
-                {
+                if (null != user.getUpperDiySiteId()) {
                     user.setUpperDiySiteId(shop.getId());
                     user = tdUserService.save(user);
                 }
@@ -1396,7 +1453,7 @@ public class TdTouchOrderController extends AbstractPaytypeController{
                 couponFee = couponType.getPrice();
                 coupon.setIsUsed(true);
                 tdCouponService.save(coupon);
-                tdOrder.setCouponUse( couponFee);
+                tdOrder.setCouponUse(couponFee);
                 tdOrder.setCouponTitle(coupon.getTypeTitle());
             }
         }
@@ -1431,21 +1488,20 @@ public class TdTouchOrderController extends AbstractPaytypeController{
         // 保存订单商品及订单
         tdOrderGoodsService.save(orderGoodsList);
         /**
-		 * @author lc
-		 * @注释：设置订单类型
-		 */
+         * @author lc
+         * @注释：设置订单类型
+         */
         tdOrder.setTypeId(1L);
         tdOrder = tdOrderService.save(tdOrder);
 
         // 添加积分使用记录
         if (null != user) {
-            if (null == user.getTotalPoints())
-            {
+            if (null == user.getTotalPoints()) {
                 user.setTotalPoints(0L);
-                
+
                 user = tdUserService.save(user);
             }
-            
+
             if (pointUse.compareTo(0L) >= 0 && null != user.getTotalPoints()
                     && user.getTotalPoints().compareTo(pointUse) >= 0) {
                 TdUserPoint userPoint = new TdUserPoint();
@@ -1504,7 +1560,7 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
         return "/touch/order_success";
     }
-    
+
     @RequestMapping(value = "/dopayleft/{orderId}")
     public String payOrderLeft(@PathVariable Long orderId, ModelMap map,
             HttpServletRequest req) {
@@ -1524,6 +1580,29 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
         if (null == order) {
             return "/touch/error_404";
+        }
+        
+        // 根据订单类型来判断支付时间是否过期
+        if (order.getTypeId().equals(3L)) { // 抢拍 订单提交后20分钟内
+            Date cur = new Date();
+            long temp = cur.getTime() - order.getOrderTime().getTime();
+            // System.out.println(temp);
+            if (temp > 1000 * 60 * 20) {
+                return "/touch/overtime";
+            }
+        } else if (order.getTypeId().equals(4L) || order.getTypeId().equals(5L)) { // 团购
+                                                                                   // 预付是订单提交后12小时内，尾款支付也是12小时
+            Date cur = new Date();
+            long temp = cur.getTime() - order.getOrderTime().getTime();
+            if (temp > 1000 * 3600 * 12) {
+                return "/touch/overtime";
+            }
+        } else { // 普通 订单提交后24小时内
+            Date cur = new Date();
+            long temp = cur.getTime() - order.getOrderTime().getTime();
+            if (temp > 1000 * 3600 * 24) {
+                return "/touch/overtime";
+            }
         }
 
         // 待付尾款
@@ -1761,30 +1840,47 @@ public class TdTouchOrderController extends AbstractPaytypeController{
         // 用户
         TdUser tdUser = tdUserService.findByUsername(tdOrder.getUsername());
 
-//        // 同盟店
-//        TdDiySite tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
+        if (null == tdUser) {
+            return;
+        }
+        // // 同盟店
+        // TdDiySite tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
         /**
-      		 * @author lc
-      		 * @注释：根据用户所属同盟店id查询同盟店
-      		 */
-              TdDiySite tdShop = null;
-              if (null != tdUser.getUpperDiySiteId()) {
-              	// 同盟店
-                  tdShop = tdDiySiteService.findOne(tdUser.getUpperDiySiteId());
-      		}else{
-      			// 同盟店
-      	        tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
-      		}
-              
-        if (tdOrder.getStatusId().equals(2L) && !tdOrder.getTotalLeftPrice().equals(0))
+         * @author lc
+         * @注释：根据用户所属同盟店id查询同盟店
+         */
+        TdDiySite tdShop = null;
+        
+        if (null != tdUser.getUpperDiySiteId()) {
+            // 同盟店
+            tdShop = tdDiySiteService.findOne(tdUser.getUpperDiySiteId());
+        } else {
+            // 同盟店
+            tdShop = tdDiySiteService.findOne(tdOrder.getShopId());
+        }
+
+        // 设置抢购最后时间
+        if (null != tdOrder.getTypeId() && tdOrder.getTypeId().equals(3L))
         {
+            Date nextTime = new Date();
+
+            Calendar calendar = Calendar.getInstance();
+
+            calendar.setTime(nextTime);
+
+            calendar.add(Calendar.DATE, 7); 
+            
+            tdUser.setLastFlashBuyTime(calendar.getTime());
+            tdUser = tdUserService.save(tdUser);
+        }
+        
+        if (tdOrder.getStatusId().equals(2L)
+                && !tdOrder.getTotalLeftPrice().equals(0)) {
             // 待付尾款
             tdOrder.setStatusId(3L);
             tdOrder = tdOrderService.save(tdOrder);
             return;
-        }
-        else
-        {
+        } else {
             // 待服务
             tdOrder.setStatusId(4L);
             tdOrder = tdOrderService.save(tdOrder);
@@ -1792,28 +1888,26 @@ public class TdTouchOrderController extends AbstractPaytypeController{
 
         // 给用户发送短信
         if (null != tdUser) {
-        	Random random = new Random();
+            Random random = new Random();
             String smscode = String.format("%04d", random.nextInt(9999));
-            SMSUtil.send(
-                    tdOrder.getShippingPhone(),
-                    "29040",
-                    new String[] {
-                            tdUser.getUsername(),
+            SMSUtil.send(tdOrder.getShippingPhone(), "29040",
+                    new String[] { tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
-                            smscode});
-            System.out.println("---Sharon---: 向用户"+tdOrder.getShippingPhone()+"发送短信");
+                            smscode });
+            System.out.println("---Sharon---: 向用户" + tdOrder.getShippingPhone()
+                    + "发送短信");
         }
 
         // 给商户发短信
         if (null != tdShop && null != tdUser && null != tdShop.getMobile()) {
-            SMSUtil.send(tdShop.getMobile(), 
-                    "29039",
+            SMSUtil.send(tdShop.getMobile(), "29039",
                     new String[] { tdShop.getTitle(), tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
                             tdOrder.getAppointmentTime().toString() });
-            System.out.println("---Sharon---: 向同盟店"+tdShop.getMobile()+"发送短信");
+            System.out.println("---Sharon---: 向同盟店" + tdShop.getMobile()
+                    + "发送短信");
         }
-        
+
         List<TdOrderGoods> tdOrderGoodsList = tdOrder.getOrderGoodsList();
 
         Long totalPoints = 0L;
@@ -1821,8 +1915,8 @@ public class TdTouchOrderController extends AbstractPaytypeController{
         Double platformService = 0.0;
         Double trainService = 0.0;
         Double shopOrderincome = 0.0;
-        Double totalSaleprice = 0.0; //订单商品总销售价
-        Double totalCostprice = 0.0; //订单商品总成本价
+        Double totalSaleprice = 0.0; // 订单商品总销售价
+        Double totalCostprice = 0.0; // 订单商品总成本价
         // 返利总额
         if (null != tdOrderGoodsList) {
             for (TdOrderGoods tog : tdOrderGoodsList) {
@@ -1831,27 +1925,38 @@ public class TdTouchOrderController extends AbstractPaytypeController{
                     TdGoods tdGoods = tdGoodsService.findOne(tog.getGoodsId());
 
                     if (null != tdGoods && null != tdGoods.getReturnPoints()) {
-                        totalPoints += tdGoods.getReturnPoints()* tog.getQuantity();
+                        totalPoints += tdGoods.getReturnPoints()
+                                * tog.getQuantity();
 
                         if (null != tdGoods.getShopReturnRation()) {
                             totalCash = tdGoods.getSalePrice()
-                                    * tdGoods.getShopReturnRation()* tog.getQuantity();
+                                    * tdGoods.getShopReturnRation()
+                                    * tog.getQuantity();
                         }
                     }
-                    if (null != tdGoods && null != tdGoods.getPlatformServiceReturnRation()) {
-                    	platformService += tdGoods.getSalePrice() * tdGoods.getPlatformServiceReturnRation() * tog.getQuantity();
-					}
-                    if (null != tdGoods && null != tdGoods.getTrainServiceReturnRation()) {
-                    	trainService += tdGoods.getCostPrice() * tdGoods.getTrainServiceReturnRation()* tog.getQuantity(); 
-					}
-                    totalSaleprice += tdGoods.getSalePrice()* tog.getQuantity();
-                    totalCostprice += tdGoods.getCostPrice()* tog.getQuantity();
+                    if (null != tdGoods
+                            && null != tdGoods.getPlatformServiceReturnRation()) {
+                        platformService += tdGoods.getSalePrice()
+                                * tdGoods.getPlatformServiceReturnRation()
+                                * tog.getQuantity();
+                    }
+                    if (null != tdGoods
+                            && null != tdGoods.getTrainServiceReturnRation()) {
+                        trainService += tdGoods.getCostPrice()
+                                * tdGoods.getTrainServiceReturnRation()
+                                * tog.getQuantity();
+                    }
+                    totalSaleprice += tdGoods.getSalePrice()
+                            * tog.getQuantity();
+                    totalCostprice += tdGoods.getCostPrice()
+                            * tog.getQuantity();
                 }
             }
             if (tdOrder.getTypeId().equals(1L)) {
-            	shopOrderincome = totalSaleprice - totalCostprice - totalPoints - platformService - trainService - totalCash;
-			}  
-            
+                shopOrderincome = totalSaleprice - totalCostprice - totalPoints
+                        - platformService - trainService - totalCash;
+            }
+
             // 用户返利
             if (null != tdUser) {
                 TdUserPoint userPoint = new TdUserPoint();
@@ -1878,10 +1983,10 @@ public class TdTouchOrderController extends AbstractPaytypeController{
             } else {
                 tdShop.setTotalCash(tdShop.getTotalCash() + totalCash);
             }
-            tdOrder.setRebate(totalCash);//设置订单同盟店所获返利
-            tdOrder.setPlatformService(platformService);//设置订单平台服务费
-            tdOrder.setTrainService(trainService);//设置订单培训服务费
-            tdOrder.setOrderIncome(shopOrderincome);//设置同盟店订单收入
+            tdOrder.setRebate(totalCash);// 设置订单同盟店所获返利
+            tdOrder.setPlatformService(platformService);// 设置订单平台服务费
+            tdOrder.setTrainService(trainService);// 设置订单培训服务费
+            tdOrder.setOrderIncome(shopOrderincome);// 设置同盟店订单收入
             tdOrder = tdOrderService.save(tdOrder);
             tdDiySiteService.save(tdShop);
         }
