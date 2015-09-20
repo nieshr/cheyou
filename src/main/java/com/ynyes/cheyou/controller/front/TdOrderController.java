@@ -1914,7 +1914,7 @@ public class TdOrderController extends AbstractPaytypeController {
                 System.out.print("Sharon: notify" + line + "\n");
                 
                 if (line.contains("<return_code>")) {
-                    return_code = line.replaceAll("<xml><return_code><\\!\\[CDATA\\[", "") .replaceAll("\\]\\]></return_code>", "");
+                    return_code = line.replaceAll("<return_code><\\!\\[CDATA\\[", "") .replaceAll("\\]\\]></return_code>", "");
                 } else if (line.contains("<out_trade_no>")) {
                     out_trade_no = line.replaceAll("<out_trade_no><\\!\\[CDATA\\[", "").replaceAll("\\]\\]></out_trade_no>", "");
                 } else if (line.contains("<result_code>")) {
@@ -1926,8 +1926,8 @@ public class TdOrderController extends AbstractPaytypeController {
             System.out.println("Sharon: notify out_trade_no: " + out_trade_no);
             System.out.println("Sharon: notify result_code: " + result_code);
             
-            if ("SUCCESS".equalsIgnoreCase(return_code) && 
-                    "SUCCESS".equalsIgnoreCase(result_code) && 
+            if (return_code.contains("SUCCESS") && 
+                    result_code.contains("SUCCESS") && 
                     null != out_trade_no)
             {
                 TdOrder order = tdOrderService.findByOrderNumber(out_trade_no);

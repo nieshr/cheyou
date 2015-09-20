@@ -50,7 +50,7 @@
         <#if address?? && address.disctrict??>dist: "${address.disctrict!''}",</#if>
         required:false
     });
-     
+    
 });
 </script>
 <script type="text/javascript">
@@ -72,8 +72,15 @@
                 }
             });      
     }
-    
-
+function verifyMobile(){
+     var mobile = $("#mobile").val();
+     var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+     if (reg.test(mobile)) {
+         
+     }else{
+          alert("输入正确的手机号");
+     };
+}
 </script>
 
 
@@ -129,7 +136,7 @@
                   <tr>
                     <th>*姓名：</th>
                     <td>
-                        <input class="mytext" id="receiverName" value="" type="text">
+                        <input class="mytext" id="receiverName" value="" type="text"/>
                     </td>
                   </tr>
                   <tr>
@@ -139,17 +146,17 @@
                   <tr>
                     <th>*手机：</th>
                     <td>
-                        <input class="mytext" id="mobile" value="" type="text">
+                        <input class="mytext" id="mobile" value="" type="text" onBlur="verifyMobile();" />
                     </td>
                   </tr>
                   <tr>
-                  <th>车牌（选填）：</th>
+                  <th>*车牌：</th>
                   <td>
                   <input class="mytext" id="receiverCarcode" value="" type="text"/>
                   </td>
                   </tr>
                   <tr>
-                  <th>车型（选填）：</th>
+                  <th>*车型：</th>
                   <td>
                    <input class="mytext" id="receiverCartype" value="" type="text"/>
                   </td>

@@ -811,6 +811,40 @@
                         </td>
                     </tr>
                     <tr>
+                        <th width="20%">
+                            姓名
+                        </th>
+                        <td>
+                            <div class="position">
+                                <span id="spanAcceptName">${order.shippingName!""}</span>
+                                <#if order.statusId lt 4>
+                                <input name="btnEditAcceptInfo" type="button" id="btnEditAcceptInfo" class="ibtn" value="修改">
+                                </#if>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            电话
+                        </th>
+                        <td><span id="spanMobile">${order.shippingPhone!""}</span></td>
+                    </tr>
+                   
+                    <tr>
+                        <th>
+                            车型
+                        </th>
+                        <td>
+                            <span id="carType">${order.carType!""}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            车牌
+                        </th>
+                        <td><span id="carCode">${order.carCode!""}</span></td>
+                    </tr>
+                    <tr>
                         <th>
                             预约时间
                         </th>
@@ -828,51 +862,20 @@
                             <span><#if order.smscode??>${order.smscode!''}</#if></span>
                         </td>
                     </tr>
+                    
                 </tbody>
                 </table>
             </dd>
         </dl>
         
-        <#--
+                    <#--
         <dl>
             <dt>收货信息</dt>
             <dd>
                 <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
                     <tbody>
-                    <tr>
-                        <th width="20%">
-                            收件人
-                        </th>
-                        <td>
-                            <div class="position">
-                                <span id="spanAcceptName">${order.shippingName!""}</span>
-                                <#if order.statusId lt 4>
-                                <input name="btnEditAcceptInfo" type="button" id="btnEditAcceptInfo" class="ibtn" value="修改">
-                                </#if>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            发货地址
-                        </th>
-                        <td>
-                            <span id="spanArea"></span> 
-                            <span id="spanAddress">${order.shippingAddress!""}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            邮政编码
-                        </th>
-                        <td><span id="spanPostCode">${order.postalCode!""}</span></td>
-                    </tr>
-                    <tr>
-                        <th>
-                            电话
-                        </th>
-                        <td><span id="spanMobile">${order.shippingPhone!""}</span></td>
-                    </tr>
+                    
+                    
                     <tr>
                         <th>
                             是否索要发票
@@ -889,10 +892,10 @@
                         </td>
                         
                     </tr>
+                    -->
                 </tbody></table>
             </dd>
         </dl>
-        -->
         
         <dl>
             <dt>备注</dt>

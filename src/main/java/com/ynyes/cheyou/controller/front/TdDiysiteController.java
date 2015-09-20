@@ -113,6 +113,7 @@ public class TdDiysiteController {
 				tdCoupon.setUserDiysiteId(tdUser.getUpperDiySiteId());
 			}
 			tdCoupon.setIsUsed(true);
+			tdCoupon.setConfirmTime(new Date());
 			tdCouponService.save(tdCoupon);
 		}
         res.put("code", 0);
