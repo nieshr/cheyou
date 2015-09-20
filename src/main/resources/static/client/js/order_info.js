@@ -119,7 +119,7 @@ function submitAddress()
     
     if (undefined == receiverName || "" == receiverName)
     {
-        alert("姓名不能为空");
+        alert("姓名不能为空！");
         $("#receiverName").focus();
         return;
     }
@@ -147,8 +147,20 @@ function submitAddress()
     **/
     if (undefined == mobile || "" == mobile)
     {
-        alert("手机号码不能为空");
+        alert("手机号码不能为空！");
         $("#mobile").focus();
+        return;
+    }
+    if (undefined == receiverCarcode || "" == receiverCarcode)
+    {
+        alert("请输入车牌号！");
+        $("#receiverCarcode").focus();
+        return;
+    }
+    if (undefined == receiverCartype || "" == receiverCartype)
+    {
+        alert("请输入车型！");
+        $("#receiverCartype").focus();
         return;
     }
     
