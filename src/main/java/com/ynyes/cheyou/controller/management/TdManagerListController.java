@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ynyes.cheyou.entity.TdArticle;
 import com.ynyes.cheyou.entity.TdArticleCategory;
 import com.ynyes.cheyou.entity.TdGoods;
+import com.ynyes.cheyou.entity.TdManager;
+import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.service.TdArticleCategoryService;
 import com.ynyes.cheyou.service.TdArticleService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdManagerLogService;
+import com.ynyes.cheyou.service.TdManagerRoleService;
+import com.ynyes.cheyou.service.TdManagerService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
@@ -43,6 +47,12 @@ public class TdManagerListController {
     @Autowired
     TdManagerLogService tdManagerLogService;
     
+    @Autowired
+    TdManagerRoleService tdManagerRoleService;
+    
+    @Autowired
+    TdManagerService tdManagerService;
+    
     @RequestMapping(value="/category/list")
     public String categoryList(Long cid, 
                                 Long mid, 
@@ -58,6 +68,18 @@ public class TdManagerListController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
         
         if (null != __EVENTTARGET)
         {
@@ -128,6 +150,19 @@ public class TdManagerListController {
             return "redirect:/Verwalter/login";
         }
         
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
+        
         if (null != __EVENTTARGET)
         {
             switch (__EVENTTARGET)
@@ -197,6 +232,19 @@ public class TdManagerListController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+        
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
         
         if (null == page || page < 0)
         {
@@ -338,6 +386,19 @@ public class TdManagerListController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+        
+      //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
         
         if (null == page || page < 0)
         {

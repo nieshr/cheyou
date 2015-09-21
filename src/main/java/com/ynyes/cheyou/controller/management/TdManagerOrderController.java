@@ -39,6 +39,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ynyes.cheyou.entity.TdDeliveryType;
 import com.ynyes.cheyou.entity.TdDiySite;
 import com.ynyes.cheyou.entity.TdGoods;
+import com.ynyes.cheyou.entity.TdManager;
+import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.entity.TdOrder;
 import com.ynyes.cheyou.entity.TdOrderGoods;
 import com.ynyes.cheyou.entity.TdPayType;
@@ -49,6 +51,8 @@ import com.ynyes.cheyou.service.TdDeliveryTypeService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdManagerLogService;
+import com.ynyes.cheyou.service.TdManagerRoleService;
+import com.ynyes.cheyou.service.TdManagerService;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayTypeService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
@@ -96,6 +100,12 @@ public class TdManagerOrderController {
     @Autowired
     TdManagerLogService tdManagerLogService;
     
+    @Autowired
+    TdManagerRoleService tdManagerRoleService;
+    
+    @Autowired
+    TdManagerService tdManagerService;
+    
     // 订单设置
     @RequestMapping(value="/setting/{type}/list")
     public String setting(@PathVariable String type, 
@@ -114,6 +124,20 @@ public class TdManagerOrderController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+        
+      //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
+        
         
         if (null != __EVENTTARGET)
         {
@@ -392,6 +416,20 @@ public class TdManagerOrderController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+        
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
+        
         if (null != __EVENTTARGET)
         {
             if (__EVENTTARGET.equalsIgnoreCase("btnCancel"))

@@ -20,10 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ynyes.cheyou.entity.TdCoupon;
 import com.ynyes.cheyou.entity.TdCouponType;
 import com.ynyes.cheyou.entity.TdDiySite;
+import com.ynyes.cheyou.entity.TdManager;
+import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.service.TdCouponService;
 import com.ynyes.cheyou.service.TdCouponTypeService;
 import com.ynyes.cheyou.service.TdDiySiteService;
 import com.ynyes.cheyou.service.TdManagerLogService;
+import com.ynyes.cheyou.service.TdManagerRoleService;
+import com.ynyes.cheyou.service.TdManagerService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
@@ -52,7 +56,11 @@ public class TdManagerCouponController {
     @Autowired
     private TdProductCategoryService tdProductCategoryService;
     
+    @Autowired
+    TdManagerRoleService tdManagerRoleService;
     
+    @Autowired
+    TdManagerService tdManagerService;
 //    @RequestMapping(value="/check", method = RequestMethod.POST)
 //    @ResponseBody
 //    public Map<String, String> validateForm(String param, Long id) {
@@ -102,6 +110,18 @@ public class TdManagerCouponController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+      //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
         
         if (null != __EVENTTARGET)
         {
@@ -188,6 +208,18 @@ public class TdManagerCouponController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
         
         if (null != __EVENTTARGET)
         {

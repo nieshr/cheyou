@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ynyes.cheyou.entity.TdDemand;
+import com.ynyes.cheyou.entity.TdManager;
+import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.entity.TdServiceItem;
 import com.ynyes.cheyou.entity.TdSetting;
 import com.ynyes.cheyou.entity.TdUserComment;
 import com.ynyes.cheyou.entity.TdUserSuggestion;
 import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdManagerLogService;
+import com.ynyes.cheyou.service.TdManagerRoleService;
+import com.ynyes.cheyou.service.TdManagerService;
 import com.ynyes.cheyou.service.TdServiceItemService;
 import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserSuggestionService;
@@ -49,6 +53,12 @@ public class TdManagerSettingController {
     
     @Autowired
     TdDemandService tdDemandService;
+    
+    @Autowired
+    TdManagerRoleService tdManagerRoleService;
+    
+    @Autowired
+    TdManagerService tdManagerService;
     
     @RequestMapping
     public String setting(Long status, ModelMap map,
@@ -102,6 +112,19 @@ public class TdManagerSettingController {
             return "redirect:/Verwalter/login";
         }
         
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
+        
         if (null != __EVENTTARGET)
         {
             if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
@@ -149,6 +172,23 @@ public class TdManagerSettingController {
                         Long[] listSortId,
                         ModelMap map,
                         HttpServletRequest req){
+    	 String username = (String) req.getSession().getAttribute("manager");
+         if (null == username) {
+             return "redirect:/Verwalter/login";
+         }
+         
+         //管理员角色
+         TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+         TdManagerRole tdManagerRole = null;
+         
+         if (null != tdManager.getRoleId())
+         {
+             tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+         }
+         
+         if (null != tdManagerRole) {
+ 			map.addAttribute("tdManagerRole", tdManagerRole);
+ 		}
     	
     	if (null != __EVENTTARGET)
         {
@@ -236,6 +276,23 @@ public class TdManagerSettingController {
                         Long[] listSortId,
                         ModelMap map,
                         HttpServletRequest req){
+    	 String username = (String) req.getSession().getAttribute("manager");
+         if (null == username) {
+             return "redirect:/Verwalter/login";
+         }
+         
+         //管理员角色
+         TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+         TdManagerRole tdManagerRole = null;
+         
+         if (null != tdManager.getRoleId())
+         {
+             tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+         }
+         
+         if (null != tdManagerRole) {
+ 			map.addAttribute("tdManagerRole", tdManagerRole);
+ 		}
     	
     	if (null != __EVENTTARGET)
         {
