@@ -595,21 +595,21 @@ function del_goods_comb(obj) {
         <dl>
             <dt>同盟店返利比例</dt>
             <dd>
-                <input id="shopReturnRation" name="shopReturnRation" type="text" value="<#if goods?? && goods.shopReturnRation??>${goods.shopReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <input id="shopReturnRation" name="shopReturnRation" type="text" value="<#if goods?? && goods.shopReturnRation??>${goods.shopReturnRation?string("0.00")}<#else>0.02</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">同盟店返利 = 销售价 * 同盟店返利比例</span>
             </dd>
         </dl>
         <dl>
             <dt>平台服务费比例</dt>
             <dd>
-                <input id="platformServiceReturnRation" name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <input id="platformServiceReturnRation" name="platformServiceReturnRation" type="text" value="<#if goods?? && goods.platformServiceReturnRation??>${goods.platformServiceReturnRation?string("0.00")}<#else>0.04</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">平台服务费 = 销售价 * 平台服务费比例</span>
             </dd>
         </dl>
         <dl>
             <dt>培训服务费比例</dt>
             <dd>
-                <input id="trainServiceReturnRation" name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.00")}<#else>0</#if>" class="input normal" sucmsg="">
+                <input id="trainServiceReturnRation" name="trainServiceReturnRation" type="text" value="<#if goods?? && goods.trainServiceReturnRation??>${goods.trainServiceReturnRation?string("0.00")}<#else>0.05</#if>" class="input normal" sucmsg="">
                 <span class="Validform_checktip">培训服务费 = 供货价* 培训服务费比例</span>
             </dd>
         </dl>

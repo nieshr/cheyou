@@ -74,6 +74,7 @@ import com.ynyes.cheyou.service.TdOrderGoodsService;
 import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdPayRecordService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
+import com.ynyes.cheyou.service.TdShippingAddressService;
 import com.ynyes.cheyou.service.TdUserPointService;
 import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.util.QRCodeUtils;
@@ -137,6 +138,9 @@ public class TdOrderController extends AbstractPaytypeController {
 
     @Autowired
     private TdProductCategoryService tdProductCategoryService;
+    
+    @Autowired
+    private TdShippingAddressService tdShippingAddressService;
 
     /**
      * 立即购买
@@ -951,9 +955,23 @@ public class TdOrderController extends AbstractPaytypeController {
         TdUser user = tdUserService.findByUsernameAndIsEnabled(username);
 
         if (null != user) {
-            map.addAttribute("user", user);
+	        // 收货地址校验
+	        List<TdShippingAddress> addressList = user.getShippingAddressList();
+	        for (TdShippingAddress address : addressList) {
+				if(null != address)
+				{
+					if(null == address.getReceiverCarcode() || null == address.getReceiverCartype()
+							|| address.getReceiverCarcode().length()==0 || address.getReceiverCartype().length()==0)
+					{
+						tdShippingAddressService.delete(address);
+					}
+				}
+			}
+	        user = tdUserService.findByUsernameAndIsEnabled(username);
+	        map.addAttribute("user", user);
         }
 
+        
         List<TdCartGoods> selectedGoodsList = tdCartGoodsService
                 .findByUsernameAndIsSelectedTrue(username);
 

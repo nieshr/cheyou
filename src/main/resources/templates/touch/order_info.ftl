@@ -70,6 +70,8 @@ $(document).ready(function(){
                 </td>
             </tr>
         </table>
+        
+        <p class="red">请填写真实信息，以便到店核实，信息不符的，同盟店有权拒绝服务</p>
         <div id="addressForm" class="hide">
             <table class="mymember_address">
                   <tbody>
@@ -86,13 +88,13 @@ $(document).ready(function(){
                     </td>
                   </tr>
                   <tr>
-                  <th>车牌（选填）：</th>
+                  <th>*车牌：</th>
                   <td>
                   <input class="mytext" id="receiverCarcode" value="" type="text"/>
                   </td>
                   </tr>
                   <tr>
-                  <th>车型（选填）：</th>
+                  <th>*车型：</th>
                   <td>
                    <input class="mytext" id="receiverCartype" value="" type="text"/>
                   </td>
@@ -104,6 +106,7 @@ $(document).ready(function(){
                 </tbody>
                 </table>
             </div>
+            
   <p class="address">选择线下同盟店：</p>
   <div class="address">
     <select name="shopId" style="width:100%;" datatype="n" nullmsg="请选择同盟店" errormsg="请选择同盟店">
