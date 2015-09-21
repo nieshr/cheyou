@@ -71,7 +71,17 @@ function __doPostBack(eventTarget, eventArgument) {
   <tbody>
   <tr class="odd_bg">
     <th width="8%">选择</th>
-    <th align="left">优惠券类型</th>
+    <th align="left"><div class="rule-single-select">
+                        <select name="typeId" onchange="javascript:setTimeout(__doPostBack('changeType',''), 0)">
+                            <option value="0" <#if !typeId?? || typeId==0>selected="selected"</#if>>所有类型</option>
+                            <#if couponType_list??>
+                                <#list couponType_list as cou>
+                                    <option value="${cou.id?c}" <#if typeId?? && typeId==cou.id>selected="selected"</#if>>${cou.title!''}</option>
+                                </#list>
+                            </#if>                             
+                        </select>
+                    </div>
+                    </th>
     <th align="left" width="10%"><div class="rule-single-select">
                         <select name="diysiteId" onchange="javascript:setTimeout(__doPostBack('changeDiysite',''), 0)">
                             <option value="0" <#if !diysiteId?? || diysiteId==0>selected="selected"</#if>>所有同盟店</option>

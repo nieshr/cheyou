@@ -312,7 +312,7 @@ function checkTime(i)
           <div class="pro_price">
           <p class="p1">
               <span class="mr10">市场价</span>
-              <span class="mr20">￥：${goods.salePrice?string("0.00")}</span>
+              <span class="mr20">￥：${goods.marketPrice?string("0.00")}</span>
             </p>
           <p class="p1">
               <span class="mr10">起拍价</span>

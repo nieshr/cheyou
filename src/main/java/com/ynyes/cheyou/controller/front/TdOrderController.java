@@ -2501,12 +2501,13 @@ public class TdOrderController extends AbstractPaytypeController {
         if (null != tdUser) {
             Random random = new Random();
             String smscode = String.format("%04d", random.nextInt(9999));
+            tdOrder.setSmscode(smscode);
+            tdOrder = tdOrderService.save(tdOrder);
+            
             SMSUtil.send(tdOrder.getShippingPhone(), "29040",
                     new String[] { tdUser.getUsername(),
                             tdOrder.getOrderGoodsList().get(0).getGoodsTitle(),
                             smscode });
-            tdOrder.setSmscode(smscode);
-            tdOrder = tdOrderService.save(tdOrder);
         }
 
         // 给商户发短信

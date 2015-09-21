@@ -126,7 +126,7 @@ function move()
     
         <div class="wdbgg">
             <#if username??>
-                <a href="/user">${usermobile!''}<i></i></a>
+                <a href="/user">${user.mobile!''}<i></i></a>
                 <a href="/logout">退出<i></i></a>
             <!-- lichong -->
             <#elseif diysiteUsername??>

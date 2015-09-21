@@ -572,44 +572,88 @@ public class TdManagerOrderController {
         	if (null != statusId) {
     			if (statusId.equals(0L)) {				
                 	if (type.equals(0L)) {
-                		List<TdOrder> list = tdOrderService.findAll();                   	
-                    	price = countprice(list);
-                    	sales = countsales(list);
-                    	map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
-                    	if (null != exportUrl) {
-                    		Page<TdOrder> tdOrderPage = tdOrderService.findAllOrderByIdDesc(page, size);
-                          	
-                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
-                          		download(wb, username, resp);
-							}                          	                          
-						}
+                		if(null != keywords)//订单号
+                		{
+                			List<TdOrder> list = tdOrderService.findAll();                   	
+                			price = countprice(list);
+                			sales = countsales(list);
+                			map.addAttribute("order_page", tdOrderService.searchByOrderNumber(keywords,page,size));
+                			if (null != exportUrl) {
+                				Page<TdOrder> tdOrderPage = tdOrderService.searchByOrderNumber(keywords,page,size);
+                				
+                				if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
+                					download(wb, username, resp);
+                				}                          	                          
+                			}
+                		}else{
+                			List<TdOrder> list = tdOrderService.findAll();                   	
+                			price = countprice(list);
+                			sales = countsales(list);
+                			map.addAttribute("order_page", tdOrderService.findAllOrderByIdDesc(page, size));
+                			if (null != exportUrl) {
+                				Page<TdOrder> tdOrderPage = tdOrderService.findAllOrderByIdDesc(page, size);
+                				
+                				if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
+                					download(wb, username, resp);
+                				}                          	                          
+                			}
+                		}
     				}
                 	else {
-                		List<TdOrder> list = tdOrderService.findBytypeIdOrderByIdDesc(type);
-                		price = countprice(list);
-                    	sales = countsales(list);
-                		map.addAttribute("order_page", tdOrderService.findBytypeIdOrderByIdDesc(type, page, size));
-                		if (null != exportUrl) {
-                    		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdOrderByIdDesc(type, page, size);
-                          	
-                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
-                          		download(wb, username, resp);
-							}                         	                           
-						}
-    				}				
+                		if(null != keywords){//订单号
+                			List<TdOrder> list = tdOrderService.searchByOrderNumberAndTypeIdOrderByIdDesc(keywords,type);
+	                		price = countprice(list);
+	                    	sales = countsales(list);
+	                		map.addAttribute("order_page", tdOrderService.searchByOrderNumberAndTypeIdOrderByIdDesc(keywords,type, page, size));
+	                		if (null != exportUrl) {
+	                    		Page<TdOrder> tdOrderPage = tdOrderService.searchByOrderNumberAndTypeIdOrderByIdDesc(keywords,type, page, size);
+	                          	
+	                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
+	                          		download(wb, username, resp);
+								}                         	                           
+							}
+                		}else{
+	                		List<TdOrder> list = tdOrderService.findBytypeIdOrderByIdDesc(type);
+	                		price = countprice(list);
+	                    	sales = countsales(list);
+	                		map.addAttribute("order_page", tdOrderService.findBytypeIdOrderByIdDesc(type, page, size));
+	                		if (null != exportUrl) {
+	                    		Page<TdOrder> tdOrderPage = tdOrderService.findBytypeIdOrderByIdDesc(type, page, size);
+	                          	
+	                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
+	                          		download(wb, username, resp);
+								}                         	                           
+							}
+	    				}
+                	}
     			}else{
-    				if (type.equals(0L)) {
-    					List<TdOrder> list = tdOrderService.findByStatusOrderByIdDesc(statusId);
-    					price = countprice(list);
-                    	sales = countsales(list);
-    					map.addAttribute("order_page", tdOrderService.findByStatusOrderByIdDesc(statusId, page, size));
-    					if (null != exportUrl) {
-                    		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusOrderByIdDesc(statusId, page, size);
-                          	
-                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
-                          		download(wb, username, resp);
-							}                         	                           
-						}
+    				if (type.equals(0L)) {//---------------------订单号-------------------------为完成-------------------------
+    					if(null != keywords){
+    						List<TdOrder> list = tdOrderService.searchByOrderNumberAndStatusOrderByIdDesc(keywords,statusId);
+	    					price = countprice(list);
+	                    	sales = countsales(list);
+	    					map.addAttribute("order_page", tdOrderService.searchByOrderNumberAndStatusOrderByIdDesc(keywords,statusId, page, size));
+	    					if (null != exportUrl) {
+	                    		Page<TdOrder> tdOrderPage = tdOrderService.searchByOrderNumberAndStatusOrderByIdDesc(keywords,statusId, page, size);
+	                          	
+	                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
+	                          		download(wb, username, resp);
+								}                         	                           
+							}
+    					}
+    					else {
+	    					List<TdOrder> list = tdOrderService.findByStatusOrderByIdDesc(statusId);
+	    					price = countprice(list);
+	                    	sales = countsales(list);
+	    					map.addAttribute("order_page", tdOrderService.findByStatusOrderByIdDesc(statusId, page, size));
+	    					if (null != exportUrl) {
+	                    		Page<TdOrder> tdOrderPage = tdOrderService.findByStatusOrderByIdDesc(statusId, page, size);
+	                          	
+	                          	if (ImportData(tdOrderPage, row, cell, sheet, timeId)) {
+	                          		download(wb, username, resp);
+								}                         	                           
+							}
+    					}
     				}
     				else{					
     					List<TdOrder> list = tdOrderService.findByStatusAndTypeIdOrderByIdDesc(statusId, type);

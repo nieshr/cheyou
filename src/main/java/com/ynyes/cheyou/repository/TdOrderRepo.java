@@ -113,5 +113,12 @@ public interface TdOrderRepo extends
      */
     List<TdOrder> findByStatusId(Long statusId);
 //    List<TdOrder> findAll();
+    /**
+     * 按订单号查询
+     * @author libiao
+     */
+    Page<TdOrder> findByOrderNumberContainingOrderByIdDesc(String orderNumber,Pageable page);
+    List<TdOrder> findByOrderNumberContainingAndTypeIdOrderByIdDesc(String keywords,Long type);
+    Page<TdOrder> findByOrderNumberContainingAndTypeIdOrderByIdDesc(String keywords,Long type,Pageable page);
     
 }

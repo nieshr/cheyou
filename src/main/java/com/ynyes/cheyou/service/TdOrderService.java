@@ -330,6 +330,8 @@ public class TdOrderService {
     public List<TdOrder> findBytypeIdOrderByIdDesc(long typeId){
     	return repository.findBytypeIdOrderByIdDesc(typeId);
     }
+    
+    
     /**
 	 * @author lc
 	 * @注释 按时间、订单类型和订单状态查询
@@ -376,4 +378,40 @@ public class TdOrderService {
     public List<TdOrder> findAll(Long statusId){
     	return (List<TdOrder>) repository.findAll();
     }
+    
+    public Page<TdOrder> searchByOrderNumber(String orderNumber,int page,int size){
+    	if(null == orderNumber){
+    		return null;
+    	}
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByOrderNumberContainingOrderByIdDesc(orderNumber, pageRequest);
+    }
+    
+    public List<TdOrder> searchByOrderNumberAndTypeIdOrderByIdDesc(String keywords,Long type){
+    	if(null == keywords){
+    		return null;
+    	}
+    	return repository.findByOrderNumberContainingAndTypeIdOrderByIdDesc(keywords,type);
+    }
+    public Page<TdOrder> searchByOrderNumberAndTypeIdOrderByIdDesc(String keywords,Long type,int page, int size){
+    	if(null == keywords){
+    		return null;
+    	}
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByOrderNumberContainingAndTypeIdOrderByIdDesc(keywords, type, pageRequest);
+    }
+    //====================================================================================
+    //===========================未    完    成===========================================
+    //====================================================================================
+    public Page<TdOrder> searchByOrderNumberAndStatusOrderByIdDesc(String keywords,long StatusId, int page, int size){
+    	if(null == keywords){
+    		return null;
+    	}
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByStatusIdOrderByIdDesc(StatusId, pageRequest);
+    }
+    public List<TdOrder> searchByOrderNumberAndStatusOrderByIdDesc(String keywords,long StatusId){
+    	return repository.findByStatusIdOrderByIdDesc(StatusId);
+    }
+    
 }

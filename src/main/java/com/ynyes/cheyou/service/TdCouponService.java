@@ -192,6 +192,11 @@ public class TdCouponService {
         
         return repository.findByIsDistributtedTrueOrderByIdDesc(pageRequest);
     }
+    public Page<TdCoupon> findByTypeIdAndIsDistributtedTrueOrderByIdDesc(Long typeId,int page,int size)
+    {
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByTypeIdAndIsDistributtedTrueOrderByIdDesc(typeId, pageRequest);
+    }
     
     //根据核销状态查找
     public Page<TdCoupon> findByIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(int page, int size){
@@ -202,6 +207,15 @@ public class TdCouponService {
     	PageRequest pageRequest = new PageRequest(page, size);
     	return repository.findByIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(pageRequest);
     }
+    public Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(Long typeId,int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByTypeIdAndIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(typeId,pageRequest);
+    }
+    public Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(Long typeId, int page, int size){
+    	PageRequest pageRequest = new PageRequest(page, size);
+    	return repository.findByTypeIdAndIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(typeId,pageRequest);
+    }
+    
     
     //根据同盟店id核销状态查找
     public Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdOrderByIdDesc(Long diysiteId, int page, int size)
