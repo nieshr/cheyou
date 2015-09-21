@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.cheyou.entity.TdManager;
+import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.service.TdManagerLogService;
+import com.ynyes.cheyou.service.TdManagerRoleService;
+import com.ynyes.cheyou.service.TdManagerService;
 import com.ynyes.cheyou.service.TdParameterCategoryService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
 
@@ -36,6 +40,12 @@ public class TdManagerProductCategoryController {
     @Autowired
     TdParameterCategoryService tdParameterCategoryService;
 
+    @Autowired
+    TdManagerRoleService tdManagerRoleService;
+    
+    @Autowired
+    TdManagerService tdManagerService;
+    
     @RequestMapping(value = "/list")
     public String categoryList(String __EVENTTARGET, String __EVENTARGUMENT,
             String __VIEWSTATE, Long[] listId, Integer[] listChkId,
@@ -45,6 +55,18 @@ public class TdManagerProductCategoryController {
             return "redirect:/Verwalter/login";
         }
 
+      //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
         if (null != __EVENTTARGET) {
             switch (__EVENTTARGET) {
             case "btnSave":

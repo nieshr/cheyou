@@ -46,6 +46,8 @@ public class TdManagerManagerController {
     @Autowired
     TdNavigationMenuService tdNavigationMenuService;
     
+    
+    
     @RequestMapping(value="/list")
     public String managerList(Integer page,
                           Integer size,
@@ -61,6 +63,20 @@ public class TdManagerManagerController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+        
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
+        
         if (null != __EVENTTARGET)
         {
             if (__EVENTTARGET.equalsIgnoreCase("btnDelete"))
@@ -121,6 +137,19 @@ public class TdManagerManagerController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+        
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
         
         if (null != __EVENTTARGET)
         {

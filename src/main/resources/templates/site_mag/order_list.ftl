@@ -74,9 +74,11 @@ function __doPostBack(eventTarget, eventArgument) {
                         <a onclick="return ExePostBack('btnConfirm','确认后将进入待发货状态，是否继续？');" class="save" href="javascript:__doPostBack('btnConfirm','')"><i></i><span>确认订单</span></a>
                     </li>
                     <#elseif statusId?? && 7==statusId>
+                    <#if tdManagerRole?? && tdManagerRole.isSys>
                     <li>
                         <a onclick="return ExePostBack('btnDelete','删除后订单将无法恢复，是否继续？');" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除订单</span></a>
                     </li>
+                    </#if>
                     </#if>
                     <li>
                         <a class="all"><span>订单总额：￥${price!0.00}</span></a>

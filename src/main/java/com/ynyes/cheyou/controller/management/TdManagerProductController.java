@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ynyes.cheyou.entity.TdManager;
+import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.entity.TdProduct;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdManagerLogService;
+import com.ynyes.cheyou.service.TdManagerRoleService;
+import com.ynyes.cheyou.service.TdManagerService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
 import com.ynyes.cheyou.service.TdProductService;
 import com.ynyes.cheyou.util.SiteMagConstant;
@@ -45,6 +49,12 @@ public class TdManagerProductController {
     
     @Autowired
     TdManagerLogService tdManagerLogService;
+    
+    @Autowired
+    TdManagerRoleService tdManagerRoleService;
+    
+    @Autowired
+    TdManagerService tdManagerService;
     
     @RequestMapping(value="/parameter/{id}", method = RequestMethod.GET)
     public String parameter(@PathVariable Long id, Long goodsId, ModelMap map,
@@ -139,6 +149,20 @@ public class TdManagerProductController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
+        
+      //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
+        
         if (null != __EVENTTARGET)
         {
             if (__EVENTTARGET.equalsIgnoreCase("btnPage"))

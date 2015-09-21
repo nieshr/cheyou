@@ -48,7 +48,9 @@ var theForm = document.forms['form1'];
     <div class="l-list">
       <ul class="icon-list">
         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
-        <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除日志</span></a></li>
+        <#if tdManagerRole?? && tdManagerRole.isSys>
+            <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除日志</span></a></li>
+        </#if>
       </ul>
     </div>
   </div>

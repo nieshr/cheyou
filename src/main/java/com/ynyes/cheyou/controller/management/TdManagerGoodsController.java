@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ynyes.cheyou.entity.TdGoods;
 import com.ynyes.cheyou.entity.TdGoodsParameter;
+import com.ynyes.cheyou.entity.TdManager;
+import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.entity.TdPriceChangeLog;
 import com.ynyes.cheyou.entity.TdProductCategory;
 import com.ynyes.cheyou.service.TdArticleService;
@@ -29,6 +31,8 @@ import com.ynyes.cheyou.service.TdBrandService;
 import com.ynyes.cheyou.service.TdGoodsParameterService;
 import com.ynyes.cheyou.service.TdGoodsService;
 import com.ynyes.cheyou.service.TdManagerLogService;
+import com.ynyes.cheyou.service.TdManagerRoleService;
+import com.ynyes.cheyou.service.TdManagerService;
 import com.ynyes.cheyou.service.TdParameterService;
 import com.ynyes.cheyou.service.TdPriceChangeLogService;
 import com.ynyes.cheyou.service.TdProductCategoryService;
@@ -84,6 +88,11 @@ public class TdManagerGoodsController {
     @Autowired
     TdSiteService tdSiteService;
 
+    @Autowired
+    TdManagerRoleService tdManagerRoleService;
+    
+    @Autowired
+    TdManagerService tdManagerService;
     @RequestMapping(value = "/edit/parameter/{categoryId}", method = RequestMethod.POST)
     public String parameter(@PathVariable Long categoryId, ModelMap map,
             HttpServletRequest req) {
@@ -344,7 +353,20 @@ public class TdManagerGoodsController {
         if (null == username) {
             return "redirect:/Verwalter/login";
         }
-
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
+              
+        
         if (null == page || page < 0) {
             page = 0;
         }

@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ynyes.cheyou.entity.TdAd;
+import com.ynyes.cheyou.entity.TdManager;
+import com.ynyes.cheyou.entity.TdManagerRole;
 import com.ynyes.cheyou.service.TdAdService;
 import com.ynyes.cheyou.service.TdAdTypeService;
 import com.ynyes.cheyou.service.TdManagerLogService;
+import com.ynyes.cheyou.service.TdManagerRoleService;
+import com.ynyes.cheyou.service.TdManagerService;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
 /**
@@ -35,6 +39,11 @@ public class TdManagerAdController {
     @Autowired
     TdManagerLogService tdManagerLogService;
     
+    @Autowired
+    TdManagerRoleService tdManagerRoleService;
+    
+    @Autowired
+    TdManagerService tdManagerService;
     @RequestMapping(value="/list")
     public String setting(Integer page,
                           Integer size,
@@ -51,6 +60,18 @@ public class TdManagerAdController {
         {
             return "redirect:/Verwalter/login";
         }
+        //管理员角色
+        TdManager tdManager = tdManagerService.findByUsernameAndIsEnableTrue(username);
+        TdManagerRole tdManagerRole = null;
+        
+        if (null != tdManager.getRoleId())
+        {
+            tdManagerRole = tdManagerRoleService.findOne(tdManager.getRoleId());
+        }
+        
+        if (null != tdManagerRole) {
+			map.addAttribute("tdManagerRole", tdManagerRole);
+		}
         
         if (null != __EVENTTARGET)
         {
