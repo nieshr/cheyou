@@ -178,7 +178,7 @@ DD_belatedPNG.fix('.,img,background');
      <tr>
         <th>车牌：</th>
         <td>
-            <input class="mytext" name="receiverCarcode" datatype="*7-7|*0-0" errormsg="请输入正确的车牌号码格式！" value="<#if address??>${address.receiverCarcode!''}</#if>" type="text">
+            <input class="mytext" name="receiverCarcode" datatype="*" errormsg="请输入正确的车牌号码格式！" value="<#if address??>${address.receiverCarcode!''}</#if>" type="text">
             <span class="Validform_checktip">*车牌号码</span>
         </td>
       </tr>
@@ -187,7 +187,7 @@ DD_belatedPNG.fix('.,img,background');
       <tr>
         <th>车型：</th>
         <td>
-            <input class="mytext" name="receiverCaryype" datatype="*1-128|*0-0" errormsg="请输入正确的格式！" value="<#if address??>${address.receiverCartype!''}</#if>" type="text">
+            <input class="mytext" name="receiverCaryype" datatype="*" errormsg="请输入正确的格式！" value="<#if address??>${address.receiverCartype!''}</#if>" type="text">
             <span class="Validform_checktip">*汽车型号</span>
         </td>
       </tr>   

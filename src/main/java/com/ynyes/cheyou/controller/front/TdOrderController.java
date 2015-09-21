@@ -2466,7 +2466,9 @@ public class TdOrderController extends AbstractPaytypeController {
         }
 
         if (tdOrder.getStatusId().equals(2L)
-                && !tdOrder.getTotalLeftPrice().equals(0)) {
+                && !tdOrder.getTotalLeftPrice().equals(0) 
+                && tdOrder.getTypeId().equals(4) 
+                || tdOrder.getTypeId().equals(5)) {
             // 待付尾款
             tdOrder.setStatusId(3L);
             tdOrder = tdOrderService.save(tdOrder);
