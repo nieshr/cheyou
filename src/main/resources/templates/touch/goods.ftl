@@ -27,7 +27,7 @@ $(document).ready(function(){
             $("#quantity").val(q-1);
         }
         
-        $("#addCart").attr("href", "/cart/init?id=${goods.id?c}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+        $("#addCart").attr("href", "/cart/init?id=${goods.id?c}&m=1&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
     });
     
     $("#id-plus").click(function(){
@@ -44,7 +44,7 @@ $(document).ready(function(){
         <#else>
             $("#quantity").val(q+1);
         </#if>
-        $("#addCart").attr("href", "/cart/init?id=${goods.id?c}&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
+        $("#addCart").attr("href", "/cart/init?id=${goods.id?c}&m=1&quantity=" + $("#quantity").val() + "<#if qiang??>&qiang=${qiang}</#if>");
     
     });
 });
