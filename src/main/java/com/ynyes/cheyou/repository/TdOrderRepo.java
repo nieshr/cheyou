@@ -118,7 +118,18 @@ public interface TdOrderRepo extends
      * @author libiao
      */
     Page<TdOrder> findByOrderNumberContainingOrderByIdDesc(String orderNumber,Pageable page);
-    List<TdOrder> findByOrderNumberContainingAndTypeIdOrderByIdDesc(String keywords,Long type);
-    Page<TdOrder> findByOrderNumberContainingAndTypeIdOrderByIdDesc(String keywords,Long type,Pageable page);
-    
+    List<TdOrder> findByOrderNumberContainingAndTypeIdOrderByIdDesc(String keywords,long type);
+    Page<TdOrder> findByOrderNumberContainingAndTypeIdOrderByIdDesc(String keywords,long type,Pageable page);
+    List<TdOrder> findByOrderNumberContainingAndStatusIdOrderByIdDesc(String orderNumber,long statusId);
+    Page<TdOrder> findByOrderNumberContainingAndStatusIdOrderByIdDesc(String orderNumber,long statusId,Pageable page);
+    List<TdOrder> findByOrderNumberContainingAndStatusIdAndTypeIdOrderByIdDesc(String orderNumber,long statusId,long  typeId);
+    Page<TdOrder> findByOrderNumberContainingAndStatusIdAndTypeIdOrderByIdDesc(String orderNumber,long statusId,long  typeId,Pageable pageRequest);
+    List<TdOrder> findByOrderNumberContainingAndOrderTimeAfterOrderByIdDesc(String orderNumber,Date time);
+    Page<TdOrder> findByOrderNumberContainingAndOrderTimeAfterOrderByIdDesc(String orderNumber,Date time, Pageable page);
+    List<TdOrder> findByOrderNumberContainingAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long typeId, Date time);
+    Page<TdOrder> findByOrderNumberContainingAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long typeId, Date time, Pageable page);
+    List<TdOrder> findByOrderNumberContainingAndStatusIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long statusId, Date time);
+    Page<TdOrder> findByOrderNumberContainingAndStatusIdAndOrderTimeAfterOrderByIdDesc(String OrderNumber,long statusId, Date time, Pageable page);
+    List<TdOrder> findByOrderNumberContainingAndStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long statusId, long typeId, Date time);
+    Page<TdOrder> findByOrderNumberContainingAndStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long statusId, long typeId, Date time, Pageable page);
 }

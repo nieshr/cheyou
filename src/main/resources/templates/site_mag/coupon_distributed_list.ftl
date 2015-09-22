@@ -57,7 +57,7 @@ function __doPostBack(eventTarget, eventArgument) {
         <li><a onclick="return ExePostBack('btnDelete');" id="btnDelete" class="del" href="javascript:__doPostBack('btnDelete','')"><i></i><span>删除</span></a></li>
       </ul>
       <div class="r-list">
-                <input name="keywords" type="text" class="keyword">
+                <input name="keywords" type="text" class="keyword" value="<#if keywords??>${keywords!''}</#if>">
                 <a id="lbtnSearch" class="btn-search" href="javascript:__doPostBack('btnSearch','')">查询</a>
       </div>
     </div>

@@ -47,9 +47,6 @@ public interface TdCouponRepo extends
     Page<TdCoupon> findByIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(Pageable page);
     Page<TdCoupon> findByIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(Pageable page);
     
-    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(Long typeId,Pageable page);//
-    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(Long typeId,Pageable page);//
-    
     Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdOrderByIdDesc(Long diysiteId, Pageable page);
     Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderByIdDesc(Long diysiteId, Pageable page);
     Page<TdCoupon> findByIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderByIdDesc(Long diysiteId, Pageable page);
@@ -75,4 +72,37 @@ public interface TdCouponRepo extends
     
     TdCoupon findByTypeId(Long typeId);
     TdCoupon findTopByTypeIdAndIsDistributtedFalse(Long typeId);
+    
+    /**
+     *  类型筛选
+     *  @author libiao
+     *  
+     * @param typeId
+     * @param page
+     * @return
+     */
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedTrueOrderByIdDesc(Long typeId,Pageable page);//
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedFalseOrderByIdDesc(Long typeId,Pageable page);//
+    
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndDiySiteIdOrderByIdDesc(long typeId,Long diysiteId, Pageable page);
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndDiySiteIdAndIsUsedTrueOrderByIdDesc(long typeId,long diysiteId,Pageable page);
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndDiySiteIdAndIsUsedFalseOrderByIdDesc(long typeId,Long diysiteId, Pageable page);
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndUsernameContainingOrTypeIdAndIsDistributtedTrueAndMobileContainingOrTypeIdAndIsDistributtedTrueAndCarCodeContainingOrderByIdDesc(long typeId,String keywords,long typeId1,String keywords1,long typeId2,String keywords2, Pageable page);
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedTrueAndUsernameContainingOrTypeIdAndIsDistributtedTrueAndIsUsedTrueAndMobileContainingOrTypeIdAndIsDistributtedTrueAndIsUsedTrueAndCarCodeContainingOrderByIdDesc(long typeId,String keywords,long typeId1,String keywords1,long typeId2,String keywords2,Pageable page);
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedFalseAndUsernameContainingOrTypeIdAndIsDistributtedTrueAndIsUsedFalseAndMobileContainingOrTypeIdAndIsDistributtedTrueAndIsUsedFalseAndCarCodeContainingOrderByIdDesc(long typeId,String keywords,long typeId1,String keywords1,long typeId2,String keywords2,Pageable page);
+    
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndDiySiteIdAndUsernameContainingOrTypeIdAndIsDistributtedTrueAndDiySiteIdAndMobileContainingOrTypeIdAndIsDistributtedTrueAndDiySiteIdAndCarCodeContainingOrderByIdDesc(long typeId ,long diysiteId,String  keywords,
+    		long typeId1,long diysiteId1, String keywords1,
+    		long typeId2,long diysiteId2, String keywords2,Pageable page);
+
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndUsernameContainingOrTypeIdAndIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndMobileContainingOrTypeIdAndIsDistributtedTrueAndIsUsedTrueAndDiySiteIdAndCarCodeContainingOrderByIdDesc(long typeId,long diysiteId, String keywords,
+    		long typeId1,long diysiteId1, String keywords1,
+    		long typeId2,long diysiteId2, String keywords2,Pageable page);
+    
+    Page<TdCoupon> findByTypeIdAndIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndUsernameContainingOrTypeIdAndIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndMobileContainingOrTypeIdAndIsDistributtedTrueAndIsUsedFalseAndDiySiteIdAndCarCodeContainingOrderByIdDesc(long typeId,long diysiteId, String keywords,
+    		long typeId1,long diysiteId1, String keywords1,
+    		long typeId2,long diysiteId2, String keywords2,Pageable page);
+    
+    
+    
 }
