@@ -113,12 +113,17 @@ function loadMap(x, y)
                             <p>服务电话：<span>${item.serviceTele!''}</span><p>                          
                             <p>本店共完成<span><a href="#"><#if ("shop_orderFinish_"+item.id?c)?eval??>${("shop_orderFinish_"+item.id?c)?eval}<#else>0</#if></a></span>个安装单，有<span><a href="#"><#if ("shop_orderComment_"+item.id?c)?eval?? && ("shop_orderComment_"+item.id?c)?eval!=0>${("shop_orderComment_"+item.id?c)?eval}<#else>0</#if></a></span>条评论</p>
                             <p class="dituxinxin">
-                                <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 0 >start01.png<#else>start03.png</#if>" /></a>
+                                <a class="fl" href="#"><img src="/client/images/content/start01.png" /></a>
+                                <a class="fl" href="#"><img src="/client/images/content/start01.png" /></a>
+                                <a class="fl" href="#"><img src="/client/images/content/start01.png" /></a>
+                                <a class="fl" href="#"><img src="/client/images/content/start01.png" /></a>
+                                <a class="fl" href="#"><img src="/client/images/content/start02.png" /></a>
+                              <!--   
                                 <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 1 >start01.png<#else>start03.png</#if>" /></a>
                                 <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 2 >start01.png<#else>start03.png</#if>" /></a>
                                 <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 3 >start01.png<#else>start03.png</#if>" /></a>
                                 <a class="fl" href="#"><img src="/client/images/content/<#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 4 >start02.png<#else>start03.png</#if>" /></a>
-                             <!--    <#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 0>
+                                <#if ("shop_serviceStars"++item.id)?eval?? && ("shop_serviceStars"++item.id)?eval gt 0>
                                     <#list 1..("shop_serviceStars"++item.id)?eval as starCount>
                                         <a class="fl" href="javascript:;"><img src="/client/images/content/start01.png" /></a>
                                     </#list>

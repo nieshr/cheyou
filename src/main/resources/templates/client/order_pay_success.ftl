@@ -50,7 +50,7 @@
     <div id="trans-status">
         <div class="notice-title status-success">
             <img class="notice-icon" title="付款成功" src="/client/img/transsucc.png"></img>
-            <span class="notice-content">付款成功，我们将尽快安排为您送货！</span>
+            <span class="notice-content">付款成功，确认收货后您可获得相应积分！</span>
         </div>
     </div>
     <div class="clear h40"></div>

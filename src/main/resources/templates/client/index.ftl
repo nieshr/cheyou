@@ -749,9 +749,9 @@ function delItem(id)
         <h3>1元抢拍</h3>
         <a class="a1" href="/info/content/94?mid=12">抢拍细则</a>
         <menu id="miao-menu">
-            <a class="sel" href="javascript:;" onmouseenter="javascript:miaoPageChang(0);">今日抢拍</a>
-            <a href="javascript:;" onmouseenter="javascript:miaoPageChang(1);">明日抢拍</a>
-            <a href="javascript:;" onmouseenter="javascript:miaoPageChang(2);">往期回顾</a>
+            <a class="sel" href="javascript:;" onclick="javascript:miaoPageChang(0);">今日抢拍</a>
+            <a href="javascript:;" onclick="javascript:miaoPageChang(1);">明日抢拍</a>
+            <a href="javascript:;" onclick="javascript:miaoPageChang(2);">往期回顾</a>
         </menu>
         <div class="clear"></div>
     </section>
@@ -764,7 +764,7 @@ function delItem(id)
                     <a href="javascript:miaoClockChang(1);">14:00抢拍<i></i></a>
                     <a href="javascript:miaoClockChang(2);">20:00抢拍<i></i></a>
                 </div>
-                <a href="/info/list/12?catId=24">抢拍细则</a>
+                <a href="/info/content/94?mid=12">抢拍细则</a>
             </menu>
             <div class="knockbox miaocur">
                 <dl>
@@ -1818,7 +1818,7 @@ function priceSearch2${item_index}(priceid,boxid,x,y){
                         <span class="c9">低于市场价${((item.salePrice - item.groupSaleHundredPrice)/item.salePrice*100)?string("0")}%</span>
                         <span class="sp1">${item.totalclicks!'0'}人关注</span>
                     </p>
-                    <b><i style="line-height:0px;font-size:0px;display:block;width:<#if item.totalclicks?? && item.totalclicks < 100>${item.totalclicks!'0'}<#else>100</#if>%;height:7px;border-radius:4px;background:#019ad3;"></i></b>
+                    <b><i style="line-height:0px;font-size:0px;display:block;width:<#if item.totalclicks?? && item.totalclicks/4 < 100>${item.totalclicks/4!'0'}<#else>100</#if>%;height:7px;border-radius:4px;background:#019ad3;"></i></b>
                 </#list>
             </#if>
     </section>

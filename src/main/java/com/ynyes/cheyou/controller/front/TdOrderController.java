@@ -343,6 +343,14 @@ public class TdOrderController extends AbstractPaytypeController {
 
         // 选中商品
         // map.addAttribute("selected_goods_list", selectedGoodsList);
+        
+        Date curr = new Date();
+        Calendar cal = Calendar.getInstance();
+        
+        cal.setTime(curr);
+        cal.add(Calendar.DATE, 1);
+        
+        map.addAttribute("tomorrow", cal.getTime());
 
         tdCommonService.setHeader(map, req);
 
@@ -1143,6 +1151,14 @@ public class TdOrderController extends AbstractPaytypeController {
 
         // 选中商品
         map.addAttribute("buy_goods_list", selectedGoodsList);
+        
+        Date curr = new Date();
+        Calendar cal = Calendar.getInstance();
+        
+        cal.setTime(curr);
+        cal.add(Calendar.DATE, 1);
+        
+        map.addAttribute("tomorrow", cal.getTime());
 
         tdCommonService.setHeader(map, req);
 

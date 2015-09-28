@@ -20,7 +20,7 @@
             <a href="/user/diysite/member">会员列表</a>
             <a href="/diysite/order/orderincome">订单收入</a>
             <a href="/diysite/order/rebateincome">返利收入</a>
-            <a href="/diysite/order/couponconfirm">免费券核销</a>
+            <a href="/diysite/order/couponconfirm">体验券核销</a>
             <a href="/diysite/order/password">修改密码</a>
         </div>
     </div>

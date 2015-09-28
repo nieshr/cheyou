@@ -45,6 +45,8 @@ public interface TdOrderRepo extends
   
     Long countByUsernameAndStatusId(String username, Long statusId);
     
+    Long countByUsername(String username);
+    
     TdOrder findByOrderNumber(String orderNumber);
     
     /**

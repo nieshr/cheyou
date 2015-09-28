@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.xpath.compiler.Keywords;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -32,6 +31,7 @@ import com.ynyes.cheyou.service.TdDemandService;
 import com.ynyes.cheyou.service.TdManagerLogService;
 import com.ynyes.cheyou.service.TdManagerRoleService;
 import com.ynyes.cheyou.service.TdManagerService;
+import com.ynyes.cheyou.service.TdOrderService;
 import com.ynyes.cheyou.service.TdUserCashRewardService;
 import com.ynyes.cheyou.service.TdUserCollectService;
 import com.ynyes.cheyou.service.TdUserCommentService;
@@ -42,7 +42,6 @@ import com.ynyes.cheyou.service.TdUserRecentVisitService;
 import com.ynyes.cheyou.service.TdUserReturnService;
 import com.ynyes.cheyou.service.TdUserService;
 import com.ynyes.cheyou.service.TdUserSuggestionService;
-import com.ynyes.cheyou.util.ClientConstant;
 import com.ynyes.cheyou.util.SiteMagConstant;
 
 /**
@@ -96,6 +95,9 @@ public class TdManagerUserController {
      
     @Autowired
     TdManagerService tdManagerService;
+    
+    @Autowired
+    private TdOrderService tdOrderService;
 
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	@ResponseBody
@@ -225,7 +227,10 @@ public class TdManagerUserController {
 		map.addAttribute("__VIEWSTATE", __VIEWSTATE);
 		map.addAttribute("roleId", roleId);
 		if (null != id) {
-			map.addAttribute("user", tdUserService.findOne(id));
+		    TdUser tdUser = tdUserService.findOne(id);
+		    
+			map.addAttribute("user", tdUser);
+			map.addAttribute("user_total_orders", tdOrderService.countByUsername(tdUser.getUsername()));
 		}
 		return "/site_mag/user_edit";
 	}

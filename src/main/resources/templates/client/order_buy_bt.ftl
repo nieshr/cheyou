@@ -188,7 +188,7 @@
         </section>
         <section class="order_check fr" style="width:40%;">
             <h3>选择预约安装时间</h3>
-            <input name="appointmentTime" type="text" value="" datatype="*" class="text input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" errormsg="请选择预约安装时间" nullmsg="请选择预约安装时间">
+            <input name="appointmentTime" type="text" value="<#if tomorrow??>${tomorrow?string("yyyy-MM-dd HH:mm:ss")}</#if>" datatype="*" class="text input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" errormsg="请选择预约安装时间" nullmsg="请选择预约安装时间">
             <a href="javascript:;"><img src="/client/images/content/rl.png" /></a>
         </section>
         <div class="clear h20"></div>

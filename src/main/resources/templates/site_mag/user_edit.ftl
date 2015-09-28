@@ -192,10 +192,33 @@ $(function () {
   <dl>
     <dt>修改用户粮草</dt>
     <dd>
-        <input name="totalPoints1" id="totalPoints" type="text" class="input" value="${user.totalPoints?c!"0"}">
+        <input name="totalPoints1" id="totalPoints" type="text" class="input" value="<#if user?? && user.totalPoints??>${user.totalPoints?c}<#else>0</#if>">
         <input name="btnEditRemark" type="button" id="btnEditRemark" class="ibtn" value="确认修改" style="margin-top: -3px;">
     </dd>
   </dl> 
+  <dl>
+    <dt>安装信息</dt>
+    <dd>
+        <#if user?? && user.shippingAddressList?? && user.shippingAddressList?size gt 0>
+        <table width="50%" border="0" cellspacing="0" cellpadding="0" class="ltable">
+            <tbody>
+            <tr class="odd_bg">
+                <th align="center" width="15%">姓名</th>
+                <th align="center" width="10%">电话</th>
+                <th align="center" width="18%">车型</th>
+            </tr>
+            <#list user.shippingAddressList as item>
+                <tr>
+                    <td align="center">${item.receiverName!''}</td>
+                    <td align="center">${item.receiverMobile!''}</td>
+                    <td align="center">${item.receiverCartype!''}</td>
+                </tr>
+            </#list>
+            </tbody>
+        </table>
+        </#if>
+    </dd>
+  </dl>
   <!--  <dl>
     <dt>修改备注</dt>
     <dd>       
@@ -276,20 +299,24 @@ $(function () {
   </dl>
   <dl>
     <dt>用户等级名称</dt>
-    <dd><span><#if user??>${user.userLevelTitle!""}</#if></span></dd>
+    <dd><span><#if user??>${user.userLevelTitle!"0"}</#if></span></dd>
   </dl>
  
   <dl>
     <dt>咨询总数</dt>
-    <dd><span><#if user??>${user.totalConsults!""}</#if></span></dd>
+    <dd><span><#if user??>${user.totalConsults!"0"}</#if></span></dd>
   </dl>
   <dl>
     <dt>评论总数</dt>
-    <dd><span><#if user??>${user.totalComments!""}</#if></span></dd>
+    <dd><span><#if user??>${user.totalComments!"0"}</#if></span></dd>
   </dl>
   <dl>
     <dt>退换货总数</dt>
-    <dd><span><#if user??>${user.totalReturns!""}</#if></span></dd>
+    <dd><span><#if user??>${user.totalReturns!"0"}</#if></span></dd>
+  </dl>
+  <dl>
+    <dt>订单数量</dt>
+    <dd><span><#if user??>${user_total_orders!"0"}</#if></span></dd>
   </dl>
 </div>
 <!--/安全设置-->

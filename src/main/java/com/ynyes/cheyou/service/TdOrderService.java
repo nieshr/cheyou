@@ -190,6 +190,11 @@ public class TdOrderService {
         return repository.countByUsernameAndStatusId(username, statusId);
     }
     
+    public Long countByUsername(String username)
+    {
+        return repository.countByUsername(username);
+    }
+    
     /**
      * 保存
      * 

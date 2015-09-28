@@ -92,7 +92,7 @@ function __doPostBack(eventTarget, eventArgument) {
     <div class="mymember_mainbox">
         <div class="mymember_info mymember_info02">
             <div class="mymember_order_search"> 
-                <a class="a001" href="/user/diysite/member">优惠券核销</a>
+                <a class="a001" href="/user/diysite/member">体验券核销</a>
                
                 <div class="clear"></div>
             </div>

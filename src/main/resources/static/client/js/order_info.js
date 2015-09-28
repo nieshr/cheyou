@@ -48,12 +48,12 @@ function pointChange(self, point, total)
         return;
     }
     
-    var goodsFee = parseFloat($("#goodsFee").html());
-    var payTypeFee = parseFloat($("#payTypeFee").html());
-    var couponFee = parseFloat($("#couponFee").html());
+    var goodsFee = parseFloat($("#goodsFee").html()).toFixed(2);
+    var payTypeFee = parseFloat($("#payTypeFee").html()).toFixed(2);
+    var couponFee = parseFloat($("#couponFee").html()).toFixed(2);
     
-    var p = parseFloat(point);
-    var t = parseFloat(total);
+    var p = parseFloat(point).toFixed(2);
+    var t = parseFloat(total).toFixed(2);
     
     if (p > t)
     {
@@ -67,17 +67,17 @@ function pointChange(self, point, total)
     }
     
     if(point + couponFee > goodsFee + payTypeFee){
-    	alert("使用粮草大于商品金额！");
-    	if(goodsFee + payTypeFee - couponFee > 0){
-    		self.value = 0;
-    		$("#pointFee").html(0);
-    		$("#totalFee").html(goodsFee + payTypeFee - 0 - couponFee);
-    	}
-    	else{
-    		self.value = 0;
-    		$("#pointFee").html(0);
+    	//alert("使用粮草大于商品金额！");
+    	//if(goodsFee + payTypeFee - couponFee > 0){
+    		//self.value = 0;
+    		//$("#pointFee").html(0);
+    		//$("#totalFee").html(goodsFee + payTypeFee - 0 - couponFee);
+    	//}
+    	//else{
+    		self.value = point;
+    		$("#pointFee").html(point);
     	    $("#totalFee").html(0);
-    	}
+    	//}
     }
     else{
     	self.value = point;
@@ -151,9 +151,16 @@ function submitAddress()
         $("#mobile").focus();
         return;
     }
+    
+    if(!(/^1[3|4|5|7|8][0-9]\d{8,8}$/.test(mobile))){ 
+        alert("请填写正确的手机号！");
+        $("#mobile").focus();
+        return;
+    }
+    
     if (undefined == receiverCarcode || "" == receiverCarcode)
     {
-        alert("请输入车牌号！");
+        alert("请输入车牌号！如：云A1231");
         $("#receiverCarcode").focus();
         return;
     }
