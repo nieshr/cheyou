@@ -291,7 +291,7 @@ public class TdGoods {
     @Column(scale=2)
     private Double flashSaleTransactionPrice;
     
-    // 团购展示图
+    // 抢拍展示图
     @Column
     private String flashSaleImage;
     

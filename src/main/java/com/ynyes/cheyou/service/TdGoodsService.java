@@ -321,7 +321,7 @@ public class TdGoodsService {
 
         return repository
                 .findByCategoryIdTreeContainingAndTitleContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndTitleContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndSubTitleContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndDetailContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleHundredTrue(
-                        catIdStr, keywords, catIdStr, keywords, catIdStr,catIdStr, keywords,catIdStr, keywords,catIdStr, keywords,
+                        catIdStr, keywords, catIdStr, keywords, catIdStr, keywords,catIdStr, keywords,catIdStr, keywords,catIdStr,
                         keywords, pageRequest);
     }
 
@@ -373,7 +373,7 @@ public class TdGoodsService {
 
         return repository
                 .findByCategoryIdTreeContainingAndTitleContainingIgnoreCaseAndIsOnSaleFalseAndIsGroupSaleTrueOrCategoryIdTreeContainingAndTitleContainingIgnoreCaseAndIsOnSaleFalseAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndSubTitleContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndDetailContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleHundredTrue(
-                        catIdStr, keywords, catIdStr, keywords, catIdStr,catIdStr, keywords,catIdStr, keywords,catIdStr, keywords,
+                        catIdStr, keywords, catIdStr, keywords, catIdStr, keywords,catIdStr, keywords,catIdStr, keywords,catIdStr,
                         keywords, pageRequest);
     }
 
@@ -386,7 +386,7 @@ public class TdGoodsService {
 
         return repository
                 .findByCategoryIdTreeContainingAndTitleContainingIgnoreCaseAndIsOnSaleFalseAndIsGroupSaleTrueOrCategoryIdTreeContainingAndTitleContainingIgnoreCaseAndIsOnSaleFalseAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndSubTitleContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndSubTitleContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleHundredTrueOrCategoryIdTreeContainingAndDetailContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleTrueOrCategoryIdTreeContainingAndDetailContainingIgnoreCaseAndIsOnSaleTrueAndIsGroupSaleHundredTrue(
-                        catIdStr, keywords, catIdStr, keywords, catIdStr,catIdStr, keywords,catIdStr, keywords,catIdStr, keywords,
+                        catIdStr, keywords, catIdStr, keywords, catIdStr, keywords,catIdStr, keywords,catIdStr, keywords,catIdStr,
                         keywords, pageRequest);
     }
 
