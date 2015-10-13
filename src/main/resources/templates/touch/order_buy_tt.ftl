@@ -69,9 +69,11 @@ $(document).ready(function(){
                 </td>
             </tr>
         </table>
+        
+        <p class="red">请填写真实信息，以便到店核实，信息不符的，同盟店有权拒绝服务</p>
         <div id="addressForm" class="hide">
             <table class="mymember_address">
-                  <tbody>
+                <tbody>
                   <tr>
                     <th>*姓名：</th>
                     <td>
@@ -85,13 +87,13 @@ $(document).ready(function(){
                     </td>
                   </tr>
                   <tr>
-                  <th>车牌（选填）：</th>
+                  <th>*车牌：</th>
                   <td>
                   <input class="mytext" id="receiverCarcode" value="" type="text"/>
                   </td>
                   </tr>
                   <tr>
-                  <th>车型（选填）：</th>
+                  <th>*车型：</th>
                   <td>
                    <input class="mytext" id="receiverCartype" value="" type="text"/>
                   </td>

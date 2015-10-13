@@ -31,6 +31,7 @@ import com.qq.connect.oauth.Oauth;
 import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.util.CommonService;
 import com.ynyes.cheyou.util.VerifServlet;
 
 /**
@@ -116,6 +117,7 @@ public class TdLoginController {
 				return res;
 			}
 			user.setLastLoginTime(new Date());
+			user.setLastLoginIp(CommonService.getIp(request));
 			/**
 			 * @author libiao
 			 * 判断是首页直接登录还是绑定第三方账号
@@ -166,6 +168,7 @@ public class TdLoginController {
 				return res;
 			}
 			user.setLastLoginTime(new Date());
+			user.setLastLoginIp(CommonService.getIp(request));
 			/**
 			 * @author libiao
 			 * 判断是首页直接登录还是绑定第三方账号
@@ -396,6 +399,7 @@ public class TdLoginController {
 			TdUser user = tdUserService.findByalipayname(user_id);
 			if (null != user) {
 				user.setLastLoginTime(new Date());
+				user.setLastLoginIp(CommonService.getIp(request));
 				user = tdUserService.save(user);
 				request.getSession().setAttribute("username", user.getUsername());
 				request.getSession().setAttribute("usermobile", user.getMobile());
@@ -431,6 +435,7 @@ public class TdLoginController {
         
 		if (null != user) {
 			user.setLastLoginTime(new Date());
+			user.setLastLoginIp(CommonService.getIp(request));
 			user = tdUserService.save(user);
 			request.getSession().setAttribute("username", user.getUsername());
 			request.getSession().setAttribute("usermobile", user.getMobile());
@@ -469,6 +474,7 @@ public class TdLoginController {
 			}
 			user.setMobile(mobile);
 			user.setLastLoginTime(new Date());
+			user.setLastLoginIp(CommonService.getIp(request));
 			tdUserService.save(user);
 			request.getSession().setAttribute("username", user.getUsername());
 			request.getSession().setAttribute("usermobile", user.getMobile());
@@ -567,6 +573,7 @@ public class TdLoginController {
 				}else{
 					//用户存在，修改最后登录时间，跳转首页
 					user.setLastLoginTime(new Date());
+					user.setLastLoginIp(CommonService.getIp(request));
 					tdUserService.save(user);
 					request.getSession().setAttribute("username", user.getUsername());
 					request.getSession().setAttribute("usermobile", user.getMobile());

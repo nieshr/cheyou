@@ -79,7 +79,7 @@ public class TdCartController {
         }
         
         if (null != id) {
-         // 这两种商品一个ID号只能购买一次
+            // 这两种商品一个ID号只能购买一次
             if (id.equals(226L) || id.equals(1644L))
             {
                 List<TdCartGoods> cartGoodsList = tdCartGoodsService.findByGoodsIdAndUsername(226L, username);
@@ -324,14 +324,20 @@ public class TdCartController {
             username = req.getSession().getId();
         }
 
-        // 226 和 1644商品仅限购买一次
-        if (null != id && !id.equals(226L) && !id.equals(1644L)) {
+        if (null != id) {
             TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
             
-            if (cartGoods.getUsername().equalsIgnoreCase(username)) {
-                long quantity = cartGoods.getQuantity();
-                cartGoods.setQuantity(quantity + 1);
-                tdCartGoodsService.save(cartGoods);
+            if (null != cartGoods)
+            {
+                // 226 和 1644商品仅限购买一次
+                if (!cartGoods.getGoodsId().equals(226L) && !cartGoods.getGoodsId().equals(1644L))
+                {
+                    if (cartGoods.getUsername().equalsIgnoreCase(username)) {
+                        long quantity = cartGoods.getQuantity();
+                        cartGoods.setQuantity(quantity + 1);
+                        tdCartGoodsService.save(cartGoods);
+                    }
+                }
             }
         }
 
@@ -350,17 +356,23 @@ public class TdCartController {
             username = req.getSession().getId();
         }
 
-        // 226 和 1644商品仅限购买一次
-        if (null != id && !id.equals(226L) && !id.equals(1644L)) {
+        if (null != id) {
             TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
 
-            if (cartGoods.getUsername().equalsIgnoreCase(username)) {
-                long quantity = cartGoods.getQuantity();
-
-                quantity = quantity > 1 ? quantity - 1 : quantity;
-
-                cartGoods.setQuantity(quantity);
-                tdCartGoodsService.save(cartGoods);
+            if (null != cartGoods)
+            {
+                // 226 和 1644商品仅限购买一次
+                if (!cartGoods.getGoodsId().equals(226L) && !cartGoods.getGoodsId().equals(1644L))
+                {
+                    if (cartGoods.getUsername().equalsIgnoreCase(username)) {
+                        long quantity = cartGoods.getQuantity();
+        
+                        quantity = quantity > 1 ? quantity - 1 : quantity;
+        
+                        cartGoods.setQuantity(quantity);
+                        tdCartGoodsService.save(cartGoods);
+                    }
+                }
             }
         }
 

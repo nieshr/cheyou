@@ -205,12 +205,14 @@ $(function () {
             <tr class="odd_bg">
                 <th align="center" width="15%">姓名</th>
                 <th align="center" width="10%">电话</th>
+                <th align="center" width="18%">车牌</th>
                 <th align="center" width="18%">车型</th>
             </tr>
             <#list user.shippingAddressList as item>
                 <tr>
                     <td align="center">${item.receiverName!''}</td>
                     <td align="center">${item.receiverMobile!''}</td>
+                    <td align="center">${item.receiverCarcode!''}</td>
                     <td align="center">${item.receiverCartype!''}</td>
                 </tr>
             </#list>
@@ -267,6 +269,16 @@ $(function () {
         <i>日期</i>
       </div>
     </dd>
+  </dl>
+  <dl>
+    <dt>禁止抢拍时间</dt>
+    <dd>
+      <div class="input-date">
+        <input name="lastFlashBuyTime" type="text" value="<#if user??>${user.lastFlashBuyTime!""}</#if>" class="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'zh-cn'})" datatype="/^\s*$|^\d{4}\-\d{1,2}\-\d{1,2}\s{1}(\d{1,2}:){2}\d{1,2}$/" errormsg="请选择正确的日期" sucmsg=" ">
+        <i>日期</i>
+      </div>
+      <span>该时间之前不可进行抢拍，为空时表示不禁止该用户抢拍</span>
+    </dd>
   </dl>  
 </div>
 <!--/基本资料-->
@@ -301,7 +313,14 @@ $(function () {
     <dt>用户等级名称</dt>
     <dd><span><#if user??>${user.userLevelTitle!"0"}</#if></span></dd>
   </dl>
- 
+  <dl>
+    <dt>上次登录时间</dt>
+    <dd><span><#if user??>${user.lastLoginTime!""}</#if></span></dd>
+  </dl>
+  <dl>
+    <dt>上次登录IP</dt>
+    <dd><span><#if user??>${user.lastLoginIp!""}</#if></span></dd>
+  </dl>
   <dl>
     <dt>咨询总数</dt>
     <dd><span><#if user??>${user.totalConsults!"0"}</#if></span></dd>

@@ -219,7 +219,7 @@
         function EditOrderRemark() {
             var dialog = $.dialog({
                 title: '订单备注',
-                content: '<textarea id="orderRemark" name="txtOrderRemark" rows="2" cols="20" class="input">${order.remarkInfo!''}</textarea>',
+                content: '<textarea id="orderRemark" name="txtOrderRemark" rows="2" cols="20" class="input"><#if order.remarkInfo??>${order.remarkInfo?chop_linebreak}</#if></textarea>',
                 min: false,
                 max: false,
                 lock: true,
@@ -936,7 +936,6 @@
                 <input type="button" id="btnCancel" value="取消订单" class="btn green">
             <#elseif order.statusId==2>
                 <input type="button" id="btnPayment" value="确认付款" class="btn">
-                <input type="button" id="btnCancel" value="取消订单" class="btn green">
             <#elseif order.statusId==3>
                 <input type="button" id="btnPaymentLeft" value="确认尾款已付" class="btn">
             <#elseif order.statusId==4>
@@ -946,6 +945,7 @@
             </#if>
             <#if order.statusId != 7>
                 <input type="button" id= "btnPrint" value="打印订单" class="btn violet">
+                <input type="button" id="btnCancel" value="强制取消" class="btn yellow">
             </#if>
             <input type="button" value="返回上一页" class="btn yellow" onclick="javascript:history.back(-1);">
         </div>

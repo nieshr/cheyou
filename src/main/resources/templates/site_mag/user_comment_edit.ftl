@@ -119,7 +119,7 @@
   </dl>
   <dl>
   	<dt>图片</dt>
-  	<dd><#if user_comment??>
+  	<dd><#if user_comment?? && user_comment.showPictures??>
         	<#list user_comment.showPictures?split(",") as uri>
             	<#if uri != "">
 		            <li>

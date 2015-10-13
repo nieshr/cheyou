@@ -86,6 +86,10 @@ public class TdUser {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date lastLoginTime;
 	
+	// 最后登录IP
+    @Column
+    private String lastLoginIp;
+	
 	// 上次抢拍时间
     @Column
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -581,6 +585,14 @@ public class TdUser {
 
     public void setLastFlashBuyTime(Date lastFlashBuyTime) {
         this.lastFlashBuyTime = lastFlashBuyTime;
+    }
+
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
+
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp;
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.ynyes.cheyou.entity.TdUser;
 import com.ynyes.cheyou.service.TdCommonService;
 import com.ynyes.cheyou.service.TdSettingService;
 import com.ynyes.cheyou.service.TdUserService;
+import com.ynyes.cheyou.util.CommonService;
 
 /**
  * 登录
@@ -199,7 +200,7 @@ public class TdTouchLoginController {
                 return res;
             }
         	user.setLastLoginTime(new Date());
-             
+        	user.setLastLoginIp(CommonService.getIp(request));
             tdUserService.save(user);
              
             request.getSession().setAttribute("username", username);
@@ -216,7 +217,7 @@ public class TdTouchLoginController {
                 return res;
             }
         	user.setLastLoginTime(new Date());
-             
+        	user.setLastLoginIp(CommonService.getIp(request));
             tdUserService.save(user);
              
             request.getSession().setAttribute("username", user.getUsername());

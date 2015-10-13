@@ -157,14 +157,20 @@ public class TdTouchCartController {
             username = req.getSession().getId();
         }
 
-        // 226 和 1644商品仅限购买一次
-        if (null != id && !id.equals(226L) && !id.equals(1644L)) {
+        if (null != id) {
             TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
 
-            if (cartGoods.getUsername().equalsIgnoreCase(username)) {
-                long quantity = cartGoods.getQuantity();
-                cartGoods.setQuantity(quantity + 1);
-                tdCartGoodsService.save(cartGoods);
+            if (null != cartGoods)
+            {
+                // 226 和 1644商品仅限购买一件
+                if (!cartGoods.getGoodsId().equals(226L) && !cartGoods.getGoodsId().equals(1644L))
+                {
+                    if (cartGoods.getUsername().equalsIgnoreCase(username)) {
+                        long quantity = cartGoods.getQuantity();
+                        cartGoods.setQuantity(quantity + 1);
+                        tdCartGoodsService.save(cartGoods);
+                    }
+                }
             }
         }
 
@@ -183,17 +189,23 @@ public class TdTouchCartController {
             username = req.getSession().getId();
         }
 
-        // 226 和 1644商品仅限购买一次
-        if (null != id && !id.equals(226L) && !id.equals(1644L)) {
+        if (null != id) {
             TdCartGoods cartGoods = tdCartGoodsService.findOne(id);
-
-            if (cartGoods.getUsername().equalsIgnoreCase(username)) {
-                long quantity = cartGoods.getQuantity();
-
-                quantity = quantity > 1 ? quantity - 1 : quantity;
-
-                cartGoods.setQuantity(quantity);
-                tdCartGoodsService.save(cartGoods);
+            
+            if (null != cartGoods)
+            {
+                // 226 和 1644商品仅限购买一次
+                if (!cartGoods.getGoodsId().equals(226L) && !cartGoods.getGoodsId().equals(1644L))
+                {
+                    if (cartGoods.getUsername().equalsIgnoreCase(username)) {
+                        long quantity = cartGoods.getQuantity();
+        
+                        quantity = quantity > 1 ? quantity - 1 : quantity;
+        
+                        cartGoods.setQuantity(quantity);
+                        tdCartGoodsService.save(cartGoods);
+                    }
+                }
             }
         }
 

@@ -123,63 +123,70 @@ function toggleNewAddress()
 function submitAddress()
 {
     var receiverName = $("#receiverName").val();
-  
-  //  var prov = $("#prov").val();
-  //  var city = $("#city").val();
-  //  var dist = $("#dist").val();
-  //  var detail = $("#detailAdd").val();
-  //  var postcode = $("#postcode").val();
     
-    var mobile = $("#mobile").val();
-    var receiverCarcode = $("#receiverCarcode").val();     //增加车牌 by zhangji
-    var receiverCartype = $("#receiverCartype").val();     //车型
-    
-    if (undefined == receiverName || "" == receiverName)
-    {
-        alert("姓名不能为空");
-        $("#receiverName").focus();
-        return;
-    }
-   /** 
-    if (undefined == prov || "" == prov)
-    {
-        alert("省市不能为空");
-        $("#prov").focus();
-        return;
-    }
-    
-    if (undefined == city || "" == city)
-    {
-        alert("省市不能为空");
-        $("#city").focus();
-        return;
-    }
-    
-    if (undefined == detail || "" == detail)
-    {
-        alert("详细地址不能为空");
-        $("#detailAdd").focus();
-        return;
-    }
-    **/
-    if (undefined == mobile || "" == mobile)
-    {
-        alert("手机号码不能为空");
-        $("#mobile").focus();
-        return;
-    }
-    if (undefined == receiverCarcode || "" == receiverCarcode)
-    {
-        alert("请输入车牌号！");
-        $("#receiverCarcode").focus();
-        return;
-    }
-    if (undefined == receiverCartype || "" == receiverCartype)
-    {
-        alert("请输入车型！");
-        $("#receiverCartype").focus();
-        return;
-    }
+    //  var prov = $("#prov").val();
+    //  var city = $("#city").val();
+    //  var dist = $("#dist").val();
+    //  var detail = $("#detailAdd").val();
+    //  var postcode = $("#postcode").val();
+      
+      var mobile = $("#mobile").val();
+      var receiverCarcode = $("#receiverCarcode").val();     //增加车牌 by zhangji
+      var receiverCartype = $("#receiverCartype").val();     //车型
+      
+      if (undefined == receiverName || "" == receiverName)
+      {
+          alert("姓名不能为空！");
+          $("#receiverName").focus();
+          return;
+      }
+     /** 
+      if (undefined == prov || "" == prov)
+      {
+          alert("省市不能为空");
+          $("#prov").focus();
+          return;
+      }
+      
+      if (undefined == city || "" == city)
+      {
+          alert("省市不能为空");
+          $("#city").focus();
+          return;
+      }
+      
+      if (undefined == detail || "" == detail)
+      {
+          alert("详细地址不能为空");
+          $("#detailAdd").focus();
+          return;
+      }
+      **/
+      if (undefined == mobile || "" == mobile)
+      {
+          alert("手机号码不能为空！");
+          $("#mobile").focus();
+          return;
+      }
+      
+      if(!(/^1[3|4|5|7|8][0-9]\d{8,8}$/.test(mobile))){ 
+          alert("请填写正确的手机号！");
+          $("#mobile").focus();
+          return;
+      }
+      
+      if (undefined == receiverCarcode || "" == receiverCarcode)
+      {
+          alert("请输入车牌号！如：云A1231");
+          $("#receiverCarcode").focus();
+          return;
+      }
+      if (undefined == receiverCartype || "" == receiverCartype)
+      {
+          alert("请输入车型！");
+          $("#receiverCartype").focus();
+          return;
+      }
     
     $.ajax({
         type:"post",

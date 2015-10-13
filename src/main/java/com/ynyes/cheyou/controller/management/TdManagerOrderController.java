@@ -23,7 +23,6 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -2183,12 +2182,8 @@ public class TdManagerOrderController {
             // 确认取消
             else if (type.equalsIgnoreCase("orderCancel"))
             {
-                if (order.getStatusId().equals(1L) ||
-                        order.getStatusId().equals(2L))
-                {
-                    order.setStatusId(7L);
-                    order.setCancelTime(new Date());
-                }
+                order.setStatusId(7L);
+                order.setCancelTime(new Date());
             }
             
             tdOrderService.save(order);
@@ -2367,13 +2362,13 @@ public class TdManagerOrderController {
                 TdOrder tdOrder= tdOrderService.findOne(id);
                 
                 // 只有待确认(1L)、待付款(2L)订单能进行删除，确认后状态为已取消(7L)
-                if (tdOrder.getStatusId().equals(1L) ||
-                        tdOrder.getStatusId().equals(2L))
-                {
+//                if (tdOrder.getStatusId().equals(1L) ||
+//                        tdOrder.getStatusId().equals(2L))
+//                {
                     tdOrder.setStatusId(7L);
                     tdOrder.setCancelTime(new Date()); // 取消时间
                     tdOrderService.save(tdOrder);
-                }
+//                }
             }
         }
     }

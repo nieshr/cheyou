@@ -397,49 +397,51 @@ public class TdOrderService {
     	if(null == orderNumber){
     		return null;
     	}
-    	PageRequest pageRequest = new PageRequest(page, size);
-    	return repository.findByOrderNumberContainingOrderByIdDesc(orderNumber, pageRequest);
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
+    	return repository.findByOrderNumberContainingIgnoreCaseOrUsernameContainingIgnoreCaseOrPayTypeTitleContainingIgnoreCase(orderNumber, orderNumber, orderNumber, pageRequest);
     }
     
     public List<TdOrder> searchByOrderNumberAndTypeIdOrderByIdDesc(String keywords,Long type){
     	if(null == keywords){
     		return null;
     	}
-    	return repository.findByOrderNumberContainingAndTypeIdOrderByIdDesc(keywords,type);
+    	return repository.findByOrderNumberContainingIgnoreCaseOrUsernameContainingIgnoreCaseOrPayTypeTitleContainingIgnoreCaseOrderByIdDesc(keywords, keywords, keywords, type);
     }
     public Page<TdOrder> searchByOrderNumberAndTypeIdOrderByIdDesc(String keywords,Long type,int page, int size){
     	if(null == keywords){
     		return null;
     	}
-    	PageRequest pageRequest = new PageRequest(page, size);
-    	return repository.findByOrderNumberContainingAndTypeIdOrderByIdDesc(keywords, type, pageRequest);
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
+    	return repository.findByOrderNumberContainingIgnoreCaseAndTypeIdOrUsernameContainingIgnoreCaseAndTypeIdOrPayTypeTitleContainingIgnoreCaseAndTypeId(keywords, type, keywords, type, keywords, type, pageRequest);
     }
+    
     public Page<TdOrder> searchByOrderNumberAndStatusOrderByIdDesc(String keywords,long StatusId, int page, int size){
     	if(null == keywords){
     		return null;
     	}
-    	PageRequest pageRequest = new PageRequest(page, size);
-    	return repository.findByOrderNumberContainingAndStatusIdOrderByIdDesc(keywords, StatusId, pageRequest);
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
+    	return repository.findByOrderNumberContainingIgnoreCaseAndStatusIdOrUsernameContainingIgnoreCaseAndStatusIdOrPayTypeTitleContainingIgnoreCaseAndStatusIdOrderByIdDesc(keywords, StatusId, keywords, StatusId, keywords, StatusId, pageRequest);
     }
+    
     public List<TdOrder> searchByOrderNumberAndStatusOrderByIdDesc(String keywords,long StatusId){
     	if(null == keywords){
     		return null;
     	}
-    	return repository.findByOrderNumberContainingAndStatusIdOrderByIdDesc(keywords, StatusId);
+    	return repository.findByOrderNumberContainingIgnoreCaseAndStatusIdOrUsernameContainingIgnoreCaseAndStatusIdOrPayTypeTitleContainingIgnoreCaseAndStatusIdOrderByIdDesc(keywords, StatusId, keywords, StatusId, keywords, StatusId);
     }
     
     public Page<TdOrder> searchByOrderNumberAndStatusAndTypeOrderByIdDesc(String orderNumber,long statusId, long typeId, int page, int size){
     	if(null == orderNumber){
     		return null;
     	}
-    	PageRequest pageRequest = new PageRequest(page, size);
-    	return repository.findByOrderNumberContainingAndStatusIdAndTypeIdOrderByIdDesc(orderNumber,statusId, typeId, pageRequest);
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
+    	return repository.findByOrderNumberContainingIgnoreCaseAndStatusIdAndTypeIdOrUsernameContainingIgnoreCaseAndStatusIdAndTypeIdOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndTypeId(orderNumber,statusId, typeId, orderNumber,statusId, typeId, orderNumber,statusId, typeId, pageRequest);
     }
     public List<TdOrder> searchByOrderNumberAndStatusAndTypeIdOrderByIdDesc(String orderNumber,long statusId, long typeId){
     	if(null == orderNumber){
     		return null;
     	}
-    	return repository.findByOrderNumberContainingAndStatusIdAndTypeIdOrderByIdDesc(orderNumber,statusId, typeId);
+    	return repository.findByOrderNumberContainingIgnoreCaseAndStatusIdAndTypeIdOrUsernameContainingIgnoreCaseAndStatusIdAndTypeIdOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndTypeIdOrderByIdDesc(orderNumber,statusId, typeId, orderNumber,statusId, typeId, orderNumber,statusId, typeId);
     }
     
     public Page<TdOrder> searchByOrderNumberAndTimeAfterOrderByIdDesc(String orderNumber,Date time, int page, int size)
@@ -447,56 +449,56 @@ public class TdOrderService {
     	if(null == orderNumber){
     		return null;
     	}
-    	PageRequest pageRequest = new PageRequest(page, size);
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
         
-        return repository.findByOrderNumberContainingAndOrderTimeAfterOrderByIdDesc(orderNumber, time, pageRequest);
+        return repository.findByOrderNumberContainingIgnoreCaseAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndOrderTimeAfter(orderNumber, time, orderNumber, time, orderNumber, time, pageRequest);
     }
     public List<TdOrder> searchByOrderNumberAndTimeAfterOrderByIdDesc(String orderNumber,Date time){
     	if(null == orderNumber){
     		return null;
     	}
-    	return repository.findByOrderNumberContainingAndOrderTimeAfterOrderByIdDesc(orderNumber, time);
+    	return repository.findByOrderNumberContainingIgnoreCaseAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndOrderTimeAfterOrderByIdDesc(orderNumber, time, orderNumber, time, orderNumber, time);
     }
     
     public Page<TdOrder> searchByOrderNumberAndtypeIdAndTimeAfterOrderByIdDesc(String orderNumber,long typeId, Date time, int page, int size){
     	if(null == orderNumber){
     		return null;
     	}
-    	PageRequest pageRequest = new PageRequest(page, size);
-    	return repository.findByOrderNumberContainingAndTypeIdAndOrderTimeAfterOrderByIdDesc(orderNumber,typeId, time, pageRequest);
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
+    	return repository.findByOrderNumberContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndTypeIdAndOrderTimeAfter(orderNumber,typeId, time, orderNumber,typeId, time, orderNumber,typeId, time, pageRequest);
     }
     public List<TdOrder> searchByOrderNumberAndtypeIdAndTimeAfterOrderByIdDesc(String orderNumber,long typeId, Date time){
     	if(null == orderNumber){
     		return null;
     	}
-    	return repository.findByOrderNumberContainingAndTypeIdAndOrderTimeAfterOrderByIdDesc(orderNumber,typeId, time);
+    	return repository.findByOrderNumberContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrderByIdDesc(orderNumber,typeId, time, orderNumber,typeId, time, orderNumber,typeId, time);
     }
     
     public Page<TdOrder> searchByOrderNumberAndStatusAndTimeAfterOrderByIdDesc(String orderNumber,long StatusId, Date time, int page, int size){
     	if(null == orderNumber){
     		return null;
     	}
-    	PageRequest pageRequest = new PageRequest(page, size);
-    	return repository.findByOrderNumberContainingAndStatusIdAndOrderTimeAfterOrderByIdDesc(orderNumber,StatusId, time, pageRequest);
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
+    	return repository.findByOrderNumberContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndOrderTimeAfter(orderNumber,StatusId, time, orderNumber,StatusId, time, orderNumber,StatusId, time, pageRequest);
     }
     public List<TdOrder> searchByOrderNumberAndStatusAndTimeAfterOrderByIdDesc(String orderNumber,long StatusId, Date time){
     	if(null == orderNumber){
     		return null;
     	}
-    	return repository.findByOrderNumberContainingAndStatusIdAndOrderTimeAfterOrderByIdDesc(orderNumber,StatusId, time);
+    	return repository.findByOrderNumberContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrderByIdDesc(orderNumber,StatusId, time, orderNumber,StatusId, time, orderNumber,StatusId, time);
     }
     public Page<TdOrder> searchByOrderNumberAndStatusIdAndTypeIdAndTimeAfterOrderByIdDesc(String orderNumber,long statusId, long typeId, Date time, int page, int size){
     	if(null == orderNumber){
     		return null;
     	}
-    	PageRequest pageRequest = new PageRequest(page, size);
-    	return repository.findByOrderNumberContainingAndStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(orderNumber,statusId, typeId, time, pageRequest);
+    	PageRequest pageRequest = new PageRequest(page, size, new Sort(Direction.DESC, "id"));
+    	return repository.findByOrderNumberContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfter(orderNumber,statusId, typeId, time, orderNumber,statusId, typeId, time, orderNumber,statusId, typeId, time, pageRequest);
     }
     public List<TdOrder> searchByOrderNumberAndStatusAndTypeIdAndTimeAfterOrderByIdDesc(String orderNumber,long statusId, long typeId, Date time){
     	if(null == orderNumber){
     		return null;
     	}
-    	return repository.findByOrderNumberContainingAndStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(orderNumber,statusId, typeId, time);
+    	return repository.findByOrderNumberContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(orderNumber,statusId, typeId, time, orderNumber,statusId, typeId, time, orderNumber,statusId, typeId, time);
     }
     
     

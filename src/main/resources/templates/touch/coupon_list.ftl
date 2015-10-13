@@ -87,8 +87,8 @@ function hideDialog()
                 <input id="couponId" name="couponId" class="text" type="hidden" value="" datatype="n"/>
                 <p><b style="color: #FF0000;">*</b> 请输入姓名</p>
                 <input class="text" name="username" value="<#if user??>${user.realName!''}</#if>" type="text" datatype="*"  nullmsg="请输入姓名"/>
-                <p>请输入车牌</p>
-                <input class="text" name="carCode" value="<#if user??>${user.carCode!''}</#if>" type="text" />
+                <p><b style="color: #FF0000;">*</b> 请输入车牌</p>
+                <input class="text" name="carCode" value="<#if user??>${user.carCode!''}</#if>" type="text" datatype="*7-7" nullmsg="请输入车牌号" errormsg="请输入正确的车牌，如：云A09912"/>
                 <p><b style="color: #FF0000;">*</b> 请输入手机</p>
                 <input class="text" name="mobile" value="<#if user??>${user.mobile!''}</#if>" type="text" datatype="m" nullmsg="请输入手机号" errormsg="请输入正确的手机号"/>
                 <p><b style="color: #FF0000;">*</b> 请输入验证码</p>

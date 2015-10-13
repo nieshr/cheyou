@@ -119,19 +119,20 @@ public interface TdOrderRepo extends
      * 按订单号查询
      * @author libiao
      */
-    Page<TdOrder> findByOrderNumberContainingOrderByIdDesc(String orderNumber,Pageable page);
-    List<TdOrder> findByOrderNumberContainingAndTypeIdOrderByIdDesc(String keywords,long type);
-    Page<TdOrder> findByOrderNumberContainingAndTypeIdOrderByIdDesc(String keywords,long type,Pageable page);
-    List<TdOrder> findByOrderNumberContainingAndStatusIdOrderByIdDesc(String orderNumber,long statusId);
-    Page<TdOrder> findByOrderNumberContainingAndStatusIdOrderByIdDesc(String orderNumber,long statusId,Pageable page);
-    List<TdOrder> findByOrderNumberContainingAndStatusIdAndTypeIdOrderByIdDesc(String orderNumber,long statusId,long  typeId);
-    Page<TdOrder> findByOrderNumberContainingAndStatusIdAndTypeIdOrderByIdDesc(String orderNumber,long statusId,long  typeId,Pageable pageRequest);
-    List<TdOrder> findByOrderNumberContainingAndOrderTimeAfterOrderByIdDesc(String orderNumber,Date time);
-    Page<TdOrder> findByOrderNumberContainingAndOrderTimeAfterOrderByIdDesc(String orderNumber,Date time, Pageable page);
-    List<TdOrder> findByOrderNumberContainingAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long typeId, Date time);
-    Page<TdOrder> findByOrderNumberContainingAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long typeId, Date time, Pageable page);
-    List<TdOrder> findByOrderNumberContainingAndStatusIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long statusId, Date time);
-    Page<TdOrder> findByOrderNumberContainingAndStatusIdAndOrderTimeAfterOrderByIdDesc(String OrderNumber,long statusId, Date time, Pageable page);
-    List<TdOrder> findByOrderNumberContainingAndStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long statusId, long typeId, Date time);
-    Page<TdOrder> findByOrderNumberContainingAndStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber,long statusId, long typeId, Date time, Pageable page);
+    Page<TdOrder> findByOrderNumberContainingIgnoreCaseOrUsernameContainingIgnoreCaseOrPayTypeTitleContainingIgnoreCase(String orderNumber, String username, String payTypeTitle, Pageable page);
+    List<TdOrder> findByOrderNumberContainingIgnoreCaseOrUsernameContainingIgnoreCaseOrPayTypeTitleContainingIgnoreCaseOrderByIdDesc(String orderNumber, String username, String payTypeTitle, long type);
+    Page<TdOrder> findByOrderNumberContainingIgnoreCaseAndTypeIdOrUsernameContainingIgnoreCaseAndTypeIdOrPayTypeTitleContainingIgnoreCaseAndTypeId(String orderNumber, Long typeId1, String username, Long typeId2, String payTypeTitle, Long typeId3, Pageable page);
+    List<TdOrder> findByOrderNumberContainingIgnoreCaseAndStatusIdOrUsernameContainingIgnoreCaseAndStatusIdOrPayTypeTitleContainingIgnoreCaseAndStatusIdOrderByIdDesc(String orderNumber, Long statusId1, String username, Long statusId2, String payTypeTitle, Long statusId3);
+    Page<TdOrder> findByOrderNumberContainingIgnoreCaseAndStatusIdOrUsernameContainingIgnoreCaseAndStatusIdOrPayTypeTitleContainingIgnoreCaseAndStatusIdOrderByIdDesc(String orderNumber,Long statusId1, String username, Long statusId2, String payTypeTitle, Long statusId3, Pageable page);
+    List<TdOrder> findByOrderNumberContainingIgnoreCaseAndStatusIdAndTypeIdOrUsernameContainingIgnoreCaseAndStatusIdAndTypeIdOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndTypeIdOrderByIdDesc(String orderNumber, Long statusId, Long typeId, String username, Long statusId2, Long typeId2, String payTypeTitle, Long statusId3, Long typeId3);
+    Page<TdOrder> findByOrderNumberContainingIgnoreCaseAndStatusIdAndTypeIdOrUsernameContainingIgnoreCaseAndStatusIdAndTypeIdOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndTypeId(String orderNumber, Long statusId, Long  typeId, String username, Long statusId2, Long  typeId2, String payTypeTitle, Long statusId3, Long  typeId3,  Pageable pageRequest);
+    List<TdOrder> findByOrderNumberContainingIgnoreCaseAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndOrderTimeAfterOrderByIdDesc(String orderNumber, Date time, String orderNumber2, Date time2, String orderNumber3, Date time3);
+    Page<TdOrder> findByOrderNumberContainingIgnoreCaseAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndOrderTimeAfter(String orderNumber,Date time, String orderNumber2,Date time2, String orderNumber3,Date time3, Pageable page);
+    List<TdOrder> findByOrderNumberContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber, Long typeId, Date time, String orderNumber2, Long typeId2, Date time2, String orderNumber3, Long typeId3, Date time3);
+    Page<TdOrder> findByOrderNumberContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndTypeIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndTypeIdAndOrderTimeAfter(String orderNumber, Long typeId, Date time, String orderNumber2, Long typeId2, Date time2, String orderNumber3, Long typeId3, Date time3, Pageable page);
+    List<TdOrder> findByOrderNumberContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrderByIdDesc(String orderNumber, Long statusId, Date time, String orderNumber2, Long statusId2, Date time2, String orderNumber3, Long statusId3, Date time3);
+    Page<TdOrder> findByOrderNumberContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndStatusIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndOrderTimeAfter(String OrderNumber, Long statusId, Date time, String OrderNumber2, Long statusId2, Date time2, String OrderNumber3, Long statusId3, Date time3, Pageable page);
+    
+    List<TdOrder> findByOrderNumberContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrderByIdDesc(String orderNumber, Long statusId, Long typeId, Date time, String orderNumber2, Long statusId2, Long typeId2, Date time2, String orderNumber3, Long statusId3, Long typeId3, Date time3);
+    Page<TdOrder> findByOrderNumberContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrUsernameContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfterOrPayTypeTitleContainingIgnoreCaseAndStatusIdAndTypeIdAndOrderTimeAfter(String orderNumber,Long statusId, Long typeId, Date time, String orderNumber2,Long statusId2, Long typeId2, Date time2, String orderNumber3,Long statusId3, Long typeId3, Date time3, Pageable page);
 }
